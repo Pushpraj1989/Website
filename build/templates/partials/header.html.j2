@@ -1,14 +1,60 @@
-<header class="site-header" data-header>
+{%- set here = page.file if page else 'index.html' %}
+<header class="site-header{% if s.ticker %} has-topbar{% endif %}" data-header>
+{%- if s.ticker %}
+<div class="topbar" data-topbar>
+  <div class="wrap topbar-row">
+    <span class="tb-label"><i class="tb-live" aria-hidden="true"></i>{{ s.ticker.label or 'Latest' }}</span>
+    <div class="tb-ticker" data-ticker aria-live="off">
+      <div class="tb-track">
+        {%- for pass in [0, 1] %}
+        <div class="tb-group"{% if pass %} aria-hidden="true"{% endif %}>
+          {%- for t in s.ticker['items'] %}<a class="tb-item" href="{{ t.href or '#' }}"{% if pass %} tabindex="-1"{% endif %}>{% if t.tag %}<b>{{ t.tag }}</b>{% endif %}{{ t.text }}</a>{% endfor %}
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+    <div class="tb-links">
+      {%- if s.ticker.emergency %}<a class="tb-sos" href="tel:{{ s.ticker.emergency.tel }}"><i aria-hidden="true">+</i><span>{{ s.ticker.emergency.label }}</span> {{ s.ticker.emergency.number }}</a>{% endif %}
+      {%- for ph in s.contact.phones[:1] %}<a class="tb-help" href="tel:{{ ph.tel }}">{{ icon('phone') }}<span>{{ ph.label }} {{ ph.number }}</span></a>{% endfor %}
+    </div>
+  </div>
+</div>
+{%- endif %}
   <div class="wrap nav-row">
-    <a class="brand" href="#top" aria-label="{{ s.name }}, back to top">
+    <a class="brand" href="index.html" aria-label="{{ s.name }}, home">
       <span class="brand-mark" aria-hidden="true">{{ s.short[0] }}</span>
       <span class="brand-text">{{ s.short }}</span>
     </a>
     <nav class="nav" id="nav" aria-label="Primary">
-      {%- for n in s._nav %}<a href="#{{ n.id }}">{{ n.label }}</a>{% endfor %}
+      {%- for n in s._nav %}
+      {%- set on = here == n.file or (page and page.listing == n.file) %}
+      {%- if n['items'] %}
+      <div class="nav-item has-mega">
+        <a href="{{ n.file }}"{% if on %} class="is-active" aria-current="page"{% endif %}>{{ n.label }}<svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+        <div class="mega">
+          <div class="mega-inner">
+            <div class="mega-intro">
+              <p class="eyebrow">{{ n.label }}</p>
+              <p class="mega-title">{{ n.title }}</p>
+              <a class="text-link" href="{{ n.file }}">View all {{ n['items'] | length }} {{ icon('arrow') }}</a>
+              {%- if n.extra %}<a class="text-link mega-extra" href="{{ n.extra.file }}">{{ n.extra.label }} {{ icon('arrow') }}</a>{% endif %}
+            </div>
+            <ul class="mega-list">
+              {%- for it in n['items'] %}
+              <li><a href="{{ it._file }}" data-preview="{{ ('assets/img/' ~ s.images[it._img].src) if it._img else '' }}"><span class="mega-n">{{ '%02d' % loop.index }}</span>{{ it.title }}</a></li>
+              {%- endfor %}
+            </ul>
+            <div class="mega-preview" aria-hidden="true"><img alt="" src="{{ ('assets/img/' ~ s.images[n['items'][0]._img].src) if n['items'][0]._img else '' }}"></div>
+          </div>
+        </div>
+      </div>
+      {%- else %}
+      <a href="{{ n.file }}"{% if on %} class="is-active" aria-current="page"{% endif %}>{{ n.label }}</a>
+      {%- endif %}
+      {%- endfor %}
     </nav>
     <div class="nav-actions">
-      <a class="btn btn-primary btn-sm" href="{{ s.cta.href }}" data-magnetic>{{ s.cta.label }}</a>
+      <a class="btn btn-primary btn-sm" href="{{ s.cta.href if not s.cta.href.startswith('#') else 'contact.html' }}" data-magnetic>{{ s.cta.label }}</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>
     </div>
   </div>

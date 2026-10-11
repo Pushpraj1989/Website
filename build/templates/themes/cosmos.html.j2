@@ -9,7 +9,7 @@
       <span class="brand-text mono">{{ s.theme_data.code }}</span>
     </a>
     <nav class="nav pill-nav" id="nav" aria-label="Primary">
-      {%- for n in s._nav %}<a href="#{{ n.id }}"><span data-scramble>{{ n.label }}</span></a>{% endfor %}
+      {%- for n in s._nav %}<a href="{{ n.file }}"><span data-scramble>{{ n.label }}</span></a>{% endfor %}
     </nav>
     <div class="nav-actions">
       <a class="btn btn-primary btn-sm" href="{{ s.cta.href }}" data-magnetic>{{ s.cta.label }}</a>

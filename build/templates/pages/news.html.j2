@@ -1,0 +1,29 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set lead = s.news[0] %}
+{%- set hero_img = lead._img or ('hero' if 'hero' in s.images else none) %}
+{%- set kicker = 'Newsroom' %}{% set intro = s.news_intro or ('Announcements, events and updates from ' ~ s.short ~ '.') %}{% set crumb = 'News' %}
+{% include "partials/pagehero.html.j2" %}
+<section class="pg-section">
+  <div class="wrap">
+    {%- set tags = s.news | map(attribute='tag') | select | unique | list %}
+    {%- if tags | length > 1 %}
+    <div class="filters" role="group" aria-label="Filter news" data-news-filters>
+      <button class="filter" type="button" data-nf="all" aria-pressed="true">All</button>
+      {%- for t in tags %}<button class="filter" type="button" data-nf="{{ t }}" aria-pressed="false">{{ t }}</button>{% endfor %}
+    </div>
+    {%- endif %}
+    <a class="news-lead" href="{{ lead._file }}" data-tag="{{ lead.tag }}">
+      <div class="nl-media" data-anim="wipe">{% if lead._img %}<img src="{{ m.src(lead._img) }}" alt="" loading="lazy">{% endif %}</div>
+      <div class="nl-copy">
+        <p class="news-meta" data-anim="up">{% if lead.tag %}<b>{{ lead.tag }}</b>{% endif %}{{ lead.date }}</p>
+        <h2 data-anim="lines">{{ lead.title }}</h2>
+        <p data-anim="up">{{ lead.summary }}</p>
+        <span class="text-link" data-anim="up">Read {{ icon('arrow') }}</span>
+      </div>
+    </a>
+    {{ m.news_grid(s.news[1:]) }}
+  </div>
+</section>
+{% endblock %}

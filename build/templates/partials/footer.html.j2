@@ -3,12 +3,20 @@
     <p class="foot-big" aria-hidden="true" data-drift="14">{{ s.short }}</p>
     <div class="foot-grid">
       <div>
-        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">{{ s.short[0] }}</span><span class="brand-text">{{ s.short }}</span></a>
+        <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">{{ s.short[0] }}</span><span class="brand-text">{{ s.short }}</span></a>
         <p style="margin-top:1rem;max-width:38ch">{{ s.meta }}</p>
       </div>
       <nav class="foot-nav" aria-label="Footer">
-        {%- for n in s._nav %}<a href="#{{ n.id }}">{{ n.label }}</a>{% endfor %}
+        <p class="foot-h">Explore</p>
+        <a href="index.html">Home</a>
+        {%- for n in s._nav %}<a href="{{ n.file }}">{{ n.label }}</a>{% endfor %}
       </nav>
+      {%- for n in s._nav if n['items'] %}{% if loop.first %}
+      <nav class="foot-nav" aria-label="{{ n.label }}">
+        <p class="foot-h">{{ n.label }}</p>
+        {%- for it in n['items'][:8] %}<a href="{{ it._file }}">{{ it.title }}</a>{% endfor %}
+      </nav>
+      {%- endif %}{% endfor %}
       <div class="foot-contact">
         {% if s.contact.address %}<p>{{ s.contact.address }}</p>{% endif %}
         {% for p in s.contact.phones if not p.fax %}<p><a href="tel:{{ p.tel }}">{{ p.number }}</a></p>{% endfor %}

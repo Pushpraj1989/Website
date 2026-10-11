@@ -1,0 +1,91 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set hero_img = s.about.image or ('about' if 'about' in s.images else ('hero' if 'hero' in s.images else none)) %}
+{%- set kicker = 'About ' ~ s.short %}{% set intro = s.about.title %}{% set crumb = 'About' %}
+{% include "partials/pagehero.html.j2" %}
+
+<section class="pg-section">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Our story</p>
+      <h2 class="pg-h2" data-anim="lines">{{ s.about.title }}</h2>
+    </div>
+    <div class="prose">
+      {%- for p in s.about.body %}<p data-anim="up">{{ p }}</p>{% endfor %}
+      {%- for p in s.about.more or [] %}<p data-anim="up">{{ p }}</p>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="pg-stats" aria-label="Key figures">
+  <div class="wrap stat-grid">
+    {%- for st in s.stats %}
+    <div class="stat-tile" data-anim="up" data-delay="{{ loop.index0 * 0.08 }}"><strong>{{ m.count(st) }}</strong><span>{{ st.label }}</span></div>
+    {%- endfor %}
+  </div>
+</section>
+
+{%- if s.about.timeline %}
+<section class="pg-section timeline-sec">
+  <div class="wrap">
+    <p class="eyebrow">Milestones</p>
+    <h2 class="pg-h2" data-anim="lines">How we got here</h2>
+    <ol class="timeline" data-timeline>
+      {%- for t in s.about.timeline %}
+      <li class="tl-item" data-anim="up"><span class="tl-year">{{ t.year }}</span><div><h3>{{ t.title }}</h3>{% if t.text %}<p>{{ t.text }}</p>{% endif %}</div></li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+{%- endif %}
+
+{%- if s.about.points %}
+<section class="pg-section alt">
+  <div class="wrap">
+    <p class="eyebrow">What we do</p>
+    <div class="point-grid">
+      {%- for pt in s.about.points %}
+      <article class="point-card" data-anim="up" data-delay="{{ loop.index0 * 0.08 }}" data-tilt>
+        <span class="point-n">{{ '%02d' % loop.index }}</span>
+        <h3>{{ pt.title }}</h3>
+        <p>{{ pt.text }}</p>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{%- if s.about.get('values') %}
+<section class="pg-section">
+  <div class="wrap">
+    <p class="eyebrow">{{ s.about.get('values_title') or 'Vision and values' }}</p>
+    <div class="value-list">
+      {%- for v in s.about.get('values') %}
+      <div class="value-row" data-anim="up"><h3>{{ v.title }}</h3><p>{{ v.text }}</p></div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{{ m.marquee(s.marquee, 1, 'left', 'pg-marquee') if s.marquee }}
+
+<section class="pg-section">
+  <div class="wrap">
+    <p class="eyebrow">Explore</p>
+    <div class="explore-grid">
+      {%- for n in s._nav if n.file not in ('about.html', 'contact.html') %}
+      {%- set first_img = (n['items'][0]._img if n['items'] and n['items'][0]._img else none) %}
+      <a class="explore-card" href="{{ n.file }}" data-anim="up" data-delay="{{ loop.index0 * 0.08 }}">
+        {%- if first_img %}<img src="{{ m.src(first_img) }}" alt="" loading="lazy">{% endif %}
+        <span class="explore-k">{{ '%02d' % loop.index }}</span>
+        <span class="explore-t">{{ n.label }}</span>
+        <span class="explore-go">{{ icon('arrow') }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

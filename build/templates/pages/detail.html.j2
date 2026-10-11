@@ -1,0 +1,55 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set it = page.item %}{% set d = it.detail %}
+{%- set hero_img = it._img or ('hero' if 'hero' in s.images else none) %}
+{%- set kicker = it.badge or page.label %}{% set intro = it.area or it.text or ((d.intro.split('. ')[0] ~ '.') if d.intro else '') %}{% set crumb = it.title %}
+{% include "partials/pagehero.html.j2" %}
+
+<section class="pg-section">
+  <div class="wrap detail-grid">
+    <article class="prose detail-main">
+      <p class="eyebrow">Overview</p>
+      {%- if d.intro %}<p class="lead" data-anim="up">{{ d.intro }}</p>{% endif %}
+      {%- for p in d.body or [] %}<p data-anim="up">{{ p }}</p>{% endfor %}
+      {%- if not d.body and not d.intro %}<p data-anim="up">{{ it.text or it.area or '' }}</p>{% endif %}
+      {%- if d.points %}
+      <h2 class="pg-h3" data-anim="up">{{ d.points_title or 'What we offer' }}</h2>
+      <ul class="check-list">
+        {%- for pt in d.points %}<li data-anim="up" data-delay="{{ (loop.index0 % 6) * 0.05 }}">{{ icon('check') }}<span>{{ pt }}</span></li>{% endfor %}
+      </ul>
+      {%- endif %}
+      {%- if it.companies %}
+      <h2 class="pg-h3" data-anim="up">Companies</h2>
+      <ul class="check-list">{% for c in it.companies %}<li data-anim="up">{{ icon('check') }}<span>{{ c }}</span></li>{% endfor %}</ul>
+      {%- endif %}
+      {%- if d.facts %}
+      <dl class="facts">{% for f in d.facts %}<div data-anim="up"><dt>{{ f.label }}</dt><dd>{{ f.value }}</dd></div>{% endfor %}</dl>
+      {%- endif %}
+      {%- if d.src %}<p class="src-note">Source: <a href="{{ d.src }}" rel="noopener">{{ d.src }}</a></p>{% endif %}
+    </article>
+    <aside class="detail-side">
+      <div class="side-card" data-anim="up">
+        <span class="side-ico">{{ icon(it.icon) }}</span>
+        <p class="side-t">{{ s.detail_cta.title if s.detail_cta else 'Talk to our team' }}</p>
+        <p class="side-p">{{ s.detail_cta.text if s.detail_cta else s.contact.intro }}</p>
+        <a class="btn btn-primary" href="contact.html" data-magnetic>{{ s.cta.label }} {{ icon('arrow') }}</a>
+        {%- for ph in s.contact.phones[:2] %}<a class="side-line" href="tel:{{ ph.tel }}">{{ icon('phone') }} {{ ph.label }} · {{ ph.number }}</a>{% endfor %}
+      </div>
+      <nav class="side-list" aria-label="All {{ page.label | lower }}">
+        <p class="side-h">All {{ page.label | lower }}</p>
+        {%- for o in s[page.key]['items'] %}<a href="{{ o._file }}"{% if o is sameas it %} aria-current="page"{% endif %}>{{ o.title }}</a>{% endfor %}
+      </nav>
+    </aside>
+  </div>
+</section>
+
+<nav class="pn" aria-label="More {{ page.label | lower }}">
+  {%- for dir, o in [('Previous', page.prev), ('Next', page.next)] %}
+  <a class="pn-link pn-{{ dir | lower }}" href="{{ o._file }}">
+    {%- if o._img %}<img src="{{ m.src(o._img) }}" alt="" loading="lazy">{% endif %}
+    <span class="pn-k">{{ dir }}</span><span class="pn-t">{{ o.title }}</span>
+  </a>
+  {%- endfor %}
+</nav>
+{% endblock %}

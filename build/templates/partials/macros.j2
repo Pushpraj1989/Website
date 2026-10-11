@@ -49,3 +49,225 @@
   <p class="empty" data-empty hidden>No locations match this filter.</p>
 {%- endif %}
 {%- endmacro -%}
+
+{%- macro curve() -%}
+    <div class="curve" data-curve tabindex="0" aria-roledescription="carousel" aria-label="Branches">
+      <div class="filters curve-filters" role="group" aria-label="Filter branches by country">
+        <button class="filter" type="button" data-cfilter="all" aria-pressed="true">All <span class="filter-n">{{ s.locations['items'] | length }}</span></button>
+        {%- for c, n in s._countries %}
+        <button class="filter" type="button" data-cfilter="{{ c }}" aria-pressed="false">{{ c }} <span class="filter-n">{{ n }}</span></button>
+        {%- endfor %}
+      </div>
+      <div class="curve-stage" data-cursor="Drag">
+        <ul class="curve-track">
+          {%- for l in s.locations['items'] %}
+          {%- set im = s.images[l.image] if l.image else none %}
+          <li class="curve-card" data-c="{{ l.country }}" data-name="{{ l.name }}" data-type="{{ l.type }}" data-cap="{{ im.cap if im else '' }}" data-address="{{ l.address or '' }}" data-phone="{{ l.phone or '' }}" data-note="{{ l.note or '' }}" data-map="{{ l._map }}" data-href="{{ l._file or '' }}">
+            <img class="cc-bg" src="assets/img/{{ im.src if im else '' }}" alt="" loading="lazy" decoding="async" draggable="false">
+            <div class="cc-top"><span class="cc-pill">{{ l.type }}</span><span>{{ l.country }}</span></div>
+            <div class="cc-bottom">
+              <span class="cc-n">{{ '%02d' % loop.index }}</span>
+              <h3>{{ l.name }}</h3>
+              {% if im %}<span class="cc-cap">{{ im.cap }}</span>{% endif %}
+            </div>
+          </li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- set first = s.locations['items'][0] %}
+      <div class="curve-ui">
+        <button class="curve-btn" type="button" data-cprev aria-label="Previous branch">{{ icon('arrow') }}</button>
+        <div class="curve-detail" aria-live="polite">
+          <span class="cd-type" data-d="type">{{ first.type }}</span>
+          <h3 class="cd-name" data-d="name">{{ first.name }}</h3>
+          <p class="cd-meta"><span data-d="country">{{ first.country }}</span> · <span data-d="cap">{{ s.images[first.image].cap if first.image else '' }}</span></p>
+          <p class="cd-line" data-d="info">{{ first.note or first.address or (first.type ~ " in " ~ first.country ~ ".") }}</p>
+          <div class="cd-actions">
+            <a class="btn btn-primary btn-sm" href="#contact" data-d="book" data-magnetic>{{ s.locations.book_label or "Contact this location" }} {{ icon('arrow') }}</a>
+            {%- set ph = s.contact.phones | rejectattr("fax") | first %}<a class="cd-phone" href="tel:{{ ph.tel }}" data-d="phone">{{ ph.label }} · {{ ph.number }}</a>
+            <a class="cd-phone" href="#" data-d="map" target="_blank" rel="noopener">Open in Maps</a>
+          </div>
+        </div>
+        <button class="curve-btn next" type="button" data-cnext aria-label="Next branch">{{ icon('arrow') }}</button>
+      </div>
+      <div class="curve-progress"><span data-counter>01 / {{ '%02d' % s.locations['items'] | length }}</span><i><b data-cbar></b></i></div>
+{%- endmacro -%}
+
+{%- macro news_grid(items) -%}
+<div class="news-grid">
+  {%- for n in items %}
+  <a class="news-card" href="{{ n._file }}" data-tag="{{ n.tag }}" data-anim="up" data-delay="{{ (loop.index0 % 3) * 0.08 }}">
+    <div class="nc-media">{% if n._img %}<img src="{{ src(n._img) }}" alt="" loading="lazy">{% endif %}<span class="nc-tag">{{ n.tag }}</span></div>
+    <p class="news-meta">{{ n.date }}</p>
+    <h3>{{ n.title }}</h3>
+    <p class="nc-sum">{{ n.summary }}</p>
+    <span class="text-link">Read {{ icon('arrow') }}</span>
+  </a>
+  {%- endfor %}
+</div>
+{%- endmacro -%}
+
+{%- macro promo() -%}
+{#- Hero promotion slider: WebGL displacement transitions between slides (CSS wipe fallback),
+    autoplay with progress, tabs, swipe. Themes can pass an ambient overlay via call(). -#}
+<section class="promo" id="top" data-promo aria-roledescription="carousel" aria-label="Highlights">
+  <div class="promo-stage">
+    {%- for p in s.promos %}
+    <div class="promo-bg{% if loop.first %} is-on{% endif %}" data-src="{{ src(p.image) }}"><img src="{{ src(p.image) }}" alt="{{ s.images[p.image].alt }}" {% if loop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async"></div>
+    {%- endfor %}
+    <canvas class="promo-gl" aria-hidden="true"></canvas>
+    <div class="promo-shade" aria-hidden="true"></div>
+    {%- if caller %}{{ caller() }}{% endif %}
+  </div>
+  <div class="wrap promo-copy-wrap">
+    {%- for p in s.promos %}
+    <div class="promo-copy{% if loop.first %} is-on{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}"{% if not loop.first %} aria-hidden="true"{% endif %}>
+      <p class="promo-k">{% if p.tag %}<b>{{ p.tag }}</b>{% endif %}{{ p.kicker }}</p>
+      {% if loop.first %}<h1 class="promo-t">{{ p.title }}</h1>{% else %}<h2 class="promo-t">{{ p.title }}</h2>{% endif %}
+      <p class="promo-p">{{ p.text }}</p>
+      <div class="cta-row">
+        {%- if p.cta %}<a class="btn btn-primary" href="{{ p.cta.href }}" data-magnetic{% if not loop.first %} tabindex="-1"{% endif %}>{{ p.cta.label }} {{ icon('arrow') }}</a>{% endif %}
+        {%- if p.cta2 %}<a class="btn btn-ghost" href="{{ p.cta2.href }}"{% if not loop.first %} tabindex="-1"{% endif %}>{{ p.cta2.label }}</a>{% endif %}
+      </div>
+      {%- if s.images[p.image].cap %}<span class="promo-cap">{{ s.images[p.image].cap }}</span>{% endif %}
+    </div>
+    {%- endfor %}
+  </div>
+  <div class="wrap promo-ui">
+    <div class="promo-tabs" role="tablist">
+      {%- for p in s.promos %}
+      <button class="promo-tab{% if loop.first %} is-on{% endif %}" type="button" role="tab" aria-selected="{{ 'true' if loop.first else 'false' }}" data-go="{{ loop.index0 }}">
+        <span class="pt-n">{{ '%02d' % loop.index }}</span><span class="pt-l">{{ p.short or p.kicker }}</span><i class="pt-bar"><b></b></i>
+      </button>
+      {%- endfor %}
+    </div>
+    <div class="promo-arrows">
+      <button type="button" class="promo-arrow prev" data-pprev aria-label="Previous slide">{{ icon('arrow') }}</button>
+      <button type="button" class="promo-arrow" data-pnext aria-label="Next slide">{{ icon('arrow') }}</button>
+      <button type="button" class="promo-pause" data-ppause aria-label="Pause slideshow" aria-pressed="false"><span></span><span></span></button>
+    </div>
+  </div>
+</section>
+{%- endmacro -%}
+
+{%- macro rail() -%}
+{#- "How can we help?" quick actions that overlap the bottom of the promo slider -#}
+{%- if s.rail %}
+<section class="rail" aria-label="{{ s.rail.title or 'Quick actions' }}">
+  <div class="wrap">
+    <div class="rail-box" data-anim="up">
+      <p class="rail-t">{{ s.rail.title or 'How can we help?' }}</p>
+      <div class="rail-items">
+        {%- for r in s.rail['items'] %}
+        <a class="rail-item" href="{{ r.href }}"{% if r.href.startswith('http') %} rel="noopener"{% endif %}>
+          <span class="rail-ico">{{ icon(r.icon) }}</span>
+          <span class="rail-l"><b>{{ r.label }}</b>{% if r.sub %}<small>{{ r.sub }}</small>{% endif %}</span>
+          <span class="rail-go">{{ icon('arrow') }}</span>
+        </a>
+        {%- endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro home_news() -%}
+{%- if s.news %}
+<section class="home-news" id="news">
+  <div class="wrap">
+    <div class="home-news-head">
+      <div><p class="eyebrow">Newsroom</p><h2 class="pg-h2" data-anim="lines">{{ s.news_title or 'Latest news and updates' }}</h2></div>
+      <a class="btn btn-ghost" href="news.html" data-magnetic>All news {{ icon('arrow') }}</a>
+    </div>
+    {{ news_grid(s.news[:3]) }}
+  </div>
+</section>
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro faq() -%}
+{%- if s.faq %}
+<section class="faq" id="faq">
+  <div class="wrap faq-grid">
+    <div>
+      <p class="eyebrow">FAQ</p>
+      <h2 class="pg-h2" data-anim="lines">{{ s.faq_title or 'Questions people ask' }}</h2>
+      <p class="muted" data-anim="up">Can't find an answer? <a href="contact.html">Contact us</a>.</p>
+    </div>
+    <div class="faq-list">
+      {%- for q in s.faq %}
+      <details class="faq-item" data-anim="up"{% if loop.first %} open{% endif %}>
+        <summary><span>{{ q.q }}</span><i aria-hidden="true"></i></summary>
+        <div class="faq-a"><p>{{ q.a }}</p></div>
+      </details>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro bmi() -%}
+<section class="tool" id="tools">
+  <div class="wrap tool-grid">
+    <div>
+      <p class="eyebrow">Health tools</p>
+      <h2 class="pg-h2" data-anim="lines">Check your body mass index</h2>
+      <p class="muted" data-anim="up">A quick screening figure, worked out on your device. Nothing is sent anywhere. It is not a diagnosis; a doctor can tell you what it means for you.</p>
+    </div>
+    <form class="bmi" data-bmi novalidate>
+      <label>Height <span><input type="range" min="120" max="210" value="168" name="h"><output data-o="h">168 cm</output></span></label>
+      <label>Weight <span><input type="range" min="30" max="180" value="70" name="w"><output data-o="w">70 kg</output></span></label>
+      <div class="bmi-out">
+        <div class="bmi-dial"><svg viewBox="0 0 200 110" aria-hidden="true"><path class="bmi-track" d="M15 100a85 85 0 0 1 170 0"/><path class="bmi-arc" d="M15 100a85 85 0 0 1 170 0" pathLength="100" data-arc/></svg><strong data-bmi-v>24.8</strong></div>
+        <p class="bmi-band" data-bmi-band aria-live="polite">Healthy range</p>
+        <p class="bmi-note">WHO adult ranges: under 18.5 underweight, 18.5 to 24.9 healthy, 25 to 29.9 overweight, 30 and over obese.</p>
+        <a class="btn btn-primary btn-sm" href="{{ s.bmi_href or 'contact.html' }}">{{ s.bmi_cta or 'Book a check-up' }} {{ icon('arrow') }}</a>
+      </div>
+    </form>
+  </div>
+</section>
+{%- endmacro -%}
+
+{%- macro testimonials() -%}
+{%- if s.testimonials %}
+<section class="quotes" aria-label="Patient stories" data-quotes>
+  <div class="wrap">
+    <p class="eyebrow">Patient stories</p>
+    <div class="q-stage">
+      {%- for t in s.testimonials %}
+      <figure class="q-item{% if loop.first %} is-on{% endif %}">
+        <blockquote>“{{ t.text }}”</blockquote>
+        <figcaption><span class="q-av" aria-hidden="true">{{ t.name[0] }}</span><b>{{ t.name }}</b><span>{{ t.date }}</span></figcaption>
+      </figure>
+      {%- endfor %}
+    </div>
+    <div class="q-ui">
+      <div class="q-dots">{% for t in s.testimonials %}<button type="button" aria-label="Story {{ loop.index }}" data-q="{{ loop.index0 }}"{% if loop.first %} class="is-on"{% endif %}></button>{% endfor %}</div>
+      <p class="q-note">Testimonials as published on the group's website.</p>
+    </div>
+  </div>
+</section>
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro insurance() -%}
+{%- if s.insurance %}
+<section class="ins" aria-label="Insurance partners">
+  <div class="wrap ins-head">
+    <p class="eyebrow">Insurance</p>
+    <h2 class="pg-h2" data-anim="lines">{{ s.insurance.intro }}</h2>
+  </div>
+  {%- set half = (s.insurance.partners | length / 2) | round(0, 'ceil') | int %}
+  {%- for row, dir in [(s.insurance.partners[:half], 'left'), (s.insurance.partners[half:], 'right')] %}
+  <div class="marquee ins-row" data-marquee="0.6" data-dir="{{ dir }}">
+    <div class="marquee-track" aria-hidden="true">
+      {%- for pass in [0, 1] %}<div class="marquee-group">{% for p in row %}<span class="ins-chip">{{ p }}</span>{% endfor %}</div>{% endfor %}
+    </div>
+  </div>
+  {%- endfor %}
+  <p class="wrap visually-hidden">Partners: {{ s.insurance.partners | join(', ') }}</p>
+</section>
+{%- endif %}
+{%- endmacro -%}

@@ -5,7 +5,7 @@ Each company picks a visual theme (data field "theme"); themes live in
 build/templates/themes/<theme>.html.j2 and shared/css/<theme>.css.
 
 Writes:
-  sites/<slug>/index.html   one page per company (+ assets/)
+  sites/<slug>/*.html       home + about, listings, detail pages, locations, news, contact (+ assets/)
   index.html                hub page linking all sites
   VERIFY.md                 facts to check before a pitch, per company
 
@@ -16,6 +16,7 @@ Needs:  jinja2  (pip install jinja2)
 import datetime
 import json
 import os
+import re
 import shutil
 from pathlib import Path
 
@@ -82,6 +83,106 @@ def digits(number):
     return "+" + "".join(ch for ch in number if ch.isdigit()) if number.strip().startswith("+") else number
 
 
+def slugify(text):
+    return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+
+
+def item_image(site, item):
+    for key in ("image", "bg"):
+        if item.get(key) and item[key] in site.get("images", {}):
+            return item[key]
+    return None
+
+
+def build_pages(site):
+    """Every site is multi-page: home plus about, listings, one page per item,
+    locations, news and contact. Files are flat (about.html, svc-x.html) so the
+    relative assets/ path works on every page."""
+    pages = [{"file": "index.html", "kind": "home", "title": site["name"]}]
+    nav = [{"file": "about.html", "label": "About"}]
+    pages.append({"file": "about.html", "kind": "about", "title": "About " + site["short"]})
+
+    def listing(key, prefix):
+        block = site.get(key) or {}
+        items = block.get("items") or []
+        if not items or block.get("page") is False:
+            return
+        label = block.get("nav") or block.get("title") or key.title()
+        file = slugify(label) + ".html"
+        for it in items:
+            it["_file"] = f"{prefix}-{slugify(it['title'])}.html"
+            it["_img"] = item_image(site, it)
+            it.setdefault("detail", {})
+        pages.append({"file": file, "kind": "listing", "title": block.get("title") or label, "key": key, "label": label})
+        for i, it in enumerate(items):
+            pages.append({"file": it["_file"], "kind": "detail", "title": it["title"], "key": key, "label": label,
+                          "listing": file, "item": it, "prev": items[i - 1], "next": items[(i + 1) % len(items)]})
+        if block.get("in_nav", True):
+            nav.append({"file": file, "label": label, "items": items, "title": block.get("title") or label})
+        block["_file"] = file
+
+    listing("services", "svc")
+    listing("specialities", "sp")
+    if site.get("specialities", {}).get("_file") and nav and nav[-1]["file"] == site["services"].get("_file"):
+        nav[-1]["extra"] = {"file": site["specialities"]["_file"], "label": f"All {len(site['specialities']['items'])} specialities"}
+    if site.get("doctors"):
+        pages.append({"file": "doctors.html", "kind": "doctors", "title": site["doctors"]["title"], "label": "Doctors"})
+        nav.append({"file": "doctors.html", "label": "Doctors"})
+    if site.get("packages"):
+        pages.append({"file": "packages.html", "kind": "packages", "title": site["packages"]["title"], "label": site["packages"].get("nav", "Packages")})
+        nav.append({"file": "packages.html", "label": site["packages"].get("nav", "Packages")})
+        if site.get("highlights"):
+            site["highlights"]["_file"] = "packages.html"
+    listing("highlights", "item")
+
+    locations = (site.get("locations") or {}).get("items", [])
+    if locations:
+        label = site["locations"].get("nav", "Locations")
+        file = slugify(label) + ".html"
+        site["locations"]["_file"] = file
+        pages.append({"file": file, "kind": "locations", "title": site["locations"].get("title") or label, "label": label})
+        nav.append({"file": file, "label": label})
+        if any(l.get("about") or l.get("address") for l in locations):
+            for i, l in enumerate(locations):
+                l["_file"] = "branch-" + slugify(l["name"]) + ".html"
+            for i, l in enumerate(locations):
+                pages.append({"file": l["_file"], "kind": "branch", "title": l.get("full_name") or l["name"], "label": label, "listing": file,
+                              "item": l, "prev": locations[i - 1], "next": locations[(i + 1) % len(locations)]})
+    if site.get("news"):
+        for n in site["news"]:
+            n["_file"] = "news-" + slugify(n["title"])[:60] + ".html"
+            n["_img"] = n.get("image") if n.get("image") in site.get("images", {}) else None
+        pages.append({"file": "news.html", "kind": "news", "title": "News and updates", "label": "News"})
+        for i, n in enumerate(site["news"]):
+            pages.append({"file": n["_file"], "kind": "article", "title": n["title"], "label": "News", "listing": "news.html",
+                          "item": n, "prev": site["news"][i - 1], "next": site["news"][(i + 1) % len(site["news"])]})
+        nav.append({"file": "news.html", "label": "News"})
+    pages.append({"file": "contact.html", "kind": "contact", "title": site["contact"].get("title", "Contact")})
+    nav.append({"file": "contact.html", "label": "Contact"})
+    def resolve(href):
+        if not href or not href.startswith("@"):
+            return href
+        kind, _, text = href[1:].partition(":")
+        pool = {"news": site.get("news") or [], "svc": (site.get("services") or {}).get("items", []),
+                "sp": (site.get("specialities") or {}).get("items", [])}[kind]
+        for it in pool:
+            if it["title"].startswith(text):
+                return it["_file"]
+        raise SystemExit(f"{site['slug']}: no page for link {href}")
+    for pr in site.get("promos") or []:
+        for k in ("cta", "cta2"):
+            if pr.get(k):
+                pr[k]["href"] = resolve(pr[k]["href"])
+    for n in nav:
+        n.setdefault("items", [])  # templates read n['items']; without the key Jinja finds dict.items
+    site["_pages"] = pages
+    site["_nav"] = nav
+    site["_anchors"] = {"#contact": "contact.html", "#about": "about.html", "#top": "#top"}
+    for key in ("services", "highlights", "locations"):
+        if (site.get(key) or {}).get("_file"):
+            site["_anchors"]["#" + key] = site[key]["_file"]
+
+
 def prepare(site):
     """Derive display values so the template only renders, never decides."""
     for stat in site["stats"]:
@@ -94,6 +195,12 @@ def prepare(site):
     locations = (site.get("locations") or {}).get("items", [])
     counts = {}
     for loc in locations:
+        ph = (re.findall(r"\+?\d[\d ]{7,}\d", re.sub(r"\+\s+", "+", loc.get("phone") or "")) or [""])[0].replace(" ", "")
+        m = re.fullmatch(r"\+(968|973|965|971|974)(\d{4})(\d{4})", ph)
+        if m:
+            loc["phone"] = f"+{m[1]} {m[2]} {m[3]}"
+        q = f"{site['name']} {loc['name']} {loc['country']}".replace(" ", "+")
+        loc["_map"] = loc.get("map") or f"https://www.google.com/maps/search/?api=1&query={q}"
         counts[loc["country"]] = counts.get(loc["country"], 0) + 1
     site["_countries"] = list(counts.items())
     site["_country_counts"] = counts
@@ -106,15 +213,7 @@ def prepare(site):
     site["contact"]["form"] = form
     site["_branch_options"] = [loc["name"] + " · " + loc["country"] for loc in locations]
 
-    nav = [{"id": "about", "label": "About"}]
-    if site.get("services", {}).get("items"):
-        nav.append({"id": "services", "label": site["services"].get("nav", "Services")})
-    if site.get("highlights"):
-        nav.append({"id": "highlights", "label": site["highlights"].get("nav", "Highlights")})
-    if locations:
-        nav.append({"id": "locations", "label": site["locations"].get("nav", "Locations")})
-    nav.append({"id": "contact", "label": "Contact"})
-    site["_nav"] = nav
+    build_pages(site)
     site["_theme"] = THEMES[site["theme"]]
 
     # credits: every image this site uses, looked up from data/credits.json
@@ -123,7 +222,7 @@ def prepare(site):
     for src in used:
         key = site["img_dir"] + "/" + src.rsplit(".", 1)[0]
         c = CREDITS.get(key)
-        if c and not c["license"].upper().startswith("CC0"):
+        if c and not c.get("owner") and not c["license"].upper().startswith("CC0"):
             site["_credits"].append({**c, "modified": True})
         elif c:
             site["_credits"].append(c)
@@ -145,8 +244,16 @@ def render_site(env, site):
         if not src.exists():
             raise SystemExit(f"missing image for {site['slug']}: {src}")
         shutil.copy(src, out_dir / "assets" / "img" / im)
-    html = env.get_template(f"themes/{site['theme']}.html.j2").render(s=site, year=YEAR)
-    (out_dir / "index.html").write_text(html, encoding="utf-8")
+    for old in out_dir.glob("*.html"):
+        old.unlink()
+    for page in site["_pages"]:
+        tpl = f"themes/{site['theme']}.html.j2" if page["kind"] == "home" else f"pages/{page['kind']}.html.j2"
+        html = env.get_template(tpl).render(s=site, page=page, year=YEAR)
+        if page["kind"] not in ("home", "contact"):
+            # section anchors from the data point at the matching page off the home page
+            for anchor, target in site["_anchors"].items():
+                html = html.replace(f'href="{anchor}"', f'href="{target}"')
+        (out_dir / page["file"]).write_text(html, encoding="utf-8")
 
 
 def render_hub(env, sites):
@@ -198,7 +305,7 @@ def main():
         site = prepare(json.loads(path.read_text(encoding="utf-8")))
         sites.append(site)
         render_site(env, site)
-        print(f"built sites/{site['slug']}/index.html")
+        print(f"built sites/{site['slug']}/  ({len(site['_pages'])} pages)")
 
     if only:
         return

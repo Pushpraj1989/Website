@@ -1,594 +1,1370 @@
 {
- "badr/hero": {
-  "title": "Doctor Patient",
-  "creator": "Direct Media",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/doctor-patient-7NQJS4WWQW"
- },
- "badr/care": {
-  "title": "Doctor Patient",
-  "creator": "Direct Media",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/doctor-patient-8YUWCVJVHH"
- },
- "badr/newborn": {
-  "title": "Happy Baby",
-  "creator": "Studio 7042",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/happy-baby-6UCQGZ6Q0W"
- },
- "badr/dental": {
-  "title": "Chair Dentist",
-  "creator": "Daniel Frank",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/chair-dentist-3J10QN5PTS"
- },
- "starcare/peds": {
-  "title": "Small Baby",
-  "creator": "Studio 7042",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/small-baby-FKXNHWCQJK"
- },
- "starcare/physio": {
-  "title": "Physiotherapy hospital",
-  "creator": null,
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "rawpixel",
-  "landing": "https://www.rawpixel.com/image/6038567/photo-image-public-domain-house-person"
- },
- "starcare/steth": {
-  "title": "Stethoscope Medical",
-  "creator": "Negative Space",
-  "license": "CC0 1.0",
-  "license_url": null,
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/stethoscope-medical-RAW1RLRTM7"
- },
- "starcare/pharmacy": {
-  "title": "Pills Medicine",
-  "creator": "Freestocks.org",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/pills-medicine-S5WGVL18A9"
- },
- "galfar/hero": {
-  "title": "Cranes Construction",
-  "creator": "Wyncliffe",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/cranes-construction-KOKXBB635S"
- },
- "galfar/sparks": {
-  "title": "Dark Night",
-  "creator": "Darius Anton",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/dark-night-MO2OUO1MD5"
- },
- "galfar/energy": {
-  "title": "Fábrica química Solvay",
-  "creator": "Jorge Franganillo",
-  "license": "BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/46191841@N00/3129290866"
- },
- "galfar/civil": {
-  "title": "Concrete Texture",
-  "creator": "The Building Envelope",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/concrete-texture-XA3VDI2RHU"
- },
- "galfar/infra": {
-  "title": "Shanghai interchange",
-  "creator": null,
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "rawpixel",
-  "landing": "https://www.rawpixel.com/image/3343089/free-photo-image-view-shanghai-city-highway"
- },
- "galfar/refinery": {
-  "title": "Nippon Oil(Yamaguchi)",
-  "creator": "kanegen",
-  "license": "BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/12527903@N00/4862607373"
- },
- "ngc/sphere": {
-  "title": "AMACO STORAGE TERMINAL",
-  "creator": "jasonwoodhead23",
-  "license": "BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/80365963@N00/7150825737"
- },
- "ngc/pipes": {
-  "title": "Industrial Silos",
-  "creator": "Leeroy",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/industrial-silos-9865C0BA21"
- },
- "ngc/valves": {
-  "title": "Utilities Meters",
-  "creator": "Leeroy",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/utilities-meters-77695777DD"
- },
- "ngc/dark": {
-  "title": "Industrial Gauges",
-  "creator": "Jonas Nilsson Lee",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/industrial-gauges-IQDKLP8G2I"
- },
- "assarain/furnish": {
-  "title": "Modern Room",
-  "creator": "World Travel Adventures",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/modern-room-ORRHZ1VULX"
- },
- "assarain/textile": {
-  "title": "Line Pattern",
-  "creator": "Seacoast Sage",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/line-pattern-L7SIUD5VN5"
- },
- "assarain/concrete": {
-  "title": "Concrete Texture",
-  "creator": "Sergei Akulich",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/concrete-texture-DQYLYXBDO8"
- },
- "assarain/property": {
-  "title": "Glass Building",
-  "creator": "Chris HP",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/glass-building-FWYEF6UNGZ"
- },
- "assarain/muttrah": {
-  "title": "Muttrah Muscat Oman 2011",
-  "creator": "~ilawar",
-  "license": "BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/24598205@N08/5402893208"
- },
- "assarain/curve": {
-  "title": "Concrete Texture",
-  "creator": "The Building Envelope",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/concrete-texture-XA3VDI2RHU"
- },
- "asyad/hero": {
-  "title": "Airport Airplane",
-  "creator": "Andrew Branch",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/airport-airplane-PEQJJ1O6ZY"
- },
- "asyad/containers": {
-  "title": "Container Stack",
-  "creator": "Bob Richards",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/container-stack-NDCVBXJMDJ"
- },
- "asyad/stack": {
-  "title": "Container Stack",
-  "creator": "Bob Richards",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/container-stack-OHHX29VJZL"
- },
- "asyad/parcel": {
-  "title": "Man Wrapping",
-  "creator": "Bruce Mars",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/man-wrapping-K2NTOLFEHN"
- },
- "asyad/boxes": {
-  "title": "Cardboard Box",
-  "creator": "Matt Bango",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/cardboard-box-USP4WCYPBW"
- },
- "asyad/road": {
-  "title": "Land-Rover-Oman-Media-Dec-95",
-  "creator": "landrovermena",
-  "license": "BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/56682936@N03/5257701582"
- },
- "asyad/dunes": {
-  "title": "OffRoad outside Dubai",
-  "creator": "BasharAlaeddin",
-  "license": "BY-SA 2.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/34413965@N02/8763643922"
- },
- "badr/oman": {
-  "title": "Sultan Qaboos Grand Mosque (1)",
-  "creator": "Mostafameraji",
-  "license": "BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=57591888"
- },
- "starcare/hero": {
-  "title": "Wings Laparoscopic operating theatre",
-  "creator": "Dr.jayesh amin",
-  "license": "BY-SA 3.0",
-  "license_url": null,
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=29136994"
- },
- "galfar/duqm": {
-  "title": "Duqm Fishing Port",
-  "creator": "AbdullahAlMaani",
-  "license": "BY-SA 4.0",
-  "license_url": null,
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=117467673"
- },
- "galfar/salalah": {
-  "title": "File:Neues Terminal SLL.jpg",
-  "creator": "Baden65",
-  "license": "BY-SA 4.0",
-  "license_url": null,
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=56182020"
- },
- "assarain/hero": {
-  "title": "Nizwa Fort and Minaret of Friday Mosque",
-  "creator": "Martin Falbisoner",
-  "license": "BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=39086370"
- },
- "badr/bahrain": {
-  "title": "Manama Manama Skyline 01",
-  "creator": "Zairon",
-  "license": "BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=96545211"
- },
- "badr/kuwait": {
-  "title": "Kuwait City Skyline 1",
-  "creator": "Zairon",
-  "license": "BY 4.0",
-  "license_url": "https://creativecommons.org/licenses/by/4.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=148181994"
- },
- "galfar/road": {
-  "title": "Muscat Expressway",
-  "creator": "Editor Socks",
-  "license": "BY-SA 4.0",
-  "license_url": null,
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=156439066"
- },
- "starcare/seeb": {
-  "title": "Seeb, Muscat, Oman (4324767930)",
-  "creator": "yeowatzup",
-  "license": "BY 2.0",
-  "license_url": null,
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=24520891"
- },
- "starcare/barka": {
-  "title": "Barka, Oman (6) (41446310861)",
-  "creator": "Hans Birger Nilsen",
-  "license": "BY-SA 2.0",
-  "license_url": null,
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=70285689"
- },
- "starcare/calicut": {
-  "title": "Kozhikode Beach Coastline",
-  "creator": "Sulyab Thottungal",
-  "license": "BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=48507623"
- },
- "assarain/nizwa-night": {
-  "title": "Oman, Nizwa, Fort Nizwa (at night)",
-  "creator": "Dr. Thomas Liptak",
-  "license": "BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=177395219"
- },
- "badr/uae": {
-  "title": "Dubai Skyline mit Burj Khalifa (18241030269)",
-  "creator": "Tim Reckmann from Hamm, Deutschland",
-  "license": "BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=82789105"
- },
- "starcare/sharjah": {
-  "title": "Sharjah city skyline",
-  "creator": "Mueed Ahmed",
-  "license": "BY-SA 4.0",
-  "license_url": null,
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=50574446"
- },
- "starcare/muscat": {
-  "title": "Sultan Qaboos Grand Mosque (1)",
-  "creator": "Mostafameraji",
-  "license": "BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=57591888"
- },
- "starcare/duqm": {
-  "title": "Duqm Fishing Port",
-  "creator": "AbdullahAlMaani",
-  "license": "BY-SA 4.0",
-  "license_url": null,
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=117467673"
- },
- "badr/mri": {
-  "title": "MRI Scanner",
-  "creator": "Joyce Kaes",
-  "license": "BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/103189636@N05/24848988506"
- },
- "badr/nurse": {
-  "title": "Caregiver Nurse",
-  "creator": "Direct Media",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/caregiver-nurse-PMZZ7WLOAJ"
- },
- "badr/wheel": {
-  "title": "Caregiver Nurse",
-  "creator": "Direct Media",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "stocksnap",
-  "landing": "https://stocksnap.io/photo/caregiver-nurse-TBEMNLXLVQ"
- },
- "badr/lab": {
-  "title": "NHG Continues to Fight COVID-19",
-  "creator": "U.S. Navy Medicine",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "rawpixel",
-  "landing": "https://www.rawpixel.com/image/3394030/free-photo-image-doctor-laboratory-lab-testing-kit"
- },
- "badr/br-muscat": {
-  "title": "Muscat, Oman مسقط، عمان 05",
-  "creator": "Mostafameraji",
-  "license": "BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=57677047"
- },
- "badr/br-sur": {
-  "title": "Sur, Oman (7)",
-  "creator": "Andries Oudshoorn",
-  "license": "BY-SA 2.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=6833735"
- },
- "badr/br-mabella": {
-  "title": "Al Maabilah, Seeb, Oman - panoramio - Luca Margheriti (1)",
-  "creator": "Luca Margheriti",
-  "license": "BY-SA 3.0",
-  "license_url": null,
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=53052709"
- },
- "badr/c-heart": {
-  "title": "AliveCor iOS screenshot",
-  "creator": "juhansonin",
-  "license": "BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/38869431@N00/8123108787"
- },
- "badr/c-knee": {
-  "title": "Knee X-Ray: Keep hiking, but take it easy",
-  "creator": "fabola",
-  "license": "BY-SA 2.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/44124339301@N01/18204762963"
- },
- "badr/c-womb": {
-  "title": "IMG_6210",
-  "creator": "Live to Create Photography",
-  "license": "BY-SA 2.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/91752758@N07/12040477644"
- },
- "badr/c-gut": {
-  "title": "Endoscopy",
-  "creator": "Yuya Tamai",
-  "license": "BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/76758469@N00/180619506"
- },
- "badr/c-ear": {
-  "title": "A clinician conducting an examination of a young female patient&rsquo;s left ear, using an otoscope. Original image sourced from US Government department: Public Health Image Library, Centers for Disease Control and Prevention. Under US law this image is copyright free, please credit the government department whenever you can&rdquo;.",
-  "creator": "Centers for Disease Control and Prevention",
-  "license": "CC0 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "source": "rawpixel",
-  "landing": "https://www.rawpixel.com/image/2288500/free-photo-image-ear-doctor-checkup"
- },
- "badr/c-tooth": {
-  "title": "Dental X-ray",
-  "creator": "icethim",
-  "license": "BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/15977536@N06/5443947055"
- },
- "badr/p-asthma": {
-  "title": "Asthma Inhaler (Object)",
-  "creator": "Jenn Durfey",
-  "license": "BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/52498245@N03/5347629183"
- },
- "badr/p-diabetes": {
-  "title": "Measure Me Blood",
-  "creator": "cogdogblog",
-  "license": "BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/37996646802@N01/6805318882"
- },
- "badr/p-bp": {
-  "title": "Blood pressure measuring. Doctor and patient. Health care.",
-  "creator": "agilemktg1",
-  "license": "PDM 1.0",
-  "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
-  "source": "flickr",
-  "landing": "https://www.flickr.com/photos/68716695@N06/29095583293"
- },
- "badr/br-sohar": {
-  "title": "Sohar Gate 2",
-  "creator": "https://www.flickr.com/photos/130649623@N05/",
-  "license": "BY-SA 2.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=44367763"
- },
- "badr/br-muharraq": {
-  "title": "Muharraq Bayt Siyadi 1",
-  "creator": "Zairon",
-  "license": "BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=97381212"
- },
- "badr/br-riffa": {
-  "title": "Riffa Riffa Fort Exterior 05",
-  "creator": "Zairon",
-  "license": "BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=97525744"
- },
- "badr/br-bahrain": {
-  "title": "Muharraq Suq",
-  "creator": "Gasschh",
-  "license": "BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=54303595"
- },
- "badr/p-thyroid": {
-  "title": "Blood pressure measurement, Poland",
-  "creator": "Kris D from Metropolia Silesia, Upper Silesia ( Oberschlesien )",
-  "license": "BY-SA 2.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=18417588"
- },
- "badr/br-ruwi": {
-  "title": "Ruwi quarter in Mascat, Oman",
-  "creator": "Wusel007",
-  "license": "BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=9476407"
- },
- "badr/br-muscat2": {
-  "title": "Ruwi Muscat",
-  "creator": "Wusel007",
-  "license": "BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=38151815"
- },
- "badr/br-salalah": {
-  "title": "File:Neues Terminal SLL.jpg",
-  "creator": "Baden65",
-  "license": "BY-SA 4.0",
-  "license_url": null,
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=56182020"
- },
- "badr/barka": {
-  "title": "Barka, Oman (6) (41446310861)",
-  "creator": "Hans Birger Nilsen",
-  "license": "BY-SA 2.0",
-  "license_url": null,
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=70285689"
- },
- "badr/nizwa": {
-  "title": "Nizwa Fort and Minaret of Friday Mosque",
-  "creator": "Martin Falbisoner",
-  "license": "BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=39086370"
- },
- "badr/duqm": {
-  "title": "Duqm Fishing Port",
-  "creator": "AbdullahAlMaani",
-  "license": "BY-SA 4.0",
-  "license_url": null,
-  "source": "wikimedia",
-  "landing": "https://commons.wikimedia.org/w/index.php?curid=117467673"
- }
+  "badr/hero": {
+    "title": "Doctor Patient",
+    "creator": "Direct Media",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/doctor-patient-7NQJS4WWQW"
+  },
+  "badr/care": {
+    "title": "Doctor Patient",
+    "creator": "Direct Media",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/doctor-patient-8YUWCVJVHH"
+  },
+  "badr/newborn": {
+    "title": "Happy Baby",
+    "creator": "Studio 7042",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/happy-baby-6UCQGZ6Q0W"
+  },
+  "badr/dental": {
+    "title": "Chair Dentist",
+    "creator": "Daniel Frank",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/chair-dentist-3J10QN5PTS"
+  },
+  "starcare/peds": {
+    "title": "Small Baby",
+    "creator": "Studio 7042",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/small-baby-FKXNHWCQJK"
+  },
+  "starcare/physio": {
+    "title": "Physiotherapy hospital",
+    "creator": null,
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "rawpixel",
+    "landing": "https://www.rawpixel.com/image/6038567/photo-image-public-domain-house-person"
+  },
+  "starcare/steth": {
+    "title": "Stethoscope Medical",
+    "creator": "Negative Space",
+    "license": "CC0 1.0",
+    "license_url": null,
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/stethoscope-medical-RAW1RLRTM7"
+  },
+  "starcare/pharmacy": {
+    "title": "Pills Medicine",
+    "creator": "Freestocks.org",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/pills-medicine-S5WGVL18A9"
+  },
+  "galfar/hero": {
+    "title": "Cranes Construction",
+    "creator": "Wyncliffe",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/cranes-construction-KOKXBB635S"
+  },
+  "galfar/sparks": {
+    "title": "Dark Night",
+    "creator": "Darius Anton",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/dark-night-MO2OUO1MD5"
+  },
+  "galfar/energy": {
+    "title": "Fábrica química Solvay",
+    "creator": "Jorge Franganillo",
+    "license": "BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/46191841@N00/3129290866"
+  },
+  "galfar/civil": {
+    "title": "Concrete Texture",
+    "creator": "The Building Envelope",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/concrete-texture-XA3VDI2RHU"
+  },
+  "galfar/infra": {
+    "title": "Shanghai interchange",
+    "creator": null,
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "rawpixel",
+    "landing": "https://www.rawpixel.com/image/3343089/free-photo-image-view-shanghai-city-highway"
+  },
+  "galfar/refinery": {
+    "title": "Nippon Oil(Yamaguchi)",
+    "creator": "kanegen",
+    "license": "BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/12527903@N00/4862607373"
+  },
+  "ngc/sphere": {
+    "title": "AMACO STORAGE TERMINAL",
+    "creator": "jasonwoodhead23",
+    "license": "BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/80365963@N00/7150825737"
+  },
+  "ngc/pipes": {
+    "title": "Industrial Silos",
+    "creator": "Leeroy",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/industrial-silos-9865C0BA21"
+  },
+  "ngc/valves": {
+    "title": "Utilities Meters",
+    "creator": "Leeroy",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/utilities-meters-77695777DD"
+  },
+  "ngc/dark": {
+    "title": "Industrial Gauges",
+    "creator": "Jonas Nilsson Lee",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/industrial-gauges-IQDKLP8G2I"
+  },
+  "assarain/furnish": {
+    "title": "Modern Room",
+    "creator": "World Travel Adventures",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/modern-room-ORRHZ1VULX"
+  },
+  "assarain/textile": {
+    "title": "Line Pattern",
+    "creator": "Seacoast Sage",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/line-pattern-L7SIUD5VN5"
+  },
+  "assarain/concrete": {
+    "title": "Concrete Texture",
+    "creator": "Sergei Akulich",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/concrete-texture-DQYLYXBDO8"
+  },
+  "assarain/property": {
+    "title": "Glass Building",
+    "creator": "Chris HP",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/glass-building-FWYEF6UNGZ"
+  },
+  "assarain/muttrah": {
+    "title": "Muttrah Muscat Oman 2011",
+    "creator": "~ilawar",
+    "license": "BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/24598205@N08/5402893208"
+  },
+  "assarain/curve": {
+    "title": "Concrete Texture",
+    "creator": "The Building Envelope",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/concrete-texture-XA3VDI2RHU"
+  },
+  "asyad/hero": {
+    "title": "Airport Airplane",
+    "creator": "Andrew Branch",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/airport-airplane-PEQJJ1O6ZY"
+  },
+  "asyad/containers": {
+    "title": "Container Stack",
+    "creator": "Bob Richards",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/container-stack-NDCVBXJMDJ"
+  },
+  "asyad/stack": {
+    "title": "Container Stack",
+    "creator": "Bob Richards",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/container-stack-OHHX29VJZL"
+  },
+  "asyad/parcel": {
+    "title": "Man Wrapping",
+    "creator": "Bruce Mars",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/man-wrapping-K2NTOLFEHN"
+  },
+  "asyad/boxes": {
+    "title": "Cardboard Box",
+    "creator": "Matt Bango",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/cardboard-box-USP4WCYPBW"
+  },
+  "asyad/road": {
+    "title": "Land-Rover-Oman-Media-Dec-95",
+    "creator": "landrovermena",
+    "license": "BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/56682936@N03/5257701582"
+  },
+  "asyad/dunes": {
+    "title": "OffRoad outside Dubai",
+    "creator": "BasharAlaeddin",
+    "license": "BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/34413965@N02/8763643922"
+  },
+  "badr/oman": {
+    "title": "Sultan Qaboos Grand Mosque (1)",
+    "creator": "Mostafameraji",
+    "license": "BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=57591888"
+  },
+  "starcare/hero": {
+    "title": "Wings Laparoscopic operating theatre",
+    "creator": "Dr.jayesh amin",
+    "license": "BY-SA 3.0",
+    "license_url": null,
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=29136994"
+  },
+  "galfar/duqm": {
+    "title": "Duqm Fishing Port",
+    "creator": "AbdullahAlMaani",
+    "license": "BY-SA 4.0",
+    "license_url": null,
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=117467673"
+  },
+  "galfar/salalah": {
+    "title": "File:Neues Terminal SLL.jpg",
+    "creator": "Baden65",
+    "license": "BY-SA 4.0",
+    "license_url": null,
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=56182020"
+  },
+  "assarain/hero": {
+    "title": "Nizwa Fort and Minaret of Friday Mosque",
+    "creator": "Martin Falbisoner",
+    "license": "BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=39086370"
+  },
+  "badr/bahrain": {
+    "title": "Manama Manama Skyline 01",
+    "creator": "Zairon",
+    "license": "BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=96545211"
+  },
+  "badr/kuwait": {
+    "title": "Kuwait City Skyline 1",
+    "creator": "Zairon",
+    "license": "BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=148181994"
+  },
+  "galfar/road": {
+    "title": "Muscat Expressway",
+    "creator": "Editor Socks",
+    "license": "BY-SA 4.0",
+    "license_url": null,
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=156439066"
+  },
+  "starcare/seeb": {
+    "title": "Seeb, Muscat, Oman (4324767930)",
+    "creator": "yeowatzup",
+    "license": "BY 2.0",
+    "license_url": null,
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=24520891"
+  },
+  "starcare/barka": {
+    "title": "Barka, Oman (6) (41446310861)",
+    "creator": "Hans Birger Nilsen",
+    "license": "BY-SA 2.0",
+    "license_url": null,
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=70285689"
+  },
+  "starcare/calicut": {
+    "title": "Kozhikode Beach Coastline",
+    "creator": "Sulyab Thottungal",
+    "license": "BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=48507623"
+  },
+  "assarain/nizwa-night": {
+    "title": "Oman, Nizwa, Fort Nizwa (at night)",
+    "creator": "Dr. Thomas Liptak",
+    "license": "BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=177395219"
+  },
+  "badr/uae": {
+    "title": "Dubai Skyline mit Burj Khalifa (18241030269)",
+    "creator": "Tim Reckmann from Hamm, Deutschland",
+    "license": "BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=82789105"
+  },
+  "starcare/sharjah": {
+    "title": "Sharjah city skyline",
+    "creator": "Mueed Ahmed",
+    "license": "BY-SA 4.0",
+    "license_url": null,
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=50574446"
+  },
+  "starcare/muscat": {
+    "title": "Sultan Qaboos Grand Mosque (1)",
+    "creator": "Mostafameraji",
+    "license": "BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=57591888"
+  },
+  "starcare/duqm": {
+    "title": "Duqm Fishing Port",
+    "creator": "AbdullahAlMaani",
+    "license": "BY-SA 4.0",
+    "license_url": null,
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=117467673"
+  },
+  "badr/mri": {
+    "title": "MRI Scanner",
+    "creator": "Joyce Kaes",
+    "license": "BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/103189636@N05/24848988506"
+  },
+  "badr/nurse": {
+    "title": "Caregiver Nurse",
+    "creator": "Direct Media",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/caregiver-nurse-PMZZ7WLOAJ"
+  },
+  "badr/wheel": {
+    "title": "Caregiver Nurse",
+    "creator": "Direct Media",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "stocksnap",
+    "landing": "https://stocksnap.io/photo/caregiver-nurse-TBEMNLXLVQ"
+  },
+  "badr/lab": {
+    "title": "NHG Continues to Fight COVID-19",
+    "creator": "U.S. Navy Medicine",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "rawpixel",
+    "landing": "https://www.rawpixel.com/image/3394030/free-photo-image-doctor-laboratory-lab-testing-kit"
+  },
+  "badr/br-muscat": {
+    "title": "Muscat, Oman مسقط، عمان 05",
+    "creator": "Mostafameraji",
+    "license": "BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=57677047"
+  },
+  "badr/br-sur": {
+    "title": "Sur, Oman (7)",
+    "creator": "Andries Oudshoorn",
+    "license": "BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=6833735"
+  },
+  "badr/br-mabella": {
+    "title": "Al Maabilah, Seeb, Oman - panoramio - Luca Margheriti (1)",
+    "creator": "Luca Margheriti",
+    "license": "BY-SA 3.0",
+    "license_url": null,
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=53052709"
+  },
+  "badr/c-heart": {
+    "title": "AliveCor iOS screenshot",
+    "creator": "juhansonin",
+    "license": "BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/38869431@N00/8123108787"
+  },
+  "badr/c-knee": {
+    "title": "Knee X-Ray: Keep hiking, but take it easy",
+    "creator": "fabola",
+    "license": "BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/44124339301@N01/18204762963"
+  },
+  "badr/c-womb": {
+    "title": "IMG_6210",
+    "creator": "Live to Create Photography",
+    "license": "BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/91752758@N07/12040477644"
+  },
+  "badr/c-gut": {
+    "title": "Endoscopy",
+    "creator": "Yuya Tamai",
+    "license": "BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/76758469@N00/180619506"
+  },
+  "badr/c-ear": {
+    "title": "A clinician conducting an examination of a young female patient&rsquo;s left ear, using an otoscope. Original image sourced from US Government department: Public Health Image Library, Centers for Disease Control and Prevention. Under US law this image is copyright free, please credit the government department whenever you can&rdquo;.",
+    "creator": "Centers for Disease Control and Prevention",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "rawpixel",
+    "landing": "https://www.rawpixel.com/image/2288500/free-photo-image-ear-doctor-checkup"
+  },
+  "badr/c-tooth": {
+    "title": "Dental X-ray",
+    "creator": "icethim",
+    "license": "BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/15977536@N06/5443947055"
+  },
+  "badr/p-asthma": {
+    "title": "Asthma Inhaler (Object)",
+    "creator": "Jenn Durfey",
+    "license": "BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/52498245@N03/5347629183"
+  },
+  "badr/p-diabetes": {
+    "title": "Measure Me Blood",
+    "creator": "cogdogblog",
+    "license": "BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/37996646802@N01/6805318882"
+  },
+  "badr/p-bp": {
+    "title": "Blood pressure measuring. Doctor and patient. Health care.",
+    "creator": "agilemktg1",
+    "license": "PDM 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "source": "flickr",
+    "landing": "https://www.flickr.com/photos/68716695@N06/29095583293"
+  },
+  "badr/br-sohar": {
+    "title": "Sohar Gate 2",
+    "creator": "https://www.flickr.com/photos/130649623@N05/",
+    "license": "BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=44367763"
+  },
+  "badr/br-muharraq": {
+    "title": "Muharraq Bayt Siyadi 1",
+    "creator": "Zairon",
+    "license": "BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=97381212"
+  },
+  "badr/br-riffa": {
+    "title": "Riffa Riffa Fort Exterior 05",
+    "creator": "Zairon",
+    "license": "BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=97525744"
+  },
+  "badr/br-bahrain": {
+    "title": "Muharraq Suq",
+    "creator": "Gasschh",
+    "license": "BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=54303595"
+  },
+  "badr/p-thyroid": {
+    "title": "Blood pressure measurement, Poland",
+    "creator": "Kris D from Metropolia Silesia, Upper Silesia ( Oberschlesien )",
+    "license": "BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=18417588"
+  },
+  "badr/br-ruwi": {
+    "title": "Ruwi quarter in Mascat, Oman",
+    "creator": "Wusel007",
+    "license": "BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=9476407"
+  },
+  "badr/br-muscat2": {
+    "title": "Ruwi Muscat",
+    "creator": "Wusel007",
+    "license": "BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=38151815"
+  },
+  "badr/br-salalah": {
+    "title": "File:Neues Terminal SLL.jpg",
+    "creator": "Baden65",
+    "license": "BY-SA 4.0",
+    "license_url": null,
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=56182020"
+  },
+  "badr/barka": {
+    "title": "Barka, Oman (6) (41446310861)",
+    "creator": "Hans Birger Nilsen",
+    "license": "BY-SA 2.0",
+    "license_url": null,
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=70285689"
+  },
+  "badr/nizwa": {
+    "title": "Nizwa Fort and Minaret of Friday Mosque",
+    "creator": "Martin Falbisoner",
+    "license": "BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=39086370"
+  },
+  "badr/duqm": {
+    "title": "Duqm Fishing Port",
+    "creator": "AbdullahAlMaani",
+    "license": "BY-SA 4.0",
+    "license_url": null,
+    "source": "wikimedia",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=117467673"
+  },
+  "badr/r-news-badr-al-samaa-and-ministry-of-health-joi": {
+    "title": "Badr Al Samaa and Ministry of Health Join Hands for ‘Save a Heart’ Campaign",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/117/badr-al-samaa-and-ministry-of-health-join-hands-for-save-a-heart-campaign",
+    "owner": true
+  },
+  "badr/r-news-badr-al-samaa-group-of-hospitals-celebra": {
+    "title": "Badr Al Samaa Group of Hospitals Celebrates World Physiotherapy Day",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/114/badr-al-samaa-group-of-hospitals-celebrates-world-physiotherapy-day",
+    "owner": true
+  },
+  "badr/r-news-badr-al-samaa-hospital-ruwi-inaugurates-": {
+    "title": "Badr Al Samaa Hospital, Ruwi Inaugurates Centre of Excellence in Orthopaedics",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/113/badr-al-samaa-hospital-ruwi-inaugurates-centre-of-excellence-in-orthopaedics",
+    "owner": true
+  },
+  "badr/r-news-badr-al-samaa-group-of-hospitals-launche": {
+    "title": "Badr Al Samaa Group of Hospitals Launches Khareef Dhofar Medical Clinic",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/107/badr-al-samaa-group-of-hospitals-launches-khareef-dhofar-medical-clinic",
+    "owner": true
+  },
+  "badr/r-news-badr-al-samaa-royal-hospital-is-all-set-": {
+    "title": "Badr Al Samaa Royal Hospital is all set to introduce Oman’s First Private Sector AI-Powered Cath Lab",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/111/badr-al-samaa-royal-hospital-is-all-set-to-introduce-omans-first-private-sector-ai-powered-cath-lab",
+    "owner": true
+  },
+  "badr/r-news-dgphe-moh-badr-al-samaa-conducts-largest": {
+    "title": "DGPHE, MoH & Badr Al Samaa conducts largest diabetes screening drive in Oman, sets world record.",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/110/dgphe-moh-badr-al-samaa-conducts-largest-diabetes-screening-drive-in-oman-sets-world-record",
+    "owner": true
+  },
+  "badr/r-news-free-national-level-diabetes-screening-r": {
+    "title": "Free National-Level Diabetes Screening & Risk Assessment Campaign",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/108/free-national-level-diabetes-screening-risk-assessment-campaign",
+    "owner": true
+  },
+  "badr/r-news-our-six-hospitals-received-official-qual": {
+    "title": "Our Six Hospitals received official quality accreditation certificates by ACHSI",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/104/our-six-hospitals-received-official-quality-accreditation-certificates-by-achsi",
+    "owner": true
+  },
+  "badr/r-news-six-hospitals-of-badr-al-samaa-group-are": {
+    "title": "Six Hospitals of Badr Al Samaa Group are now ACHSI Accredited",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/102/six-hospitals-of-badr-al-samaa-group-are-now-achsi-accredited",
+    "owner": true
+  },
+  "badr/r-news-badr-al-samaa-group-of-hospital-s-doctor": {
+    "title": "Badr Al Samaa Group of Hospital’s Doctors visit to Badr Al Samaa Royal Hospital",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/100/badr-al-samaa-group-of-hospitals-doctors-visit-to-badr-al-samaa-royal-hospital",
+    "owner": true
+  },
+  "badr/r-news-badr-al-samaa-royal-hospital-brh-a-luxur": {
+    "title": "Badr Al Samaa Royal Hospital (BRH), a luxury premium hospital inaugurated.",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/99/badr-al-samaa-royal-hospital-brh-a-luxury-premium-hospital-inaugurated",
+    "owner": true
+  },
+  "badr/r-news-badr-al-samaa-royal-hospital-brh-all-set": {
+    "title": "Badr Al Samaa Royal Hospital (BRH) all set to be inaugurated tomorrow",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/98/badr-al-samaa-royal-hospital-brh-all-set-to-be-inaugurated-tomorrow",
+    "owner": true
+  },
+  "badr/r-news-badr-al-samaa-hospital-sohar-inaugurates": {
+    "title": "Badr Al Samaa Hospital, Sohar inaugurates Advanced Cardiac Catheterization Laboratory",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/97/badr-al-samaa-hospital-sohar-inaugurates-advanced-cardiac-catheterization-laboratory",
+    "owner": true
+  },
+  "badr/r-news-cutting-edge-neurological-diagnostics-un": {
+    "title": "Cutting-Edge Neurological Diagnostics Unveiled at Badr Al Samaa Hospital, Salalah",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/96/cutting-edge-neurological-diagnostics-unveiled-at-badr-al-samaa-hospital-salalah",
+    "owner": true
+  },
+  "badr/r-news-badr-al-samaa-named-official-medical-par": {
+    "title": "Badr Al Samaa named Official Medical Partner of Al Mouj Muscat Marathon",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/95/badr-al-samaa-named-official-medical-partner-of-al-mouj-muscat-marathon",
+    "owner": true
+  },
+  "badr/r-news-badr-al-samaa-becomes-official-medical-p": {
+    "title": "Badr Al Samaa becomes Official Medical Partners for Hockey 5s World Cup & Olympic Qualifiers",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/94/badr-al-samaa-becomes-official-medical-partners-for-hockey-5s-world-cup-olympic-qualifiers",
+    "owner": true
+  },
+  "badr/r-news-badr-al-samaa-hospital-sohar-launches-di": {
+    "title": "Badr Al Samaa Hospital, Sohar launches Dialysis Unit",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/news-and-event/93/badr-al-samaa-hospital-sohar-launches-dialysis-unit",
+    "owner": true
+  },
+  "badr/r-dept-cardiology": {
+    "title": "Cardiac monitoring",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com",
+    "owner": true
+  },
+  "badr/r-dept-orthopaedics": {
+    "title": "Orthopaedic consultation",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com",
+    "owner": true
+  },
+  "badr/r-dept-obstetrics-gynaecology": {
+    "title": "Obstetrics & Gynaecology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/14/obstetrics-gynaecology",
+    "owner": true
+  },
+  "badr/r-dept-urology-andrology": {
+    "title": "Urology & Andrology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/27/urology-andrology",
+    "owner": true
+  },
+  "badr/r-dept-gastroentrology": {
+    "title": "Gastroentrology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/5/gastroentrology",
+    "owner": true
+  },
+  "badr/r-dept-radiology": {
+    "title": "Radiology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/26/radiology",
+    "owner": true
+  },
+  "badr/r-dept-ent": {
+    "title": "ENT at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/1/ent",
+    "owner": true
+  },
+  "badr/r-dept-dentistry": {
+    "title": "Dentistry at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/2/dentistry",
+    "owner": true
+  },
+  "badr/r-dept-dermatology": {
+    "title": "Dermatology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/3/dermatology",
+    "owner": true
+  },
+  "badr/r-dept-endocrinology": {
+    "title": "Endocrinology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/4/endocrinology",
+    "owner": true
+  },
+  "badr/r-dept-general-medicine": {
+    "title": "General Medicine at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/6/general-medicine",
+    "owner": true
+  },
+  "badr/r-dept-general-practice": {
+    "title": "General Practice at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/8/general-practice",
+    "owner": true
+  },
+  "badr/r-dept-internal-medicine": {
+    "title": "Internal Medicine at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/10/internal-medicine",
+    "owner": true
+  },
+  "badr/r-dept-nephrology": {
+    "title": "Nephrology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/11/nephrology",
+    "owner": true
+  },
+  "badr/r-dept-neurology": {
+    "title": "Neurology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/13/neurology",
+    "owner": true
+  },
+  "badr/r-dept-ophthalmology": {
+    "title": "Ophthalmology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/15/ophthalmology",
+    "owner": true
+  },
+  "badr/r-dept-anaesthesiology": {
+    "title": "Anaesthesiology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/16/anaesthesiology",
+    "owner": true
+  },
+  "badr/r-dept-orthodontics": {
+    "title": "Orthodontics at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/20/orthodontics",
+    "owner": true
+  },
+  "badr/r-dept-paediatrics-neonatology": {
+    "title": "Paediatrics & Neonatology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/22/paediatrics-neonatology",
+    "owner": true
+  },
+  "badr/r-dept-pathology": {
+    "title": "Pathology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/23/pathology",
+    "owner": true
+  },
+  "badr/r-dept-psychiatry": {
+    "title": "Psychiatry at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/24/psychiatry",
+    "owner": true
+  },
+  "badr/r-dept-pulmonology": {
+    "title": "Pulmonology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/25/pulmonology",
+    "owner": true
+  },
+  "badr/r-dept-general-surgery": {
+    "title": "General Surgery at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/29/general-surgery",
+    "owner": true
+  },
+  "badr/r-dept-emergency-and-critical-care": {
+    "title": "Emergency team moving a patient",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com",
+    "owner": true
+  },
+  "badr/r-dept-physiotherapy": {
+    "title": "Physiotherapy at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/63/physiotherapy",
+    "owner": true
+  },
+  "badr/r-dept-dietetics": {
+    "title": "Dietetics at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/64/dietetics",
+    "owner": true
+  },
+  "badr/r-dept-general-laparoscopic-surgery": {
+    "title": "General & Laparoscopic Surgery at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/65/general-laparoscopic-surgery",
+    "owner": true
+  },
+  "badr/r-dept-plastic-reconstructive-cosmetic-surgery": {
+    "title": "Plastic, Reconstructive & Cosmetic Surgery at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/66/plastic-reconstructive-cosmetic-surgery",
+    "owner": true
+  },
+  "badr/r-dept-diabetics-family-medicine": {
+    "title": "Diabetics & Family Medicine at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/68/diabetics-family-medicine",
+    "owner": true
+  },
+  "badr/r-dept-oral-maxillofacial-dental-surgery": {
+    "title": "Oral, Maxillofacial & Dental Surgery at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/69/oral-maxillofacial-dental-surgery",
+    "owner": true
+  },
+  "badr/r-dept-audiology": {
+    "title": "Audiology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/72/audiology",
+    "owner": true
+  },
+  "badr/r-dept-in-vitro-fertilization-ivf": {
+    "title": "In vitro fertilization (IVF) at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/73/in-vitro-fertilization-ivf",
+    "owner": true
+  },
+  "badr/r-dept-neuro-surgery": {
+    "title": "Neuro Surgery at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/74/neuro-surgery",
+    "owner": true
+  },
+  "badr/r-dept-spine-surgery": {
+    "title": "Spine Surgery at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/75/spine-surgery",
+    "owner": true
+  },
+  "badr/r-dept-oncology": {
+    "title": "Oncology at Badr Al Samaa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/speciality/76/oncology",
+    "owner": true
+  },
+  "badr/r-pkg-4": {
+    "title": "Master Check up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/4",
+    "owner": true
+  },
+  "badr/r-pkg-6": {
+    "title": "Hands holding a red heart",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com",
+    "owner": true
+  },
+  "badr/r-pkg-7": {
+    "title": "Well Women check up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/7",
+    "owner": true
+  },
+  "badr/r-pkg-8": {
+    "title": "COMPREHENSIVE CHECK UP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/8",
+    "owner": true
+  },
+  "badr/r-pkg-9": {
+    "title": "EXECUTIVE CHECK UP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/9",
+    "owner": true
+  },
+  "badr/r-pkg-10": {
+    "title": "MEN'S HEALTH CHECK UP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/10",
+    "owner": true
+  },
+  "badr/r-pkg-11": {
+    "title": "FEMALE HORMONE PACKAGE",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/11",
+    "owner": true
+  },
+  "badr/r-pkg-12": {
+    "title": "WELLNESS CHECK UP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/12",
+    "owner": true
+  },
+  "badr/r-pkg-17": {
+    "title": "Complete Heart and Body",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/17",
+    "owner": true
+  },
+  "badr/r-pkg-18": {
+    "title": "High Blood Pressure and Heart",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/18",
+    "owner": true
+  },
+  "badr/r-pkg-19": {
+    "title": "Preliminary cardiac",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/19",
+    "owner": true
+  },
+  "badr/r-pkg-20": {
+    "title": "Executive Body Check up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/20",
+    "owner": true
+  },
+  "badr/r-pkg-21": {
+    "title": "Master Health Check up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/21",
+    "owner": true
+  },
+  "badr/r-pkg-22": {
+    "title": "Diabetic Comprehensive Check up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/22",
+    "owner": true
+  },
+  "badr/r-pkg-23": {
+    "title": "Comprehensive Cardiac and Body checkup",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/23",
+    "owner": true
+  },
+  "badr/r-pkg-31": {
+    "title": "Executive Check-Up Program",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/31",
+    "owner": true
+  },
+  "badr/r-pkg-32": {
+    "title": "Executive Check-Up Plus Program",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/32",
+    "owner": true
+  },
+  "badr/r-pkg-33": {
+    "title": "Woman in the open air, arms raised",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com",
+    "owner": true
+  },
+  "badr/r-pkg-34": {
+    "title": "Executive Check Up Program",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/34",
+    "owner": true
+  },
+  "badr/r-pkg-35": {
+    "title": "Executive Check Up Plus Program",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/35",
+    "owner": true
+  },
+  "badr/r-pkg-36": {
+    "title": "Well Woman Package",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/36",
+    "owner": true
+  },
+  "badr/r-pkg-37": {
+    "title": "Protein Urea Check Up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/37",
+    "owner": true
+  },
+  "badr/r-pkg-38": {
+    "title": "Executive Body Check Up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/38",
+    "owner": true
+  },
+  "badr/r-pkg-39": {
+    "title": "Master Health Check Up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/39",
+    "owner": true
+  },
+  "badr/r-pkg-40": {
+    "title": "Preliminary Cardiac & Body Check Up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/40",
+    "owner": true
+  },
+  "badr/r-pkg-41": {
+    "title": "Executive Cardiac Check Up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/41",
+    "owner": true
+  },
+  "badr/r-pkg-42": {
+    "title": "Comprehensive Diabetic Check Up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/42",
+    "owner": true
+  },
+  "badr/r-pkg-43": {
+    "title": "High Blood Pressure & Heart Check Up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/43",
+    "owner": true
+  },
+  "badr/r-pkg-44": {
+    "title": "Comprehensive Renal Check Up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/44",
+    "owner": true
+  },
+  "badr/r-pkg-45": {
+    "title": "Complete Heart & Body Check Up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/45",
+    "owner": true
+  },
+  "badr/r-pkg-46": {
+    "title": "Asthma & Allergy Check Up",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/46",
+    "owner": true
+  },
+  "badr/r-pkg-47": {
+    "title": "WELL WOMAN PACKAGE",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/47",
+    "owner": true
+  },
+  "badr/r-pkg-48": {
+    "title": "EXECUTIVE BODY CHECK UP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/48",
+    "owner": true
+  },
+  "badr/r-pkg-49": {
+    "title": "EXECUTIVE CARDIAC CHECKUP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/49",
+    "owner": true
+  },
+  "badr/r-pkg-50": {
+    "title": "COMPLETE HEART & BODY CHECK UP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/50",
+    "owner": true
+  },
+  "badr/r-pkg-51": {
+    "title": "COMPREHENSIVE RENAL CHECK UP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/51",
+    "owner": true
+  },
+  "badr/r-pkg-52": {
+    "title": "MASTER HEALTH CHECK UP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/52",
+    "owner": true
+  },
+  "badr/r-pkg-53": {
+    "title": "THYROID PANEL CHECK UP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/53",
+    "owner": true
+  },
+  "badr/r-pkg-54": {
+    "title": "HIGH BLOOD PRESSURE & HEART CHECKUP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/54",
+    "owner": true
+  },
+  "badr/r-pkg-55": {
+    "title": "COMPREHENSIVE DIABETIC CHECK UP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/55",
+    "owner": true
+  },
+  "badr/r-pkg-56": {
+    "title": "ASTHMA & ALLERGY CHECK UP",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://badralsamaahospitals.com/package-details/56",
+    "owner": true
+  },
+  "badr/r-br-nizwa": {
+    "title": "Badr Al Samaa Hospital - Nizwa",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://nizwa.badralsamaahospitals.com",
+    "owner": true
+  },
+  "badr/r-br-duqm": {
+    "title": "Badr Al Samaa Medical Centre - Duqm",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://duqm.badralsamaahospitals.com",
+    "owner": true
+  },
+  "badr/r-br-suwaiq": {
+    "title": "Badr Al Samaa Polyclinic - Suwaiq",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://suwaiq.badralsamaahospitals.com",
+    "owner": true
+  },
+  "badr/r-br-askar": {
+    "title": "Al Hilal Medical Centre - Askar",
+    "creator": "Badr Al Samaa Group",
+    "license": "© Badr Al Samaa Group, used for this concept preview",
+    "license_url": "",
+    "landing": "https://askar.badralsamaahospitals.com",
+    "owner": true
+  }
 }

@@ -1,0 +1,31 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set n = page.item %}
+{%- set hero_img = n._img or ('hero' if 'hero' in s.images else none) %}
+{%- set kicker = (n.tag ~ ' · ' if n.tag else '') ~ n.date %}{% set intro = n.summary %}{% set crumb = 'Article' %}
+{% include "partials/pagehero.html.j2" %}
+<section class="pg-section">
+  <div class="wrap article-wrap">
+    <article class="prose article">
+      {%- for p in n.body or [n.summary] %}<p data-anim="up">{{ p }}</p>{% endfor %}
+      {%- if n.src %}<p class="src-note">Source: <a href="{{ n.src }}" rel="noopener">{{ n.src_label or n.src }}</a></p>{% endif %}
+      {%- if n.sample %}<p class="src-note">Sample article for the concept. Replace it with the group's own news before launch.</p>{% endif %}
+    </article>
+    <aside class="article-side">
+      <p class="side-h">Share</p>
+      <div class="share">
+        <a href="https://wa.me/?text={{ n.title | urlencode }}" rel="noopener">WhatsApp</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/intent/post?text={{ n.title | urlencode }}" rel="noopener">X</a>
+      </div>
+    </aside>
+  </div>
+</section>
+<section class="pg-section alt">
+  <div class="wrap">
+    <p class="eyebrow">More news</p>
+    {{ m.news_grid(s.news | rejectattr('_file', 'equalto', n._file) | list | batch(3) | first) }}
+  </div>
+</section>
+{% endblock %}

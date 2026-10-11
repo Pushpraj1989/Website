@@ -1,0 +1,36 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set DR = s.doctors %}
+{%- set hero_img = (s.services['items'][0].image if s.services['items'][0].image else none) %}
+{%- set kicker = 'Doctors' %}{% set intro = DR.intro %}{% set crumb = 'Doctors' %}
+{% include "partials/pagehero.html.j2" %}
+<section class="pg-section" data-doctors>
+  <div class="wrap">
+    <form class="dr-tools" role="search" onsubmit="return false">
+      <label class="dr-search">{{ icon('globe') }}<input type="search" placeholder="Search by name or speciality" aria-label="Search doctors" data-dq></label>
+      <label class="dr-select"><span>Speciality</span><select data-ds><option value="">All specialities</option>{% for sp in DR['items'] | map(attribute='spec') | unique | sort %}<option>{{ sp }}</option>{% endfor %}</select></label>
+      <label class="dr-select"><span>Branch</span><select data-db><option value="">All branches</option>{% for b in DR['items'] | map(attribute='branch') | unique | sort %}<option>{{ b }}</option>{% endfor %}</select></label>
+    </form>
+    <p class="dr-count" aria-live="polite" data-dcount>{{ DR['items'] | length }} doctors</p>
+    <ul class="dr-grid">
+      {%- for d in DR['items'] %}
+      {%- set parts = d.name.replace('Dr. ', '').replace('Mr ', '').replace('Ms ', '').split() %}
+      <li class="dr-card" data-s="{{ d.spec }}" data-b="{{ d.branch }}" data-t="{{ (d.name ~ ' ' ~ d.spec ~ ' ' ~ d.title) | lower }}"{% if loop.index > 24 %} hidden data-more{% endif %}>
+        <span class="dr-av" aria-hidden="true" style="--h: {{ (loop.index * 47) % 360 }}">{{ parts[0][0] }}{{ parts[-1][0] if parts | length > 1 else '' }}</span>
+        <div class="dr-info">
+          <h3>{{ d.name }}</h3>
+          <p class="dr-title">{{ d.title }}</p>
+          {%- if d.q %}<p class="dr-q">{{ d.q }}</p>{% endif %}
+          <p class="dr-meta"><span>{{ d.spec }}</span><span>{{ icon('pin') }}{{ d.branch }}</span></p>
+        </div>
+        <a class="dr-book" href="contact.html" aria-label="Book with {{ d.name }}">Book {{ icon('arrow') }}</a>
+      </li>
+      {%- endfor %}
+    </ul>
+    <p class="dr-empty" data-dempty hidden>No doctor matches. Try another speciality or branch.</p>
+    <div class="dr-more-row"><button class="btn btn-ghost" type="button" data-dmore>Show more doctors</button></div>
+    <p class="src-note">Directory from the group's speciality pages (Oman branches), read 11 Oct 2026.</p>
+  </div>
+</section>
+{% endblock %}

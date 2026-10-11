@@ -1,0 +1,60 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set l = page.item %}
+{%- set hero_img = l.image %}
+{%- set kicker = l.type ~ ' · ' ~ l.country %}{% set intro = l.about %}{% set crumb = l.name %}
+{% include "partials/pagehero.html.j2" %}
+<section class="pg-section">
+  <div class="wrap detail-grid">
+    <article class="detail-main">
+      <div class="br-facts">
+        {%- if l.doctors %}<div data-anim="up"><strong>{{ l.doctors }}</strong><span>doctors</span></div>{% endif %}
+        {%- if l.specs %}<div data-anim="up"><strong>{{ l.specs | length }}</strong><span>specialities</span></div>{% endif %}
+        <div data-anim="up"><strong>24/7</strong><span>helpline</span></div>
+      </div>
+      {%- if l.specs %}
+      <h2 class="pg-h3" data-anim="up">Specialities at {{ l.name }}</h2>
+      <ul class="spec-chips">
+        {%- for sp in l.specs %}
+        {%- set match = (s.specialities['items'] | selectattr('title', 'equalto', sp) | list | first) if s.specialities else none %}
+        <li data-anim="up" data-delay="{{ (loop.index0 % 8) * 0.03 }}">{% if match %}<a href="{{ match._file }}">{{ sp }}</a>{% else %}<span>{{ sp }}</span>{% endif %}</li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+      {%- set docs = (s.doctors['items'] | selectattr('branch', 'equalto', l.name) | list) if s.doctors else [] %}
+      {%- if docs %}
+      <h2 class="pg-h3" data-anim="up">Some of our doctors in {{ l.name }}</h2>
+      <ul class="dr-mini">
+        {%- for d in docs[:8] %}<li data-anim="up"><b>{{ d.name }}</b><span>{{ d.title }}</span></li>{% endfor %}
+      </ul>
+      <a class="text-link" href="doctors.html">See all doctors {{ icon('arrow') }}</a>
+      {%- endif %}
+      {%- if l.src %}<p class="src-note">Source: <a href="{{ l.src }}" rel="noopener">{{ l.src }}</a></p>{% endif %}
+    </article>
+    <aside class="detail-side">
+      <div class="side-card" data-anim="up">
+        <span class="side-ico">{{ icon('pin') }}</span>
+        <p class="side-t">{{ l.full_name or l.name }}</p>
+        {%- if l.address %}<p class="side-p">{{ l.address }}</p>{% endif %}
+        <a class="btn btn-primary" href="contact.html" data-magnetic>{{ s.cta.label }} {{ icon('arrow') }}</a>
+        {%- if l.phone %}<a class="side-line" href="tel:{{ l.phone }}">{{ icon('phone') }} {{ l.phone }}</a>{% endif %}
+        {%- if l.email %}<a class="side-line" href="mailto:{{ l.email }}">{{ icon('mail') }} {{ l.email }}</a>{% endif %}
+        <a class="side-line" href="{{ l._map }}" target="_blank" rel="noopener">{{ icon('globe') }} Directions in Google Maps</a>
+      </div>
+      <nav class="side-list" aria-label="Other branches">
+        <p class="side-h">Other branches in {{ l.country }}</p>
+        {%- for o in s.locations['items'] if o.country == l.country and o is not sameas l %}<a href="{{ o._file }}">{{ o.name }}</a>{% endfor %}
+      </nav>
+    </aside>
+  </div>
+</section>
+<nav class="pn" aria-label="More branches">
+  {%- for dir, o in [('Previous', page.prev), ('Next', page.next)] %}
+  <a class="pn-link pn-{{ dir | lower }}" href="{{ o._file }}">
+    {%- if o.image %}<img src="{{ m.src(o.image) }}" alt="" loading="lazy">{% endif %}
+    <span class="pn-k">{{ dir }} branch</span><span class="pn-t">{{ o.name }}</span>
+  </a>
+  {%- endfor %}
+</nav>
+{% endblock %}

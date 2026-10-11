@@ -1,0 +1,25 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set L = s.locations %}
+{%- set hero_img = L.image or ((L['items'][0].image) if L['items'][0].image else ('hero' if 'hero' in s.images else none)) %}
+{%- set kicker = page.label %}{% set intro = L.intro %}{% set crumb = page.label %}
+{% include "partials/pagehero.html.j2" %}
+<section class="pg-section countries" id="locations">
+  <div class="wrap">
+    <div class="loc-stats" data-anim="up">
+      <div><strong>{{ L['items'] | length }}</strong><span>{{ page.label | lower }}</span></div>
+      <div><strong>{{ s._countries | length }}</strong><span>{{ 'country' if s._countries | length == 1 else 'countries' }}</span></div>
+      {%- for c, n in s._countries[:3] %}<div><strong>{{ n }}</strong><span>in {{ c }}</span></div>{% endfor %}
+    </div>
+    {{ m.curve() }}
+  </div>
+</section>
+<section class="pg-section alt">
+  <div class="wrap">
+    <p class="eyebrow">Full list</p>
+    <h2 class="pg-h2" data-anim="lines">Every {{ page.label | lower | replace('locations', 'location') | replace('branches', 'branch') }}, with directions</h2>
+    {{ m.locations() }}
+  </div>
+</section>
+{% endblock %}

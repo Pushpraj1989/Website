@@ -1,0 +1,14 @@
+<section class="cta-band" id="contact">
+  <div class="wrap cta-band-row">
+    <div>
+      <p class="eyebrow">{{ s.contact.title }}</p>
+      <h2 class="cta-band-title" data-anim="lines">{{ s.cta_band or s.contact.intro }}</h2>
+    </div>
+    <div class="cta-band-actions" data-anim="up">
+      <a class="btn btn-primary" href="contact.html" data-magnetic>{{ s.cta.label }} {{ icon('arrow') }}</a>
+      {%- for ph in s.contact.phones[:2] %}
+      <a class="btn btn-ghost" href="{{ ('https://wa.me/' ~ ph.tel[1:]) if ph.whatsapp else ('tel:' ~ ph.tel) }}">{{ icon('phone') }} {{ ph.label }}</a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

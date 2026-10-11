@@ -269,6 +269,146 @@
     });
   };
 
+  /* ---------- nudges, page transitions, mega menu previews, news filter ---------- */
+  const ring = $("[data-ring]");
+  const actionBar = $(".action-bar");
+  const dockEl = $("[data-dock]");
+  const offer = $("[data-offer]");
+  let offerShown = false;
+  const offerKey = offer ? "t1-offer-" + offer.dataset.offer : "";
+  const maybeOffer = (y, max) => {
+    if (!offer || offerShown || max <= 0 || y / max < 0.35) return;
+    offerShown = true;
+    try { if (localStorage.getItem(offerKey)) return; } catch {}
+    offer.hidden = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => offer.classList.add("is-in")));
+  };
+  if (offer) $$("[data-offer-close]", offer).forEach((b) => b.addEventListener("click", () => {
+    offer.classList.remove("is-in");
+    setTimeout(() => (offer.hidden = true), 500);
+    try { localStorage.setItem(offerKey, "1"); } catch {}
+  }));
+
+  const dock = $("[data-dock]");
+  if (dock) {
+    const dt = $("[data-dock-toggle]", dock);
+    const setDock = (open) => { dock.classList.toggle("is-open", open); dt.setAttribute("aria-expanded", String(open)); };
+    dt.addEventListener("click", () => setDock(!dock.classList.contains("is-open")));
+    document.addEventListener("click", (e) => { if (!dock.contains(e.target)) setDock(false); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") setDock(false); });
+  }
+
+  // mega menu: hovering an entry swaps the preview photo
+  $$(".mega").forEach((mg) => {
+    const img = $(".mega-preview img", mg);
+    if (!img) return;
+    $$("[data-preview]", mg).forEach((a) => a.addEventListener("pointerenter", () => {
+      const src = a.dataset.preview;
+      if (!src || img.getAttribute("src") === src) return;
+      img.classList.add("is-swap");
+      setTimeout(() => { img.src = src; img.onload = () => img.classList.remove("is-swap"); }, 180);
+    }));
+  });
+
+  // news tag filter
+  const nf = $("[data-news-filters]");
+  if (nf) nf.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-nf]");
+    if (!b) return;
+    $$("[data-nf]", nf).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    $$(".news-card, .news-lead").forEach((c) => (c.hidden = !(b.dataset.nf === "all" || c.dataset.tag === b.dataset.nf)));
+    if (motion) { gsap.from($$(".news-card:not([hidden])"), { y: 30, opacity: 0, duration: 0.7, ease: "expo.out", stagger: 0.05 }); ST.refresh(); }
+  });
+
+  // page transitions: a colour wipe covers the page, the next page lifts it
+  const wipe = $(".page-wipe");
+  const lift = () => {
+    if (!root.classList.contains("is-arriving")) return;
+    root.classList.remove("is-arriving");
+    if (wipe) { wipe.classList.add("is-out"); setTimeout(() => wipe.classList.remove("is-out"), 1000); }
+  };
+  if (wipe && motion) {
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a[href]");
+      if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0 || a.target === "_blank" || a.hasAttribute("download")) return;
+      const href = a.getAttribute("href");
+      if (!href || href.startsWith("#") || /^[a-z]+:/i.test(href) || !/\.html(#.*)?$/.test(href)) return;
+      e.preventDefault();
+      try { sessionStorage.setItem("t1-nav", "1"); } catch {}
+      wipe.classList.remove("is-out");
+      wipe.classList.add("is-in");
+      setTimeout(() => (location.href = a.href), 520);
+    });
+    // back/forward cache: never come back to a covered page
+    addEventListener("pageshow", (e) => { if (e.persisted) { wipe.classList.remove("is-in"); lift(); } });
+  }
+  T1.lift = lift;
+
+  // doctor directory: search, filters, show more
+  $$("[data-doctors]").forEach((w) => {
+    const q = $("[data-dq]", w), sp = $("[data-ds]", w), br = $("[data-db]", w), more = $("[data-dmore]", w);
+    const cards = $$(".dr-card", w), count = $("[data-dcount]", w), empty = $("[data-dempty]", w);
+    let limit = 24;
+    const run = () => {
+      const t = q.value.trim().toLowerCase(); let n = 0, shown = 0;
+      cards.forEach((c) => {
+        const ok = (!t || c.dataset.t.includes(t)) && (!sp.value || c.dataset.s === sp.value) && (!br.value || c.dataset.b === br.value);
+        if (ok) n++;
+        const vis = ok && n <= limit;
+        if (vis) shown++;
+        c.hidden = !vis;
+      });
+      count.textContent = `${n} doctor${n === 1 ? "" : "s"}${n > shown ? `, showing ${shown}` : ""}`;
+      more.hidden = n <= limit; empty.hidden = n !== 0;
+      if (motion) ST.refresh();
+    };
+    [q, sp, br].forEach((el) => el.addEventListener("input", () => { limit = 24; run(); }));
+    more.addEventListener("click", () => { limit += 24; run(); });
+    const sel = new URLSearchParams(location.search).get("spec");
+    if (sel) sp.value = sel;
+    run();
+  });
+
+  // packages: country tabs
+  $$("[data-pk-tabs]").forEach((tabs) => {
+    tabs.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-pkc]"); if (!b) return;
+      $$("[data-pkc]", tabs).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      const shown = [];
+      $$(".pk-card").forEach((c) => { c.hidden = c.dataset.pkc !== b.dataset.pkc; if (!c.hidden) shown.push(c); });
+      if (motion) { gsap.from(shown, { y: 40, opacity: 0, duration: 0.8, ease: "expo.out", stagger: 0.05 }); ST.refresh(); }
+    });
+  });
+
+  // testimonials: auto-rotate, pause on hover
+  $$("[data-quotes]").forEach((w) => {
+    const items = $$(".q-item", w), dots = $$("[data-q]", w);
+    let i = 0, hold = false;
+    const show = (k) => { i = (k + items.length) % items.length; items.forEach((it, j) => it.classList.toggle("is-on", j === i)); dots.forEach((d, j) => d.classList.toggle("is-on", j === i)); };
+    dots.forEach((d, j) => d.addEventListener("click", () => show(j)));
+    w.addEventListener("pointerenter", () => (hold = true)); w.addEventListener("pointerleave", () => (hold = false));
+    if (!reduce && items.length > 1) setInterval(() => { if (!hold && !document.hidden) show(i + 1); }, 7000);
+  });
+
+  // BMI tool (runs on the device; nothing is sent)
+  $$("[data-bmi]").forEach((f) => {
+    const h = f.elements.h, w = f.elements.w;
+    const calc = () => {
+      const v = w.value / Math.pow(h.value / 100, 2);
+      $("[data-o=h]", f).textContent = h.value + " cm";
+      $("[data-o=w]", f).textContent = w.value + " kg";
+      $("[data-bmi-v]", f).textContent = v.toFixed(1);
+      const band = v < 18.5 ? "Underweight" : v < 25 ? "Healthy range" : v < 30 ? "Overweight" : "Obese";
+      $("[data-bmi-band]", f).textContent = band;
+      const arc = $("[data-arc]", f);
+      arc.style.strokeDashoffset = String(100 - Math.max(4, Math.min(100, ((v - 12) / 28) * 100)));
+      arc.style.stroke = v < 18.5 || v >= 30 ? "#d9534f" : v >= 25 ? "#e3a008" : "";
+    };
+    f.addEventListener("input", calc);
+    f.addEventListener("submit", (e) => e.preventDefault());
+    calc();
+  });
+
   /* ---------- header, progress, to-top ---------- */
   const header = $("[data-header]");
   const progress = $(".progress");
@@ -285,6 +425,10 @@
       if (y < lastY - 2) header.classList.remove("is-hidden");
     }
     if (toTop) toTop.classList.toggle("is-visible", y > 900);
+    if (ring) ring.style.strokeDashoffset = String(100 - (max > 0 ? (y / max) * 100 : 0));
+    if (actionBar) actionBar.classList.toggle("is-in", y > 240);
+    if (dockEl) dockEl.classList.toggle("is-in", y > innerHeight * 0.7);
+    maybeOffer(y, max);
     lastY = y;
   };
   addEventListener("scroll", onScroll, { passive: true });
@@ -395,9 +539,11 @@
   /* ---------- opening loader ---------- */
   const loader = $(".loader");
   const runLoader = () => {
+    lift();
     if (!loader || !motion) { if (loader) loader.hidden = true; fireIntro(); return; }
     let seen = false;
-    try { seen = sessionStorage.getItem("t1-seen-" + location.pathname) === "1"; sessionStorage.setItem("t1-seen-" + location.pathname, "1"); } catch {}
+    const seenKey = "t1-seen-" + location.pathname.replace(/[^/]*$/, ""); // once per site, not per page
+    try { seen = sessionStorage.getItem(seenKey) === "1"; sessionStorage.setItem(seenKey, "1"); } catch {}
     if (T1.lenis) T1.lenis.stop();
     const count = $(".loader-count", loader);
     const bar = $(".loader-bar i", loader);

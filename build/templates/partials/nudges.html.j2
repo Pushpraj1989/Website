@@ -1,0 +1,39 @@
+{#- Nudges: progress ring back-to-top, floating quick actions, mobile action bar, one-time offer slide-in -#}
+{%- set wa = (s.contact.phones | selectattr('whatsapp') | list | first) if s.contact.phones | selectattr('whatsapp') | list else none %}
+{%- set call = s.contact.phones | rejectattr('fax') | first %}
+<a class="to-top" href="#top" data-to-top aria-label="Back to top">
+  <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22"/><circle class="ring-fill" cx="24" cy="24" r="22" pathLength="100" data-ring/></svg>
+  {{ icon('arrow') }}
+</a>
+
+<div class="dock" data-dock>
+  <button class="dock-toggle" type="button" aria-expanded="false" aria-label="Quick contact" data-dock-toggle>
+    <span class="dock-pulse" aria-hidden="true"></span>{{ icon('phone') }}<span class="dock-label">{{ s.nudges.dock_label if s.nudges else 'Talk to us' }}</span>
+  </button>
+  <div class="dock-menu">
+    {%- if call %}<a href="tel:{{ call.tel }}">{{ icon('phone') }}<span><b>{{ call.label }}</b>{{ call.number }}</span></a>{% endif %}
+    {%- if wa %}<a href="https://wa.me/{{ wa.tel[1:] }}" rel="noopener">{{ icon('mail') }}<span><b>WhatsApp</b>{{ wa.number }}</span></a>{% endif %}
+    <a href="contact.html">{{ icon('check') }}<span><b>{{ s.cta.label }}</b>Online form</span></a>
+  </div>
+</div>
+
+<nav class="action-bar" aria-label="Quick actions">
+  {%- if call %}<a href="tel:{{ call.tel }}">{{ icon('phone') }}<span>Call</span></a>{% endif %}
+  {%- if wa %}<a href="https://wa.me/{{ wa.tel[1:] }}" rel="noopener">{{ icon('mail') }}<span>WhatsApp</span></a>{% endif %}
+  {%- if s.locations and s.locations._file %}<a href="{{ s.locations._file }}">{{ icon('pin') }}<span>{{ s.locations.nav or 'Find us' }}</span></a>{% endif %}
+  <a class="ab-primary" href="contact.html">{{ icon("arrow") }}<span>{{ s.cta.short or "Book" }}</span></a>
+</nav>
+
+{%- if s.nudges and s.nudges.offer %}
+{%- set o = s.nudges.offer %}
+<aside class="offer" data-offer="{{ s.slug }}-{{ o.id or 'offer' }}" aria-label="{{ o.kicker or 'Offer' }}" hidden>
+  <button class="offer-x" type="button" aria-label="Close" data-offer-close>×</button>
+  {%- if o.image %}<img class="offer-img" src="{{ m.src(o.image) }}" alt="" loading="lazy">{% endif %}
+  <div class="offer-body">
+    <p class="offer-k">{{ o.kicker }}</p>
+    <p class="offer-t">{{ o.title }}</p>
+    <p class="offer-p">{{ o.text }}</p>
+    <a class="btn btn-primary btn-sm" href="{{ o.href or 'contact.html' }}" data-offer-close>{{ o.cta or 'Find out more' }} {{ icon('arrow') }}</a>
+  </div>
+</aside>
+{%- endif %}

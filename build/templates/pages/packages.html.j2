@@ -1,0 +1,39 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set PK = s.packages %}
+{%- set hero_img = 'pr-check' if 'pr-check' in s.images else PK['items'][0].image %}
+{%- set kicker = 'Preventive health' %}{% set intro = PK.intro %}{% set crumb = 'Packages' %}
+{% include "partials/pagehero.html.j2" %}
+<section class="pg-section">
+  <div class="wrap">
+    {%- set countries = PK['items'] | map(attribute='country') | unique | list %}
+    <div class="filters pk-tabs" role="tablist" aria-label="Country" data-pk-tabs>
+      {%- for c in countries %}<button class="filter" type="button" role="tab" data-pkc="{{ c }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ c }} <span class="filter-n">{{ PK['items'] | selectattr('country', 'equalto', c) | list | length }}</span></button>{% endfor %}
+    </div>
+    <div class="pk-grid">
+      {%- for p in PK['items'] %}
+      <article class="pk-card" data-pkc="{{ p.country }}"{% if p.country != countries[0] %} hidden{% endif %}>
+        <div class="pk-media">{% if p.image %}<img src="{{ m.src(p.image) }}" alt="" loading="lazy">{% endif %}<span class="pk-price">{{ p.price }}</span></div>
+        <div class="pk-body">
+          <h3>{{ p.name }}</h3>
+          <p class="pk-text">{{ p.text }}</p>
+          {%- if p.incl %}
+          <details class="pk-incl">
+            <summary>{{ p.incl | length }} tests and consultations included</summary>
+            <ul>{% for x in p.incl %}<li>{{ icon('check') }}{{ x }}</li>{% endfor %}</ul>
+          </details>
+          {%- endif %}
+          <div class="pk-actions">
+            <a class="btn btn-primary btn-sm" href="contact.html">Book this package {{ icon('arrow') }}</a>
+            {%- if p.at %}<span class="pk-at">{{ icon('pin') }}{{ p.at[:3] | join(', ') }}{% if p.at | length > 3 %} +{{ p.at | length - 3 }}{% endif %}</span>{% endif %}
+          </div>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+    <p class="src-note">Prices as listed on the group's website on 11 Oct 2026. Confirm at booking.</p>
+  </div>
+</section>
+{{ m.bmi() }}
+{% endblock %}

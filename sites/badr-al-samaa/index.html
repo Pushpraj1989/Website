@@ -10,30 +10,48 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&amp;family=Inter:wght@400;500;600">
 <link rel="stylesheet" href="assets/core.css">
-<link rel="stylesheet" href="assets/story.css"><script>document.documentElement.classList.replace('no-js', 'js');</script>
+<link rel="stylesheet" href="assets/story.css"><script>document.documentElement.classList.replace('no-js', 'js');try{if(sessionStorage.getItem('t1-nav')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('is-arriving');setTimeout(function(){document.documentElement.classList.remove('is-arriving')},2500)}sessionStorage.removeItem('t1-nav')}catch(e){}</script>
 </head>
-<body data-theme="story" style="--accent: #0f5c55">
+<body data-theme="story" data-page="home" style="--accent: #0f5c55">
 <a class="skip" href="#main">Skip to content</a>
 <div class="progress" aria-hidden="true"></div>
 
-<div class="loader" aria-hidden="true">
+<div class="page-wipe" aria-hidden="true"><span>Badr Al Samaa</span></div><div class="loader" aria-hidden="true">
   <div class="loader-inner">
     <p class="loader-name"><span>B</span><span>a</span><span>d</span><span>r</span><span> </span><span>A</span><span>l</span><span> </span><span>S</span><span>a</span><span>m</span><span>a</span><span>a</span></p>
     <div class="loader-bar"><i></i></div>
     <p class="loader-count">000</p>
   </div>
-</div>
-<div class="cursor" aria-hidden="true"><div class="cursor-ring"><span></span></div><div class="cursor-dot"></div></div>
+</div><div class="cursor" aria-hidden="true"><div class="cursor-ring"><span></span></div><div class="cursor-dot"></div></div>
 
-<header class="site-header" data-header>
-  <div class="wrap nav-row">
-    <a class="brand" href="#top" aria-label="Badr Al Samaa Group, back to top">
+<header class="site-header has-topbar" data-header><div class="topbar" data-topbar>
+  <div class="wrap topbar-row">
+    <span class="tb-label"><i class="tb-live" aria-hidden="true"></i>Latest</span>
+    <div class="tb-ticker" data-ticker aria-live="off">
+      <div class="tb-track">        <div class="tb-group"><a class="tb-item" href="#"><b>Press</b>Badr Al Samaa and Ministry of Health Join Hands for ‘Save a Heart’ Campaign</a><a class="tb-item" href="#"><b>Press</b>Badr Al Samaa Group of Hospitals Celebrates World Physiotherapy Day</a><a class="tb-item" href="#"><b>Press</b>Badr Al Samaa Hospital, Ruwi Inaugurates Centre of Excellence in Orthopaedics</a><a class="tb-item" href="#"><b>Press</b>Badr Al Samaa Group of Hospitals Launches Dr. Badr Al Samaa 3D Health Awareness Video Series</a><a class="tb-item" href="#"><b>Press</b>Badr Al Samaa Royal Hospital is all set to introduce Oman’s First Private Sector AI-Powered Cath Lab</a><a class="tb-item" href="#"><b>Press</b>DGPHE, MoH &amp; Badr Al Samaa conducts largest diabetes screening drive in Oman, sets world record</a>        </div>        <div class="tb-group" aria-hidden="true"><a class="tb-item" href="#" tabindex="-1"><b>Press</b>Badr Al Samaa and Ministry of Health Join Hands for ‘Save a Heart’ Campaign</a><a class="tb-item" href="#" tabindex="-1"><b>Press</b>Badr Al Samaa Group of Hospitals Celebrates World Physiotherapy Day</a><a class="tb-item" href="#" tabindex="-1"><b>Press</b>Badr Al Samaa Hospital, Ruwi Inaugurates Centre of Excellence in Orthopaedics</a><a class="tb-item" href="#" tabindex="-1"><b>Press</b>Badr Al Samaa Group of Hospitals Launches Dr. Badr Al Samaa 3D Health Awareness Video Series</a><a class="tb-item" href="#" tabindex="-1"><b>Press</b>Badr Al Samaa Royal Hospital is all set to introduce Oman’s First Private Sector AI-Powered Cath Lab</a><a class="tb-item" href="#" tabindex="-1"><b>Press</b>DGPHE, MoH &amp; Badr Al Samaa conducts largest diabetes screening drive in Oman, sets world record</a>        </div>      </div>
+    </div>
+    <div class="tb-links"><a class="tb-sos" href="tel:+96824799760"><i aria-hidden="true">+</i><span>Ambulance 24/7</span> +968 2479 9760</a><a class="tb-help" href="tel:+96822717171"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>24/7 helpline +968 2271 7171</span></a>    </div>
+  </div>
+</div>  <div class="wrap nav-row">
+    <a class="brand" href="index.html" aria-label="Badr Al Samaa Group, home">
       <span class="brand-mark" aria-hidden="true">B</span>
       <span class="brand-text">Badr Al Samaa</span>
     </a>
-    <nav class="nav" id="nav" aria-label="Primary"><a href="#about">About</a><a href="#services">Services</a><a href="#highlights">Packages</a><a href="#locations">Locations</a><a href="#contact">Contact</a>    </nav>
+    <nav class="nav" id="nav" aria-label="Primary">      <a href="about.html">About</a>      <div class="nav-item has-mega">
+        <a href="centres.html">Centres<svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+        <div class="mega">
+          <div class="mega-inner">
+            <div class="mega-intro">
+              <p class="eyebrow">Centres</p>
+              <p class="mega-title">Centres of excellence</p>
+              <a class="text-link" href="centres.html">View all 8 <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="text-link mega-extra" href="specialities.html">All 36 specialities <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>            </div>
+            <ul class="mega-list">              <li><a href="svc-cardiology.html" data-preview="assets/img/r-dept-cardiology.jpg"><span class="mega-n">01</span>Cardiology</a></li>              <li><a href="svc-orthopaedics.html" data-preview="assets/img/r-dept-orthopaedics.jpg"><span class="mega-n">02</span>Orthopaedics</a></li>              <li><a href="svc-obstetrics-gynaecology.html" data-preview="assets/img/r-dept-obstetrics-gynaecology.jpg"><span class="mega-n">03</span>Obstetrics &amp; Gynaecology</a></li>              <li><a href="svc-urology-andrology.html" data-preview="assets/img/r-dept-urology-andrology.jpg"><span class="mega-n">04</span>Urology &amp; Andrology</a></li>              <li><a href="svc-gastroenterology.html" data-preview="assets/img/r-dept-gastroentrology.jpg"><span class="mega-n">05</span>Gastroenterology</a></li>              <li><a href="svc-radiology.html" data-preview="assets/img/r-dept-radiology.jpg"><span class="mega-n">06</span>Radiology</a></li>              <li><a href="svc-ent.html" data-preview="assets/img/r-dept-ent.jpg"><span class="mega-n">07</span>ENT</a></li>              <li><a href="svc-dentistry.html" data-preview="assets/img/r-dept-dentistry.jpg"><span class="mega-n">08</span>Dentistry</a></li>            </ul>
+            <div class="mega-preview" aria-hidden="true"><img alt="" src="assets/img/r-dept-cardiology.jpg"></div>
+          </div>
+        </div>
+      </div>      <a href="doctors.html">Doctors</a>      <a href="packages.html">Packages</a>      <a href="locations.html">Locations</a>      <a href="news.html">News</a>      <a href="contact.html">Contact</a>    </nav>
     <div class="nav-actions">
-      <a class="btn btn-primary btn-sm" href="#contact" data-magnetic>Book appointment</a>
+      <a class="btn btn-primary btn-sm" href="contact.html" data-magnetic>Book appointment</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>
     </div>
   </div>
@@ -76,14 +94,77 @@
     <clipPath id="clip-body"><path d="M150 104 L166 104 C170 116 190 122 212 128 C230 134 236 150 238 176 L246 260 C248 290 254 320 258 350 C262 370 264 386 258 398 C252 404 244 398 242 388 L236 356 C230 330 222 300 220 270 L212 196 C208 230 202 270 200 300 C206 326 210 350 208 380 C206 420 200 460 198 490 C196 530 192 570 190 600 C192 612 200 622 198 630 L102 630 C100 622 108 612 110 600 C108 570 104 530 102 490 C100 460 94 420 92 380 C90 350 94 326 100 300 C98 270 92 230 88 196 L80 270 C78 300 70 330 64 356 L58 388 C56 398 48 404 42 398 C36 386 38 370 42 350 C46 320 52 290 54 260 L62 176 C64 150 70 134 88 128 C110 122 130 116 134 104 Z M150 18 A34 42 0 1 1 149.9 18 Z"/></clipPath>
   </defs>
 </svg>
-<section class="hero" id="top">
+<section class="promo" id="top" data-promo aria-roledescription="carousel" aria-label="Highlights">
+  <div class="promo-stage">    <div class="promo-bg is-on" data-src="assets/img/r-pkg-6.jpg"><img src="assets/img/r-pkg-6.jpg" alt="Hands holding a red heart" fetchpriority="high" decoding="async"></div>    <div class="promo-bg" data-src="assets/img/r-dept-orthopaedics.jpg"><img src="assets/img/r-dept-orthopaedics.jpg" alt="Orthopaedic consultation" loading="lazy" decoding="async"></div>    <div class="promo-bg" data-src="assets/img/r-dept-cardiology.jpg"><img src="assets/img/r-dept-cardiology.jpg" alt="Cardiac monitoring" loading="lazy" decoding="async"></div>    <div class="promo-bg" data-src="assets/img/r-pkg-33.jpg"><img src="assets/img/r-pkg-33.jpg" alt="Woman in the open air, arms raised" loading="lazy" decoding="async"></div>    <div class="promo-bg" data-src="assets/img/r-dept-emergency-and-critical-care.jpg"><img src="assets/img/r-dept-emergency-and-critical-care.jpg" alt="Emergency team moving a patient" loading="lazy" decoding="async"></div>    <canvas class="promo-gl" aria-hidden="true"></canvas>
+    <div class="promo-shade" aria-hidden="true"></div><canvas class="promo-fx" data-fx="floaters" aria-hidden="true"></canvas>  </div>
+  <div class="wrap promo-copy-wrap">    <div class="promo-copy is-on" role="group" aria-roledescription="slide" aria-label="1 of 5">
+      <p class="promo-k"><b>Campaign</b>With the Ministry of Health</p>
+<h1 class="promo-t">Save a Heart: closing the cardiac emergency gap</h1>      <p class="promo-p">A national awareness campaign with the Ministry of Health, teaching people what to do in the first minutes of a heart emergency.</p>
+      <div class="cta-row"><a class="btn btn-primary" href="news-badr-al-samaa-and-ministry-of-health-join-hands-for-save-a-h.html" data-magnetic>Read the story <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="svc-cardiology.html">Cardiology</a>      </div><span class="promo-cap">Photo: Badr Al Samaa Group</span>    </div>    <div class="promo-copy" role="group" aria-roledescription="slide" aria-label="2 of 5" aria-hidden="true">
+      <p class="promo-k"><b>New</b>Badr Al Samaa Hospital, Ruwi</p>
+<h2 class="promo-t">A Centre of Excellence for joints and spine</h2>      <p class="promo-p">Joint replacement and spine surgery now have a dedicated centre of excellence at the Ruwi hospital, where the group began in 2002.</p>
+      <div class="cta-row"><a class="btn btn-primary" href="svc-orthopaedics.html" data-magnetic tabindex="-1">Explore orthopaedics <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="doctors.html" tabindex="-1">Find a doctor</a>      </div><span class="promo-cap">Photo: Badr Al Samaa Group</span>    </div>    <div class="promo-copy" role="group" aria-roledescription="slide" aria-label="3 of 5" aria-hidden="true">
+      <p class="promo-k"><b>Coming soon</b>Badr Al Samaa Royal Hospital</p>
+<h2 class="promo-t">Oman&#39;s first private-sector AI-powered Cath Lab</h2>      <p class="promo-p">The Royal Hospital is introducing an AI-powered cardiac catheterisation lab with OCT and IVL imaging.</p>
+      <div class="cta-row"><a class="btn btn-primary" href="news-badr-al-samaa-royal-hospital-is-all-set-to-introduce-oman-s-.html" data-magnetic tabindex="-1">Read the announcement <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>      </div><span class="promo-cap">Photo: Badr Al Samaa Group</span>    </div>    <div class="promo-copy" role="group" aria-roledescription="slide" aria-label="4 of 5" aria-hidden="true">
+      <p class="promo-k"><b>From OMR 35</b>Preventive health</p>
+<h2 class="promo-t">Know your numbers before they become symptoms</h2>      <p class="promo-p">Ten check-up packages in Oman, from the Executive Body Check Up at OMR 35 to complete heart and body screening.</p>
+      <div class="cta-row"><a class="btn btn-primary" href="packages.html" data-magnetic tabindex="-1">Compare packages <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="contact.html" tabindex="-1">Book a check-up</a>      </div><span class="promo-cap">Photo: Badr Al Samaa Group</span>    </div>    <div class="promo-copy" role="group" aria-roledescription="slide" aria-label="5 of 5" aria-hidden="true">
+      <p class="promo-k"><b>24/7</b>Emergency and critical care</p>
+<h2 class="promo-t">Emergency care, day and night</h2>      <p class="promo-p">Physicians, trauma surgeons and nurses on call around the clock, with ambulances, blood bank and laboratory support.</p>
+      <div class="cta-row"><a class="btn btn-primary" href="tel:+96824799760" data-magnetic tabindex="-1">Call the ambulance <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="locations.html" tabindex="-1">Find your nearest branch</a>      </div><span class="promo-cap">Photo: Badr Al Samaa Group</span>    </div>  </div>
+  <div class="wrap promo-ui">
+    <div class="promo-tabs" role="tablist">      <button class="promo-tab is-on" type="button" role="tab" aria-selected="true" data-go="0">
+        <span class="pt-n">01</span><span class="pt-l">Save a Heart</span><i class="pt-bar"><b></b></i>
+      </button>      <button class="promo-tab" type="button" role="tab" aria-selected="false" data-go="1">
+        <span class="pt-n">02</span><span class="pt-l">Orthopaedics centre</span><i class="pt-bar"><b></b></i>
+      </button>      <button class="promo-tab" type="button" role="tab" aria-selected="false" data-go="2">
+        <span class="pt-n">03</span><span class="pt-l">AI-powered Cath Lab</span><i class="pt-bar"><b></b></i>
+      </button>      <button class="promo-tab" type="button" role="tab" aria-selected="false" data-go="3">
+        <span class="pt-n">04</span><span class="pt-l">Health check-ups</span><i class="pt-bar"><b></b></i>
+      </button>      <button class="promo-tab" type="button" role="tab" aria-selected="false" data-go="4">
+        <span class="pt-n">05</span><span class="pt-l">Emergency care</span><i class="pt-bar"><b></b></i>
+      </button>    </div>
+    <div class="promo-arrows">
+      <button type="button" class="promo-arrow prev" data-pprev aria-label="Previous slide"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <button type="button" class="promo-arrow" data-pnext aria-label="Next slide"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <button type="button" class="promo-pause" data-ppause aria-label="Pause slideshow" aria-pressed="false"><span></span><span></span></button>
+    </div>
+  </div>
+</section><section class="rail" aria-label="How can we help?">
+  <div class="wrap">
+    <div class="rail-box" data-anim="up">
+      <p class="rail-t">How can we help?</p>
+      <div class="rail-items">        <a class="rail-item" href="contact.html">
+          <span class="rail-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+          <span class="rail-l"><b>Book an appointment</b><small>Online, in two minutes</small></span>
+          <span class="rail-go"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>        <a class="rail-item" href="doctors.html">
+          <span class="rail-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></span>
+          <span class="rail-l"><b>Find a doctor</b><small>337 doctors</small></span>
+          <span class="rail-go"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>        <a class="rail-item" href="locations.html">
+          <span class="rail-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+          <span class="rail-l"><b>Find a branch</b><small>19 locations</small></span>
+          <span class="rail-go"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>        <a class="rail-item" href="packages.html">
+          <span class="rail-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/></svg></span>
+          <span class="rail-l"><b>Health packages</b><small>From OMR 35</small></span>
+          <span class="rail-go"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>        <a class="rail-item" href="https://wa.me/96893932255" rel="noopener">
+          <span class="rail-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+          <span class="rail-l"><b>WhatsApp us</b><small>+968 9393 2255</small></span>
+          <span class="rail-go"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>      </div>
+    </div>
+  </div>
+</section><section class="hero" id="explore">
   <canvas class="hero-fx" data-fx="floaters" aria-hidden="true"></canvas>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow" data-anim="up" data-intro>Hospitals &amp; medical centres · Oman · Bahrain · Kuwait · UAE</p>
-      <h1 class="hero-title" data-anim="lines" data-intro>Trusted care, <em>close to home</em></h1>
-      <p class="hero-lede" data-anim="up" data-intro data-delay=".45">Hospitals, medical centres and polyclinics across the GCC, with more than 700 doctors and 2,000 nurses and support staff. Find a branch, book an appointment, and get seen.</p>
-      <div class="cta-row" data-anim="up" data-intro data-delay=".6">
+      <p class="eyebrow" data-anim="up" >Hospitals &amp; medical centres · Oman · Bahrain · Kuwait · UAE</p>
+<h2 class="hero-title" data-anim="lines">Trusted care, <em>close to home</em></h2>      <p class="hero-lede" data-anim="up"  data-delay=".45">Hospitals, medical centres and polyclinics across Oman, Bahrain, Kuwait and the UAE, with 400+ doctors and over 2,000 nurses and support staff. Explore the body to find the right centre.</p>
+      <div class="cta-row" data-anim="up"  data-delay=".6">
         <a class="btn btn-primary" href="#contact" data-magnetic>Book an appointment <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="btn btn-ghost" href="#locations" data-magnetic>Find a branch</a>
       </div>
@@ -147,11 +228,11 @@
         </a>        <a class="hotspot" href="#c-tooth" style="--x: 50.00%; --y: 13.75%; --i: 7">
           <span class="hs-dot" aria-hidden="true"></span><span class="hs-label">Dentistry</span>
         </a>      </div>
-      <p class="giant giant-front" aria-hidden="true" data-drift="30">care</p>      <div class="badge badge-1" data-anim="scale" data-intro data-delay="0.8">
+      <p class="giant giant-front" aria-hidden="true" data-drift="30">care</p>      <div class="badge badge-1" data-anim="scale"  data-delay="0.8">
         <strong><span data-count data-to="700" data-suffix="+">700+</span></strong><span>Doctors</span>
-      </div>      <div class="badge badge-2" data-anim="scale" data-intro data-delay="0.9500000000000001">
+      </div>      <div class="badge badge-2" data-anim="scale"  data-delay="0.9500000000000001">
         <strong><span data-count data-to="19" data-suffix="">19</span></strong><span>Listed branches</span>
-      </div>      <div class="badge badge-3" data-anim="scale" data-intro data-delay="1.1">
+      </div>      <div class="badge badge-3" data-anim="scale"  data-delay="1.1">
         <strong><span data-count data-to="4" data-suffix="">4</span></strong><span>Countries</span>
       </div>    </div>
   </div>
@@ -160,15 +241,18 @@
 
 <section class="band" aria-label="Key figures">
   <div class="wrap band-row">    <div class="band-stat" data-anim="up" data-delay="0.0">
-      <strong><span data-count data-to="19" data-suffix="">19</span></strong>
-      <span>Listed branches</span>
+      <strong><span data-count data-to="20" data-suffix="+">20+</span></strong>
+      <span>Hospitals &amp; medical centres</span>
     </div>    <div class="band-stat" data-anim="up" data-delay="0.08">
-      <strong><span data-count data-to="700" data-suffix="+">700+</span></strong>
-      <span>Doctors</span>
+      <strong><span data-count data-to="30" data-suffix="M+">30M+</span></strong>
+      <span>Patient visits</span>
     </div>    <div class="band-stat" data-anim="up" data-delay="0.16">
+      <strong><span data-count data-to="400" data-suffix="+">400+</span></strong>
+      <span>Doctors</span>
+    </div>    <div class="band-stat" data-anim="up" data-delay="0.24">
       <strong><span data-count data-to="2000" data-suffix="+">2,000+</span></strong>
       <span>Nurses &amp; support staff</span>
-    </div>    <div class="band-stat" data-anim="up" data-delay="0.24">
+    </div>    <div class="band-stat" data-anim="up" data-delay="0.32">
       <strong><span data-count data-to="24" data-suffix="">24</span></strong>
       <span>Years of care</span>
     </div>  </div>
@@ -188,7 +272,7 @@
     <div class="chapter-list">
       <div class="chapter-intro">
         <p class="eyebrow">About</p>
-        <h2 data-anim="lines">From one polyclinic in Ruwi to a GCC group</h2><p class="muted" data-anim="up">Badr Al Samaa began in 2002 as a polyclinic in Ruwi. It has grown into a group of hospitals, medical centres and clinics across Oman, Bahrain, Kuwait and the UAE.</p>      </div>      <article class="chapter" data-chapter>
+        <h2 data-anim="lines">From one polyclinic in Ruwi to a GCC group</h2><p class="muted" data-anim="up">The venture was started off in Ruwi, Oman, by a group of renowned visionaries in 2002, aiming to provide world-class multispecialty healthcare at affordable costs.</p><p class="muted" data-anim="up">Made its humble beginning as Polyclinic in 2002 and gradually became the largest private healthcare group of Oman. The group spread its wings and became multinational, having presence in Oman, Bahrain, UAE, Kuwait and Qatar.</p>      </div>      <article class="chapter" data-chapter>
         <span class="chapter-k">1</span>
         <h3>Find a branch</h3>
         <p>19 branches across Oman, Bahrain, Kuwait and the UAE, from Ruwi to Dubai.</p>
@@ -206,9 +290,9 @@
 
 <section class="centres" id="services">
   <div class="wrap centres-head">
-    <p class="eyebrow">Services</p>
+    <p class="eyebrow">Centres</p>
     <h2 data-anim="lines">Centres of excellence</h2>
-    <p class="muted" data-anim="up">Specialist departments listed across the group&#39;s hospitals and medical centres.</p>
+    <p class="muted" data-anim="up">Eight centres of excellence lead the group&#39;s 36 specialities, from heart care and joint replacement to IVF and oncology.</p>
   </div>
   <div class="wrap organ-grid">    <article class="organ-card" id="c-heart" data-anim="up" data-delay="0.0">
       <div class="organ-stage"><img class="organ-bg" src="assets/img/c-heart.jpg" alt="" loading="lazy" decoding="async"><span class="stage-cap">Illustrative</span>        <svg class="organ organ-heart" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
@@ -372,42 +456,125 @@
 <section class="packages" id="highlights">
   <div class="wrap">
     <p class="eyebrow">Packages</p>
-    <h2 data-anim="lines">Health check packages</h2>
-    <p class="muted" data-anim="up">Preventive check-up packages the group lists on its homepage.</p>
-    <div class="pkg-row">      <div class="pkg-cell" data-anim="up" data-delay="0.0">
-      <article class="pkg pkg-photo" style="--r: -6deg"><img class="pkg-bg" src="assets/img/p-asthma.jpg" alt="Asthma inhaler" loading="lazy" decoding="async"><span class="stage-cap">Illustrative</span>        <span class="pkg-k">Package 01</span>
-        <span class="pkg-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/></svg></span>
-        <h3>Asthma &amp; allergy</h3>
-        <span class="pkg-foot">Preventive check-up</span>
+    <h2 data-anim="lines">Health check-up packages</h2>
+    <p class="muted" data-anim="up">Preventive packages with fixed prices. Ten are offered in Oman, from OMR 35.</p><a class="btn btn-ghost pkg-all" href="packages.html" data-magnetic>All 41 packages <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>    <div class="pkg-row">      <div class="pkg-cell" data-anim="up" data-delay="0.0">
+      <article class="pkg pkg-photo" style="--r: -6deg"><img class="pkg-bg" src="assets/img/r-pkg-38.jpg" alt="Executive Body Check Up" loading="lazy" decoding="async"><span class="stage-cap">Photo: Badr Al Samaa Group</span>        <span class="pkg-k">Package 01</span>
+        <span class="pkg-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span>
+        <h3>Executive Body Check Up</h3>
+        <span class="pkg-foot">OMR 35</span>
       </article>
       </div>      <div class="pkg-cell" data-anim="up" data-delay="0.1">
-      <article class="pkg pkg-photo" style="--r: 4deg"><img class="pkg-bg" src="assets/img/p-diabetes.jpg" alt="Blood glucose meter" loading="lazy" decoding="async"><span class="stage-cap">Illustrative</span>        <span class="pkg-k">Package 02</span>
-        <span class="pkg-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V4M4 20h16M8 16v-5M12 16V8M16 16v-3"/></svg></span>
-        <h3>Comprehensive diabetes</h3>
-        <span class="pkg-foot">Preventive check-up</span>
+      <article class="pkg pkg-photo" style="--r: 4deg"><img class="pkg-bg" src="assets/img/r-pkg-40.jpg" alt="Preliminary Cardiac &amp; Body Check Up" loading="lazy" decoding="async"><span class="stage-cap">Photo: Badr Al Samaa Group</span>        <span class="pkg-k">Package 02</span>
+        <span class="pkg-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span>
+        <h3>Preliminary Cardiac &amp; Body Check Up</h3>
+        <span class="pkg-foot">OMR 45</span>
       </article>
       </div>      <div class="pkg-cell" data-anim="up" data-delay="0.2">
-      <article class="pkg pkg-photo" style="--r: -3deg"><img class="pkg-bg" src="assets/img/p-bp.jpg" alt="Blood pressure being measured" loading="lazy" decoding="async"><span class="stage-cap">Illustrative</span>        <span class="pkg-k">Package 03</span>
+      <article class="pkg pkg-photo" style="--r: -3deg"><img class="pkg-bg" src="assets/img/r-pkg-46.jpg" alt="Asthma &amp; Allergy Check Up" loading="lazy" decoding="async"><span class="stage-cap">Photo: Badr Al Samaa Group</span>        <span class="pkg-k">Package 03</span>
         <span class="pkg-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span>
-        <h3>High blood pressure</h3>
-        <span class="pkg-foot">Preventive check-up</span>
+        <h3>Asthma &amp; Allergy Check Up</h3>
+        <span class="pkg-foot">OMR 48</span>
       </article>
       </div>      <div class="pkg-cell" data-anim="up" data-delay="0.30000000000000004">
-      <article class="pkg pkg-photo" style="--r: 7deg"><img class="pkg-bg" src="assets/img/p-thyroid.jpg" alt="Doctor examining a patient" loading="lazy" decoding="async"><span class="stage-cap">Illustrative</span>        <span class="pkg-k">Package 04</span>
-        <span class="pkg-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/></svg></span>
-        <h3>Thyroid panel</h3>
-        <span class="pkg-foot">Preventive check-up</span>
+      <article class="pkg pkg-photo" style="--r: 7deg"><img class="pkg-bg" src="assets/img/r-pkg-42.jpg" alt="Comprehensive Diabetic Check Up" loading="lazy" decoding="async"><span class="stage-cap">Photo: Badr Al Samaa Group</span>        <span class="pkg-k">Package 04</span>
+        <span class="pkg-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span>
+        <h3>Comprehensive Diabetic Check Up</h3>
+        <span class="pkg-foot">OMR 50</span>
       </article>
       </div>    </div>
   </div>
 </section>
 
+<section class="home-news" id="news">
+  <div class="wrap">
+    <div class="home-news-head">
+      <div><p class="eyebrow">Newsroom</p><h2 class="pg-h2" data-anim="lines">Latest news and updates</h2></div>
+      <a class="btn btn-ghost" href="news.html" data-magnetic>All news <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="news-grid">  <a class="news-card" href="news-badr-al-samaa-and-ministry-of-health-join-hands-for-save-a-h.html" data-tag="Press release" data-anim="up" data-delay="0.0">
+    <div class="nc-media"><img src="assets/img/r-news-badr-al-samaa-and-ministry-of-health-joi.jpg" alt="" loading="lazy"><span class="nc-tag">Press release</span></div>
+    <p class="news-meta">September 29, 2026</p>
+    <h3>Badr Al Samaa and Ministry of Health Join Hands for ‘Save a Heart’ Campaign</h3>
+    <p class="nc-sum">Badr Al Samaa and Ministry of Health Join Hands for ‘Save a Heart’ Campaign to Bridge Cardiac Emergency Awareness Gap</p>
+    <span class="text-link">Read <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </a>  <a class="news-card" href="news-badr-al-samaa-group-of-hospitals-celebrates-world-physiother.html" data-tag="Press release" data-anim="up" data-delay="0.08">
+    <div class="nc-media"><img src="assets/img/r-news-badr-al-samaa-group-of-hospital-s-doctor.jpg" alt="" loading="lazy"><span class="nc-tag">Press release</span></div>
+    <p class="news-meta">September 09, 2026</p>
+    <h3>Badr Al Samaa Group of Hospitals Celebrates World Physiotherapy Day</h3>
+    <p class="nc-sum">Badr Al Samaa Group of Hospitals Celebrates World Physiotherapy Day, Showcasing Comprehensive Physiotherapy &amp; Rehabilitation Services Across Oman</p>
+    <span class="text-link">Read <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </a>  <a class="news-card" href="news-badr-al-samaa-hospital-ruwi-inaugurates-centre-of-excellence.html" data-tag="Press release" data-anim="up" data-delay="0.16">
+    <div class="nc-media"><img src="assets/img/r-news-badr-al-samaa-hospital-ruwi-inaugurates-.jpg" alt="" loading="lazy"><span class="nc-tag">Press release</span></div>
+    <p class="news-meta">June 02, 2026</p>
+    <h3>Badr Al Samaa Hospital, Ruwi Inaugurates Centre of Excellence in Orthopaedics</h3>
+    <p class="nc-sum">Badr Al Samaa Hospital, Ruwi, marked another major milestone in advanced healthcare with the inauguration of its Centre of Excellence in Orthopaedics, Joint Replacements &amp; Spine Surgeries during a special Continuing Medical Education (CME) event held at Crowne Plaza Hotel, Qurum.</p>
+    <span class="text-link">Read <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </a></div>
+  </div>
+</section>
+<section class="quotes" aria-label="Patient stories" data-quotes>
+  <div class="wrap">
+    <p class="eyebrow">Patient stories</p>
+    <div class="q-stage">      <figure class="q-item is-on">
+        <blockquote>“Very impressed with the quality of service and care from the doctors and supporting staff. The process is very smooth right from booking an appointment. No long queues or long waiting hours to see doctors and buy medicines. The premises are kept neat and hygienic. I went with my baby to consult a pediatrician and it was the best decision ever. The doctor was very helpful and knowledgeable. She also shared some valuable tips to prevent infections.”</blockquote>
+        <figcaption><span class="q-av" aria-hidden="true">L</span><b>Labeeba</b><span>12 July 2019</span></figcaption>
+      </figure>      <figure class="q-item">
+        <blockquote>“I am deeply indebted to all doctors and the staff members of Badr al Samaa hospital especially the cardiology department. A few months back my mother had to undergo immediate cardiac surgery and was admitted here for two weeks. The doctors were very courteous and caring throughout. She was treated like a family member rather than just a patient. I have complete confidence in their treatment method. Thank you very much for saving her life. God bless”</blockquote>
+        <figcaption><span class="q-av" aria-hidden="true">A</span><b>Aafiyah Mahmood</b><span>12 July 2019</span></figcaption>
+      </figure>      <figure class="q-item">
+        <blockquote>“Awesome team, excellent service. Special thanks to the ortho team for your valuable support. We had a difficult time when my father had met with an accident. We immediately admitted him to this hospital. Everything was perfect including staff behaviour, facilities and treatment. The doctors were very knowledgeable. Keep up the good service. Wishing good luck to the entire medical team.”</blockquote>
+        <figcaption><span class="q-av" aria-hidden="true">S</span><b>Saeed</b><span>12 July 2019</span></figcaption>
+      </figure>      <figure class="q-item">
+        <blockquote>“Extremely impressed by the hospital facilities and behaviour of the staff members. I developed some gynecological problems and my friend referred me to this hospital. The doctor gave me a clear picture of the problem and she was very friendly. I was told that I need to have a small surgery. The nurses gave me very good care and I am very happy with their attitude. The treatment was accurate and I feel much better now. Thanks for your outstanding service.”</blockquote>
+        <figcaption><span class="q-av" aria-hidden="true">K</span><b>Kaheela Mariyam</b><span>12 July 2019</span></figcaption>
+      </figure>      <figure class="q-item">
+        <blockquote>“I would like to extend my sincere gratitude to all emergency department doctors who took care of my health. A few months back I was admitted to the emergency department suffering from a serious trauma. The doctors were extremely caring and loving. They assured my family that my health is stable and there is nothing to worry. My health improved and soon I was transferred to a room. All services were beyond our expectations. Thank you for supporting us through this difficult phase. God bless.”</blockquote>
+        <figcaption><span class="q-av" aria-hidden="true">H</span><b>Hameeda</b><span>12 July 2019</span></figcaption>
+      </figure>      <figure class="q-item">
+        <blockquote>“Note of appreciation from patient Mr Taher Ali Bohra, who underwent heart surgery at Badr Al Samaa Hospital, Ruwi; case taken up by Dr Benny Panakkal.”</blockquote>
+        <figcaption><span class="q-av" aria-hidden="true">T</span><b>Taher Ali Bohra</b><span>12 July 2019</span></figcaption>
+      </figure>    </div>
+    <div class="q-ui">
+      <div class="q-dots"><button type="button" aria-label="Story 1" data-q="0" class="is-on"></button><button type="button" aria-label="Story 2" data-q="1"></button><button type="button" aria-label="Story 3" data-q="2"></button><button type="button" aria-label="Story 4" data-q="3"></button><button type="button" aria-label="Story 5" data-q="4"></button><button type="button" aria-label="Story 6" data-q="5"></button></div>
+      <p class="q-note">Testimonials as published on the group's website.</p>
+    </div>
+  </div>
+</section>
+<section class="ins" aria-label="Insurance partners">
+  <div class="wrap ins-head">
+    <p class="eyebrow">Insurance</p>
+    <h2 class="pg-h2" data-anim="lines">Cashless treatment with the region&#39;s major insurers.</h2>
+  </div>  <div class="marquee ins-row" data-marquee="0.6" data-dir="left">
+    <div class="marquee-track" aria-hidden="true"><div class="marquee-group"><span class="ins-chip">NEXTCARE</span><span class="ins-chip">METLIFE</span><span class="ins-chip">LIVA</span><span class="ins-chip">NEURON</span><span class="ins-chip">GIG</span><span class="ins-chip">MEDNET</span><span class="ins-chip">SAICOHEALTH</span><span class="ins-chip">VIPUL BETTER CARE</span><span class="ins-chip">CIGNA</span><span class="ins-chip">BUPA INSURANCE</span><span class="ins-chip">MSH INTERNATIONAL</span><span class="ins-chip">ALLIANZ WORLDWIDE CARE</span></div><div class="marquee-group"><span class="ins-chip">NEXTCARE</span><span class="ins-chip">METLIFE</span><span class="ins-chip">LIVA</span><span class="ins-chip">NEURON</span><span class="ins-chip">GIG</span><span class="ins-chip">MEDNET</span><span class="ins-chip">SAICOHEALTH</span><span class="ins-chip">VIPUL BETTER CARE</span><span class="ins-chip">CIGNA</span><span class="ins-chip">BUPA INSURANCE</span><span class="ins-chip">MSH INTERNATIONAL</span><span class="ins-chip">ALLIANZ WORLDWIDE CARE</span></div>    </div>
+  </div>  <div class="marquee ins-row" data-marquee="0.6" data-dir="right">
+    <div class="marquee-track" aria-hidden="true"><div class="marquee-group"><span class="ins-chip">NOW HEALTH INTERNATIONAL</span><span class="ins-chip">AMITY HEALTH</span><span class="ins-chip">AETNA INTERNATIONAL</span><span class="ins-chip">OMAN INSURANCE COMPANY</span><span class="ins-chip">INAYAH TPA(LLC)</span><span class="ins-chip">NATIONAL HEALTH INSURANCE COMPANY</span><span class="ins-chip">INTERNATIONAL PRIVATE MEDICAL INSURANCE</span><span class="ins-chip">OQIC</span><span class="ins-chip">NEW INDIA ASSURANCE</span><span class="ins-chip">NAS NEURON</span><span class="ins-chip">GREENLINE INSURANCE</span></div><div class="marquee-group"><span class="ins-chip">NOW HEALTH INTERNATIONAL</span><span class="ins-chip">AMITY HEALTH</span><span class="ins-chip">AETNA INTERNATIONAL</span><span class="ins-chip">OMAN INSURANCE COMPANY</span><span class="ins-chip">INAYAH TPA(LLC)</span><span class="ins-chip">NATIONAL HEALTH INSURANCE COMPANY</span><span class="ins-chip">INTERNATIONAL PRIVATE MEDICAL INSURANCE</span><span class="ins-chip">OQIC</span><span class="ins-chip">NEW INDIA ASSURANCE</span><span class="ins-chip">NAS NEURON</span><span class="ins-chip">GREENLINE INSURANCE</span></div>    </div>
+  </div>  <p class="wrap visually-hidden">Partners: NEXTCARE, METLIFE, LIVA, NEURON, GIG, MEDNET, SAICOHEALTH, VIPUL BETTER CARE, CIGNA, BUPA INSURANCE, MSH INTERNATIONAL, ALLIANZ WORLDWIDE CARE, NOW HEALTH INTERNATIONAL, AMITY HEALTH, AETNA INTERNATIONAL, OMAN INSURANCE COMPANY, INAYAH TPA(LLC), NATIONAL HEALTH INSURANCE COMPANY, INTERNATIONAL PRIVATE MEDICAL INSURANCE, OQIC, NEW INDIA ASSURANCE, NAS NEURON, GREENLINE INSURANCE</p>
+</section>
+<section class="tool" id="tools">
+  <div class="wrap tool-grid">
+    <div>
+      <p class="eyebrow">Health tools</p>
+      <h2 class="pg-h2" data-anim="lines">Check your body mass index</h2>
+      <p class="muted" data-anim="up">A quick screening figure, worked out on your device. Nothing is sent anywhere. It is not a diagnosis; a doctor can tell you what it means for you.</p>
+    </div>
+    <form class="bmi" data-bmi novalidate>
+      <label>Height <span><input type="range" min="120" max="210" value="168" name="h"><output data-o="h">168 cm</output></span></label>
+      <label>Weight <span><input type="range" min="30" max="180" value="70" name="w"><output data-o="w">70 kg</output></span></label>
+      <div class="bmi-out">
+        <div class="bmi-dial"><svg viewBox="0 0 200 110" aria-hidden="true"><path class="bmi-track" d="M15 100a85 85 0 0 1 170 0"/><path class="bmi-arc" d="M15 100a85 85 0 0 1 170 0" pathLength="100" data-arc/></svg><strong data-bmi-v>24.8</strong></div>
+        <p class="bmi-band" data-bmi-band aria-live="polite">Healthy range</p>
+        <p class="bmi-note">WHO adult ranges: under 18.5 underweight, 18.5 to 24.9 healthy, 25 to 29.9 overweight, 30 and over obese.</p>
+        <a class="btn btn-primary btn-sm" href="contact.html">Book a check-up <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </form>
+  </div>
+</section>
 <section class="countries" id="locations">
   <svg class="wave to-cream2" viewBox="0 0 1440 120" preserveAspectRatio="none" data-waves aria-hidden="true"><path d="M0 120 L0 60 L1440 60 L1440 120 Z"/><path d="M0 120 L0 80 L1440 80 L1440 120 Z"/></svg>
   <div class="wrap">
     <p class="eyebrow">Locations</p>
     <h2 data-anim="lines">Find a branch</h2>
-    <p class="muted" data-anim="up">The 19 branches listed on the group&#39;s site, across four countries. Filter by country to narrow the list.</p>
+    <p class="muted" data-anim="up">Hospitals, medical centres and polyclinics in Oman, Bahrain, Kuwait and the UAE. Every branch page has its address, phone, specialities and directions.</p>
     <div class="country-row">      <button class="country-card" type="button" data-cursor="Filter" data-filter-proxy="Oman" data-anim="up" data-delay="0.0"><figure class="media country-media">
   <img src="assets/img/oman.jpg" alt="Mosque courtyard in Muscat" loading="lazy" decoding="async"><figcaption class="media-cap">Muscat</figcaption></figure>        <span class="country-name">Oman</span><span class="country-n">12 branches</span>
       </button>      <button class="country-card" type="button" data-cursor="Filter" data-filter-proxy="Bahrain" data-anim="up" data-delay="0.08"><figure class="media country-media">
@@ -421,158 +588,139 @@
       <div class="filters curve-filters" role="group" aria-label="Filter branches by country">
         <button class="filter" type="button" data-cfilter="all" aria-pressed="true">All <span class="filter-n">19</span></button>        <button class="filter" type="button" data-cfilter="Oman" aria-pressed="false">Oman <span class="filter-n">12</span></button>        <button class="filter" type="button" data-cfilter="Bahrain" aria-pressed="false">Bahrain <span class="filter-n">5</span></button>        <button class="filter" type="button" data-cfilter="Kuwait" aria-pressed="false">Kuwait <span class="filter-n">1</span></button>        <button class="filter" type="button" data-cfilter="UAE" aria-pressed="false">UAE <span class="filter-n">1</span></button>      </div>
       <div class="curve-stage" data-cursor="Drag">
-        <ul class="curve-track">          <li class="curve-card" data-c="Oman" data-name="Ruwi" data-type="Hospital" data-cap="View of Ruwi" data-address="" data-phone="" data-note="">
+        <ul class="curve-track">          <li class="curve-card" data-c="Oman" data-name="Ruwi" data-type="Hospital" data-cap="View of Ruwi" data-address="Badr Al Samaa Hospital, P. O. Box 443, P. C. 112" data-phone="+968 2271 7171" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=23.597471,58.540099" data-href="branch-ruwi.html">
             <img class="cc-bg" src="assets/img/br-ruwi.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Hospital</span><span>Oman</span></div>
             <div class="cc-bottom">
               <span class="cc-n">01</span>
               <h3>Ruwi</h3>
-              <span class="cc-cap">View of Ruwi</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Oman" data-name="Al Khoud" data-type="Hospital" data-cap="View of Muscat" data-address="" data-phone="" data-note="">
+<span class="cc-cap">View of Ruwi</span>            </div>
+          </li>          <li class="curve-card" data-c="Oman" data-name="Al Khoud" data-type="Hospital" data-cap="View of Muscat" data-address="Badr Al Samaa Hospital, P. O. Box 1165, P. C. 121" data-phone="+968 9144 2161" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=23.654393,58.203370" data-href="branch-al-khoud.html">
             <img class="cc-bg" src="assets/img/br-muscat.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Hospital</span><span>Oman</span></div>
             <div class="cc-bottom">
               <span class="cc-n">02</span>
               <h3>Al Khoud</h3>
-              <span class="cc-cap">View of Muscat</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Oman" data-name="Barka" data-type="Hospital" data-cap="View of Barka" data-address="" data-phone="" data-note="">
+<span class="cc-cap">View of Muscat</span>            </div>
+          </li>          <li class="curve-card" data-c="Oman" data-name="Barka" data-type="Hospital" data-cap="View of Barka" data-address="Badr Al Samaa Hospital, P. O. Box 516, P. C. 320" data-phone="+968 2688 4910" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=23.664586,57.894130" data-href="branch-barka.html">
             <img class="cc-bg" src="assets/img/barka.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Hospital</span><span>Oman</span></div>
             <div class="cc-bottom">
               <span class="cc-n">03</span>
               <h3>Barka</h3>
-              <span class="cc-cap">View of Barka</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Oman" data-name="Nizwa" data-type="Hospital" data-cap="View of Nizwa" data-address="" data-phone="" data-note="">
-            <img class="cc-bg" src="assets/img/nizwa.jpg" alt="" loading="lazy" decoding="async" draggable="false">
+<span class="cc-cap">View of Barka</span>            </div>
+          </li>          <li class="curve-card" data-c="Oman" data-name="Nizwa" data-type="Hospital" data-cap="Photo: Badr Al Samaa Group" data-address="Badr Al Samaa Hospital, P. O. Box 1116 , P. C. 611" data-phone="+968 2544 7776" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=22.917103,57.536292" data-href="branch-nizwa.html">
+            <img class="cc-bg" src="assets/img/r-br-nizwa.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Hospital</span><span>Oman</span></div>
             <div class="cc-bottom">
               <span class="cc-n">04</span>
               <h3>Nizwa</h3>
-              <span class="cc-cap">View of Nizwa</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Oman" data-name="Salalah" data-type="Hospital" data-cap="View of Salalah Airport" data-address="" data-phone="" data-note="">
+<span class="cc-cap">Photo: Badr Al Samaa Group</span>            </div>
+          </li>          <li class="curve-card" data-c="Oman" data-name="Salalah" data-type="Hospital" data-cap="View of Salalah Airport" data-address="Badr Al Samaa Hospital, P. O. Box 2344, P. C. 211" data-phone="+968 2329 1830" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=17.050668,54.106586" data-href="branch-salalah.html">
             <img class="cc-bg" src="assets/img/br-salalah.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Hospital</span><span>Oman</span></div>
             <div class="cc-bottom">
               <span class="cc-n">05</span>
               <h3>Salalah</h3>
-              <span class="cc-cap">View of Salalah Airport</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Oman" data-name="Sohar" data-type="Hospital" data-cap="View of Sohar" data-address="" data-phone="" data-note="">
+<span class="cc-cap">View of Salalah Airport</span>            </div>
+          </li>          <li class="curve-card" data-c="Oman" data-name="Sohar" data-type="Hospital" data-cap="View of Sohar" data-address="" data-phone="" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=Badr+Al+Samaa+Group+Sohar+Oman" data-href="branch-sohar.html">
             <img class="cc-bg" src="assets/img/br-sohar.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Hospital</span><span>Oman</span></div>
             <div class="cc-bottom">
               <span class="cc-n">06</span>
               <h3>Sohar</h3>
-              <span class="cc-cap">View of Sohar</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Oman" data-name="Al Khuwair" data-type="Medical Centre" data-cap="View of Muscat" data-address="" data-phone="" data-note="">
+<span class="cc-cap">View of Sohar</span>            </div>
+          </li>          <li class="curve-card" data-c="Oman" data-name="Al Khuwair" data-type="Medical Centre" data-cap="View of Muscat" data-address="Badr Al Samaa Medical Centre, P. O. Box 443, P. C. 112" data-phone="+968 9967 6589" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=23.586504,58.426945" data-href="branch-al-khuwair.html">
             <img class="cc-bg" src="assets/img/br-muscat2.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Medical Centre</span><span>Oman</span></div>
             <div class="cc-bottom">
               <span class="cc-n">07</span>
               <h3>Al Khuwair</h3>
-              <span class="cc-cap">View of Muscat</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Oman" data-name="Falaj Al Qabail" data-type="Medical Centre" data-cap="View of Sohar" data-address="" data-phone="" data-note="">
+<span class="cc-cap">View of Muscat</span>            </div>
+          </li>          <li class="curve-card" data-c="Oman" data-name="Falaj Al Qabail" data-type="Medical Centre" data-cap="View of Sohar" data-address="Badr Al Samaa Medical Centre, P. O. Box 598, P. C. 322" data-phone="+968 2675 4131" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=24.433356,56.626138" data-href="branch-falaj-al-qabail.html">
             <img class="cc-bg" src="assets/img/br-sohar.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Medical Centre</span><span>Oman</span></div>
             <div class="cc-bottom">
               <span class="cc-n">08</span>
               <h3>Falaj Al Qabail</h3>
-              <span class="cc-cap">View of Sohar</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Oman" data-name="Sur" data-type="Medical Centre" data-cap="View of Sur" data-address="" data-phone="" data-note="">
+<span class="cc-cap">View of Sohar</span>            </div>
+          </li>          <li class="curve-card" data-c="Oman" data-name="Sur" data-type="Medical Centre" data-cap="View of Sur" data-address="Badr Al Samaa Medical Centre, P. O. Box 293, P. C. 411" data-phone="+968 2554 6112" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=22.570546,59.498613" data-href="branch-sur.html">
             <img class="cc-bg" src="assets/img/br-sur.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Medical Centre</span><span>Oman</span></div>
             <div class="cc-bottom">
               <span class="cc-n">09</span>
               <h3>Sur</h3>
-              <span class="cc-cap">View of Sur</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Oman" data-name="Duqm" data-type="Medical Centre" data-cap="View of Duqm" data-address="" data-phone="" data-note="">
-            <img class="cc-bg" src="assets/img/duqm.jpg" alt="" loading="lazy" decoding="async" draggable="false">
+<span class="cc-cap">View of Sur</span>            </div>
+          </li>          <li class="curve-card" data-c="Oman" data-name="Duqm" data-type="Medical Centre" data-cap="Photo: Badr Al Samaa Group" data-address="Badr Al Samaa Polyclinic, PC / Block: 51, Plot No. 106, Special Economic Zone, Duqm, Al Wusta, Oman" data-phone="+968 2282 6435" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=19.639482,57.677911" data-href="branch-duqm.html">
+            <img class="cc-bg" src="assets/img/r-br-duqm.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Medical Centre</span><span>Oman</span></div>
             <div class="cc-bottom">
               <span class="cc-n">10</span>
               <h3>Duqm</h3>
-              <span class="cc-cap">View of Duqm</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Oman" data-name="Suwaiq" data-type="Polyclinic" data-cap="View of Al Batinah coast" data-address="" data-phone="" data-note="">
-            <img class="cc-bg" src="assets/img/barka.jpg" alt="" loading="lazy" decoding="async" draggable="false">
+<span class="cc-cap">Photo: Badr Al Samaa Group</span>            </div>
+          </li>          <li class="curve-card" data-c="Oman" data-name="Suwaiq" data-type="Polyclinic" data-cap="Photo: Badr Al Samaa Group" data-address="Suwaiq, Sultanate of Oman" data-phone="+968 7170 4333" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=23.822374,57.431675" data-href="branch-suwaiq.html">
+            <img class="cc-bg" src="assets/img/r-br-suwaiq.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Polyclinic</span><span>Oman</span></div>
             <div class="cc-bottom">
               <span class="cc-n">11</span>
               <h3>Suwaiq</h3>
-              <span class="cc-cap">View of Al Batinah coast</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Oman" data-name="Mabella" data-type="Premium Medical Centre" data-cap="View of Al Maabilah" data-address="" data-phone="" data-note="">
+<span class="cc-cap">Photo: Badr Al Samaa Group</span>            </div>
+          </li>          <li class="curve-card" data-c="Oman" data-name="Mabella" data-type="Premium Medical Centre" data-cap="View of Al Maabilah" data-address="Badr Al Samaa Premium Medical Centre, PC 121, PB 1269, Al Khair Street" data-phone="+968 2282 6381" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=Badr+Al+Samaa+Group+Mabella+Oman" data-href="branch-mabella.html">
             <img class="cc-bg" src="assets/img/br-mabella.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Premium Medical Centre</span><span>Oman</span></div>
             <div class="cc-bottom">
               <span class="cc-n">12</span>
               <h3>Mabella</h3>
-              <span class="cc-cap">View of Al Maabilah</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Bahrain" data-name="Muharraq" data-type="Al Hilal Hospital" data-cap="View of Muharraq" data-address="" data-phone="" data-note="">
+<span class="cc-cap">View of Al Maabilah</span>            </div>
+          </li>          <li class="curve-card" data-c="Bahrain" data-name="Muharraq" data-type="Al Hilal Hospital" data-cap="View of Muharraq" data-address="Al Hilal Hospital, Rad No 1129, Al-Muharraq, 23622" data-phone="+973 1734 4700" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=26.265074,50.622327" data-href="branch-muharraq.html">
             <img class="cc-bg" src="assets/img/br-muharraq.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Al Hilal Hospital</span><span>Bahrain</span></div>
             <div class="cc-bottom">
               <span class="cc-n">13</span>
               <h3>Muharraq</h3>
-              <span class="cc-cap">View of Muharraq</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Bahrain" data-name="Riffa" data-type="Al Hilal Medical Centre" data-cap="View of Riffa" data-address="" data-phone="" data-note="">
+<span class="cc-cap">View of Muharraq</span>            </div>
+          </li>          <li class="curve-card" data-c="Bahrain" data-name="Riffa" data-type="Al Hilal Medical Centre" data-cap="View of Riffa" data-address="Al Hilal Medical Centre, Road 313, Block 903 Building 640, Sh Khalid Ave" data-phone="+973 1749 5555" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=26.122606,50.534262" data-href="branch-riffa.html">
             <img class="cc-bg" src="assets/img/br-riffa.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Al Hilal Medical Centre</span><span>Bahrain</span></div>
             <div class="cc-bottom">
               <span class="cc-n">14</span>
               <h3>Riffa</h3>
-              <span class="cc-cap">View of Riffa</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Bahrain" data-name="Manama" data-type="Al Hilal Medical Centre" data-cap="View of Manama" data-address="" data-phone="" data-note="">
+<span class="cc-cap">View of Riffa</span>            </div>
+          </li>          <li class="curve-card" data-c="Bahrain" data-name="Manama" data-type="Al Hilal Medical Centre" data-cap="View of Manama" data-address="Al Hilal Medical Centre, Road No 2704" data-phone="+973 1782 4444" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=26.228516,50.586050" data-href="branch-manama.html">
             <img class="cc-bg" src="assets/img/bahrain.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Al Hilal Medical Centre</span><span>Bahrain</span></div>
             <div class="cc-bottom">
               <span class="cc-n">15</span>
               <h3>Manama</h3>
-              <span class="cc-cap">View of Manama</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Bahrain" data-name="Salmabad" data-type="Al Hilal Medical Centre" data-cap="View of Bahrain" data-address="" data-phone="" data-note="">
+<span class="cc-cap">View of Manama</span>            </div>
+          </li>          <li class="curve-card" data-c="Bahrain" data-name="Salmabad" data-type="Al Hilal Medical Centre" data-cap="View of Bahrain" data-address="Al Hilal Medical Centre" data-phone="+973 3401 2345" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=26.185217,50.529086" data-href="branch-salmabad.html">
             <img class="cc-bg" src="assets/img/br-bahrain.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Al Hilal Medical Centre</span><span>Bahrain</span></div>
             <div class="cc-bottom">
               <span class="cc-n">16</span>
               <h3>Salmabad</h3>
-              <span class="cc-cap">View of Bahrain</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Bahrain" data-name="Askar" data-type="Al Hilal Medical Centre" data-cap="View of Bahrain" data-address="" data-phone="" data-note="">
-            <img class="cc-bg" src="assets/img/br-bahrain.jpg" alt="" loading="lazy" decoding="async" draggable="false">
+<span class="cc-cap">View of Bahrain</span>            </div>
+          </li>          <li class="curve-card" data-c="Bahrain" data-name="Askar" data-type="Al Hilal Medical Centre" data-cap="Photo: Badr Al Samaa Group" data-address="3JJG+MG Sitra," data-phone="+973 1617 1122" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=Badr+Al+Samaa+Group+Askar+Bahrain" data-href="branch-askar.html">
+            <img class="cc-bg" src="assets/img/r-br-askar.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Al Hilal Medical Centre</span><span>Bahrain</span></div>
             <div class="cc-bottom">
               <span class="cc-n">17</span>
               <h3>Askar</h3>
-              <span class="cc-cap">View of Bahrain</span>
-            </div>
-          </li>          <li class="curve-card" data-c="Kuwait" data-name="Farwaniya" data-type="Medical Centre" data-cap="View of Kuwait" data-address="" data-phone="" data-note="">
+<span class="cc-cap">Photo: Badr Al Samaa Group</span>            </div>
+          </li>          <li class="curve-card" data-c="Kuwait" data-name="Farwaniya" data-type="Medical Centre" data-cap="View of Kuwait" data-address="Badr Al Samaa Medical Centre, Farwaniya, Block 4, Street 39, Near Farwaniya Garden" data-phone="+965 2475 9250" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=Badr+Al+Samaa+Group+Farwaniya+Kuwait" data-href="branch-farwaniya.html">
             <img class="cc-bg" src="assets/img/kuwait.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Medical Centre</span><span>Kuwait</span></div>
             <div class="cc-bottom">
               <span class="cc-n">18</span>
               <h3>Farwaniya</h3>
-              <span class="cc-cap">View of Kuwait</span>
-            </div>
-          </li>          <li class="curve-card" data-c="UAE" data-name="Dubai" data-type="Medical Centre" data-cap="View of Dubai" data-address="" data-phone="" data-note="">
+<span class="cc-cap">View of Kuwait</span>            </div>
+          </li>          <li class="curve-card" data-c="UAE" data-name="Dubai" data-type="Medical Centre" data-cap="View of Dubai" data-address="Badr Al Samaa Medical Centre, P. O. Box: 125035, Near Al Fahidi Metro Station (Exit No. 1), Opposite Musalla Tower" data-phone="+971 4357 8681" data-note="" data-map="https://www.google.com/maps/search/?api=1&amp;query=25.214557,55.303291" data-href="branch-dubai.html">
             <img class="cc-bg" src="assets/img/uae.jpg" alt="" loading="lazy" decoding="async" draggable="false">
             <div class="cc-top"><span class="cc-pill">Medical Centre</span><span>UAE</span></div>
             <div class="cc-bottom">
               <span class="cc-n">19</span>
               <h3>Dubai</h3>
-              <span class="cc-cap">View of Dubai</span>
-            </div>
+<span class="cc-cap">View of Dubai</span>            </div>
           </li>        </ul>
       </div>      <div class="curve-ui">
         <button class="curve-btn" type="button" data-cprev aria-label="Previous branch"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -580,10 +728,10 @@
           <span class="cd-type" data-d="type">Hospital</span>
           <h3 class="cd-name" data-d="name">Ruwi</h3>
           <p class="cd-meta"><span data-d="country">Oman</span> · <span data-d="cap">View of Ruwi</span></p>
-          <p class="cd-line" data-d="info">Branch listed on the group's website. Full address to be confirmed.</p>
+          <p class="cd-line" data-d="info">Badr Al Samaa Hospital, P. O. Box 443, P. C. 112</p>
           <div class="cd-actions">
-            <a class="btn btn-primary btn-sm" href="#contact" data-d="book" data-magnetic>Book at this branch <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <a class="cd-phone" href="tel:+96822717171">24/7 helpline · +968 2271 7171</a>
+            <a class="btn btn-primary btn-sm" href="#contact" data-d="book" data-magnetic>View branch <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="cd-phone" href="tel:+96822717171" data-d="phone">24/7 helpline · +968 2271 7171</a>
+            <a class="cd-phone" href="#" data-d="map" target="_blank" rel="noopener">Open in Maps</a>
           </div>
         </div>
         <button class="curve-btn next" type="button" data-cnext aria-label="Next branch"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -592,13 +740,44 @@
     </div>
   </div>
 </section>
+<section class="faq" id="faq">
+  <div class="wrap faq-grid">
+    <div>
+      <p class="eyebrow">FAQ</p>
+      <h2 class="pg-h2" data-anim="lines">Questions patients ask</h2>
+      <p class="muted" data-anim="up">Can't find an answer? <a href="contact.html">Contact us</a>.</p>
+    </div>
+    <div class="faq-list">      <details class="faq-item" data-anim="up" open>
+        <summary><span>How do I book an appointment?</span><i aria-hidden="true"></i></summary>
+        <div class="faq-a"><p>Use the online form, call the 24/7 helpline on +968 2271 7171, or message the team on WhatsApp at +968 9393 2255. Choose your branch and a coordinator confirms the slot.</p></div>
+      </details>      <details class="faq-item" data-anim="up">
+        <summary><span>Is emergency care available around the clock?</span><i aria-hidden="true"></i></summary>
+        <div class="faq-a"><p>Yes. Emergency care is staffed 24x7 by in-house physicians, trauma surgeons and nurses, with ambulances, portable life support, blood bank and laboratory services. Ambulance: +968 2479 9760.</p></div>
+      </details>      <details class="faq-item" data-anim="up">
+        <summary><span>Which insurance do you accept?</span><i aria-hidden="true"></i></summary>
+        <div class="faq-a"><p>The group works with the region&#39;s major insurers on a cashless basis, including NEXtCARE, MetLife, GIG, Cigna, Bupa, Allianz Worldwide Care, Oman Insurance Company and National Health Insurance.</p></div>
+      </details>      <details class="faq-item" data-anim="up">
+        <summary><span>How much is a health check-up?</span><i aria-hidden="true"></i></summary>
+        <div class="faq-a"><p>Packages in Oman start at OMR 35 for the Executive Body Check Up and go up to OMR 115 for the Complete Heart &amp; Body Check Up. Prices for Bahrain, Kuwait, UAE and Qatar are on the packages page.</p></div>
+      </details>      <details class="faq-item" data-anim="up">
+        <summary><span>Can I see a doctor by video?</span><i aria-hidden="true"></i></summary>
+        <div class="faq-a"><p>Yes. Video consultations can be booked online with doctors at each branch.</p></div>
+      </details>      <details class="faq-item" data-anim="up">
+        <summary><span>Do you help international patients?</span><i aria-hidden="true"></i></summary>
+        <div class="faq-a"><p>The medical tourism team arranges visa processing for patients and relatives, flights and airport transfers, and accommodation with dietary needs.</p></div>
+      </details>      <details class="faq-item" data-anim="up">
+        <summary><span>Which countries do you operate in?</span><i aria-hidden="true"></i></summary>
+        <div class="faq-a"><p>Oman, Bahrain, Kuwait and the UAE, with hospitals, medical centres and polyclinics in each.</p></div>
+      </details>    </div>
+  </div>
+</section>
 <section class="contact" id="contact">
   <div class="wrap contact-grid">
     <div>
       <p class="eyebrow">Contact</p>
       <h2 class="contact-title" data-anim="lines">Book an appointment</h2>
       <p class="contact-intro" data-anim="up">Choose a branch and tell us what you need. A coordinator confirms your slot by phone or WhatsApp.</p>
-      <ul class="contact-list">        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><small>Address</small>P.O. Box 443, P.C. 112, Ruwi, Sultanate of Oman</span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>24/7 helpline</small><a href="tel:+96822717171">+968 2271 7171</a></span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>WhatsApp</small><a href="tel:+96893932255">+968 9393 2255</a><a class="wa" href="https://wa.me/96893932255">WhatsApp</a></span></li>      </ul>
+      <ul class="contact-list">        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><small>Address</small>P.O. Box 443, P.C. 112, Ruwi, Sultanate of Oman</span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>24/7 helpline</small><a href="tel:+96822717171">+968 2271 7171</a></span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>WhatsApp</small><a href="tel:+96893932255">+968 9393 2255</a><a class="wa" href="https://wa.me/96893932255">WhatsApp</a></span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>Ambulance 24/7</small><a href="tel:+96824799760">+968 2479 9760</a></span></li>      </ul>
 <p class="contact-note">The booking form is a concept preview. Connect it to the group&#39;s booking system before launch.</p>    </div>
 
     <form class="form" data-form data-endpoint="" novalidate data-anim="up">
@@ -634,23 +813,45 @@
     <p class="foot-big" aria-hidden="true" data-drift="14">Badr Al Samaa</p>
     <div class="foot-grid">
       <div>
-        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">B</span><span class="brand-text">Badr Al Samaa</span></a>
+        <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">B</span><span class="brand-text">Badr Al Samaa</span></a>
         <p style="margin-top:1rem;max-width:38ch">Hospitals, medical centres and polyclinics across Oman, Bahrain, Kuwait and the UAE.</p>
       </div>
-      <nav class="foot-nav" aria-label="Footer"><a href="#about">About</a><a href="#services">Services</a><a href="#highlights">Packages</a><a href="#locations">Locations</a><a href="#contact">Contact</a>      </nav>
-      <div class="foot-contact">
-<p>P.O. Box 443, P.C. 112, Ruwi, Sultanate of Oman</p><p><a href="tel:+96822717171">+968 2271 7171</a></p><p><a href="tel:+96893932255">+968 9393 2255</a></p>      </div>
+      <nav class="foot-nav" aria-label="Footer">
+        <p class="foot-h">Explore</p>
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="centres.html">Centres</a><a href="doctors.html">Doctors</a><a href="packages.html">Packages</a><a href="locations.html">Locations</a><a href="news.html">News</a><a href="contact.html">Contact</a>      </nav>      <nav class="foot-nav" aria-label="Centres">
+        <p class="foot-h">Centres</p><a href="svc-cardiology.html">Cardiology</a><a href="svc-orthopaedics.html">Orthopaedics</a><a href="svc-obstetrics-gynaecology.html">Obstetrics &amp; Gynaecology</a><a href="svc-urology-andrology.html">Urology &amp; Andrology</a><a href="svc-gastroenterology.html">Gastroenterology</a><a href="svc-radiology.html">Radiology</a><a href="svc-ent.html">ENT</a><a href="svc-dentistry.html">Dentistry</a>      </nav>      <div class="foot-contact">
+<p>P.O. Box 443, P.C. 112, Ruwi, Sultanate of Oman</p><p><a href="tel:+96822717171">+968 2271 7171</a></p><p><a href="tel:+96893932255">+968 9393 2255</a></p><p><a href="tel:+96824799760">+968 2479 9760</a></p>      </div>
     </div>
     <div class="foot-bottom">
       <p>© 2026 Badr Al Samaa Group. Concept redesign, not the company's official website. Facts to be verified before use.</p>
       <a href="#top">Back to top</a>
     </div>    <details class="credits">
       <summary>Image credits</summary>
-      <ul>        <li>“Manama Manama Skyline 01” by Zairon, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=96545211" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Barka, Oman (6) (41446310861)” by Hans Birger Nilsen, BY-SA 2.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=70285689" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Muharraq Suq” by Gasschh, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=54303595" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Al Maabilah, Seeb, Oman - panoramio - Luca Margheriti (1)” by Luca Margheriti, BY-SA 3.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=53052709" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Muharraq Bayt Siyadi 1” by Zairon, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=97381212" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Muscat, Oman مسقط، عمان 05” by Mostafameraji, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=57677047" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Ruwi Muscat” by Wusel007, <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license noopener">BY-SA 3.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=38151815" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Riffa Riffa Fort Exterior 05” by Zairon, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=97525744" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Ruwi quarter in Mascat, Oman” by Wusel007, <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license noopener">BY-SA 3.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=9476407" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“File:Neues Terminal SLL.jpg” by Baden65, BY-SA 4.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=56182020" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Sohar Gate 2” by https://www.flickr.com/photos/130649623@N05/, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">BY-SA 2.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=44367763" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Sur, Oman (7)” by Andries Oudshoorn, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">BY-SA 2.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=6833735" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“A clinician conducting an examination of a young female patient&amp;rsquo;s left ear, using an otoscope. Original image sourced from US Government department: Public Health Image Library, Centers for Disease Control and Prevention. Under US law this image is copyright free, please credit the government department whenever you can&amp;rdquo;.” by Centers for Disease Control and Prevention, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://www.rawpixel.com/image/2288500/free-photo-image-ear-doctor-checkup" rel="noopener">source</a></li>        <li>“Endoscopy” by Yuya Tamai, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/76758469@N00/180619506" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“AliveCor iOS screenshot” by juhansonin, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/38869431@N00/8123108787" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Knee X-Ray: Keep hiking, but take it easy” by fabola, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">BY-SA 2.0</a> · <a href="https://www.flickr.com/photos/44124339301@N01/18204762963" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Dental X-ray” by icethim, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/15977536@N06/5443947055" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“IMG_6210” by Live to Create Photography, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">BY-SA 2.0</a> · <a href="https://www.flickr.com/photos/91752758@N07/12040477644" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Chair Dentist” by Daniel Frank, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/chair-dentist-3J10QN5PTS" rel="noopener">source</a></li>        <li>“Duqm Fishing Port” by AbdullahAlMaani, BY-SA 4.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=117467673" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Kuwait City Skyline 1” by Zairon, <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener">BY 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=148181994" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“NHG Continues to Fight COVID-19” by U.S. Navy Medicine, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://www.rawpixel.com/image/3394030/free-photo-image-doctor-laboratory-lab-testing-kit" rel="noopener">source</a></li>        <li>“MRI Scanner” by Joyce Kaes, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/103189636@N05/24848988506" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Nizwa Fort and Minaret of Friday Mosque” by Martin Falbisoner, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=39086370" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Caregiver Nurse” by Direct Media, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/caregiver-nurse-PMZZ7WLOAJ" rel="noopener">source</a></li>        <li>“Sultan Qaboos Grand Mosque (1)” by Mostafameraji, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=57591888" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Asthma Inhaler (Object)” by Jenn Durfey, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/52498245@N03/5347629183" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Blood pressure measuring. Doctor and patient. Health care.” by agilemktg1, <a href="https://creativecommons.org/publicdomain/mark/1.0/" rel="license noopener">PDM 1.0</a> · <a href="https://www.flickr.com/photos/68716695@N06/29095583293" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Measure Me Blood” by cogdogblog, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/37996646802@N01/6805318882" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Blood pressure measurement, Poland” by Kris D from Metropolia Silesia, Upper Silesia ( Oberschlesien ), <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">BY-SA 2.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=18417588" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Dubai Skyline mit Burj Khalifa (18241030269)” by Tim Reckmann from Hamm, Deutschland, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=82789105" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Caregiver Nurse” by Direct Media, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/caregiver-nurse-TBEMNLXLVQ" rel="noopener">source</a></li>      </ul>
+      <ul>        <li>“Manama Manama Skyline 01” by Zairon, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=96545211" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Barka, Oman (6) (41446310861)” by Hans Birger Nilsen, BY-SA 2.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=70285689" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Muharraq Suq” by Gasschh, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=54303595" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Al Maabilah, Seeb, Oman - panoramio - Luca Margheriti (1)” by Luca Margheriti, BY-SA 3.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=53052709" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Muharraq Bayt Siyadi 1” by Zairon, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=97381212" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Muscat, Oman مسقط، عمان 05” by Mostafameraji, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=57677047" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Ruwi Muscat” by Wusel007, <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license noopener">BY-SA 3.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=38151815" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Riffa Riffa Fort Exterior 05” by Zairon, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=97525744" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Ruwi quarter in Mascat, Oman” by Wusel007, <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license noopener">BY-SA 3.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=9476407" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“File:Neues Terminal SLL.jpg” by Baden65, BY-SA 4.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=56182020" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Sohar Gate 2” by https://www.flickr.com/photos/130649623@N05/, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">BY-SA 2.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=44367763" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Sur, Oman (7)” by Andries Oudshoorn, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">BY-SA 2.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=6833735" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“A clinician conducting an examination of a young female patient&amp;rsquo;s left ear, using an otoscope. Original image sourced from US Government department: Public Health Image Library, Centers for Disease Control and Prevention. Under US law this image is copyright free, please credit the government department whenever you can&amp;rdquo;.” by Centers for Disease Control and Prevention, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://www.rawpixel.com/image/2288500/free-photo-image-ear-doctor-checkup" rel="noopener">source</a></li>        <li>“Endoscopy” by Yuya Tamai, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/76758469@N00/180619506" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“AliveCor iOS screenshot” by juhansonin, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/38869431@N00/8123108787" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Knee X-Ray: Keep hiking, but take it easy” by fabola, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">BY-SA 2.0</a> · <a href="https://www.flickr.com/photos/44124339301@N01/18204762963" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Dental X-ray” by icethim, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/15977536@N06/5443947055" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“IMG_6210” by Live to Create Photography, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">BY-SA 2.0</a> · <a href="https://www.flickr.com/photos/91752758@N07/12040477644" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Chair Dentist” by Daniel Frank, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/chair-dentist-3J10QN5PTS" rel="noopener">source</a></li>        <li>“Duqm Fishing Port” by AbdullahAlMaani, BY-SA 4.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=117467673" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Kuwait City Skyline 1” by Zairon, <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener">BY 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=148181994" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“NHG Continues to Fight COVID-19” by U.S. Navy Medicine, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://www.rawpixel.com/image/3394030/free-photo-image-doctor-laboratory-lab-testing-kit" rel="noopener">source</a></li>        <li>“MRI Scanner” by Joyce Kaes, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/103189636@N05/24848988506" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Nizwa Fort and Minaret of Friday Mosque” by Martin Falbisoner, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=39086370" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Caregiver Nurse” by Direct Media, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/caregiver-nurse-PMZZ7WLOAJ" rel="noopener">source</a></li>        <li>“Sultan Qaboos Grand Mosque (1)” by Mostafameraji, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=57591888" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Asthma Inhaler (Object)” by Jenn Durfey, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/52498245@N03/5347629183" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Blood pressure measuring. Doctor and patient. Health care.” by agilemktg1, <a href="https://creativecommons.org/publicdomain/mark/1.0/" rel="license noopener">PDM 1.0</a> · <a href="https://www.flickr.com/photos/68716695@N06/29095583293" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Measure Me Blood” by cogdogblog, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/37996646802@N01/6805318882" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Blood pressure measurement, Poland” by Kris D from Metropolia Silesia, Upper Silesia ( Oberschlesien ), <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">BY-SA 2.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=18417588" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Al Hilal Medical Centre - Askar” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://askar.badralsamaahospitals.com" rel="noopener">source</a></li>        <li>“Badr Al Samaa Medical Centre - Duqm” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://duqm.badralsamaahospitals.com" rel="noopener">source</a></li>        <li>“Badr Al Samaa Hospital - Nizwa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://nizwa.badralsamaahospitals.com" rel="noopener">source</a></li>        <li>“Badr Al Samaa Polyclinic - Suwaiq” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://suwaiq.badralsamaahospitals.com" rel="noopener">source</a></li>        <li>“Anaesthesiology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/16/anaesthesiology" rel="noopener">source</a></li>        <li>“Audiology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/72/audiology" rel="noopener">source</a></li>        <li>“Cardiac monitoring” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com" rel="noopener">source</a></li>        <li>“Dentistry at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/2/dentistry" rel="noopener">source</a></li>        <li>“Dermatology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/3/dermatology" rel="noopener">source</a></li>        <li>“Diabetics &amp; Family Medicine at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/68/diabetics-family-medicine" rel="noopener">source</a></li>        <li>“Dietetics at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/64/dietetics" rel="noopener">source</a></li>        <li>“Emergency team moving a patient” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com" rel="noopener">source</a></li>        <li>“Endocrinology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/4/endocrinology" rel="noopener">source</a></li>        <li>“ENT at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/1/ent" rel="noopener">source</a></li>        <li>“Gastroentrology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/5/gastroentrology" rel="noopener">source</a></li>        <li>“General &amp; Laparoscopic Surgery at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/65/general-laparoscopic-surgery" rel="noopener">source</a></li>        <li>“General Medicine at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/6/general-medicine" rel="noopener">source</a></li>        <li>“General Practice at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/8/general-practice" rel="noopener">source</a></li>        <li>“General Surgery at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/29/general-surgery" rel="noopener">source</a></li>        <li>“In vitro fertilization (IVF) at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/73/in-vitro-fertilization-ivf" rel="noopener">source</a></li>        <li>“Internal Medicine at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/10/internal-medicine" rel="noopener">source</a></li>        <li>“Nephrology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/11/nephrology" rel="noopener">source</a></li>        <li>“Neuro Surgery at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/74/neuro-surgery" rel="noopener">source</a></li>        <li>“Neurology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/13/neurology" rel="noopener">source</a></li>        <li>“Obstetrics &amp; Gynaecology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/14/obstetrics-gynaecology" rel="noopener">source</a></li>        <li>“Oncology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/76/oncology" rel="noopener">source</a></li>        <li>“Ophthalmology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/15/ophthalmology" rel="noopener">source</a></li>        <li>“Oral, Maxillofacial &amp; Dental Surgery at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/69/oral-maxillofacial-dental-surgery" rel="noopener">source</a></li>        <li>“Orthodontics at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/20/orthodontics" rel="noopener">source</a></li>        <li>“Orthopaedic consultation” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com" rel="noopener">source</a></li>        <li>“Paediatrics &amp; Neonatology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/22/paediatrics-neonatology" rel="noopener">source</a></li>        <li>“Pathology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/23/pathology" rel="noopener">source</a></li>        <li>“Physiotherapy at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/63/physiotherapy" rel="noopener">source</a></li>        <li>“Plastic, Reconstructive &amp; Cosmetic Surgery at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/66/plastic-reconstructive-cosmetic-surgery" rel="noopener">source</a></li>        <li>“Psychiatry at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/24/psychiatry" rel="noopener">source</a></li>        <li>“Pulmonology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/25/pulmonology" rel="noopener">source</a></li>        <li>“Radiology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/26/radiology" rel="noopener">source</a></li>        <li>“Spine Surgery at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/75/spine-surgery" rel="noopener">source</a></li>        <li>“Urology &amp; Andrology at Badr Al Samaa” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/speciality/27/urology-andrology" rel="noopener">source</a></li>        <li>“Badr Al Samaa and Ministry of Health Join Hands for ‘Save a Heart’ Campaign” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/117/badr-al-samaa-and-ministry-of-health-join-hands-for-save-a-heart-campaign" rel="noopener">source</a></li>        <li>“Badr Al Samaa becomes Official Medical Partners for Hockey 5s World Cup &amp; Olympic Qualifiers” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/94/badr-al-samaa-becomes-official-medical-partners-for-hockey-5s-world-cup-olympic-qualifiers" rel="noopener">source</a></li>        <li>“Badr Al Samaa Group of Hospital’s Doctors visit to Badr Al Samaa Royal Hospital” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/100/badr-al-samaa-group-of-hospitals-doctors-visit-to-badr-al-samaa-royal-hospital" rel="noopener">source</a></li>        <li>“Badr Al Samaa Hospital, Ruwi Inaugurates Centre of Excellence in Orthopaedics” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/113/badr-al-samaa-hospital-ruwi-inaugurates-centre-of-excellence-in-orthopaedics" rel="noopener">source</a></li>        <li>“Badr Al Samaa Hospital, Sohar inaugurates Advanced Cardiac Catheterization Laboratory” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/97/badr-al-samaa-hospital-sohar-inaugurates-advanced-cardiac-catheterization-laboratory" rel="noopener">source</a></li>        <li>“Badr Al Samaa Hospital, Sohar launches Dialysis Unit” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/93/badr-al-samaa-hospital-sohar-launches-dialysis-unit" rel="noopener">source</a></li>        <li>“Badr Al Samaa named Official Medical Partner of Al Mouj Muscat Marathon” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/95/badr-al-samaa-named-official-medical-partner-of-al-mouj-muscat-marathon" rel="noopener">source</a></li>        <li>“Badr Al Samaa Royal Hospital (BRH) all set to be inaugurated tomorrow” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/98/badr-al-samaa-royal-hospital-brh-all-set-to-be-inaugurated-tomorrow" rel="noopener">source</a></li>        <li>“Badr Al Samaa Royal Hospital is all set to introduce Oman’s First Private Sector AI-Powered Cath Lab” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/111/badr-al-samaa-royal-hospital-is-all-set-to-introduce-omans-first-private-sector-ai-powered-cath-lab" rel="noopener">source</a></li>        <li>“Cutting-Edge Neurological Diagnostics Unveiled at Badr Al Samaa Hospital, Salalah” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/96/cutting-edge-neurological-diagnostics-unveiled-at-badr-al-samaa-hospital-salalah" rel="noopener">source</a></li>        <li>“DGPHE, MoH &amp; Badr Al Samaa conducts largest diabetes screening drive in Oman, sets world record.” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/110/dgphe-moh-badr-al-samaa-conducts-largest-diabetes-screening-drive-in-oman-sets-world-record" rel="noopener">source</a></li>        <li>“Free National-Level Diabetes Screening &amp; Risk Assessment Campaign” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/108/free-national-level-diabetes-screening-risk-assessment-campaign" rel="noopener">source</a></li>        <li>“Our Six Hospitals received official quality accreditation certificates by ACHSI” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/104/our-six-hospitals-received-official-quality-accreditation-certificates-by-achsi" rel="noopener">source</a></li>        <li>“Six Hospitals of Badr Al Samaa Group are now ACHSI Accredited” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/news-and-event/102/six-hospitals-of-badr-al-samaa-group-are-now-achsi-accredited" rel="noopener">source</a></li>        <li>“MEN&#39;S HEALTH CHECK UP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/10" rel="noopener">source</a></li>        <li>“FEMALE HORMONE PACKAGE” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/11" rel="noopener">source</a></li>        <li>“WELLNESS CHECK UP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/12" rel="noopener">source</a></li>        <li>“Complete Heart and Body” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/17" rel="noopener">source</a></li>        <li>“High Blood Pressure and Heart” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/18" rel="noopener">source</a></li>        <li>“Preliminary cardiac” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/19" rel="noopener">source</a></li>        <li>“Executive Body Check up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/20" rel="noopener">source</a></li>        <li>“Master Health Check up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/21" rel="noopener">source</a></li>        <li>“Diabetic Comprehensive Check up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/22" rel="noopener">source</a></li>        <li>“Comprehensive Cardiac and Body checkup” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/23" rel="noopener">source</a></li>        <li>“Executive Check-Up Program” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/31" rel="noopener">source</a></li>        <li>“Executive Check-Up Plus Program” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/32" rel="noopener">source</a></li>        <li>“Woman in the open air, arms raised” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com" rel="noopener">source</a></li>        <li>“Executive Check Up Program” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/34" rel="noopener">source</a></li>        <li>“Executive Check Up Plus Program” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/35" rel="noopener">source</a></li>        <li>“Well Woman Package” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/36" rel="noopener">source</a></li>        <li>“Protein Urea Check Up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/37" rel="noopener">source</a></li>        <li>“Executive Body Check Up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/38" rel="noopener">source</a></li>        <li>“Master Health Check Up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/39" rel="noopener">source</a></li>        <li>“Master Check up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/4" rel="noopener">source</a></li>        <li>“Preliminary Cardiac &amp; Body Check Up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/40" rel="noopener">source</a></li>        <li>“Executive Cardiac Check Up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/41" rel="noopener">source</a></li>        <li>“Comprehensive Diabetic Check Up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/42" rel="noopener">source</a></li>        <li>“High Blood Pressure &amp; Heart Check Up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/43" rel="noopener">source</a></li>        <li>“Comprehensive Renal Check Up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/44" rel="noopener">source</a></li>        <li>“Complete Heart &amp; Body Check Up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/45" rel="noopener">source</a></li>        <li>“Asthma &amp; Allergy Check Up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/46" rel="noopener">source</a></li>        <li>“WELL WOMAN PACKAGE” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/47" rel="noopener">source</a></li>        <li>“EXECUTIVE BODY CHECK UP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/48" rel="noopener">source</a></li>        <li>“EXECUTIVE CARDIAC CHECKUP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/49" rel="noopener">source</a></li>        <li>“COMPLETE HEART &amp; BODY CHECK UP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/50" rel="noopener">source</a></li>        <li>“COMPREHENSIVE RENAL CHECK UP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/51" rel="noopener">source</a></li>        <li>“MASTER HEALTH CHECK UP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/52" rel="noopener">source</a></li>        <li>“THYROID PANEL CHECK UP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/53" rel="noopener">source</a></li>        <li>“HIGH BLOOD PRESSURE &amp; HEART CHECKUP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/54" rel="noopener">source</a></li>        <li>“COMPREHENSIVE DIABETIC CHECK UP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/55" rel="noopener">source</a></li>        <li>“ASTHMA &amp; ALLERGY CHECK UP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/56" rel="noopener">source</a></li>        <li>“Hands holding a red heart” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com" rel="noopener">source</a></li>        <li>“Well Women check up” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/7" rel="noopener">source</a></li>        <li>“COMPREHENSIVE CHECK UP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/8" rel="noopener">source</a></li>        <li>“EXECUTIVE CHECK UP” by Badr Al Samaa Group, © Badr Al Samaa Group, used for this concept preview · <a href="https://badralsamaahospitals.com/package-details/9" rel="noopener">source</a></li>        <li>“Dubai Skyline mit Burj Khalifa (18241030269)” by Tim Reckmann from Hamm, Deutschland, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=82789105" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Caregiver Nurse” by Direct Media, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/caregiver-nurse-TBEMNLXLVQ" rel="noopener">source</a></li>      </ul>
     </details>  </div>
 </footer>
-<a class="to-top" href="#top" data-to-top aria-label="Back to top"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="to-top" href="#top" data-to-top aria-label="Back to top">
+  <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22"/><circle class="ring-fill" cx="24" cy="24" r="22" pathLength="100" data-ring/></svg>
+  <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+</a>
 
+<div class="dock" data-dock>
+  <button class="dock-toggle" type="button" aria-expanded="false" aria-label="Quick contact" data-dock-toggle>
+    <span class="dock-pulse" aria-hidden="true"></span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span class="dock-label">Book or call</span>
+  </button>
+  <div class="dock-menu"><a href="tel:+96822717171"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><b>24/7 helpline</b>+968 2271 7171</span></a><a href="https://wa.me/96893932255" rel="noopener"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><b>WhatsApp</b>+968 9393 2255</span></a>    <a href="contact.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span><b>Book appointment</b>Online form</span></a>
+  </div>
+</div>
+
+<nav class="action-bar" aria-label="Quick actions"><a href="tel:+96822717171"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>Call</span></a><a href="https://wa.me/96893932255" rel="noopener"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>WhatsApp</span></a><a href="locations.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Locations</span></a>  <a class="ab-primary" href="contact.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>Book</span></a>
+</nav><aside class="offer" data-offer="badr-al-samaa-pk35" aria-label="Preventive health" hidden>
+  <button class="offer-x" type="button" aria-label="Close" data-offer-close>×</button><img class="offer-img" src="assets/img/r-pkg-33.jpg" alt="" loading="lazy">  <div class="offer-body">
+    <p class="offer-k">Preventive health</p>
+    <p class="offer-t">Health check-ups from OMR 35</p>
+    <p class="offer-p">Ten packages in Oman, with tests, scans and a specialist consultation.</p>
+    <a class="btn btn-primary btn-sm" href="packages.html" data-offer-close>Compare packages <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</aside>
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>

@@ -1,0 +1,19 @@
+{#- Sub-page hero: breadcrumb, split title, intro, darkened background image with slow zoom -#}
+<section class="page-hero{% if hero_img %} has-img{% endif %}" id="top">
+  {%- if hero_img %}
+  <div class="ph-media" aria-hidden="true"><img src="{{ m.src(hero_img) }}" alt="" data-speed="-1.2"></div>
+  {%- endif %}
+  <div class="ph-grain" aria-hidden="true"></div>
+  <div class="wrap ph-inner">
+    <nav class="crumbs" aria-label="Breadcrumb" data-anim="up" data-intro>
+      <a href="index.html">Home</a>
+      {%- if page.listing %}<span>/</span><a href="{{ page.listing }}">{{ page.label }}</a>{% endif %}
+      <span>/</span><span aria-current="page">{{ crumb or page.title }}</span>
+    </nav>
+    {%- if kicker %}<p class="eyebrow ph-k" data-anim="up" data-intro>{{ kicker }}</p>{% endif %}
+    <h1 class="ph-title" data-anim="lines" data-intro>{{ page.title }}</h1>
+    {%- if intro %}<p class="ph-intro" data-anim="up" data-intro data-delay=".3">{{ intro }}</p>{% endif %}
+    {%- if hero_img and s.images[hero_img].cap %}<span class="ph-cap">{{ s.images[hero_img].cap }}</span>{% endif %}
+  </div>
+  <div class="ph-scroll" aria-hidden="true"><span></span></div>
+</section>

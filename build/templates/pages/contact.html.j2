@@ -1,0 +1,7 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set hero_img = s.contact.image or ('hero' if 'hero' in s.images else none) %}
+{%- set kicker = 'Contact' %}{% set intro = s.contact.intro %}{% set crumb = 'Contact' %}
+{% include "partials/pagehero.html.j2" %}
+{% endblock %}

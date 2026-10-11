@@ -524,6 +524,163 @@
 
   /* =================== themes =================== */
 
+
+  /* ---------- promo hero slider: WebGL displacement between slides, CSS crossfade fallback ---------- */
+  function promoSlider(root, T1) {
+    const bgs = Array.from(root.querySelectorAll(".promo-bg"));
+    const copies = Array.from(root.querySelectorAll(".promo-copy"));
+    const tabs = Array.from(root.querySelectorAll(".promo-tab"));
+    const pauseBtn = root.querySelector("[data-ppause]");
+    const n = bgs.length;
+    if (n < 2) return;
+    const DUR = 6500;
+    let cur = 0, t0 = performance.now(), paused = false, hover = false, visible = true, busy = false;
+    const gsap = T1.motion ? T1.gsap : null;
+
+    /* --- WebGL --- */
+    const canvas = root.querySelector(".promo-gl");
+    let gl = null, prog, texs = [], uni = {}, glFrom = 0, glTo = 0, glP = 0, glAnim = null;
+    const imgs = bgs.map((b) => b.querySelector("img"));
+    if (canvas && !T1.reduce) {
+      try { gl = canvas.getContext("webgl", { premultipliedAlpha: false, antialias: false }); } catch (e) { gl = null; }
+    }
+    const VS = "attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;v.y=1.-v.y;gl_Position=vec4(p,0.,1.);}";
+    const FS = `precision mediump float;varying vec2 v;uniform sampler2D a,b;uniform float t,time;uniform vec2 res,ra,rb;
+      vec2 cover(vec2 uv,vec2 img){float s=max(res.x/img.x,res.y/img.y);vec2 sz=img*s;return (uv*res-(res-sz)*.5)/sz;}
+      float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+      float nz(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+      void main(){vec2 uv=v;float n=nz(uv*3.+time*.05)*.6+nz(uv*9.)*.4;
+        float edge=smoothstep(t-.25,t+.25,n*.6+uv.x*.4+(1.-uv.y)*.1);
+        float k=t*(1.-t)*4.;
+        vec2 da=uv+vec2(n-.5,n*.3)*k*.18*(1.-edge);vec2 db=uv-vec2(n-.5,n*.3)*k*.18*edge;
+        float za=1.+t*.08,zb=1.08-t*.08;
+        vec4 ca=texture2D(a,cover((da-.5)/za+.5,ra));vec4 cb=texture2D(b,cover((db-.5)/zb+.5,rb));
+        float m=1.-edge;vec4 c=mix(ca,cb,m);
+        c.rgb+=vec3(.9,.95,1.)*smoothstep(.08,0.,abs(edge-.5))*k*.12;
+        gl_FragColor=c;}`;
+    const sh = (type, src) => { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+    const sizeGL = () => {
+      if (!gl) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = Math.round(canvas.clientWidth * dpr); canvas.height = Math.round(canvas.clientHeight * dpr);
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    };
+    const tex = (img) => {
+      const tx = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, tx);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+      return { tx, w: img.naturalWidth, h: img.naturalHeight };
+    };
+    const draw = (time) => {
+      if (!gl || !texs[glFrom] || !texs[glTo]) return;
+      gl.useProgram(prog);
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texs[glFrom].tx);
+      gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, texs[glTo].tx);
+      gl.uniform1i(uni.a, 0); gl.uniform1i(uni.b, 1);
+      gl.uniform1f(uni.t, glP); gl.uniform1f(uni.time, time / 1000);
+      gl.uniform2f(uni.res, canvas.width, canvas.height);
+      gl.uniform2f(uni.ra, texs[glFrom].w, texs[glFrom].h); gl.uniform2f(uni.rb, texs[glTo].w, texs[glTo].h);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    };
+    if (gl) {
+      try {
+        prog = gl.createProgram();
+        gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(prog);
+        const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+        const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+        ["a", "b", "t", "time", "res", "ra", "rb"].forEach((k) => (uni[k] = gl.getUniformLocation(prog, k)));
+        const load = (i) => new Promise((res) => {
+          const im = imgs[i];
+          if (im.loading === "lazy") im.loading = "eager";
+          const done = () => { try { texs[i] = tex(im); } catch (e) { /* cross-origin or decode failure: stay on CSS */ } res(); };
+          im.complete && im.naturalWidth ? done() : im.addEventListener("load", done, { once: true });
+        });
+        load(0).then(() => {
+          if (!texs[0]) { gl = null; return; }
+          sizeGL(); draw(0); root.classList.add("has-gl");
+          imgs.forEach((_, i) => i && load(i));
+        });
+        window.addEventListener("resize", () => { sizeGL(); draw(performance.now()); });
+      } catch (e) { gl = null; }
+    }
+
+    /* --- copy animation --- */
+    const showCopy = (i, dir) => {
+      copies.forEach((c, k) => {
+        const on = k === i;
+        c.setAttribute("aria-hidden", String(!on));
+        c.querySelectorAll("a").forEach((a) => (on ? a.removeAttribute("tabindex") : a.setAttribute("tabindex", "-1")));
+      });
+      const prev = copies[cur], next = copies[i];
+      if (gsap) {
+        const outEls = prev.querySelectorAll(".promo-k, .promo-t, .promo-p, .cta-row, .promo-cap");
+        const inEls = next.querySelectorAll(".promo-k, .promo-t, .promo-p, .cta-row, .promo-cap");
+        gsap.to(outEls, { y: -40 * dir, opacity: 0, duration: 0.5, ease: "power3.in", stagger: 0.04, onComplete: () => prev.classList.remove("is-on") });
+        next.classList.add("is-on");
+        gsap.fromTo(inEls, { y: 60 * dir, opacity: 0, clipPath: "inset(0 0 100% 0)" }, { y: 0, opacity: 1, clipPath: "inset(0 0 -20% 0)", duration: 1.1, ease: "expo.out", stagger: 0.08, delay: 0.45 });
+      } else {
+        prev.classList.remove("is-on"); next.classList.add("is-on");
+      }
+    };
+    const go = (i, dir = 1) => {
+      i = (i + n) % n;
+      if (i === cur || busy) return;
+      busy = true;
+      bgs[cur].classList.remove("is-on"); bgs[i].classList.add("is-on");
+      tabs.forEach((t, k) => { t.classList.toggle("is-on", k === i); t.setAttribute("aria-selected", String(k === i)); t.classList.toggle("is-done", false); t.querySelector("b").style.transform = "scaleX(0)"; });
+      showCopy(i, dir);
+      if (gl && texs[i] && texs[cur]) {
+        glFrom = cur; glTo = i; glP = 0;
+        const start = performance.now(), D = 1600;
+        cancelAnimationFrame(glAnim);
+        const step = (now) => {
+          const x = Math.min(1, (now - start) / D);
+          glP = x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+          draw(now);
+          if (x < 1) glAnim = requestAnimationFrame(step); else { glFrom = i; glP = 0; draw(now); }
+        };
+        glAnim = requestAnimationFrame(step);
+      }
+      cur = i; t0 = performance.now();
+      setTimeout(() => (busy = false), 900);
+    };
+    tabs.forEach((t, k) => t.addEventListener("click", () => go(k, k > cur ? 1 : -1)));
+    root.querySelector("[data-pnext]").addEventListener("click", () => go(cur + 1, 1));
+    root.querySelector("[data-pprev]").addEventListener("click", () => go(cur - 1, -1));
+    if (pauseBtn) pauseBtn.addEventListener("click", () => {
+      paused = !paused; pauseBtn.setAttribute("aria-pressed", String(paused));
+      pauseBtn.setAttribute("aria-label", paused ? "Play slideshow" : "Pause slideshow");
+    });
+    root.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") hover = true; });
+    root.addEventListener("pointerleave", () => (hover = false));
+    root.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") go(cur + 1, 1); if (e.key === "ArrowLeft") go(cur - 1, -1); });
+    let sx = null;
+    root.addEventListener("touchstart", (e) => (sx = e.touches[0].clientX), { passive: true });
+    root.addEventListener("touchend", (e) => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); sx = null; });
+    new IntersectionObserver((es) => es.forEach((e) => (visible = e.isIntersecting))).observe(root);
+    if (T1.reduce) { paused = true; if (pauseBtn) pauseBtn.setAttribute("aria-pressed", "true"); }
+
+    let last = performance.now();
+    const loop = (now) => {
+      const dt = now - last; last = now;
+      if (paused || hover || !visible || document.hidden) t0 += dt;
+      const x = Math.min(1, (now - t0) / DUR);
+      const bar = tabs[cur] && tabs[cur].querySelector("b");
+      if (bar) bar.style.transform = `scaleX(${x})`;
+      if (x >= 1) go(cur + 1, 1);
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+    T1.onIntro(() => {
+      const first = copies[0].querySelectorAll(".promo-k, .promo-t, .promo-p, .cta-row, .promo-cap");
+      if (gsap) gsap.from(first, { y: 70, opacity: 0, duration: 1.3, ease: "expo.out", stagger: 0.1 });
+      if (gsap) gsap.from(root.querySelector(".promo-ui"), { y: 40, opacity: 0, duration: 1.2, ease: "expo.out", delay: 0.5 });
+    });
+  }
+
   /* ---------- curved branch slider: cards on an arc, drag / wheel / keys / filters ---------- */
   function curveSlider(root, T1) {
     const stage = root.querySelector(".curve-stage");
@@ -563,6 +720,9 @@
       const v = c.dataset;
       D("type").textContent = v.type; D("name").textContent = v.name; D("country").textContent = v.c; D("cap").textContent = v.cap;
       D("info").textContent = v.note || v.address || `${v.type} in ${v.c}, listed on the group's website. Full address and opening hours to be confirmed.`;
+      const map = D("map"); if (map) map.href = v.map || "#";
+      const book = D("book"); if (book && v.href) book.href = v.href;
+      const ph = D("phone"); if (ph && v.phone) { ph.href = "tel:" + v.phone.replace(/[^+\d]/g, ""); ph.textContent = "Call the branch · " + v.phone; }
       if (T1.motion && T1.gsap) T1.gsap.fromTo(detail.children, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "expo.out", stagger: 0.05, overwrite: true });
     };
     const go = (t) => { target = t; };
@@ -600,7 +760,7 @@
     stage.addEventListener("click", (e) => {
       const c = e.target.closest(".curve-card");
       if (!c || stage.dataset.justDragged) return;
-      if (c === active()) root.querySelector("[data-d=book]").click(); else snapTo(cards.indexOf(c));
+      if (c === active()) { const b = root.querySelector("[data-d=book]"); if (c.dataset.href) location.href = c.dataset.href; else b.click(); } else snapTo(cards.indexOf(c));
     });
     // horizontal wheel / trackpad swipe only, so vertical page scroll is never trapped
     let wheelLock = 0;
@@ -620,6 +780,7 @@
     // book: preselect this branch in the form
     root.querySelector("[data-d=book]").addEventListener("click", () => {
       const sel = document.getElementById("f-branch"), c = active();
+      if (c && c.dataset.href) return; // goes to the branch page
       if (sel && c) { const want = `${c.dataset.name} · ${c.dataset.c}`; Array.from(sel.options).forEach((o) => { if (o.text === want) sel.value = o.value || o.text; }); }
     });
 
@@ -753,6 +914,7 @@
   window.T1FX = (T1) => {
     const theme = document.body.dataset.theme;
     document.querySelectorAll("[data-curve]").forEach((r) => curveSlider(r, T1)); // works with or without motion
+    document.querySelectorAll("[data-promo]").forEach((r) => promoSlider(r, T1));
     if (!T1.motion || !THEMES[theme]) return;
     THEMES[theme](T1);
   };

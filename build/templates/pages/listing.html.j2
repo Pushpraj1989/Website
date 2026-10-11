@@ -1,0 +1,35 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set block = s[page.key] %}
+{%- set items = block['items'] %}
+{%- set hero_img = block.image or (items[0]._img if items[0]._img else ('hero' if 'hero' in s.images else none)) %}
+{%- set kicker = page.label %}{% set intro = block.intro %}{% set crumb = page.label %}
+{% include "partials/pagehero.html.j2" %}
+
+<section class="pg-section">
+  <div class="wrap">
+    <div class="list-head">
+      <p class="list-count" data-anim="up"><strong>{{ items | length }}</strong> {{ page.label | lower }}</p>
+      {%- if block.chips %}<ul class="chips" data-anim="up">{% for c in block.chips %}<li>{{ c }}</li>{% endfor %}</ul>{% endif %}
+    </div>
+    <div class="feature-list">
+      {%- for it in items %}
+      <a class="feature{% if loop.index is even %} flip{% endif %}" href="{{ it._file }}">
+        <div class="feature-media" data-anim="wipe">
+          {%- if it._img %}<img src="{{ m.src(it._img) }}" alt="{{ s.images[it._img].alt }}" loading="lazy" data-speed="0.6">{% else %}<span class="feature-ico">{{ icon(it.icon) }}</span>{% endif %}
+          {%- if it._img and s.images[it._img].cap %}<span class="stage-cap">{{ s.images[it._img].cap }}</span>{% endif %}
+        </div>
+        <div class="feature-copy">
+          <span class="feature-n" data-anim="up">{{ '%02d' % loop.index }} / {{ '%02d' % items | length }}</span>
+          <h2 data-anim="lines">{{ it.title }}</h2>
+          <p data-anim="up">{{ it.detail.intro or it.text or it.area or '' }}</p>
+          {%- if it.companies %}<p class="feature-sub" data-anim="up">{{ it.companies | join(' · ') }}</p>{% endif %}
+          <span class="text-link" data-anim="up">Explore {{ icon('arrow') }}</span>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

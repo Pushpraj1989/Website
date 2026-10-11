@@ -39,9 +39,22 @@ Sources:
 - No openly licensed photos of Badr Al Samaa's own hospitals exist, so hospital photography is illustrative stock (see footer credits). Ask the group for its own interior and exterior photos.
 - The glass anatomy graphics are concept illustrations drawn for this design, not medical diagrams. Have them reviewed if they are to be used clinically.
 - Branch cards show a view of each town or wider area (captioned on the card), not the branch building. Swap in photos of each hospital once the group supplies them.
+- News dates come from the branch subsites' news lists; five posts show no date (dates for those are from the article text or image upload month).
+- Package prices are as listed on 11 Oct 2026. Confirm they are current.
+- Doctor directory lists the 337 doctors on the Oman speciality pages; Bahrain, Kuwait, UAE and Qatar doctors are not on those pages.
+- Map pins for Mabella, Askar and Farwaniya on the official site point to the wrong countries, so those branches use a search link instead.
+- Testimonials are dated 2019 on the official site. Ask for recent ones.
+- Branch photos on the official site are thumbnails (215 px); most branch cards still use illustrative city views. Ask for full-size branch photography.
+- Doctor and centre counts conflict on the official site: 400+ doctors on /about vs 700+ on the homepage; 20+ centres vs around 25. The concept uses the /about figures (20+ centres, 400+ doctors, 30M+ visits).
+- News dates come from the branch subsites' news lists; five posts show no date (dates for those are from the article text or image upload month).
+- Package prices are as listed on 11 Oct 2026. Confirm they are current.
+- Doctor directory lists the 337 doctors on the Oman speciality pages; Bahrain, Kuwait, UAE and Qatar doctors are not on those pages.
+- Map pins for Mabella, Askar and Farwaniya on the official site point to the wrong countries, so those branches use a search link instead.
+- Testimonials are dated 2019 on the official site. Ask for recent ones.
+- Branch photos on the official site are thumbnails (215 px); most branch cards still use illustrative city views. Ask for full-size branch photography.
 
 Sources:
-- https://www.badralsamaahospitals.com (homepage read 11 Oct 2026)
+- https://badralsamaahospitals.com (homepage, about, news, packages, specialities, doctors, branch sites, insurance; read 11 Oct 2026)
 
 ## Galfar Engineering & Contracting
 

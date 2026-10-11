@@ -10,20 +10,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Space+Grotesk:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500">
 <link rel="stylesheet" href="assets/core.css">
-<link rel="stylesheet" href="assets/cosmos.css"><script>document.documentElement.classList.replace('no-js', 'js');</script>
+<link rel="stylesheet" href="assets/cosmos.css"><script>document.documentElement.classList.replace('no-js', 'js');try{if(sessionStorage.getItem('t1-nav')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('is-arriving');setTimeout(function(){document.documentElement.classList.remove('is-arriving')},2500)}sessionStorage.removeItem('t1-nav')}catch(e){}</script>
 </head>
-<body data-theme="cosmos" style="--accent: #c6ff4a">
+<body data-theme="cosmos" data-page="home" style="--accent: #c6ff4a">
 <a class="skip" href="#main">Skip to content</a>
 <div class="progress" aria-hidden="true"></div>
 
-<div class="loader" aria-hidden="true">
+<div class="page-wipe" aria-hidden="true"><span>National Gas</span></div><div class="loader" aria-hidden="true">
   <div class="loader-inner">
     <p class="loader-name"><span>N</span><span>a</span><span>t</span><span>i</span><span>o</span><span>n</span><span>a</span><span>l</span><span> </span><span>G</span><span>a</span><span>s</span></p>
     <div class="loader-bar"><i></i></div>
     <p class="loader-count">000</p>
   </div>
-</div>
-<div class="cursor" aria-hidden="true"><div class="cursor-ring"><span></span></div><div class="cursor-dot"></div></div>
+</div><div class="cursor" aria-hidden="true"><div class="cursor-ring"><span></span></div><div class="cursor-dot"></div></div>
 
 <header class="site-header" data-header>
   <div class="wrap nav-row">
@@ -31,7 +30,7 @@
       <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-text mono">NGC</span>
     </a>
-    <nav class="nav pill-nav" id="nav" aria-label="Primary"><a href="#about"><span data-scramble>About</span></a><a href="#services"><span data-scramble>Subsidiaries</span></a><a href="#locations"><span data-scramble>Locations</span></a><a href="#contact"><span data-scramble>Contact</span></a>    </nav>
+    <nav class="nav pill-nav" id="nav" aria-label="Primary"><a href="about.html"><span data-scramble>About</span></a><a href="subsidiaries.html"><span data-scramble>Subsidiaries</span></a><a href="locations.html"><span data-scramble>Locations</span></a><a href="contact.html"><span data-scramble>Contact</span></a>    </nav>
     <div class="nav-actions">
       <a class="btn btn-primary btn-sm" href="#contact" data-magnetic>Contact us</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>
@@ -195,11 +194,13 @@
     <p class="foot-big" aria-hidden="true" data-drift="14">National Gas</p>
     <div class="foot-grid">
       <div>
-        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">N</span><span class="brand-text">National Gas</span></a>
+        <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">N</span><span class="brand-text">National Gas</span></a>
         <p style="margin-top:1rem;max-width:38ch">National Gas Company: LPG plants and storage across Oman, the UAE and Malaysia.</p>
       </div>
-      <nav class="foot-nav" aria-label="Footer"><a href="#about">About</a><a href="#services">Subsidiaries</a><a href="#locations">Locations</a><a href="#contact">Contact</a>      </nav>
-      <div class="foot-contact">
+      <nav class="foot-nav" aria-label="Footer">
+        <p class="foot-h">Explore</p>
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="subsidiaries.html">Subsidiaries</a><a href="locations.html">Locations</a><a href="contact.html">Contact</a>      </nav>      <nav class="foot-nav" aria-label="Subsidiaries">
+        <p class="foot-h">Subsidiaries</p><a href="svc-ngc-energy-llc.html">NGC Energy LLC</a><a href="svc-ngc-energy-sdn-bhd.html">NGC Energy Sdn. Bhd.</a><a href="svc-ngc-energy-llc.html">NGC Energy LLC</a>      </nav>      <div class="foot-contact">
 <p>Location: Muscat, Sultanate of Oman (street address to confirm)</p><p><a href="tel:+96824162646">+968 2416 2646</a></p><p><a href="tel:+96890604445">+968 9060 4445</a></p><p><a href="mailto:info@nationalgasco.net">info@nationalgasco.net</a></p>      </div>
     </div>
     <div class="foot-bottom">
@@ -210,8 +211,21 @@
       <ul>        <li>“Industrial Gauges” by Jonas Nilsson Lee, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/industrial-gauges-IQDKLP8G2I" rel="noopener">source</a></li>        <li>“Industrial Silos” by Leeroy, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/industrial-silos-9865C0BA21" rel="noopener">source</a></li>        <li>“AMACO STORAGE TERMINAL” by jasonwoodhead23, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/80365963@N00/7150825737" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Utilities Meters” by Leeroy, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/utilities-meters-77695777DD" rel="noopener">source</a></li>      </ul>
     </details>  </div>
 </footer>
-<a class="to-top" href="#top" data-to-top aria-label="Back to top"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="to-top" href="#top" data-to-top aria-label="Back to top">
+  <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22"/><circle class="ring-fill" cx="24" cy="24" r="22" pathLength="100" data-ring/></svg>
+  <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+</a>
 
+<div class="dock" data-dock>
+  <button class="dock-toggle" type="button" aria-expanded="false" aria-label="Quick contact" data-dock-toggle>
+    <span class="dock-pulse" aria-hidden="true"></span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span class="dock-label">Talk to us</span>
+  </button>
+  <div class="dock-menu"><a href="tel:+96824162646"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><b>Call centre</b>+968 2416 2646</span></a><a href="https://wa.me/96890604445" rel="noopener"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><b>WhatsApp</b>+968 9060 4445</span></a>    <a href="contact.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span><b>Contact us</b>Online form</span></a>
+  </div>
+</div>
+
+<nav class="action-bar" aria-label="Quick actions"><a href="tel:+96824162646"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>Call</span></a><a href="https://wa.me/96890604445" rel="noopener"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>WhatsApp</span></a><a href="locations.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Locations</span></a>  <a class="ab-primary" href="contact.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>Book</span></a>
+</nav>
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>
