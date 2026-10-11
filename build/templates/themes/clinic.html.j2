@@ -2,25 +2,27 @@
 {% import "partials/macros.j2" as m with context %}
 
 {% block content %}
-<section class="hero" id="top">
+{% if s.promos %}{% call m.promo() %}{% endcall %}
+{{ m.rail() }}{% endif %}
+<section class="hero" id="{{ 'brand' if s.promos else 'top' }}">
   <div class="grid-paper" aria-hidden="true"></div>
   <div class="wrap hero-inner">
-    <p class="eyebrow" data-anim="up" data-intro><span class="live" aria-hidden="true"></span>{{ s.hero.eyebrow }}</p>
-    <h1 class="hero-title">
-      <span class="ht-line" data-anim="chars" data-intro>{{ s.theme_data.lead }}</span>
+    <p class="eyebrow" data-anim="up" {{ '' if s.promos else 'data-intro' }}><span class="live" aria-hidden="true"></span>{{ s.hero.eyebrow }}</p>
+    {% if s.promos %}<h2 class="hero-title">{% else %}<h1 class="hero-title">{% endif %}
+      <span class="ht-line" data-anim="chars" {{ '' if s.promos else 'data-intro' }}>{{ s.theme_data.lead }}</span>
       <span class="ht-line ht-swap">
         <em class="swap" data-swap data-words='{{ s.theme_data.words | tojson }}'>{{ s.theme_data.words[0] }}</em>
       </span>
       <span class="visually-hidden">: {{ s.theme_data.words | join(', ') }}</span>
-    </h1>
+    {% if s.promos %}</h2>{% else %}</h1>{% endif %}
     <div class="hero-row">
-      <p class="hero-lede" data-anim="up" data-intro data-delay=".4">{{ s.hero.lede }}</p>
-      <div class="cta-row" data-anim="up" data-intro data-delay=".55">
+      <p class="hero-lede" data-anim="up" {{ '' if s.promos else 'data-intro' }} data-delay=".4">{{ s.hero.lede }}</p>
+      <div class="cta-row" data-anim="up" {{ '' if s.promos else 'data-intro' }} data-delay=".55">
         <a class="btn btn-primary" href="{{ s.hero.primary.href }}" data-magnetic>{{ s.hero.primary.label }} {{ icon('arrow') }}</a>
         <a class="btn btn-ghost" href="{{ s.hero.secondary.href }}" data-magnetic>{{ s.hero.secondary.label }}</a>
       </div>
     </div>
-    <div class="hero-card" data-anim="img" data-intro data-delay=".3">
+    <div class="hero-card" data-anim="img" {{ '' if s.promos else 'data-intro' }} data-delay=".3">
       {{ m.img('hero', 'hero-media') }}
       <div class="hero-chip"><strong>{{ m.count(s.stats[0]) }}</strong><span>{{ s.stats[0].label }}</span></div>
     </div>
@@ -122,4 +124,8 @@
     <p class="empty" data-empty hidden>No sites match this filter.</p>
   </div>
 </section>
+{{ m.home_news() }}
+{{ m.testimonials() }}
+{{ m.insurance() }}
+{{ m.faq() }}
 {% endblock %}

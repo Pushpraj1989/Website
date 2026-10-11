@@ -110,7 +110,7 @@
 {%- macro promo() -%}
 {#- Hero promotion slider: WebGL displacement transitions between slides (CSS wipe fallback),
     autoplay with progress, tabs, swipe. Themes can pass an ambient overlay via call(). -#}
-<section class="promo" id="top" data-promo aria-roledescription="carousel" aria-label="Highlights">
+<section class="promo promo-{{ s.promo_fx or 'flow' }}" id="top" data-promo="{{ s.promo_fx or 'flow' }}" aria-roledescription="carousel" aria-label="Highlights">
   <div class="promo-stage">
     {%- for p in s.promos %}
     <div class="promo-bg{% if loop.first %} is-on{% endif %}" data-src="{{ src(p.image) }}"><img src="{{ src(p.image) }}" alt="{{ s.images[p.image].alt }}" {% if loop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async"></div>

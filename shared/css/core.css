@@ -1369,7 +1369,7 @@ body:has(.page-hero.has-img, .promo) .site-header:not(.is-scrolled):not(.is-open
 .pg-stats { padding: clamp(3rem, 6vw, 5rem) 0; background: var(--stats-bg, var(--accent)); color: var(--stats-fg, var(--accent-ink)); }
 .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 2rem; }
 .stat-tile strong { display: block; font: 400 clamp(2.6rem, 5vw, 4.4rem)/1 var(--font-display); }
-.stat-tile span { display: block; margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8; }
+.stat-tile > span { display: block; margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8; }
 .timeline { position: relative; margin: 2rem 0 0; padding: 0; list-style: none; }
 .timeline::before { content: ""; position: absolute; left: 6.5rem; top: 0; bottom: 0; width: 1px; background: var(--line); }
 .tl-item { position: relative; display: grid; grid-template-columns: 6.5rem 1fr; gap: 2.5rem; padding: 1.6rem 0; }
@@ -1450,7 +1450,7 @@ body:has(.page-hero.has-img, .promo) .site-header:not(.is-scrolled):not(.is-open
 /* locations page */
 .loc-stats { display: flex; flex-wrap: wrap; gap: 1rem 3rem; justify-content: center; margin-bottom: 1rem; text-align: center; }
 .loc-stats strong { display: block; font: 400 clamp(2.4rem, 4vw, 3.4rem)/1 var(--font-display); color: var(--accent); }
-.loc-stats span { font-size: 0.85rem; color: var(--muted); }
+.loc-stats div > span { font-size: 0.85rem; color: var(--muted); }
 .loc-map { display: inline-flex; margin-top: 0.4rem; font-size: 0.85rem; font-weight: 600; color: inherit; }
 
 /* ---------- news ---------- */
@@ -1662,7 +1662,7 @@ body:has(.page-hero.has-img, .promo) .site-header:not(.is-scrolled):not(.is-open
 /* ---------- branch page ---------- */
 .br-facts { display: flex; flex-wrap: wrap; gap: 1rem 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--line); }
 .br-facts strong { display: block; font: 400 clamp(2.4rem, 4vw, 3.4rem)/1 var(--font-display); color: var(--accent); }
-.br-facts span { font-size: 0.85rem; color: var(--muted); }
+.br-facts div > span { font-size: 0.85rem; color: var(--muted); }
 .spec-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
 .spec-chips a, .spec-chips span { display: inline-block; padding: 0.55rem 1rem; border: 1px solid var(--line); border-radius: 99px; color: inherit; font-size: 0.86rem; text-decoration: none; transition: background 0.3s, color 0.3s, border-color 0.3s; }
 .spec-chips a:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }

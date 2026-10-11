@@ -2,18 +2,20 @@
 {% import "partials/macros.j2" as m with context %}
 
 {% block content %}
-<section class="hero" id="top">
+{% if s.promos %}{% call m.promo() %}{% endcall %}
+{{ m.rail() }}{% endif %}
+<section class="hero" id="{{ 'brand' if s.promos else 'top' }}">
   {{ m.img('hero', 'hero-media') }}
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="curtain curtain-l" aria-hidden="true"></div>
   <div class="curtain curtain-r" aria-hidden="true"></div>
 
   <div class="wrap hero-inner">
-    <p class="eyebrow" data-anim="up" data-intro data-delay=".6">{{ s.hero.eyebrow }}</p>
-    <h1 class="hero-title" data-anim="lines" data-intro data-delay=".7">{{ s.theme_data.hero_html | safe }}</h1>
+    <p class="eyebrow" data-anim="up" {{ '' if s.promos else 'data-intro' }} data-delay=".6">{{ s.hero.eyebrow }}</p>
+    {% if s.promos %}<h2 class="hero-title" data-anim="lines" {{ '' if s.promos else 'data-intro' }} data-delay=".7">{% else %}<h1 class="hero-title" data-anim="lines" {{ '' if s.promos else 'data-intro' }} data-delay=".7">{% endif %}{{ s.theme_data.hero_html | safe }}{% if s.promos %}</h2>{% else %}</h1>{% endif %}
     <div class="hero-foot">
-      <p class="hero-lede" data-anim="up" data-intro data-delay="1">{{ s.hero.lede }}</p>
-      <div class="cta-row" data-anim="up" data-intro data-delay="1.1">
+      <p class="hero-lede" data-anim="up" {{ '' if s.promos else 'data-intro' }} data-delay="1">{{ s.hero.lede }}</p>
+      <div class="cta-row" data-anim="up" {{ '' if s.promos else 'data-intro' }} data-delay="1.1">
         <a class="btn btn-primary" href="{{ s.hero.primary.href }}" data-magnetic>{{ s.hero.primary.label }} {{ icon('arrow') }}</a>
         <a class="btn btn-ghost" href="{{ s.hero.secondary.href }}" data-magnetic>{{ s.hero.secondary.label }}</a>
       </div>
@@ -111,4 +113,8 @@
     {{ m.locations() }}
   </div>
 </section>
+{{ m.home_news() }}
+{{ m.testimonials() }}
+{{ m.insurance() }}
+{{ m.faq() }}
 {% endblock %}

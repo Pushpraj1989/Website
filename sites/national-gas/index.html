@@ -24,20 +24,28 @@
   </div>
 </div><div class="cursor" aria-hidden="true"><div class="cursor-ring"><span></span></div><div class="cursor-dot"></div></div>
 
-<header class="site-header" data-header>
-  <div class="wrap nav-row">
-    <a class="brand" href="#top" aria-label="National Gas Company, back to top">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <span class="brand-text mono">NGC</span>
-    </a>
-    <nav class="nav pill-nav" id="nav" aria-label="Primary"><a href="about.html"><span data-scramble>About</span></a><a href="subsidiaries.html"><span data-scramble>Subsidiaries</span></a><a href="locations.html"><span data-scramble>Locations</span></a><a href="contact.html"><span data-scramble>Contact</span></a>    </nav>
+<header class="site-header" data-header>  <div class="wrap nav-row">
+    <a class="brand" href="index.html" aria-label="National Gas Company, home">      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text mono">NGC</span>    </a>
+    <nav class="nav pill-nav" id="nav" aria-label="Primary">      <a href="about.html">About</a>      <div class="nav-item has-mega">
+        <a href="subsidiaries.html">Subsidiaries<svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+        <div class="mega">
+          <div class="mega-inner">
+            <div class="mega-intro">
+              <p class="eyebrow">Subsidiaries</p>
+              <p class="mega-title">Group structure</p>
+              <a class="text-link" href="subsidiaries.html">View all 3 <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>            </div>
+            <ul class="mega-list">              <li><a href="svc-ngc-energy-llc.html" data-preview=""><span class="mega-n">01</span>NGC Energy LLC</a></li>              <li><a href="svc-ngc-energy-sdn-bhd.html" data-preview=""><span class="mega-n">02</span>NGC Energy Sdn. Bhd.</a></li>              <li><a href="svc-ngc-energy-llc.html" data-preview=""><span class="mega-n">03</span>NGC Energy LLC</a></li>            </ul>
+            <div class="mega-preview" aria-hidden="true"><img alt="" src=""></div>
+          </div>
+        </div>
+      </div>      <a href="locations.html">Locations</a>      <a href="contact.html">Contact</a>    </nav>
     <div class="nav-actions">
-      <a class="btn btn-primary btn-sm" href="#contact" data-magnetic>Contact us</a>
+      <a class="btn btn-primary btn-sm" href="contact.html" data-magnetic>Contact us</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>
     </div>
   </div>
 </header>
-
 <main id="main">
 <section class="hero" id="top">
   <canvas class="hero-fx" data-fx="sphere" aria-hidden="true"></canvas>
@@ -46,8 +54,7 @@
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <p class="eyebrow mono" data-anim="up" data-intro>LPG production &amp; storage · Oman · UAE · Malaysia</p>
-      <h1 class="hero-title" data-scramble data-intro>Energy supply across three countries</h1>
-      <p class="hero-lede" data-anim="words" data-intro data-delay=".4">Eleven LPG plants, more than 350,000 metric tonnes of LPG a year, and the largest LPG storage in the Sultanate of Oman.</p>
+<h1 class="hero-title" data-scramble data-intro>Energy supply across three countries</h1>      <p class="hero-lede" data-anim="words" data-intro data-delay=".4">Eleven LPG plants, more than 350,000 metric tonnes of LPG a year, and the largest LPG storage in the Sultanate of Oman.</p>
       <div class="cta-row" data-anim="up" data-intro data-delay=".7">
         <a class="btn btn-primary" href="#contact" data-magnetic>Contact us <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="btn btn-ghost" href="#locations" data-magnetic>Our footprint</a>
@@ -155,6 +162,10 @@
   <p class="empty" data-empty hidden>No locations match this filter.</p>
   </div>
 </section>
+
+
+
+
 <section class="contact" id="contact">
   <div class="wrap contact-grid">
     <div>

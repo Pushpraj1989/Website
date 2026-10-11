@@ -22,10 +22,15 @@
 {%- endif %}
   <div class="wrap nav-row">
     <a class="brand" href="index.html" aria-label="{{ s.name }}, home">
+      {%- if s.theme == 'cosmos' %}
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text mono">{{ s.theme_data.code }}</span>
+      {%- else %}
       <span class="brand-mark" aria-hidden="true">{{ s.short[0] }}</span>
       <span class="brand-text">{{ s.short }}</span>
+      {%- endif %}
     </a>
-    <nav class="nav" id="nav" aria-label="Primary">
+    <nav class="nav{% if s.theme == 'cosmos' %} pill-nav{% endif %}" id="nav" aria-label="Primary">
       {%- for n in s._nav %}
       {%- set on = here == n.file or (page and page.listing == n.file) %}
       {%- if n['items'] %}

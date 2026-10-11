@@ -534,6 +534,7 @@
     const n = bgs.length;
     if (n < 2) return;
     const DUR = 6500;
+    const MODE = { flow: 0, burn: 1, pixel: 2, blinds: 3, streak: 4, ripple: 5 }[root.dataset.promo] || 0;
     let cur = 0, t0 = performance.now(), paused = false, hover = false, visible = true, busy = false;
     const gsap = T1.motion ? T1.gsap : null;
 
@@ -545,18 +546,21 @@
       try { gl = canvas.getContext("webgl", { premultipliedAlpha: false, antialias: false }); } catch (e) { gl = null; }
     }
     const VS = "attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;v.y=1.-v.y;gl_Position=vec4(p,0.,1.);}";
-    const FS = `precision mediump float;varying vec2 v;uniform sampler2D a,b;uniform float t,time;uniform vec2 res,ra,rb;
+    const FS = `precision mediump float;varying vec2 v;uniform sampler2D a,b;uniform float t,time,mode;uniform vec2 res,ra,rb;
       vec2 cover(vec2 uv,vec2 img){float s=max(res.x/img.x,res.y/img.y);vec2 sz=img*s;return (uv*res-(res-sz)*.5)/sz;}
       float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
       float nz(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
-      void main(){vec2 uv=v;float n=nz(uv*3.+time*.05)*.6+nz(uv*9.)*.4;
-        float edge=smoothstep(t-.25,t+.25,n*.6+uv.x*.4+(1.-uv.y)*.1);
-        float k=t*(1.-t)*4.;
-        vec2 da=uv+vec2(n-.5,n*.3)*k*.18*(1.-edge);vec2 db=uv-vec2(n-.5,n*.3)*k*.18*edge;
+      void main(){vec2 uv=v;float k=t*(1.-t)*4.;float m;vec2 dA=vec2(0.),dB=vec2(0.);vec3 glow=vec3(.9,.95,1.);float gw=.12;
+        if(mode<.5){float n=nz(uv*3.+time*.05)*.6+nz(uv*9.)*.4;m=1.-smoothstep(t-.25,t+.25,n*.6+uv.x*.4+(1.-uv.y)*.1);dA=vec2(n-.5,n*.3)*k*.18;dB=-dA;}
+        else if(mode<1.5){float n=nz(uv*4.)*.7+nz(uv*14.)*.3;float e=n*.7+(1.-uv.y)*.3;m=1.-smoothstep(t-.04,t+.04,e*.999);float edge=1.-smoothstep(0.,.07,abs(e-t));glow=vec3(1.,.42,.08)*edge*2.2;gw=1.;dA=vec2(0.,-k*.04*n);}
+        else if(mode<2.5){vec2 g=vec2(48.,27.);vec2 c=floor(uv*g)/g;float r=h(c);m=step(r,t*1.15-.08+uv.x*.1);float px=mix(1.,32.,k);vec2 q=floor(uv*res/px)*px/res;dA=q-uv;dB=dA;glow=vec3(.75,1.,.25);gw=.08*k;}
+        else if(mode<3.5){float bars=10.;float f=fract(uv.x*bars);float o=(floor(uv.x*bars)/bars)*.35;m=step(f,clamp((t-o)*1.6,0.,1.));dA=vec2(0.,k*.02);dB=vec2(0.,-k*.02);glow=vec3(.85,.7,.4);gw=.06;}
+        else if(mode<4.5){float row=h(vec2(floor(uv.y*70.),3.));float e=uv.x*.7+row*.3;m=1.-smoothstep(t-.03,t+.03,1.-e);dA=vec2(k*.12*row,0.);dB=vec2(-k*.12*(1.-row),0.);glow=vec3(1.,.55,.15);gw=.25*k;}
+        else{float d=distance((uv-.5)*vec2(res.x/res.y,1.),vec2(0.));float R=t*1.3;m=1.-smoothstep(R-.06,R,d);float w=sin(d*40.-t*12.)*.012*k;dA=normalize(uv-.5+.0001)*w;dB=dA;glow=vec3(.8,.9,1.);gw=.1;}
         float za=1.+t*.08,zb=1.08-t*.08;
-        vec4 ca=texture2D(a,cover((da-.5)/za+.5,ra));vec4 cb=texture2D(b,cover((db-.5)/zb+.5,rb));
-        float m=1.-edge;vec4 c=mix(ca,cb,m);
-        c.rgb+=vec3(.9,.95,1.)*smoothstep(.08,0.,abs(edge-.5))*k*.12;
+        vec4 ca=texture2D(a,cover((uv+dA-.5)/za+.5,ra));vec4 cb=texture2D(b,cover((uv+dB-.5)/zb+.5,rb));
+        vec4 c=mix(ca,cb,m);
+        float seam=m*(1.-m)*4.;c.rgb+=glow*(mode>.5&&mode<1.5?1.:seam)*gw*(mode>.5&&mode<1.5?k:1.);
         gl_FragColor=c;}`;
     const sh = (type, src) => { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
     const sizeGL = () => {
@@ -579,7 +583,7 @@
       gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texs[glFrom].tx);
       gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, texs[glTo].tx);
       gl.uniform1i(uni.a, 0); gl.uniform1i(uni.b, 1);
-      gl.uniform1f(uni.t, glP); gl.uniform1f(uni.time, time / 1000);
+      gl.uniform1f(uni.t, glP); gl.uniform1f(uni.time, time / 1000); gl.uniform1f(uni.mode, MODE);
       gl.uniform2f(uni.res, canvas.width, canvas.height);
       gl.uniform2f(uni.ra, texs[glFrom].w, texs[glFrom].h); gl.uniform2f(uni.rb, texs[glTo].w, texs[glTo].h);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -591,7 +595,7 @@
         const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
         const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-        ["a", "b", "t", "time", "res", "ra", "rb"].forEach((k) => (uni[k] = gl.getUniformLocation(prog, k)));
+        ["a", "b", "t", "time", "mode", "res", "ra", "rb"].forEach((k) => (uni[k] = gl.getUniformLocation(prog, k)));
         const load = (i) => new Promise((res) => {
           const im = imgs[i];
           if (im.loading === "lazy") im.loading = "eager";
