@@ -840,3 +840,249 @@ body[data-theme="story"] {
     font-size: 1.4rem;
   }
 }
+
+/* =========================================================
+   Glass anatomy (hero body + one animated organ per centre)
+   ========================================================= */
+
+.svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.gl { fill: url(#g-glass); stroke: url(#g-edge); stroke-width: 1.4; }
+.edge { fill: none; stroke: url(#g-edge); stroke-width: 1.6; filter: url(#f-glow); }
+.hl { fill: none; stroke: #fff; stroke-opacity: 0.85; stroke-width: 2.4; stroke-linecap: round; }
+.bn { fill: url(#g-bone); stroke: rgba(255, 255, 255, 0.75); stroke-width: 1; }
+.bnl { fill: none; stroke: rgba(225, 250, 246, 0.72); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.rib { fill: none; stroke: rgba(225, 250, 246, 0.6); stroke-width: 2.2; stroke-linecap: round; }
+.vert { fill: rgba(225, 250, 246, 0.55); }
+.or { fill: url(#g-organ); filter: url(#f-glow); }
+.tube { fill: none; stroke: rgba(255, 255, 255, 0.22); stroke-width: 8; stroke-linecap: round; }
+.tube.thin { stroke-width: 6; }
+.vein { fill: none; stroke: #ffd6c9; stroke-width: 1.6; stroke-linecap: round; opacity: 0.8; }
+.limb { fill: none; stroke: #ffc2b0; stroke-width: 5; stroke-linecap: round; opacity: 0.85; }
+.cord { fill: none; stroke: #ffc2b0; stroke-width: 3; stroke-dasharray: 4 6; animation: flowd 1.4s linear infinite; }
+.pulp { fill: none; stroke: #ffb59f; stroke-width: 2.4; stroke-linecap: round; opacity: 0.75; }
+.screen { fill: rgba(4, 30, 28, 0.55); stroke: rgba(127, 240, 224, 0.35); }
+.hud { fill: none; stroke: #7ff0e0; stroke-width: 2; opacity: 0.75; }
+.xray-bones { filter: url(#f-glow); }
+
+.halo, .beat, .fetus, .sac, .heartdot, .stomach, .tooth, .tibia, .fillup, .spark, .shine, .o-heart {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.halo { animation: halo 4s ease-in-out infinite; }
+.beat, .o-heart { animation: beat 1.15s ease-in-out infinite; }
+.ecg { fill: none; stroke: #7ff0e0; stroke-width: 2.2; stroke-linejoin: round; stroke-dasharray: 90 420; filter: url(#f-glow); animation: ecg 2.2s linear infinite; }
+.tibia { animation: flex 2.4s ease-in-out infinite; }
+.cartilage { fill: #ef8a6d; filter: url(#f-glow); animation: glowp 2.4s ease-in-out infinite; }
+.scanline { animation: scanY 3.2s linear infinite; }
+.beam { animation: beamY 3s ease-in-out infinite; }
+.fetus { animation: float 5s ease-in-out infinite; }
+.sac { animation: breathe 5s ease-in-out infinite; }
+.heartdot { fill: #ff9b80; animation: dotp 0.9s ease-in-out infinite; }
+.bubbles circle { fill: rgba(255, 255, 255, 0.75); animation: bub 4s linear infinite; }
+.bubbles circle:nth-child(2) { animation-delay: 1s; }
+.bubbles circle:nth-child(3) { animation-delay: 2s; }
+.bubbles circle:nth-child(4) { animation-delay: 3s; }
+.flow { fill: none; stroke: #ffb59f; stroke-width: 3; stroke-dasharray: 6 14; stroke-linecap: round; animation: flowd 1.2s linear infinite; }
+.kid .or { animation: glowp 2.6s ease-in-out infinite; }
+.kid-r .or { animation-delay: 1.3s; }
+.fillup { transform-origin: bottom; animation: fillup 3s ease-in-out infinite; }
+.peri { fill: none; stroke: #ffb59f; stroke-width: 4; stroke-dasharray: 10 18; stroke-linecap: round; filter: url(#f-glow); animation: flowd 1.6s linear infinite; }
+.stomach { animation: squeeze 3s ease-in-out infinite; }
+.waves path { fill: none; stroke: #7ff0e0; stroke-width: 2.4; stroke-linecap: round; opacity: 0; animation: wave 1.8s ease-out infinite; }
+.waves path:nth-child(3) { animation-delay: 0s; }
+.waves path:nth-child(2) { animation-delay: 0.3s; }
+.waves path:nth-child(1) { animation-delay: 0.6s; }
+.canal { animation: glowp 1.8s ease-in-out infinite; }
+.tooth { animation: turn 6s ease-in-out infinite; }
+.shine { fill: rgba(255, 255, 255, 0.55); animation: shine 3.6s ease-in-out infinite; }
+.spark { fill: #fff; animation: twinkle 2.4s ease-in-out infinite; }
+.spark.s2 { animation-delay: 0.8s; }
+.spark.s3 { animation-delay: 1.6s; }
+
+@keyframes halo { 50% { transform: scale(1.08); opacity: 0.7; } }
+@keyframes beat { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.07); } 24% { transform: scale(0.97); } 38% { transform: scale(1.04); } 52% { transform: scale(1); } }
+@keyframes ecg { from { stroke-dashoffset: 510; } to { stroke-dashoffset: 0; } }
+@keyframes flex { 50% { transform: translateY(4px); } }
+@keyframes glowp { 50% { opacity: 0.35; } }
+@keyframes scanY { from { transform: translateY(-20px); } to { transform: translateY(196px); } }
+@keyframes beamY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(140px); } }
+@keyframes float { 50% { transform: translateY(-5px) rotate(-4deg); } }
+@keyframes breathe { 50% { transform: scale(1.025); } }
+@keyframes dotp { 50% { transform: scale(1.6); opacity: 0.5; } }
+@keyframes bub { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-60px); opacity: 0; } }
+@keyframes flowd { to { stroke-dashoffset: -40; } }
+@keyframes fillup { 0%, 100% { transform: scaleY(0.3); } 60% { transform: scaleY(1); } }
+@keyframes squeeze { 50% { transform: scale(1.04, 0.96); } }
+@keyframes wave { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes turn { 50% { transform: scaleX(0.9); } }
+@keyframes shine { 0%, 40% { transform: skewX(-18deg) translateX(-80px); } 75%, 100% { transform: skewX(-18deg) translateX(170px); } }
+@keyframes twinkle { 0%, 100% { transform: scale(0); opacity: 0; } 50% { transform: scale(1) rotate(45deg); opacity: 1; } }
+
+/* pause anything offscreen (class set by fx.js) */
+.is-off *,
+.is-off::before { animation-play-state: paused !important; }
+
+/* ---------- hero glass body ---------- */
+.hero-visual { perspective: 1400px; }
+
+.body-wrap {
+  position: relative;
+  z-index: 1;
+  height: min(78vh, 660px);
+  aspect-ratio: 300 / 640;
+  animation: sway 10s ease-in-out infinite;
+}
+
+.body-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 2% -34% -2%;
+  z-index: -1;
+  border-radius: 999px 999px 36px 36px;
+  background:
+    radial-gradient(60% 40% at 50% 30%, rgba(127, 240, 224, 0.28), transparent 70%),
+    linear-gradient(180deg, #0f5c55, #08302c);
+  box-shadow: 0 50px 100px -40px rgba(15, 92, 85, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.glass-body { width: 100%; height: 100%; overflow: visible; }
+.body-halo { opacity: 0.55; }
+.skeleton { opacity: 0.8; }
+.gut { fill: none; stroke: #ef8a6d; stroke-width: 5; stroke-linecap: round; stroke-dasharray: 8 10; opacity: 0.65; animation: flowd 1.6s linear infinite; }
+.o-brain { animation: glowp 3s ease-in-out infinite; }
+.body-scan { animation: bodyScan 4.2s linear infinite; }
+
+@keyframes sway { 50% { transform: rotateY(9deg) translateY(-8px); } }
+@keyframes bodyScan { from { transform: translateY(0); } to { transform: translateY(720px); } }
+
+.hotspot {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  z-index: 3;
+  display: block;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  text-decoration: none;
+}
+
+.hs-dot {
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7), 0 0 12px rgba(127, 240, 224, 0.9);
+  animation: hs 2.2s ease-out infinite;
+  animation-delay: calc(var(--i) * 0.27s);
+}
+
+@keyframes hs { 70%, 100% { box-shadow: 0 0 0 14px rgba(255, 255, 255, 0), 0 0 12px rgba(127, 240, 224, 0.9); } }
+
+.hs-label {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--teal);
+  font-size: 0.74rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-6px, -50%);
+  transition: opacity 0.4s, transform 0.5s var(--ease-out);
+  pointer-events: none;
+}
+
+.hotspot:hover .hs-label,
+.hotspot:focus-visible .hs-label,
+.hotspot.is-show .hs-label {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+/* ---------- centres: dark glass lab ---------- */
+.centres {
+  background:
+    radial-gradient(55% 45% at 50% 0%, rgba(127, 240, 224, 0.16), transparent 65%),
+    linear-gradient(180deg, #0b3d39, #072624);
+  color: #eaf7f4;
+  --muted: rgba(234, 247, 244, 0.66);
+  --line: rgba(234, 247, 244, 0.16);
+  --fg: #eaf7f4;
+}
+
+.centres .eyebrow { color: #7ff0e0; }
+
+.organ-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-top: 3rem;
+}
+
+.organ-card {
+  position: relative;
+  padding: 0.9rem 0.9rem 1.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 26px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  scroll-margin-top: calc(var(--header-h) + 2rem);
+  transition: border-color 0.4s, box-shadow 0.6s;
+}
+
+.organ-card:hover { border-color: rgba(127, 240, 224, 0.5); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7); }
+.organ-card:target { border-color: var(--coral); box-shadow: 0 0 0 2px var(--coral); }
+
+.organ-stage {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(127, 240, 224, 0.14), transparent 65%),
+    rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.organ { width: 84%; height: auto; overflow: visible; transition: transform 0.8s var(--ease-out); }
+.organ-card:hover .organ { transform: scale(1.06); }
+
+.organ-copy { padding: 1rem 0.4rem 0; }
+.organ-n { font: italic 400 1rem/1 var(--font-display); color: var(--coral); }
+.organ-copy h3 { margin: 0.4rem 0 0.3rem; font-size: 1.45rem; color: #fff; }
+.organ-copy p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+.centres .chips li { border-color: var(--line); }
+.centres .chips li:hover { background: #7ff0e0; color: #072624; }
+
+/* ---------- moments: placeholder hospital photography ---------- */
+.moments { padding: clamp(4rem, 8vw, 6rem) 0 clamp(2rem, 5vw, 3rem); }
+.moments-row { display: grid; grid-template-columns: 1.25fr 0.8fr 1fr; gap: 1rem; align-items: end; }
+.moment { margin: 0; border-radius: 24px; overflow: hidden; }
+.moment img { height: 120%; }
+.moment-1 { aspect-ratio: 4 / 3; }
+.moment-2 { aspect-ratio: 3 / 4; }
+.moment-3 { aspect-ratio: 1; }
+.moments-note { margin-top: 1rem; color: var(--muted); font-size: 0.85rem; }
+
+@media (max-width: 960px) {
+  .organ-grid { grid-template-columns: repeat(2, 1fr); }
+  .body-wrap { height: min(64vh, 520px); }
+}
+
+@media (max-width: 600px) {
+  .organ-grid { gap: 0.7rem; }
+  .organ-copy h3 { font-size: 1.1rem; }
+  .organ-copy p { font-size: 0.8rem; }
+  .moments-row { grid-template-columns: 1fr 1fr; }
+  .moment-1 { grid-column: 1 / -1; }
+  .hs-label { display: none; }
+}

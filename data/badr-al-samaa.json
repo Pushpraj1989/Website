@@ -70,35 +70,83 @@
     "items": [
       {
         "title": "Cardiology",
-        "icon": "pulse"
+        "icon": "pulse",
+        "kind": "heart",
+        "area": "Heart and blood vessels",
+        "spot": [
+          160,
+          198
+        ]
       },
       {
         "title": "Orthopaedics",
-        "icon": "layers"
+        "icon": "layers",
+        "kind": "knee",
+        "area": "Bones, joints and muscles",
+        "spot": [
+          186,
+          486
+        ]
       },
       {
         "title": "Obstetrics & Gynaecology",
-        "icon": "heart"
+        "icon": "heart",
+        "kind": "womb",
+        "area": "Pregnancy and women's health",
+        "spot": [
+          150,
+          350
+        ]
       },
       {
         "title": "Urology & Andrology",
-        "icon": "shield"
+        "icon": "shield",
+        "kind": "kidney",
+        "area": "Kidneys and urinary tract",
+        "spot": [
+          178,
+          284
+        ]
       },
       {
         "title": "Gastroenterology",
-        "icon": "leaf"
+        "icon": "leaf",
+        "kind": "gut",
+        "area": "Digestive system",
+        "spot": [
+          178,
+          250
+        ]
       },
       {
         "title": "Radiology",
-        "icon": "chart"
+        "icon": "chart",
+        "kind": "xray",
+        "area": "Medical imaging",
+        "spot": [
+          122,
+          178
+        ]
       },
       {
         "title": "ENT",
-        "icon": "pulse"
+        "icon": "pulse",
+        "kind": "ear",
+        "area": "Ear, nose and throat",
+        "spot": [
+          184,
+          62
+        ]
       },
       {
         "title": "Dentistry",
-        "icon": "star"
+        "icon": "star",
+        "kind": "tooth",
+        "area": "Teeth and gums",
+        "spot": [
+          150,
+          88
+        ]
       }
     ],
     "chips_title": "Also offered",
@@ -289,7 +337,8 @@
     "No email address is published on the site.",
     "Branch street addresses and branch-level phone numbers are not on the page (city and facility type only).",
     "Clinical wording on the concept is drafted, not reviewed. It needs medical sign-off before use.",
-    "Photography is illustrative Creative Commons imagery (see footer credits), not Badr Al Samaa's facilities or staff. Replace with the group's own photos before use."
+    "No openly licensed photos of Badr Al Samaa's own hospitals exist, so hospital photography is illustrative stock (see footer credits). Ask the group for its own interior and exterior photos.",
+    "The glass anatomy graphics are concept illustrations drawn for this design, not medical diagrams. Have them reviewed if they are to be used clinically."
   ],
   "sources": [
     "https://www.badralsamaahospitals.com (homepage read 11 Oct 2026)"
@@ -297,21 +346,6 @@
   "theme": "story",
   "img_dir": "badr",
   "images": {
-    "hero": {
-      "src": "hero.jpg",
-      "alt": "Doctor in consultation with a patient",
-      "cap": "Illustrative"
-    },
-    "care": {
-      "src": "care.jpg",
-      "alt": "Doctor and nurse talking with a patient",
-      "cap": "Illustrative"
-    },
-    "dental": {
-      "src": "dental.jpg",
-      "alt": "Dental treatment room",
-      "cap": "Illustrative"
-    },
     "oman": {
       "src": "oman.jpg",
       "alt": "Mosque courtyard in Muscat",
@@ -331,6 +365,31 @@
       "src": "uae.jpg",
       "alt": "Dubai skyline",
       "cap": "Dubai"
+    },
+    "mri": {
+      "src": "mri.jpg",
+      "alt": "MRI scanner",
+      "cap": "Illustrative"
+    },
+    "nurse": {
+      "src": "nurse.jpg",
+      "alt": "Nurse holding a patient's hand",
+      "cap": "Illustrative"
+    },
+    "wheel": {
+      "src": "wheel.jpg",
+      "alt": "Nurse talking with a patient in a wheelchair",
+      "cap": "Illustrative"
+    },
+    "lab": {
+      "src": "lab.jpg",
+      "alt": "Laboratory sample tubes",
+      "cap": "Illustrative"
+    },
+    "dental": {
+      "src": "dental.jpg",
+      "alt": "Dental treatment room",
+      "cap": "Illustrative"
     }
   },
   "theme_data": {
@@ -365,7 +424,7 @@
       {
         "title": "Choose a specialist",
         "text": "Eight centres of excellence, from cardiology and orthopaedics to ENT and dentistry.",
-        "image": "dental",
+        "image": "mri",
         "link": {
           "label": "Browse the centres",
           "href": "#services"
@@ -374,7 +433,7 @@
       {
         "title": "Book your visit",
         "text": "Send a request online, call the 24/7 helpline, or message the team on WhatsApp.",
-        "image": "care",
+        "image": "nurse",
         "link": {
           "label": "Book an appointment",
           "href": "#contact"
@@ -398,6 +457,11 @@
         "name": "UAE",
         "image": "uae"
       }
+    ],
+    "moments": [
+      "lab",
+      "wheel",
+      "dental"
     ]
   }
 }

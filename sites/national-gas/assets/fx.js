@@ -567,15 +567,25 @@
       $$("svg[data-waves]").forEach(waves);
       $$("[data-chapters]").forEach((w) => chapters(w, T1));
       drift(T1);
-      const orbit = $("[data-orbit]");
-      if (orbit && matchMedia("(min-width: 760px)").matches) {
-        gsap.to(orbit, { rotation: 40, ease: "none", scrollTrigger: { trigger: orbit.parentElement, start: "top bottom", end: "bottom top", scrub: true } });
-        $$("[data-orbit] .orbit-card").forEach((card) => {
-          gsap.to(card, { rotation: -40, ease: "none", scrollTrigger: { trigger: orbit.parentElement, start: "top bottom", end: "bottom top", scrub: true } });
-          tilt(card.firstElementChild, T1, 12);
+      const bodyWrap = $(".body-wrap");
+      if (bodyWrap) {
+        T1.onIntro(() => {
+          gsap.from(".glass-body", { y: 70, opacity: 0, scale: 0.9, duration: 1.8, ease: "expo.out" });
+          gsap.from(".hotspot", { scale: 0, duration: 0.8, ease: "back.out(2)", stagger: 0.08, delay: 0.9 });
         });
+        const spots = $$(".hotspot", bodyWrap);
+        let k = 0;
+        setInterval(() => {
+          if (document.hidden || bodyWrap.classList.contains("is-off")) return;
+          spots.forEach((h, i) => h.classList.toggle("is-show", i === k));
+          k = (k + 1) % spots.length;
+        }, 1800);
       }
-      T1.onIntro(() => gsap.from(".hero-arch img", { scale: 1.3, duration: 2.2, ease: "expo.out" }));
+      // pause the CSS anatomy loops whenever they are offscreen
+      const offIO = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle("is-off", !e.isIntersecting)));
+      $$(".organ-card, .body-wrap").forEach((el) => offIO.observe(el));
+      $$(".organ-stage").forEach((st) => tilt(st, T1, 12));
+
     },
 
     /* Starcare: kinetic italic word swap on grid paper, horizontal departments, hover previews */

@@ -374,5 +374,37 @@
   "license_url": null,
   "source": "wikimedia",
   "landing": "https://commons.wikimedia.org/w/index.php?curid=117467673"
+ },
+ "badr/mri": {
+  "title": "MRI Scanner",
+  "creator": "Joyce Kaes",
+  "license": "BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "source": "flickr",
+  "landing": "https://www.flickr.com/photos/103189636@N05/24848988506"
+ },
+ "badr/nurse": {
+  "title": "Caregiver Nurse",
+  "creator": "Direct Media",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/caregiver-nurse-PMZZ7WLOAJ"
+ },
+ "badr/wheel": {
+  "title": "Caregiver Nurse",
+  "creator": "Direct Media",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/caregiver-nurse-TBEMNLXLVQ"
+ },
+ "badr/lab": {
+  "title": "NHG Continues to Fight COVID-19",
+  "creator": "U.S. Navy Medicine",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/3394030/free-photo-image-doctor-laboratory-lab-testing-kit"
  }
 }

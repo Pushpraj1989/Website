@@ -36,7 +36,8 @@ Sources:
 - No email address is published on the site.
 - Branch street addresses and branch-level phone numbers are not on the page (city and facility type only).
 - Clinical wording on the concept is drafted, not reviewed. It needs medical sign-off before use.
-- Photography is illustrative Creative Commons imagery (see footer credits), not Badr Al Samaa's facilities or staff. Replace with the group's own photos before use.
+- No openly licensed photos of Badr Al Samaa's own hospitals exist, so hospital photography is illustrative stock (see footer credits). Ask the group for its own interior and exterior photos.
+- The glass anatomy graphics are concept illustrations drawn for this design, not medical diagrams. Have them reviewed if they are to be used clinically.
 
 Sources:
 - https://www.badralsamaahospitals.com (homepage read 11 Oct 2026)

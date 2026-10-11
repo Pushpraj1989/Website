@@ -1,11 +1,13 @@
 {% extends "base.html.j2" %}
 {% import "partials/macros.j2" as m with context %}
+{% import "partials/anatomy.j2" as an %}
 
 {% macro wave(cls, flip=false) -%}
 <svg class="wave {{ cls }}{% if flip %} wave-flip{% endif %}" viewBox="0 0 1440 120" preserveAspectRatio="none" data-waves aria-hidden="true"><path d="M0 120 L0 60 L1440 60 L1440 120 Z"/><path d="M0 120 L0 80 L1440 80 L1440 120 Z"/></svg>
 {%- endmacro %}
 
 {% block content %}
+{{ an.defs() }}
 <section class="hero" id="top">
   <canvas class="hero-fx" data-fx="floaters" aria-hidden="true"></canvas>
   <div class="wrap hero-grid">
@@ -20,7 +22,14 @@
     </div>
     <div class="hero-visual">
       <p class="giant giant-back" aria-hidden="true" data-drift="30">{{ s.theme_data.giant }}</p>
-      <div class="hero-arch" data-anim="img" data-intro>{{ m.img('hero', 'arch-media') }}</div>
+      <div class="body-wrap" data-intro-body>
+        {{ an.body() }}
+        {%- for it in s.services['items'] %}
+        <a class="hotspot" href="#c-{{ it.kind }}" style="--x: {{ '%.2f' % (it.spot[0] / 3) }}%; --y: {{ '%.2f' % (it.spot[1] / 6.4) }}%; --i: {{ loop.index0 }}">
+          <span class="hs-dot" aria-hidden="true"></span><span class="hs-label">{{ it.title }}</span>
+        </a>
+        {%- endfor %}
+      </div>
       <p class="giant giant-front" aria-hidden="true" data-drift="30">{{ s.theme_data.giant }}</p>
       {%- for b in s.theme_data.badges %}
       <div class="badge badge-{{ loop.index }}" data-anim="scale" data-intro data-delay="{{ 0.8 + loop.index0 * 0.15 }}">
@@ -79,21 +88,17 @@
     <h2 data-anim="lines">{{ s.services.title }}</h2>
     <p class="muted" data-anim="up">{{ s.services.intro }}</p>
   </div>
-  <div class="orbit-wrap">
-    <div class="orbit-core" data-anim="scale">
-      <strong>{{ s.services['items'] | length }}</strong>
-      <span>centres of<br>excellence</span>
-    </div>
-    <ul class="orbit" data-orbit>
-      {%- for it in s.services['items'] %}
-      <li class="orbit-card" style="--a: {{ (360 / s.services['items']|length) * loop.index0 }}deg">
-        <div class="orbit-inner">
-          <span class="orbit-ico">{{ icon(it.icon) }}</span>
-          <span class="orbit-t">{{ it.title }}</span>
-        </div>
-      </li>
-      {%- endfor %}
-    </ul>
+  <div class="wrap organ-grid">
+    {%- for it in s.services['items'] %}
+    <article class="organ-card" id="c-{{ it.kind }}" data-anim="up" data-delay="{{ (loop.index0 % 4) * 0.08 }}">
+      <div class="organ-stage">{{ an.organ(it.kind) }}</div>
+      <div class="organ-copy">
+        <span class="organ-n">{{ '%02d' % loop.index }}</span>
+        <h3>{{ it.title }}</h3>
+        <p>{{ it.area }}</p>
+      </div>
+    </article>
+    {%- endfor %}
   </div>
   <div class="wrap">
     <div class="chips-block" data-anim="up">
@@ -101,6 +106,15 @@
       <ul class="chips">{% for c in s.services.chips %}<li>{{ c }}</li>{% endfor %}</ul>
     </div>
   </div>
+</section>
+
+<section class="moments" aria-label="Moments of care">
+  <div class="wrap moments-row">
+    {%- for r in s.theme_data.moments %}
+    {{ m.img(r, 'moment moment-' ~ loop.index, 'img', ['1', '-1', '1.5'][loop.index0 % 3]) }}
+    {%- endfor %}
+  </div>
+  <p class="wrap moments-note">Placeholder photography. Replace with Badr Al Samaa's own hospital photos, inside and out, before use.</p>
 </section>
 
 <section class="packages" id="highlights">

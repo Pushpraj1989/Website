@@ -1,0 +1,192 @@
+{#- Glass anatomy: animated SVG illustrations drawn for the Badr Al Samaa concept.
+    defs() goes once per page; body() is the hero figure; organ(kind) draws one centre's visual.
+    All motion is CSS (shared/css/story.css), so it pauses offscreen and stops for reduced motion. -#}
+
+{%- macro defs() -%}
+<svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="g-glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/>
+      <stop offset=".45" stop-color="#bfeee8" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#0f5c55" stop-opacity=".42"/>
+    </linearGradient>
+    <linearGradient id="g-edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#9fe3da" stop-opacity=".35"/>
+    </linearGradient>
+    <radialGradient id="g-organ" cx=".35" cy=".3" r=".85">
+      <stop offset="0" stop-color="#ffe0d6"/>
+      <stop offset=".45" stop-color="#ef8a6d" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#a3301f" stop-opacity=".75"/>
+    </radialGradient>
+    <radialGradient id="g-bone" cx=".4" cy=".3" r=".9">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#cfe9e4" stop-opacity=".3"/>
+    </radialGradient>
+    <linearGradient id="g-scan" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7ff0e0" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#7ff0e0" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#7ff0e0" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="g-halo" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#7ff0e0" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#7ff0e0" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="f-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="clip-tooth"><path d="M64 58 C60 38 84 32 100 42 C116 32 140 38 136 58 C134 78 128 90 124 118 C122 138 118 166 110 166 C104 166 104 138 100 126 C96 138 96 166 90 166 C82 166 78 138 76 118 C72 90 66 78 64 58 Z"/></clipPath>
+    <clipPath id="clip-body"><path d="M150 104 L166 104 C170 116 190 122 212 128 C230 134 236 150 238 176 L246 260 C248 290 254 320 258 350 C262 370 264 386 258 398 C252 404 244 398 242 388 L236 356 C230 330 222 300 220 270 L212 196 C208 230 202 270 200 300 C206 326 210 350 208 380 C206 420 200 460 198 490 C196 530 192 570 190 600 C192 612 200 622 198 630 L102 630 C100 622 108 612 110 600 C108 570 104 530 102 490 C100 460 94 420 92 380 C90 350 94 326 100 300 C98 270 92 230 88 196 L80 270 C78 300 70 330 64 356 L58 388 C56 398 48 404 42 398 C36 386 38 370 42 350 C46 320 52 290 54 260 L62 176 C64 150 70 134 88 128 C110 122 130 116 134 104 Z M150 18 A34 42 0 1 1 149.9 18 Z"/></clipPath>
+  </defs>
+</svg>
+{%- endmacro -%}
+
+{#- ---------- hero: glass body with skeleton, organs, scan beam ---------- -#}
+{%- macro body() -%}
+{%- set half = "M150 104 L166 104 C170 116 190 122 212 128 C230 134 236 150 238 176 L246 260 C248 290 254 320 258 350 C262 370 264 386 258 398 C252 404 244 398 242 388 L236 356 C230 330 222 300 220 270 L212 196 C208 230 202 270 200 300 C206 326 210 350 208 380 C206 420 200 460 198 490 C196 530 192 570 190 600 C192 612 200 622 198 630 L164 630 C160 610 162 590 162 570 C160 520 158 460 156 420 C155 400 153 388 150 384" -%}
+<svg class="glass-body" viewBox="0 0 300 640" role="img" aria-label="Animated glass figure showing the skeleton and organs">
+  <ellipse class="body-halo" cx="150" cy="300" rx="150" ry="300" fill="url(#g-halo)"/>
+  {#- glass skin -#}
+  <g class="skin">
+    <path class="gl" d="{{ half }} Z" stroke="none"/>
+    <path class="gl" d="{{ half }} Z" stroke="none" transform="translate(300 0) scale(-1 1)"/>
+    <ellipse class="gl" cx="150" cy="60" rx="34" ry="42" stroke="none"/>
+    <path class="edge" d="{{ half }}"/>
+    <path class="edge" d="{{ half }}" transform="translate(300 0) scale(-1 1)"/>
+    <ellipse class="edge" cx="150" cy="60" rx="34" ry="42"/>
+    <path class="hl" d="M126 34 C132 24 142 20 150 20"/>
+    <path class="hl" d="M92 140 C80 150 72 166 70 186"/>
+  </g>
+  {#- skeleton -#}
+  <g class="skeleton">
+    <ellipse class="bnl" cx="150" cy="56" rx="25" ry="30"/>
+    <path class="bnl" d="M136 82 C140 92 160 92 164 82"/>
+    {%- for i in range(27) %}<rect class="vert" x="146" y="{{ 104 + i * 10 }}" width="8" height="6" rx="2"/>{% endfor %}
+    {%- for i in range(7) %}
+    {%- set y = 146 + i * 14 %}
+    <path class="rib" d="M150 {{ y }} C130 {{ y - 6 }} {{ 108 + i }} {{ y + 2 }} {{ 108 + i * 2 }} {{ y + 18 }}"/>
+    <path class="rib" d="M150 {{ y }} C170 {{ y - 6 }} {{ 192 - i }} {{ y + 2 }} {{ 192 - i * 2 }} {{ y + 18 }}"/>
+    {%- endfor %}
+    <path class="bnl" d="M150 132 L100 138 M150 132 L200 138"/>
+    <path class="bnl" d="M120 352 C110 372 120 396 150 393 C180 396 190 372 180 352 C170 364 130 364 120 352 Z"/>
+    <path class="bnl" d="M222 142 L234 256 M236 262 L250 352 M78 142 L66 256 M64 262 L50 352"/>
+    <path class="bnl" d="M178 392 L186 478 M186 494 L184 600 M122 392 L114 478 M114 494 L116 600"/>
+    <circle class="bnl" cx="186" cy="486" r="7"/>
+    <circle class="bnl" cx="114" cy="486" r="7"/>
+  </g>
+  {#- organs -#}
+  <g class="organs">
+    <path class="or o-brain" d="M130 52 C128 38 142 32 150 36 C158 32 172 38 170 52 C172 64 160 70 150 66 C140 70 128 64 130 52 Z"/>
+    <path class="or o-lung" d="M146 152 C122 150 110 180 112 212 C114 234 136 238 144 224 Z" opacity=".45"/>
+    <path class="or o-lung" d="M154 152 C178 150 190 180 188 212 C186 234 164 238 156 224 Z" opacity=".45"/>
+    <path class="or o-heart" d="M158 214 C146 206 140 196 144 188 C147 182 154 182 158 188 C162 182 170 182 172 188 C176 198 168 206 158 214 Z"/>
+    <path class="or o-liver" d="M112 238 C122 228 150 228 156 240 C150 256 126 264 114 254 Z" opacity=".6"/>
+    <path class="or o-stomach" d="M160 236 C176 230 192 238 190 254 C188 268 170 270 162 262 C168 254 166 246 160 236 Z"/>
+    <path class="gut o-gut" d="M126 286 C126 276 174 276 174 286 C174 296 126 296 126 306 C126 316 174 316 174 326"/>
+    <path class="or o-kidney" d="M126 272 C118 274 116 288 122 294 C126 290 128 282 126 272 Z" opacity=".7"/>
+    <path class="or o-kidney" d="M174 272 C182 274 184 288 178 294 C174 290 172 282 174 272 Z" opacity=".7"/>
+    <path class="or o-womb" d="M138 346 C138 336 162 336 162 346 C162 360 154 366 150 366 C146 366 138 360 138 346 Z"/>
+  </g>
+  {#- scan beam, clipped to the figure -#}
+  <g clip-path="url(#clip-body)">
+    <rect class="body-scan" x="0" y="-60" width="300" height="70" fill="url(#g-scan)"/>
+  </g>
+</svg>
+{%- endmacro -%}
+
+{#- ---------- one organ per centre (viewBox 0 0 200 200) ---------- -#}
+{%- macro organ(kind) -%}
+<svg class="organ organ-{{ kind }}" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+  <circle class="halo" cx="100" cy="104" r="78" fill="url(#g-halo)"/>
+{%- if kind == 'heart' %}
+  <g class="beat">
+    <path class="tube" d="M92 66 C88 42 100 28 118 30 C130 32 136 44 130 56"/>
+    <path class="tube" d="M80 64 C72 48 60 42 50 46"/>
+    <path class="tube" d="M112 60 C118 46 130 40 142 44"/>
+    <path class="gl" d="M100 172 C60 152 40 118 48 88 C54 64 76 54 92 64 C98 52 112 46 124 50 C148 58 160 86 152 112 C144 140 122 160 100 172 Z"/>
+    <path class="or" d="M100 160 C72 144 58 118 64 96 C68 80 82 74 94 82 C100 74 110 72 118 76 C136 82 144 102 138 120 C132 140 116 152 100 160 Z"/>
+    <path class="vein" d="M100 84 C106 104 96 124 104 150"/>
+    <path class="vein" d="M120 82 C130 100 128 120 118 138"/>
+    <path class="hl" d="M58 96 C60 80 72 70 86 72"/>
+  </g>
+  <polyline class="ecg" points="8,188 56,188 66,188 74,170 82,198 90,178 98,188 136,188 146,188 154,174 160,196 166,188 192,188"/>
+{%- elif kind == 'knee' %}
+  <path class="gl leg" d="M70 0 C66 60 64 100 72 124 C66 150 72 180 76 200 L124 200 C128 180 134 150 128 124 C136 100 134 60 130 0 Z"/>
+  <g class="femur">
+    <path class="bn" d="M88 6 L112 6 L111 86 C124 90 130 106 120 116 C112 110 106 110 100 116 C94 110 88 110 80 116 C70 106 76 90 89 86 Z"/>
+    <path class="hl" d="M93 14 L93 80"/>
+  </g>
+  <ellipse class="gl patella" cx="100" cy="104" rx="11" ry="14"/>
+  <ellipse class="cartilage" cx="100" cy="122" rx="24" ry="4"/>
+  <g class="tibia">
+    <path class="bn" d="M78 132 C84 125 116 125 122 132 L113 144 L111 194 L89 194 L87 144 Z"/>
+    <rect class="bn" x="118" y="146" width="6" height="46" rx="3"/>
+    <path class="hl" d="M94 146 L94 186"/>
+  </g>
+  <rect class="scanline" x="40" y="0" width="120" height="18" fill="url(#g-scan)"/>
+{%- elif kind == 'womb' %}
+  <circle class="gl sac" cx="100" cy="104" r="68"/>
+  <path class="hl" d="M48 82 C54 60 72 44 94 40"/>
+  <g class="fetus">
+    <path class="or" d="M106 92 C80 98 70 134 92 150 C110 164 140 152 142 128 C143 112 132 100 120 98 Z"/>
+    <circle class="or" cx="118" cy="76" r="22"/>
+    <ellipse class="or" cx="116" cy="146" rx="15" ry="8" transform="rotate(-18 116 146)"/>
+    <ellipse class="or" cx="98" cy="110" rx="9" ry="6" transform="rotate(35 98 110)"/>
+    <path class="hl" d="M104 64 C108 58 114 56 120 56"/>
+    <circle class="heartdot" cx="120" cy="116" r="4"/>
+  </g>
+  <path class="cord" d="M104 132 C88 162 60 162 48 140"/>
+  <g class="bubbles"><circle cx="70" cy="150" r="3"/><circle cx="134" cy="158" r="2"/><circle cx="84" cy="70" r="2.5"/><circle cx="146" cy="96" r="2"/></g>
+{%- elif kind == 'kidney' %}
+  {%- set kd = "M70 34 C48 36 40 68 48 92 C54 110 74 114 82 98 C76 88 76 76 84 66 C90 52 84 34 70 34 Z" %}
+  {%- set ki = "M66 46 C54 50 50 72 56 88 C60 98 70 100 74 92 C70 84 70 74 76 66 C80 58 76 46 66 46 Z" %}
+  <g class="kid kid-l"><path class="gl" d="{{ kd }}"/><path class="or" d="{{ ki }}"/><path class="hl" d="M52 60 C54 48 60 42 68 40"/></g>
+  <g transform="translate(200 0) scale(-1 1)"><g class="kid kid-r"><path class="gl" d="{{ kd }}"/><path class="or" d="{{ ki }}"/></g></g>
+  <path class="tube thin" d="M80 96 C86 126 94 138 97 152"/>
+  <path class="tube thin" d="M120 96 C114 126 106 138 103 152"/>
+  <path class="flow" d="M80 96 C86 126 94 138 97 152"/>
+  <path class="flow" d="M120 96 C114 126 106 138 103 152"/>
+  <ellipse class="gl" cx="100" cy="166" rx="24" ry="17"/>
+  <ellipse class="or fillup" cx="100" cy="172" rx="18" ry="9"/>
+{%- elif kind == 'gut' %}
+  <path class="tube" d="M88 0 L90 40"/>
+  <g class="stomach">
+    <path class="gl" d="M88 38 C82 58 70 70 66 88 C62 110 80 126 104 120 C128 114 140 96 132 76 C126 62 112 66 108 76 C104 86 96 80 98 62 C99 52 96 42 88 38 Z"/>
+    <path class="or" d="M86 56 C78 70 72 80 72 92 C72 108 86 116 104 112 C120 108 128 96 124 84 C120 76 112 80 108 88 C102 96 92 90 90 74 Z"/>
+    <path class="hl" d="M74 84 C76 72 82 62 86 56"/>
+  </g>
+  <path class="tube" d="M62 146 C62 132 138 132 138 146 C138 160 62 160 62 172 C62 186 138 186 138 198"/>
+  <path class="peri" d="M62 146 C62 132 138 132 138 146 C138 160 62 160 62 172 C62 186 138 186 138 198"/>
+{%- elif kind == 'xray' %}
+  <rect class="screen" x="16" y="16" width="168" height="168" rx="18"/>
+  <g class="xray-bones">
+    {%- for i in range(14) %}<rect class="vert" x="96" y="{{ 34 + i * 10 }}" width="8" height="7" rx="2"/>{% endfor %}
+    {%- for i in range(7) %}
+    {%- set y = 50 + i * 16 %}
+    <path class="rib" d="M100 {{ y }} C80 {{ y - 6 }} 52 {{ y + 2 }} {{ 50 + i * 2 }} {{ y + 18 }}"/>
+    <path class="rib" d="M100 {{ y }} C120 {{ y - 6 }} 148 {{ y + 2 }} {{ 150 - i * 2 }} {{ y + 18 }}"/>
+    {%- endfor %}
+    <path class="bnl" d="M100 42 L56 48 M100 42 L144 48"/>
+  </g>
+  <rect class="beam" x="16" y="16" width="168" height="28" fill="url(#g-scan)"/>
+  <path class="hud" d="M28 44 V28 H44 M156 28 H172 V44 M172 156 V172 H156 M44 172 H28 V156"/>
+{%- elif kind == 'ear' %}
+  <path class="gl" d="M124 30 C84 22 62 54 68 92 C72 118 86 128 92 150 C96 168 116 174 124 158 C132 142 114 132 118 114 C122 98 148 90 148 66 C148 46 138 34 124 30 Z"/>
+  <path class="edge" d="M118 50 C98 46 86 64 92 86 C96 102 108 106 108 122"/>
+  <path class="or canal" d="M106 96 C112 90 122 96 120 104 C118 114 106 114 104 106 Z"/>
+  <path class="hl" d="M82 60 C88 46 100 38 114 38"/>
+  <g class="waves"><path d="M52 84 C44 94 44 108 52 118"/><path d="M40 74 C28 90 28 112 40 128"/><path d="M28 64 C12 86 12 116 28 138"/></g>
+{%- elif kind == 'tooth' %}
+  <g class="tooth">
+    <path class="gl" d="M64 58 C60 38 84 32 100 42 C116 32 140 38 136 58 C134 78 128 90 124 118 C122 138 118 166 110 166 C104 166 104 138 100 126 C96 138 96 166 90 166 C82 166 78 138 76 118 C72 90 66 78 64 58 Z"/>
+    <path class="pulp" d="M100 60 C90 70 88 92 90 116 M100 60 C110 70 112 92 110 116 M90 116 C90 134 92 150 92 158 M110 116 C110 134 108 150 108 158"/>
+    <g clip-path="url(#clip-tooth)"><rect class="shine" x="20" y="20" width="26" height="170"/></g>
+    <path class="hl" d="M72 56 C72 46 80 42 88 44"/>
+  </g>
+  <path class="spark s1" d="M152 42 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 Z"/>
+  <path class="spark s2" d="M44 70 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3 Z"/>
+  <path class="spark s3" d="M150 132 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3 Z"/>
+{%- endif %}
+</svg>
+{%- endmacro -%}
