@@ -156,7 +156,46 @@
       </button>
       {%- endfor %}
     </div>
-    {{ m.locations() }}
+    <div class="curve" data-curve tabindex="0" aria-roledescription="carousel" aria-label="Branches">
+      <div class="filters curve-filters" role="group" aria-label="Filter branches by country">
+        <button class="filter" type="button" data-cfilter="all" aria-pressed="true">All <span class="filter-n">{{ s.locations['items'] | length }}</span></button>
+        {%- for c, n in s._countries %}
+        <button class="filter" type="button" data-cfilter="{{ c }}" aria-pressed="false">{{ c }} <span class="filter-n">{{ n }}</span></button>
+        {%- endfor %}
+      </div>
+      <div class="curve-stage" data-cursor="Drag">
+        <ul class="curve-track">
+          {%- for l in s.locations['items'] %}
+          {%- set im = s.images[l.image] %}
+          <li class="curve-card" data-c="{{ l.country }}" data-name="{{ l.name }}" data-type="{{ l.type }}" data-cap="{{ im.cap }}" data-address="{{ l.address or '' }}" data-phone="{{ l.phone or '' }}" data-note="{{ l.note or '' }}">
+            <img class="cc-bg" src="assets/img/{{ im.src }}" alt="" loading="lazy" decoding="async" draggable="false">
+            <div class="cc-top"><span class="cc-pill">{{ l.type }}</span><span>{{ l.country }}</span></div>
+            <div class="cc-bottom">
+              <span class="cc-n">{{ '%02d' % loop.index }}</span>
+              <h3>{{ l.name }}</h3>
+              <span class="cc-cap">{{ im.cap }}</span>
+            </div>
+          </li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- set first = s.locations['items'][0] %}
+      <div class="curve-ui">
+        <button class="curve-btn" type="button" data-cprev aria-label="Previous branch">{{ icon('arrow') }}</button>
+        <div class="curve-detail" aria-live="polite">
+          <span class="cd-type" data-d="type">{{ first.type }}</span>
+          <h3 class="cd-name" data-d="name">{{ first.name }}</h3>
+          <p class="cd-meta"><span data-d="country">{{ first.country }}</span> · <span data-d="cap">{{ s.images[first.image].cap }}</span></p>
+          <p class="cd-line" data-d="info">Branch listed on the group's website. Full address to be confirmed.</p>
+          <div class="cd-actions">
+            <a class="btn btn-primary btn-sm" href="#contact" data-d="book" data-magnetic>Book at this branch {{ icon('arrow') }}</a>
+            <a class="cd-phone" href="tel:+96822717171">24/7 helpline · +968 2271 7171</a>
+          </div>
+        </div>
+        <button class="curve-btn next" type="button" data-cnext aria-label="Next branch">{{ icon('arrow') }}</button>
+      </div>
+      <div class="curve-progress"><span data-counter>01 / {{ '%02d' % s.locations['items'] | length }}</span><i><b data-cbar></b></i></div>
+    </div>
   </div>
 </section>
 {% endblock %}

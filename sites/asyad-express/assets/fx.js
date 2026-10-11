@@ -508,7 +508,9 @@
       media.forEach((m, k) => m.classList.toggle("is-on", k === i));
       if (num) num.textContent = String(i + 1);
     };
-    items.forEach((it, i) => ScrollTrigger.create({ trigger: it, start: "top 60%", end: "bottom 60%", onToggle: (st) => st.isActive && set(i) }));
+    // on narrow screens the image is pinned over the top half, so read the chapter lower down
+    const line = matchMedia("(max-width: 960px)").matches ? "82%" : "60%";
+    items.forEach((it, i) => ScrollTrigger.create({ trigger: it, start: `top ${line}`, end: `bottom ${line}`, onToggle: (st) => st.isActive && set(i) }));
     set(0);
   }
 
@@ -521,6 +523,133 @@
   }
 
   /* =================== themes =================== */
+
+  /* ---------- curved branch slider: cards on an arc, drag / wheel / keys / filters ---------- */
+  function curveSlider(root, T1) {
+    const stage = root.querySelector(".curve-stage");
+    const all = Array.from(root.querySelectorAll(".curve-card"));
+    if (!stage || !all.length) return;
+    const counter = root.querySelector("[data-counter]");
+    const bar = root.querySelector("[data-cbar]");
+    const D = (k) => root.querySelector(`[data-d=${k}]`);
+    const detail = root.querySelector(".curve-detail");
+    const pad = (n) => String(n).padStart(2, "0");
+    let cards = all.slice(), pos = 0, target = 0, drag = null, hover = false, visible = false, last = 0;
+    root.classList.add("is-curve");
+
+    const spacing = () => Math.min(Math.max(stage.clientWidth * 0.24, 170), 330);
+    const layout = () => {
+      const sp = spacing();
+      all.forEach((c) => { if (!cards.includes(c)) c.style.cssText = "opacity:0;visibility:hidden;pointer-events:none"; });
+      cards.forEach((c, i) => {
+        let d = i - pos;
+        const n = cards.length;
+        if (n > 4) d = ((d % n) + n + n / 2) % n - n / 2; // wrap so the arc loops
+        const a = Math.abs(d);
+        const hide = a > 3.4;
+        c.style.cssText = `transform: translate(-50%,-50%) translate3d(${d * sp}px, ${d * d * 18}px, ${-a * 170}px) rotateY(${-d * 18}deg) rotateZ(${d * 3}deg);` +
+          `opacity:${hide ? 0 : Math.min(1, Math.max(0, (3.4 - a) / 0.9))};z-index:${100 - Math.round(a * 10)};visibility:${hide ? "hidden" : "visible"};` +
+          `filter:brightness(${1 - Math.min(a, 3) * 0.13});`;
+        c.classList.toggle("is-active", a < 0.5);
+      });
+    };
+    const active = () => cards[((Math.round(pos) % cards.length) + cards.length) % cards.length];
+    const show = () => {
+      const c = active(); if (!c) return;
+      const i = cards.indexOf(c);
+      if (counter) counter.textContent = `${pad(i + 1)} / ${pad(cards.length)}`;
+      if (bar) bar.style.transform = `scaleX(${(i + 1) / cards.length})`;
+      if (c === last) return; last = c;
+      const v = c.dataset;
+      D("type").textContent = v.type; D("name").textContent = v.name; D("country").textContent = v.c; D("cap").textContent = v.cap;
+      D("info").textContent = v.note || v.address || `${v.type} in ${v.c}, listed on the group's website. Full address and opening hours to be confirmed.`;
+      if (T1.motion && T1.gsap) T1.gsap.fromTo(detail.children, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "expo.out", stagger: 0.05, overwrite: true });
+    };
+    const go = (t) => { target = t; };
+    const snapTo = (i) => { // nearest equivalent index so wrap-around goes the short way
+      const n = cards.length; let t = i;
+      if (n > 4) t = Math.round(pos) + ((((i - Math.round(pos)) % n) + n + n / 2) % n - n / 2);
+      go(t);
+    };
+    let dirty = true;
+    window.addEventListener("resize", () => (dirty = true));
+    const tick = () => {
+      if (!drag) pos += (target - pos) * (T1.reduce ? 1 : 0.12);
+      if (Math.abs(target - pos) < 0.001) pos = target;
+      if (dirty || drag || pos !== target) { layout(); show(); dirty = pos !== target; }
+      requestAnimationFrame(tick);
+    };
+
+    // pointer drag
+    stage.addEventListener("pointerdown", (e) => {
+      drag = { x: e.clientX, p: pos, moved: false };
+      root.classList.add("is-drag");
+    });
+    window.addEventListener("pointermove", (e) => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (Math.abs(dx) > 6) drag.moved = true;
+      pos = drag.p - dx / spacing(); target = pos;
+    });
+    window.addEventListener("pointerup", () => {
+      if (!drag) return;
+      const moved = drag.moved; drag = null; root.classList.remove("is-drag");
+      go(Math.round(pos));
+      if (moved) { stage.dataset.justDragged = "1"; setTimeout(() => delete stage.dataset.justDragged, 50); }
+    });
+    stage.addEventListener("click", (e) => {
+      const c = e.target.closest(".curve-card");
+      if (!c || stage.dataset.justDragged) return;
+      if (c === active()) root.querySelector("[data-d=book]").click(); else snapTo(cards.indexOf(c));
+    });
+    // horizontal wheel / trackpad swipe only, so vertical page scroll is never trapped
+    let wheelLock = 0;
+    stage.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || Math.abs(e.deltaX) < 8) return;
+      e.preventDefault();
+      const now = Date.now(); if (now - wheelLock < 260) return; wheelLock = now;
+      go(Math.round(target) + Math.sign(e.deltaX));
+    }, { passive: false });
+    root.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") { go(Math.round(target) + 1); e.preventDefault(); }
+      if (e.key === "ArrowLeft") { go(Math.round(target) - 1); e.preventDefault(); }
+    });
+    root.querySelector("[data-cprev]").addEventListener("click", () => go(Math.round(target) - 1));
+    root.querySelector("[data-cnext]").addEventListener("click", () => go(Math.round(target) + 1));
+
+    // book: preselect this branch in the form
+    root.querySelector("[data-d=book]").addEventListener("click", () => {
+      const sel = document.getElementById("f-branch"), c = active();
+      if (sel && c) { const want = `${c.dataset.name} · ${c.dataset.c}`; Array.from(sel.options).forEach((o) => { if (o.text === want) sel.value = o.value || o.text; }); }
+    });
+
+    // country filters (buttons inside the slider + the country cards above it)
+    const filterBtns = Array.from(root.querySelectorAll("[data-cfilter]"));
+    const filter = (val) => {
+      filterBtns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.cfilter === val)));
+      cards = all.filter((c) => val === "all" || c.dataset.c === val);
+      pos = Math.min(2, cards.length - 1) + 0.9; target = 0; last = 0; dirty = true;
+      if (cards.length <= 4) pos = cards.length - 1 + 0.6;
+    };
+    filterBtns.forEach((b) => b.addEventListener("click", () => filter(b.dataset.cfilter)));
+    document.querySelectorAll("[data-filter-proxy]").forEach((b) => b.addEventListener("click", () => {
+      filter(b.dataset.filterProxy);
+      if (T1.scrollTo) T1.scrollTo(root, { offset: -90 }); else root.scrollIntoView({ behavior: "smooth", block: "center" });
+    }));
+
+    // autoplay while on screen and not being used
+    root.addEventListener("pointerenter", () => (hover = true));
+    root.addEventListener("pointerleave", () => (hover = false));
+    root.addEventListener("focusin", () => (hover = true));
+    root.addEventListener("focusout", () => (hover = false));
+    new IntersectionObserver((es) => es.forEach((e) => (visible = e.isIntersecting)), { threshold: 0.35 }).observe(root);
+    if (!T1.reduce) setInterval(() => { if (visible && !hover && !drag && !document.hidden) go(Math.round(target) + 1); }, 3600);
+
+    // entrance: fan the arc open from the centre
+    pos = 3.5;
+    tick();
+  }
+
   const THEMES = {
     /* Galfar: Ember-style fire, condensed type, assembling units, stacked project panels */
     ember(T1) {
@@ -623,6 +752,7 @@
 
   window.T1FX = (T1) => {
     const theme = document.body.dataset.theme;
+    document.querySelectorAll("[data-curve]").forEach((r) => curveSlider(r, T1)); // works with or without motion
     if (!T1.motion || !THEMES[theme]) return;
     THEMES[theme](T1);
   };
