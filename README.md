@@ -32,9 +32,13 @@ a full-screen mobile menu.
 The output is plain static files, so any web server works. Upload `index.html`,
 `assets/` and `sites/` to the web root (or a sub-folder); every link is relative.
 
-- **Your own server:** copy those three items into the site folder (for example
-  `/var/www/tier1-concepts/`). Each company's link is then
-  `https://<your-domain>/<folder>/sites/<slug>/`.
+- **Your own server (one command):** `./deploy/deploy.sh root@<server-ip>` uploads
+  the sites to `/var/www/tier1-concepts`, installs nginx if needed, and adds one
+  server block that answers only for the server's IP, so other sites are untouched.
+  Links: `http://<server-ip>/` (hub) and `http://<server-ip>/sites/<slug>/`.
+  Use `SSH_KEY=path/to/key` to pick a specific key. Re-running it redeploys and
+  keeps the previous copy in `/var/www/tier1-concepts.old`.
+- **Manual upload:** copy those three items into any web root; links are relative.
 - **GitHub Pages:** `.github/workflows/pages.yml` deploys on every push to
   `tier1-concept-sites` once Pages is switched on (see the comments at the top of
   the workflow). Links become
