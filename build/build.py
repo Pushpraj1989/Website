@@ -297,6 +297,7 @@ def render_site(env, site):
     (out_dir / "assets" / "img").mkdir(parents=True)
     shutil.copy(SHARED / "css" / "core.css", out_dir / "assets" / "core.css")
     shutil.copy(SHARED / "css" / f"{site['theme']}.css", out_dir / "assets" / f"{site['theme']}.css")
+    shutil.copy(SHARED / "css" / "styles.css", out_dir / "assets" / "styles.css")
     for js in ("core.js", "fx.js"):
         shutil.copy(SHARED / "js" / js, out_dir / "assets" / js)
     shutil.copytree(SHARED / "vendor", out_dir / "assets" / "vendor")
@@ -305,6 +306,25 @@ def render_site(env, site):
         if not src.exists():
             raise SystemExit(f"missing image for {site['slug']}: {src}")
         shutil.copy(src, out_dir / "assets" / "img" / im)
+    # scroll-scrubbed footage: videos and frame folders named in home sections
+    media = []
+    for m in site.get("home") or []:
+        if isinstance(m, dict) and m.get("type") == "scrub":
+            for k in ("video", "video_m"):
+                if m.get(k):
+                    media.append(m[k])
+                    webm = m[k].rsplit(".", 1)[0] + ".webm"
+                    if (SHARED / "img" / site["img_dir"] / webm).exists():
+                        media.append(webm)
+            if m.get("frames"):
+                media.append(m["frames"]["dir"])
+    for name in media:
+        src = SHARED / "img" / site["img_dir"] / name
+        if not src.exists():
+            raise SystemExit(f"missing media for {site['slug']}: {src}")
+        dst = out_dir / "assets" / "media" / name
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(src, dst) if src.is_dir() else shutil.copy(src, dst)
     for old in out_dir.glob("*.html"):
         old.unlink()
     for page in site["_pages"]:

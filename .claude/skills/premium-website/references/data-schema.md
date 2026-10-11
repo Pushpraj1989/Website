@@ -15,6 +15,7 @@ other block switches on a feature when present. Working examples:
 "accent": "#d48c4f",
 "brand": {                     // studio theme only
   "mode": "dark",              // dark | light
+  "style": "glass",            // optional: glass | liquid | neumorph | clay | skeuo | brutal | minimal | maximal | bento | spatial
   "bg": "#130e0b", "fg": "#f4ebe1", "accent": "#d48c4f", "accent_ink": "#130e0b", "alt": "#1b1410",
   "font_display": "\"Fraunces\", Georgia, serif", "font_body": "\"Inter\", system-ui, sans-serif",
   "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Fraunces...&family=Inter..."
@@ -35,7 +36,27 @@ other block switches on a feature when present. Working examples:
   "services", "stats", "testimonials", "partners", "news", "locations", "emi", "bmi", "faq"]
 ```
 Section types: promo, rail, statement, stats, services, catalogue, assemble, split, news,
-testimonials, partners, locations, faq, bmi, emi. Order is yours.
+testimonials, partners, locations, faq, bmi, emi, depth, scrub, stages. Order is yours.
+
+```json
+{"type": "depth", "id": "hero", "height": 200, "kicker": "…", "title": "Find what moves you", "text": "…", "cta": {"label": "…", "href": "…"},
+ "cap": "Illustrative render",
+ "layers": [                                     // back to front
+   {"image": "sky", "speed": 0.15, "scale": 0.05},
+   {"clouds": true, "speed": 0.3, "y": 55, "tint": "#ffffff", "count": 7},
+   {"title": true, "speed": 0.5},                // headline plane
+   {"image": "building-cutout", "speed": 0.25, "fit": "contain", "bottom": "70%"},
+   {"clouds": true, "front": true, "speed": 0.9, "y": 75}]}
+
+{"type": "scrub", "id": "build", "video": "film.mp4", "video_m": "film-m.mp4", "poster": "img-key", "height": 320, "align": "left",
+ // or "frames": {"dir": "seq-build", "count": 180, "ext": "webp"}
+ "beats": [{"at": 0, "kicker": "01", "title": "Wake the beans", "text": "…"}, {"at": 0.4, "title": "…"}, {"at": 0.7, "title": "…", "cta": {…}}]}
+
+{"type": "stages", "id": "progress", "kicker": "Construction", "title": "From plot to keys",
+ "stages": [{"image": "plot", "label": "Plot", "title": "…", "text": "…", "date": "Q1 2025"}, …]}
+```
+Video files and frame folders live in `shared/img/<img_dir>/`; make them with
+`tools/encode.sh` (writes .mp4 and .webm) or `tools/frames.sh`.
 
 ## Images
 

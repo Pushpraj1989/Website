@@ -21,6 +21,9 @@ video) the person shares to items here; build new modules only for what is missi
 | locations | 3D curved slider + live detail panel (map, timings, phones, actions) | branches, stores |
 | faq | Accordion | always useful |
 | bmi / emi | On-device calculators | health / finance, property, cars |
+| depth | Layered hero: sky/subject/foreground planes and generated clouds move at different rates on scroll and lean with the pointer; headline between planes | real estate, hotels, travel, any hero-led brand |
+| scrub | Pinned full-screen film (video or image sequence) that advances with the scroll; text beats change over it; progress line | product pour/burst, construction time-lapse, fly-through, process |
+| stages | Pinned storyline of stills that wipe one into the next with a labelled progress rail | construction progress, how-it's-made, project phases, history |
 
 ## Pages (generated from data)
 
@@ -50,6 +53,10 @@ reduced-motion and no-JS fallbacks.
 | Parallax (`data-speed`), drift of giant words (`data-drift`) | images, headings |
 | Tilt on hover (`data-tilt`), magnetic buttons (`data-magnetic`) | cards, CTAs |
 | Count-up numbers (`data-count`) | stats |
+| Scroll-scrubbed video (blob-loaded, MP4 + WebM) or canvas image sequence | scrub |
+| Multi-plane depth parallax with pointer lean, CSS-generated drifting clouds | depth |
+| Clip-path wipes between stills with a progress rail | stages |
+| Ten surface styles (`brand.style`) | whole site |
 
 ## Building something new
 

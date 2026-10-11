@@ -1,0 +1,60 @@
+/* Design-style systems. Set "style" in the brand block (studio theme) and the whole site
+   changes surface treatment: cards, panels, buttons, chips, the rail and the branch panel.
+   Styles: glass, liquid, neumorph, clay, skeuo, brutal, minimal, maximal, bento, spatial. */
+
+/* --- Glassmorphism: frosted translucent panels over colour --- */
+body[data-style="glass"] { background-image: radial-gradient(60vw 60vw at 10% 0%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 60%), radial-gradient(50vw 50vw at 100% 40%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%); background-attachment: fixed; }
+body[data-style="glass"] :is(.pc, .sg-card, .point-card, .bpanel, .rail-box, .side-list, .dr-card, .pk-card, .nutri, .bmi, .faq-list) { background: color-mix(in srgb, var(--fg) 7%, transparent); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4); border: 1px solid color-mix(in srgb, var(--fg) 18%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 25%, transparent), 0 30px 60px -30px rgba(0, 0, 0, .4); }
+body[data-style="glass"] .btn-ghost { backdrop-filter: blur(10px); background: color-mix(in srgb, var(--fg) 8%, transparent); }
+
+/* --- Liquid glass: thicker refraction, specular edge, pill shapes --- */
+body[data-style="liquid"] { --radius: 28px; }
+body[data-style="liquid"] :is(.pc, .sg-card, .point-card, .bpanel, .rail-box, .side-list, .dr-card, .pk-card, .nutri, .bmi) { background: linear-gradient(135deg, color-mix(in srgb, #fff 14%, transparent), color-mix(in srgb, #fff 3%, transparent)); backdrop-filter: blur(24px) saturate(1.8) contrast(1.05); -webkit-backdrop-filter: blur(24px) saturate(1.8); border: 1px solid color-mix(in srgb, #fff 30%, transparent); box-shadow: inset 1px 1px 0 color-mix(in srgb, #fff 45%, transparent), inset -1px -1px 0 color-mix(in srgb, #000 12%, transparent), 0 20px 50px -20px rgba(0, 0, 0, .45); }
+body[data-style="liquid"] :is(.btn, .filter, .rail-item, .bp-act) { border-radius: 999px; box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 40%, transparent); }
+
+/* --- Neumorphism: soft extruded surfaces, same colour as the page --- */
+body[data-style="neumorph"] { --neu-l: color-mix(in srgb, var(--bg) 70%, #fff); --neu-d: color-mix(in srgb, var(--bg) 82%, #000); }
+body[data-style="neumorph"] :is(.pc, .sg-card, .point-card, .bpanel, .rail-box, .side-list, .dr-card, .pk-card, .nutri, .bmi, .faq-item) { background: var(--bg); border: 0; box-shadow: 10px 10px 24px var(--neu-d), -10px -10px 24px var(--neu-l); }
+body[data-style="neumorph"] :is(.btn-ghost, .filter, .rail-item, .bp-act, .curve-btn) { background: var(--bg); border: 0; box-shadow: 5px 5px 12px var(--neu-d), -5px -5px 12px var(--neu-l); }
+body[data-style="neumorph"] :is(.filter[aria-pressed="true"], .pd-chip.is-on) { box-shadow: inset 4px 4px 10px var(--neu-d), inset -4px -4px 10px var(--neu-l); background: var(--bg); color: var(--accent); }
+
+/* --- Claymorphism: puffy, rounded, inner highlight and drop shadow --- */
+body[data-style="clay"] { --radius: 30px; }
+body[data-style="clay"] :is(.pc, .sg-card, .point-card, .bpanel, .rail-box, .side-list, .dr-card, .pk-card, .nutri, .bmi) { border: 0; border-radius: 32px; background: color-mix(in srgb, var(--accent) 10%, var(--bg)); box-shadow: inset -8px -8px 16px color-mix(in srgb, #000 10%, transparent), inset 8px 8px 16px color-mix(in srgb, #fff 45%, transparent), 0 24px 40px -18px color-mix(in srgb, var(--accent) 50%, transparent); }
+body[data-style="clay"] :is(.btn, .filter, .rail-item) { border-radius: 22px; box-shadow: inset -4px -4px 8px color-mix(in srgb, #000 14%, transparent), inset 4px 4px 8px color-mix(in srgb, #fff 40%, transparent); }
+
+/* --- Skeuomorphism: real materials, bevels, textures --- */
+body[data-style="skeuo"] :is(.pc, .sg-card, .point-card, .bpanel, .rail-box, .side-list, .dr-card, .pk-card, .nutri, .bmi) { background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 88%, #fff), color-mix(in srgb, var(--bg) 92%, #000)); border: 1px solid color-mix(in srgb, #000 30%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 35%, transparent), 0 2px 0 color-mix(in srgb, #000 25%, transparent), 0 18px 30px -16px rgba(0, 0, 0, .6); }
+body[data-style="skeuo"] .btn-primary { background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 80%, #fff), var(--accent) 55%, color-mix(in srgb, var(--accent) 80%, #000)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 3px 0 color-mix(in srgb, var(--accent) 60%, #000); }
+
+/* --- Brutalism: hard edges, thick borders, offset shadows, mono labels --- */
+body[data-style="brutal"] { --radius: 0px; }
+body[data-style="brutal"] :is(.pc, .sg-card, .point-card, .bpanel, .rail-box, .side-list, .side-card, .dr-card, .pk-card, .nutri, .bmi, .faq-item, .pc-media, .nl-media, .nc-media, .feature-media, .splitf-media, .pd-media) { border-radius: 0 !important; border: 3px solid var(--fg) !important; box-shadow: 8px 8px 0 var(--fg) !important; }
+body[data-style="brutal"] :is(.btn, .filter, .rail-item, .bp-act, .pd-chip, .cc-pill, .pc-badge) { border-radius: 0 !important; border: 3px solid var(--fg) !important; box-shadow: 4px 4px 0 var(--fg); text-transform: uppercase; letter-spacing: .04em; }
+body[data-style="brutal"] :is(.eyebrow, .pc-cat, .feature-n) { font-family: var(--font-mono); }
+body[data-style="brutal"] :is(.pc, .sg-card):hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0 var(--accent) !important; }
+
+/* --- Minimalism: hairlines, lots of air, no shadows --- */
+body[data-style="minimal"] :is(.pc, .sg-card, .point-card, .bpanel, .rail-box, .side-list, .dr-card, .pk-card, .nutri, .bmi) { background: transparent; box-shadow: none !important; border: 1px solid var(--line); border-radius: 4px; }
+body[data-style="minimal"] .pg-section, body[data-style="minimal"] .sgrid, body[data-style="minimal"] .cstrip { padding-block: clamp(6rem, 12vw, 11rem); }
+body[data-style="minimal"] .pc:hover, body[data-style="minimal"] .sg-card:hover { transform: none; border-color: var(--fg); }
+
+/* --- Maximalism: saturated colour blocks, big type, stickers --- */
+body[data-style="maximal"] .pc:nth-child(4n+1) .pc-media { background: color-mix(in srgb, var(--accent) 70%, #ff3d7f); }
+body[data-style="maximal"] .pc:nth-child(4n+2) .pc-media { background: color-mix(in srgb, var(--accent) 40%, #2ec4ff); }
+body[data-style="maximal"] .pc:nth-child(4n+3) .pc-media { background: color-mix(in srgb, var(--accent) 40%, #ffd23f); }
+body[data-style="maximal"] .pc:nth-child(4n) .pc-media { background: color-mix(in srgb, var(--accent) 40%, #7cff6b); }
+body[data-style="maximal"] :is(.pg-h2, .asm-title, .stmt-text, .promo-t) { font-size: clamp(3rem, 8vw, 7.5rem); line-height: .92; }
+body[data-style="maximal"] .pc-badge { transform: rotate(-6deg); font-size: .85rem; padding: .5rem .9rem; }
+
+/* --- Bento grid: product and service grids become mixed-size tiles --- */
+body[data-style="bento"] :is(.pc-grid, .sgrid-list, .point-grid) { grid-template-columns: repeat(4, 1fr); grid-auto-rows: minmax(220px, auto); grid-auto-flow: dense; }
+body[data-style="bento"] :is(.pc-grid, .sgrid-list, .point-grid) > :nth-child(6n+1) { grid-column: span 2; grid-row: span 2; }
+body[data-style="bento"] :is(.pc-grid, .sgrid-list, .point-grid) > :nth-child(6n+4) { grid-column: span 2; }
+body[data-style="bento"] :is(.pc, .sg-card, .point-card) { border-radius: 26px; }
+@media (max-width: 760px) { body[data-style="bento"] :is(.pc-grid, .sgrid-list, .point-grid) { grid-template-columns: 1fr 1fr; } body[data-style="bento"] :is(.pc-grid, .sgrid-list, .point-grid) > * { grid-column: span 1 !important; grid-row: span 1 !important; } body[data-style="bento"] :is(.pc-grid, .sgrid-list) > :nth-child(3n+1) { grid-column: span 2 !important; } }
+
+/* --- Spatial UI: floating panels with depth, perspective and glow --- */
+body[data-style="spatial"] main { perspective: 1600px; }
+body[data-style="spatial"] :is(.pc, .sg-card, .point-card, .bpanel, .rail-box, .dr-card, .pk-card, .bmi) { background: color-mix(in srgb, var(--fg) 6%, transparent); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid color-mix(in srgb, var(--fg) 14%, transparent); border-radius: 28px; box-shadow: 0 50px 100px -40px rgba(0, 0, 0, .6), 0 0 0 1px color-mix(in srgb, #fff 6%, transparent), 0 0 60px -20px color-mix(in srgb, var(--accent) 40%, transparent); transform: translateZ(0) rotateX(2deg); }
+body[data-style="spatial"] :is(.pc, .sg-card):hover { transform: translateZ(40px) rotateX(0deg); }

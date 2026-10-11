@@ -496,5 +496,92 @@
 {%- elif t == 'faq' %}{{ faq() }}
 {%- elif t == 'bmi' %}{{ bmi() }}
 {%- elif t == 'emi' %}{{ emi() }}
+{%- elif t == 'scrub' %}{{ scrub(m) }}
+{%- elif t == 'depth' %}{{ depth(m) }}
+{%- elif t == 'stages' %}{{ stages(m) }}
 {%- endif %}
+{%- endmacro -%}
+
+{%- macro scrub(m) -%}
+{#- Scroll-scrubbed footage: a video (encoded with tools/encode.sh) or an image sequence
+    (tools/frames.sh) advances with the scroll while text beats change over it. -#}
+{%- set H = m.height or 300 %}
+<section class="scrub" id="{{ m.id or 'scrub' }}" data-scrub style="--scrub-h: {{ H }}vh" aria-label="{{ m.label or (m.beats[0].title if m.beats else 'Film') }}">
+  <div class="scrub-stage">
+    {%- if m.poster %}<img class="scrub-poster" src="{{ src(m.poster) }}" alt="" aria-hidden="true">{% endif %}
+    {%- if m.video %}
+    <video class="scrub-media" muted playsinline preload="auto" data-src="assets/media/{{ m.video }}"{% if m.video_m %} data-src-m="assets/media/{{ m.video_m }}"{% endif %}{% if m.poster %} poster="{{ src(m.poster) }}"{% endif %}></video>
+    {%- elif m.frames %}
+    <canvas class="scrub-media" data-frames="assets/media/{{ m.frames.dir }}/" data-count="{{ m.frames.count }}" data-ext="{{ m.frames.ext or 'webp' }}" data-pad="{{ m.frames.pad or 3 }}"></canvas>
+    {%- endif %}
+    <div class="scrub-shade" aria-hidden="true"></div>
+    <div class="wrap scrub-beats scrub-{{ m.align or 'left' }}">
+      {%- for b in m.beats or [] %}
+      <div class="scrub-beat" data-at="{{ b.at if b.at is defined else (loop.index0 / loop.length) }}">
+        {%- if b.kicker %}<p class="eyebrow">{{ b.kicker }}</p>{% endif %}
+        {%- if b.title %}<h2 class="scrub-title">{{ b.title }}</h2>{% endif %}
+        {%- if b.text %}<p class="scrub-text">{{ b.text }}</p>{% endif %}
+        {%- if b.cta %}<a class="btn btn-primary" href="{{ b.cta.href }}">{{ b.cta.label }} {{ icon('arrow') }}</a>{% endif %}
+      </div>
+      {%- endfor %}
+    </div>
+    <div class="scrub-bar" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+{%- endmacro -%}
+
+{%- macro depth(m) -%}
+{#- Layered hero: independent planes (sky, subject, foreground, generated clouds) move at different
+    rates as you scroll and lean with the pointer; the headline can sit between planes. -#}
+<section class="depth" id="{{ m.id or 'depth' }}" data-depth style="--depth-h: {{ m.height or 200 }}vh">
+  <div class="depth-stage">
+    {%- for l in m.layers %}
+    {%- if l.clouds %}
+    <div class="depth-layer depth-clouds{% if l.front %} is-front{% endif %}" data-speed="{{ l.speed or 0.6 }}" data-lean="{{ l.lean or 18 }}" style="--tint: {{ l.tint or '#ffffff' }}; z-index: {{ l.z or (loop.index * 10) }}; --cy: {{ l.y or 70 }}%" aria-hidden="true">
+      {%- for k in range(l.count or 9) %}<i style="--x: {{ (k * 37 + 7) % 100 }}%; --y: {{ (k * 23 + 11) % 34 }}%; --s: {{ 0.7 + (k % 4) * 0.25 }}; --d: {{ 40 + (k % 5) * 14 }}s; --o: {{ 0.55 + (k % 3) * 0.15 }}"></i>{% endfor %}
+    </div>
+    {%- elif l.title %}
+    <div class="depth-layer depth-copy" data-speed="{{ l.speed or 0.35 }}" data-fade="1" style="z-index: {{ l.z or (loop.index * 10) }}">
+      <div class="wrap">
+        {%- if m.kicker %}<p class="eyebrow">{{ m.kicker }}</p>{% endif %}
+        <h1 class="depth-title">{{ m.title }}</h1>
+        {%- if m.text %}<p class="depth-text">{{ m.text }}</p>{% endif %}
+        {%- if m.cta %}<a class="btn btn-primary" href="{{ m.cta.href }}" data-magnetic>{{ m.cta.label }} {{ icon('arrow') }}</a>{% endif %}
+      </div>
+    </div>
+    {%- else %}
+    <div class="depth-layer" data-speed="{{ l.speed or 0.2 }}" data-scale="{{ l.scale or 0 }}" data-lean="{{ l.lean or 8 }}" style="z-index: {{ l.z or (loop.index * 10) }}">
+      <img src="{{ src(l.image) }}" alt="{{ s.images[l.image].alt if l.alt is not defined else l.alt }}" style="object-position: {{ l.position or 'center' }}; {% if l.fit == 'contain' %}object-fit: contain;{% endif %}{% if l.bottom %} top: auto; bottom: 0; height: {{ l.bottom }};{% endif %}">
+    </div>
+    {%- endif %}
+    {%- endfor %}
+    {%- if m.cap %}<span class="depth-cap">{{ m.cap }}</span>{% endif %}
+  </div>
+</section>
+{%- endmacro -%}
+
+{%- macro stages(m) -%}
+{#- Storyline of stills (renders, construction progress, process steps) that wipe from one to the
+    next as you scroll, with a progress rail of labelled stages. -#}
+<section class="stages" id="{{ m.id or 'stages' }}" data-stages style="--stages-n: {{ m.stages | length }}">
+  <div class="stages-stage">
+    {%- for st in m.stages %}
+    <figure class="stg-img" data-i="{{ loop.index0 }}"><img src="{{ src(st.image) }}" alt="{{ s.images[st.image].alt }}" loading="lazy"></figure>
+    {%- endfor %}
+    <div class="stages-shade" aria-hidden="true"></div>
+    <div class="wrap stages-copy">
+      {%- if m.kicker %}<p class="eyebrow">{{ m.kicker }}</p>{% endif %}
+      {%- if m.title %}<h2 class="stages-title">{{ m.title }}</h2>{% endif %}
+      <div class="stg-texts">
+        {%- for st in m.stages %}
+        <div class="stg-text" data-i="{{ loop.index0 }}"><span class="stg-n">{{ '%02d' % loop.index }}{% if st.date %} · {{ st.date }}{% endif %}</span><h3>{{ st.title or st.label }}</h3>{% if st.text %}<p>{{ st.text }}</p>{% endif %}</div>
+        {%- endfor %}
+      </div>
+    </div>
+    <ol class="stg-rail">
+      {%- for st in m.stages %}<li data-i="{{ loop.index0 }}"><i></i><span>{{ st.label }}</span></li>{% endfor %}
+      <b class="stg-fill" aria-hidden="true"></b>
+    </ol>
+  </div>
+</section>
 {%- endmacro -%}

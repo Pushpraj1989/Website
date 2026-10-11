@@ -36,21 +36,31 @@ Ask the questions in [references/intake.md](references/intake.md), in four short
 2. Go deeper where the preset's `scrape_focus` says (doctors, menu, products with prices,
    branches with phones/hours/maps, projects, rates, news). Delegate big sites to sub-agents,
    one per area, each writing JSON with a `src` on every item.
-3. Study the references they gave (sites, Figma, videos, Instagram reels): list the motion and
-   layout ideas you will reuse and map each to a module in [references/modules.md](references/modules.md).
-4. Note every error or contradiction on their current site (old names, conflicting numbers,
+3. Study the references they gave (sites, Figma, videos, Instagram reels). For videos, pull
+   frames (`ffmpeg -i clip.mp4 -vf fps=1.5,scale=300:-1 f%02d.jpg`) and look at them. List the
+   motion, layout and style ideas you will reuse and map each to a module in
+   [references/modules.md](references/modules.md) or a style in [references/craft.md](references/craft.md).
+4. Collect footage: project films, product clips, reels. Encode clips for scrubbing with
+   `tools/encode.sh` (MP4 + WebM) or turn them into frames with `tools/frames.sh`.
+   Optional paid helpers (Apify for Instagram, generation tools): [references/integrations.md](references/integrations.md).
+5. Note every error or contradiction on their current site (old names, conflicting numbers,
    dead links). These go into `confirm` and you never copy them as fact.
 
 ### 3. Plan: pages, sections, signature graphic
 
-Pick the preset (`ls presets/`, see [references/sectors.md](references/sectors.md)) and decide:
+Read [references/craft.md](references/craft.md) first. Pick the preset (`ls presets/`, see
+[references/sectors.md](references/sectors.md)) and decide:
 - theme: `studio` (data-driven; default for any new company) or a signature theme
   (story, clinic, ember, cosmos, editorial, route) when they want that exact look;
 - `home`: the ordered list of sections;
 - pages: services, catalogue (menu/products/plans), locations with branch pages, news, plus
   sector extras (doctor directory, packages, compare, projects…);
+- design style `brand.style`: glass, liquid, neumorph, clay, skeuo, brutal, minimal, maximal, bento, spatial;
 - slider transition `promo_fx`: flow, burn, pixel, blinds, streak, ripple;
-- the signature graphic: product assembly (`assemble`), anatomy, globe, particles, embers…
+- page grammar, feeling curve and the one peak (craft.md);
+- the signature graphic: layered `depth` hero, scroll-scrubbed `scrub` film, `stages` story,
+  product `assemble`, anatomy, globe, particles, embers…
+Write `briefs/<slug>.plan.md` ([references/plan-template.md](references/plan-template.md)).
 Show the person a short sitemap and home section list. Continue unless they object.
 
 ### 4. Build the data
@@ -63,7 +73,8 @@ Show the person a short sitemap and home section list. Continue unless they obje
    - Branches: address, phones, hours, map coordinates or a directions link.
    - `assemble`: 1–2 hero products, bottom layer first, 4–7 layers, each with a name and a
      one-line note. Use `image` layers with transparent packshots when the brand has them.
-3. Photos go in `shared/img/<slug>/` (max 1800 px wide, JPEG ~78). Add each to `images`
+3. Run the copy pass on everything you wrote: [references/copy.md](references/copy.md).
+4. Photos go in `shared/img/<slug>/` (max 1800 px wide, JPEG ~78). Add each to `images`
    with alt text and a caption; add licence info to `data/credits.json` (company-owned:
    `"owner": true`; stock: CC0 / CC BY with creator). Caption non-literal photos "Illustrative".
    Rules: [references/content-rules.md](references/content-rules.md).
@@ -93,8 +104,9 @@ items they must confirm. Say plainly what is sample or unverified.
   rail, stats, catalogue strip or services grid, one signature graphic, social proof or news,
   locations, FAQ.
 - Nudges: news-flash ticker, floating contact dock, phone action bar, one honest offer slide-in.
-- Motion: reveals animate when scrolling down and back up; at least one scroll-scrubbed
-  graphic; page transitions; same graphic level on phones (not a plain list).
+- Motion: reveals animate when scrolling down and back up; a layered hero or scrubbed film;
+  at least one scroll-scrubbed graphic; page transitions; same graphic level on phones.
+- Craft: one grammar, one peak, one style, typography floor (craft.md); copy pass done.
 - Real content with sources; nothing invented; `confirm` lists every open question.
 - `tools/qa.py` passes: no errors, no missing files, no sideways scroll, nothing stuck hidden,
   reduced motion shows everything.

@@ -194,6 +194,39 @@
       "text": "Small-batch coffee, roasted on Tuesdays and poured with care, every day of the week."
     },
     {
+      "type": "scrub",
+      "id": "from-bean-to-cup",
+      "video": "film.mp4",
+      "video_m": "film-m.mp4",
+      "poster": "beans",
+      "height": 320,
+      "label": "From bean to cup",
+      "beats": [
+        {
+          "at": 0,
+          "kicker": "01 · Origin",
+          "title": "Wake the beans",
+          "text": "Four origins, bought direct and roasted in small batches."
+        },
+        {
+          "at": 0.36,
+          "kicker": "02 · Roast",
+          "title": "Roasted on Tuesdays",
+          "text": "Every batch rests for three days before it reaches the bar."
+        },
+        {
+          "at": 0.68,
+          "kicker": "03 · Pour",
+          "title": "Let it bloom",
+          "text": "Poured slowly, to order, every time.",
+          "cta": {
+            "label": "See the menu",
+            "href": "menu.html"
+          }
+        }
+      ]
+    },
+    {
       "type": "assemble",
       "id": "spanish-latte"
     },

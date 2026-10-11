@@ -719,6 +719,116 @@
     gsap.from(sec.querySelector(".asm-glow"), { scale: 0.4, opacity: 0, scrollTrigger: { trigger: sec, start: "top 80%", end: "top top", scrub: true } });
   }
 
+
+  /* ---------- scroll progress of a tall section with a sticky stage: 0 at its top, 1 at its end ---------- */
+  const sectionProgress = (sec) => {
+    const r = sec.getBoundingClientRect();
+    const span = r.height - innerHeight;
+    return span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 0;
+  };
+  const visibleNow = (sec) => { const r = sec.getBoundingClientRect(); return r.bottom > -innerHeight * 0.5 && r.top < innerHeight * 1.5; };
+
+  /* ---------- scroll-scrubbed footage: video currentTime or an image sequence follows the scroll ---------- */
+  function scrubFilm(sec, T1) {
+    const beats = Array.from(sec.querySelectorAll(".scrub-beat"));
+    const bar = sec.querySelector(".scrub-bar i");
+    const video = sec.querySelector("video.scrub-media");
+    const canvas = sec.querySelector("canvas.scrub-media");
+    let cur = 0, target = 0, frames = [], dur = 0, ctx = null, lastFrame = -1;
+    const ats = beats.map((b) => parseFloat(b.dataset.at) || 0);
+    const setBeat = (p) => {
+      let k = 0; ats.forEach((a, i) => { if (p >= a - 0.001) k = i; });
+      beats.forEach((b, i) => b.classList.toggle("is-on", i === k));
+    };
+    setBeat(0);
+    if (video) {
+      // load as a blob so every frame is seekable without range-request stalls
+      let url = (innerWidth < 760 && video.dataset.srcM) || video.dataset.src;
+      // H.264 is missing in open-source Chromium and some Android browsers: use the WebM twin there
+      if (!video.canPlayType('video/mp4; codecs="avc1.42E01E"')) url = url.replace(/\.mp4$/, ".webm");
+      fetch(url).then((r) => r.blob()).then((b) => {
+        video.src = URL.createObjectURL(b);
+        video.addEventListener("loadedmetadata", () => { dur = video.duration || 0; video.pause(); sec.classList.add("is-ready"); }, { once: true });
+      }).catch(() => { video.src = url; });
+    }
+    if (canvas) {
+      ctx = canvas.getContext("2d");
+      const n = +canvas.dataset.count, pad = +canvas.dataset.pad || 3, base = canvas.dataset.frames, ext = canvas.dataset.ext;
+      const size = () => { const d = Math.min(devicePixelRatio || 1, 2); canvas.width = canvas.clientWidth * d; canvas.height = canvas.clientHeight * d; lastFrame = -1; };
+      size(); addEventListener("resize", size);
+      // load every 4th frame first so scrubbing works early, then fill the gaps
+      const order = []; for (let s = 4; s >= 1; s = s === 4 ? 2 : s === 2 ? 1 : 0) { for (let i = 0; i < n; i += s) if (!order.includes(i)) order.push(i); if (s === 1) break; }
+      order.forEach((i) => { const im = new Image(); im.decoding = "async"; im.src = base + String(i + 1).padStart(pad, "0") + "." + ext; im.onload = () => { frames[i] = im; if (i === 0) sec.classList.add("is-ready"); }; });
+    }
+    const draw = (p) => {
+      const n = +canvas.dataset.count; let idx = Math.round(p * (n - 1));
+      let im = frames[idx]; for (let d = 1; !im && d < n; d++) im = frames[idx - d] || frames[idx + d];
+      if (!im || idx === lastFrame) return; lastFrame = idx;
+      const cw = canvas.width, ch = canvas.height, s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight);
+      const w = im.naturalWidth * s, h = im.naturalHeight * s;
+      ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+    };
+    const tick = () => {
+      if (visibleNow(sec)) {
+        target = sectionProgress(sec);
+        cur += (target - cur) * 0.14;
+        if (Math.abs(target - cur) < 0.0005) cur = target;
+        if (bar) bar.style.transform = `scaleX(${cur})`;
+        setBeat(cur);
+        if (video && dur && !video.seeking) { const t = Math.min(dur - 0.04, cur * dur); if (Math.abs(video.currentTime - t) > 0.016) video.currentTime = t; }
+        if (canvas) draw(cur);
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- layered depth hero: planes move at different rates and lean with the pointer ---------- */
+  function depthHero(sec, T1) {
+    const layers = Array.from(sec.querySelectorAll(".depth-layer"));
+    let mx = 0, my = 0, tx = 0, ty = 0;
+    if (T1.fine) sec.addEventListener("pointermove", (e) => { const r = sec.getBoundingClientRect(); tx = (e.clientX / r.width - 0.5) * 2; ty = (e.clientY / innerHeight - 0.5) * 2; });
+    const tick = () => {
+      if (visibleNow(sec)) {
+        const p = sectionProgress(sec);
+        mx += (tx - mx) * 0.06; my += (ty - my) * 0.06;
+        layers.forEach((l) => {
+          const sp = parseFloat(l.dataset.speed) || 0, sc = parseFloat(l.dataset.scale) || 0, lean = parseFloat(l.dataset.lean) || 0;
+          const y = -p * sp * innerHeight * 0.7, x = -mx * lean, yy = -my * lean * 0.5;
+          l.style.transform = `translate3d(${x}px, ${y + yy}px, 0) scale(${1 + p * sc})`;
+          if (l.dataset.fade) l.style.opacity = String(Math.max(0, 1 - p * 1.7));
+        });
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- stages storyline: stills wipe one into the next along a labelled progress rail ---------- */
+  function stagesStory(sec) {
+    const imgs = Array.from(sec.querySelectorAll(".stg-img"));
+    const texts = Array.from(sec.querySelectorAll(".stg-text"));
+    const rail = Array.from(sec.querySelectorAll(".stg-rail li"));
+    const fill = sec.querySelector(".stg-fill");
+    const n = imgs.length;
+    const tick = () => {
+      if (visibleNow(sec)) {
+        const p = sectionProgress(sec), seg = p * (n - 1);
+        imgs.forEach((im, i) => {
+          const rev = i === 0 ? 1 : Math.min(1, Math.max(0, seg - (i - 1)));
+          im.style.clipPath = `inset(0 0 0 ${(1 - rev) * 100}%)`;
+          const img = im.firstElementChild; if (img) img.style.transform = `scale(${1.12 - rev * 0.12 + Math.max(0, seg - i) * 0.04})`;
+        });
+        const k = Math.min(n - 1, Math.round(seg));
+        texts.forEach((t, i) => t.classList.toggle("is-on", i === k));
+        rail.forEach((r, i) => r.classList.toggle("is-on", i <= k));
+        if (fill) fill.style.transform = `scaleX(${p})`;
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
   /* ---------- curved branch slider: 3D arc of cards, drag / swipe / wheel / keys / filters,
      with a detail panel (timings, phones, specialities, live map, actions) for the centred card ---------- */
   function curveSlider(root, T1) {
@@ -1000,6 +1110,13 @@
     document.querySelectorAll("[data-curve]").forEach((r) => curveSlider(r, T1)); // works with or without motion
     document.querySelectorAll("[data-promo]").forEach((r) => promoSlider(r, T1));
     document.querySelectorAll("[data-assemble]").forEach((r) => productAssemble(r, T1));
+    if (T1.motion) {
+      document.querySelectorAll("[data-scrub]").forEach((r) => scrubFilm(r, T1));
+      document.querySelectorAll("[data-depth]").forEach((r) => depthHero(r, T1));
+      document.querySelectorAll("[data-stages]").forEach((r) => stagesStory(r));
+    } else {
+      document.querySelectorAll(".scrub-beat, .stg-text").forEach((b) => b.classList.add("is-on"));
+    }
     if (!T1.motion || !THEMES[theme]) return;
     THEMES[theme](T1);
   };

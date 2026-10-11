@@ -30,8 +30,13 @@ put the recommended option first.
 7. **Brand.** Logo, colours, fonts, brand book? Or should we propose a palette?
    Options: use our brand (upload) · take it from the current site · propose 2 directions.
 8. **Signature graphic.** One "wow" element for the home page?
-   Options: product assembles layer by layer (food, drinks, protein, cards, devices) ·
-   3D object or particles · interactive map/globe · anatomy/body (health) · none.
+   Options: layered depth hero (subject in clouds/landscape) · scroll-scrubbed film (pour,
+   burst, construction, fly-through) · product assembles layer by layer · step-by-step stages
+   story · 3D object or particles · map/globe · anatomy (health) · none.
+8b. **Design style.** Glass · liquid glass · minimal · bento grid · neumorphism · claymorphism ·
+   skeuomorphism · brutalism · maximalism · spatial UI · "you choose". Show what each means in one line.
+8c. **Footage.** Any videos, renders, drone shots or reels we can use (project films,
+   construction updates, product clips)? Real footage beats generated.
 
 ## Round 3: content and features
 

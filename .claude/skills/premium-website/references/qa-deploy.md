@@ -16,6 +16,9 @@ WebGL needs a real web server (qa.py starts one); file:// pages fall back to CSS
 Take screenshots and actually view them, desktop and phone:
 - Home: top, after the slider, mid-page, signature graphic half-way and finished, footer.
 - One detail page, one product page, the locations slider and branch panel, contact.
+- Every scroll-driven section (depth, scrub, stages, assemble) at its start, middle and end,
+  desktop and phone. Scrubbed video must change frame with the scroll (check currentTime moves);
+  test in a browser without H.264 too (the WebM twin must load).
 Check: text contrast over photos; nothing overlapping (dock vs buttons, rail vs slider
 controls); headings not tiny (brand fonts loaded); cards aligned; phone layout has the same
 graphics (3D slider, assembly) and not a bare list; offer pop-up not covering key content.
