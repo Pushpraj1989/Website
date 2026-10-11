@@ -38,6 +38,9 @@ The output is plain static files, so any web server works. Upload `index.html`,
   Links: `http://<server-ip>/` (hub) and `http://<server-ip>/sites/<slug>/`.
   Use `SSH_KEY=path/to/key` to pick a specific key. Re-running it redeploys and
   keeps the previous copy in `/var/www/tier1-concepts.old`.
+- **From the server itself (e.g. Hostinger's Web console):** clone the repository on
+  the server and run `bash deploy/install.sh`. It does the same as `deploy.sh`
+  without needing SSH from another machine.
 - **Manual upload:** copy those three items into any web root; links are relative.
 - **GitHub Pages:** `.github/workflows/pages.yml` deploys on every push to
   `tier1-concept-sites` once Pages is switched on (see the comments at the top of

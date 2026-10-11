@@ -22,79 +22,13 @@ for f in index.html assets sites; do
   [ -e "$ROOT_DIR/$f" ] || { echo "missing $f — run python3 build/build.py first" >&2; exit 1; }
 done
 
+# Upload the built files plus install.sh, then run install.sh on the server.
 BUNDLE="$(mktemp -d)/tier1-concepts.tgz"
-tar -C "$ROOT_DIR" -czf "$BUNDLE" index.html assets sites
+tar -C "$ROOT_DIR" -czf "$BUNDLE" index.html assets sites deploy/install.sh
 echo "→ uploading $(du -h "$BUNDLE" | cut -f1) to $TARGET"
-scp "${SSH_OPTS[@]}" "$BUNDLE" "$TARGET:/tmp/tier1-concepts.tgz"
-
-ssh "${SSH_OPTS[@]}" "$TARGET" HOST_IP="$HOST_IP" bash -s <<'REMOTE'
-set -euo pipefail
-DIR=/var/www/tier1-concepts
-
-# 1. files
-mkdir -p "$DIR.new"
-tar -xzf /tmp/tier1-concepts.tgz -C "$DIR.new"
-rm -rf "$DIR.old"
-[ -d "$DIR" ] && mv "$DIR" "$DIR.old"
-mv "$DIR.new" "$DIR"
-chmod -R a+rX "$DIR"
-rm -f /tmp/tier1-concepts.tgz
-
-# 2. web server
-holder="$(ss -ltnp 2>/dev/null | awk '$4 ~ /:80$/' | grep -o 'users:(("[^"]*' | head -1 | cut -d'"' -f2 || true)"
-if [ -n "$holder" ] && [ "$holder" != "nginx" ]; then
-  echo "Port 80 is already used by '$holder'. Files are in $DIR; point that server at it, or ask for help." >&2
-  exit 2
-fi
-if ! command -v nginx >/dev/null 2>&1; then
-  echo "→ installing nginx"
-  if command -v apt-get >/dev/null 2>&1; then
-    DEBIAN_FRONTEND=noninteractive apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -y -qq nginx
-  elif command -v dnf >/dev/null 2>&1; then
-    dnf install -y -q nginx
-  else
-    echo "No apt-get or dnf found; install nginx manually." >&2; exit 3
-  fi
-  if command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ]; then systemctl enable --now nginx; else nginx; fi
-fi
-
-# 3. site config: answers only for http://<ip>/
-CONF=/etc/nginx/conf.d/tier1-concepts.conf
-if grep -Rqs "server_name[^;]*\b${HOST_IP}\b" /etc/nginx --exclude=tier1-concepts.conf; then
-  echo "Another nginx site already uses server_name ${HOST_IP}; not adding a second one." >&2
-  echo "Files are in $DIR — add 'location / { root $DIR; }' to that site, or ask for help." >&2
-  exit 4
-fi
-cat > "$CONF" <<NGX
-server {
-    listen 80;
-    server_name ${HOST_IP};
-    root ${DIR};
-    index index.html;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-
-    location ~* \.(?:css|js|jpg|jpeg|png|webp|svg|woff2?)$ {
-        expires 7d;
-        add_header Cache-Control "public";
-    }
-
-    gzip on;
-    gzip_types text/css application/javascript image/svg+xml;
-}
-NGX
-nginx -t
-if command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ]; then systemctl reload nginx; else nginx -s reload 2>/dev/null || nginx; fi
-
-# 4. firewall (only if ufw is active)
-if command -v ufw >/dev/null 2>&1 && ufw status | grep -q "Status: active"; then
-  ufw allow 80/tcp >/dev/null
-fi
-echo "deployed"
-REMOTE
-
+scp "${SSH_OPTS[@]}" "$BUNDLE" "$TARGET:/tmp/tier1-upload.tgz"
+ssh "${SSH_OPTS[@]}" "$TARGET" "set -e; rm -rf /tmp/tier1-src; mkdir -p /tmp/tier1-src; tar -xzf /tmp/tier1-upload.tgz -C /tmp/tier1-src; HOST_IP=$HOST_IP bash /tmp/tier1-src/deploy/install.sh; rm -rf /tmp/tier1-src /tmp/tier1-upload.tgz"
+exit 0
 echo
 echo "Live links:"
 echo "  Hub:           http://$HOST_IP/"
