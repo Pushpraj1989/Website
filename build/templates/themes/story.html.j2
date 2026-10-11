@@ -91,7 +91,10 @@
   <div class="wrap organ-grid">
     {%- for it in s.services['items'] %}
     <article class="organ-card" id="c-{{ it.kind }}" data-anim="up" data-delay="{{ (loop.index0 % 4) * 0.08 }}">
-      <div class="organ-stage">{{ an.organ(it.kind) }}</div>
+      <div class="organ-stage">
+        {%- if it.bg %}<img class="organ-bg" src="{{ m.src(it.bg) }}" alt="" loading="lazy" decoding="async"><span class="stage-cap">{{ s.images[it.bg].cap }}</span>{% endif %}
+        {{ an.organ(it.kind) }}
+      </div>
       <div class="organ-copy">
         <span class="organ-n">{{ '%02d' % loop.index }}</span>
         <h3>{{ it.title }}</h3>
@@ -124,7 +127,8 @@
     <p class="muted" data-anim="up">{{ s.highlights.intro }}</p>
     <div class="pkg-row">
       {%- for it in s.highlights['items'] %}
-      <article class="pkg" style="--r: {{ [-6, 4, -3, 7][loop.index0 % 4] }}deg" data-anim="up" data-delay="{{ loop.index0 * 0.1 }}">
+      <article class="pkg{% if it.bg %} pkg-photo{% endif %}" style="--r: {{ [-6, 4, -3, 7][loop.index0 % 4] }}deg" data-anim="up" data-delay="{{ loop.index0 * 0.1 }}">
+        {%- if it.bg %}<img class="pkg-bg" src="{{ m.src(it.bg) }}" alt="{{ s.images[it.bg].alt }}" loading="lazy" decoding="async"><span class="stage-cap">{{ s.images[it.bg].cap }}</span>{% endif %}
         <span class="pkg-k">Package 0{{ loop.index }}</span>
         <span class="pkg-ico">{{ icon(it.icon) }}</span>
         <h3>{{ it.title }}</h3>

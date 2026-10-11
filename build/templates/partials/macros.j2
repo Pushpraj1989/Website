@@ -36,7 +36,8 @@
   <p class="result-count" aria-live="polite" data-result></p>
   <ul class="loc-grid">
     {%- for l in s.locations['items'] %}
-    <li class="loc" data-country="{{ l.country }}">
+    <li class="loc{% if l.image %} loc-img{% endif %}" data-country="{{ l.country }}">
+      {%- if l.image %}<img class="loc-bg" src="assets/img/{{ s.images[l.image].src }}" alt="" loading="lazy" decoding="async"><span class="loc-cap">{{ s.images[l.image].cap }}</span>{% endif %}
       <div class="loc-top"><span class="pill">{{ l.type }}</span><span>{{ l.country }}</span></div>
       <h3>{{ l.name }}</h3>
       {% if l.address %}<p>{{ l.address }}</p>{% endif %}

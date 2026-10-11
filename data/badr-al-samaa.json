@@ -76,7 +76,8 @@
         "spot": [
           160,
           198
-        ]
+        ],
+        "bg": "bg-heart"
       },
       {
         "title": "Orthopaedics",
@@ -86,7 +87,8 @@
         "spot": [
           186,
           486
-        ]
+        ],
+        "bg": "bg-knee"
       },
       {
         "title": "Obstetrics & Gynaecology",
@@ -96,7 +98,8 @@
         "spot": [
           150,
           350
-        ]
+        ],
+        "bg": "bg-womb"
       },
       {
         "title": "Urology & Andrology",
@@ -106,7 +109,8 @@
         "spot": [
           178,
           284
-        ]
+        ],
+        "bg": "bg-kidney"
       },
       {
         "title": "Gastroenterology",
@@ -116,7 +120,8 @@
         "spot": [
           178,
           250
-        ]
+        ],
+        "bg": "bg-gut"
       },
       {
         "title": "Radiology",
@@ -126,7 +131,8 @@
         "spot": [
           122,
           178
-        ]
+        ],
+        "bg": "bg-xray"
       },
       {
         "title": "ENT",
@@ -136,7 +142,8 @@
         "spot": [
           184,
           62
-        ]
+        ],
+        "bg": "bg-ear"
       },
       {
         "title": "Dentistry",
@@ -146,7 +153,8 @@
         "spot": [
           150,
           88
-        ]
+        ],
+        "bg": "bg-tooth"
       }
     ],
     "chips_title": "Also offered",
@@ -170,19 +178,23 @@
     "items": [
       {
         "title": "Asthma & allergy",
-        "icon": "shield"
+        "icon": "shield",
+        "bg": "pk-p-asthma"
       },
       {
         "title": "Comprehensive diabetes",
-        "icon": "chart"
+        "icon": "chart",
+        "bg": "pk-p-diabetes"
       },
       {
         "title": "High blood pressure",
-        "icon": "pulse"
+        "icon": "pulse",
+        "bg": "pk-p-bp"
       },
       {
         "title": "Thyroid panel",
-        "icon": "heart"
+        "icon": "heart",
+        "bg": "pk-p-thyroid"
       }
     ]
   },
@@ -194,97 +206,116 @@
       {
         "name": "Ruwi",
         "type": "Hospital",
-        "country": "Oman"
+        "country": "Oman",
+        "image": "loc-ruwi"
       },
       {
         "name": "Al Khoud",
         "type": "Hospital",
-        "country": "Oman"
+        "country": "Oman",
+        "image": "loc-al-khoud"
       },
       {
         "name": "Barka",
         "type": "Hospital",
-        "country": "Oman"
+        "country": "Oman",
+        "image": "loc-barka"
       },
       {
         "name": "Nizwa",
         "type": "Hospital",
-        "country": "Oman"
+        "country": "Oman",
+        "image": "loc-nizwa"
       },
       {
         "name": "Salalah",
         "type": "Hospital",
-        "country": "Oman"
+        "country": "Oman",
+        "image": "loc-salalah"
       },
       {
         "name": "Sohar",
         "type": "Hospital",
-        "country": "Oman"
+        "country": "Oman",
+        "image": "loc-sohar"
       },
       {
         "name": "Al Khuwair",
         "type": "Medical Centre",
-        "country": "Oman"
+        "country": "Oman",
+        "image": "loc-al-khuwair"
       },
       {
         "name": "Falaj Al Qabail",
         "type": "Medical Centre",
-        "country": "Oman"
+        "country": "Oman",
+        "image": "loc-falaj-al-qabail"
       },
       {
         "name": "Sur",
         "type": "Medical Centre",
-        "country": "Oman"
+        "country": "Oman",
+        "image": "loc-sur"
       },
       {
         "name": "Duqm",
         "type": "Medical Centre",
-        "country": "Oman"
+        "country": "Oman",
+        "image": "loc-duqm"
       },
       {
         "name": "Suwaiq",
         "type": "Polyclinic",
-        "country": "Oman"
+        "country": "Oman",
+        "image": "loc-suwaiq"
       },
       {
         "name": "Mabella",
         "type": "Premium Medical Centre",
-        "country": "Oman"
+        "country": "Oman",
+        "image": "loc-mabella"
       },
       {
         "name": "Muharraq",
         "type": "Al Hilal Hospital",
-        "country": "Bahrain"
+        "country": "Bahrain",
+        "image": "loc-muharraq"
       },
       {
         "name": "Riffa",
         "type": "Al Hilal Medical Centre",
-        "country": "Bahrain"
+        "country": "Bahrain",
+        "image": "loc-riffa"
       },
       {
         "name": "Manama",
         "type": "Al Hilal Medical Centre",
-        "country": "Bahrain"
+        "country": "Bahrain",
+        "image": "loc-manama"
       },
       {
         "name": "Salmabad",
         "type": "Al Hilal Medical Centre",
-        "country": "Bahrain"
+        "country": "Bahrain",
+        "image": "loc-salmabad"
       },
       {
         "name": "Askar",
         "type": "Al Hilal Medical Centre",
-        "country": "Bahrain"
+        "country": "Bahrain",
+        "image": "loc-askar"
       },
       {
         "name": "Farwaniya",
         "type": "Medical Centre",
-        "country": "Kuwait"
+        "country": "Kuwait",
+        "image": "loc-farwaniya"
       },
       {
         "name": "Dubai",
         "type": "Medical Centre",
-        "country": "UAE"
+        "country": "UAE",
+        "image": "loc-dubai"
       }
     ]
   },
@@ -338,7 +369,8 @@
     "Branch street addresses and branch-level phone numbers are not on the page (city and facility type only).",
     "Clinical wording on the concept is drafted, not reviewed. It needs medical sign-off before use.",
     "No openly licensed photos of Badr Al Samaa's own hospitals exist, so hospital photography is illustrative stock (see footer credits). Ask the group for its own interior and exterior photos.",
-    "The glass anatomy graphics are concept illustrations drawn for this design, not medical diagrams. Have them reviewed if they are to be used clinically."
+    "The glass anatomy graphics are concept illustrations drawn for this design, not medical diagrams. Have them reviewed if they are to be used clinically.",
+    "Branch cards show a view of each town or wider area (captioned on the card), not the branch building. Swap in photos of each hospital once the group supplies them."
   ],
   "sources": [
     "https://www.badralsamaahospitals.com (homepage read 11 Oct 2026)"
@@ -389,6 +421,161 @@
     "dental": {
       "src": "dental.jpg",
       "alt": "Dental treatment room",
+      "cap": "Illustrative"
+    },
+    "loc-ruwi": {
+      "src": "br-ruwi.jpg",
+      "alt": "View of Ruwi",
+      "cap": "View of Ruwi"
+    },
+    "loc-al-khoud": {
+      "src": "br-muscat.jpg",
+      "alt": "View of Muscat",
+      "cap": "View of Muscat"
+    },
+    "loc-barka": {
+      "src": "barka.jpg",
+      "alt": "View of Barka",
+      "cap": "View of Barka"
+    },
+    "loc-nizwa": {
+      "src": "nizwa.jpg",
+      "alt": "View of Nizwa",
+      "cap": "View of Nizwa"
+    },
+    "loc-salalah": {
+      "src": "br-salalah.jpg",
+      "alt": "View of Salalah Airport",
+      "cap": "View of Salalah Airport"
+    },
+    "loc-sohar": {
+      "src": "br-sohar.jpg",
+      "alt": "View of Sohar",
+      "cap": "View of Sohar"
+    },
+    "loc-al-khuwair": {
+      "src": "br-muscat2.jpg",
+      "alt": "View of Muscat",
+      "cap": "View of Muscat"
+    },
+    "loc-falaj-al-qabail": {
+      "src": "br-sohar.jpg",
+      "alt": "View of Sohar",
+      "cap": "View of Sohar"
+    },
+    "loc-sur": {
+      "src": "br-sur.jpg",
+      "alt": "View of Sur",
+      "cap": "View of Sur"
+    },
+    "loc-duqm": {
+      "src": "duqm.jpg",
+      "alt": "View of Duqm",
+      "cap": "View of Duqm"
+    },
+    "loc-suwaiq": {
+      "src": "barka.jpg",
+      "alt": "View of Al Batinah coast",
+      "cap": "View of Al Batinah coast"
+    },
+    "loc-mabella": {
+      "src": "br-mabella.jpg",
+      "alt": "View of Al Maabilah",
+      "cap": "View of Al Maabilah"
+    },
+    "loc-muharraq": {
+      "src": "br-muharraq.jpg",
+      "alt": "View of Muharraq",
+      "cap": "View of Muharraq"
+    },
+    "loc-riffa": {
+      "src": "br-riffa.jpg",
+      "alt": "View of Riffa",
+      "cap": "View of Riffa"
+    },
+    "loc-manama": {
+      "src": "bahrain.jpg",
+      "alt": "View of Manama",
+      "cap": "View of Manama"
+    },
+    "loc-salmabad": {
+      "src": "br-bahrain.jpg",
+      "alt": "View of Bahrain",
+      "cap": "View of Bahrain"
+    },
+    "loc-askar": {
+      "src": "br-bahrain.jpg",
+      "alt": "View of Bahrain",
+      "cap": "View of Bahrain"
+    },
+    "loc-farwaniya": {
+      "src": "kuwait.jpg",
+      "alt": "View of Kuwait",
+      "cap": "View of Kuwait"
+    },
+    "loc-dubai": {
+      "src": "uae.jpg",
+      "alt": "View of Dubai",
+      "cap": "View of Dubai"
+    },
+    "bg-heart": {
+      "src": "c-heart.jpg",
+      "alt": "ECG trace on a monitor",
+      "cap": "Illustrative"
+    },
+    "bg-knee": {
+      "src": "c-knee.jpg",
+      "alt": "Knee X-ray",
+      "cap": "Illustrative"
+    },
+    "bg-womb": {
+      "src": "c-womb.jpg",
+      "alt": "Expectant mother holding an ultrasound scan",
+      "cap": "Illustrative"
+    },
+    "bg-kidney": {
+      "src": "lab.jpg",
+      "alt": "Laboratory sample tubes",
+      "cap": "Illustrative"
+    },
+    "bg-gut": {
+      "src": "c-gut.jpg",
+      "alt": "Endoscopy room",
+      "cap": "Illustrative"
+    },
+    "bg-xray": {
+      "src": "mri.jpg",
+      "alt": "MRI scanner",
+      "cap": "Illustrative"
+    },
+    "bg-ear": {
+      "src": "c-ear.jpg",
+      "alt": "Ear examination",
+      "cap": "Illustrative"
+    },
+    "bg-tooth": {
+      "src": "c-tooth.jpg",
+      "alt": "Dental panoramic X-ray",
+      "cap": "Illustrative"
+    },
+    "pk-p-asthma": {
+      "src": "p-asthma.jpg",
+      "alt": "Asthma inhaler",
+      "cap": "Illustrative"
+    },
+    "pk-p-diabetes": {
+      "src": "p-diabetes.jpg",
+      "alt": "Blood glucose meter",
+      "cap": "Illustrative"
+    },
+    "pk-p-bp": {
+      "src": "p-bp.jpg",
+      "alt": "Blood pressure being measured",
+      "cap": "Illustrative"
+    },
+    "pk-p-thyroid": {
+      "src": "p-thyroid.jpg",
+      "alt": "Doctor examining a patient",
       "cap": "Illustrative"
     }
   },

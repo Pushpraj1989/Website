@@ -38,6 +38,7 @@ Sources:
 - Clinical wording on the concept is drafted, not reviewed. It needs medical sign-off before use.
 - No openly licensed photos of Badr Al Samaa's own hospitals exist, so hospital photography is illustrative stock (see footer credits). Ask the group for its own interior and exterior photos.
 - The glass anatomy graphics are concept illustrations drawn for this design, not medical diagrams. Have them reviewed if they are to be used clinically.
+- Branch cards show a view of each town or wider area (captioned on the card), not the branch building. Swap in photos of each hospital once the group supplies them.
 
 Sources:
 - https://www.badralsamaahospitals.com (homepage read 11 Oct 2026)
