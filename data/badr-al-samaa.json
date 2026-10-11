@@ -1,0 +1,113 @@
+{
+  "slug": "badr-al-samaa",
+  "tier": 1,
+  "name": "Badr Al Samaa Group",
+  "short": "Badr Al Samaa",
+  "sector": "Healthcare",
+  "meta": "Hospitals, medical centres and polyclinics across Oman, Bahrain, Kuwait and the UAE.",
+  "accent": "#0f766e",
+  "cta": {"label": "Book appointment", "href": "#contact"},
+  "hero": {
+    "eyebrow": "Hospitals & medical centres · Oman · Bahrain · Kuwait · UAE",
+    "title": "Trusted care, close to home",
+    "lede": "Hospitals, medical centres and polyclinics across the GCC, with more than 700 doctors and 2,000 nurses and support staff. Find a branch, book an appointment, and get seen.",
+    "primary": {"label": "Book an appointment", "href": "#contact"},
+    "secondary": {"label": "Find a branch", "href": "#locations"}
+  },
+  "stats": [
+    {"value": 19, "label": "Listed branches"},
+    {"value": 700, "suffix": "+", "label": "Doctors"},
+    {"value": 2000, "suffix": "+", "label": "Nurses & support staff"},
+    {"years_since": 2002, "label": "Years of care"}
+  ],
+  "about": {
+    "title": "From one polyclinic in Ruwi to a GCC group",
+    "body": [
+      "Badr Al Samaa began in 2002 as a polyclinic in Ruwi. It has grown into a group of hospitals, medical centres and clinics across Oman, Bahrain, Kuwait and the UAE."
+    ],
+    "points": [
+      {"title": "Centres of excellence", "text": "Cardiology, orthopaedics, obstetrics & gynaecology, urology & andrology, gastroenterology, radiology, ENT and dentistry."},
+      {"title": "Preventive health", "text": "Check-up packages for asthma and allergy, diabetes, blood pressure and thyroid."},
+      {"title": "Insurance & medical tourism", "text": "Both are listed among the group's services."}
+    ]
+  },
+  "services": {
+    "title": "Centres of excellence",
+    "nav": "Services",
+    "intro": "Specialist departments listed across the group's hospitals and medical centres.",
+    "items": [
+      {"title": "Cardiology", "icon": "pulse"},
+      {"title": "Orthopaedics", "icon": "layers"},
+      {"title": "Obstetrics & Gynaecology", "icon": "heart"},
+      {"title": "Urology & Andrology", "icon": "shield"},
+      {"title": "Gastroenterology", "icon": "leaf"},
+      {"title": "Radiology", "icon": "chart"},
+      {"title": "ENT", "icon": "pulse"},
+      {"title": "Dentistry", "icon": "star"}
+    ],
+    "chips_title": "Also offered",
+    "chips": ["Emergency care", "Preventive health packages", "NICU & neonatology", "Diabetology", "Endoscopic services", "Oncology", "Insurance", "Medical tourism", "Friday OPDs", "Wellness"]
+  },
+  "highlights": {
+    "title": "Health check packages",
+    "nav": "Packages",
+    "intro": "Preventive check-up packages the group lists on its homepage.",
+    "items": [
+      {"title": "Asthma & allergy", "icon": "shield"},
+      {"title": "Comprehensive diabetes", "icon": "chart"},
+      {"title": "High blood pressure", "icon": "pulse"},
+      {"title": "Thyroid panel", "icon": "heart"}
+    ]
+  },
+  "locations": {
+    "title": "Find a branch",
+    "nav": "Locations",
+    "intro": "The 19 branches listed on the group's site, across four countries. Filter by country to narrow the list.",
+    "items": [
+      {"name": "Ruwi", "type": "Hospital", "country": "Oman"},
+      {"name": "Al Khoud", "type": "Hospital", "country": "Oman"},
+      {"name": "Barka", "type": "Hospital", "country": "Oman"},
+      {"name": "Nizwa", "type": "Hospital", "country": "Oman"},
+      {"name": "Salalah", "type": "Hospital", "country": "Oman"},
+      {"name": "Sohar", "type": "Hospital", "country": "Oman"},
+      {"name": "Al Khuwair", "type": "Medical Centre", "country": "Oman"},
+      {"name": "Falaj Al Qabail", "type": "Medical Centre", "country": "Oman"},
+      {"name": "Sur", "type": "Medical Centre", "country": "Oman"},
+      {"name": "Duqm", "type": "Medical Centre", "country": "Oman"},
+      {"name": "Suwaiq", "type": "Polyclinic", "country": "Oman"},
+      {"name": "Mabella", "type": "Premium Medical Centre", "country": "Oman"},
+      {"name": "Muharraq", "type": "Al Hilal Hospital", "country": "Bahrain"},
+      {"name": "Riffa", "type": "Al Hilal Medical Centre", "country": "Bahrain"},
+      {"name": "Manama", "type": "Al Hilal Medical Centre", "country": "Bahrain"},
+      {"name": "Salmabad", "type": "Al Hilal Medical Centre", "country": "Bahrain"},
+      {"name": "Askar", "type": "Al Hilal Medical Centre", "country": "Bahrain"},
+      {"name": "Farwaniya", "type": "Medical Centre", "country": "Kuwait"},
+      {"name": "Dubai", "type": "Medical Centre", "country": "UAE"}
+    ]
+  },
+  "marquee": ["Cardiology", "Orthopaedics", "Obstetrics & Gynaecology", "Urology & Andrology", "Gastroenterology", "Radiology", "ENT", "Dentistry", "Oncology", "Emergency care"],
+  "contact": {
+    "title": "Book an appointment",
+    "intro": "Choose a branch and tell us what you need. A coordinator confirms your slot by phone or WhatsApp.",
+    "address": "P.O. Box 443, P.C. 112, Ruwi, Sultanate of Oman",
+    "phones": [
+      {"label": "24/7 helpline", "number": "+968 2271 7171", "tel": "+96822717171"},
+      {"label": "WhatsApp", "number": "+968 9393 2255", "tel": "+96893932255", "whatsapp": true}
+    ],
+    "email": null,
+    "note": "The booking form is a concept preview. Connect it to the group's booking system before launch.",
+    "form": {
+      "branch": true,
+      "topics": ["Book an appointment", "Health check package", "Insurance question", "Medical tourism", "Other"],
+      "submit": "Request appointment"
+    }
+  },
+  "confirm": [
+    "Branch count: the site menu lists 19, but the copy says 'nine' in one place and 'more than 25' in another. The concept shows the 19 listed branches.",
+    "The earlier audit noted Doha in a dropdown; it is not in the 19-branch list read here. Check before adding it.",
+    "No email address is published on the site.",
+    "Branch street addresses and branch-level phone numbers are not on the page (city and facility type only).",
+    "Clinical wording on the concept is drafted, not reviewed. It needs medical sign-off before use."
+  ],
+  "sources": ["https://www.badralsamaahospitals.com (homepage read 11 Oct 2026)"]
+}

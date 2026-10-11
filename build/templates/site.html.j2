@@ -1,0 +1,319 @@
+{%- macro count(st) -%}
+<span data-count data-to="{{ st.value }}" data-suffix="{{ st.suffix or '' }}">{{ '{:,}'.format(st.value) }}{{ st.suffix or '' }}</span>
+{%- endmacro -%}
+{%- macro nav_links(cls) -%}
+{%- for n in s._nav %}<a class="{{ cls }}" href="#{{ n.id }}">{{ n.label }}</a>{% endfor -%}
+{%- endmacro -%}
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ s.name }} · Concept redesign</title>
+<meta name="description" content="{{ s.meta }}">
+<meta name="theme-color" content="{{ s.accent }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script>document.documentElement.classList.replace('no-js', 'js');</script>
+</head>
+<body style="--accent: {{ s.accent }}">
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+
+<header class="site-header" data-header>
+  <div class="wrap nav-row">
+    <a class="brand" href="#top" aria-label="{{ s.name }}, back to top">
+      <span class="brand-mark" aria-hidden="true">{{ s.short[0] }}</span>
+      <span class="brand-text">{{ s.short }}</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      {{ nav_links('') }}
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-primary btn-sm cta-head" href="{{ s.cta.href }}">{{ s.cta.label }}</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu>
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="grid"></div>
+  </div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow" data-reveal>{{ s.hero.eyebrow }}</p>
+      <h1 class="hero-title" aria-label="{{ s.hero.title }}">{% for w in s.hero.title.split() %}<span class="w" style="--i: {{ loop.index0 }}" aria-hidden="true">{{ w }}</span> {% endfor %}</h1>
+      <p class="lede" data-reveal style="--d: .35s">{{ s.hero.lede }}</p>
+      <div class="cta-row" data-reveal style="--d: .5s">
+        <a class="btn btn-primary" href="{{ s.hero.primary.href }}">{{ s.hero.primary.label }} {{ icon('arrow') }}</a>
+        {% if s.hero.secondary %}
+        <a class="btn btn-ghost" href="{{ s.hero.secondary.href }}">{{ s.hero.secondary.label }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <aside class="hero-panel" data-reveal style="--d: .6s" aria-label="Key figures">
+      <div class="glass">
+        <p class="glass-label">At a glance</p>
+        <ul class="glass-stats">
+          {% for st in s.stats[:3] %}
+          <li><strong>{{ count(st) }}</strong><span>{{ st.label }}</span></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </aside>
+  </div>
+  <a class="scroll-cue" href="#about" aria-label="Scroll to about"><span></span></a>
+</section>
+
+<div class="wrap">
+  <div class="stat-grid" aria-label="Key figures">
+    {% for st in s.stats %}
+    <div class="stat" data-reveal style="--d: {{ loop.index0 * 0.1 }}s">
+      <div class="num">{{ count(st) }}</div>
+      <div class="lbl">{{ st.label }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% if s.marquee %}
+<div class="marquee section-gap" aria-label="Areas covered">
+  <div class="marquee-track">
+    {% for pass in [0, 1] %}
+    <div class="marquee-group"{% if pass %} aria-hidden="true"{% endif %}>
+      {% for m in s.marquee %}<span>{{ m }}</span>{% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<section class="section" id="about">
+  <div class="wrap split">
+    <div>
+      <p class="kicker" data-reveal>About</p>
+      <h2 data-reveal style="--d: .08s">{{ s.about.title }}</h2>
+      {% for p in s.about.body %}
+      <p class="lead-p" data-reveal style="--d: .16s">{{ p }}</p>
+      {% endfor %}
+    </div>
+    <ul class="points">
+      {% for p in s.about.points %}
+      <li data-reveal style="--d: {{ loop.index0 * 0.1 }}s">
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.text }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% if s.services and s.services['items'] %}
+<section class="section alt" id="services">
+  <div class="wrap">
+    <header class="section-head" data-reveal>
+      <p class="kicker">{{ s.services.nav or 'Services' }}</p>
+      <h2>{{ s.services.title }}</h2>
+      {% if s.services.intro %}<p>{{ s.services.intro }}</p>{% endif %}
+    </header>
+
+    <div class="card-grid">
+      {% for it in s.services['items'] %}
+      <article class="card spot" data-reveal style="--d: {{ (loop.index0 % 3) * 0.1 }}s">
+        <div class="icon">{{ icon(it.icon or 'layers') }}</div>
+        <h3>{{ it.title }}</h3>
+        {% if it.text %}<p>{{ it.text }}</p>{% endif %}
+        {% if it.companies %}
+        <ul class="tags">{% for c in it.companies %}<li>{{ c }}</li>{% endfor %}</ul>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+
+    {% if s.services.chips %}
+    <div class="chips-block" data-reveal>
+      <h3>{{ s.services.chips_title or 'Also offered' }}</h3>
+      <ul class="chips">
+        {% for c in s.services.chips %}<li>{{ c }}</li>{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+
+{% if s.highlights %}
+<section class="section" id="highlights">
+  <div class="wrap">
+    <header class="section-head" data-reveal>
+      <p class="kicker">{{ s.highlights.nav or 'Highlights' }}</p>
+      <h2>{{ s.highlights.title }}</h2>
+      {% if s.highlights.intro %}<p>{{ s.highlights.intro }}</p>{% endif %}
+    </header>
+    <div class="card-grid">
+      {% for it in s.highlights['items'] %}
+      <article class="card spot" data-reveal style="--d: {{ (loop.index0 % 4) * 0.08 }}s">
+        <div class="icon">{{ icon(it.icon or 'check') }}</div>
+        <h3>{{ it.title }}</h3>
+        {% if it.text %}<p>{{ it.text }}</p>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if s.locations and s.locations['items'] %}
+<section class="section alt" id="locations">
+  <div class="wrap">
+    <header class="section-head" data-reveal>
+      <p class="kicker">{{ s.locations.nav or 'Locations' }}</p>
+      <h2>{{ s.locations.title }}</h2>
+      {% if s.locations.intro %}<p>{{ s.locations.intro }}</p>{% endif %}
+    </header>
+
+    {% if s._show_filter %}
+    <div class="filters" role="group" aria-label="Filter locations by country" data-filters>
+      <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+      {% for c, n in s._countries %}
+      <button class="filter" type="button" data-filter="{{ c }}" aria-pressed="false">{{ c }} <span class="filter-n">{{ n }}</span></button>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <p class="result-count" aria-live="polite" data-result></p>
+
+    <ul class="loc-grid">
+      {% for l in s.locations['items'] %}
+      <li class="loc card spot" data-country="{{ l.country }}" data-reveal style="--d: {{ (loop.index0 % 3) * 0.06 }}s">
+        <div class="loc-top">
+          <span class="pill">{{ l.type }}</span>
+          <span class="country">{{ l.country }}</span>
+        </div>
+        <h3>{{ l.name }}</h3>
+        {% if l.address %}<p class="loc-addr">{{ icon('pin') }}<span>{{ l.address }}</span></p>{% endif %}
+        {% if l.phone %}<a href="tel:{{ digits(l.phone) }}">{{ icon('phone') }} {{ l.phone }}</a>{% endif %}
+        {% if l.note %}<p class="note">{{ l.note }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="empty" data-empty hidden>No locations match this filter.</p>
+  </div>
+</section>
+{% endif %}
+
+<section class="section contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="kicker" data-reveal>Contact</p>
+      <h2 data-reveal style="--d: .08s">{{ s.contact.title }}</h2>
+      <p data-reveal style="--d: .16s">{{ s.contact.intro }}</p>
+
+      <ul class="contact-list">
+        {% if s.contact.address %}
+        <li data-reveal style="--d: .2s">{{ icon('pin') }}<span><small>Address</small>{{ s.contact.address }}</span></li>
+        {% endif %}
+        {% for p in s.contact.phones %}
+        <li data-reveal style="--d: {{ 0.25 + loop.index0 * 0.05 }}s">{{ icon('phone') }}
+          <span>
+            <small>{{ p.label }}</small>
+            {% if p.fax %}
+              {{ p.number }}
+            {% else %}
+              <a href="tel:{{ p.tel }}">{{ p.number }}</a>
+              {% if p.whatsapp %}<a class="wa" href="https://wa.me/{{ p.tel | replace('+', '') }}">WhatsApp</a>{% endif %}
+            {% endif %}
+          </span>
+        </li>
+        {% endfor %}
+        {% if s.contact.email %}
+        <li data-reveal style="--d: .4s">{{ icon('mail') }}<span><small>Email</small><a href="mailto:{{ s.contact.email }}">{{ s.contact.email }}</a></span></li>
+        {% endif %}
+      </ul>
+
+      {% if s.contact.note %}<p class="note contact-note">{{ s.contact.note }}</p>{% endif %}
+    </div>
+
+    <form class="form card" data-form data-endpoint="" novalidate data-reveal style="--d: .15s">
+      <h3>{{ s.contact.form.submit }}</h3>
+
+      <div class="field" data-field>
+        <label for="f-name">Full name</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" data-rule="name" required>
+        <p class="err" data-err aria-live="polite"></p>
+      </div>
+
+      <div class="field" data-field>
+        <label for="f-contact">Email or phone</label>
+        <input id="f-contact" name="contact" type="text" autocomplete="email" inputmode="email" data-rule="contact" required>
+        <p class="err" data-err aria-live="polite"></p>
+      </div>
+
+      {% if s.contact.form.branch and s._branch_options %}
+      <div class="field">
+        <label for="f-branch">Branch</label>
+        <select id="f-branch" name="branch">
+          {% for b in s._branch_options %}<option>{{ b }}</option>{% endfor %}
+        </select>
+      </div>
+      {% endif %}
+
+      <div class="field">
+        <label for="f-topic">What is this about?</label>
+        <select id="f-topic" name="topic">
+          {% for t in s.contact.form.topics %}<option>{{ t }}</option>{% endfor %}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="f-msg">Message <span class="optional">(optional)</span></label>
+        <textarea id="f-msg" name="message" rows="4"></textarea>
+      </div>
+
+      <button class="btn btn-primary btn-block" type="submit">{{ s.contact.form.submit }}</button>
+      <p class="form-status" role="status" data-status></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <div>
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">{{ s.short[0] }}</span>
+        <span class="brand-text">{{ s.short }}</span>
+      </a>
+      <p class="foot-meta">{{ s.meta }}</p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      {{ nav_links('') }}
+    </nav>
+    <div class="foot-contact">
+      {% if s.contact.address %}<p>{{ s.contact.address }}</p>{% endif %}
+      {% for p in s.contact.phones if not p.fax %}<p><a href="tel:{{ p.tel }}">{{ p.number }}</a></p>{% endfor %}
+      {% if s.contact.email %}<p><a href="mailto:{{ s.contact.email }}">{{ s.contact.email }}</a></p>{% endif %}
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <p>© {{ year }} {{ s.name }}. Concept redesign, not the company's official website. Facts to be verified before use.</p>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<a class="to-top" href="#top" data-to-top aria-label="Back to top">{{ icon('arrow') }}</a>
+
+<script src="assets/motion.js" defer></script>
+</body>
+</html>

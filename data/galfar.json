@@ -1,0 +1,88 @@
+{
+  "slug": "galfar",
+  "tier": 1,
+  "name": "Galfar Engineering & Contracting",
+  "short": "Galfar",
+  "sector": "Engineering & construction",
+  "meta": "Galfar Engineering & Contracting: multi-disciplined engineering, contracting and construction in Oman since 1972.",
+  "accent": "#1d4ed8",
+  "cta": {"label": "Contact us", "href": "#contact"},
+  "hero": {
+    "eyebrow": "Engineering · Contracting · Construction · Oman",
+    "title": "Building Oman since 1972",
+    "lede": "One of the largest multi-disciplined engineering, contracting and construction companies in the Sultanate of Oman, delivering energy, civil and infrastructure projects.",
+    "primary": {"label": "Our capabilities", "href": "#services"},
+    "secondary": {"label": "Contact us", "href": "#contact"}
+  },
+  "stats": [
+    {"years_since": 1972, "label": "Years of experience"},
+    {"value": 3, "label": "Business units"},
+    {"value": 7, "label": "Support units"},
+    {"value": 4, "label": "Iconic projects featured"}
+  ],
+  "about": {
+    "title": "Multi-disciplined, from design to operation",
+    "body": [
+      "Galfar has been established in Oman since 1972. Its work spans engineering, procurement and construction for energy and industrial plants, buildings and environmental works, and roads, airports, seaports, dams and water networks, including operation and maintenance."
+    ],
+    "points": [
+      {"title": "Operation & maintenance", "text": "Galfar also operates and maintains several of the facilities it builds."},
+      {"title": "Quality, safety & environment", "text": "QHSSE is one of the group's dedicated support units."},
+      {"title": "Iconic projects", "text": "Yibal Khuff, Salalah Airport, the Boushar-Amirat Road and Duqm Fishery Port."}
+    ]
+  },
+  "services": {
+    "title": "Business units",
+    "nav": "Capabilities",
+    "intro": "Three business units cover energy, civil and infrastructure work.",
+    "items": [
+      {"title": "Energy & Industrial", "icon": "factory", "text": "Engineering, construction and procurement for oil and gas plants, petrochemical and manufacturing facilities, power generation and power grids."},
+      {"title": "Civil & Environmental", "icon": "leaf", "text": "Landmark buildings, MEP services, and wastewater treatment plants and networks, including operation and maintenance."},
+      {"title": "Infrastructure", "icon": "truck", "text": "Roads, bridges, airports, seaports, dams, water treatment plants and water networks, including operation and maintenance."}
+    ],
+    "chips_title": "Support units",
+    "chips": ["QHSSE", "Project Services", "Human Capital", "Finance", "Treasury & IT", "Supply Chain Management", "Strategy & Business Development"]
+  },
+  "highlights": {
+    "title": "Iconic projects",
+    "nav": "Projects",
+    "intro": "Projects the group features on its homepage.",
+    "items": [
+      {"title": "Yibal Khuff Project", "icon": "factory", "text": "Energy & Industrial"},
+      {"title": "Salalah Airport", "icon": "building", "text": "Civil & Environmental"},
+      {"title": "Boushar-Amirat Road", "icon": "truck", "text": "Infrastructure"},
+      {"title": "Duqm Fishery Port", "icon": "layers", "text": "Infrastructure"}
+    ]
+  },
+  "locations": {
+    "title": "Head office",
+    "nav": "Locations",
+    "intro": "The head office is in Muscat. The site publishes a postal address only.",
+    "items": [
+      {"name": "Head office", "type": "Head office", "country": "Oman", "address": "P.O. Box 533, P.C. 100, Muscat, Sultanate of Oman"}
+    ]
+  },
+  "marquee": ["Oil & gas plants", "Power generation", "Airports", "Seaports", "Dams", "Water networks", "Wastewater treatment", "Roads & bridges"],
+  "contact": {
+    "title": "Contact Galfar",
+    "intro": "For project, tender and corporate enquiries.",
+    "address": "P.O. Box 533, P.C. 100, Muscat, Sultanate of Oman",
+    "phones": [
+      {"label": "Telephone", "number": "+968 2452 5000", "tel": "+96824525000"}
+    ],
+    "email": null,
+    "note": "The email address on the site is obfuscated and has not been published here.",
+    "form": {
+      "branch": false,
+      "topics": ["Project enquiry", "Tender or supplier registration", "Careers", "Media", "Other"],
+      "submit": "Send enquiry"
+    }
+  },
+  "confirm": [
+    "The site's headline counters (projects delivered, workforce, shareholders, plant, vendors) show '+ 0' in the page code. They are left out until real figures are confirmed.",
+    "The email address is obfuscated on the site. Confirm the public address.",
+    "The head office street address is not published.",
+    "The '1972' founding year and '54 years' are calculated; the site's own text says '52 years', which is out of date."
+  ],
+  "sources": ["https://galfar.com/oman/galfar/ (homepage read 11 Oct 2026)"]
+}

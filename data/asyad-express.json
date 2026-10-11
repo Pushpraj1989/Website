@@ -1,0 +1,66 @@
+{
+  "slug": "asyad-express",
+  "tier": 1,
+  "name": "Asyad Express",
+  "short": "Asyad Express",
+  "sector": "Courier & logistics",
+  "meta": "Asyad Express: courier and distribution across Oman, with shipments to more than 220 countries.",
+  "accent": "#c2410c",
+  "cta": {"label": "Contact us", "href": "#contact"},
+  "hero": {
+    "eyebrow": "Express delivery · Asyad Group",
+    "title": "Express delivery across Oman and beyond",
+    "lede": "A distribution network across Oman, with shipments to more than 220 countries.",
+    "primary": {"label": "Contact us", "href": "#contact"},
+    "secondary": {"label": "Our services", "href": "#services"}
+  },
+  "stats": [
+    {"value": 11, "label": "Distribution centres (to confirm)"},
+    {"value": 220, "suffix": "+", "label": "Countries served (to confirm)"}
+  ],
+  "about": {
+    "title": "A national network with international reach",
+    "body": [
+      "Asyad Express is the courier service of Asyad Group, a government-owned logistics group. It delivers through distribution centres across Oman and ships to international destinations."
+    ],
+    "points": [
+      {"title": "Government-owned", "text": "Part of Asyad Group, a government-owned logistics group."},
+      {"title": "Distribution network", "text": "Distribution centres across Oman. The exact list is to be confirmed."}
+    ]
+  },
+  "services": {
+    "title": "Express services",
+    "nav": "Services",
+    "intro": "Service lines to be confirmed with the client. These are the two lines the earlier audit identified.",
+    "items": [
+      {"title": "Domestic express", "icon": "truck", "text": "Delivery through the Oman distribution network."},
+      {"title": "International express", "icon": "globe", "text": "Shipments to more than 220 countries."}
+    ]
+  },
+  "highlights": null,
+  "locations": null,
+  "marquee": ["Domestic express", "International express", "Distribution centres", "Oman", "220+ countries"],
+  "contact": {
+    "title": "Contact Asyad Express",
+    "intro": "For shipments, business accounts and partnerships.",
+    "address": null,
+    "phones": [],
+    "email": null,
+    "note": "Contact details have not been verified. The official site blocked automated access; add them from the official site.",
+    "form": {
+      "branch": false,
+      "topics": ["Shipping enquiry", "Business account", "Partnership or tender", "Media", "Other"],
+      "submit": "Send enquiry"
+    }
+  },
+  "confirm": [
+    "Distribution centre count: group pages give 6 in one place and 11 in another. The concept shows 11. Verify before use.",
+    "Service lines and the 220+ country figure come from the earlier audit, not a live check: the official site blocked automated access.",
+    "No address, phone number or email has been verified.",
+    "Government-owned: expect a tender process. This is a concept only, not an offer to the company."
+  ],
+  "sources": [
+    "https://asyad.om/logistics-solutions/asyad-express (redirects to asyad.com; blocked automated access on 11 Oct 2026)",
+    "Earlier audit notes (prospects document, 11 Oct 2026)"
+  ]
+}

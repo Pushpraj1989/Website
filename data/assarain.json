@@ -1,0 +1,131 @@
+{
+  "slug": "assarain",
+  "tier": 1,
+  "name": "Assarain Group",
+  "short": "Assarain",
+  "sector": "Diversified group",
+  "meta": "Assarain Group of Companies: 18 companies across retail, wholesale, manufacturing, construction and property in Oman.",
+  "accent": "#7f1d1d",
+  "cta": {"label": "Contact the group", "href": "#contact"},
+  "hero": {
+    "eyebrow": "Diversified group · Ruwi, Muscat",
+    "title": "Eighteen companies, one group",
+    "lede": "From concrete and steel to food, furnishing, insurance and specialist clinics, Assarain Group has been operating in Oman since 1975.",
+    "primary": {"label": "Explore the companies", "href": "#services"},
+    "secondary": {"label": "Contact the group", "href": "#contact"}
+  },
+  "stats": [
+    {"value": 18, "label": "Group companies"},
+    {"value": 4, "label": "Business groups"},
+    {"years_since": 1975, "label": "Years in operation"},
+    {"value": 2, "label": "Joint ventures"}
+  ],
+  "about": {
+    "title": "Five decades of diversified growth",
+    "body": [
+      "Assarain has operated since its inception in 1975. Its companies sit in four business groups: retail and consumer services, commercial wholesale, manufacturing, and construction, maintenance and property."
+    ],
+    "points": [
+      {"title": "Joint ventures", "text": "Savills and Partners Oman, and Kone Assarain LLC."},
+      {"title": "Manufacturing base", "text": "Concrete products, modern steel mills, and plastic and acrylic industries."},
+      {"title": "Health & insurance", "text": "Hatat Specialty Clinics and Assarain Insurance Services are part of the group."}
+    ]
+  },
+  "services": {
+    "title": "Our business groups",
+    "nav": "Companies",
+    "intro": "Eighteen companies, organised into four business groups.",
+    "items": [
+      {
+        "title": "Retail & Consumer Services",
+        "icon": "building",
+        "companies": [
+          "Assarain Furnishing LLC",
+          "Assarain Insurance Services LLC",
+          "National Marketing & Trading Co. LLC",
+          "Hatat Specialty Clinics",
+          "Assarain Textiles LLC",
+          "Kalhat Services & Trading LLC"
+        ]
+      },
+      {
+        "title": "Commercial Wholesale",
+        "icon": "truck",
+        "companies": ["Assarain Food Products LLC"]
+      },
+      {
+        "title": "Manufacturing",
+        "icon": "factory",
+        "companies": [
+          "Assarain Concrete Products & Trading LLC",
+          "Modern Concrete Products LLC",
+          "Alserkal & Assarain Concrete Products",
+          "Modern Steel Mills",
+          "Shamal Plastic Industries LLC",
+          "Gulf Acrylic Industries LLC"
+        ]
+      },
+      {
+        "title": "Construction, Maintenance & Property",
+        "icon": "layers",
+        "companies": [
+          "Savills and Partners Oman (JV)",
+          "Assarain International Contracting LLC",
+          "Hatat Complex",
+          "Assarain Properties",
+          "Kone Assarain LLC (JV)"
+        ]
+      }
+    ]
+  },
+  "highlights": null,
+  "locations": {
+    "title": "Head office",
+    "nav": "Locations",
+    "intro": "The group's corporate head office is in Ruwi, Muscat.",
+    "items": [
+      {
+        "name": "Corporate Head Office",
+        "type": "Head office",
+        "country": "Oman",
+        "address": "PO Box 1475, PC 112, Ruwi, Muscat, Sultanate of Oman"
+      }
+    ]
+  },
+  "marquee": [
+    "Assarain Furnishing",
+    "Assarain Textiles",
+    "Assarain Food Products",
+    "Assarain Concrete Products",
+    "Modern Steel Mills",
+    "Gulf Acrylic Industries",
+    "Savills and Partners Oman",
+    "Kone Assarain",
+    "Hatat Specialty Clinics",
+    "Assarain Insurance Services",
+    "Assarain Properties",
+    "Assarain International Contracting"
+  ],
+  "contact": {
+    "title": "Contact the group",
+    "intro": "For group enquiries, partnerships and joint ventures.",
+    "address": "Assarain Group of Companies (Corporate Head Office), PO Box 1475, PC 112, Ruwi, Muscat, Oman",
+    "phones": [
+      {"label": "Telephone", "number": "+968 2460 4811", "tel": "+96824604811"},
+      {"label": "Fax", "number": "+968 2460 4837", "fax": true}
+    ],
+    "email": "business@assarain.com",
+    "form": {
+      "branch": false,
+      "topics": ["Business enquiry", "Partnership or joint venture", "Careers", "Media", "Other"],
+      "submit": "Send enquiry"
+    }
+  },
+  "confirm": [
+    "Company descriptions use company names and group categories only. The site gives no one-line activity text, so none has been written.",
+    "Joint-venture ownership shares (Savills, Kone) are not published.",
+    "Only the corporate head office is published. Confirm whether any other office should appear.",
+    "The site's head office line gives 'Ruwi, Muscat' and a PO box; the building address still needs confirming."
+  ],
+  "sources": ["https://www.assarain.com (homepage read 11 Oct 2026)", "https://www.assarain.com/contact-us/ (read 11 Oct 2026)"]
+}

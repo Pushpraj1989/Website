@@ -1,0 +1,89 @@
+{
+  "slug": "starcare",
+  "tier": 1,
+  "name": "Starcare Hospital",
+  "short": "Starcare",
+  "sector": "Healthcare",
+  "meta": "Starcare Hospital: eight sites across Oman, the UAE and India, with specialist departments, check-up packages and an in-house pharmacy.",
+  "accent": "#0e7490",
+  "cta": {"label": "Book appointment", "href": "#contact"},
+  "hero": {
+    "eyebrow": "Hospital care · Oman · UAE · India",
+    "title": "Specialist care at eight sites",
+    "lede": "From Seeb and Barka to Muscat, Bousher, Saha, Duqm and Sharjah, with check-up packages, specialist departments and an in-house pharmacy.",
+    "primary": {"label": "Book an appointment", "href": "#contact"},
+    "secondary": {"label": "Find a site", "href": "#locations"}
+  },
+  "stats": [
+    {"value": 8, "label": "Listed sites"},
+    {"value": 3, "label": "Countries"},
+    {"value": 500, "suffix": "+", "label": "Doctors, nurses & support staff"},
+    {"value": 5, "label": "Specialist departments"}
+  ],
+  "about": {
+    "title": "Eight sites, one hospital group",
+    "body": [
+      "Starcare operates six sites in Oman, one in Sharjah in the UAE, and one listed in Calicut, India. Each site lists its own address and phone number."
+    ],
+    "points": [
+      {"title": "Workforce", "text": "Over 500 doctors, nurses, paramedics and support staff, according to the group's site."},
+      {"title": "In-house pharmacy", "text": "The pharmacy stocks a range of lifesaving medicines."},
+      {"title": "Check-ups & packages", "text": "Health check packages are offered across the group."}
+    ]
+  },
+  "services": {
+    "title": "Specialist departments",
+    "nav": "Departments",
+    "intro": "Departments named on the group's homepage. Which site offers which department is not listed.",
+    "items": [
+      {"title": "Pediatrics & Neonatology", "icon": "heart"},
+      {"title": "ENT", "icon": "pulse"},
+      {"title": "Physiotherapy & Rehabilitation", "icon": "leaf"},
+      {"title": "Anaesthesiology & Pain Management", "icon": "shield"},
+      {"title": "General & Laparoscopic Surgery", "icon": "layers"}
+    ],
+    "chips_title": "Also offered",
+    "chips": ["Check-ups & packages", "In-house pharmacy"]
+  },
+  "highlights": null,
+  "locations": {
+    "title": "Find a site",
+    "nav": "Locations",
+    "intro": "Eight sites in three countries. Filter by country to narrow the list.",
+    "items": [
+      {"name": "Seeb", "type": "Branch", "country": "Oman", "address": "PO Box 198, PC 101, As Seeb, Sultanate of Oman", "phone": "+968 2455 7200"},
+      {"name": "Barka", "type": "Branch", "country": "Oman", "address": "PO Box 539, PC 320, Barka, Sultanate of Oman", "phone": "+968 2698 2200"},
+      {"name": "Mabela", "type": "Branch", "country": "Oman", "address": "PO Box 198, PC 101, Mabela, Muscat, Sultanate of Oman", "phone": "+968 2426 3300", "note": "Shares its PO Box with Seeb. Confirm."},
+      {"name": "Bousher", "type": "Branch", "country": "Oman", "address": "PO Box 59, PC 118, Bousher, near Mall of Oman", "phone": "+968 2411 3900"},
+      {"name": "Saha", "type": "Branch", "country": "Oman", "note": "Listed with the Seeb address and phone. Confirm this branch's own details."},
+      {"name": "Duqm", "type": "Branch", "country": "Oman", "note": "Listed with the Seeb address and phone. Confirm this branch's own details."},
+      {"name": "Sharjah", "type": "Branch", "country": "UAE", "address": "Starcare Medical Center LLC, PO Box 25568, Malabar Plaza, Rolla, Sharjah, UAE", "phone": "+971 6 561 1099"},
+      {"name": "Calicut", "type": "Branch", "country": "India", "note": "Listed with a Muscat, Oman address. Confirm the Calicut address."}
+    ]
+  },
+  "marquee": ["Pediatrics & Neonatology", "ENT", "Physiotherapy & Rehabilitation", "Anaesthesiology & Pain Management", "General & Laparoscopic Surgery", "Check-ups & packages", "In-house pharmacy"],
+  "contact": {
+    "title": "Book an appointment",
+    "intro": "Pick a site and send a request. For urgent care, call the site directly.",
+    "address": "Starcare Hospital, PO Box 198, PC 101, As Seeb, Sultanate of Oman",
+    "phones": [
+      {"label": "Seeb", "number": "+968 2455 7200", "tel": "+96824557200"},
+      {"label": "Seeb (second line)", "number": "+968 2455 7201", "tel": "+96824557201"}
+    ],
+    "email": null,
+    "note": "No emergency number is published on the site. The booking form is a concept preview.",
+    "form": {
+      "branch": true,
+      "topics": ["Book an appointment", "Check-up package", "Pharmacy", "General enquiry"],
+      "submit": "Request appointment"
+    }
+  },
+  "confirm": [
+    "Seeb, Saha, Duqm and Calicut all list the same address and phone numbers. Mabela shares Seeb's PO box. Verify each branch's own address and phone.",
+    "The Calicut entry gives an Oman address. Verify the Indian address.",
+    "The Sharjah entry lists both a UAE and an Oman phone number. The concept uses the UAE number.",
+    "No emergency number, bed count or founding year is published.",
+    "The staff figure ('over 500') is the group's own wording."
+  ],
+  "sources": ["https://www.starcarehospital.com (homepage read 11 Oct 2026)"]
+}
