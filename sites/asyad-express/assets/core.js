@@ -282,6 +282,10 @@
     try { if (localStorage.getItem(offerKey)) return; } catch {}
     offer.hidden = false;
     requestAnimationFrame(() => requestAnimationFrame(() => offer.classList.add("is-in")));
+    // step aside after a while if ignored (not remembered: it may show again next visit)
+    let touched = false;
+    offer.addEventListener("pointerenter", () => (touched = true), { once: true });
+    setTimeout(() => { if (!touched) { offer.classList.remove("is-in"); setTimeout(() => (offer.hidden = true), 500); } }, 15000);
   };
   if (offer) $$("[data-offer-close]", offer).forEach((b) => b.addEventListener("click", () => {
     offer.classList.remove("is-in");

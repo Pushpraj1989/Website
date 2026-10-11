@@ -46,6 +46,7 @@ testimonials, partners, locations, faq, bmi, emi, depth, scrub, stages. Order is
    {"clouds": true, "speed": 0.3, "y": 55, "tint": "#ffffff", "count": 7},
    {"title": true, "speed": 0.5},                // headline plane
    {"image": "building-cutout", "speed": 0.25, "fit": "contain", "bottom": "70%"},
+   // no cutout? use the full render with "mask": "float" (soft edges) | "fade-bottom" | "sky"
    {"clouds": true, "front": true, "speed": 0.9, "y": 75}]}
 
 {"type": "scrub", "id": "build", "video": "film.mp4", "video_m": "film-m.mp4", "poster": "img-key", "height": 320, "align": "left",
@@ -77,7 +78,10 @@ Refer to images by key everywhere else. Credits go in `data/credits.json` under
             "cta": {"label": "Read", "href": "@news:Title prefix"}, "cta2": {"label": "Menu", "href": "menu.html"}}],
 "rail": {"title": "How can we help?", "items": [{"label": "Book", "sub": "In two minutes", "icon": "check", "href": "contact.html"}]}
 ```
-Link shortcuts resolve at build time: `@news:<title start>`, `@svc:<title start>`,
+A promo slide can carry `"video": "file.mp4"` (MP4 + WebM twin in `shared/img/<img_dir>/`): the
+slider then crossfades and plays only the active slide's film; `image` stays as the poster.
+
+Link shortcuts resolve at build time, in any `href` of home sections, nudges and assemble blocks: `@news:<title start>`, `@svc:<title start>`,
 `@sp:<speciality>`, `@cat:<product title start>`, and `#section-id` on the home page.
 Icons: pulse, heart, layers, shield, leaf, chart, star, building, factory, globe, pin,
 phone, mail, truck, clock, arrow, check.
@@ -111,7 +115,9 @@ phone, mail, truck, clock, arrow, check.
     "specs": [{"label": "Size", "value": "12 oz"}],       // also feeds the compare table
     "nutrition": [{"label": "Energy", "value": "260 kcal", "pct": 13}], "serving": "per cup",
     "options": [{"label": "Milk", "values": ["Whole", "Oat"]}],
-    "tags": ["Vegan option"], "cta": {"label": "Apply", "href": "contact.html"}, "src": "https://…"
+    "tags": ["Vegan option"], "cta": {"label": "Apply", "href": "contact.html"}, "src": "https://…",
+    "gallery": ["img-key", "img-key"],               // draggable strip of large photos on the item page
+    "highlights": [{"title": "…", "text": "…"}]       // feature cards on the item page
   }]}
 ```
 Pages: `<nav>.html` (filters + search), `p-<title>.html` per item, `compare.html`.

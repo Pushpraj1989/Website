@@ -161,6 +161,61 @@ def fetch(url, timeout=25):
         return r.geturl(), ctype, raw.decode(charset.group(1) if charset else "utf-8", errors="replace")
 
 
+class Renderer:
+    """Headless Chromium for JavaScript-rendered sites (pip install playwright)."""
+
+    def __init__(self, out):
+        import os
+        from playwright.sync_api import sync_playwright
+        self.out = out
+        self.api_dir = out / "api"
+        self.api_dir.mkdir(parents=True, exist_ok=True)
+        self.media = {}
+        self.pw = sync_playwright().start()
+        exe = os.environ.get("CHROMIUM") or next((str(p) for p in Path("/opt/pw-browsers").glob("chromium-*/chrome-linux/chrome")), None)
+        self.browser = self.pw.chromium.launch(executable_path=exe, args=["--no-sandbox"]) if exe else self.pw.chromium.launch()
+        self.ctx = self.browser.new_context(user_agent=UA, viewport={"width": 1440, "height": 900})
+        self.n_api = 0
+
+    def fetch(self, url):
+        pg = self.ctx.new_page()
+        def on_resp(r):
+            try:
+                ct = r.headers.get("content-type", "")
+                u = r.url
+                if r.status >= 400:
+                    return
+                if re.search(r"\.(mp4|webm|m3u8)(\?|$)", u, re.I) or ct.startswith("video/"):
+                    self.media.setdefault(u.split("?")[0], {"type": "video", "page": url})
+                elif ct.startswith("image/") and not re.search(r"logo|icon|sprite|favicon|\.svg", u, re.I):
+                    self.media.setdefault(u, {"type": "image", "page": url})
+                elif "json" in ct and r.request.resource_type in ("xhr", "fetch"):
+                    body = r.text()
+                    if len(body) > 200:
+                        self.n_api += 1
+                        name = re.sub(r"[^a-z0-9]+", "-", urllib.parse.urlparse(u).path.lower()).strip("-")[:80] or "api"
+                        (self.api_dir / f"{self.n_api:03d}-{name}.json").write_text(json.dumps({"url": u, "page": url, "body": json.loads(body)}, ensure_ascii=False), encoding="utf-8")
+            except Exception:
+                pass
+        pg.on("response", on_resp)
+        try:
+            pg.goto(url, wait_until="networkidle", timeout=45000)
+        except Exception:
+            pass
+        for _ in range(14):  # scroll so lazy images, videos and data load
+            pg.mouse.wheel(0, 900); pg.wait_for_timeout(250)
+        pg.wait_for_timeout(800)
+        for v in pg.eval_on_selector_all("video, video source", "els => els.map(e => e.currentSrc || e.src || e.getAttribute('src')).filter(Boolean)"):
+            self.media.setdefault(urllib.parse.urljoin(url, v).split("?")[0], {"type": "video", "page": url})
+        html, final = pg.content(), pg.url
+        pg.close()
+        return final, "text/html", html
+
+    def close(self):
+        (self.out / "media.json").write_text(json.dumps(self.media, indent=2, ensure_ascii=False), encoding="utf-8")
+        self.browser.close(); self.pw.stop()
+
+
 def sitemap_urls(root, rp, limit):
     out, seen = [], set()
     queue = deque()
@@ -219,6 +274,7 @@ def main():
     ap.add_argument("--min-width", type=int, default=900)
     ap.add_argument("--max-images", type=int, default=80)
     ap.add_argument("--out", default="research")
+    ap.add_argument("--render", action="store_true", help="load pages in headless Chromium (JavaScript apps: React, Angular, Next, Vue); also saves the JSON the app fetches and every image/video it requests")
     ap.add_argument("--exclude", default="", help="regex of URLs to skip, e.g. '/ar/' for a duplicate Arabic tree")
     ap.add_argument("--ignore-robots", action="store_true", help="only with the site owner's permission")
     args = ap.parse_args()
@@ -244,6 +300,8 @@ def main():
         p = urllib.parse.urlparse(u)
         return p.scheme in ("http", "https") and p.netloc.replace("www.", "").endswith(host) and not SKIP_EXT.search(p.path)
 
+    renderer = Renderer(out) if args.render else None
+    get = renderer.fetch if renderer else fetch
     queue = deque([final])
     for u in sitemap_urls(root, rp, args.max):
         if internal(u):
@@ -257,7 +315,7 @@ def main():
                 continue
             seen.add(key)
             try:
-                got, ctype, html = fetch(url)
+                got, ctype, html = get(url)
             except (urllib.error.URLError, TimeoutError, ValueError, ConnectionError) as e:
                 print(f"skip {url}: {e}", file=sys.stderr)
                 continue
@@ -292,6 +350,10 @@ def main():
                 if l.rstrip("/").replace("://www.", "://") not in seen:
                     queue.append(l)
             time.sleep(args.delay)
+
+    if renderer:
+        renderer.close()
+        print(f"rendered mode: {renderer.n_api} JSON responses in {out}/api/, {len(renderer.media)} media files listed in media.json")
 
     # ---- summary ----
     GENERIC = re.compile(r"^(search|menu|navigation|main menu|close|share|follow us|contact us|quick links|related|newsletter)$", re.I)
@@ -332,6 +394,8 @@ def main():
         idir.mkdir(exist_ok=True)
         seen_img, saved = set(), {}
         cands = [(i, r["url"]) for r in records for i in r["images"]] + [({"src": r["og_image"], "alt": r["title"]}, r["url"]) for r in records if r["og_image"]]
+        if (out / "media.json").exists():
+            cands += [({"src": u, "alt": ""}, m["page"]) for u, m in json.loads((out / "media.json").read_text()).items() if m["type"] == "image"]
         for img, page in cands:
             if len(saved) >= args.max_images:
                 break

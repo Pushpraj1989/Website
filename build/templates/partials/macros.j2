@@ -150,7 +150,8 @@
 <section class="promo promo-{{ s.promo_fx or 'flow' }}" id="top" data-promo="{{ s.promo_fx or 'flow' }}" aria-roledescription="carousel" aria-label="Highlights">
   <div class="promo-stage">
     {%- for p in s.promos %}
-    <div class="promo-bg{% if loop.first %} is-on{% endif %}" data-src="{{ src(p.image) }}"><img src="{{ src(p.image) }}" alt="{{ s.images[p.image].alt }}" {% if loop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async"></div>
+    <div class="promo-bg{% if loop.first %} is-on{% endif %}{% if p.video %} has-video{% endif %}" data-src="{{ src(p.image) }}"><img src="{{ src(p.image) }}" alt="{{ s.images[p.image].alt }}" {% if loop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+      {%- if p.video %}<video class="promo-vid" muted loop playsinline preload="{{ 'auto' if loop.first else 'none' }}" poster="{{ src(p.image) }}" data-src="assets/media/{{ p.video }}" aria-hidden="true"></video>{% endif %}</div>
     {%- endfor %}
     <canvas class="promo-gl" aria-hidden="true"></canvas>
     <div class="promo-shade" aria-hidden="true"></div>
@@ -550,7 +551,7 @@
       </div>
     </div>
     {%- else %}
-    <div class="depth-layer" data-speed="{{ l.speed or 0.2 }}" data-scale="{{ l.scale or 0 }}" data-lean="{{ l.lean or 8 }}" style="z-index: {{ l.z or (loop.index * 10) }}">
+    <div class="depth-layer{% if l.mask %} mask-{{ l.mask }}{% endif %}" data-speed="{{ l.speed or 0.2 }}" data-scale="{{ l.scale or 0 }}" data-lean="{{ l.lean or 8 }}" style="z-index: {{ l.z or (loop.index * 10) }}{% if l.inset %}; inset: {{ l.inset }}{% endif %}">
       <img src="{{ src(l.image) }}" alt="{{ s.images[l.image].alt if l.alt is not defined else l.alt }}" style="object-position: {{ l.position or 'center' }}; {% if l.fit == 'contain' %}object-fit: contain;{% endif %}{% if l.bottom %} top: auto; bottom: 0; height: {{ l.bottom }};{% endif %}">
     </div>
     {%- endif %}

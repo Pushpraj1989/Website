@@ -200,6 +200,18 @@ def build_pages(site):
                 pr[k]["href"] = resolve(pr[k]["href"])
     for r in (site.get("rail") or {}).get("items", []):
         r["href"] = resolve(r["href"])
+
+    def walk(o):  # any "href" in home sections, nudges and assemble blocks can use @ shortcuts
+        if isinstance(o, dict):
+            for k, v in o.items():
+                if k == "href" and isinstance(v, str):
+                    o[k] = resolve(v)
+                else:
+                    walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+    walk(site.get("home")); walk(site.get("nudges")); walk(site.get("assemble"))
     for n in nav:
         n.setdefault("items", [])  # templates read n['items']; without the key Jinja finds dict.items
     site["_pages"] = pages
@@ -318,7 +330,13 @@ def render_site(env, site):
                         media.append(webm)
             if m.get("frames"):
                 media.append(m["frames"]["dir"])
-    for name in media:
+    for pr in site.get("promos") or []:
+        if pr.get("video"):
+            media.append(pr["video"])
+            webm = pr["video"].rsplit(".", 1)[0] + ".webm"
+            if (SHARED / "img" / site["img_dir"] / webm).exists():
+                media.append(webm)
+    for name in dict.fromkeys(media):
         src = SHARED / "img" / site["img_dir"] / name
         if not src.exists():
             raise SystemExit(f"missing media for {site['slug']}: {src}")

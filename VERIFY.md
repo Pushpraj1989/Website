@@ -57,6 +57,18 @@ Sources:
 Sources:
 - https://badralsamaahospitals.com (homepage, about, news, packages, specialities, doctors, branch sites, insurance; read 11 Oct 2026)
 
+## Dar Global
+
+- Kit test build: not reviewed by Dar Global.
+- Stats ('32 years', 'US$23B GDV', '7 markets', '12+ partners') are marked indicative as of Q3 2026 on the official site; the investor page says 14 cities in 9 countries and the FAQ says 9 countries.
+- Office phone numbers are matched to offices by country code from the contact page; Doha and Athens have no published number; Athens has no published address.
+- No prices are published on darglobal.co.uk; the concept shows none.
+- Construction stage images are renders, not progress photos; ask for site photography for the stages story.
+- Opening hours of offices are not published.
+
+Sources:
+- https://darglobal.co.uk (home, about, projects and 39 project pages, partners, press, FAQ, investor, get-in-touch; rendered with headless Chromium, read 11 Oct 2026)
+
 ## Roastline Coffee House
 
 - Demo brand: replace every item with the real company's content.

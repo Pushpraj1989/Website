@@ -31,6 +31,11 @@ Ask the questions in [references/intake.md](references/intake.md), in four short
 1. Scrape the existing site:
    `python3 tools/scrape.py <url> --slug <slug> --images` (add `--exclude '/ar/'` for duplicate
    language trees). Output: `research/<slug>/summary.json`, `pages.jsonl`, `images/`.
+   If pages come back with no headings or paragraphs, the site is a JavaScript app (React,
+   Next, Angular, Vue): rerun with `--render`. It drives headless Chromium, scrolls each page,
+   saves the JSON the app fetches (`api/`) and lists every image and video it loads (`media.json`).
+   For catalogues (projects, products, doctors), write a small Playwright collector that visits
+   the listing and each item page; take item names from the listing cards, not page taglines.
    If the site blocks robots or the script, read pages with WebFetch or curl, and use web search
    for press coverage. Respect robots.txt unless the owner gave permission.
 2. Go deeper where the preset's `scrape_focus` says (doctors, menu, products with prices,
@@ -74,7 +79,9 @@ Show the person a short sitemap and home section list. Continue unless they obje
    - `assemble`: 1–2 hero products, bottom layer first, 4–7 layers, each with a name and a
      one-line note. Use `image` layers with transparent packshots when the brand has them.
 3. Run the copy pass on everything you wrote: [references/copy.md](references/copy.md).
-4. Photos go in `shared/img/<slug>/` (max 1800 px wide, JPEG ~78). Add each to `images`
+4. Keep the image budget sane: about 150 photos and 25 MB per site at most (1280 px, JPEG ~66–74),
+   films encoded with `tools/encode.sh`.
+5. Photos go in `shared/img/<slug>/` (max 1800 px wide, JPEG ~78). Add each to `images`
    with alt text and a caption; add licence info to `data/credits.json` (company-owned:
    `"owner": true`; stock: CC0 / CC BY with creator). Caption non-literal photos "Illustrative".
    Rules: [references/content-rules.md](references/content-rules.md).

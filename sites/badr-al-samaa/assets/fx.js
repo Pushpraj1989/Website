@@ -542,7 +542,19 @@
     const canvas = root.querySelector(".promo-gl");
     let gl = null, prog, texs = [], uni = {}, glFrom = 0, glTo = 0, glP = 0, glAnim = null;
     const imgs = bgs.map((b) => b.querySelector("img"));
-    if (canvas && !T1.reduce) {
+    // video slides: crossfade instead of WebGL, play only the active slide
+    const vids = bgs.map((b) => b.querySelector("video"));
+    const hasVideo = vids.some(Boolean);
+    const h264 = document.createElement("video").canPlayType('video/mp4; codecs="avc1.42E01E"');
+    const playOnly = (i) => vids.forEach((v, k) => {
+      if (!v) return;
+      if (k === i && !T1.reduce) {
+        if (!v.src) v.src = h264 ? v.dataset.src : v.dataset.src.replace(/\.mp4$/, ".webm");
+        v.play().catch(() => {});
+      } else v.pause();
+    });
+    if (hasVideo) playOnly(0);
+    if (canvas && !T1.reduce && !hasVideo) {
       try { gl = canvas.getContext("webgl", { premultipliedAlpha: false, antialias: false }); } catch (e) { gl = null; }
     }
     const VS = "attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;v.y=1.-v.y;gl_Position=vec4(p,0.,1.);}";
@@ -634,6 +646,7 @@
       if (i === cur || busy) return;
       busy = true;
       bgs[cur].classList.remove("is-on"); bgs[i].classList.add("is-on");
+      if (hasVideo) playOnly(i);
       tabs.forEach((t, k) => { t.classList.toggle("is-on", k === i); t.setAttribute("aria-selected", String(k === i)); t.classList.toggle("is-done", false); t.querySelector("b").style.transform = "scaleX(0)"; });
       showCopy(i, dir);
       if (gl && texs[i] && texs[cur]) {
@@ -885,6 +898,8 @@
       B("phones").innerHTML = b.phones.length ? b.phones.map((p) => `<li><span>${esc(p.label)}</span><a href="tel:${esc(p.tel)}">${esc(p.number)}</a></li>`).join("") : "<li><span>Phone</span><b>Use the helpline</b></li>";
       B("docs").textContent = b.docs || "–";
       B("nspec").textContent = b.specs.length || "–";
+      // counts only make sense where the data has them (hospitals: doctors, specialities)
+      const stats = panel.querySelector(".bp-stats"); if (stats) stats.hidden = !b.docs && !b.specs.length;
       const top = b.specs.slice(0, 8);
       B("specs").innerHTML = top.map((x) => `<li>${esc(x)}</li>`).join("") + (b.specs.length > 8 ? `<li class="more">+${b.specs.length - 8} more</li>` : "");
       const page = B("page"); page.hidden = !b.page; if (b.page) page.href = b.page;

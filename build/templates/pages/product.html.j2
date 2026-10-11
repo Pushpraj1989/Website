@@ -49,6 +49,22 @@
   </div>
 </section>
 {%- endif %}
+{%- if it.gallery %}
+<section class="pd-gallery" aria-label="Gallery">
+  <div class="wrap cstrip-head"><div><p class="eyebrow">Gallery</p><h2 class="pg-h2" data-anim="lines">{{ it.gallery_title or 'Inside ' ~ it.title }}</h2></div></div>
+  <div class="pdg-track" data-hdrag>
+    {%- for g in it.gallery %}<figure class="pdg-item"><img src="{{ m.src(g) }}" alt="{{ s.images[g].alt }}" loading="lazy" draggable="false">{% if s.images[g].cap %}<figcaption>{{ s.images[g].cap }}</figcaption>{% endif %}</figure>{% endfor %}
+  </div>
+</section>
+{%- endif %}
+{%- if it.highlights %}
+<section class="pg-section">
+  <div class="wrap">
+    <p class="eyebrow">{{ C.highlights_title or 'Highlights' }}</p>
+    <div class="point-grid">{% for h in it.highlights %}<article class="point-card" data-anim="up" data-delay="{{ (loop.index0 % 3) * 0.08 }}"><span class="point-n">{{ '%02d' % loop.index }}</span><h3>{{ h.title }}</h3>{% if h.text %}<p>{{ h.text }}</p>{% endif %}</article>{% endfor %}</div>
+  </div>
+</section>
+{%- endif %}
 {%- for a in s.assemble or [] if a.product == it.title %}{{ m.assemble(a) }}{% endfor %}
 <section class="pg-section alt">
   <div class="wrap">

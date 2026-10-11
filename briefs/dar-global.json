@@ -1,0 +1,15 @@
+{
+  "slug": "dar-global",
+  "name": "Dar Global",
+  "sector": "real-estate",
+  "goal": "kit test (internal)",
+  "languages": ["en"],
+  "website": "https://darglobal.co.uk/",
+  "references": [{"url": "reel: Real Estate Websites in 2026", "like": "building floating in clouds, construction sequence scrubbed by scroll, full-screen video hero"}],
+  "motion": "cinematic",
+  "brand": {"style": "chosen by builder"},
+  "signature": ["depth hero with clouds", "construction stages story", "scrubbed film", "full-screen video hero"],
+  "hosting": "existing server (same as Tier 1 concepts)",
+  "forms": "preview only",
+  "verifier": "internal"
+}
