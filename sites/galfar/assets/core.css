@@ -1267,7 +1267,8 @@ html.is-arriving .page-wipe { clip-path: inset(0 0 0 0); }
   min-height: 100svh;
   display: grid;
   grid-template-rows: 1fr auto;
-  overflow: hidden;
+  grid-template-columns: minmax(0, 1fr);
+  overflow: clip;
   color: #fff;
   background: #0b0b0b;
   isolation: isolate;
@@ -1300,7 +1301,7 @@ html.is-arriving .page-wipe { clip-path: inset(0 0 0 0); }
 .promo-cap { display: inline-block; margin-top: 1.6rem; padding: 0.25rem 0.6rem; border-radius: 6px; background: rgba(0, 0, 0, 0.45); font-size: 0.72rem; color: rgba(255, 255, 255, 0.8); }
 .no-motion .promo-copy:not(.is-on), html:not(.js) .promo-copy:not(:first-child) { display: none; }
 .promo-ui { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; padding-bottom: 2rem; }
-.promo-tabs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 220px); gap: 1rem; flex: 1; }
+.promo-tabs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1rem; flex: 1; min-width: 0; max-width: 1000px; }
 .promo-tab { display: grid; gap: 0.45rem; padding: 0; border: 0; background: none; color: rgba(255, 255, 255, 0.6); text-align: left; cursor: pointer; font: inherit; transition: color 0.3s; }
 .promo-tab:hover, .promo-tab.is-on { color: #fff; }
 .pt-n { font: 500 0.72rem/1 var(--font-mono); }
@@ -1699,3 +1700,8 @@ body:has(.page-hero.has-img, .promo) .site-header:not(.is-scrolled):not(.is-open
   .offer-t { font-size: 1.05rem; }
   .action-bar a span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
 }
+/* the action rail overlaps the slider: keep the slider controls clear of it */
+.promo:has(+ .rail) .promo-ui { padding-bottom: 6.5rem; }
+.rail { pointer-events: none; }
+.rail-box { pointer-events: auto; }
+@media (max-width: 760px) { .promo:has(+ .rail) .promo-ui { padding-bottom: 4.5rem; } }
