@@ -1,0 +1,24 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set C = s.catalogue %}
+{%- set hero_img = C.image or none %}
+{%- set kicker = page.label %}{% set intro = C.compare_intro or 'Every option side by side.' %}{% set crumb = 'Compare' %}
+{% include "partials/pagehero.html.j2" %}
+{%- set labels = [] %}
+{%- for it in C['items'] %}{% for f in it.specs or [] %}{% if f.label not in labels %}{% set _ = labels.append(f.label) %}{% endif %}{% endfor %}{% endfor %}
+<section class="pg-section">
+  <div class="wrap">
+    <div class="cmp-wrap" data-anim="up">
+      <table class="cmp">
+        <thead><tr><th scope="col">{{ page.label }}</th>{% for it in C['items'] %}<th scope="col"><a href="{{ it._file }}">{{ it.title }}</a>{% if it.price %}<span>{{ it.price }}</span>{% endif %}</th>{% endfor %}</tr></thead>
+        <tbody>
+          {%- for lab in labels %}
+          <tr><th scope="row">{{ lab }}</th>{% for it in C['items'] %}{% set v = (it.specs or []) | selectattr('label', 'equalto', lab) | map(attribute='value') | first %}<td>{{ v if v else '–' }}</td>{% endfor %}</tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

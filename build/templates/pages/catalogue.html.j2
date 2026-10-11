@@ -1,0 +1,24 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set C = s.catalogue %}
+{%- set hero_img = C.image or (C['items'][0]._img if C['items'][0]._img else ('hero' if 'hero' in s.images else none)) %}
+{%- set kicker = C.kicker or C.nav %}{% set intro = C.intro %}{% set crumb = page.label %}
+{% include "partials/pagehero.html.j2" %}
+<section class="pg-section" data-catalogue>
+  <div class="wrap">
+    <div class="cat-tools">
+      <div class="filters" role="group" aria-label="Category" data-cat-filters>
+        <button class="filter" type="button" data-catf="all" aria-pressed="true">All <span class="filter-n">{{ C['items'] | length }}</span></button>
+        {%- for c in C._categories %}<button class="filter" type="button" data-catf="{{ c }}" aria-pressed="false">{{ c }} <span class="filter-n">{{ C['items'] | selectattr('category', 'equalto', c) | list | length }}</span></button>{% endfor %}
+      </div>
+      <label class="dr-search cat-search">{{ icon('globe') }}<input type="search" placeholder="Search" aria-label="Search {{ page.label | lower }}" data-catq></label>
+    </div>
+    <div class="pc-grid">{% for it in C['items'] %}{{ m.product_card(it) }}{% endfor %}</div>
+    <p class="dr-empty" data-cat-empty hidden>Nothing matches. Try another category.</p>
+    {%- if C.compare %}<div class="dr-more-row"><a class="btn btn-ghost" href="compare.html">{{ C.compare_title or 'Compare side by side' }} {{ icon('arrow') }}</a></div>{% endif %}
+    {%- if C.note %}<p class="src-note">{{ C.note }}</p>{% endif %}
+  </div>
+</section>
+{%- for a in s.assemble or [] if a.on_catalogue %}{{ m.assemble(a) }}{% endfor %}
+{% endblock %}

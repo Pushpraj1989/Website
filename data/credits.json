@@ -1366,5 +1366,47 @@
     "license_url": "",
     "landing": "https://askar.badralsamaahospitals.com",
     "owner": true
+  },
+  "demo-coffee/latte": {
+    "title": "Latte art 3",
+    "creator": "Kim Sanso",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=70214602"
+  },
+  "demo-coffee/iced": {
+    "title": "Texting over iced coffee (Unsplash)",
+    "creator": "rawpixel.com",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=61716159"
+  },
+  "demo-coffee/beans": {
+    "title": "Rwandan coffee beans",
+    "creator": "Evan-Amos",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=14930972"
+  },
+  "demo-coffee/roast": {
+    "title": "Fresh coffee beans roasting machine",
+    "creator": "rawpixel",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "landing": "https://www.rawpixel.com/image/6039167"
+  },
+  "demo-coffee/cafe": {
+    "title": "Arched windows empty café",
+    "creator": "rawpixel",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "landing": "https://www.rawpixel.com/image/3301932"
+  },
+  "demo-coffee/pastry": {
+    "title": "Freshly baked pastries",
+    "creator": "rawpixel",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "landing": "https://www.rawpixel.com/image/5968565"
   }
 }

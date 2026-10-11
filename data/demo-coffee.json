@@ -1,0 +1,1269 @@
+{
+  "slug": "demo-coffee",
+  "tier": "Demo",
+  "name": "Roastline Coffee House",
+  "short": "Roastline",
+  "sector": "Food & beverage · coffee house (fictional demo brand)",
+  "meta": "A fictional coffee house built to demonstrate the website kit: menu, product pages, comparison, and drinks that assemble as you scroll.",
+  "demo": true,
+  "footer_note": "Fictional demo brand built with the website kit. Menu, prices and locations are sample content.",
+  "accent": "#d08a4e",
+  "theme": "studio",
+  "promo_fx": "ripple",
+  "img_dir": "demo-coffee",
+  "brand": {
+    "mode": "dark",
+    "bg": "#130e0b",
+    "fg": "#f4ebe1",
+    "accent": "#d48c4f",
+    "accent_ink": "#130e0b",
+    "alt": "#1b1410",
+    "font_display": "\"Fraunces\", Georgia, serif",
+    "font_body": "\"Inter\", system-ui, sans-serif",
+    "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600;700"
+  },
+  "cta": {
+    "label": "Order ahead",
+    "short": "Order",
+    "href": "contact.html"
+  },
+  "hero": {
+    "eyebrow": "",
+    "title": "Roastline",
+    "lede": "",
+    "primary": {
+      "label": "Menu",
+      "href": "menu.html"
+    },
+    "secondary": {
+      "label": "Visit",
+      "href": "locations.html"
+    }
+  },
+  "images": {
+    "latte": {
+      "src": "latte.jpg",
+      "alt": "Latte with a rosetta in the foam",
+      "cap": "Sample photography"
+    },
+    "iced": {
+      "src": "iced.jpg",
+      "alt": "Iced coffee on a table",
+      "cap": "Sample photography"
+    },
+    "beans": {
+      "src": "beans.jpg",
+      "alt": "Roasted coffee beans",
+      "cap": "Sample photography"
+    },
+    "roast": {
+      "src": "roast.jpg",
+      "alt": "Beans tumbling in a roaster",
+      "cap": "Sample photography"
+    },
+    "cafe": {
+      "src": "cafe.jpg",
+      "alt": "Café interior with arched windows",
+      "cap": "Sample photography"
+    },
+    "pastry": {
+      "src": "pastry.jpg",
+      "alt": "Freshly baked pastries",
+      "cap": "Sample photography"
+    }
+  },
+  "ticker": {
+    "label": "Today",
+    "items": [
+      {
+        "tag": "New",
+        "text": "Cardamom cold brew is back for the summer",
+        "href": "p-cardamom-cold-brew.html"
+      },
+      {
+        "tag": "Roast",
+        "text": "This week's single origin: Ethiopia Guji, washed",
+        "href": "p-ethiopia-guji-250-g.html"
+      },
+      {
+        "tag": "Class",
+        "text": "Home-brewing class every Saturday at 10am",
+        "href": "svc-coffee-classes.html"
+      }
+    ]
+  },
+  "promos": [
+    {
+      "image": "latte",
+      "tag": "Signature",
+      "kicker": "Spanish latte",
+      "short": "Spanish latte",
+      "title": "Sweet, silky, poured to order",
+      "text": "Double espresso over condensed milk and steamed whole milk, finished with a cinnamon dust.",
+      "cta": {
+        "label": "See how it's built",
+        "href": "#spanish-latte"
+      },
+      "cta2": {
+        "label": "Full menu",
+        "href": "menu.html"
+      }
+    },
+    {
+      "image": "iced",
+      "tag": "Summer",
+      "kicker": "Cold bar",
+      "short": "Cold bar",
+      "title": "Cold brew, steeped for 18 hours",
+      "text": "Slow-steeped, never bitter. Over ice, with cardamom or oat milk.",
+      "cta": {
+        "label": "Cold drinks",
+        "href": "menu.html"
+      }
+    },
+    {
+      "image": "roast",
+      "tag": "Roastery",
+      "kicker": "Roasted in-house",
+      "short": "Our roastery",
+      "title": "Roasted every Tuesday, in small batches",
+      "text": "Beans from four origins, roasted on site and rested before they reach your cup.",
+      "cta": {
+        "label": "Shop beans",
+        "href": "menu.html"
+      },
+      "cta2": {
+        "label": "The roastery",
+        "href": "svc-roastery.html"
+      }
+    },
+    {
+      "image": "pastry",
+      "tag": "Bakery",
+      "kicker": "Baked this morning",
+      "short": "Bakery",
+      "title": "Pastries out of the oven at 7am",
+      "text": "Croissants, cardamom buns and a breakfast brioche built to order.",
+      "cta": {
+        "label": "Bakery menu",
+        "href": "menu.html"
+      }
+    }
+  ],
+  "rail": {
+    "title": "What can we get you?",
+    "items": [
+      {
+        "label": "Order ahead",
+        "sub": "Skip the queue",
+        "icon": "check",
+        "href": "contact.html"
+      },
+      {
+        "label": "Menu",
+        "sub": "12 items",
+        "icon": "layers",
+        "href": "menu.html"
+      },
+      {
+        "label": "Find a café",
+        "sub": "4 locations",
+        "icon": "pin",
+        "href": "locations.html"
+      },
+      {
+        "label": "Shop beans",
+        "sub": "Fresh roast",
+        "icon": "leaf",
+        "href": "menu.html"
+      },
+      {
+        "label": "Catering",
+        "sub": "Offices & events",
+        "icon": "building",
+        "href": "svc-catering.html"
+      }
+    ]
+  },
+  "home": [
+    "promo",
+    "rail",
+    {
+      "type": "statement",
+      "kicker": "Roastline",
+      "text": "Small-batch coffee, roasted on Tuesdays and poured with care, every day of the week."
+    },
+    {
+      "type": "assemble",
+      "id": "spanish-latte"
+    },
+    "catalogue",
+    {
+      "type": "split",
+      "image": "cafe",
+      "kicker": "The café",
+      "title": "Built for long mornings",
+      "body": [
+        "Big tables, quiet corners and fast Wi-Fi. Order at the bar or ahead from your phone."
+      ],
+      "points": [
+        "Open from 7am",
+        "Oat, almond and lactose-free milk at no extra cost",
+        "Pastries baked on site"
+      ],
+      "cta": {
+        "label": "Find a café",
+        "href": "locations.html"
+      }
+    },
+    "services",
+    {
+      "type": "assemble",
+      "id": "breakfast-brioche"
+    },
+    "stats",
+    "locations",
+    "news",
+    "faq"
+  ],
+  "stats": [
+    {
+      "value": 4,
+      "label": "Cafés"
+    },
+    {
+      "value": 18,
+      "label": "Hours of cold brew steeping"
+    },
+    {
+      "value": 4,
+      "label": "Origins on the roaster"
+    },
+    {
+      "value": 7,
+      "label": "Days a week"
+    }
+  ],
+  "about": {
+    "title": "A roastery with a few cafés attached",
+    "body": [
+      "Roastline is a fictional coffee house used to demonstrate this website kit. Everything on this site is sample content."
+    ],
+    "timeline": [
+      {
+        "year": "2019",
+        "title": "First café opens"
+      },
+      {
+        "year": "2021",
+        "title": "In-house roastery starts"
+      },
+      {
+        "year": "2024",
+        "title": "Fourth café and catering"
+      }
+    ],
+    "values": [
+      {
+        "title": "Fresh",
+        "text": "Roasted weekly, rested, then brewed."
+      },
+      {
+        "title": "Honest",
+        "text": "Clear prices and origins on every bag."
+      },
+      {
+        "title": "Kind",
+        "text": "Every milk at the same price."
+      }
+    ]
+  },
+  "services": {
+    "title": "More than a cup",
+    "nav": "Experiences",
+    "intro": "Roastery tours, classes and catering.",
+    "items": [
+      {
+        "title": "Roastery",
+        "icon": "factory",
+        "text": "Watch the Tuesday roast and taste the week's beans.",
+        "image": "roast",
+        "detail": {
+          "intro": "Every Tuesday the roaster runs from 8am. Visitors can watch, ask questions and taste the new batch.",
+          "points": [
+            "Tours on Tuesdays at 10am",
+            "Cupping of three origins",
+            "Take-home 250 g bag"
+          ]
+        }
+      },
+      {
+        "title": "Coffee classes",
+        "icon": "star",
+        "text": "Brew better at home in one Saturday morning.",
+        "image": "beans",
+        "detail": {
+          "intro": "A two-hour class on grind, ratio and water, with V60, AeroPress and French press.",
+          "points": [
+            "Saturdays at 10am",
+            "Groups of eight",
+            "All equipment provided"
+          ]
+        }
+      },
+      {
+        "title": "Catering",
+        "icon": "building",
+        "text": "Espresso bar and pastries for offices and events.",
+        "image": "cafe",
+        "detail": {
+          "intro": "A barista, a machine and pastries for meetings, launches and weddings.",
+          "points": [
+            "From 30 guests",
+            "Full espresso menu",
+            "Book two weeks ahead"
+          ]
+        }
+      }
+    ]
+  },
+  "catalogue": {
+    "title": "Menu",
+    "nav": "Menu",
+    "kicker": "Menu",
+    "intro": "Coffee, cold drinks, bakery and beans. Sample prices.",
+    "home_title": "Today's menu",
+    "all_label": "Full menu",
+    "categories": [
+      "Coffee",
+      "Cold drinks",
+      "Bakery",
+      "Beans"
+    ],
+    "compare": true,
+    "compare_title": "Compare drinks",
+    "cta": "Order ahead",
+    "note": "Sample menu and prices for the demo.",
+    "nutrition_title": "Nutrition (approx.)",
+    "items": [
+      {
+        "title": "Spanish latte",
+        "category": "Coffee",
+        "price": "OMR 1.900",
+        "badge": "Signature",
+        "featured": true,
+        "text": "Double espresso, condensed milk and steamed milk, with cinnamon.",
+        "specs": [
+          {
+            "label": "Size",
+            "value": "12 oz"
+          },
+          {
+            "label": "Caffeine",
+            "value": "Double shot"
+          },
+          {
+            "label": "Milk",
+            "value": "Whole (any milk)"
+          },
+          {
+            "label": "Served",
+            "value": "Hot or iced"
+          }
+        ],
+        "nutrition": [
+          {
+            "label": "Energy",
+            "value": "260 kcal",
+            "pct": 13
+          },
+          {
+            "label": "Sugar",
+            "value": "31 g",
+            "pct": 34
+          },
+          {
+            "label": "Protein",
+            "value": "10 g",
+            "pct": 20
+          },
+          {
+            "label": "Fat",
+            "value": "9 g",
+            "pct": 13
+          }
+        ],
+        "options": [
+          {
+            "label": "Size",
+            "values": [
+              "8 oz",
+              "12 oz",
+              "16 oz"
+            ]
+          },
+          {
+            "label": "Milk",
+            "values": [
+              "Whole",
+              "Oat",
+              "Almond",
+              "Lactose-free"
+            ]
+          }
+        ],
+        "layers": [
+          {
+            "shape": "liquid",
+            "color": "#e9d6b4",
+            "h": 22,
+            "w": 0.86
+          },
+          {
+            "shape": "liquid",
+            "color": "#f1e6d6",
+            "h": 70,
+            "w": 0.92
+          },
+          {
+            "shape": "liquid",
+            "color": "#5a3220",
+            "h": 34,
+            "w": 0.97
+          },
+          {
+            "shape": "foam",
+            "color": "#eadbc6",
+            "h": 18,
+            "w": 1.0
+          },
+          {
+            "shape": "glass",
+            "h": 26,
+            "w": 1.08,
+            "wb": 0.86
+          }
+        ]
+      },
+      {
+        "title": "Flat white",
+        "category": "Coffee",
+        "price": "OMR 1.600",
+        "featured": true,
+        "text": "Ristretto shots with velvety microfoam.",
+        "specs": [
+          {
+            "label": "Size",
+            "value": "8 oz"
+          },
+          {
+            "label": "Caffeine",
+            "value": "Double ristretto"
+          },
+          {
+            "label": "Milk",
+            "value": "Whole (any milk)"
+          },
+          {
+            "label": "Served",
+            "value": "Hot"
+          }
+        ],
+        "nutrition": [
+          {
+            "label": "Energy",
+            "value": "120 kcal",
+            "pct": 6
+          },
+          {
+            "label": "Sugar",
+            "value": "9 g",
+            "pct": 10
+          },
+          {
+            "label": "Protein",
+            "value": "7 g",
+            "pct": 14
+          }
+        ],
+        "options": [
+          {
+            "label": "Milk",
+            "values": [
+              "Whole",
+              "Oat",
+              "Almond"
+            ]
+          }
+        ],
+        "layers": [
+          {
+            "shape": "liquid",
+            "color": "#4a2a17",
+            "h": 40,
+            "w": 0.88
+          },
+          {
+            "shape": "liquid",
+            "color": "#c79a6b",
+            "h": 40,
+            "w": 0.94
+          },
+          {
+            "shape": "foam",
+            "color": "#efe2cf",
+            "h": 14,
+            "w": 1.0
+          },
+          {
+            "shape": "glass",
+            "h": 24,
+            "w": 1.06,
+            "wb": 0.88
+          }
+        ]
+      },
+      {
+        "title": "Cortado",
+        "category": "Coffee",
+        "price": "OMR 1.400",
+        "text": "Equal parts espresso and warm milk.",
+        "specs": [
+          {
+            "label": "Size",
+            "value": "4 oz"
+          },
+          {
+            "label": "Caffeine",
+            "value": "Double shot"
+          },
+          {
+            "label": "Milk",
+            "value": "Whole"
+          },
+          {
+            "label": "Served",
+            "value": "Hot"
+          }
+        ],
+        "layers": [
+          {
+            "shape": "liquid",
+            "color": "#4a2a17",
+            "h": 34,
+            "w": 0.84
+          },
+          {
+            "shape": "liquid",
+            "color": "#d6b48c",
+            "h": 34,
+            "w": 0.9
+          },
+          {
+            "shape": "glass",
+            "h": 18,
+            "w": 1.0,
+            "wb": 0.86
+          }
+        ]
+      },
+      {
+        "title": "Cardamom cold brew",
+        "category": "Cold drinks",
+        "price": "OMR 1.800",
+        "badge": "Seasonal",
+        "featured": true,
+        "text": "18-hour cold brew with cardamom syrup over ice.",
+        "specs": [
+          {
+            "label": "Size",
+            "value": "16 oz"
+          },
+          {
+            "label": "Caffeine",
+            "value": "High"
+          },
+          {
+            "label": "Milk",
+            "value": "None (add oat)"
+          },
+          {
+            "label": "Served",
+            "value": "Iced"
+          }
+        ],
+        "nutrition": [
+          {
+            "label": "Energy",
+            "value": "70 kcal",
+            "pct": 4
+          },
+          {
+            "label": "Sugar",
+            "value": "16 g",
+            "pct": 18
+          }
+        ],
+        "layers": [
+          {
+            "shape": "liquid",
+            "color": "#2f1a10",
+            "h": 110,
+            "w": 0.9
+          },
+          {
+            "shape": "ice",
+            "color": "#e8f6ff",
+            "h": 30,
+            "w": 0.9
+          },
+          {
+            "shape": "glass",
+            "h": 30,
+            "w": 1.06,
+            "wb": 0.86
+          }
+        ]
+      },
+      {
+        "title": "Iced Spanish latte",
+        "category": "Cold drinks",
+        "price": "OMR 2.000",
+        "featured": true,
+        "text": "Our signature, poured over ice.",
+        "specs": [
+          {
+            "label": "Size",
+            "value": "16 oz"
+          },
+          {
+            "label": "Caffeine",
+            "value": "Double shot"
+          },
+          {
+            "label": "Milk",
+            "value": "Whole (any milk)"
+          },
+          {
+            "label": "Served",
+            "value": "Iced"
+          }
+        ],
+        "layers": [
+          {
+            "shape": "liquid",
+            "color": "#e9d6b4",
+            "h": 24,
+            "w": 0.86
+          },
+          {
+            "shape": "liquid",
+            "color": "#f1e6d6",
+            "h": 60,
+            "w": 0.92
+          },
+          {
+            "shape": "liquid",
+            "color": "#5a3220",
+            "h": 30,
+            "w": 0.96
+          },
+          {
+            "shape": "ice",
+            "color": "#e8f6ff",
+            "h": 26,
+            "w": 0.9
+          },
+          {
+            "shape": "glass",
+            "h": 28,
+            "w": 1.08,
+            "wb": 0.86
+          }
+        ]
+      },
+      {
+        "title": "Hibiscus iced tea",
+        "category": "Cold drinks",
+        "price": "OMR 1.300",
+        "text": "Brewed hibiscus, lime and a little honey.",
+        "specs": [
+          {
+            "label": "Size",
+            "value": "16 oz"
+          },
+          {
+            "label": "Caffeine",
+            "value": "None"
+          },
+          {
+            "label": "Milk",
+            "value": "None"
+          },
+          {
+            "label": "Served",
+            "value": "Iced"
+          }
+        ],
+        "layers": [
+          {
+            "shape": "liquid",
+            "color": "#8e1f3a",
+            "h": 110,
+            "w": 0.9
+          },
+          {
+            "shape": "ice",
+            "color": "#ffe8ee",
+            "h": 26,
+            "w": 0.9
+          },
+          {
+            "shape": "glass",
+            "h": 28,
+            "w": 1.06,
+            "wb": 0.86
+          }
+        ]
+      },
+      {
+        "title": "Breakfast brioche",
+        "category": "Bakery",
+        "price": "OMR 2.400",
+        "badge": "Built to order",
+        "featured": true,
+        "text": "Toasted brioche, egg, cheese, rocket and smoky tomato relish.",
+        "nutrition": [
+          {
+            "label": "Energy",
+            "value": "520 kcal",
+            "pct": 26
+          },
+          {
+            "label": "Protein",
+            "value": "24 g",
+            "pct": 48
+          },
+          {
+            "label": "Carbs",
+            "value": "44 g",
+            "pct": 17
+          }
+        ],
+        "layers": [
+          {
+            "shape": "disc",
+            "color": "#d08a3c",
+            "h": 24,
+            "w": 0.96
+          },
+          {
+            "shape": "sauce",
+            "color": "#b8382a",
+            "h": 6
+          },
+          {
+            "shape": "leaf",
+            "color": "#5f9e45",
+            "h": 8
+          },
+          {
+            "shape": "disc",
+            "color": "#f6f0e1",
+            "h": 16,
+            "w": 0.9
+          },
+          {
+            "shape": "drip",
+            "color": "#f2b53a",
+            "h": 6,
+            "w": 0.82
+          },
+          {
+            "shape": "dome",
+            "color": "#d08a3c",
+            "h": 64,
+            "w": 0.96,
+            "dots": "#f3e3bf"
+          }
+        ]
+      },
+      {
+        "title": "Cardamom bun",
+        "category": "Bakery",
+        "price": "OMR 0.900",
+        "featured": true,
+        "text": "Knotted dough with cardamom sugar.",
+        "layers": [
+          {
+            "shape": "disc",
+            "color": "#c27a35",
+            "h": 20,
+            "w": 0.8
+          },
+          {
+            "shape": "dome",
+            "color": "#d39248",
+            "h": 50,
+            "w": 0.8,
+            "dots": "#f5e9d0"
+          }
+        ]
+      },
+      {
+        "title": "Butter croissant",
+        "category": "Bakery",
+        "price": "OMR 0.800",
+        "text": "Laminated with French butter, baked at 7am.",
+        "layers": [
+          {
+            "shape": "disc",
+            "color": "#c98a3e",
+            "h": 16,
+            "w": 0.9
+          },
+          {
+            "shape": "dome",
+            "color": "#dca15a",
+            "h": 54,
+            "w": 0.9
+          }
+        ]
+      },
+      {
+        "title": "Ethiopia Guji 250 g",
+        "category": "Beans",
+        "price": "OMR 5.500",
+        "badge": "This week",
+        "text": "Washed. Jasmine, bergamot and stone fruit.",
+        "specs": [
+          {
+            "label": "Origin",
+            "value": "Guji, Ethiopia"
+          },
+          {
+            "label": "Process",
+            "value": "Washed"
+          },
+          {
+            "label": "Roast",
+            "value": "Light"
+          },
+          {
+            "label": "Notes",
+            "value": "Jasmine, bergamot"
+          }
+        ],
+        "layers": [
+          {
+            "shape": "bar",
+            "color": "#2a1a12",
+            "h": 120,
+            "w": 0.62
+          }
+        ]
+      },
+      {
+        "title": "Colombia Huila 250 g",
+        "category": "Beans",
+        "price": "OMR 5.000",
+        "text": "Washed. Caramel, red apple, cocoa.",
+        "specs": [
+          {
+            "label": "Origin",
+            "value": "Huila, Colombia"
+          },
+          {
+            "label": "Process",
+            "value": "Washed"
+          },
+          {
+            "label": "Roast",
+            "value": "Medium"
+          },
+          {
+            "label": "Notes",
+            "value": "Caramel, red apple"
+          }
+        ],
+        "layers": [
+          {
+            "shape": "bar",
+            "color": "#3b2416",
+            "h": 120,
+            "w": 0.62
+          }
+        ]
+      },
+      {
+        "title": "House espresso blend 1 kg",
+        "category": "Beans",
+        "price": "OMR 16.000",
+        "text": "Brazil and Colombia. Chocolate and hazelnut.",
+        "specs": [
+          {
+            "label": "Origin",
+            "value": "Brazil, Colombia"
+          },
+          {
+            "label": "Process",
+            "value": "Natural, washed"
+          },
+          {
+            "label": "Roast",
+            "value": "Medium-dark"
+          },
+          {
+            "label": "Notes",
+            "value": "Chocolate, hazelnut"
+          }
+        ],
+        "layers": [
+          {
+            "shape": "bar",
+            "color": "#4a2d1c",
+            "h": 150,
+            "w": 0.72
+          }
+        ]
+      }
+    ]
+  },
+  "assemble": [
+    {
+      "id": "spanish-latte",
+      "product": "Spanish latte",
+      "kicker": "Signature drink",
+      "title": "How we build a Spanish latte",
+      "intro": "Five layers, poured in this order, every time.",
+      "price": "OMR 1.900",
+      "price_label": "Spanish latte",
+      "cta": {
+        "label": "Order one",
+        "href": "contact.html"
+      },
+      "layers": [
+        {
+          "name": "Condensed milk",
+          "note": "A spoon of sweetness at the base",
+          "shape": "liquid",
+          "color": "#e9d6b4",
+          "h": 22,
+          "w": 0.86
+        },
+        {
+          "name": "Steamed whole milk",
+          "note": "Silky, 60 to 65 °C",
+          "shape": "liquid",
+          "color": "#f1e6d6",
+          "h": 70,
+          "w": 0.92
+        },
+        {
+          "name": "Double espresso",
+          "note": "18 g in, 36 g out, 28 seconds",
+          "shape": "liquid",
+          "color": "#5a3220",
+          "h": 34,
+          "w": 0.97
+        },
+        {
+          "name": "Microfoam",
+          "note": "A thin, glossy cap",
+          "shape": "foam",
+          "color": "#eadbc6",
+          "h": 18,
+          "w": 1.0
+        },
+        {
+          "name": "Cinnamon dust",
+          "note": "A light finish",
+          "shape": "dust",
+          "color": "#9c5a2c",
+          "h": 4,
+          "w": 0.7
+        },
+        {
+          "name": "Double-walled glass",
+          "note": "Keeps it hot, shows the layers",
+          "shape": "glass",
+          "h": 30,
+          "w": 1.08,
+          "wb": 0.86
+        }
+      ]
+    },
+    {
+      "id": "breakfast-brioche",
+      "product": "Breakfast brioche",
+      "kicker": "Bakery",
+      "title": "Breakfast brioche, layer by layer",
+      "intro": "Built to order in about four minutes.",
+      "price": "OMR 2.400",
+      "price_label": "Breakfast brioche",
+      "cta": {
+        "label": "See the bakery menu",
+        "href": "menu.html"
+      },
+      "layers": [
+        {
+          "name": "Toasted brioche base",
+          "note": "Baked here every morning",
+          "shape": "disc",
+          "color": "#d08a3c",
+          "h": 24,
+          "w": 0.96
+        },
+        {
+          "name": "Smoky tomato relish",
+          "note": "Slow-cooked for three hours",
+          "shape": "sauce",
+          "color": "#b8382a",
+          "h": 6
+        },
+        {
+          "name": "Rocket",
+          "note": "Peppery and fresh",
+          "shape": "leaf",
+          "color": "#5f9e45",
+          "h": 8
+        },
+        {
+          "name": "Free-range egg",
+          "note": "Folded, soft-set",
+          "shape": "disc",
+          "color": "#f6f0e1",
+          "h": 16,
+          "w": 0.9
+        },
+        {
+          "name": "Aged cheddar",
+          "note": "Melted on the egg",
+          "shape": "drip",
+          "color": "#f2b53a",
+          "h": 6,
+          "w": 0.82
+        },
+        {
+          "name": "Brioche crown",
+          "note": "Sesame and butter glaze",
+          "shape": "dome",
+          "color": "#d08a3c",
+          "h": 64,
+          "w": 0.96,
+          "dots": "#f3e3bf"
+        }
+      ]
+    }
+  ],
+  "locations": {
+    "title": "Four cafés, one roastery",
+    "nav": "Locations",
+    "intro": "Sample locations for the demo.",
+    "book_label": "Visit",
+    "items": [
+      {
+        "name": "Harbour Street",
+        "type": "Café & roastery",
+        "country": "Oman",
+        "image": "roast",
+        "address": "Demo address, Muscat",
+        "about": "Our first café and the roastery behind it.",
+        "lat": "23.588",
+        "lng": "58.383",
+        "hours": [
+          {
+            "label": "Every day",
+            "value": "Open 7am to 11pm"
+          }
+        ],
+        "phones": [
+          {
+            "label": "Café",
+            "number": "+968 0000 0001"
+          }
+        ],
+        "specs": [
+          "Espresso bar",
+          "Roastery tours",
+          "Bakery"
+        ]
+      },
+      {
+        "name": "Garden Mall",
+        "type": "Café",
+        "country": "Oman",
+        "image": "cafe",
+        "address": "Demo address, Muscat",
+        "about": "Big windows and long tables.",
+        "lat": "23.61",
+        "lng": "58.47",
+        "hours": [
+          {
+            "label": "Every day",
+            "value": "Open 8am to 10pm"
+          }
+        ],
+        "phones": [
+          {
+            "label": "Café",
+            "number": "+968 0000 0002"
+          }
+        ],
+        "specs": [
+          "Espresso bar",
+          "Bakery"
+        ]
+      },
+      {
+        "name": "Marina Walk",
+        "type": "Kiosk",
+        "country": "UAE",
+        "image": "iced",
+        "address": "Demo address, Dubai",
+        "about": "Cold bar and grab-and-go.",
+        "lat": "25.08",
+        "lng": "55.14",
+        "hours": [
+          {
+            "label": "Every day",
+            "value": "Open 7am to midnight"
+          }
+        ],
+        "phones": [
+          {
+            "label": "Kiosk",
+            "number": "+971 0 000 0003"
+          }
+        ],
+        "specs": [
+          "Cold bar"
+        ]
+      },
+      {
+        "name": "Old Town",
+        "type": "Café",
+        "country": "UAE",
+        "image": "latte",
+        "address": "Demo address, Dubai",
+        "about": "A quiet corner café.",
+        "lat": "25.26",
+        "lng": "55.30",
+        "hours": [
+          {
+            "label": "Every day",
+            "value": "Open 7am to 10pm"
+          }
+        ],
+        "phones": [
+          {
+            "label": "Café",
+            "number": "+971 0 000 0004"
+          }
+        ],
+        "specs": [
+          "Espresso bar",
+          "Bakery",
+          "Classes"
+        ]
+      }
+    ]
+  },
+  "news": [
+    {
+      "title": "Cardamom cold brew returns for summer",
+      "date": "Sample · June",
+      "tag": "Menu",
+      "summary": "Our 18-hour cold brew with cardamom syrup is back on every menu.",
+      "image": "iced",
+      "sample": true
+    },
+    {
+      "title": "Saturday brewing classes now weekly",
+      "date": "Sample · May",
+      "tag": "Classes",
+      "summary": "Learn grind, ratio and water in two hours, with three brewers.",
+      "image": "beans",
+      "sample": true
+    },
+    {
+      "title": "Fourth café opens on Old Town square",
+      "date": "Sample · March",
+      "tag": "Cafés",
+      "summary": "A quiet corner café with a full espresso bar and bakery.",
+      "image": "cafe",
+      "sample": true
+    }
+  ],
+  "faq": [
+    {
+      "q": "Can I order ahead?",
+      "a": "Yes. Use the order form and pick a café and a time. This is a demo, so the form is not connected."
+    },
+    {
+      "q": "Do you charge for plant milk?",
+      "a": "No. Oat, almond and lactose-free milk cost the same as whole milk."
+    },
+    {
+      "q": "Do you sell beans?",
+      "a": "Yes. Four origins in 250 g bags and the house blend in 1 kg, roasted every Tuesday."
+    },
+    {
+      "q": "Do you cater events?",
+      "a": "Yes, from 30 guests, with a barista, an espresso machine and pastries."
+    }
+  ],
+  "nudges": {
+    "dock_label": "Order or call",
+    "offer": {
+      "id": "brew",
+      "kicker": "Seasonal",
+      "title": "Cardamom cold brew is back",
+      "text": "18 hours of steeping, over ice.",
+      "cta": "See the menu",
+      "href": "menu.html",
+      "image": "iced"
+    }
+  },
+  "cta_band": "Order ahead and skip the queue.",
+  "contact": {
+    "title": "Order ahead",
+    "intro": "Pick a café, a time and your order. This demo form is not connected.",
+    "address": "Demo address, Muscat",
+    "phones": [
+      {
+        "label": "Orders",
+        "number": "+968 0000 0001"
+      },
+      {
+        "label": "WhatsApp",
+        "number": "+968 0000 0009",
+        "whatsapp": true
+      }
+    ],
+    "email": "hello@example.com",
+    "note": "Demo form. Connect it to an ordering system before launch.",
+    "form": {
+      "branch": true,
+      "topics": [
+        "Order ahead",
+        "Catering",
+        "Classes",
+        "Other"
+      ],
+      "submit": "Send order"
+    }
+  },
+  "marquee": [
+    "Spanish latte",
+    "Cold brew",
+    "Fresh roast",
+    "Bakery"
+  ],
+  "confirm": [
+    "Demo brand: replace every item with the real company's content."
+  ],
+  "sources": [
+    "Fictional demo content written for the website kit."
+  ]
+}

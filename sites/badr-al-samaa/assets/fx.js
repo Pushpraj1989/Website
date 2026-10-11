@@ -685,6 +685,40 @@
     });
   }
 
+
+  /* ---------- product assemble: layers start exploded and build into the product as you scroll ---------- */
+  function productAssemble(sec, T1) {
+    const { gsap } = T1;
+    const svg = sec.querySelector(".asm-svg");
+    const layers = Array.from(sec.querySelectorAll(".as-layer"));
+    const parts = Array.from(sec.querySelectorAll("[data-part]"));
+    if (!svg || !layers.length) return;
+    const n = layers.length, GAP = 70, glass = sec.querySelector(".as-glass");
+    const body = layers.filter((l) => l !== glass);
+    const mid = (body.length - 1) / 2;
+    const markPart = (k) => parts.forEach((p) => p.classList.toggle("is-on", +p.dataset.part <= k));
+    if (!T1.motion) { markPart(n); sec.classList.add("is-done"); return; }
+    // exploded start: spread vertically about the middle, nudged sideways and tilted
+    body.forEach((l, i) => gsap.set(l, { y: (i - mid) * -GAP, x: (i % 2 ? 1 : -1) * 26, rotation: (i % 2 ? 1 : -1) * 5, transformOrigin: "50% 50%" }));
+    if (glass) gsap.set(glass, { opacity: 0, scale: 1.15, transformOrigin: "50% 60%" });
+    const tl = gsap.timeline({
+      defaults: { ease: "power2.inOut" },
+      scrollTrigger: {
+        trigger: sec, start: "top top", end: () => "+=" + Math.round(innerHeight * Math.max(1.6, n * 0.42)),
+        pin: sec.querySelector(".asm-pin"), scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: (st) => {
+          markPart(Math.floor(st.progress * (n + 0.6)) - 1);
+          sec.classList.toggle("is-done", st.progress > 0.92);
+        },
+      },
+    });
+    // bottom layer settles first, each next one drops onto it
+    body.forEach((l, i) => tl.to(l, { y: 0, x: 0, rotation: 0, duration: 1 }, i * 0.55));
+    if (glass) tl.to(glass, { opacity: 1, scale: 1, duration: 1 }, body.length * 0.55);
+    tl.to(svg, { scale: 1.04, duration: 0.6, ease: "sine.inOut" }).to(svg, { scale: 1, duration: 0.6 });
+    gsap.from(sec.querySelector(".asm-glow"), { scale: 0.4, opacity: 0, scrollTrigger: { trigger: sec, start: "top 80%", end: "top top", scrub: true } });
+  }
+
   /* ---------- curved branch slider: 3D arc of cards, drag / swipe / wheel / keys / filters,
      with a detail panel (timings, phones, specialities, live map, actions) for the centred card ---------- */
   function curveSlider(root, T1) {
@@ -855,6 +889,13 @@
   }
 
   const THEMES = {
+    /* Studio: data-driven theme; shared effects only (tilt on cards, drift on giant words) */
+    studio(T1) {
+      const { $$ } = T1;
+      $$("[data-tilt]").forEach((c) => tilt(c, T1, 6));
+      drift(T1);
+    },
+
     /* Galfar: Ember-style fire, condensed type, assembling units, stacked project panels */
     ember(T1) {
       const { gsap, $, $$ } = T1;
@@ -958,6 +999,7 @@
     const theme = document.body.dataset.theme;
     document.querySelectorAll("[data-curve]").forEach((r) => curveSlider(r, T1)); // works with or without motion
     document.querySelectorAll("[data-promo]").forEach((r) => promoSlider(r, T1));
+    document.querySelectorAll("[data-assemble]").forEach((r) => productAssemble(r, T1));
     if (!T1.motion || !THEMES[theme]) return;
     THEMES[theme](T1);
   };

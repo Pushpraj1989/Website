@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <p>© {{ year }} {{ s.name }}. Concept redesign, not the company's official website. Facts to be verified before use.</p>
+      <p>© {{ year }} {{ s.name }}. {{ s.footer_note or "Concept redesign, not the company's official website. Facts to be verified before use." }}</p>
       <a href="#top">Back to top</a>
     </div>
     {%- if s._credits %}

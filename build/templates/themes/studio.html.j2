@@ -1,0 +1,9 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{#- Studio: a fully data-driven theme. The home page is the list of sections in s.home,
+    in order; colours and fonts come from s.brand. Use it for any new company. -#}
+{% block content %}
+{%- for sec in s.home or ['promo', 'rail', 'stats', 'services', 'catalogue', 'assemble', 'testimonials', 'news', 'locations', 'faq'] %}
+{{ m.module(sec) }}
+{%- endfor %}
+{% endblock %}

@@ -282,7 +282,7 @@
     </div>
     <div class="q-ui">
       <div class="q-dots">{% for t in s.testimonials %}<button type="button" aria-label="Story {{ loop.index }}" data-q="{{ loop.index0 }}"{% if loop.first %} class="is-on"{% endif %}></button>{% endfor %}</div>
-      <p class="q-note">Testimonials as published on the group's website.</p>
+      <p class="q-note">{{ s.testimonials_note or "Testimonials as published on the company's website." }}</p>
     </div>
   </div>
 </section>
@@ -306,5 +306,195 @@
   {%- endfor %}
   <p class="wrap visually-hidden">Partners: {{ s.insurance.partners | join(', ') }}</p>
 </section>
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro assemble(a) -%}
+{#- Exploded product that builds itself on scroll. Layers come from build/art.py (one <g> per layer). -#}
+<section class="asm" id="{{ a.id }}" data-assemble aria-label="{{ a.title }}">
+  <div class="asm-pin">
+    <div class="wrap asm-grid">
+      <div class="asm-copy">
+        <p class="eyebrow">{{ a.kicker or 'Inside the product' }}</p>
+        <h2 class="asm-title">{{ a.title }}</h2>
+        {%- if a.intro %}<p class="asm-intro">{{ a.intro }}</p>{% endif %}
+        <ol class="asm-parts">
+          {%- for l in a._parts | reverse %}
+          {%- set idx = a._parts | length - loop.index %}
+          <li data-part="{{ idx }}" style="--c: {{ l.color or 'var(--accent)' }}"><i></i><div><b>{{ l.name }}</b>{% if l.note %}<span>{{ l.note }}</span>{% endif %}</div></li>
+          {%- endfor %}
+        </ol>
+        {%- if a.cta %}<a class="btn btn-primary asm-cta" href="{{ a.cta.href }}" data-magnetic>{{ a.cta.label }} {{ icon('arrow') }}</a>{% endif %}
+      </div>
+      <div class="asm-stage">
+        <div class="asm-glow" aria-hidden="true"></div>
+        <svg class="asm-svg" viewBox="0 0 400 {{ a._h }}" role="img" aria-label="{{ a.title }}: {{ a._parts | map(attribute='name') | join(', ') }}">{{ a._svg | safe }}</svg>
+        <p class="asm-hint" aria-hidden="true"><span></span>Scroll to assemble</p>
+        {%- if a.price %}<div class="asm-price"><span>{{ a.price_label or 'From' }}</span><b>{{ a.price }}</b></div>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endmacro -%}
+
+{%- macro product_card(it) -%}
+<a class="pc" href="{{ it._file }}" data-cat="{{ it.category }}" data-q="{{ (it.title ~ ' ' ~ (it.tags or []) | join(' ') ~ ' ' ~ (it.category or '')) | lower }}">
+  <div class="pc-media{% if it._art %} is-art{% endif %}">
+    {%- if it._img %}<img src="{{ src(it._img) }}" alt="{{ s.images[it._img].alt }}" loading="lazy">
+    {%- elif it._art %}<svg viewBox="0 0 400 {{ it._art_h }}" aria-hidden="true">{{ it._art | safe }}</svg>{% endif %}
+    {%- if it.badge %}<span class="pc-badge">{{ it.badge }}</span>{% endif %}
+  </div>
+  <div class="pc-body">
+    {%- if it.category %}<span class="pc-cat">{{ it.category }}</span>{% endif %}
+    <h3>{{ it.title }}</h3>
+    {%- if it.text %}<p>{{ it.text }}</p>{% endif %}
+    <div class="pc-foot">{% if it.price %}<b>{{ it.price }}</b>{% endif %}<span class="pc-go">{{ icon('arrow') }}</span></div>
+  </div>
+</a>
+{%- endmacro -%}
+
+{%- macro catalogue_strip() -%}
+{%- set C = s.catalogue %}
+{%- if C and C['items'] %}
+<section class="cstrip">
+  <div class="wrap cstrip-head">
+    <div><p class="eyebrow">{{ C.nav or 'Products' }}</p><h2 class="pg-h2" data-anim="lines">{{ C.home_title or C.title }}</h2></div>
+    <a class="btn btn-ghost" href="{{ C._file }}" data-magnetic>{{ C.all_label or ('All ' ~ (C.nav or 'products') | lower) }} {{ icon('arrow') }}</a>
+  </div>
+  <div class="cstrip-track" data-hdrag>
+    {%- for it in (C['items'] | selectattr('featured') | list or C['items'][:8]) %}{{ product_card(it) }}{% endfor %}
+  </div>
+</section>
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro statement(m) -%}
+<section class="stmt">
+  <div class="wrap">
+    {%- if m.kicker %}<p class="eyebrow">{{ m.kicker }}</p>{% endif %}
+    <p class="stmt-text" data-anim="words">{{ m.text }}</p>
+  </div>
+</section>
+{%- endmacro -%}
+
+{%- macro stats_band() -%}
+{%- if s.stats %}
+<section class="pg-stats" aria-label="Key figures">
+  <div class="wrap stat-grid">
+    {%- for st in s.stats %}<div class="stat-tile" data-anim="up" data-delay="{{ loop.index0 * 0.08 }}"><strong>{{ count(st) }}</strong><span>{{ st.label }}</span></div>{% endfor %}
+  </div>
+</section>
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro services_grid() -%}
+{%- set S = s.services %}
+{%- if S and S['items'] %}
+<section class="sgrid" id="services">
+  <div class="wrap">
+    <div class="cstrip-head">
+      <div><p class="eyebrow">{{ S.nav or 'Services' }}</p><h2 class="pg-h2" data-anim="lines">{{ S.title }}</h2>{% if S.intro %}<p class="muted" data-anim="up">{{ S.intro }}</p>{% endif %}</div>
+      {%- if S._file %}<a class="btn btn-ghost" href="{{ S._file }}" data-magnetic>View all {{ icon('arrow') }}</a>{% endif %}
+    </div>
+    <div class="sgrid-list">
+      {%- for it in S['items'] %}
+      <a class="sg-card" href="{{ it._file or '#' }}" data-anim="up" data-delay="{{ (loop.index0 % 3) * 0.08 }}" data-tilt>
+        {%- if it._img %}<img src="{{ src(it._img) }}" alt="" loading="lazy">{% endif %}
+        <span class="sg-ico">{{ icon(it.icon) }}</span>
+        <span class="sg-n">{{ '%02d' % loop.index }}</span>
+        <h3>{{ it.title }}</h3>
+        <p>{{ it.text or it.area or (it.detail.intro if it.detail else '') }}</p>
+        <span class="sg-go">{{ icon('arrow') }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro split(m) -%}
+<section class="splitf{% if m.flip %} flip{% endif %}">
+  <div class="wrap splitf-grid">
+    <div class="splitf-media" data-anim="wipe">{% if m.image %}<img src="{{ src(m.image) }}" alt="{{ s.images[m.image].alt }}" loading="lazy" data-speed="0.8">{% endif %}</div>
+    <div class="splitf-copy">
+      {%- if m.kicker %}<p class="eyebrow">{{ m.kicker }}</p>{% endif %}
+      <h2 class="pg-h2" data-anim="lines">{{ m.title }}</h2>
+      {%- for p in m.body or [] %}<p class="muted" data-anim="up">{{ p }}</p>{% endfor %}
+      {%- if m.points %}<ul class="check-list">{% for pt in m.points %}<li data-anim="up">{{ icon('check') }}<span>{{ pt }}</span></li>{% endfor %}</ul>{% endif %}
+      {%- if m.cta %}<a class="btn btn-primary" href="{{ m.cta.href }}" data-magnetic>{{ m.cta.label }} {{ icon('arrow') }}</a>{% endif %}
+    </div>
+  </div>
+</section>
+{%- endmacro -%}
+
+{%- macro emi() -%}
+{%- set E = s.emi or {} %}
+<section class="tool" id="tools">
+  <div class="wrap tool-grid">
+    <div>
+      <p class="eyebrow">{{ E.kicker or 'Calculator' }}</p>
+      <h2 class="pg-h2" data-anim="lines">{{ E.title or 'Estimate your monthly instalment' }}</h2>
+      <p class="muted" data-anim="up">{{ E.note or 'An estimate only, worked out on your device. Your actual rate and instalment depend on approval.' }}</p>
+    </div>
+    <form class="bmi emi" data-emi data-cur="{{ E.currency or '' }}" novalidate>
+      <label>Amount <span><input type="range" name="p" min="{{ E.min or 1000 }}" max="{{ E.max or 100000 }}" step="{{ E.step or 500 }}" value="{{ E.value or 20000 }}"><output data-o="p"></output></span></label>
+      <label>Rate (% a year) <span><input type="range" name="r" min="1" max="15" step="0.25" value="{{ E.rate or 6 }}"><output data-o="r"></output></span></label>
+      <label>Term (months) <span><input type="range" name="n" min="6" max="{{ E.max_months or 120 }}" step="6" value="{{ E.months or 48 }}"><output data-o="n"></output></span></label>
+      <div class="bmi-out">
+        <p class="bmi-band">Monthly instalment</p>
+        <div class="emi-v"><strong data-emi-v>0</strong></div>
+        <p class="bmi-note" data-emi-total></p>
+        <a class="btn btn-primary btn-sm" href="{{ E.href or 'contact.html' }}">{{ E.cta or 'Apply now' }} {{ icon('arrow') }}</a>
+      </div>
+    </form>
+  </div>
+</section>
+{%- endmacro -%}
+
+{%- macro partners() -%}
+{%- set P = s.partners or s.insurance %}
+{%- if P %}
+<section class="ins" aria-label="{{ P.title or 'Partners' }}">
+  <div class="wrap ins-head"><p class="eyebrow">{{ P.kicker or 'Partners' }}</p><h2 class="pg-h2" data-anim="lines">{{ P.intro }}</h2></div>
+  {%- set half = (P.partners | length / 2) | round(0, 'ceil') | int %}
+  {%- for row, dir in [(P.partners[:half], 'left'), (P.partners[half:], 'right')] %}
+  <div class="marquee ins-row" data-marquee="0.6" data-dir="{{ dir }}"><div class="marquee-track" aria-hidden="true">{% for pass in [0, 1] %}<div class="marquee-group">{% for p in row %}<span class="ins-chip">{{ p }}</span>{% endfor %}</div>{% endfor %}</div></div>
+  {%- endfor %}
+  <p class="visually-hidden">{{ P.partners | join(', ') }}</p>
+</section>
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro locations_block() -%}
+{%- if s.locations and s.locations['items'] %}
+<section class="pg-section countries" id="locations">
+  <div class="wrap">
+    <div class="cstrip-head"><div><p class="eyebrow">{{ s.locations.nav or 'Locations' }}</p><h2 class="pg-h2" data-anim="lines">{{ s.locations.title }}</h2></div>
+    <a class="btn btn-ghost" href="{{ s.locations._file }}" data-magnetic>All {{ (s.locations.nav or 'locations') | lower }} {{ icon('arrow') }}</a></div>
+    {{ curve() }}
+  </div>
+</section>
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro module(m) -%}
+{#- Renders one home-page section by type. The studio theme loops over s.home. -#}
+{%- set t = m.type if m is mapping else m %}
+{%- if t == 'promo' %}{% if s.promos %}{{ promo() }}{% endif %}
+{%- elif t == 'rail' %}{{ rail() }}
+{%- elif t == 'statement' %}{{ statement(m) }}
+{%- elif t == 'stats' %}{{ stats_band() }}
+{%- elif t == 'services' %}{{ services_grid() }}
+{%- elif t == 'catalogue' %}{{ catalogue_strip() }}
+{%- elif t == 'assemble' %}{% for a in s.assemble or [] if (m is not mapping or not m.id or a.id == m.id) %}{{ assemble(a) }}{% endfor %}
+{%- elif t == 'split' %}{{ split(m) }}
+{%- elif t == 'news' %}{{ home_news() }}
+{%- elif t == 'testimonials' %}{{ testimonials() }}
+{%- elif t == 'partners' %}{{ partners() }}
+{%- elif t == 'locations' %}{{ locations_block() }}
+{%- elif t == 'faq' %}{{ faq() }}
+{%- elif t == 'bmi' %}{{ bmi() }}
+{%- elif t == 'emi' %}{{ emi() }}
 {%- endif %}
 {%- endmacro -%}

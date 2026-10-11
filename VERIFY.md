@@ -57,6 +57,13 @@ Sources:
 Sources:
 - https://badralsamaahospitals.com (homepage, about, news, packages, specialities, doctors, branch sites, insurance; read 11 Oct 2026)
 
+## Roastline Coffee House
+
+- Demo brand: replace every item with the real company's content.
+
+Sources:
+- Fictional demo content written for the website kit.
+
 ## Galfar Engineering & Contracting
 
 - The site's headline counters (projects delivered, workforce, shareholders, plant, vendors) show '+ 0' in the page code. They are left out until real figures are confirmed.

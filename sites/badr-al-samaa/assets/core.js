@@ -396,6 +396,52 @@
     if (want && sel) Array.from(sel.options).forEach((o) => { if (o.text === want) sel.value = o.value || o.text; });
   } catch {}
 
+  // catalogue: category filter + search
+  $$("[data-catalogue]").forEach((w) => {
+    const q = $("[data-catq]", w), cards = $$(".pc", w), empty = $("[data-cat-empty]", w);
+    let cat = "all";
+    const run = () => {
+      const t = (q ? q.value : "").trim().toLowerCase(); let n = 0; const shown = [];
+      cards.forEach((c) => { const ok = (cat === "all" || c.dataset.cat === cat) && (!t || c.dataset.q.includes(t)); if (ok && c.hidden) shown.push(c); c.hidden = !ok; if (ok) n++; });
+      if (empty) empty.hidden = n !== 0;
+      if (motion && shown.length) gsap.from(shown, { y: 30, opacity: 0, duration: 0.7, ease: "expo.out", stagger: 0.04 });
+      if (motion) ST.refresh();
+    };
+    $$("[data-catf]", w).forEach((b) => b.addEventListener("click", () => {
+      cat = b.dataset.catf; $$("[data-catf]", w).forEach((x) => x.setAttribute("aria-pressed", String(x === b))); run();
+    }));
+    if (q) q.addEventListener("input", run);
+  });
+
+  // product options: one chip per group is selected
+  $$(".pd-chips").forEach((g) => g.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-chip]"); if (!b) return;
+    $$("[data-chip]", g).forEach((x) => x.classList.toggle("is-on", x === b));
+  }));
+
+  // drag-to-scroll strips (mouse); touch scrolls natively
+  $$("[data-hdrag]").forEach((tr) => {
+    let d = null;
+    tr.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") return; d = { x: e.clientX, s: tr.scrollLeft, moved: false }; tr.classList.add("is-drag"); });
+    addEventListener("pointermove", (e) => { if (!d) return; const dx = e.clientX - d.x; if (Math.abs(dx) > 5) d.moved = true; tr.scrollLeft = d.s - dx; });
+    addEventListener("pointerup", () => { if (!d) return; const moved = d.moved; d = null; tr.classList.remove("is-drag"); if (moved) { tr.dataset.dragged = "1"; setTimeout(() => delete tr.dataset.dragged, 50); } });
+    tr.addEventListener("click", (e) => { if (tr.dataset.dragged) e.preventDefault(); }, true);
+  });
+
+  // loan / EMI estimate (runs on the device)
+  $$("[data-emi]").forEach((f) => {
+    const cur = f.dataset.cur ? f.dataset.cur + " " : "";
+    const fmt = (v) => cur + Math.round(v).toLocaleString("en");
+    const calc = () => {
+      const P = +f.elements.p.value, r = +f.elements.r.value / 1200, N = +f.elements.n.value;
+      const m = r ? (P * r * Math.pow(1 + r, N)) / (Math.pow(1 + r, N) - 1) : P / N;
+      $("[data-o=p]", f).textContent = fmt(P); $("[data-o=r]", f).textContent = f.elements.r.value + "%"; $("[data-o=n]", f).textContent = N;
+      $("[data-emi-v]", f).textContent = fmt(m);
+      $("[data-emi-total]", f).textContent = `Total repaid ${fmt(m * N)}, of which interest ${fmt(m * N - P)}.`;
+    };
+    f.addEventListener("input", calc); f.addEventListener("submit", (e) => e.preventDefault()); calc();
+  });
+
   // BMI tool (runs on the device; nothing is sent)
   $$("[data-bmi]").forEach((f) => {
     const h = f.elements.h, w = f.elements.w;

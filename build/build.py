@@ -23,6 +23,8 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup
 
+import art
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 SHARED = ROOT / "shared"
@@ -135,6 +137,28 @@ def build_pages(site):
             site["highlights"]["_file"] = "packages.html"
     listing("highlights", "item")
 
+    cat = site.get("catalogue")
+    if cat and cat.get("items"):
+        label = cat.get("nav", "Products")
+        file = slugify(label) + ".html"
+        cat["_file"] = file
+        for it in cat["items"]:
+            it["_file"] = "p-" + slugify(it["title"]) + ".html"
+            it["_img"] = item_image(site, it)
+        cats = []
+        for it in cat["items"]:
+            if it.get("category") and it["category"] not in cats:
+                cats.append(it["category"])
+        cat["_categories"] = cat.get("categories") or cats
+        pages.append({"file": file, "kind": "catalogue", "title": cat.get("title") or label, "label": label})
+        items = cat["items"]
+        for i, it in enumerate(items):
+            pages.append({"file": it["_file"], "kind": "product", "title": it["title"], "label": label, "listing": file,
+                          "item": it, "prev": items[i - 1], "next": items[(i + 1) % len(items)]})
+        if cat.get("compare"):
+            pages.append({"file": "compare.html", "kind": "compare", "title": cat.get("compare_title", "Compare " + label.lower()), "label": label, "listing": file})
+        nav.append({"file": file, "label": label, "items": items, "title": cat.get("title") or label})
+
     locations = (site.get("locations") or {}).get("items", [])
     if locations:
         label = site["locations"].get("nav", "Locations")
@@ -164,7 +188,8 @@ def build_pages(site):
             return href
         kind, _, text = href[1:].partition(":")
         pool = {"news": site.get("news") or [], "svc": (site.get("services") or {}).get("items", []),
-                "sp": (site.get("specialities") or {}).get("items", [])}[kind]
+                "sp": (site.get("specialities") or {}).get("items", []),
+                "cat": (site.get("catalogue") or {}).get("items", [])}[kind]
         for it in pool:
             if it["title"].startswith(text):
                 return it["_file"]
@@ -173,18 +198,23 @@ def build_pages(site):
         for k in ("cta", "cta2"):
             if pr.get(k):
                 pr[k]["href"] = resolve(pr[k]["href"])
+    for r in (site.get("rail") or {}).get("items", []):
+        r["href"] = resolve(r["href"])
     for n in nav:
         n.setdefault("items", [])  # templates read n['items']; without the key Jinja finds dict.items
     site["_pages"] = pages
     site["_nav"] = nav
     site["_anchors"] = {"#contact": "contact.html", "#about": "about.html", "#top": "#top"}
-    for key in ("services", "highlights", "locations"):
+    for key in ("services", "highlights", "locations", "catalogue"):
         if (site.get(key) or {}).get("_file"):
             site["_anchors"]["#" + key] = site[key]["_file"]
 
 
 def prepare(site):
     """Derive display values so the template only renders, never decides."""
+    site.setdefault("stats", []); site.setdefault("confirm", []); site.setdefault("sources", [])
+    site.setdefault("images", {}); site.setdefault("img_dir", site["slug"])
+    site.setdefault("about", {"title": site.get("meta", ""), "body": []})
     for stat in site["stats"]:
         if "years_since" in stat:
             stat["value"] = YEAR - stat["years_since"]
@@ -231,7 +261,21 @@ def prepare(site):
     site["contact"]["form"] = form
     site["_branch_options"] = [loc["name"] + " · " + loc["country"] for loc in locations]
 
-    site["_theme"] = THEMES[site["theme"]]
+    # layered product art: exploded "assemble" stacks and assembled catalogue thumbnails
+    img_src = {k: "assets/img/" + v["src"] for k, v in site["images"].items()}
+    for a in site.get("assemble") or []:
+        a["_svg"], a["_h"], a["_n"] = art.stack(a["id"], a["layers"], img_src, explode=True)
+        a["_parts"] = [l for l in a["layers"] if l.get("shape") != "glass"] + [l for l in a["layers"] if l.get("shape") == "glass"]
+    for it in (site.get("catalogue") or {}).get("items", []):
+        if it.get("layers"):
+            it["_art"], it["_art_h"], _ = art.stack("p-" + slugify(it["title"]), it["layers"], img_src, explode=False)
+
+    if site["theme"] == "studio":
+        b = site.setdefault("brand", {})
+        site["_theme"] = {"fonts": b.get("fonts_url") or GF + "Fraunces:opsz,wght@9..144,300..600&family=Inter:wght@400;500;600;700",
+                          "theme_color": b.get("bg", "#111111"), "label": "Studio", "motion": "Data-driven sections"}
+    else:
+        site["_theme"] = THEMES[site["theme"]]
 
     # credits: every image this site uses, looked up from data/credits.json
     used = sorted({im["src"] for im in site.get("images", {}).values()})
