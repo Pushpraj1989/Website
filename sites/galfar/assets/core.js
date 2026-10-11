@@ -105,46 +105,72 @@
     return el._split;
   };
 
-  /* ---------- reveal presets ---------- */
-  const reveal = (el, delay = 0) => {
+  /* ---------- reveal presets ----------
+     Each reveal is a paused timeline. Hero items play once after the loader;
+     everything else plays when it enters the viewport from either direction
+     and reverses when it leaves, so motion happens scrolling down and back up. */
+  const buildReveal = (el) => {
     const kind = el.dataset.anim;
-    const d = delay + parseFloat(el.dataset.delay || 0);
+    const tl = gsap.timeline({ paused: true });
     gsap.set(el, { visibility: "visible" });
     switch (kind) {
       case "lines": {
         const { lines } = T1.split(el, "lines");
-        return gsap.from(lines, { yPercent: 115, rotate: 2, duration: 1.15, ease: "expo.out", stagger: 0.09, delay: d });
+        tl.from(lines, { yPercent: 115, rotate: 2, duration: 1.15, ease: "expo.out", stagger: 0.09 });
+        break;
       }
       case "chars": {
         const { chars } = T1.split(el, "chars");
-        return gsap.from(chars, { yPercent: 110, opacity: 0, duration: 0.9, ease: "expo.out", stagger: 0.025, delay: d });
+        tl.from(chars, { yPercent: 110, opacity: 0, duration: 0.9, ease: "expo.out", stagger: 0.025 });
+        break;
       }
       case "words": {
         const { words } = T1.split(el, "words");
-        return gsap.from(words, { y: 24, opacity: 0, filter: "blur(6px)", duration: 0.9, ease: "power3.out", stagger: 0.035, delay: d });
+        tl.from(words, { y: 24, opacity: 0, filter: "blur(6px)", duration: 0.9, ease: "power3.out", stagger: 0.035 });
+        break;
       }
       case "img": {
         const img = el.querySelector("img");
-        gsap.from(el, { clipPath: "inset(100% 0% 0% 0%)", duration: 1.4, ease: "expo.inOut", delay: d });
-        if (img) gsap.from(img, { scale: 1.35, duration: 1.8, ease: "expo.out", delay: d });
-        return;
+        tl.from(el, { clipPath: "inset(100% 0% 0% 0%)", duration: 1.4, ease: "expo.inOut" });
+        if (img) tl.from(img, { scale: 1.35, duration: 1.8, ease: "expo.out" }, 0);
+        break;
       }
       case "scale":
-        return gsap.from(el, { scale: 0.85, opacity: 0, duration: 1.2, ease: "expo.out", delay: d });
+        tl.from(el, { scale: 0.85, opacity: 0, duration: 1.2, ease: "expo.out" });
+        break;
       case "left":
-        return gsap.from(el, { x: -60, opacity: 0, duration: 1.1, ease: "expo.out", delay: d });
+        tl.from(el, { x: -60, opacity: 0, duration: 1.1, ease: "expo.out" });
+        break;
       default:
-        return gsap.from(el, { y: 40, opacity: 0, duration: 1.1, ease: "expo.out", delay: d });
+        tl.from(el, { y: 40, opacity: 0, duration: 1.1, ease: "expo.out" });
     }
+    return tl;
   };
 
   const initReveals = () => {
     $$("[data-anim]").forEach((el) => {
+      const d = parseFloat(el.dataset.delay || 0);
       if (el.hasAttribute("data-intro")) {
-        T1.onIntro(() => reveal(el, 0.05));
-      } else {
-        ST.create({ trigger: el, start: "top 88%", once: true, onEnter: () => reveal(el) });
+        T1.onIntro(() => { const tl = buildReveal(el); gsap.delayedCall(0.05 + d, () => tl.play()); });
+        return;
       }
+      let tl = null;
+      let pending = null;
+      const show = () => {
+        tl = tl || buildReveal(el);
+        if (pending) pending.kill();
+        tl.timeScale(1);
+        pending = gsap.delayedCall(d, () => tl.play());
+      };
+      const hide = () => {
+        if (!tl) return;
+        if (pending) pending.kill();
+        tl.timeScale(1.8).reverse();
+      };
+      // Inside a pinned section the element stays on screen for the whole pin, so it
+      // must not reverse when its own trigger "leaves"; it only resets above the section.
+      const inPin = !!el.closest("[data-hscroll], [data-fly]");
+      ST.create({ trigger: el, start: "top 92%", end: "bottom 8%", onEnter: show, onEnterBack: show, onLeave: inPin ? null : hide, onLeaveBack: hide });
     });
   };
 
@@ -156,13 +182,12 @@
       const suffix = el.dataset.suffix || "";
       if (!Number.isFinite(to)) return;
       const obj = { v: 0 };
-      ST.create({
-        trigger: el,
-        start: "top 90%",
-        once: true,
-        onEnter: () =>
-          gsap.to(obj, { v: to, duration: 2.2, ease: "expo.out", onUpdate: () => (el.textContent = fmt(obj.v, suffix)) }),
-      });
+      const run = () => {
+        gsap.killTweensOf(obj);
+        obj.v = 0;
+        gsap.to(obj, { v: to, duration: 2.2, ease: "expo.out", onUpdate: () => (el.textContent = fmt(obj.v, suffix)) });
+      };
+      ST.create({ trigger: el, start: "top 92%", end: "bottom 8%", onEnter: run, onEnterBack: run });
       el.textContent = fmt(0, suffix);
     });
   };
@@ -392,6 +417,9 @@
 
   /* ---------- boot ---------- */
   const boot = () => {
+    // Theme effects first: they create the pinned sections, and every reveal
+    // trigger further down the page must be measured with that pin spacing.
+    if (window.T1FX) window.T1FX(T1);
     if (motion) {
       initReveals();
       initCounters();
@@ -399,12 +427,16 @@
       initMarquees();
       initCursor();
       initMagnetic();
+      ST.sort();
     }
-    if (window.T1FX) window.T1FX(T1);
     runLoader();
     if (motion) {
-      addEventListener("load", () => ST.refresh());
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ST.refresh());
+      let t;
+      const refresh = () => { clearTimeout(t); t = setTimeout(() => ST.refresh(), 150); };
+      addEventListener("load", refresh);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+      // lazy images change the layout when they arrive; re-measure triggers
+      $$("img").forEach((img) => { if (!img.complete) img.addEventListener("load", refresh, { once: true }); });
     }
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);

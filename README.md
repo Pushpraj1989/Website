@@ -27,6 +27,22 @@ a full-screen mobile menu.
 - `sites/<slug>/index.html` – one site each. Every site folder is self-contained
   (`assets/` holds its CSS, JS, vendored libraries and only its own images).
 
+## Publish
+
+The output is plain static files, so any web server works. Upload `index.html`,
+`assets/` and `sites/` to the web root (or a sub-folder); every link is relative.
+
+- **Your own server:** copy those three items into the site folder (for example
+  `/var/www/tier1-concepts/`). Each company's link is then
+  `https://<your-domain>/<folder>/sites/<slug>/`.
+- **GitHub Pages:** `.github/workflows/pages.yml` deploys on every push to
+  `tier1-concept-sites` once Pages is switched on (see the comments at the top of
+  the workflow). Links become
+  `https://pushpraj1989.github.io/Website/sites/<slug>/`. Pages on a private
+  repository needs a paid GitHub plan, and the published sites are public.
+
+Slugs: `galfar`, `national-gas`, `badr-al-samaa`, `starcare`, `assarain`, `asyad-express`.
+
 ## Rebuild
 
 ```

@@ -1,0 +1,41 @@
+# Publishes the built concept sites (index.html, assets/, sites/) to GitHub Pages.
+# One-time setup in the repository settings:
+#   1. Settings → Pages → Source: "GitHub Actions"
+#   2. Settings → Secrets and variables → Actions → Variables: DEPLOY_PAGES = true
+# Until DEPLOY_PAGES is set, the job is skipped instead of failing.
+name: Deploy concept sites
+
+on:
+  push:
+    branches: [tier1-concept-sites]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: ${{ vars.DEPLOY_PAGES == 'true' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Bundle the static site
+        run: |
+          mkdir _site
+          cp -r index.html assets sites _site/
+          touch _site/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
