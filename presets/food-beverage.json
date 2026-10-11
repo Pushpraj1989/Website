@@ -1,0 +1,105 @@
+{
+  "sector": "food-beverage",
+  "label": "Restaurants, cafés, coffee houses, bakeries, QSR",
+  "examples": "demo-coffee (built in this repo)",
+  "promo_fx": "ripple",
+  "brand_hint": {
+    "mode": "dark warm or light cream",
+    "feel": "appetite, craft; espresso/cream/terracotta or bold brand colour",
+    "fonts": "expressive serif or display + clean sans"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "statement",
+    "assemble",
+    "catalogue",
+    "split",
+    "services",
+    "assemble",
+    "stats",
+    "locations",
+    "news",
+    "faq"
+  ],
+  "services": {
+    "nav": "Experiences",
+    "title": "More than a meal"
+  },
+  "catalogue": {
+    "nav": "Menu",
+    "title": "Menu",
+    "categories": [
+      "Signature",
+      "Hot drinks",
+      "Cold drinks",
+      "Food",
+      "Desserts"
+    ],
+    "compare": false
+  },
+  "locations": {
+    "nav": "Locations",
+    "title": "Find us"
+  },
+  "rail": [
+    {
+      "label": "Order ahead",
+      "icon": "check"
+    },
+    {
+      "label": "Menu",
+      "icon": "layers"
+    },
+    {
+      "label": "Find a branch",
+      "icon": "pin"
+    },
+    {
+      "label": "Delivery",
+      "icon": "truck"
+    },
+    {
+      "label": "Catering",
+      "icon": "building"
+    }
+  ],
+  "extra_pages": [
+    "menu with categories, nutrition, allergens",
+    "product pages with options (size, milk, extras)",
+    "catering / events",
+    "franchise",
+    "loyalty app"
+  ],
+  "tools": [
+    "nutrition panels"
+  ],
+  "signature_graphics": [
+    "burger / sandwich / drink that assembles layer by layer",
+    "steam and pour particles",
+    "ingredient fly-in"
+  ],
+  "assemble_ideas": [
+    "signature burger: bun, sauce, lettuce, patty, cheese, crown",
+    "layered drink in glass: syrup, milk, espresso, foam, topping",
+    "cake slice layers"
+  ],
+  "scrape_focus": [
+    "menu items with prices, descriptions, calories, allergens",
+    "locations with hours",
+    "delivery partners (Talabat, Deliveroo...)",
+    "social posts",
+    "catering and franchise info"
+  ],
+  "questions": [
+    "Share the full menu (PDF or link). Do you have product photos on plain backgrounds?",
+    "Which 2-3 hero products should assemble on scroll?",
+    "Delivery partners and order links?",
+    "Opening hours per branch?"
+  ],
+  "compliance": [
+    "Allergen and calorie info where required",
+    "Prices dated or marked 'from'"
+  ],
+  "theme": "studio"
+}

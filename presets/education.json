@@ -1,0 +1,86 @@
+{
+  "sector": "education",
+  "label": "Schools, universities, training",
+  "promo_fx": "flow",
+  "brand_hint": {
+    "mode": "light",
+    "feel": "bright, optimistic",
+    "fonts": "friendly sans"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "stats",
+    "catalogue",
+    "split",
+    "services",
+    "testimonials",
+    "news",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Student life",
+    "title": "Campus and student life"
+  },
+  "catalogue": {
+    "nav": "Programmes",
+    "title": "Programmes",
+    "categories": [
+      "Undergraduate",
+      "Postgraduate",
+      "Foundation",
+      "Short courses"
+    ],
+    "compare": true
+  },
+  "locations": {
+    "nav": "Campuses",
+    "title": "Campuses"
+  },
+  "rail": [
+    {
+      "label": "Apply now",
+      "icon": "check"
+    },
+    {
+      "label": "Programmes",
+      "icon": "layers"
+    },
+    {
+      "label": "Fees & scholarships",
+      "icon": "chart"
+    },
+    {
+      "label": "Visit campus",
+      "icon": "pin"
+    },
+    {
+      "label": "Talk to admissions",
+      "icon": "phone"
+    }
+  ],
+  "tools": [],
+  "signature_graphics": [
+    "programme pathway lines",
+    "campus map"
+  ],
+  "assemble_ideas": [
+    "degree: modules stacked by year"
+  ],
+  "scrape_focus": [
+    "programmes with duration, fees, entry requirements",
+    "campuses",
+    "accreditations",
+    "events",
+    "news"
+  ],
+  "questions": [
+    "Application portal link?",
+    "Fees public?"
+  ],
+  "compliance": [
+    "Accreditation names exact"
+  ],
+  "theme": "studio"
+}

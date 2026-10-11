@@ -1,0 +1,84 @@
+{
+  "sector": "conglomerate",
+  "label": "Holding groups and diversified conglomerates",
+  "examples": "Assarain (editorial theme)",
+  "promo_fx": "blinds",
+  "brand_hint": {
+    "mode": "dark warm",
+    "feel": "heritage, authority; oxblood/navy + brass",
+    "fonts": "classic serif + sans"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "statement",
+    "stats",
+    "services",
+    "catalogue",
+    "split",
+    "news",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Businesses",
+    "title": "Our business groups"
+  },
+  "catalogue": {
+    "nav": "Companies",
+    "title": "Group companies",
+    "categories": [],
+    "compare": false
+  },
+  "locations": {
+    "nav": "Offices",
+    "title": "Offices"
+  },
+  "rail": [
+    {
+      "label": "Our businesses",
+      "icon": "layers"
+    },
+    {
+      "label": "Companies",
+      "icon": "building"
+    },
+    {
+      "label": "Careers",
+      "icon": "star"
+    },
+    {
+      "label": "Partner with us",
+      "icon": "globe"
+    },
+    {
+      "label": "Contact",
+      "icon": "phone"
+    }
+  ],
+  "tools": [],
+  "signature_graphics": [
+    "curtain reveal",
+    "company index with image follow",
+    "horizontal business groups"
+  ],
+  "assemble_ideas": [
+    "group structure: holding, divisions, companies"
+  ],
+  "scrape_focus": [
+    "divisions and every company (description, website, contacts)",
+    "history",
+    "leadership",
+    "brands represented",
+    "CSR",
+    "news"
+  ],
+  "questions": [
+    "Current chairman and leadership names?",
+    "Which companies lead the story?"
+  ],
+  "compliance": [
+    "Check leadership and ruler references are current"
+  ],
+  "theme": "studio"
+}

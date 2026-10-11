@@ -1,0 +1,84 @@
+{
+  "sector": "logistics",
+  "label": "Courier, freight, ports, supply chain",
+  "examples": "Asyad Express (route theme in this repo)",
+  "promo_fx": "streak",
+  "brand_hint": {
+    "mode": "dark",
+    "feel": "fast, global; night + signal orange/yellow",
+    "fonts": "wide display + mono accents"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "stats",
+    "services",
+    "split",
+    "catalogue",
+    "partners",
+    "news",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Services",
+    "title": "Shipping and logistics"
+  },
+  "catalogue": {
+    "nav": "Solutions",
+    "title": "Solutions by industry",
+    "categories": [],
+    "compare": false
+  },
+  "locations": {
+    "nav": "Network",
+    "title": "Service centres"
+  },
+  "rail": [
+    {
+      "label": "Track a shipment",
+      "icon": "truck"
+    },
+    {
+      "label": "Ship now",
+      "icon": "check"
+    },
+    {
+      "label": "Get rates",
+      "icon": "chart"
+    },
+    {
+      "label": "Find a centre",
+      "icon": "pin"
+    },
+    {
+      "label": "Business account",
+      "icon": "building"
+    }
+  ],
+  "tools": [
+    "tracking box (link to real tracker)"
+  ],
+  "signature_graphics": [
+    "dotted globe with live arcs",
+    "route line drawn on scroll with parcel",
+    "conveyor marquee"
+  ],
+  "assemble_ideas": [
+    "parcel: box, contents, label, seal, tracking chip"
+  ],
+  "scrape_focus": [
+    "services",
+    "coverage and centres",
+    "tracking URL pattern",
+    "rates if public",
+    "app links",
+    "news"
+  ],
+  "questions": [
+    "Tracking URL to link to?",
+    "Show rates or 'request a quote'?"
+  ],
+  "compliance": [],
+  "theme": "studio"
+}

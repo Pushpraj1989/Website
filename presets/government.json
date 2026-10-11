@@ -1,0 +1,79 @@
+{
+  "sector": "government",
+  "label": "Government entities, authorities, NGOs",
+  "promo_fx": "blinds",
+  "brand_hint": {
+    "mode": "light",
+    "feel": "accessible, formal, clear",
+    "fonts": "legible sans"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "statement",
+    "services",
+    "stats",
+    "split",
+    "news",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Services",
+    "title": "E-services"
+  },
+  "catalogue": {
+    "nav": "Services",
+    "title": "Service catalogue",
+    "categories": [],
+    "compare": false
+  },
+  "locations": {
+    "nav": "Offices",
+    "title": "Service centres"
+  },
+  "rail": [
+    {
+      "label": "E-services",
+      "icon": "check"
+    },
+    {
+      "label": "Track a request",
+      "icon": "clock"
+    },
+    {
+      "label": "Open data",
+      "icon": "chart"
+    },
+    {
+      "label": "Service centres",
+      "icon": "pin"
+    },
+    {
+      "label": "Contact",
+      "icon": "phone"
+    }
+  ],
+  "tools": [],
+  "signature_graphics": [
+    "calm motion only",
+    "map of service centres"
+  ],
+  "assemble_ideas": [],
+  "scrape_focus": [
+    "services with steps, fees, documents",
+    "centres with hours",
+    "news",
+    "laws/regulations"
+  ],
+  "questions": [
+    "Accessibility level required (WCAG 2.2 AA)?",
+    "Arabic first?"
+  ],
+  "compliance": [
+    "WCAG 2.2 AA",
+    "Arabic/RTL usually required",
+    "Reduced motion by default"
+  ],
+  "theme": "studio"
+}

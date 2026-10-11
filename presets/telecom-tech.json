@@ -1,0 +1,87 @@
+{
+  "sector": "telecom-tech",
+  "label": "Telecom, ISP, SaaS, IT services",
+  "promo_fx": "pixel",
+  "brand_hint": {
+    "mode": "dark",
+    "feel": "connected, modern",
+    "fonts": "grotesk"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "catalogue",
+    "assemble",
+    "stats",
+    "services",
+    "split",
+    "testimonials",
+    "news",
+    "faq"
+  ],
+  "services": {
+    "nav": "Solutions",
+    "title": "Solutions"
+  },
+  "catalogue": {
+    "nav": "Plans",
+    "title": "Plans",
+    "categories": [
+      "Mobile",
+      "Home internet",
+      "Business"
+    ],
+    "compare": true
+  },
+  "locations": {
+    "nav": "Stores",
+    "title": "Stores"
+  },
+  "rail": [
+    {
+      "label": "Plans",
+      "icon": "layers"
+    },
+    {
+      "label": "Check coverage",
+      "icon": "globe"
+    },
+    {
+      "label": "Pay a bill",
+      "icon": "check"
+    },
+    {
+      "label": "Find a store",
+      "icon": "pin"
+    },
+    {
+      "label": "Support",
+      "icon": "phone"
+    }
+  ],
+  "tools": [
+    "compare"
+  ],
+  "signature_graphics": [
+    "particle network",
+    "device exploded"
+  ],
+  "assemble_ideas": [
+    "router / phone teardown",
+    "plan bundle layers"
+  ],
+  "scrape_focus": [
+    "plans with data, minutes, price",
+    "devices",
+    "stores",
+    "coverage map link"
+  ],
+  "questions": [
+    "Plan list and prices?",
+    "Self-care portal link?"
+  ],
+  "compliance": [
+    "Fair-use and price terms"
+  ],
+  "theme": "studio"
+}

@@ -1,0 +1,91 @@
+{
+  "sector": "energy-utilities",
+  "label": "Oil & gas, LPG, power, water, renewables",
+  "examples": "National Gas Company (cosmos theme)",
+  "promo_fx": "pixel",
+  "brand_hint": {
+    "mode": "dark",
+    "feel": "technical, powerful; deep space + one electric colour",
+    "fonts": "grotesk + mono"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "stats",
+    "services",
+    "catalogue",
+    "split",
+    "assemble",
+    "news",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Operations",
+    "title": "What we do"
+  },
+  "catalogue": {
+    "nav": "Products",
+    "title": "Products and services",
+    "categories": [],
+    "compare": true
+  },
+  "locations": {
+    "nav": "Facilities",
+    "title": "Plants and facilities"
+  },
+  "rail": [
+    {
+      "label": "Products",
+      "icon": "layers"
+    },
+    {
+      "label": "Safety",
+      "icon": "shield"
+    },
+    {
+      "label": "Investors",
+      "icon": "chart"
+    },
+    {
+      "label": "Emergency",
+      "icon": "phone"
+    },
+    {
+      "label": "Contact",
+      "icon": "mail"
+    }
+  ],
+  "extra_pages": [
+    "safety / leak guidance",
+    "investor relations with reports",
+    "sustainability",
+    "projects"
+  ],
+  "tools": [],
+  "signature_graphics": [
+    "3D particle sphere",
+    "pipeline flow lines",
+    "cylinder cut-away"
+  ],
+  "assemble_ideas": [
+    "LPG cylinder: shell, valve, regulator, safety cap"
+  ],
+  "scrape_focus": [
+    "products with specs",
+    "plants",
+    "safety guidance",
+    "emergency numbers",
+    "reports",
+    "news"
+  ],
+  "questions": [
+    "Emergency / leak hotline?",
+    "Which reports to show for investors?"
+  ],
+  "compliance": [
+    "Safety text must match official guidance",
+    "Market disclosure rules for listed companies"
+  ],
+  "theme": "studio"
+}

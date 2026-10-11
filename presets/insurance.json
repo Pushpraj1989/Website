@@ -1,0 +1,104 @@
+{
+  "sector": "insurance",
+  "label": "Insurance and takaful",
+  "examples": "motor, health, life, travel, corporate",
+  "promo_fx": "blinds",
+  "brand_hint": {
+    "mode": "light",
+    "feel": "protective, human; blue/green with warm highlight",
+    "fonts": "friendly sans display"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "catalogue",
+    "assemble",
+    "stats",
+    "services",
+    "split",
+    "testimonials",
+    "partners",
+    "news",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Insurance",
+    "title": "Personal and business cover"
+  },
+  "catalogue": {
+    "nav": "Plans",
+    "title": "Insurance plans",
+    "categories": [
+      "Motor",
+      "Health",
+      "Life",
+      "Travel",
+      "Home",
+      "Business"
+    ],
+    "compare": true
+  },
+  "locations": {
+    "nav": "Branches",
+    "title": "Branches and service centres"
+  },
+  "rail": [
+    {
+      "label": "Get a quote",
+      "icon": "check"
+    },
+    {
+      "label": "Make a claim",
+      "icon": "shield"
+    },
+    {
+      "label": "Renew a policy",
+      "icon": "clock"
+    },
+    {
+      "label": "Find a garage or clinic",
+      "icon": "pin"
+    },
+    {
+      "label": "Talk to us",
+      "icon": "phone"
+    }
+  ],
+  "extra_pages": [
+    "plan compare table",
+    "claims process (step pages)",
+    "network garages / hospitals",
+    "policy documents downloads"
+  ],
+  "tools": [
+    "compare (from plan specs)"
+  ],
+  "signature_graphics": [
+    "shield that assembles from layers of cover",
+    "car/home exploded with covered parts highlighted"
+  ],
+  "assemble_ideas": [
+    "comprehensive motor: third party, own damage, roadside, agency repair, extras",
+    "family health plan layers"
+  ],
+  "scrape_focus": [
+    "plans with benefits and limits",
+    "claims steps and contacts",
+    "network lists",
+    "branches",
+    "news",
+    "ratings (S&P/AM Best)"
+  ],
+  "questions": [
+    "Which plans to compare, and which benefits matter most?",
+    "Is there an online quote or claims portal?",
+    "Do you want a network-garage / hospital finder?"
+  ],
+  "compliance": [
+    "No premium figures without an official calculator",
+    "Regulator licence number in footer",
+    "Benefits wording must match policy documents"
+  ],
+  "theme": "studio"
+}

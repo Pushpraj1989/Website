@@ -1,0 +1,87 @@
+{
+  "sector": "automotive",
+  "label": "Car dealers, distributors, service centres",
+  "promo_fx": "streak",
+  "brand_hint": {
+    "mode": "dark",
+    "feel": "performance, precision",
+    "fonts": "wide display + sans"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "catalogue",
+    "assemble",
+    "split",
+    "services",
+    "emi",
+    "stats",
+    "news",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Service",
+    "title": "Service and parts"
+  },
+  "catalogue": {
+    "nav": "Models",
+    "title": "Models",
+    "categories": [
+      "SUV",
+      "Sedan",
+      "Pickup",
+      "Electric"
+    ],
+    "compare": true
+  },
+  "locations": {
+    "nav": "Showrooms",
+    "title": "Showrooms and service centres"
+  },
+  "rail": [
+    {
+      "label": "Book a test drive",
+      "icon": "check"
+    },
+    {
+      "label": "Models",
+      "icon": "layers"
+    },
+    {
+      "label": "Finance calculator",
+      "icon": "chart"
+    },
+    {
+      "label": "Book a service",
+      "icon": "clock"
+    },
+    {
+      "label": "Find a showroom",
+      "icon": "pin"
+    }
+  ],
+  "tools": [
+    "emi"
+  ],
+  "signature_graphics": [
+    "car exploded into chassis, engine, body",
+    "speed streak transitions"
+  ],
+  "assemble_ideas": [
+    "car: chassis, powertrain, body, interior, wheels"
+  ],
+  "scrape_focus": [
+    "models with specs and prices",
+    "offers",
+    "showrooms and service centres with hours"
+  ],
+  "questions": [
+    "Which models and trims?",
+    "Official price list?"
+  ],
+  "compliance": [
+    "Prices and specs from the official sheet"
+  ],
+  "theme": "studio"
+}

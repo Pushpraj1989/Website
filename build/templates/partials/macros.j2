@@ -483,12 +483,12 @@
 {%- set t = m.type if m is mapping else m %}
 {%- if t == 'promo' %}{% if s.promos %}{{ promo() }}{% endif %}
 {%- elif t == 'rail' %}{{ rail() }}
-{%- elif t == 'statement' %}{{ statement(m) }}
+{%- elif t == 'statement' %}{% if m is mapping and m.text %}{{ statement(m) }}{% endif %}
 {%- elif t == 'stats' %}{{ stats_band() }}
 {%- elif t == 'services' %}{{ services_grid() }}
 {%- elif t == 'catalogue' %}{{ catalogue_strip() }}
 {%- elif t == 'assemble' %}{% for a in s.assemble or [] if (m is not mapping or not m.id or a.id == m.id) %}{{ assemble(a) }}{% endfor %}
-{%- elif t == 'split' %}{{ split(m) }}
+{%- elif t == 'split' %}{% if m is mapping and m.title %}{{ split(m) }}{% endif %}
 {%- elif t == 'news' %}{{ home_news() }}
 {%- elif t == 'testimonials' %}{{ testimonials() }}
 {%- elif t == 'partners' %}{{ partners() }}

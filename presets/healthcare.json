@@ -1,0 +1,106 @@
+{
+  "sector": "healthcare",
+  "label": "Hospitals, clinics, diagnostics",
+  "examples": "Badr Al Samaa (built in this repo)",
+  "promo_fx": "flow",
+  "brand_hint": {
+    "mode": "light",
+    "feel": "calm, clean, trustworthy; teal/green/blue with one warm accent",
+    "fonts": "serif display + humanist sans"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "stats",
+    "services",
+    "catalogue",
+    "split",
+    "testimonials",
+    "partners",
+    "news",
+    "bmi",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Centres",
+    "title": "Centres of excellence"
+  },
+  "catalogue": {
+    "nav": "Packages",
+    "title": "Health check-up packages",
+    "categories": [
+      "Preventive",
+      "Heart",
+      "Diabetes",
+      "Women",
+      "Men"
+    ],
+    "compare": true
+  },
+  "locations": {
+    "nav": "Locations",
+    "title": "Hospitals and clinics"
+  },
+  "rail": [
+    {
+      "label": "Book an appointment",
+      "icon": "check"
+    },
+    {
+      "label": "Find a doctor",
+      "icon": "star"
+    },
+    {
+      "label": "Find a branch",
+      "icon": "pin"
+    },
+    {
+      "label": "Health packages",
+      "icon": "heart"
+    },
+    {
+      "label": "WhatsApp",
+      "icon": "mail"
+    }
+  ],
+  "extra_pages": [
+    "doctors (searchable directory)",
+    "specialities (one page each)",
+    "branch pages with map, timings, phones",
+    "insurance partners"
+  ],
+  "tools": [
+    "bmi"
+  ],
+  "signature_graphics": [
+    "glass anatomy body with clickable organ hotspots (story theme)",
+    "animated organs per speciality"
+  ],
+  "assemble_ideas": [
+    "health package: layers = tests included",
+    "ward/OT tour as exploded floors"
+  ],
+  "scrape_focus": [
+    "departments",
+    "doctors",
+    "branches (address, phone, map, timings)",
+    "packages and prices",
+    "insurance partners",
+    "news",
+    "accreditations",
+    "emergency numbers"
+  ],
+  "questions": [
+    "Do you want a doctor directory? How many doctors, and can we use their photos?",
+    "Which branches have 24/7 emergency, and what are outpatient hours?",
+    "Which insurers are accepted?",
+    "Is there an online booking or video consultation system to link to?"
+  ],
+  "compliance": [
+    "No outcome claims or before/after photos without approval",
+    "Medical copy reviewed by a clinician",
+    "Patient testimonials need written consent"
+  ],
+  "theme": "studio"
+}

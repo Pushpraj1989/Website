@@ -1,0 +1,86 @@
+{
+  "sector": "real-estate",
+  "label": "Developers, brokers, property",
+  "promo_fx": "flow",
+  "brand_hint": {
+    "mode": "light or dark",
+    "feel": "aspirational, architectural",
+    "fonts": "architectural sans + serif"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "catalogue",
+    "assemble",
+    "split",
+    "stats",
+    "services",
+    "news",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Services",
+    "title": "Buy, rent, invest"
+  },
+  "catalogue": {
+    "nav": "Projects",
+    "title": "Projects and listings",
+    "categories": [
+      "Apartments",
+      "Villas",
+      "Commercial",
+      "Land"
+    ],
+    "compare": true
+  },
+  "locations": {
+    "nav": "Sales centres",
+    "title": "Sales centres"
+  },
+  "rail": [
+    {
+      "label": "Browse projects",
+      "icon": "building"
+    },
+    {
+      "label": "Book a viewing",
+      "icon": "check"
+    },
+    {
+      "label": "Payment calculator",
+      "icon": "chart"
+    },
+    {
+      "label": "Brochures",
+      "icon": "layers"
+    },
+    {
+      "label": "Call sales",
+      "icon": "phone"
+    }
+  ],
+  "tools": [
+    "emi"
+  ],
+  "signature_graphics": [
+    "building assembling floor by floor",
+    "masterplan map with hotspots"
+  ],
+  "assemble_ideas": [
+    "tower floors",
+    "villa: plot, structure, interiors, landscape"
+  ],
+  "scrape_focus": [
+    "projects with location, unit types, sizes, prices, handover dates, brochures",
+    "sales centres"
+  ],
+  "questions": [
+    "Which projects and unit types?",
+    "Payment plans to show?"
+  ],
+  "compliance": [
+    "Regulator / escrow numbers where required"
+  ],
+  "theme": "studio"
+}

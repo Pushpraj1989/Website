@@ -1,115 +1,81 @@
-# Tier 1 concept redesigns
+# Premium website kit
 
-Six concept redesigns for the Tier 1 prospects in the Oman prospects document.
-Each company has its own visual language and motion, modelled on the reference
-recordings (Active Theory, Pour/Play, Ember and the "No developers" reel).
+Build a premium, multi-page website with real motion for any company, from its existing
+website. Banks, insurers, hospitals, cafés, protein brands, contractors, couriers, hotels,
+schools: one data file per company, one command to build, static files to host anywhere.
 
-These are **concept pages for internal pitch use**. They are not the companies'
-official sites and are not published anywhere.
+Works with any AI assistant: Claude Code picks up the skill automatically
+(`.claude/skills/premium-website/`, or type `/premium-website`). Other tools read `AGENTS.md`.
+People can follow the same steps by hand.
 
-| Company | Theme | Style and motion |
+## What a build includes
+
+- **Multi-page by default:** home, about, a page per service, a product catalogue with a page per item
+  and a compare table, locations with a page per branch (live map, timings, phones,
+  actions), news with articles, and contact. Sector extras include a doctor directory,
+  priced packages, projects and investor pages.
+- **Home sections you order in data:** a WebGL promo slider with six transition styles, a quick-action
+  rail, stats, a services grid, a draggable product strip, a product that assembles layer
+  by layer as you scroll, split features, testimonials, a partners marquee, news, a 3D curved
+  locations slider with a detail panel, FAQ, and BMI or loan calculators.
+- **Nudges:** a news-flash ticker with an emergency pill, a floating contact dock, an action bar
+  on phones, a one-time offer slide-in, and a scroll progress ring.
+- **Motion:** smooth scroll, reveals in both scroll directions, page transitions, a mega menu with
+  previews, and scroll-scrubbed graphics. Reduced-motion and no-JavaScript fallbacks are included.
+- **Real content:** scraped from the company's site, with sources and a `VERIFY.md` of open questions.
+
+## Quick start
+
+```
+pip install jinja2 pillow playwright        # Playwright only for QA
+
+# 1. answer the intake (the skill asks you), saved as briefs/<slug>.json
+# 2. research the current site
+python3 tools/scrape.py https://www.example.com --slug example --images
+# 3. start the data file from a sector preset
+python3 tools/new_site.py --slug example --sector banking --scrape research/example/summary.json
+# 4. fill the TODOs with real content, add photos to shared/img/example/, then build and test
+ONLY=example python3 build/build.py
+python3 tools/qa.py example
+# 5. deploy
+./deploy/deploy.sh root@<server-ip>          # or GitHub Pages / any static host
+```
+
+Open `sites/<slug>/index.html`, or the hub `index.html` that lists every site.
+
+## Reference builds in this repo
+
+| Site | Theme | Shows |
 | --- | --- | --- |
-| Galfar Engineering & Contracting | `ember` | Charcoal and fire, condensed type. Rising embers over Salalah Airport, count-up figures, business units that fly in and assemble, iconic projects as full-screen panels that stack over each other. |
-| National Gas Company | `cosmos` | Deep space, lime light. A rotating 3D particle sphere (an LPG sphere drawn in light) that disperses on scroll, scramble-decode text, glowing pill nav, glass cards in a pinned 3D fly-through. |
-| Badr Al Samaa Group | `story` | Cream, teal and coral serif. A glass human figure (skeleton, organs, sweeping scan beam) with clickable hotspots for each centre; eight animated glass organs (beating heart with ECG, knee joint, fetus in its sac, kidneys, digestive system, X-ray ribcage, ear with sound waves, tooth); liquid waves, numbered chapters, tilted package cards, country cards that filter the branch list. |
-| Starcare Hospital | `clinic` | Clinical white on grid paper. Kinetic italic word swap ("Specialist care for newborns / recovery / surgery / pain relief"), departments in a pinned horizontal scroll, site list with a cursor-following city preview. |
-| Assarain Group | `editorial` | Oxblood, parchment and brass. Curtains part over Nizwa Fort, business groups in a pinned horizontal scroll, an 18-company index with image follow. |
-| Asyad Express | `route` | Night logistics, courier orange. A dotted globe with delivery arcs flying out of Muscat, a conveyor-belt marquee that reacts to scroll speed, a route line that draws itself with a parcel riding it. |
-
-Shared across all six: smooth inertial scrolling (Lenis), an opening loader,
-GSAP ScrollTrigger reveals (line, word and character splits; image wipes),
-a custom cursor and magnetic buttons on desktop, a hide-on-scroll header, and
-a full-screen mobile menu.
-
-## Open them
-
-- `index.html` – hub page with a preview of each concept.
-- `sites/<slug>/index.html` – one site each. Every site folder is self-contained
-  (`assets/` holds its CSS, JS, vendored libraries and only its own images).
-
-## Publish
-
-The output is plain static files, so any web server works. Upload `index.html`,
-`assets/` and `sites/` to the web root (or a sub-folder); every link is relative.
-
-- **Your own server (one command):** `./deploy/deploy.sh root@<server-ip>` uploads
-  the sites to `/var/www/tier1-concepts`, installs nginx if needed, and adds one
-  server block that answers only for the server's IP, so other sites are untouched.
-  Links: `http://<server-ip>/` (hub) and `http://<server-ip>/sites/<slug>/`.
-  Use `SSH_KEY=path/to/key` to pick a specific key. Re-running it redeploys and
-  keeps the previous copy in `/var/www/tier1-concepts.old`.
-- **From the server itself (e.g. Hostinger's Web console):** clone the repository on
-  the server and run `bash deploy/install.sh`. It does the same as `deploy.sh`
-  without needing SSH from another machine.
-- **Manual upload:** copy those three items into any web root; links are relative.
-- **GitHub Pages:** `.github/workflows/pages.yml` deploys on every push to
-  `tier1-concept-sites` once Pages is switched on (see the comments at the top of
-  the workflow). Links become
-  `https://pushpraj1989.github.io/Website/sites/<slug>/`. Pages on a private
-  repository needs a paid GitHub plan, and the published sites are public.
-
-Slugs: `galfar`, `national-gas`, `badr-al-samaa`, `starcare`, `assarain`, `asyad-express`.
-
-## Rebuild
-
-```
-pip install jinja2
-python3 build/build.py              # all sites, hub and VERIFY.md
-ONLY=galfar python3 build/build.py  # one site while iterating
-python3 build/snap.py               # optional: refresh hub previews (needs Playwright)
-```
+| `badr-al-samaa` | story | 90 pages from real content: 337-doctor directory, 41 priced packages, 36 specialities, 19 branch pages with maps, 18 news posts, glass anatomy |
+| `demo-coffee` | studio | Fictional café: menu with drawn product art, product pages with options and nutrition, a compare table, a latte and a sandwich that assemble on scroll |
+| `galfar` | ember | Industrial: rising embers, project panels |
+| `national-gas` | cosmos | Energy: particle sphere, 3D fly-through |
+| `starcare` | clinic | Clinical: kinetic type, horizontal departments |
+| `assarain` | editorial | Conglomerate: curtains, company index |
+| `asyad-express` | route | Logistics: globe arcs, route drawn on scroll |
 
 ## Where things live
 
 | Path | What it is |
 | --- | --- |
-| `data/<slug>.json` | All company content: facts, stats, services, locations, contact, image roles and captions, theme choice, and the `confirm` list. Edit facts here, not in HTML. |
-| `data/credits.json` | Source, creator and licence for every photo. Each site's footer lists its credits automatically. |
-| `build/build.py` | Renders each site with its theme, copies its assets, writes the hub and `VERIFY.md`. |
-| `build/templates/base.html.j2` | Shared page frame: loader, cursor, header, contact, footer. |
-| `build/templates/themes/<theme>.html.j2` | The layout for each theme. |
-| `shared/css/core.css` + `shared/css/<theme>.css` | Shared structure, then each theme's palette, type and layout. |
-| `shared/js/core.js` | Motion engine: smooth scroll, loader, split-text reveals, counters, parallax, velocity marquee, cursor, magnetic buttons, header, menu, location filter, form validation. |
-| `shared/js/fx.js` | Effects (embers, particle sphere, floaters, dotted globe, scramble, word swap, tilt, hover preview, horizontal scroll, stacked panels, assemble, route, waves, fly-through) and each theme's choreography. |
-| `shared/vendor/` | GSAP 3.12.5, ScrollTrigger and Lenis 1.1.13, vendored so the sites need no CDN. |
-| `shared/img/` | Downloaded photography, resized. |
-| `VERIFY.md` | Generated. Every unconfirmed or conflicting fact, per company, with sources. Read this before any pitch. |
+| `.claude/skills/premium-website/` | The skill: workflow, intake questionnaire, sector guide, data schema, module catalogue, content rules, QA and deploy |
+| `presets/<sector>.json` | 16 sector presets: pages, home order, rail, tools, signature graphics, scrape focus, questions, compliance |
+| `tools/scrape.py` | Crawls any site (robots-aware): pages, headings, text, prices, phones, emails, socials, news, products, locations, large photos |
+| `tools/new_site.py` | Writes `data/<slug>.json` from a preset + brief + scrape, ready to build |
+| `tools/qa.py` | Browser QA of every page on desktop and phone, plus reduced motion; exits 1 on problems |
+| `data/<slug>.json` | One company's content and settings. `data/credits.json` holds image credits |
+| `build/build.py` | Renders every site (all pages), the hub and `VERIFY.md`. `ONLY=<slug>` builds one |
+| `build/art.py` | Draws layered product art for the assemble module and product cards |
+| `build/templates/` | `base`, `partials/` (header, footer, nudges, macros for every module), `pages/` (one template per page type), `themes/` (studio plus six signature themes) |
+| `shared/css`, `shared/js` | `core.css` and `core.js` for structure and site-wide behaviour, `fx.js` for effects (WebGL slider, assemble, curved slider, canvases), and theme CSS |
+| `shared/vendor/` | GSAP 3.12.5, ScrollTrigger, Lenis 1.1.13 (no CDN needed) |
+| `deploy/` | `deploy.sh` (over SSH) and `install.sh` (on the server): nginx block for the server IP |
 
-## Images
+## Rules the kit follows
 
-Photography comes from Openverse: CC0 images from StockSnap and rawpixel, and
-CC BY / CC BY-SA images from Wikimedia Commons and Flickr. Each site credits its
-images in the footer, with licence links. Real Oman locations are used where
-they exist (Salalah Airport, Duqm Fishing Port, Muscat Expressway, Nizwa Fort,
-Muttrah, Seeb, Barka) plus Manama, Kuwait City, Dubai, Sharjah and Kozhikode.
-Anything that does not show the actual company, project or place is captioned
-"Illustrative" on the page. Generated graphics (the particle sphere, globe,
-embers, floating crosses) are drawn live in canvas.
+Real facts only, each with a source. Prices are shown as published, with a date. No made-up reviews. Licensed images
+with credits. "Illustrative" on stock photos. Concepts and demos are labelled as such.
+Details are in `.claude/skills/premium-website/references/content-rules.md`.
 
-## Data rules used
-
-- Only facts from each company's homepage (read 11 Oct 2026) or the prospects
-  document appear on the page. Concept copy, such as Asyad's four-step flow, is
-  labelled as such on the page and listed in `VERIFY.md`.
-- Where sources conflict (Badr's facility count, Asyad's centre count), the
-  concept shows one figure and lists the conflict in `VERIFY.md`.
-- Galfar's counters showed `+ 0` in the page code, so they are not shown.
-- Years since founding and copyright years are calculated, so they do not go stale.
-- The Sultan Qaboos reference from the earlier audit is not carried over.
-
-## Accessibility and fallbacks
-
-- `prefers-reduced-motion` turns off smooth scroll, pinning, canvases and the loader; all content shows statically.
-- If the motion libraries fail to load, the page falls back to a static, readable layout.
-- Count-up numbers are written into the HTML, so no-JS readers see the real figures.
-- Skip link, focus styles, keyboard-closable menu, labelled form fields.
-- Checked at 1440px and 390px wide: no horizontal scroll and no console errors on any page.
-
-## Before any of these are shown to a prospect
-
-1. Work through `VERIFY.md` for that company.
-2. Swap the concept palettes for the company's brand colours and logo.
-3. Replace stock and illustrative photography with the client's own.
-4. Have clinical copy (Badr, Starcare) reviewed.
-5. Connect the forms to a real endpoint (`data-endpoint` on the form) or remove them.
-6. Arabic and RTL versions are not built yet. Both matter for Omani clients.
+Arabic and RTL layouts are not built in yet. Add them per site if the client needs them.

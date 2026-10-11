@@ -1,0 +1,110 @@
+{
+  "sector": "banking",
+  "label": "Banks, finance, fintech, exchange houses",
+  "examples": "retail bank, Islamic bank, finance company",
+  "promo_fx": "streak",
+  "brand_hint": {
+    "mode": "dark or light",
+    "feel": "precise, confident; deep navy/green/black with metallic accent",
+    "fonts": "geometric sans display + neutral sans"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "statement",
+    "catalogue",
+    "assemble",
+    "emi",
+    "stats",
+    "services",
+    "split",
+    "news",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Banking",
+    "title": "Personal, business and corporate banking"
+  },
+  "catalogue": {
+    "nav": "Products",
+    "title": "Accounts, cards and finance",
+    "categories": [
+      "Accounts",
+      "Cards",
+      "Home finance",
+      "Car finance",
+      "Personal finance",
+      "Deposits"
+    ],
+    "compare": true
+  },
+  "locations": {
+    "nav": "Branches & ATMs",
+    "title": "Branches and ATMs"
+  },
+  "rail": [
+    {
+      "label": "Open an account",
+      "icon": "check"
+    },
+    {
+      "label": "Apply for a card",
+      "icon": "layers"
+    },
+    {
+      "label": "Loan calculator",
+      "icon": "chart"
+    },
+    {
+      "label": "Find a branch or ATM",
+      "icon": "pin"
+    },
+    {
+      "label": "Report fraud",
+      "icon": "shield"
+    }
+  ],
+  "extra_pages": [
+    "product compare (cards, accounts)",
+    "rates and charges",
+    "investor relations",
+    "security & fraud awareness",
+    "digital banking / app"
+  ],
+  "tools": [
+    "emi"
+  ],
+  "signature_graphics": [
+    "credit card that assembles (chip, hologram, metal core) on scroll",
+    "particle globe of transfers",
+    "rising chart lines"
+  ],
+  "assemble_ideas": [
+    "premium card: core, metal layer, chip, NFC antenna, finish",
+    "account bundle: account + card + app + insurance"
+  ],
+  "scrape_focus": [
+    "products with fees, rates, eligibility",
+    "branch and ATM list",
+    "rates page",
+    "app store links",
+    "annual reports",
+    "news",
+    "fraud warnings",
+    "Sharia board (Islamic)"
+  ],
+  "questions": [
+    "Which products must be shown, with which rates and fees?",
+    "Is there an online application or app to link to?",
+    "Do you need branch AND ATM locator?",
+    "Islamic or conventional (or both)?"
+  ],
+  "compliance": [
+    "Rates and fees must match the official schedule, dated",
+    "Regulator disclaimers in the footer",
+    "No promised returns",
+    "Fraud warning nudge recommended"
+  ],
+  "theme": "studio"
+}

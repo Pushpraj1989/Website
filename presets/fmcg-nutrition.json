@@ -1,0 +1,103 @@
+{
+  "sector": "fmcg-nutrition",
+  "label": "FMCG, protein, supplements, beverages, packaged food",
+  "examples": "protein brand, juice brand, snack brand",
+  "promo_fx": "pixel",
+  "brand_hint": {
+    "mode": "bold",
+    "feel": "energetic, product-first; one loud brand colour on dark or white",
+    "fonts": "condensed display + sans"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "assemble",
+    "catalogue",
+    "statement",
+    "split",
+    "stats",
+    "testimonials",
+    "news",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Why us",
+    "title": "What goes in"
+  },
+  "catalogue": {
+    "nav": "Products",
+    "title": "Products",
+    "categories": [
+      "Protein",
+      "Bars",
+      "Drinks",
+      "Snacks",
+      "Bundles"
+    ],
+    "compare": true
+  },
+  "locations": {
+    "nav": "Stockists",
+    "title": "Where to buy"
+  },
+  "rail": [
+    {
+      "label": "Shop now",
+      "icon": "check"
+    },
+    {
+      "label": "Find a stockist",
+      "icon": "pin"
+    },
+    {
+      "label": "Compare products",
+      "icon": "chart"
+    },
+    {
+      "label": "Ingredients",
+      "icon": "leaf"
+    },
+    {
+      "label": "Wholesale",
+      "icon": "building"
+    }
+  ],
+  "extra_pages": [
+    "product pages with nutrition, ingredients, flavours",
+    "compare table (protein per serving, sugar, calories)",
+    "stockists",
+    "athletes / ambassadors",
+    "recipes"
+  ],
+  "tools": [
+    "nutrition panels",
+    "compare"
+  ],
+  "signature_graphics": [
+    "protein tub / bar exploding into ingredients and re-assembling",
+    "scoop pour particles",
+    "macro rings"
+  ],
+  "assemble_ideas": [
+    "protein bar: base, protein crisp, caramel, coating, wrapper",
+    "shake: powder scoop, milk, ice, shaker"
+  ],
+  "scrape_focus": [
+    "products with nutrition per serving",
+    "flavours and sizes",
+    "ingredients and certifications (halal, ISO)",
+    "stockists and e-shop links",
+    "reviews"
+  ],
+  "questions": [
+    "Do you have packshots (transparent PNG) for each product?",
+    "Which nutrition figures must be shown?",
+    "Online store link or stockist list?"
+  ],
+  "compliance": [
+    "Nutrition and health claims must match label and local rules",
+    "No medical claims"
+  ],
+  "theme": "studio"
+}

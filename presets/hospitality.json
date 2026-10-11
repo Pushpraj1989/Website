@@ -1,0 +1,87 @@
+{
+  "sector": "hospitality",
+  "label": "Hotels, resorts, travel, tourism",
+  "promo_fx": "ripple",
+  "brand_hint": {
+    "mode": "light",
+    "feel": "escape, calm luxury",
+    "fonts": "elegant serif + sans"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "statement",
+    "catalogue",
+    "split",
+    "services",
+    "testimonials",
+    "stats",
+    "news",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Experiences",
+    "title": "Dining, spa and experiences"
+  },
+  "catalogue": {
+    "nav": "Rooms",
+    "title": "Rooms and suites",
+    "categories": [
+      "Rooms",
+      "Suites",
+      "Villas"
+    ],
+    "compare": true
+  },
+  "locations": {
+    "nav": "Destinations",
+    "title": "Our hotels"
+  },
+  "rail": [
+    {
+      "label": "Book a stay",
+      "icon": "check"
+    },
+    {
+      "label": "Rooms",
+      "icon": "layers"
+    },
+    {
+      "label": "Dining",
+      "icon": "star"
+    },
+    {
+      "label": "Offers",
+      "icon": "heart"
+    },
+    {
+      "label": "Location",
+      "icon": "pin"
+    }
+  ],
+  "tools": [],
+  "signature_graphics": [
+    "slow ken-burns hero",
+    "room fly-through",
+    "map of destinations"
+  ],
+  "assemble_ideas": [
+    "suite exploded view"
+  ],
+  "scrape_focus": [
+    "rooms with size, beds, view, amenities",
+    "restaurants",
+    "offers",
+    "reviews",
+    "booking engine link"
+  ],
+  "questions": [
+    "Booking engine URL?",
+    "Which offers are live?"
+  ],
+  "compliance": [
+    "Prices only from the booking engine"
+  ],
+  "theme": "studio"
+}

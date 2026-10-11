@@ -1,0 +1,97 @@
+{
+  "sector": "construction-engineering",
+  "label": "Contractors, engineering, real estate developers",
+  "examples": "Galfar (ember theme)",
+  "promo_fx": "burn",
+  "brand_hint": {
+    "mode": "dark",
+    "feel": "heavy, industrial; charcoal + fire orange or steel blue",
+    "fonts": "condensed display + sans + mono"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "stats",
+    "services",
+    "catalogue",
+    "split",
+    "assemble",
+    "partners",
+    "news",
+    "faq"
+  ],
+  "services": {
+    "nav": "Capabilities",
+    "title": "Business units"
+  },
+  "catalogue": {
+    "nav": "Projects",
+    "title": "Projects",
+    "categories": [
+      "Roads",
+      "Buildings",
+      "Oil & gas",
+      "Marine",
+      "Utilities"
+    ],
+    "compare": false
+  },
+  "locations": {
+    "nav": "Offices",
+    "title": "Offices"
+  },
+  "rail": [
+    {
+      "label": "Projects",
+      "icon": "building"
+    },
+    {
+      "label": "Capabilities",
+      "icon": "layers"
+    },
+    {
+      "label": "HSE",
+      "icon": "shield"
+    },
+    {
+      "label": "Investors",
+      "icon": "chart"
+    },
+    {
+      "label": "Careers",
+      "icon": "star"
+    }
+  ],
+  "extra_pages": [
+    "project pages (client, value, status, scope, gallery)",
+    "HSE",
+    "investors",
+    "careers",
+    "equipment fleet"
+  ],
+  "tools": [],
+  "signature_graphics": [
+    "rising embers",
+    "stacked project panels",
+    "building that assembles floor by floor"
+  ],
+  "assemble_ideas": [
+    "tower: foundation, columns, floors, facade, crown",
+    "road section layers: subgrade, base, asphalt, markings"
+  ],
+  "scrape_focus": [
+    "projects with client, location, value, year, images",
+    "divisions",
+    "HSE stats",
+    "certifications",
+    "financials"
+  ],
+  "questions": [
+    "Top 10 projects with photos?",
+    "Safety statistics to show (LTI-free hours)?"
+  ],
+  "compliance": [
+    "Client names only with permission"
+  ],
+  "theme": "studio"
+}

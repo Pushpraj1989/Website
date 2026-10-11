@@ -1,0 +1,81 @@
+{
+  "sector": "retail",
+  "label": "Retail, fashion, electronics, furniture, malls",
+  "promo_fx": "flow",
+  "brand_hint": {
+    "mode": "light",
+    "feel": "editorial, aspirational",
+    "fonts": "editorial serif + sans"
+  },
+  "home": [
+    "promo",
+    "rail",
+    "catalogue",
+    "split",
+    "assemble",
+    "services",
+    "stats",
+    "news",
+    "locations",
+    "faq"
+  ],
+  "services": {
+    "nav": "Services",
+    "title": "Services"
+  },
+  "catalogue": {
+    "nav": "Shop",
+    "title": "Collections",
+    "categories": [],
+    "compare": false
+  },
+  "locations": {
+    "nav": "Stores",
+    "title": "Stores"
+  },
+  "rail": [
+    {
+      "label": "Shop online",
+      "icon": "check"
+    },
+    {
+      "label": "Find a store",
+      "icon": "pin"
+    },
+    {
+      "label": "New arrivals",
+      "icon": "star"
+    },
+    {
+      "label": "Offers",
+      "icon": "heart"
+    },
+    {
+      "label": "Contact",
+      "icon": "phone"
+    }
+  ],
+  "tools": [],
+  "signature_graphics": [
+    "exploded product (sofa, phone, watch)",
+    "lookbook horizontal scroll"
+  ],
+  "assemble_ideas": [
+    "device teardown",
+    "furniture build"
+  ],
+  "scrape_focus": [
+    "categories and products with prices",
+    "stores with hours",
+    "offers",
+    "brands carried"
+  ],
+  "questions": [
+    "Is there an e-commerce platform to link to?",
+    "Which collections lead?"
+  ],
+  "compliance": [
+    "Prices and offers dated"
+  ],
+  "theme": "studio"
+}
