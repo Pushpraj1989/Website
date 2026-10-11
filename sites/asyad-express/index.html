@@ -5,17 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Asyad Express · Concept redesign</title>
 <meta name="description" content="Asyad Express: courier and distribution across Oman, with shipments to more than 220 countries.">
-<meta name="theme-color" content="#c2410c">
+<meta name="theme-color" content="#0d0d0f">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="assets/site.css">
-<script>document.documentElement.classList.replace('no-js', 'js');</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Unbounded:wght@400;600;800&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500">
+<link rel="stylesheet" href="assets/core.css">
+<link rel="stylesheet" href="assets/route.css"><script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
-<body style="--accent: #c2410c">
-
+<body data-theme="route" style="--accent: #ff5b00">
 <a class="skip" href="#main">Skip to content</a>
 <div class="progress" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <p class="loader-name"><span>A</span><span>s</span><span>y</span><span>a</span><span>d</span><span> </span><span>E</span><span>x</span><span>p</span><span>r</span><span>e</span><span>s</span><span>s</span></p>
+    <div class="loader-bar"><i></i></div>
+    <p class="loader-count">000</p>
+  </div>
+</div>
+<div class="cursor" aria-hidden="true"><div class="cursor-ring"><span></span></div><div class="cursor-dot"></div></div>
 
 <header class="site-header" data-header>
   <div class="wrap nav-row">
@@ -23,185 +31,191 @@
       <span class="brand-mark" aria-hidden="true">A</span>
       <span class="brand-text">Asyad Express</span>
     </a>
-    <nav class="nav" id="nav" aria-label="Primary">
-      <a class="" href="#about">About</a><a class="" href="#services">Services</a><a class="" href="#contact">Contact</a>
-    </nav>
+    <nav class="nav" id="nav" aria-label="Primary"><a href="#about">About</a><a href="#services">Services</a><a href="#highlights">How it works</a><a href="#contact">Contact</a>    </nav>
     <div class="nav-actions">
-      <a class="btn btn-primary btn-sm cta-head" href="#contact">Contact us</a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu>
-        <span></span><span></span>
-      </button>
+      <a class="btn btn-primary btn-sm" href="#contact" data-magnetic>Contact us</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>
     </div>
   </div>
 </header>
-
 <main id="main">
-
 <section class="hero" id="top">
-  <div class="hero-bg" aria-hidden="true">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="grid"></div>
-  </div>
+  <canvas class="hero-fx" data-fx="globe" aria-hidden="true"></canvas>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow" data-reveal>Express delivery · Asyad Group</p>
-      <h1 class="hero-title" aria-label="Express delivery across Oman and beyond"><span class="w" style="--i: 0" aria-hidden="true">Express</span> <span class="w" style="--i: 1" aria-hidden="true">delivery</span> <span class="w" style="--i: 2" aria-hidden="true">across</span> <span class="w" style="--i: 3" aria-hidden="true">Oman</span> <span class="w" style="--i: 4" aria-hidden="true">and</span> <span class="w" style="--i: 5" aria-hidden="true">beyond</span> </h1>
-      <p class="lede" data-reveal style="--d: .35s">A distribution network across Oman, with shipments to more than 220 countries.</p>
-      <div class="cta-row" data-reveal style="--d: .5s">
-        <a class="btn btn-primary" href="#contact">Contact us <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="#services">Our services</a>
+      <p class="eyebrow mono" data-anim="up" data-intro>Express delivery · Asyad Group</p>
+      <h1 class="hero-title" data-anim="lines" data-intro>Express delivery across Oman <em>and beyond</em></h1>
+      <p class="hero-lede" data-anim="up" data-intro data-delay=".45">A distribution network across Oman, with shipments to more than 220 countries.</p>
+      <div class="cta-row" data-anim="up" data-intro data-delay=".6">
+        <a class="btn btn-primary" href="#contact" data-magnetic>Contact us <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#services" data-magnetic>Our services</a>
       </div>
     </div>
-
-    <aside class="hero-panel" data-reveal style="--d: .6s" aria-label="Key figures">
-      <div class="glass">
-        <p class="glass-label">At a glance</p>
-        <ul class="glass-stats">
-          <li><strong><span data-count data-to="11" data-suffix="">11</span></strong><span>Distribution centres (to confirm)</span></li>
-          <li><strong><span data-count data-to="220" data-suffix="+">220+</span></strong><span>Countries served (to confirm)</span></li>
-        </ul>
-      </div>
-    </aside>
+    <div class="ticket mono" data-anim="up" data-intro data-delay=".8" aria-label="Network summary">
+      <div class="ticket-row"><span>Origin</span><strong>MCT · Oman</strong></div>
+      <div class="ticket-route" aria-hidden="true"><i></i><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h12v10H2zM14 10h4l3 3v3h-7"/><circle cx="6" cy="17.5" r="1.5"/><circle cx="17" cy="17.5" r="1.5"/></svg><i></i></div>
+      <div class="ticket-row"><span>Reach</span><strong><span data-count data-to="220" data-suffix="+">220+</span> countries</strong></div>
+      <p class="ticket-note">Figures to confirm with Asyad Express</p>
+    </div>
   </div>
-  <a class="scroll-cue" href="#about" aria-label="Scroll to about"><span></span></a>
 </section>
 
-<div class="wrap">
-  <div class="stat-grid" aria-label="Key figures">
-    <div class="stat" data-reveal style="--d: 0.0s">
-      <div class="num"><span data-count data-to="11" data-suffix="">11</span></div>
-      <div class="lbl">Distribution centres (to confirm)</div>
-    </div>
-    <div class="stat" data-reveal style="--d: 0.1s">
-      <div class="num"><span data-count data-to="220" data-suffix="+">220+</span></div>
-      <div class="lbl">Countries served (to confirm)</div>
-    </div>
-  </div>
+<div class="marquee belt" data-marquee="1.6" data-dir="left" aria-label="Domestic express, International express, Distribution centres, Oman, 220+ countries">
+  <div class="marquee-track" aria-hidden="true">    <div class="marquee-group"><span class="mq-item">Domestic express</span><span class="mq-sep"></span><span class="mq-item">International express</span><span class="mq-sep"></span><span class="mq-item">Distribution centres</span><span class="mq-sep"></span><span class="mq-item">Oman</span><span class="mq-sep"></span><span class="mq-item">220+ countries</span><span class="mq-sep"></span></div>    <div class="marquee-group"><span class="mq-item">Domestic express</span><span class="mq-sep"></span><span class="mq-item">International express</span><span class="mq-sep"></span><span class="mq-item">Distribution centres</span><span class="mq-sep"></span><span class="mq-item">Oman</span><span class="mq-sep"></span><span class="mq-item">220+ countries</span><span class="mq-sep"></span></div>  </div>
 </div>
 
-<div class="marquee section-gap" aria-label="Areas covered">
-  <div class="marquee-track">
-    <div class="marquee-group">
-<span>Domestic express</span><span>International express</span><span>Distribution centres</span><span>Oman</span><span>220+ countries</span>    </div>
-    <div class="marquee-group" aria-hidden="true">
-<span>Domestic express</span><span>International express</span><span>Distribution centres</span><span>Oman</span><span>220+ countries</span>    </div>
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono">Services</p>
+      <h2 data-anim="lines">Express services</h2>
+      <p class="muted" data-anim="up">Service lines to be confirmed with the client. These are the two lines the earlier audit identified.</p>
+    </div>
+    <div class="svc-grid">      <article class="svc" data-anim="up" data-delay="0.0" data-cursor="Oman">
+        <figure class="media svc-media">
+  <img src="assets/img/road.jpg" alt="Vehicle on a mountain road in Oman" loading="lazy" decoding="async"><figcaption class="media-cap">Oman</figcaption></figure>
+        <div class="svc-copy">
+          <span class="svc-n mono">01</span>
+          <h3>Domestic express</h3>
+          <p>Delivery through the Oman distribution network.</p>
+        </div>
+      </article>      <article class="svc" data-anim="up" data-delay="0.12" data-cursor="World">
+        <figure class="media svc-media">
+  <img src="assets/img/hero.jpg" alt="Aircraft at an airport gate at sunrise" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure>
+        <div class="svc-copy">
+          <span class="svc-n mono">02</span>
+          <h3>International express</h3>
+          <p>Shipments to more than 220 countries.</p>
+        </div>
+      </article>    </div>
   </div>
-</div>
+</section>
 
-<section class="section" id="about">
-  <div class="wrap split">
+<section class="flow" id="highlights" data-route>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono">How it works</p>
+      <h2 data-anim="lines">How express delivery works</h2>
+      <p class="muted" data-anim="up">Concept flow for illustration. Confirm the actual process with Asyad Express.</p>
+    </div>
+    <div class="flow-stage">
+      <svg class="flow-svg" viewBox="0 0 1200 900" preserveAspectRatio="none" aria-hidden="true">
+        <path class="flow-ghost" d="M100 40 C 100 200, 1100 160, 1100 330 S 100 470, 100 620 S 1100 760, 1100 880"/>
+        <path class="flow-path" data-route-path d="M100 40 C 100 200, 1100 160, 1100 330 S 100 470, 100 620 S 1100 760, 1100 880"/>
+        <g data-route-rider><rect x="-16" y="-12" width="32" height="24" rx="4"/><path d="M-16 -4 H16 M0 -12 V12"/></g>
+      </svg>
+      <ol class="stops">        <li class="stop stop-1" data-stop>
+          <span class="stop-n mono">01</span>
+          <h3>Book</h3>
+          <p>Create a shipment or open a business account.</p>
+        </li>        <li class="stop stop-2" data-stop>
+          <span class="stop-n mono">02</span>
+          <h3>Collect</h3>
+          <p>Parcels enter the network at a distribution centre.</p>
+        </li>        <li class="stop stop-3" data-stop>
+          <span class="stop-n mono">03</span>
+          <h3>Sort</h3>
+          <p>Routed through the Oman distribution network.</p>
+        </li>        <li class="stop stop-4" data-stop>
+          <span class="stop-n mono">04</span>
+          <h3>Deliver</h3>
+          <p>Delivered in Oman, or sent on to international destinations.</p>
+        </li>      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="mosaic" aria-label="Gallery">
+  <p class="giant mono" aria-hidden="true" data-drift="40">Oman → World</p>
+  <div class="wrap tiles">    <div class="tile tile-1" data-tile><figure class="media tile-media">
+  <img src="assets/img/containers.jpg" alt="Stacked shipping containers" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure></div>    <div class="tile tile-2" data-tile><figure class="media tile-media">
+  <img src="assets/img/parcel.jpg" alt="Parcel being wrapped" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure></div>    <div class="tile tile-3" data-tile><figure class="media tile-media">
+  <img src="assets/img/dunes.jpg" alt="Desert dunes in Oman" loading="lazy" decoding="async"><figcaption class="media-cap">Oman</figcaption></figure></div>    <div class="tile tile-4" data-tile><figure class="media tile-media">
+  <img src="assets/img/stack.jpg" alt="Container stack from below" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure></div>    <div class="tile tile-5" data-tile><figure class="media tile-media">
+  <img src="assets/img/boxes.jpg" alt="Cardboard box" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure></div>    <div class="tile tile-6" data-tile><figure class="media tile-media">
+  <img src="assets/img/road.jpg" alt="Vehicle on a mountain road in Oman" loading="lazy" decoding="async"><figcaption class="media-cap">Oman</figcaption></figure></div>  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
     <div>
-      <p class="kicker" data-reveal>About</p>
-      <h2 data-reveal style="--d: .08s">A national network with international reach</h2>
-      <p class="lead-p" data-reveal style="--d: .16s">Asyad Express is the courier service of Asyad Group, a government-owned logistics group. It delivers through distribution centres across Oman and ships to international destinations.</p>
-    </div>
-    <ul class="points">
-      <li data-reveal style="--d: 0.0s">
+      <p class="eyebrow mono">About</p>
+      <h2 data-anim="lines">A national network with international reach</h2><p class="muted about-p" data-anim="up">Asyad Express is the courier service of Asyad Group, a government-owned logistics group. It delivers through distribution centres across Oman and ships to international destinations.</p>    </div>
+    <div class="big-stats">      <div class="big-stat" data-anim="up" data-delay="0.0">
+        <strong><span data-count data-to="11" data-suffix="">11</span></strong>
+        <span>Distribution centres (to confirm)</span>
+      </div>      <div class="big-stat" data-anim="up" data-delay="0.1">
+        <strong><span data-count data-to="220" data-suffix="+">220+</span></strong>
+        <span>Countries served (to confirm)</span>
+      </div>      <div class="big-point" data-anim="up" data-delay="0.2">
         <h3>Government-owned</h3>
         <p>Part of Asyad Group, a government-owned logistics group.</p>
-      </li>
-      <li data-reveal style="--d: 0.1s">
+      </div>      <div class="big-point" data-anim="up" data-delay="0.30000000000000004">
         <h3>Distribution network</h3>
         <p>Distribution centres across Oman. The exact list is to be confirmed.</p>
-      </li>
-    </ul>
+      </div>    </div>
   </div>
 </section>
-
-<section class="section alt" id="services">
-  <div class="wrap">
-    <header class="section-head" data-reveal>
-      <p class="kicker">Services</p>
-      <h2>Express services</h2>
-<p>Service lines to be confirmed with the client. These are the two lines the earlier audit identified.</p>    </header>
-
-    <div class="card-grid">
-      <article class="card spot" data-reveal style="--d: 0.0s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h12v10H2zM14 10h4l3 3v3h-7"/><circle cx="6" cy="17.5" r="1.5"/><circle cx="17" cy="17.5" r="1.5"/></svg></div>
-        <h3>Domestic express</h3>
-<p>Delivery through the Oman distribution network.</p>      </article>
-      <article class="card spot" data-reveal style="--d: 0.1s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></div>
-        <h3>International express</h3>
-<p>Shipments to more than 220 countries.</p>      </article>
-    </div>
-
-  </div>
-</section>
-
-
-
-<section class="section contact" id="contact">
+<section class="contact" id="contact">
   <div class="wrap contact-grid">
     <div>
-      <p class="kicker" data-reveal>Contact</p>
-      <h2 data-reveal style="--d: .08s">Contact Asyad Express</h2>
-      <p data-reveal style="--d: .16s">For shipments, business accounts and partnerships.</p>
+      <p class="eyebrow">Contact</p>
+      <h2 class="contact-title" data-anim="lines">Contact Asyad Express</h2>
+      <p class="contact-intro" data-anim="up">For shipments, business accounts and partnerships.</p>
+      <ul class="contact-list">      </ul>
+<p class="contact-note">Contact details have not been verified. The official site blocked automated access; add them from the official site.</p>    </div>
 
-      <ul class="contact-list">
-      </ul>
-
-<p class="note contact-note">Contact details have not been verified. The official site blocked automated access; add them from the official site.</p>    </div>
-
-    <form class="form card" data-form data-endpoint="" novalidate data-reveal style="--d: .15s">
+    <form class="form" data-form data-endpoint="" novalidate data-anim="up">
       <h3>Send enquiry</h3>
-
       <div class="field" data-field>
         <label for="f-name">Full name</label>
         <input id="f-name" name="name" type="text" autocomplete="name" data-rule="name" required>
         <p class="err" data-err aria-live="polite"></p>
       </div>
-
       <div class="field" data-field>
         <label for="f-contact">Email or phone</label>
         <input id="f-contact" name="contact" type="text" autocomplete="email" inputmode="email" data-rule="contact" required>
         <p class="err" data-err aria-live="polite"></p>
-      </div>
-
-
-      <div class="field">
+      </div>      <div class="field">
         <label for="f-topic">What is this about?</label>
-        <select id="f-topic" name="topic">
-<option>Shipping enquiry</option><option>Business account</option><option>Partnership or tender</option><option>Media</option><option>Other</option>        </select>
+        <select id="f-topic" name="topic"><option>Shipping enquiry</option><option>Business account</option><option>Partnership or tender</option><option>Media</option><option>Other</option></select>
       </div>
-
       <div class="field">
         <label for="f-msg">Message <span class="optional">(optional)</span></label>
         <textarea id="f-msg" name="message" rows="4"></textarea>
       </div>
-
-      <button class="btn btn-primary btn-block" type="submit">Send enquiry</button>
+      <button class="btn btn-primary btn-block" type="submit">Send enquiry <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="form-status" role="status" data-status></p>
     </form>
   </div>
-</section>
-
-</main>
+</section></main>
 
 <footer class="site-footer">
-  <div class="wrap foot-grid">
-    <div>
-      <a class="brand" href="#top">
-        <span class="brand-mark" aria-hidden="true">A</span>
-        <span class="brand-text">Asyad Express</span>
-      </a>
-      <p class="foot-meta">Asyad Express: courier and distribution across Oman, with shipments to more than 220 countries.</p>
+  <div class="wrap">
+    <p class="foot-big" aria-hidden="true" data-drift="14">Asyad Express</p>
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">A</span><span class="brand-text">Asyad Express</span></a>
+        <p style="margin-top:1rem;max-width:38ch">Asyad Express: courier and distribution across Oman, with shipments to more than 220 countries.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer"><a href="#about">About</a><a href="#services">Services</a><a href="#highlights">How it works</a><a href="#contact">Contact</a>      </nav>
+      <div class="foot-contact">
+      </div>
     </div>
-    <nav class="foot-nav" aria-label="Footer">
-      <a class="" href="#about">About</a><a class="" href="#services">Services</a><a class="" href="#contact">Contact</a>
-    </nav>
-    <div class="foot-contact">
-    </div>
-  </div>
-  <div class="wrap foot-bottom">
-    <p>© 2026 Asyad Express. Concept redesign, not the company's official website. Facts to be verified before use.</p>
-    <a href="#top">Back to top</a>
-  </div>
+    <div class="foot-bottom">
+      <p>© 2026 Asyad Express. Concept redesign, not the company's official website. Facts to be verified before use.</p>
+      <a href="#top">Back to top</a>
+    </div>    <details class="credits">
+      <summary>Image credits</summary>
+      <ul>        <li>“Cardboard Box” by Matt Bango, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/cardboard-box-USP4WCYPBW" rel="noopener">source</a></li>        <li>“Container Stack” by Bob Richards, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/container-stack-NDCVBXJMDJ" rel="noopener">source</a></li>        <li>“OffRoad outside Dubai” by BasharAlaeddin, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">BY-SA 2.0</a> · <a href="https://www.flickr.com/photos/34413965@N02/8763643922" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Airport Airplane” by Andrew Branch, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/airport-airplane-PEQJJ1O6ZY" rel="noopener">source</a></li>        <li>“Man Wrapping” by Bruce Mars, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/man-wrapping-K2NTOLFEHN" rel="noopener">source</a></li>        <li>“Land-Rover-Oman-Media-Dec-95” by landrovermena, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/56682936@N03/5257701582" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Container Stack” by Bob Richards, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/container-stack-OHHX29VJZL" rel="noopener">source</a></li>      </ul>
+    </details>  </div>
 </footer>
-
 <a class="to-top" href="#top" data-to-top aria-label="Back to top"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 
-<script src="assets/motion.js" defer></script>
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/fx.js" defer></script>
+<script src="assets/core.js" defer></script>
 </body>
 </html>

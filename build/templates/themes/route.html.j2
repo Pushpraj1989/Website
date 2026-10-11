@@ -1,0 +1,108 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+
+{% block content %}
+<section class="hero" id="top">
+  <canvas class="hero-fx" data-fx="globe" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow mono" data-anim="up" data-intro>{{ s.hero.eyebrow }}</p>
+      <h1 class="hero-title" data-anim="lines" data-intro>{{ s.theme_data.hero_html | safe }}</h1>
+      <p class="hero-lede" data-anim="up" data-intro data-delay=".45">{{ s.hero.lede }}</p>
+      <div class="cta-row" data-anim="up" data-intro data-delay=".6">
+        <a class="btn btn-primary" href="{{ s.hero.primary.href }}" data-magnetic>{{ s.hero.primary.label }} {{ icon('arrow') }}</a>
+        <a class="btn btn-ghost" href="{{ s.hero.secondary.href }}" data-magnetic>{{ s.hero.secondary.label }}</a>
+      </div>
+    </div>
+    <div class="ticket mono" data-anim="up" data-intro data-delay=".8" aria-label="Network summary">
+      <div class="ticket-row"><span>Origin</span><strong>MCT · Oman</strong></div>
+      <div class="ticket-route" aria-hidden="true"><i></i>{{ icon('truck') }}<i></i></div>
+      <div class="ticket-row"><span>Reach</span><strong>{{ m.count(s.stats[1]) }} countries</strong></div>
+      <p class="ticket-note">Figures to confirm with Asyad Express</p>
+    </div>
+  </div>
+</section>
+
+{{ m.marquee(s.marquee, 1.6, 'left', 'belt') }}
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono">{{ s.services.nav }}</p>
+      <h2 data-anim="lines">{{ s.services.title }}</h2>
+      <p class="muted" data-anim="up">{{ s.services.intro }}</p>
+    </div>
+    <div class="svc-grid">
+      {%- for it in s.services['items'] %}
+      <article class="svc" data-anim="up" data-delay="{{ loop.index0 * 0.12 }}" data-cursor="{{ ['Oman', 'World'][loop.index0 % 2] }}">
+        {{ m.img(it.image, 'svc-media') }}
+        <div class="svc-copy">
+          <span class="svc-n mono">{{ '%02d' % loop.index }}</span>
+          <h3>{{ it.title }}</h3>
+          <p>{{ it.text }}</p>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="flow" id="highlights" data-route>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono">{{ s.highlights.nav }}</p>
+      <h2 data-anim="lines">{{ s.highlights.title }}</h2>
+      <p class="muted" data-anim="up">{{ s.highlights.intro }}</p>
+    </div>
+    <div class="flow-stage">
+      <svg class="flow-svg" viewBox="0 0 1200 900" preserveAspectRatio="none" aria-hidden="true">
+        <path class="flow-ghost" d="M100 40 C 100 200, 1100 160, 1100 330 S 100 470, 100 620 S 1100 760, 1100 880"/>
+        <path class="flow-path" data-route-path d="M100 40 C 100 200, 1100 160, 1100 330 S 100 470, 100 620 S 1100 760, 1100 880"/>
+        <g data-route-rider><rect x="-16" y="-12" width="32" height="24" rx="4"/><path d="M-16 -4 H16 M0 -12 V12"/></g>
+      </svg>
+      <ol class="stops">
+        {%- for it in s.highlights['items'] %}
+        <li class="stop stop-{{ loop.index }}" data-stop>
+          <span class="stop-n mono">{{ '%02d' % loop.index }}</span>
+          <h3>{{ it.title }}</h3>
+          <p>{{ it.text }}</p>
+        </li>
+        {%- endfor %}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="mosaic" aria-label="Gallery">
+  <p class="giant mono" aria-hidden="true" data-drift="40">{{ s.theme_data.giant }}</p>
+  <div class="wrap tiles">
+    {%- for t in s.theme_data.tiles %}
+    <div class="tile tile-{{ loop.index }}" data-tile>{{ m.img(t, 'tile-media') }}</div>
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <p class="eyebrow mono">About</p>
+      <h2 data-anim="lines">{{ s.about.title }}</h2>
+      {%- for p in s.about.body %}<p class="muted about-p" data-anim="up">{{ p }}</p>{% endfor %}
+    </div>
+    <div class="big-stats">
+      {%- for st in s.stats %}
+      <div class="big-stat" data-anim="up" data-delay="{{ loop.index0 * 0.1 }}">
+        <strong>{{ m.count(st) }}</strong>
+        <span>{{ st.label }}</span>
+      </div>
+      {%- endfor %}
+      {%- for p in s.about.points %}
+      <div class="big-point" data-anim="up" data-delay="{{ 0.2 + loop.index0 * 0.1 }}">
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.text }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

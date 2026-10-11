@@ -1,0 +1,33 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="foot-big" aria-hidden="true" data-drift="14">{{ s.short }}</p>
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">{{ s.short[0] }}</span><span class="brand-text">{{ s.short }}</span></a>
+        <p style="margin-top:1rem;max-width:38ch">{{ s.meta }}</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer">
+        {%- for n in s._nav %}<a href="#{{ n.id }}">{{ n.label }}</a>{% endfor %}
+      </nav>
+      <div class="foot-contact">
+        {% if s.contact.address %}<p>{{ s.contact.address }}</p>{% endif %}
+        {% for p in s.contact.phones if not p.fax %}<p><a href="tel:{{ p.tel }}">{{ p.number }}</a></p>{% endfor %}
+        {% if s.contact.email %}<p><a href="mailto:{{ s.contact.email }}">{{ s.contact.email }}</a></p>{% endif %}
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© {{ year }} {{ s.name }}. Concept redesign, not the company's official website. Facts to be verified before use.</p>
+      <a href="#top">Back to top</a>
+    </div>
+    {%- if s._credits %}
+    <details class="credits">
+      <summary>Image credits</summary>
+      <ul>
+        {%- for c in s._credits %}
+        <li>“{{ c.title }}”{% if c.creator %} by {{ c.creator }}{% endif %}, {% if c.license_url %}<a href="{{ c.license_url }}" rel="license noopener">{{ c.license }}</a>{% else %}{{ c.license }}{% endif %}{% if c.landing %} · <a href="{{ c.landing }}" rel="noopener">source</a>{% endif %}{% if c.modified %} · cropped and colour-graded{% endif %}</li>
+        {%- endfor %}
+      </ul>
+    </details>
+    {%- endif %}
+  </div>
+</footer>

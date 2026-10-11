@@ -5,20 +5,42 @@
   "short": "National Gas",
   "sector": "Energy · LPG",
   "meta": "National Gas Company: LPG plants and storage across Oman, the UAE and Malaysia.",
-  "accent": "#b45309",
-  "cta": {"label": "Contact us", "href": "#contact"},
+  "accent": "#c6ff4a",
+  "cta": {
+    "label": "Contact us",
+    "href": "#contact"
+  },
   "hero": {
     "eyebrow": "LPG production & storage · Oman · UAE · Malaysia",
     "title": "Energy supply across three countries",
     "lede": "Eleven LPG plants, more than 350,000 metric tonnes of LPG a year, and the largest LPG storage in the Sultanate of Oman.",
-    "primary": {"label": "Contact us", "href": "#contact"},
-    "secondary": {"label": "Our footprint", "href": "#locations"}
+    "primary": {
+      "label": "Contact us",
+      "href": "#contact"
+    },
+    "secondary": {
+      "label": "Our footprint",
+      "href": "#locations"
+    }
   },
   "stats": [
-    {"value": 11, "label": "LPG plants"},
-    {"value": 350000, "suffix": "+", "label": "Metric tonnes of LPG a year"},
-    {"value": 2600, "label": "Tonnes of storage, the largest in Oman"},
-    {"value": 3, "label": "Countries with plants"}
+    {
+      "value": 11,
+      "label": "LPG plants"
+    },
+    {
+      "value": 350000,
+      "suffix": "+",
+      "label": "Metric tonnes of LPG a year"
+    },
+    {
+      "value": 2600,
+      "label": "Tonnes of storage, the largest in Oman"
+    },
+    {
+      "value": 3,
+      "label": "Countries with plants"
+    }
   ],
   "about": {
     "title": "Built around LPG supply",
@@ -26,9 +48,18 @@
       "National Gas Company runs LPG plants and storage in Oman, the UAE and Malaysia. Its subsidiaries operate in the UAE, Malaysia and Saudi Arabia."
     ],
     "points": [
-      {"title": "Plants", "text": "Eleven LPG plants across Oman, the UAE and Malaysia."},
-      {"title": "Storage", "text": "2,600 tonnes of LPG storage, which the group describes as the largest in Oman."},
-      {"title": "Throughput", "text": "More than 350,000 metric tonnes of LPG a year."}
+      {
+        "title": "Plants",
+        "text": "Eleven LPG plants across Oman, the UAE and Malaysia."
+      },
+      {
+        "title": "Storage",
+        "text": "2,600 tonnes of LPG storage, which the group describes as the largest in Oman."
+      },
+      {
+        "title": "Throughput",
+        "text": "More than 350,000 metric tonnes of LPG a year."
+      }
     ]
   },
   "services": {
@@ -36,9 +67,21 @@
     "nav": "Subsidiaries",
     "intro": "Subsidiaries and the countries they operate in, as shown on the group's site.",
     "items": [
-      {"title": "NGC Energy LLC", "icon": "globe", "text": "United Arab Emirates"},
-      {"title": "NGC Energy Sdn. Bhd.", "icon": "globe", "text": "Malaysia"},
-      {"title": "NGC Energy LLC", "icon": "globe", "text": "Saudi Arabia (KSA)"}
+      {
+        "title": "NGC Energy LLC",
+        "icon": "globe",
+        "text": "United Arab Emirates"
+      },
+      {
+        "title": "NGC Energy Sdn. Bhd.",
+        "icon": "globe",
+        "text": "Malaysia"
+      },
+      {
+        "title": "NGC Energy LLC",
+        "icon": "globe",
+        "text": "Saudi Arabia (KSA)"
+      }
     ]
   },
   "highlights": null,
@@ -47,25 +90,67 @@
     "nav": "Locations",
     "intro": "Eleven LPG plants in total. The site lists the countries but not each plant's address or per-country count.",
     "items": [
-      {"name": "Head office", "type": "Head office", "country": "Oman", "address": "Muscat, Sultanate of Oman. Street address not published."},
-      {"name": "LPG plants", "type": "LPG plant & storage", "country": "Oman", "note": "Count and sites to confirm."},
-      {"name": "LPG plants", "type": "LPG plant", "country": "UAE", "note": "Count and sites to confirm."},
-      {"name": "LPG plants", "type": "LPG plant", "country": "Malaysia", "note": "Count and sites to confirm."}
+      {
+        "name": "Head office",
+        "type": "Head office",
+        "country": "Oman",
+        "address": "Muscat, Sultanate of Oman. Street address not published."
+      },
+      {
+        "name": "LPG plants",
+        "type": "LPG plant & storage",
+        "country": "Oman",
+        "note": "Count and sites to confirm."
+      },
+      {
+        "name": "LPG plants",
+        "type": "LPG plant",
+        "country": "UAE",
+        "note": "Count and sites to confirm."
+      },
+      {
+        "name": "LPG plants",
+        "type": "LPG plant",
+        "country": "Malaysia",
+        "note": "Count and sites to confirm."
+      }
     ]
   },
-  "marquee": ["LPG production", "Bulk storage", "Oman", "United Arab Emirates", "Malaysia", "Saudi Arabia"],
+  "marquee": [
+    "LPG production",
+    "Bulk storage",
+    "Oman",
+    "United Arab Emirates",
+    "Malaysia",
+    "Saudi Arabia"
+  ],
   "contact": {
     "title": "Contact us",
     "intro": "For supply, corporate and investor enquiries.",
     "address": "Location: Muscat, Sultanate of Oman (street address to confirm)",
     "phones": [
-      {"label": "Call centre", "number": "+968 2416 2646", "tel": "+96824162646"},
-      {"label": "WhatsApp", "number": "+968 9060 4445", "tel": "+96890604445", "whatsapp": true}
+      {
+        "label": "Call centre",
+        "number": "+968 2416 2646",
+        "tel": "+96824162646"
+      },
+      {
+        "label": "WhatsApp",
+        "number": "+968 9060 4445",
+        "tel": "+96890604445",
+        "whatsapp": true
+      }
     ],
     "email": "info@nationalgasco.net",
     "form": {
       "branch": false,
-      "topics": ["Supply enquiry", "Corporate or investor relations", "Careers", "Media", "Other"],
+      "topics": [
+        "Supply enquiry",
+        "Corporate or investor relations",
+        "Careers",
+        "Media",
+        "Other"
+      ],
       "submit": "Send enquiry"
     }
   },
@@ -73,7 +158,121 @@
     "Only the total of 11 plants is published. Per-country counts and plant addresses are not on the site, so the footprint shows countries only.",
     "The Saudi subsidiary name (NGC Energy LLC) and the Malaysia company name were inferred from the site's labels and domain. Confirm both.",
     "No founding year or listing details are published.",
-    "The head office street address is not published."
+    "The head office street address is not published.",
+    "Photography is illustrative Creative Commons imagery (see footer credits), not NGC's plants. Replace with the company's own photos."
   ],
-  "sources": ["https://nationalgasco.net (homepage read 11 Oct 2026)"]
+  "sources": [
+    "https://nationalgasco.net (homepage read 11 Oct 2026)"
+  ],
+  "theme": "cosmos",
+  "img_dir": "ngc",
+  "images": {
+    "sphere": {
+      "src": "sphere.jpg",
+      "alt": "Spherical gas storage tank",
+      "cap": "Illustrative"
+    },
+    "pipes": {
+      "src": "pipes.jpg",
+      "alt": "Industrial pipework",
+      "cap": "Illustrative"
+    },
+    "valves": {
+      "src": "valves.jpg",
+      "alt": "Rows of gas valves and gauges",
+      "cap": "Illustrative"
+    },
+    "dark": {
+      "src": "dark.jpg",
+      "alt": "Pipes and valves in low light",
+      "cap": "Illustrative"
+    }
+  },
+  "theme_data": {
+    "code": "NGC",
+    "seek": [
+      {
+        "label": "Supply enquiry",
+        "href": "#contact"
+      },
+      {
+        "label": "Group structure",
+        "href": "#services"
+      },
+      {
+        "label": "Our footprint",
+        "href": "#locations"
+      },
+      {
+        "label": "Corporate & investors",
+        "href": "#contact"
+      }
+    ],
+    "nodes": [
+      "Oman",
+      "UAE",
+      "Malaysia",
+      "KSA"
+    ],
+    "space": [
+      {
+        "kicker": "Subsidiary · UAE",
+        "title": "NGC Energy LLC",
+        "text": "United Arab Emirates",
+        "z": -300,
+        "x": -22,
+        "y": -6
+      },
+      {
+        "kicker": "Storage",
+        "title": "2,600 MT",
+        "text": "LPG storage, described by the group as the largest in Oman.",
+        "image": "sphere",
+        "z": -700,
+        "x": 22,
+        "y": 4
+      },
+      {
+        "kicker": "Subsidiary · Malaysia",
+        "title": "NGC Energy Sdn. Bhd.",
+        "text": "Malaysia",
+        "z": -1100,
+        "x": -24,
+        "y": 8
+      },
+      {
+        "kicker": "Plants",
+        "title": "11 LPG plants",
+        "text": "Across Oman, the UAE and Malaysia.",
+        "z": -1500,
+        "x": 20,
+        "y": -8
+      },
+      {
+        "kicker": "Subsidiary · KSA",
+        "title": "NGC Energy LLC",
+        "text": "Saudi Arabia",
+        "z": -1900,
+        "x": -18,
+        "y": -2
+      },
+      {
+        "kicker": "Throughput",
+        "title": "350,000+ MT a year",
+        "text": "Metric tonnes of LPG handled annually.",
+        "image": "dark",
+        "z": -2300,
+        "x": 18,
+        "y": 6
+      },
+      {
+        "kicker": "Group",
+        "title": "Three countries with plants",
+        "text": "Oman · UAE · Malaysia",
+        "z": -2650,
+        "x": 0,
+        "y": 0
+      }
+    ]
+  }
 }

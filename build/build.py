@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Build the Tier 1 concept redesigns from data/*.json.
 
+Each company picks a visual theme (data field "theme"); themes live in
+build/templates/themes/<theme>.html.j2 and shared/css/<theme>.css.
+
 Writes:
   sites/<slug>/index.html   one page per company (+ assets/)
   index.html                hub page linking all sites
@@ -12,6 +15,7 @@ Needs:  jinja2  (pip install jinja2)
 
 import datetime
 import json
+import os
 import shutil
 from pathlib import Path
 
@@ -24,6 +28,23 @@ SHARED = ROOT / "shared"
 SITES = ROOT / "sites"
 TEMPLATES = ROOT / "build" / "templates"
 YEAR = datetime.date.today().year
+CREDITS = json.loads((DATA / "credits.json").read_text(encoding="utf-8")) if (DATA / "credits.json").exists() else {}
+
+GF = "https://fonts.googleapis.com/css2?display=swap&family="
+THEMES = {
+    "ember": {"fonts": GF + "Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500", "theme_color": "#0e0b08",
+              "label": "Ember", "motion": "Rising embers, condensed type, units that assemble, project panels that stack"},
+    "cosmos": {"fonts": GF + "Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500", "theme_color": "#05040a",
+               "label": "Cosmos", "motion": "3D particle sphere, scramble text, glass cards in a 3D fly-through"},
+    "story": {"fonts": GF + "Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600", "theme_color": "#f4ede3",
+              "label": "Story", "motion": "Numbered chapters, giant words behind imagery, liquid waves, orbiting centres"},
+    "clinic": {"fonts": GF + "Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400", "theme_color": "#f7f9fb",
+               "label": "Clinic", "motion": "Kinetic italic word swap, grid paper, horizontal departments, hover previews"},
+    "editorial": {"fonts": GF + "Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@400;500;600;700", "theme_color": "#1f0a0d",
+                  "label": "Editorial", "motion": "Curtain reveal, horizontal business groups, company index with image follow"},
+    "route": {"fonts": GF + "Unbounded:wght@400;600;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500", "theme_color": "#0d0d0f",
+              "label": "Route", "motion": "Dotted globe with live arcs, conveyor marquee, route drawn on scroll"},
+}
 
 # 24px stroke icons, drawn in the same style so they match the type.
 ICONS = {
@@ -75,6 +96,7 @@ def prepare(site):
     for loc in locations:
         counts[loc["country"]] = counts.get(loc["country"], 0) + 1
     site["_countries"] = list(counts.items())
+    site["_country_counts"] = counts
     site["_show_filter"] = len(counts) > 1
 
     form = site["contact"].get("form", {})
@@ -93,23 +115,50 @@ def prepare(site):
         nav.append({"id": "locations", "label": site["locations"].get("nav", "Locations")})
     nav.append({"id": "contact", "label": "Contact"})
     site["_nav"] = nav
+    site["_theme"] = THEMES[site["theme"]]
+
+    # credits: every image this site uses, looked up from data/credits.json
+    used = sorted({im["src"] for im in site.get("images", {}).values()})
+    site["_credits"] = []
+    for src in used:
+        key = site["img_dir"] + "/" + src.rsplit(".", 1)[0]
+        c = CREDITS.get(key)
+        if c and not c["license"].upper().startswith("CC0"):
+            site["_credits"].append({**c, "modified": True})
+        elif c:
+            site["_credits"].append(c)
     return site
 
 
 def render_site(env, site):
     out_dir = SITES / site["slug"]
-    (out_dir / "assets").mkdir(parents=True, exist_ok=True)
-    shutil.copy(SHARED / "css" / "site.css", out_dir / "assets" / "site.css")
-    shutil.copy(SHARED / "js" / "motion.js", out_dir / "assets" / "motion.js")
-    html = env.get_template("site.html.j2").render(s=site, year=YEAR)
+    if (out_dir / "assets").exists():
+        shutil.rmtree(out_dir / "assets")
+    (out_dir / "assets" / "img").mkdir(parents=True)
+    shutil.copy(SHARED / "css" / "core.css", out_dir / "assets" / "core.css")
+    shutil.copy(SHARED / "css" / f"{site['theme']}.css", out_dir / "assets" / f"{site['theme']}.css")
+    for js in ("core.js", "fx.js"):
+        shutil.copy(SHARED / "js" / js, out_dir / "assets" / js)
+    shutil.copytree(SHARED / "vendor", out_dir / "assets" / "vendor")
+    for im in {im["src"] for im in site.get("images", {}).values()}:
+        src = SHARED / "img" / site["img_dir"] / im
+        if not src.exists():
+            raise SystemExit(f"missing image for {site['slug']}: {src}")
+        shutil.copy(src, out_dir / "assets" / "img" / im)
+    html = env.get_template(f"themes/{site['theme']}.html.j2").render(s=site, year=YEAR)
     (out_dir / "index.html").write_text(html, encoding="utf-8")
 
 
 def render_hub(env, sites):
-    (ROOT / "assets").mkdir(exist_ok=True)
-    shutil.copy(SHARED / "css" / "site.css", ROOT / "assets" / "site.css")
-    shutil.copy(SHARED / "js" / "motion.js", ROOT / "assets" / "motion.js")
-    html = env.get_template("hub.html.j2").render(sites=sites, year=YEAR)
+    if (ROOT / "assets").exists():
+        shutil.rmtree(ROOT / "assets")
+    (ROOT / "assets").mkdir()
+    shutil.copy(SHARED / "css" / "hub.css", ROOT / "assets" / "hub.css")
+    if (SHARED / "hub").exists():
+        shutil.copytree(SHARED / "hub", ROOT / "assets" / "hub")
+    for site in sites:
+        site["_thumb"] = (SHARED / "hub" / f"{site['slug']}.jpg").exists()
+    html = env.get_template("hub.html.j2").render(sites=sites, year=YEAR, fonts=GF + "Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700")
     (ROOT / "index.html").write_text(html, encoding="utf-8")
 
 
@@ -141,13 +190,18 @@ def main():
     env.globals["icon"] = icon
     env.globals["digits"] = digits
 
+    only = os.environ.get("ONLY")  # e.g. ONLY=galfar to rebuild one site while iterating
     sites = []
     for path in sorted(DATA.glob("*.json")):
+        if path.name == "credits.json" or (only and path.stem != only):
+            continue
         site = prepare(json.loads(path.read_text(encoding="utf-8")))
         sites.append(site)
         render_site(env, site)
         print(f"built sites/{site['slug']}/index.html")
 
+    if only:
+        return
     render_hub(env, sites)
     write_verify(sites)
     print("built index.html and VERIFY.md")

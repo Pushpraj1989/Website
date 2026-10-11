@@ -1,0 +1,50 @@
+{#- Shared macros. `s` (site data) comes from the render context. -#}
+{%- macro count(st) -%}
+<span data-count data-to="{{ st.value }}" data-suffix="{{ st.suffix or '' }}">{{ '{:,}'.format(st.value) }}{{ st.suffix or '' }}</span>
+{%- endmacro -%}
+
+{%- macro img(role, cls='', anim='', speed='', sizes='') -%}
+{%- set im = s.images[role] -%}
+<figure class="media {{ cls }}"{% if anim %} data-anim="{{ anim }}"{% endif %}>
+  <img src="assets/img/{{ im.src }}" alt="{{ im.alt }}" loading="{{ 'eager' if role == 'hero' else 'lazy' }}" decoding="async"{% if speed %} data-speed="{{ speed }}"{% endif %}>
+  {%- if im.cap %}<figcaption class="media-cap">{{ im.cap }}</figcaption>{% endif %}
+</figure>
+{%- endmacro -%}
+
+{%- macro src(role) -%}assets/img/{{ s.images[role].src }}{%- endmacro -%}
+
+{%- macro marquee(items, speed=1, dir='left', cls='') -%}
+<div class="marquee {{ cls }}" data-marquee="{{ speed }}" data-dir="{{ dir }}" aria-label="{{ items | join(', ') }}">
+  <div class="marquee-track" aria-hidden="true">
+    {%- for pass in [0, 1] %}
+    <div class="marquee-group">{% for m in items %}<span class="mq-item">{{ m }}</span><span class="mq-sep"></span>{% endfor %}</div>
+    {%- endfor %}
+  </div>
+</div>
+{%- endmacro -%}
+
+{%- macro locations(dark=false) -%}
+{%- if s.locations and s.locations['items'] %}
+  {%- if s._show_filter %}
+  <div class="filters" role="group" aria-label="Filter locations by country" data-filters>
+    <button class="filter" type="button" data-filter="all" aria-pressed="true">All <span class="filter-n">{{ s.locations['items'] | length }}</span></button>
+    {%- for c, n in s._countries %}
+    <button class="filter" type="button" data-filter="{{ c }}" aria-pressed="false">{{ c }} <span class="filter-n">{{ n }}</span></button>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+  <p class="result-count" aria-live="polite" data-result></p>
+  <ul class="loc-grid">
+    {%- for l in s.locations['items'] %}
+    <li class="loc" data-country="{{ l.country }}">
+      <div class="loc-top"><span class="pill">{{ l.type }}</span><span>{{ l.country }}</span></div>
+      <h3>{{ l.name }}</h3>
+      {% if l.address %}<p>{{ l.address }}</p>{% endif %}
+      {% if l.phone %}<a href="tel:{{ digits(l.phone) }}">{{ l.phone }}</a>{% endif %}
+      {% if l.note %}<p class="note">{{ l.note }}</p>{% endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+  <p class="empty" data-empty hidden>No locations match this filter.</p>
+{%- endif %}
+{%- endmacro -%}

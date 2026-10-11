@@ -1,0 +1,125 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+
+{% block content %}
+<section class="hero" id="top">
+  <div class="grid-paper" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow" data-anim="up" data-intro><span class="live" aria-hidden="true"></span>{{ s.hero.eyebrow }}</p>
+    <h1 class="hero-title">
+      <span class="ht-line" data-anim="chars" data-intro>{{ s.theme_data.lead }}</span>
+      <span class="ht-line ht-swap">
+        <em class="swap" data-swap data-words='{{ s.theme_data.words | tojson }}'>{{ s.theme_data.words[0] }}</em>
+      </span>
+      <span class="visually-hidden">: {{ s.theme_data.words | join(', ') }}</span>
+    </h1>
+    <div class="hero-row">
+      <p class="hero-lede" data-anim="up" data-intro data-delay=".4">{{ s.hero.lede }}</p>
+      <div class="cta-row" data-anim="up" data-intro data-delay=".55">
+        <a class="btn btn-primary" href="{{ s.hero.primary.href }}" data-magnetic>{{ s.hero.primary.label }} {{ icon('arrow') }}</a>
+        <a class="btn btn-ghost" href="{{ s.hero.secondary.href }}" data-magnetic>{{ s.hero.secondary.label }}</a>
+      </div>
+    </div>
+    <div class="hero-card" data-anim="img" data-intro data-delay=".3">
+      {{ m.img('hero', 'hero-media') }}
+      <div class="hero-chip"><strong>{{ m.count(s.stats[0]) }}</strong><span>{{ s.stats[0].label }}</span></div>
+    </div>
+  </div>
+</section>
+
+{{ m.marquee(s.marquee, 1, 'left', 'serif-mq') }}
+
+<section class="depts" id="services" data-hscroll>
+  <div class="depts-pin">
+    <div class="wrap depts-head">
+      <div>
+        <p class="eyebrow">{{ s.services.nav }}</p>
+        <h2 data-anim="lines">{{ s.theme_data.depts_html | safe }}</h2>
+      </div>
+      <p class="muted depts-intro">{{ s.services.intro }}</p>
+    </div>
+    <div class="depts-track" data-htrack>
+      {%- for it in s.services['items'] %}
+      <article class="dept-card" data-cursor="{{ loop.index }}/{{ s.services['items']|length }}">
+        <figure class="media dept-media">
+          <img src="{{ m.src(it.image) }}" alt="{{ s.images[it.image].alt }}" loading="lazy" data-hpar>
+          {%- if s.images[it.image].cap %}<figcaption class="media-cap">{{ s.images[it.image].cap }}</figcaption>{% endif %}
+        </figure>
+        <span class="dept-n">{{ '%02d' % loop.index }}</span>
+        <h3>{{ it.title }}</h3>
+      </article>
+      {%- endfor %}
+      <article class="dept-card dept-more">
+        <span class="dept-n">+</span>
+        <h3>{{ s.services.chips_title }}</h3>
+        <ul>{% for c in s.services.chips %}<li>{{ c }}</li>{% endfor %}</ul>
+      </article>
+    </div>
+    <div class="wrap"><div class="hbar"><i data-hbar></i></div></div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="grid-paper" aria-hidden="true"></div>
+  <div class="wrap about-grid">
+    <div>
+      <p class="eyebrow">About</p>
+      <h2 data-anim="lines">{{ s.theme_data.about_html | safe }}</h2>
+      {%- for p in s.about.body %}<p class="muted about-p" data-anim="up">{{ p }}</p>{% endfor %}
+    </div>
+    <div class="stat-cards">
+      {%- for st in s.stats %}
+      <div class="stat-card" data-anim="up" data-delay="{{ loop.index0 * 0.08 }}">
+        <strong>{{ m.count(st) }}</strong>
+        <span>{{ st.label }}</span>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+  <div class="wrap points">
+    {%- for p in s.about.points %}
+    <div class="point" data-anim="up" data-delay="{{ loop.index0 * 0.1 }}">
+      <span class="point-n">({{ loop.index }})</span>
+      <h3>{{ p.title }}</h3>
+      <p>{{ p.text }}</p>
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="sites" id="locations">
+  <div class="wrap">
+    <div class="sites-head">
+      <div>
+        <p class="eyebrow">{{ s.locations.nav }}</p>
+        <h2 data-anim="lines">{{ s.theme_data.sites_html | safe }}</h2>
+      </div>
+      <p class="muted">{{ s.locations.intro }}</p>
+    </div>
+    {%- if s._show_filter %}
+    <div class="filters" role="group" aria-label="Filter sites by country" data-filters>
+      <button class="filter" type="button" data-filter="all" aria-pressed="true">All <span class="filter-n">{{ s.locations['items'] | length }}</span></button>
+      {%- for c, n in s._countries %}
+      <button class="filter" type="button" data-filter="{{ c }}" aria-pressed="false">{{ c }} <span class="filter-n">{{ n }}</span></button>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    <p class="result-count" aria-live="polite" data-result></p>
+    <ul class="site-rows" data-previews>
+      {%- for l in s.locations['items'] %}
+      <li class="site-row" data-country="{{ l.country }}"{% if l.image %} data-preview="{{ m.src(l.image) }}"{% endif %}>
+        <span class="site-n">{{ '%02d' % loop.index }}</span>
+        <h3 class="site-name">{{ l.name }}</h3>
+        <span class="site-country">{{ l.country }}</span>
+        <span class="site-detail">
+          {%- if l.address %}{{ l.address }}{% endif %}
+          {%- if l.note %}<em class="site-note">{{ l.note }}</em>{% endif %}
+        </span>
+        {%- if l.phone %}<a class="site-phone" href="tel:{{ digits(l.phone) }}">{{ l.phone }}</a>{% else %}<span class="site-phone muted">—</span>{% endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+    <p class="empty" data-empty hidden>No sites match this filter.</p>
+  </div>
+</section>
+{% endblock %}

@@ -5,18 +5,34 @@
   "short": "Asyad Express",
   "sector": "Courier & logistics",
   "meta": "Asyad Express: courier and distribution across Oman, with shipments to more than 220 countries.",
-  "accent": "#c2410c",
-  "cta": {"label": "Contact us", "href": "#contact"},
+  "accent": "#ff5b00",
+  "cta": {
+    "label": "Contact us",
+    "href": "#contact"
+  },
   "hero": {
     "eyebrow": "Express delivery · Asyad Group",
     "title": "Express delivery across Oman and beyond",
     "lede": "A distribution network across Oman, with shipments to more than 220 countries.",
-    "primary": {"label": "Contact us", "href": "#contact"},
-    "secondary": {"label": "Our services", "href": "#services"}
+    "primary": {
+      "label": "Contact us",
+      "href": "#contact"
+    },
+    "secondary": {
+      "label": "Our services",
+      "href": "#services"
+    }
   },
   "stats": [
-    {"value": 11, "label": "Distribution centres (to confirm)"},
-    {"value": 220, "suffix": "+", "label": "Countries served (to confirm)"}
+    {
+      "value": 11,
+      "label": "Distribution centres (to confirm)"
+    },
+    {
+      "value": 220,
+      "suffix": "+",
+      "label": "Countries served (to confirm)"
+    }
   ],
   "about": {
     "title": "A national network with international reach",
@@ -24,8 +40,14 @@
       "Asyad Express is the courier service of Asyad Group, a government-owned logistics group. It delivers through distribution centres across Oman and ships to international destinations."
     ],
     "points": [
-      {"title": "Government-owned", "text": "Part of Asyad Group, a government-owned logistics group."},
-      {"title": "Distribution network", "text": "Distribution centres across Oman. The exact list is to be confirmed."}
+      {
+        "title": "Government-owned",
+        "text": "Part of Asyad Group, a government-owned logistics group."
+      },
+      {
+        "title": "Distribution network",
+        "text": "Distribution centres across Oman. The exact list is to be confirmed."
+      }
     ]
   },
   "services": {
@@ -33,13 +55,51 @@
     "nav": "Services",
     "intro": "Service lines to be confirmed with the client. These are the two lines the earlier audit identified.",
     "items": [
-      {"title": "Domestic express", "icon": "truck", "text": "Delivery through the Oman distribution network."},
-      {"title": "International express", "icon": "globe", "text": "Shipments to more than 220 countries."}
+      {
+        "title": "Domestic express",
+        "icon": "truck",
+        "text": "Delivery through the Oman distribution network.",
+        "image": "road"
+      },
+      {
+        "title": "International express",
+        "icon": "globe",
+        "text": "Shipments to more than 220 countries.",
+        "image": "plane"
+      }
     ]
   },
-  "highlights": null,
+  "highlights": {
+    "nav": "How it works",
+    "title": "How express delivery works",
+    "intro": "Concept flow for illustration. Confirm the actual process with Asyad Express.",
+    "items": [
+      {
+        "title": "Book",
+        "text": "Create a shipment or open a business account."
+      },
+      {
+        "title": "Collect",
+        "text": "Parcels enter the network at a distribution centre."
+      },
+      {
+        "title": "Sort",
+        "text": "Routed through the Oman distribution network."
+      },
+      {
+        "title": "Deliver",
+        "text": "Delivered in Oman, or sent on to international destinations."
+      }
+    ]
+  },
   "locations": null,
-  "marquee": ["Domestic express", "International express", "Distribution centres", "Oman", "220+ countries"],
+  "marquee": [
+    "Domestic express",
+    "International express",
+    "Distribution centres",
+    "Oman",
+    "220+ countries"
+  ],
   "contact": {
     "title": "Contact Asyad Express",
     "intro": "For shipments, business accounts and partnerships.",
@@ -49,7 +109,13 @@
     "note": "Contact details have not been verified. The official site blocked automated access; add them from the official site.",
     "form": {
       "branch": false,
-      "topics": ["Shipping enquiry", "Business account", "Partnership or tender", "Media", "Other"],
+      "topics": [
+        "Shipping enquiry",
+        "Business account",
+        "Partnership or tender",
+        "Media",
+        "Other"
+      ],
       "submit": "Send enquiry"
     }
   },
@@ -57,10 +123,63 @@
     "Distribution centre count: group pages give 6 in one place and 11 in another. The concept shows 11. Verify before use.",
     "Service lines and the 220+ country figure come from the earlier audit, not a live check: the official site blocked automated access.",
     "No address, phone number or email has been verified.",
-    "Government-owned: expect a tender process. This is a concept only, not an offer to the company."
+    "Government-owned: expect a tender process. This is a concept only, not an offer to the company.",
+    "The four-step 'How express delivery works' flow is concept copy written for the design, not taken from Asyad's site.",
+    "Photography is illustrative Creative Commons imagery (see footer credits), not Asyad's fleet or facilities."
   ],
   "sources": [
     "https://asyad.om/logistics-solutions/asyad-express (redirects to asyad.com; blocked automated access on 11 Oct 2026)",
     "Earlier audit notes (prospects document, 11 Oct 2026)"
-  ]
+  ],
+  "theme": "route",
+  "img_dir": "asyad",
+  "images": {
+    "plane": {
+      "src": "hero.jpg",
+      "alt": "Aircraft at an airport gate at sunrise",
+      "cap": "Illustrative"
+    },
+    "road": {
+      "src": "road.jpg",
+      "alt": "Vehicle on a mountain road in Oman",
+      "cap": "Oman"
+    },
+    "containers": {
+      "src": "containers.jpg",
+      "alt": "Stacked shipping containers",
+      "cap": "Illustrative"
+    },
+    "stack": {
+      "src": "stack.jpg",
+      "alt": "Container stack from below",
+      "cap": "Illustrative"
+    },
+    "parcel": {
+      "src": "parcel.jpg",
+      "alt": "Parcel being wrapped",
+      "cap": "Illustrative"
+    },
+    "boxes": {
+      "src": "boxes.jpg",
+      "alt": "Cardboard box",
+      "cap": "Illustrative"
+    },
+    "dunes": {
+      "src": "dunes.jpg",
+      "alt": "Desert dunes in Oman",
+      "cap": "Oman"
+    }
+  },
+  "theme_data": {
+    "hero_html": "Express delivery across Oman <em>and beyond</em>",
+    "giant": "Oman → World",
+    "tiles": [
+      "containers",
+      "parcel",
+      "dunes",
+      "stack",
+      "boxes",
+      "road"
+    ]
+  }
 }

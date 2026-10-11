@@ -1,0 +1,50 @@
+{%- import "partials/macros.j2" as m with context -%}
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ s.name }} · Concept redesign</title>
+<meta name="description" content="{{ s.meta }}">
+<meta name="theme-color" content="{{ s._theme.theme_color }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="{{ s._theme.fonts }}">
+<link rel="stylesheet" href="assets/core.css">
+<link rel="stylesheet" href="assets/{{ s.theme }}.css">
+{%- if s.images.hero %}
+<link rel="preload" as="image" href="{{ m.src('hero') }}">
+{%- endif %}
+<script>document.documentElement.classList.replace('no-js', 'js');</script>
+</head>
+<body data-theme="{{ s.theme }}" style="--accent: {{ s.accent }}">
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <p class="loader-name">{% for ch in s.short %}<span>{{ ' ' if ch == ' ' else ch }}</span>{% endfor %}</p>
+    <div class="loader-bar"><i></i></div>
+    <p class="loader-count">000</p>
+  </div>
+</div>
+<div class="cursor" aria-hidden="true"><div class="cursor-ring"><span></span></div><div class="cursor-dot"></div></div>
+
+{% block header %}{% include "partials/header.html.j2" %}{% endblock %}
+
+<main id="main">
+{% block content %}{% endblock %}
+{% include "partials/contact.html.j2" %}
+</main>
+
+{% include "partials/footer.html.j2" %}
+
+<a class="to-top" href="#top" data-to-top aria-label="Back to top">{{ icon('arrow') }}</a>
+
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/fx.js" defer></script>
+<script src="assets/core.js" defer></script>
+</body>
+</html>

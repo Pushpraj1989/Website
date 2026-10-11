@@ -5,17 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Badr Al Samaa Group · Concept redesign</title>
 <meta name="description" content="Hospitals, medical centres and polyclinics across Oman, Bahrain, Kuwait and the UAE.">
-<meta name="theme-color" content="#0f766e">
+<meta name="theme-color" content="#f4ede3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="assets/site.css">
-<script>document.documentElement.classList.replace('no-js', 'js');</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&amp;family=Inter:wght@400;500;600">
+<link rel="stylesheet" href="assets/core.css">
+<link rel="stylesheet" href="assets/story.css"><link rel="preload" as="image" href="assets/img/hero.jpg"><script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
-<body style="--accent: #0f766e">
-
+<body data-theme="story" style="--accent: #0f5c55">
 <a class="skip" href="#main">Skip to content</a>
 <div class="progress" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <p class="loader-name"><span>B</span><span>a</span><span>d</span><span>r</span><span> </span><span>A</span><span>l</span><span> </span><span>S</span><span>a</span><span>m</span><span>a</span><span>a</span></p>
+    <div class="loader-bar"><i></i></div>
+    <p class="loader-count">000</p>
+  </div>
+</div>
+<div class="cursor" aria-hidden="true"><div class="cursor-ring"><span></span></div><div class="cursor-dot"></div></div>
 
 <header class="site-header" data-header>
   <div class="wrap nav-row">
@@ -23,425 +31,318 @@
       <span class="brand-mark" aria-hidden="true">B</span>
       <span class="brand-text">Badr Al Samaa</span>
     </a>
-    <nav class="nav" id="nav" aria-label="Primary">
-      <a class="" href="#about">About</a><a class="" href="#services">Services</a><a class="" href="#highlights">Packages</a><a class="" href="#locations">Locations</a><a class="" href="#contact">Contact</a>
-    </nav>
+    <nav class="nav" id="nav" aria-label="Primary"><a href="#about">About</a><a href="#services">Services</a><a href="#highlights">Packages</a><a href="#locations">Locations</a><a href="#contact">Contact</a>    </nav>
     <div class="nav-actions">
-      <a class="btn btn-primary btn-sm cta-head" href="#contact">Book appointment</a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu>
-        <span></span><span></span>
-      </button>
+      <a class="btn btn-primary btn-sm" href="#contact" data-magnetic>Book appointment</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>
     </div>
   </div>
 </header>
-
 <main id="main">
-
 <section class="hero" id="top">
-  <div class="hero-bg" aria-hidden="true">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="grid"></div>
-  </div>
+  <canvas class="hero-fx" data-fx="floaters" aria-hidden="true"></canvas>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow" data-reveal>Hospitals &amp; medical centres · Oman · Bahrain · Kuwait · UAE</p>
-      <h1 class="hero-title" aria-label="Trusted care, close to home"><span class="w" style="--i: 0" aria-hidden="true">Trusted</span> <span class="w" style="--i: 1" aria-hidden="true">care,</span> <span class="w" style="--i: 2" aria-hidden="true">close</span> <span class="w" style="--i: 3" aria-hidden="true">to</span> <span class="w" style="--i: 4" aria-hidden="true">home</span> </h1>
-      <p class="lede" data-reveal style="--d: .35s">Hospitals, medical centres and polyclinics across the GCC, with more than 700 doctors and 2,000 nurses and support staff. Find a branch, book an appointment, and get seen.</p>
-      <div class="cta-row" data-reveal style="--d: .5s">
-        <a class="btn btn-primary" href="#contact">Book an appointment <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="#locations">Find a branch</a>
+      <p class="eyebrow" data-anim="up" data-intro>Hospitals &amp; medical centres · Oman · Bahrain · Kuwait · UAE</p>
+      <h1 class="hero-title" data-anim="lines" data-intro>Trusted care, <em>close to home</em></h1>
+      <p class="hero-lede" data-anim="up" data-intro data-delay=".45">Hospitals, medical centres and polyclinics across the GCC, with more than 700 doctors and 2,000 nurses and support staff. Find a branch, book an appointment, and get seen.</p>
+      <div class="cta-row" data-anim="up" data-intro data-delay=".6">
+        <a class="btn btn-primary" href="#contact" data-magnetic>Book an appointment <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#locations" data-magnetic>Find a branch</a>
       </div>
     </div>
-
-    <aside class="hero-panel" data-reveal style="--d: .6s" aria-label="Key figures">
-      <div class="glass">
-        <p class="glass-label">At a glance</p>
-        <ul class="glass-stats">
-          <li><strong><span data-count data-to="19" data-suffix="">19</span></strong><span>Listed branches</span></li>
-          <li><strong><span data-count data-to="700" data-suffix="+">700+</span></strong><span>Doctors</span></li>
-          <li><strong><span data-count data-to="2000" data-suffix="+">2,000+</span></strong><span>Nurses &amp; support staff</span></li>
-        </ul>
-      </div>
-    </aside>
+    <div class="hero-visual">
+      <p class="giant giant-back" aria-hidden="true" data-drift="30">care</p>
+      <div class="hero-arch" data-anim="img" data-intro><figure class="media arch-media">
+  <img src="assets/img/hero.jpg" alt="Doctor in consultation with a patient" loading="eager" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure></div>
+      <p class="giant giant-front" aria-hidden="true" data-drift="30">care</p>      <div class="badge badge-1" data-anim="scale" data-intro data-delay="0.8">
+        <strong><span data-count data-to="700" data-suffix="+">700+</span></strong><span>Doctors</span>
+      </div>      <div class="badge badge-2" data-anim="scale" data-intro data-delay="0.9500000000000001">
+        <strong><span data-count data-to="19" data-suffix="">19</span></strong><span>Listed branches</span>
+      </div>      <div class="badge badge-3" data-anim="scale" data-intro data-delay="1.1">
+        <strong><span data-count data-to="4" data-suffix="">4</span></strong><span>Countries</span>
+      </div>    </div>
   </div>
-  <a class="scroll-cue" href="#about" aria-label="Scroll to about"><span></span></a>
+  <svg class="wave to-teal" viewBox="0 0 1440 120" preserveAspectRatio="none" data-waves aria-hidden="true"><path d="M0 120 L0 60 L1440 60 L1440 120 Z"/><path d="M0 120 L0 80 L1440 80 L1440 120 Z"/></svg>
 </section>
 
-<div class="wrap">
-  <div class="stat-grid" aria-label="Key figures">
-    <div class="stat" data-reveal style="--d: 0.0s">
-      <div class="num"><span data-count data-to="19" data-suffix="">19</span></div>
-      <div class="lbl">Listed branches</div>
-    </div>
-    <div class="stat" data-reveal style="--d: 0.1s">
-      <div class="num"><span data-count data-to="700" data-suffix="+">700+</span></div>
-      <div class="lbl">Doctors</div>
-    </div>
-    <div class="stat" data-reveal style="--d: 0.2s">
-      <div class="num"><span data-count data-to="2000" data-suffix="+">2,000+</span></div>
-      <div class="lbl">Nurses &amp; support staff</div>
-    </div>
-    <div class="stat" data-reveal style="--d: 0.30000000000000004s">
-      <div class="num"><span data-count data-to="24" data-suffix="">24</span></div>
-      <div class="lbl">Years of care</div>
-    </div>
-  </div>
-</div>
+<section class="band" aria-label="Key figures">
+  <div class="wrap band-row">    <div class="band-stat" data-anim="up" data-delay="0.0">
+      <strong><span data-count data-to="19" data-suffix="">19</span></strong>
+      <span>Listed branches</span>
+    </div>    <div class="band-stat" data-anim="up" data-delay="0.08">
+      <strong><span data-count data-to="700" data-suffix="+">700+</span></strong>
+      <span>Doctors</span>
+    </div>    <div class="band-stat" data-anim="up" data-delay="0.16">
+      <strong><span data-count data-to="2000" data-suffix="+">2,000+</span></strong>
+      <span>Nurses &amp; support staff</span>
+    </div>    <div class="band-stat" data-anim="up" data-delay="0.24">
+      <strong><span data-count data-to="24" data-suffix="">24</span></strong>
+      <span>Years of care</span>
+    </div>  </div>
+  <svg class="wave from-teal wave-flip" viewBox="0 0 1440 120" preserveAspectRatio="none" data-waves aria-hidden="true"><path d="M0 120 L0 60 L1440 60 L1440 120 Z"/><path d="M0 120 L0 80 L1440 80 L1440 120 Z"/></svg>
+</section>
 
-<div class="marquee section-gap" aria-label="Areas covered">
-  <div class="marquee-track">
-    <div class="marquee-group">
-<span>Cardiology</span><span>Orthopaedics</span><span>Obstetrics &amp; Gynaecology</span><span>Urology &amp; Andrology</span><span>Gastroenterology</span><span>Radiology</span><span>ENT</span><span>Dentistry</span><span>Oncology</span><span>Emergency care</span>    </div>
-    <div class="marquee-group" aria-hidden="true">
-<span>Cardiology</span><span>Orthopaedics</span><span>Obstetrics &amp; Gynaecology</span><span>Urology &amp; Andrology</span><span>Gastroenterology</span><span>Radiology</span><span>ENT</span><span>Dentistry</span><span>Oncology</span><span>Emergency care</span>    </div>
-  </div>
-</div>
-
-<section class="section" id="about">
-  <div class="wrap split">
-    <div>
-      <p class="kicker" data-reveal>About</p>
-      <h2 data-reveal style="--d: .08s">From one polyclinic in Ruwi to a GCC group</h2>
-      <p class="lead-p" data-reveal style="--d: .16s">Badr Al Samaa began in 2002 as a polyclinic in Ruwi. It has grown into a group of hospitals, medical centres and clinics across Oman, Bahrain, Kuwait and the UAE.</p>
+<section class="chapters" id="about" data-chapters>
+  <p class="giant giant-mid" aria-hidden="true" data-drift="24">book</p>
+  <div class="wrap chapter-grid">
+    <div class="chapter-sticky">
+      <div class="chapter-num" aria-hidden="true"><span data-chapter-num>1</span></div>
+      <div class="chapter-frames">        <div class="chapter-frame" data-chapter-media><figure class="media chapter-media">
+  <img src="assets/img/oman.jpg" alt="Mosque courtyard in Muscat" loading="lazy" decoding="async"><figcaption class="media-cap">Muscat</figcaption></figure></div>        <div class="chapter-frame" data-chapter-media><figure class="media chapter-media">
+  <img src="assets/img/dental.jpg" alt="Dental treatment room" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure></div>        <div class="chapter-frame" data-chapter-media><figure class="media chapter-media">
+  <img src="assets/img/care.jpg" alt="Doctor and nurse talking with a patient" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure></div>      </div>
     </div>
-    <ul class="points">
-      <li data-reveal style="--d: 0.0s">
-        <h3>Centres of excellence</h3>
-        <p>Cardiology, orthopaedics, obstetrics &amp; gynaecology, urology &amp; andrology, gastroenterology, radiology, ENT and dentistry.</p>
-      </li>
-      <li data-reveal style="--d: 0.1s">
-        <h3>Preventive health</h3>
-        <p>Check-up packages for asthma and allergy, diabetes, blood pressure and thyroid.</p>
-      </li>
-      <li data-reveal style="--d: 0.2s">
-        <h3>Insurance &amp; medical tourism</h3>
-        <p>Both are listed among the group&#39;s services.</p>
-      </li>
-    </ul>
+    <div class="chapter-list">
+      <div class="chapter-intro">
+        <p class="eyebrow">About</p>
+        <h2 data-anim="lines">From one polyclinic in Ruwi to a GCC group</h2><p class="muted" data-anim="up">Badr Al Samaa began in 2002 as a polyclinic in Ruwi. It has grown into a group of hospitals, medical centres and clinics across Oman, Bahrain, Kuwait and the UAE.</p>      </div>      <article class="chapter" data-chapter>
+        <span class="chapter-k">1</span>
+        <h3>Find a branch</h3>
+        <p>19 branches across Oman, Bahrain, Kuwait and the UAE, from Ruwi to Dubai.</p>
+<a class="text-link" href="#locations">See every branch <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>      </article>      <article class="chapter" data-chapter>
+        <span class="chapter-k">2</span>
+        <h3>Choose a specialist</h3>
+        <p>Eight centres of excellence, from cardiology and orthopaedics to ENT and dentistry.</p>
+<a class="text-link" href="#services">Browse the centres <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>      </article>      <article class="chapter" data-chapter>
+        <span class="chapter-k">3</span>
+        <h3>Book your visit</h3>
+        <p>Send a request online, call the 24/7 helpline, or message the team on WhatsApp.</p>
+<a class="text-link" href="#contact">Book an appointment <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>      </article>    </div>
   </div>
 </section>
 
-<section class="section alt" id="services">
+<section class="centres" id="services">
+  <div class="wrap centres-head">
+    <p class="eyebrow">Services</p>
+    <h2 data-anim="lines">Centres of excellence</h2>
+    <p class="muted" data-anim="up">Specialist departments listed across the group&#39;s hospitals and medical centres.</p>
+  </div>
+  <div class="orbit-wrap">
+    <div class="orbit-core" data-anim="scale">
+      <strong>8</strong>
+      <span>centres of<br>excellence</span>
+    </div>
+    <ul class="orbit" data-orbit>      <li class="orbit-card" style="--a: 0.0deg">
+        <div class="orbit-inner">
+          <span class="orbit-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span>
+          <span class="orbit-t">Cardiology</span>
+        </div>
+      </li>      <li class="orbit-card" style="--a: 45.0deg">
+        <div class="orbit-inner">
+          <span class="orbit-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5zM3 13l9 5 9-5"/></svg></span>
+          <span class="orbit-t">Orthopaedics</span>
+        </div>
+      </li>      <li class="orbit-card" style="--a: 90.0deg">
+        <div class="orbit-inner">
+          <span class="orbit-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/></svg></span>
+          <span class="orbit-t">Obstetrics &amp; Gynaecology</span>
+        </div>
+      </li>      <li class="orbit-card" style="--a: 135.0deg">
+        <div class="orbit-inner">
+          <span class="orbit-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/></svg></span>
+          <span class="orbit-t">Urology &amp; Andrology</span>
+        </div>
+      </li>      <li class="orbit-card" style="--a: 180.0deg">
+        <div class="orbit-inner">
+          <span class="orbit-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14"/><path d="M5 19 13 11"/></svg></span>
+          <span class="orbit-t">Gastroenterology</span>
+        </div>
+      </li>      <li class="orbit-card" style="--a: 225.0deg">
+        <div class="orbit-inner">
+          <span class="orbit-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V4M4 20h16M8 16v-5M12 16V8M16 16v-3"/></svg></span>
+          <span class="orbit-t">Radiology</span>
+        </div>
+      </li>      <li class="orbit-card" style="--a: 270.0deg">
+        <div class="orbit-inner">
+          <span class="orbit-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span>
+          <span class="orbit-t">ENT</span>
+        </div>
+      </li>      <li class="orbit-card" style="--a: 315.0deg">
+        <div class="orbit-inner">
+          <span class="orbit-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></span>
+          <span class="orbit-t">Dentistry</span>
+        </div>
+      </li>    </ul>
+  </div>
   <div class="wrap">
-    <header class="section-head" data-reveal>
-      <p class="kicker">Services</p>
-      <h2>Centres of excellence</h2>
-<p>Specialist departments listed across the group&#39;s hospitals and medical centres.</p>    </header>
-
-    <div class="card-grid">
-      <article class="card spot" data-reveal style="--d: 0.0s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></div>
-        <h3>Cardiology</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.1s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5zM3 13l9 5 9-5"/></svg></div>
-        <h3>Orthopaedics</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.2s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/></svg></div>
-        <h3>Obstetrics &amp; Gynaecology</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.0s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/></svg></div>
-        <h3>Urology &amp; Andrology</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.1s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14"/><path d="M5 19 13 11"/></svg></div>
-        <h3>Gastroenterology</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.2s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V4M4 20h16M8 16v-5M12 16V8M16 16v-3"/></svg></div>
-        <h3>Radiology</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.0s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></div>
-        <h3>ENT</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.1s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></div>
-        <h3>Dentistry</h3>
-      </article>
-    </div>
-
-    <div class="chips-block" data-reveal>
+    <div class="chips-block" data-anim="up">
       <h3>Also offered</h3>
-      <ul class="chips">
-<li>Emergency care</li><li>Preventive health packages</li><li>NICU &amp; neonatology</li><li>Diabetology</li><li>Endoscopic services</li><li>Oncology</li><li>Insurance</li><li>Medical tourism</li><li>Friday OPDs</li><li>Wellness</li>      </ul>
+      <ul class="chips"><li>Emergency care</li><li>Preventive health packages</li><li>NICU &amp; neonatology</li><li>Diabetology</li><li>Endoscopic services</li><li>Oncology</li><li>Insurance</li><li>Medical tourism</li><li>Friday OPDs</li><li>Wellness</li></ul>
     </div>
   </div>
 </section>
 
-<section class="section" id="highlights">
+<section class="packages" id="highlights">
   <div class="wrap">
-    <header class="section-head" data-reveal>
-      <p class="kicker">Packages</p>
-      <h2>Health check packages</h2>
-<p>Preventive check-up packages the group lists on its homepage.</p>    </header>
-    <div class="card-grid">
-      <article class="card spot" data-reveal style="--d: 0.0s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/></svg></div>
+    <p class="eyebrow">Packages</p>
+    <h2 data-anim="lines">Health check packages</h2>
+    <p class="muted" data-anim="up">Preventive check-up packages the group lists on its homepage.</p>
+    <div class="pkg-row">      <article class="pkg" style="--r: -6deg" data-anim="up" data-delay="0.0">
+        <span class="pkg-k">Package 01</span>
+        <span class="pkg-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/></svg></span>
         <h3>Asthma &amp; allergy</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.08s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V4M4 20h16M8 16v-5M12 16V8M16 16v-3"/></svg></div>
+        <span class="pkg-foot">Preventive check-up</span>
+      </article>      <article class="pkg" style="--r: 4deg" data-anim="up" data-delay="0.1">
+        <span class="pkg-k">Package 02</span>
+        <span class="pkg-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V4M4 20h16M8 16v-5M12 16V8M16 16v-3"/></svg></span>
         <h3>Comprehensive diabetes</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.16s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></div>
+        <span class="pkg-foot">Preventive check-up</span>
+      </article>      <article class="pkg" style="--r: -3deg" data-anim="up" data-delay="0.2">
+        <span class="pkg-k">Package 03</span>
+        <span class="pkg-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span>
         <h3>High blood pressure</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.24s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/></svg></div>
+        <span class="pkg-foot">Preventive check-up</span>
+      </article>      <article class="pkg" style="--r: 7deg" data-anim="up" data-delay="0.30000000000000004">
+        <span class="pkg-k">Package 04</span>
+        <span class="pkg-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/></svg></span>
         <h3>Thyroid panel</h3>
-      </article>
-    </div>
+        <span class="pkg-foot">Preventive check-up</span>
+      </article>    </div>
   </div>
 </section>
 
-<section class="section alt" id="locations">
+<section class="countries" id="locations">
+  <svg class="wave to-cream2" viewBox="0 0 1440 120" preserveAspectRatio="none" data-waves aria-hidden="true"><path d="M0 120 L0 60 L1440 60 L1440 120 Z"/><path d="M0 120 L0 80 L1440 80 L1440 120 Z"/></svg>
   <div class="wrap">
-    <header class="section-head" data-reveal>
-      <p class="kicker">Locations</p>
-      <h2>Find a branch</h2>
-<p>The 19 branches listed on the group&#39;s site, across four countries. Filter by country to narrow the list.</p>    </header>
-
-    <div class="filters" role="group" aria-label="Filter locations by country" data-filters>
-      <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter" type="button" data-filter="Oman" aria-pressed="false">Oman <span class="filter-n">12</span></button>
-      <button class="filter" type="button" data-filter="Bahrain" aria-pressed="false">Bahrain <span class="filter-n">5</span></button>
-      <button class="filter" type="button" data-filter="Kuwait" aria-pressed="false">Kuwait <span class="filter-n">1</span></button>
-      <button class="filter" type="button" data-filter="UAE" aria-pressed="false">UAE <span class="filter-n">1</span></button>
-    </div>
-    <p class="result-count" aria-live="polite" data-result></p>
-
-    <ul class="loc-grid">
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">Hospital</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Ruwi</h3>
-      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.06s">
-        <div class="loc-top">
-          <span class="pill">Hospital</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Al Khoud</h3>
-      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.12s">
-        <div class="loc-top">
-          <span class="pill">Hospital</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Barka</h3>
-      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">Hospital</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Nizwa</h3>
-      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.06s">
-        <div class="loc-top">
-          <span class="pill">Hospital</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Salalah</h3>
-      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.12s">
-        <div class="loc-top">
-          <span class="pill">Hospital</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Sohar</h3>
-      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">Medical Centre</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Al Khuwair</h3>
-      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.06s">
-        <div class="loc-top">
-          <span class="pill">Medical Centre</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Falaj Al Qabail</h3>
-      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.12s">
-        <div class="loc-top">
-          <span class="pill">Medical Centre</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Sur</h3>
-      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">Medical Centre</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Duqm</h3>
-      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.06s">
-        <div class="loc-top">
-          <span class="pill">Polyclinic</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Suwaiq</h3>
-      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.12s">
-        <div class="loc-top">
-          <span class="pill">Premium Medical Centre</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Mabella</h3>
-      </li>
-      <li class="loc card spot" data-country="Bahrain" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">Al Hilal Hospital</span>
-          <span class="country">Bahrain</span>
-        </div>
-        <h3>Muharraq</h3>
-      </li>
-      <li class="loc card spot" data-country="Bahrain" data-reveal style="--d: 0.06s">
-        <div class="loc-top">
-          <span class="pill">Al Hilal Medical Centre</span>
-          <span class="country">Bahrain</span>
-        </div>
-        <h3>Riffa</h3>
-      </li>
-      <li class="loc card spot" data-country="Bahrain" data-reveal style="--d: 0.12s">
-        <div class="loc-top">
-          <span class="pill">Al Hilal Medical Centre</span>
-          <span class="country">Bahrain</span>
-        </div>
-        <h3>Manama</h3>
-      </li>
-      <li class="loc card spot" data-country="Bahrain" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">Al Hilal Medical Centre</span>
-          <span class="country">Bahrain</span>
-        </div>
-        <h3>Salmabad</h3>
-      </li>
-      <li class="loc card spot" data-country="Bahrain" data-reveal style="--d: 0.06s">
-        <div class="loc-top">
-          <span class="pill">Al Hilal Medical Centre</span>
-          <span class="country">Bahrain</span>
-        </div>
-        <h3>Askar</h3>
-      </li>
-      <li class="loc card spot" data-country="Kuwait" data-reveal style="--d: 0.12s">
-        <div class="loc-top">
-          <span class="pill">Medical Centre</span>
-          <span class="country">Kuwait</span>
-        </div>
-        <h3>Farwaniya</h3>
-      </li>
-      <li class="loc card spot" data-country="UAE" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">Medical Centre</span>
-          <span class="country">UAE</span>
-        </div>
-        <h3>Dubai</h3>
-      </li>
-    </ul>
-    <p class="empty" data-empty hidden>No locations match this filter.</p>
+    <p class="eyebrow">Locations</p>
+    <h2 data-anim="lines">Find a branch</h2>
+    <p class="muted" data-anim="up">The 19 branches listed on the group&#39;s site, across four countries. Filter by country to narrow the list.</p>
+    <div class="country-row">      <button class="country-card" type="button" data-cursor="Filter" data-filter-proxy="Oman" data-anim="up" data-delay="0.0"><figure class="media country-media">
+  <img src="assets/img/oman.jpg" alt="Mosque courtyard in Muscat" loading="lazy" decoding="async"><figcaption class="media-cap">Muscat</figcaption></figure>        <span class="country-name">Oman</span><span class="country-n">12 branches</span>
+      </button>      <button class="country-card" type="button" data-cursor="Filter" data-filter-proxy="Bahrain" data-anim="up" data-delay="0.08"><figure class="media country-media">
+  <img src="assets/img/bahrain.jpg" alt="Manama skyline" loading="lazy" decoding="async"><figcaption class="media-cap">Manama</figcaption></figure>        <span class="country-name">Bahrain</span><span class="country-n">5 branches</span>
+      </button>      <button class="country-card" type="button" data-cursor="Filter" data-filter-proxy="Kuwait" data-anim="up" data-delay="0.16"><figure class="media country-media">
+  <img src="assets/img/kuwait.jpg" alt="Kuwait City skyline" loading="lazy" decoding="async"><figcaption class="media-cap">Kuwait City</figcaption></figure>        <span class="country-name">Kuwait</span><span class="country-n">1 branch</span>
+      </button>      <button class="country-card" type="button" data-cursor="Filter" data-filter-proxy="UAE" data-anim="up" data-delay="0.24"><figure class="media country-media">
+  <img src="assets/img/uae.jpg" alt="Dubai skyline" loading="lazy" decoding="async"><figcaption class="media-cap">Dubai</figcaption></figure>        <span class="country-name">UAE</span><span class="country-n">1 branch</span>
+      </button>    </div>
+      <div class="filters" role="group" aria-label="Filter locations by country" data-filters>
+    <button class="filter" type="button" data-filter="all" aria-pressed="true">All <span class="filter-n">19</span></button>    <button class="filter" type="button" data-filter="Oman" aria-pressed="false">Oman <span class="filter-n">12</span></button>    <button class="filter" type="button" data-filter="Bahrain" aria-pressed="false">Bahrain <span class="filter-n">5</span></button>    <button class="filter" type="button" data-filter="Kuwait" aria-pressed="false">Kuwait <span class="filter-n">1</span></button>    <button class="filter" type="button" data-filter="UAE" aria-pressed="false">UAE <span class="filter-n">1</span></button>  </div>  <p class="result-count" aria-live="polite" data-result></p>
+  <ul class="loc-grid">    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Hospital</span><span>Oman</span></div>
+      <h3>Ruwi</h3>
+    </li>    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Hospital</span><span>Oman</span></div>
+      <h3>Al Khoud</h3>
+    </li>    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Hospital</span><span>Oman</span></div>
+      <h3>Barka</h3>
+    </li>    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Hospital</span><span>Oman</span></div>
+      <h3>Nizwa</h3>
+    </li>    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Hospital</span><span>Oman</span></div>
+      <h3>Salalah</h3>
+    </li>    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Hospital</span><span>Oman</span></div>
+      <h3>Sohar</h3>
+    </li>    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Medical Centre</span><span>Oman</span></div>
+      <h3>Al Khuwair</h3>
+    </li>    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Medical Centre</span><span>Oman</span></div>
+      <h3>Falaj Al Qabail</h3>
+    </li>    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Medical Centre</span><span>Oman</span></div>
+      <h3>Sur</h3>
+    </li>    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Medical Centre</span><span>Oman</span></div>
+      <h3>Duqm</h3>
+    </li>    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Polyclinic</span><span>Oman</span></div>
+      <h3>Suwaiq</h3>
+    </li>    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Premium Medical Centre</span><span>Oman</span></div>
+      <h3>Mabella</h3>
+    </li>    <li class="loc" data-country="Bahrain">
+      <div class="loc-top"><span class="pill">Al Hilal Hospital</span><span>Bahrain</span></div>
+      <h3>Muharraq</h3>
+    </li>    <li class="loc" data-country="Bahrain">
+      <div class="loc-top"><span class="pill">Al Hilal Medical Centre</span><span>Bahrain</span></div>
+      <h3>Riffa</h3>
+    </li>    <li class="loc" data-country="Bahrain">
+      <div class="loc-top"><span class="pill">Al Hilal Medical Centre</span><span>Bahrain</span></div>
+      <h3>Manama</h3>
+    </li>    <li class="loc" data-country="Bahrain">
+      <div class="loc-top"><span class="pill">Al Hilal Medical Centre</span><span>Bahrain</span></div>
+      <h3>Salmabad</h3>
+    </li>    <li class="loc" data-country="Bahrain">
+      <div class="loc-top"><span class="pill">Al Hilal Medical Centre</span><span>Bahrain</span></div>
+      <h3>Askar</h3>
+    </li>    <li class="loc" data-country="Kuwait">
+      <div class="loc-top"><span class="pill">Medical Centre</span><span>Kuwait</span></div>
+      <h3>Farwaniya</h3>
+    </li>    <li class="loc" data-country="UAE">
+      <div class="loc-top"><span class="pill">Medical Centre</span><span>UAE</span></div>
+      <h3>Dubai</h3>
+    </li>  </ul>
+  <p class="empty" data-empty hidden>No locations match this filter.</p>
   </div>
 </section>
-
-<section class="section contact" id="contact">
+<section class="contact" id="contact">
   <div class="wrap contact-grid">
     <div>
-      <p class="kicker" data-reveal>Contact</p>
-      <h2 data-reveal style="--d: .08s">Book an appointment</h2>
-      <p data-reveal style="--d: .16s">Choose a branch and tell us what you need. A coordinator confirms your slot by phone or WhatsApp.</p>
+      <p class="eyebrow">Contact</p>
+      <h2 class="contact-title" data-anim="lines">Book an appointment</h2>
+      <p class="contact-intro" data-anim="up">Choose a branch and tell us what you need. A coordinator confirms your slot by phone or WhatsApp.</p>
+      <ul class="contact-list">        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><small>Address</small>P.O. Box 443, P.C. 112, Ruwi, Sultanate of Oman</span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>24/7 helpline</small><a href="tel:+96822717171">+968 2271 7171</a></span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>WhatsApp</small><a href="tel:+96893932255">+968 9393 2255</a><a class="wa" href="https://wa.me/96893932255">WhatsApp</a></span></li>      </ul>
+<p class="contact-note">The booking form is a concept preview. Connect it to the group&#39;s booking system before launch.</p>    </div>
 
-      <ul class="contact-list">
-        <li data-reveal style="--d: .2s"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><small>Address</small>P.O. Box 443, P.C. 112, Ruwi, Sultanate of Oman</span></li>
-        <li data-reveal style="--d: 0.25s"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-          <span>
-            <small>24/7 helpline</small>
-              <a href="tel:+96822717171">+968 2271 7171</a>
-          </span>
-        </li>
-        <li data-reveal style="--d: 0.3s"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-          <span>
-            <small>WhatsApp</small>
-              <a href="tel:+96893932255">+968 9393 2255</a>
-<a class="wa" href="https://wa.me/96893932255">WhatsApp</a>          </span>
-        </li>
-      </ul>
-
-<p class="note contact-note">The booking form is a concept preview. Connect it to the group&#39;s booking system before launch.</p>    </div>
-
-    <form class="form card" data-form data-endpoint="" novalidate data-reveal style="--d: .15s">
+    <form class="form" data-form data-endpoint="" novalidate data-anim="up">
       <h3>Request appointment</h3>
-
       <div class="field" data-field>
         <label for="f-name">Full name</label>
         <input id="f-name" name="name" type="text" autocomplete="name" data-rule="name" required>
         <p class="err" data-err aria-live="polite"></p>
       </div>
-
       <div class="field" data-field>
         <label for="f-contact">Email or phone</label>
         <input id="f-contact" name="contact" type="text" autocomplete="email" inputmode="email" data-rule="contact" required>
         <p class="err" data-err aria-live="polite"></p>
-      </div>
-
-      <div class="field">
+      </div>      <div class="field">
         <label for="f-branch">Branch</label>
-        <select id="f-branch" name="branch">
-<option>Ruwi · Oman</option><option>Al Khoud · Oman</option><option>Barka · Oman</option><option>Nizwa · Oman</option><option>Salalah · Oman</option><option>Sohar · Oman</option><option>Al Khuwair · Oman</option><option>Falaj Al Qabail · Oman</option><option>Sur · Oman</option><option>Duqm · Oman</option><option>Suwaiq · Oman</option><option>Mabella · Oman</option><option>Muharraq · Bahrain</option><option>Riffa · Bahrain</option><option>Manama · Bahrain</option><option>Salmabad · Bahrain</option><option>Askar · Bahrain</option><option>Farwaniya · Kuwait</option><option>Dubai · UAE</option>        </select>
-      </div>
-
-      <div class="field">
+        <select id="f-branch" name="branch"><option>Ruwi · Oman</option><option>Al Khoud · Oman</option><option>Barka · Oman</option><option>Nizwa · Oman</option><option>Salalah · Oman</option><option>Sohar · Oman</option><option>Al Khuwair · Oman</option><option>Falaj Al Qabail · Oman</option><option>Sur · Oman</option><option>Duqm · Oman</option><option>Suwaiq · Oman</option><option>Mabella · Oman</option><option>Muharraq · Bahrain</option><option>Riffa · Bahrain</option><option>Manama · Bahrain</option><option>Salmabad · Bahrain</option><option>Askar · Bahrain</option><option>Farwaniya · Kuwait</option><option>Dubai · UAE</option></select>
+      </div>      <div class="field">
         <label for="f-topic">What is this about?</label>
-        <select id="f-topic" name="topic">
-<option>Book an appointment</option><option>Health check package</option><option>Insurance question</option><option>Medical tourism</option><option>Other</option>        </select>
+        <select id="f-topic" name="topic"><option>Book an appointment</option><option>Health check package</option><option>Insurance question</option><option>Medical tourism</option><option>Other</option></select>
       </div>
-
       <div class="field">
         <label for="f-msg">Message <span class="optional">(optional)</span></label>
         <textarea id="f-msg" name="message" rows="4"></textarea>
       </div>
-
-      <button class="btn btn-primary btn-block" type="submit">Request appointment</button>
+      <button class="btn btn-primary btn-block" type="submit">Request appointment <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="form-status" role="status" data-status></p>
     </form>
   </div>
-</section>
-
-</main>
+</section></main>
 
 <footer class="site-footer">
-  <div class="wrap foot-grid">
-    <div>
-      <a class="brand" href="#top">
-        <span class="brand-mark" aria-hidden="true">B</span>
-        <span class="brand-text">Badr Al Samaa</span>
-      </a>
-      <p class="foot-meta">Hospitals, medical centres and polyclinics across Oman, Bahrain, Kuwait and the UAE.</p>
+  <div class="wrap">
+    <p class="foot-big" aria-hidden="true" data-drift="14">Badr Al Samaa</p>
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">B</span><span class="brand-text">Badr Al Samaa</span></a>
+        <p style="margin-top:1rem;max-width:38ch">Hospitals, medical centres and polyclinics across Oman, Bahrain, Kuwait and the UAE.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer"><a href="#about">About</a><a href="#services">Services</a><a href="#highlights">Packages</a><a href="#locations">Locations</a><a href="#contact">Contact</a>      </nav>
+      <div class="foot-contact">
+<p>P.O. Box 443, P.C. 112, Ruwi, Sultanate of Oman</p><p><a href="tel:+96822717171">+968 2271 7171</a></p><p><a href="tel:+96893932255">+968 9393 2255</a></p>      </div>
     </div>
-    <nav class="foot-nav" aria-label="Footer">
-      <a class="" href="#about">About</a><a class="" href="#services">Services</a><a class="" href="#highlights">Packages</a><a class="" href="#locations">Locations</a><a class="" href="#contact">Contact</a>
-    </nav>
-    <div class="foot-contact">
-<p>P.O. Box 443, P.C. 112, Ruwi, Sultanate of Oman</p><p><a href="tel:+96822717171">+968 2271 7171</a></p><p><a href="tel:+96893932255">+968 9393 2255</a></p>    </div>
-  </div>
-  <div class="wrap foot-bottom">
-    <p>© 2026 Badr Al Samaa Group. Concept redesign, not the company's official website. Facts to be verified before use.</p>
-    <a href="#top">Back to top</a>
-  </div>
+    <div class="foot-bottom">
+      <p>© 2026 Badr Al Samaa Group. Concept redesign, not the company's official website. Facts to be verified before use.</p>
+      <a href="#top">Back to top</a>
+    </div>    <details class="credits">
+      <summary>Image credits</summary>
+      <ul>        <li>“Manama Manama Skyline 01” by Zairon, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=96545211" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Doctor Patient” by Direct Media, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/doctor-patient-8YUWCVJVHH" rel="noopener">source</a></li>        <li>“Chair Dentist” by Daniel Frank, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/chair-dentist-3J10QN5PTS" rel="noopener">source</a></li>        <li>“Doctor Patient” by Direct Media, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/doctor-patient-7NQJS4WWQW" rel="noopener">source</a></li>        <li>“Kuwait City Skyline 1” by Zairon, <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener">BY 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=148181994" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Sultan Qaboos Grand Mosque (1)” by Mostafameraji, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=57591888" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Dubai Skyline mit Burj Khalifa (18241030269)” by Tim Reckmann from Hamm, Deutschland, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=82789105" rel="noopener">source</a> · cropped and colour-graded</li>      </ul>
+    </details>  </div>
 </footer>
-
 <a class="to-top" href="#top" data-to-top aria-label="Back to top"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 
-<script src="assets/motion.js" defer></script>
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/fx.js" defer></script>
+<script src="assets/core.js" defer></script>
 </body>
 </html>

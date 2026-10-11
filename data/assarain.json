@@ -5,20 +5,41 @@
   "short": "Assarain",
   "sector": "Diversified group",
   "meta": "Assarain Group of Companies: 18 companies across retail, wholesale, manufacturing, construction and property in Oman.",
-  "accent": "#7f1d1d",
-  "cta": {"label": "Contact the group", "href": "#contact"},
+  "accent": "#8a2432",
+  "cta": {
+    "label": "Contact the group",
+    "href": "#contact"
+  },
   "hero": {
     "eyebrow": "Diversified group · Ruwi, Muscat",
     "title": "Eighteen companies, one group",
     "lede": "From concrete and steel to food, furnishing, insurance and specialist clinics, Assarain Group has been operating in Oman since 1975.",
-    "primary": {"label": "Explore the companies", "href": "#services"},
-    "secondary": {"label": "Contact the group", "href": "#contact"}
+    "primary": {
+      "label": "Explore the companies",
+      "href": "#services"
+    },
+    "secondary": {
+      "label": "Contact the group",
+      "href": "#contact"
+    }
   },
   "stats": [
-    {"value": 18, "label": "Group companies"},
-    {"value": 4, "label": "Business groups"},
-    {"years_since": 1975, "label": "Years in operation"},
-    {"value": 2, "label": "Joint ventures"}
+    {
+      "value": 18,
+      "label": "Group companies"
+    },
+    {
+      "value": 4,
+      "label": "Business groups"
+    },
+    {
+      "years_since": 1975,
+      "label": "Years in operation"
+    },
+    {
+      "value": 2,
+      "label": "Joint ventures"
+    }
   ],
   "about": {
     "title": "Five decades of diversified growth",
@@ -26,9 +47,18 @@
       "Assarain has operated since its inception in 1975. Its companies sit in four business groups: retail and consumer services, commercial wholesale, manufacturing, and construction, maintenance and property."
     ],
     "points": [
-      {"title": "Joint ventures", "text": "Savills and Partners Oman, and Kone Assarain LLC."},
-      {"title": "Manufacturing base", "text": "Concrete products, modern steel mills, and plastic and acrylic industries."},
-      {"title": "Health & insurance", "text": "Hatat Specialty Clinics and Assarain Insurance Services are part of the group."}
+      {
+        "title": "Joint ventures",
+        "text": "Savills and Partners Oman, and Kone Assarain LLC."
+      },
+      {
+        "title": "Manufacturing base",
+        "text": "Concrete products, modern steel mills, and plastic and acrylic industries."
+      },
+      {
+        "title": "Health & insurance",
+        "text": "Hatat Specialty Clinics and Assarain Insurance Services are part of the group."
+      }
     ]
   },
   "services": {
@@ -46,12 +76,16 @@
           "Hatat Specialty Clinics",
           "Assarain Textiles LLC",
           "Kalhat Services & Trading LLC"
-        ]
+        ],
+        "image": "furnish"
       },
       {
         "title": "Commercial Wholesale",
         "icon": "truck",
-        "companies": ["Assarain Food Products LLC"]
+        "companies": [
+          "Assarain Food Products LLC"
+        ],
+        "image": "textile"
       },
       {
         "title": "Manufacturing",
@@ -63,7 +97,8 @@
           "Modern Steel Mills",
           "Shamal Plastic Industries LLC",
           "Gulf Acrylic Industries LLC"
-        ]
+        ],
+        "image": "concrete"
       },
       {
         "title": "Construction, Maintenance & Property",
@@ -74,11 +109,16 @@
           "Hatat Complex",
           "Assarain Properties",
           "Kone Assarain LLC (JV)"
-        ]
+        ],
+        "image": "property"
       }
     ]
   },
-  "highlights": null,
+  "highlights": {
+    "nav": "Index",
+    "title": "Company index",
+    "items": []
+  },
   "locations": {
     "title": "Head office",
     "nav": "Locations",
@@ -111,13 +151,27 @@
     "intro": "For group enquiries, partnerships and joint ventures.",
     "address": "Assarain Group of Companies (Corporate Head Office), PO Box 1475, PC 112, Ruwi, Muscat, Oman",
     "phones": [
-      {"label": "Telephone", "number": "+968 2460 4811", "tel": "+96824604811"},
-      {"label": "Fax", "number": "+968 2460 4837", "fax": true}
+      {
+        "label": "Telephone",
+        "number": "+968 2460 4811",
+        "tel": "+96824604811"
+      },
+      {
+        "label": "Fax",
+        "number": "+968 2460 4837",
+        "fax": true
+      }
     ],
     "email": "business@assarain.com",
     "form": {
       "branch": false,
-      "topics": ["Business enquiry", "Partnership or joint venture", "Careers", "Media", "Other"],
+      "topics": [
+        "Business enquiry",
+        "Partnership or joint venture",
+        "Careers",
+        "Media",
+        "Other"
+      ],
       "submit": "Send enquiry"
     }
   },
@@ -125,7 +179,55 @@
     "Company descriptions use company names and group categories only. The site gives no one-line activity text, so none has been written.",
     "Joint-venture ownership shares (Savills, Kone) are not published.",
     "Only the corporate head office is published. Confirm whether any other office should appear.",
-    "The site's head office line gives 'Ruwi, Muscat' and a PO box; the building address still needs confirming."
+    "The site's head office line gives 'Ruwi, Muscat' and a PO box; the building address still needs confirming.",
+    "Photography is Creative Commons imagery (see footer credits): Oman heritage sites and illustrative business images, not Assarain's own premises or products."
   ],
-  "sources": ["https://www.assarain.com (homepage read 11 Oct 2026)", "https://www.assarain.com/contact-us/ (read 11 Oct 2026)"]
+  "sources": [
+    "https://www.assarain.com (homepage read 11 Oct 2026)",
+    "https://www.assarain.com/contact-us/ (read 11 Oct 2026)"
+  ],
+  "theme": "editorial",
+  "img_dir": "assarain",
+  "images": {
+    "hero": {
+      "src": "hero.jpg",
+      "alt": "Nizwa Fort and the minaret of the Friday Mosque",
+      "cap": "Nizwa Fort, Oman"
+    },
+    "muttrah": {
+      "src": "muttrah.jpg",
+      "alt": "Muttrah corniche, Muscat",
+      "cap": "Muttrah, Muscat"
+    },
+    "night": {
+      "src": "nizwa-night.jpg",
+      "alt": "Nizwa Fort lit at night",
+      "cap": "Nizwa, Oman"
+    },
+    "furnish": {
+      "src": "furnish.jpg",
+      "alt": "Furnished interior",
+      "cap": "Illustrative"
+    },
+    "textile": {
+      "src": "textile.jpg",
+      "alt": "Woven textile",
+      "cap": "Illustrative"
+    },
+    "concrete": {
+      "src": "concrete.jpg",
+      "alt": "Concrete surface",
+      "cap": "Illustrative"
+    },
+    "property": {
+      "src": "property.jpg",
+      "alt": "Office buildings",
+      "cap": "Illustrative"
+    }
+  },
+  "theme_data": {
+    "est": 1975,
+    "hero_html": "Eighteen companies, <em>one group</em>",
+    "index_html": "All <em>eighteen</em> companies"
+  }
 }

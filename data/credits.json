@@ -1,0 +1,378 @@
+{
+ "badr/hero": {
+  "title": "Doctor Patient",
+  "creator": "Direct Media",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/doctor-patient-7NQJS4WWQW"
+ },
+ "badr/care": {
+  "title": "Doctor Patient",
+  "creator": "Direct Media",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/doctor-patient-8YUWCVJVHH"
+ },
+ "badr/newborn": {
+  "title": "Happy Baby",
+  "creator": "Studio 7042",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/happy-baby-6UCQGZ6Q0W"
+ },
+ "badr/dental": {
+  "title": "Chair Dentist",
+  "creator": "Daniel Frank",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/chair-dentist-3J10QN5PTS"
+ },
+ "starcare/peds": {
+  "title": "Small Baby",
+  "creator": "Studio 7042",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/small-baby-FKXNHWCQJK"
+ },
+ "starcare/physio": {
+  "title": "Physiotherapy hospital",
+  "creator": null,
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/6038567/photo-image-public-domain-house-person"
+ },
+ "starcare/steth": {
+  "title": "Stethoscope Medical",
+  "creator": "Negative Space",
+  "license": "CC0 1.0",
+  "license_url": null,
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/stethoscope-medical-RAW1RLRTM7"
+ },
+ "starcare/pharmacy": {
+  "title": "Pills Medicine",
+  "creator": "Freestocks.org",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/pills-medicine-S5WGVL18A9"
+ },
+ "galfar/hero": {
+  "title": "Cranes Construction",
+  "creator": "Wyncliffe",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/cranes-construction-KOKXBB635S"
+ },
+ "galfar/sparks": {
+  "title": "Dark Night",
+  "creator": "Darius Anton",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/dark-night-MO2OUO1MD5"
+ },
+ "galfar/energy": {
+  "title": "Fábrica química Solvay",
+  "creator": "Jorge Franganillo",
+  "license": "BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "source": "flickr",
+  "landing": "https://www.flickr.com/photos/46191841@N00/3129290866"
+ },
+ "galfar/civil": {
+  "title": "Concrete Texture",
+  "creator": "The Building Envelope",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/concrete-texture-XA3VDI2RHU"
+ },
+ "galfar/infra": {
+  "title": "Shanghai interchange",
+  "creator": null,
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/3343089/free-photo-image-view-shanghai-city-highway"
+ },
+ "galfar/refinery": {
+  "title": "Nippon Oil(Yamaguchi)",
+  "creator": "kanegen",
+  "license": "BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "source": "flickr",
+  "landing": "https://www.flickr.com/photos/12527903@N00/4862607373"
+ },
+ "ngc/sphere": {
+  "title": "AMACO STORAGE TERMINAL",
+  "creator": "jasonwoodhead23",
+  "license": "BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "source": "flickr",
+  "landing": "https://www.flickr.com/photos/80365963@N00/7150825737"
+ },
+ "ngc/pipes": {
+  "title": "Industrial Silos",
+  "creator": "Leeroy",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/industrial-silos-9865C0BA21"
+ },
+ "ngc/valves": {
+  "title": "Utilities Meters",
+  "creator": "Leeroy",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/utilities-meters-77695777DD"
+ },
+ "ngc/dark": {
+  "title": "Industrial Gauges",
+  "creator": "Jonas Nilsson Lee",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/industrial-gauges-IQDKLP8G2I"
+ },
+ "assarain/furnish": {
+  "title": "Modern Room",
+  "creator": "World Travel Adventures",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/modern-room-ORRHZ1VULX"
+ },
+ "assarain/textile": {
+  "title": "Line Pattern",
+  "creator": "Seacoast Sage",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/line-pattern-L7SIUD5VN5"
+ },
+ "assarain/concrete": {
+  "title": "Concrete Texture",
+  "creator": "Sergei Akulich",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/concrete-texture-DQYLYXBDO8"
+ },
+ "assarain/property": {
+  "title": "Glass Building",
+  "creator": "Chris HP",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/glass-building-FWYEF6UNGZ"
+ },
+ "assarain/muttrah": {
+  "title": "Muttrah Muscat Oman 2011",
+  "creator": "~ilawar",
+  "license": "BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "source": "flickr",
+  "landing": "https://www.flickr.com/photos/24598205@N08/5402893208"
+ },
+ "assarain/curve": {
+  "title": "Concrete Texture",
+  "creator": "The Building Envelope",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/concrete-texture-XA3VDI2RHU"
+ },
+ "asyad/hero": {
+  "title": "Airport Airplane",
+  "creator": "Andrew Branch",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/airport-airplane-PEQJJ1O6ZY"
+ },
+ "asyad/containers": {
+  "title": "Container Stack",
+  "creator": "Bob Richards",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/container-stack-NDCVBXJMDJ"
+ },
+ "asyad/stack": {
+  "title": "Container Stack",
+  "creator": "Bob Richards",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/container-stack-OHHX29VJZL"
+ },
+ "asyad/parcel": {
+  "title": "Man Wrapping",
+  "creator": "Bruce Mars",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/man-wrapping-K2NTOLFEHN"
+ },
+ "asyad/boxes": {
+  "title": "Cardboard Box",
+  "creator": "Matt Bango",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/cardboard-box-USP4WCYPBW"
+ },
+ "asyad/road": {
+  "title": "Land-Rover-Oman-Media-Dec-95",
+  "creator": "landrovermena",
+  "license": "BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "source": "flickr",
+  "landing": "https://www.flickr.com/photos/56682936@N03/5257701582"
+ },
+ "asyad/dunes": {
+  "title": "OffRoad outside Dubai",
+  "creator": "BasharAlaeddin",
+  "license": "BY-SA 2.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "source": "flickr",
+  "landing": "https://www.flickr.com/photos/34413965@N02/8763643922"
+ },
+ "badr/oman": {
+  "title": "Sultan Qaboos Grand Mosque (1)",
+  "creator": "Mostafameraji",
+  "license": "BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=57591888"
+ },
+ "starcare/hero": {
+  "title": "Wings Laparoscopic operating theatre",
+  "creator": "Dr.jayesh amin",
+  "license": "BY-SA 3.0",
+  "license_url": null,
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=29136994"
+ },
+ "galfar/duqm": {
+  "title": "Duqm Fishing Port",
+  "creator": "AbdullahAlMaani",
+  "license": "BY-SA 4.0",
+  "license_url": null,
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=117467673"
+ },
+ "galfar/salalah": {
+  "title": "File:Neues Terminal SLL.jpg",
+  "creator": "Baden65",
+  "license": "BY-SA 4.0",
+  "license_url": null,
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=56182020"
+ },
+ "assarain/hero": {
+  "title": "Nizwa Fort and Minaret of Friday Mosque",
+  "creator": "Martin Falbisoner",
+  "license": "BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=39086370"
+ },
+ "badr/bahrain": {
+  "title": "Manama Manama Skyline 01",
+  "creator": "Zairon",
+  "license": "BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=96545211"
+ },
+ "badr/kuwait": {
+  "title": "Kuwait City Skyline 1",
+  "creator": "Zairon",
+  "license": "BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=148181994"
+ },
+ "galfar/road": {
+  "title": "Muscat Expressway",
+  "creator": "Editor Socks",
+  "license": "BY-SA 4.0",
+  "license_url": null,
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=156439066"
+ },
+ "starcare/seeb": {
+  "title": "Seeb, Muscat, Oman (4324767930)",
+  "creator": "yeowatzup",
+  "license": "BY 2.0",
+  "license_url": null,
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=24520891"
+ },
+ "starcare/barka": {
+  "title": "Barka, Oman (6) (41446310861)",
+  "creator": "Hans Birger Nilsen",
+  "license": "BY-SA 2.0",
+  "license_url": null,
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=70285689"
+ },
+ "starcare/calicut": {
+  "title": "Kozhikode Beach Coastline",
+  "creator": "Sulyab Thottungal",
+  "license": "BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=48507623"
+ },
+ "assarain/nizwa-night": {
+  "title": "Oman, Nizwa, Fort Nizwa (at night)",
+  "creator": "Dr. Thomas Liptak",
+  "license": "BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=177395219"
+ },
+ "badr/uae": {
+  "title": "Dubai Skyline mit Burj Khalifa (18241030269)",
+  "creator": "Tim Reckmann from Hamm, Deutschland",
+  "license": "BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=82789105"
+ },
+ "starcare/sharjah": {
+  "title": "Sharjah city skyline",
+  "creator": "Mueed Ahmed",
+  "license": "BY-SA 4.0",
+  "license_url": null,
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=50574446"
+ },
+ "starcare/muscat": {
+  "title": "Sultan Qaboos Grand Mosque (1)",
+  "creator": "Mostafameraji",
+  "license": "BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=57591888"
+ },
+ "starcare/duqm": {
+  "title": "Duqm Fishing Port",
+  "creator": "AbdullahAlMaani",
+  "license": "BY-SA 4.0",
+  "license_url": null,
+  "source": "wikimedia",
+  "landing": "https://commons.wikimedia.org/w/index.php?curid=117467673"
+ }
+}

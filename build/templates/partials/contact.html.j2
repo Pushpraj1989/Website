@@ -1,0 +1,52 @@
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h2 class="contact-title" data-anim="lines">{{ s.contact.title }}</h2>
+      <p class="contact-intro" data-anim="up">{{ s.contact.intro }}</p>
+      <ul class="contact-list">
+        {%- if s.contact.address %}
+        <li data-anim="up">{{ icon('pin') }}<span><small>Address</small>{{ s.contact.address }}</span></li>
+        {%- endif %}
+        {%- for p in s.contact.phones %}
+        <li data-anim="up">{{ icon('phone') }}<span><small>{{ p.label }}</small>
+          {%- if p.fax %}{{ p.number }}{% else %}<a href="tel:{{ p.tel }}">{{ p.number }}</a>{% if p.whatsapp %}<a class="wa" href="https://wa.me/{{ p.tel | replace('+', '') }}">WhatsApp</a>{% endif %}{% endif %}</span></li>
+        {%- endfor %}
+        {%- if s.contact.email %}
+        <li data-anim="up">{{ icon('mail') }}<span><small>Email</small><a href="mailto:{{ s.contact.email }}">{{ s.contact.email }}</a></span></li>
+        {%- endif %}
+      </ul>
+      {% if s.contact.note %}<p class="contact-note">{{ s.contact.note }}</p>{% endif %}
+    </div>
+
+    <form class="form" data-form data-endpoint="" novalidate data-anim="up">
+      <h3>{{ s.contact.form.submit }}</h3>
+      <div class="field" data-field>
+        <label for="f-name">Full name</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" data-rule="name" required>
+        <p class="err" data-err aria-live="polite"></p>
+      </div>
+      <div class="field" data-field>
+        <label for="f-contact">Email or phone</label>
+        <input id="f-contact" name="contact" type="text" autocomplete="email" inputmode="email" data-rule="contact" required>
+        <p class="err" data-err aria-live="polite"></p>
+      </div>
+      {%- if s.contact.form.branch and s._branch_options %}
+      <div class="field">
+        <label for="f-branch">Branch</label>
+        <select id="f-branch" name="branch">{% for b in s._branch_options %}<option>{{ b }}</option>{% endfor %}</select>
+      </div>
+      {%- endif %}
+      <div class="field">
+        <label for="f-topic">What is this about?</label>
+        <select id="f-topic" name="topic">{% for t in s.contact.form.topics %}<option>{{ t }}</option>{% endfor %}</select>
+      </div>
+      <div class="field">
+        <label for="f-msg">Message <span class="optional">(optional)</span></label>
+        <textarea id="f-msg" name="message" rows="4"></textarea>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">{{ s.contact.form.submit }} {{ icon('arrow') }}</button>
+      <p class="form-status" role="status" data-status></p>
+    </form>
+  </div>
+</section>

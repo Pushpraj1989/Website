@@ -5,17 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Starcare Hospital · Concept redesign</title>
 <meta name="description" content="Starcare Hospital: eight sites across Oman, the UAE and India, with specialist departments, check-up packages and an in-house pharmacy.">
-<meta name="theme-color" content="#0e7490">
+<meta name="theme-color" content="#f7f9fb">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="assets/site.css">
-<script>document.documentElement.classList.replace('no-js', 'js');</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400">
+<link rel="stylesheet" href="assets/core.css">
+<link rel="stylesheet" href="assets/clinic.css"><link rel="preload" as="image" href="assets/img/hero.jpg"><script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
-<body style="--accent: #0e7490">
-
+<body data-theme="clinic" style="--accent: #2346d8">
 <a class="skip" href="#main">Skip to content</a>
 <div class="progress" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <p class="loader-name"><span>S</span><span>t</span><span>a</span><span>r</span><span>c</span><span>a</span><span>r</span><span>e</span></p>
+    <div class="loader-bar"><i></i></div>
+    <p class="loader-count">000</p>
+  </div>
+</div>
+<div class="cursor" aria-hidden="true"><div class="cursor-ring"><span></span></div><div class="cursor-dot"></div></div>
 
 <header class="site-header" data-header>
   <div class="wrap nav-row">
@@ -23,309 +31,232 @@
       <span class="brand-mark" aria-hidden="true">S</span>
       <span class="brand-text">Starcare</span>
     </a>
-    <nav class="nav" id="nav" aria-label="Primary">
-      <a class="" href="#about">About</a><a class="" href="#services">Departments</a><a class="" href="#locations">Locations</a><a class="" href="#contact">Contact</a>
-    </nav>
+    <nav class="nav" id="nav" aria-label="Primary"><a href="#about">About</a><a href="#services">Departments</a><a href="#locations">Locations</a><a href="#contact">Contact</a>    </nav>
     <div class="nav-actions">
-      <a class="btn btn-primary btn-sm cta-head" href="#contact">Book appointment</a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu>
-        <span></span><span></span>
-      </button>
+      <a class="btn btn-primary btn-sm" href="#contact" data-magnetic>Book appointment</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>
     </div>
   </div>
 </header>
-
 <main id="main">
-
 <section class="hero" id="top">
-  <div class="hero-bg" aria-hidden="true">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="grid"></div>
-  </div>
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow" data-reveal>Hospital care · Oman · UAE · India</p>
-      <h1 class="hero-title" aria-label="Specialist care at eight sites"><span class="w" style="--i: 0" aria-hidden="true">Specialist</span> <span class="w" style="--i: 1" aria-hidden="true">care</span> <span class="w" style="--i: 2" aria-hidden="true">at</span> <span class="w" style="--i: 3" aria-hidden="true">eight</span> <span class="w" style="--i: 4" aria-hidden="true">sites</span> </h1>
-      <p class="lede" data-reveal style="--d: .35s">From Seeb and Barka to Muscat, Bousher, Saha, Duqm and Sharjah, with check-up packages, specialist departments and an in-house pharmacy.</p>
-      <div class="cta-row" data-reveal style="--d: .5s">
-        <a class="btn btn-primary" href="#contact">Book an appointment <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="#locations">Find a site</a>
+  <div class="grid-paper" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow" data-anim="up" data-intro><span class="live" aria-hidden="true"></span>Hospital care · Oman · UAE · India</p>
+    <h1 class="hero-title">
+      <span class="ht-line" data-anim="chars" data-intro>Specialist care for</span>
+      <span class="ht-line ht-swap">
+        <em class="swap" data-swap data-words='["newborns", "recovery", "surgery", "pain relief"]'>newborns</em>
+      </span>
+      <span class="visually-hidden">: newborns, recovery, surgery, pain relief</span>
+    </h1>
+    <div class="hero-row">
+      <p class="hero-lede" data-anim="up" data-intro data-delay=".4">From Seeb and Barka to Muscat, Bousher, Saha, Duqm and Sharjah, with check-up packages, specialist departments and an in-house pharmacy.</p>
+      <div class="cta-row" data-anim="up" data-intro data-delay=".55">
+        <a class="btn btn-primary" href="#contact" data-magnetic>Book an appointment <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#locations" data-magnetic>Find a site</a>
       </div>
     </div>
-
-    <aside class="hero-panel" data-reveal style="--d: .6s" aria-label="Key figures">
-      <div class="glass">
-        <p class="glass-label">At a glance</p>
-        <ul class="glass-stats">
-          <li><strong><span data-count data-to="8" data-suffix="">8</span></strong><span>Listed sites</span></li>
-          <li><strong><span data-count data-to="3" data-suffix="">3</span></strong><span>Countries</span></li>
-          <li><strong><span data-count data-to="500" data-suffix="+">500+</span></strong><span>Doctors, nurses &amp; support staff</span></li>
-        </ul>
-      </div>
-    </aside>
-  </div>
-  <a class="scroll-cue" href="#about" aria-label="Scroll to about"><span></span></a>
-</section>
-
-<div class="wrap">
-  <div class="stat-grid" aria-label="Key figures">
-    <div class="stat" data-reveal style="--d: 0.0s">
-      <div class="num"><span data-count data-to="8" data-suffix="">8</span></div>
-      <div class="lbl">Listed sites</div>
+    <div class="hero-card" data-anim="img" data-intro data-delay=".3">
+      <figure class="media hero-media">
+  <img src="assets/img/hero.jpg" alt="Laparoscopic operating theatre" loading="eager" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure>
+      <div class="hero-chip"><strong><span data-count data-to="8" data-suffix="">8</span></strong><span>Listed sites</span></div>
     </div>
-    <div class="stat" data-reveal style="--d: 0.1s">
-      <div class="num"><span data-count data-to="3" data-suffix="">3</span></div>
-      <div class="lbl">Countries</div>
-    </div>
-    <div class="stat" data-reveal style="--d: 0.2s">
-      <div class="num"><span data-count data-to="500" data-suffix="+">500+</span></div>
-      <div class="lbl">Doctors, nurses &amp; support staff</div>
-    </div>
-    <div class="stat" data-reveal style="--d: 0.30000000000000004s">
-      <div class="num"><span data-count data-to="5" data-suffix="">5</span></div>
-      <div class="lbl">Specialist departments</div>
-    </div>
-  </div>
-</div>
-
-<div class="marquee section-gap" aria-label="Areas covered">
-  <div class="marquee-track">
-    <div class="marquee-group">
-<span>Pediatrics &amp; Neonatology</span><span>ENT</span><span>Physiotherapy &amp; Rehabilitation</span><span>Anaesthesiology &amp; Pain Management</span><span>General &amp; Laparoscopic Surgery</span><span>Check-ups &amp; packages</span><span>In-house pharmacy</span>    </div>
-    <div class="marquee-group" aria-hidden="true">
-<span>Pediatrics &amp; Neonatology</span><span>ENT</span><span>Physiotherapy &amp; Rehabilitation</span><span>Anaesthesiology &amp; Pain Management</span><span>General &amp; Laparoscopic Surgery</span><span>Check-ups &amp; packages</span><span>In-house pharmacy</span>    </div>
-  </div>
-</div>
-
-<section class="section" id="about">
-  <div class="wrap split">
-    <div>
-      <p class="kicker" data-reveal>About</p>
-      <h2 data-reveal style="--d: .08s">Eight sites, one hospital group</h2>
-      <p class="lead-p" data-reveal style="--d: .16s">Starcare operates six sites in Oman, one in Sharjah in the UAE, and one listed in Calicut, India. Each site lists its own address and phone number.</p>
-    </div>
-    <ul class="points">
-      <li data-reveal style="--d: 0.0s">
-        <h3>Workforce</h3>
-        <p>Over 500 doctors, nurses, paramedics and support staff, according to the group&#39;s site.</p>
-      </li>
-      <li data-reveal style="--d: 0.1s">
-        <h3>In-house pharmacy</h3>
-        <p>The pharmacy stocks a range of lifesaving medicines.</p>
-      </li>
-      <li data-reveal style="--d: 0.2s">
-        <h3>Check-ups &amp; packages</h3>
-        <p>Health check packages are offered across the group.</p>
-      </li>
-    </ul>
   </div>
 </section>
 
-<section class="section alt" id="services">
-  <div class="wrap">
-    <header class="section-head" data-reveal>
-      <p class="kicker">Departments</p>
-      <h2>Specialist departments</h2>
-<p>Departments named on the group&#39;s homepage. Which site offers which department is not listed.</p>    </header>
+<div class="marquee serif-mq" data-marquee="1" data-dir="left" aria-label="Pediatrics &amp; Neonatology, ENT, Physiotherapy &amp; Rehabilitation, Anaesthesiology &amp; Pain Management, General &amp; Laparoscopic Surgery, Check-ups &amp; packages, In-house pharmacy">
+  <div class="marquee-track" aria-hidden="true">    <div class="marquee-group"><span class="mq-item">Pediatrics &amp; Neonatology</span><span class="mq-sep"></span><span class="mq-item">ENT</span><span class="mq-sep"></span><span class="mq-item">Physiotherapy &amp; Rehabilitation</span><span class="mq-sep"></span><span class="mq-item">Anaesthesiology &amp; Pain Management</span><span class="mq-sep"></span><span class="mq-item">General &amp; Laparoscopic Surgery</span><span class="mq-sep"></span><span class="mq-item">Check-ups &amp; packages</span><span class="mq-sep"></span><span class="mq-item">In-house pharmacy</span><span class="mq-sep"></span></div>    <div class="marquee-group"><span class="mq-item">Pediatrics &amp; Neonatology</span><span class="mq-sep"></span><span class="mq-item">ENT</span><span class="mq-sep"></span><span class="mq-item">Physiotherapy &amp; Rehabilitation</span><span class="mq-sep"></span><span class="mq-item">Anaesthesiology &amp; Pain Management</span><span class="mq-sep"></span><span class="mq-item">General &amp; Laparoscopic Surgery</span><span class="mq-sep"></span><span class="mq-item">Check-ups &amp; packages</span><span class="mq-sep"></span><span class="mq-item">In-house pharmacy</span><span class="mq-sep"></span></div>  </div>
+</div>
 
-    <div class="card-grid">
-      <article class="card spot" data-reveal style="--d: 0.0s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/></svg></div>
+<section class="depts" id="services" data-hscroll>
+  <div class="depts-pin">
+    <div class="wrap depts-head">
+      <div>
+        <p class="eyebrow">Departments</p>
+        <h2 data-anim="lines">Five <em>specialist</em> departments</h2>
+      </div>
+      <p class="muted depts-intro">Departments named on the group&#39;s homepage. Which site offers which department is not listed.</p>
+    </div>
+    <div class="depts-track" data-htrack>      <article class="dept-card" data-cursor="1/5">
+        <figure class="media dept-media">
+          <img src="assets/img/peds.jpg" alt="Newborn baby&#39;s foot" loading="lazy" data-hpar><figcaption class="media-cap">Illustrative</figcaption>        </figure>
+        <span class="dept-n">01</span>
         <h3>Pediatrics &amp; Neonatology</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.1s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></div>
+      </article>      <article class="dept-card" data-cursor="2/5">
+        <figure class="media dept-media">
+          <img src="assets/img/steth.jpg" alt="Stethoscope on a desk" loading="lazy" data-hpar><figcaption class="media-cap">Illustrative</figcaption>        </figure>
+        <span class="dept-n">02</span>
         <h3>ENT</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.2s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14"/><path d="M5 19 13 11"/></svg></div>
+      </article>      <article class="dept-card" data-cursor="3/5">
+        <figure class="media dept-media">
+          <img src="assets/img/physio.jpg" alt="Physiotherapy exercise session" loading="lazy" data-hpar><figcaption class="media-cap">Illustrative</figcaption>        </figure>
+        <span class="dept-n">03</span>
         <h3>Physiotherapy &amp; Rehabilitation</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.0s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/></svg></div>
+      </article>      <article class="dept-card" data-cursor="4/5">
+        <figure class="media dept-media">
+          <img src="assets/img/pharmacy.jpg" alt="Assorted medicines" loading="lazy" data-hpar><figcaption class="media-cap">Illustrative</figcaption>        </figure>
+        <span class="dept-n">04</span>
         <h3>Anaesthesiology &amp; Pain Management</h3>
-      </article>
-      <article class="card spot" data-reveal style="--d: 0.1s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5zM3 13l9 5 9-5"/></svg></div>
+      </article>      <article class="dept-card" data-cursor="5/5">
+        <figure class="media dept-media">
+          <img src="assets/img/hero.jpg" alt="Laparoscopic operating theatre" loading="lazy" data-hpar><figcaption class="media-cap">Illustrative</figcaption>        </figure>
+        <span class="dept-n">05</span>
         <h3>General &amp; Laparoscopic Surgery</h3>
+      </article>      <article class="dept-card dept-more">
+        <span class="dept-n">+</span>
+        <h3>Also offered</h3>
+        <ul><li>Check-ups &amp; packages</li><li>In-house pharmacy</li></ul>
       </article>
     </div>
-
-    <div class="chips-block" data-reveal>
-      <h3>Also offered</h3>
-      <ul class="chips">
-<li>Check-ups &amp; packages</li><li>In-house pharmacy</li>      </ul>
-    </div>
+    <div class="wrap"><div class="hbar"><i data-hbar></i></div></div>
   </div>
 </section>
 
+<section class="about" id="about">
+  <div class="grid-paper" aria-hidden="true"></div>
+  <div class="wrap about-grid">
+    <div>
+      <p class="eyebrow">About</p>
+      <h2 data-anim="lines">Eight sites, <em>one</em> hospital group</h2><p class="muted about-p" data-anim="up">Starcare operates six sites in Oman, one in Sharjah in the UAE, and one listed in Calicut, India. Each site lists its own address and phone number.</p>    </div>
+    <div class="stat-cards">      <div class="stat-card" data-anim="up" data-delay="0.0">
+        <strong><span data-count data-to="8" data-suffix="">8</span></strong>
+        <span>Listed sites</span>
+      </div>      <div class="stat-card" data-anim="up" data-delay="0.08">
+        <strong><span data-count data-to="3" data-suffix="">3</span></strong>
+        <span>Countries</span>
+      </div>      <div class="stat-card" data-anim="up" data-delay="0.16">
+        <strong><span data-count data-to="500" data-suffix="+">500+</span></strong>
+        <span>Doctors, nurses &amp; support staff</span>
+      </div>      <div class="stat-card" data-anim="up" data-delay="0.24">
+        <strong><span data-count data-to="5" data-suffix="">5</span></strong>
+        <span>Specialist departments</span>
+      </div>    </div>
+  </div>
+  <div class="wrap points">    <div class="point" data-anim="up" data-delay="0.0">
+      <span class="point-n">(1)</span>
+      <h3>Workforce</h3>
+      <p>Over 500 doctors, nurses, paramedics and support staff, according to the group&#39;s site.</p>
+    </div>    <div class="point" data-anim="up" data-delay="0.1">
+      <span class="point-n">(2)</span>
+      <h3>In-house pharmacy</h3>
+      <p>The pharmacy stocks a range of lifesaving medicines.</p>
+    </div>    <div class="point" data-anim="up" data-delay="0.2">
+      <span class="point-n">(3)</span>
+      <h3>Check-ups &amp; packages</h3>
+      <p>Health check packages are offered across the group.</p>
+    </div>  </div>
+</section>
 
-<section class="section alt" id="locations">
+<section class="sites" id="locations">
   <div class="wrap">
-    <header class="section-head" data-reveal>
-      <p class="kicker">Locations</p>
-      <h2>Find a site</h2>
-<p>Eight sites in three countries. Filter by country to narrow the list.</p>    </header>
-
-    <div class="filters" role="group" aria-label="Filter locations by country" data-filters>
-      <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter" type="button" data-filter="Oman" aria-pressed="false">Oman <span class="filter-n">6</span></button>
-      <button class="filter" type="button" data-filter="UAE" aria-pressed="false">UAE <span class="filter-n">1</span></button>
-      <button class="filter" type="button" data-filter="India" aria-pressed="false">India <span class="filter-n">1</span></button>
-    </div>
-    <p class="result-count" aria-live="polite" data-result></p>
-
-    <ul class="loc-grid">
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">Branch</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Seeb</h3>
-<p class="loc-addr"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>PO Box 198, PC 101, As Seeb, Sultanate of Oman</span></p><a href="tel:+96824557200"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> +968 2455 7200</a>      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.06s">
-        <div class="loc-top">
-          <span class="pill">Branch</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Barka</h3>
-<p class="loc-addr"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>PO Box 539, PC 320, Barka, Sultanate of Oman</span></p><a href="tel:+96826982200"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> +968 2698 2200</a>      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.12s">
-        <div class="loc-top">
-          <span class="pill">Branch</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Mabela</h3>
-<p class="loc-addr"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>PO Box 198, PC 101, Mabela, Muscat, Sultanate of Oman</span></p><a href="tel:+96824263300"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> +968 2426 3300</a><p class="note">Shares its PO Box with Seeb. Confirm.</p>      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">Branch</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Bousher</h3>
-<p class="loc-addr"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>PO Box 59, PC 118, Bousher, near Mall of Oman</span></p><a href="tel:+96824113900"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> +968 2411 3900</a>      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.06s">
-        <div class="loc-top">
-          <span class="pill">Branch</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Saha</h3>
-<p class="note">Listed with the Seeb address and phone. Confirm this branch&#39;s own details.</p>      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.12s">
-        <div class="loc-top">
-          <span class="pill">Branch</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Duqm</h3>
-<p class="note">Listed with the Seeb address and phone. Confirm this branch&#39;s own details.</p>      </li>
-      <li class="loc card spot" data-country="UAE" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">Branch</span>
-          <span class="country">UAE</span>
-        </div>
-        <h3>Sharjah</h3>
-<p class="loc-addr"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Starcare Medical Center LLC, PO Box 25568, Malabar Plaza, Rolla, Sharjah, UAE</span></p><a href="tel:+97165611099"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> +971 6 561 1099</a>      </li>
-      <li class="loc card spot" data-country="India" data-reveal style="--d: 0.06s">
-        <div class="loc-top">
-          <span class="pill">Branch</span>
-          <span class="country">India</span>
-        </div>
-        <h3>Calicut</h3>
-<p class="note">Listed with a Muscat, Oman address. Confirm the Calicut address.</p>      </li>
-    </ul>
-    <p class="empty" data-empty hidden>No locations match this filter.</p>
+    <div class="sites-head">
+      <div>
+        <p class="eyebrow">Locations</p>
+        <h2 data-anim="lines">Find a <em>site</em></h2>
+      </div>
+      <p class="muted">Eight sites in three countries. Filter by country to narrow the list.</p>
+    </div>    <div class="filters" role="group" aria-label="Filter sites by country" data-filters>
+      <button class="filter" type="button" data-filter="all" aria-pressed="true">All <span class="filter-n">8</span></button>      <button class="filter" type="button" data-filter="Oman" aria-pressed="false">Oman <span class="filter-n">6</span></button>      <button class="filter" type="button" data-filter="UAE" aria-pressed="false">UAE <span class="filter-n">1</span></button>      <button class="filter" type="button" data-filter="India" aria-pressed="false">India <span class="filter-n">1</span></button>    </div>    <p class="result-count" aria-live="polite" data-result></p>
+    <ul class="site-rows" data-previews>      <li class="site-row" data-country="Oman" data-preview="assets/img/seeb.jpg">
+        <span class="site-n">01</span>
+        <h3 class="site-name">Seeb</h3>
+        <span class="site-country">Oman</span>
+        <span class="site-detail">PO Box 198, PC 101, As Seeb, Sultanate of Oman        </span><a class="site-phone" href="tel:+96824557200">+968 2455 7200</a>      </li>      <li class="site-row" data-country="Oman" data-preview="assets/img/barka.jpg">
+        <span class="site-n">02</span>
+        <h3 class="site-name">Barka</h3>
+        <span class="site-country">Oman</span>
+        <span class="site-detail">PO Box 539, PC 320, Barka, Sultanate of Oman        </span><a class="site-phone" href="tel:+96826982200">+968 2698 2200</a>      </li>      <li class="site-row" data-country="Oman" data-preview="assets/img/muscat.jpg">
+        <span class="site-n">03</span>
+        <h3 class="site-name">Mabela</h3>
+        <span class="site-country">Oman</span>
+        <span class="site-detail">PO Box 198, PC 101, Mabela, Muscat, Sultanate of Oman<em class="site-note">Shares its PO Box with Seeb. Confirm.</em>        </span><a class="site-phone" href="tel:+96824263300">+968 2426 3300</a>      </li>      <li class="site-row" data-country="Oman" data-preview="assets/img/muscat.jpg">
+        <span class="site-n">04</span>
+        <h3 class="site-name">Bousher</h3>
+        <span class="site-country">Oman</span>
+        <span class="site-detail">PO Box 59, PC 118, Bousher, near Mall of Oman        </span><a class="site-phone" href="tel:+96824113900">+968 2411 3900</a>      </li>      <li class="site-row" data-country="Oman" data-preview="assets/img/seeb.jpg">
+        <span class="site-n">05</span>
+        <h3 class="site-name">Saha</h3>
+        <span class="site-country">Oman</span>
+        <span class="site-detail"><em class="site-note">Listed with the Seeb address and phone. Confirm this branch&#39;s own details.</em>        </span><span class="site-phone muted">—</span>      </li>      <li class="site-row" data-country="Oman" data-preview="assets/img/duqm.jpg">
+        <span class="site-n">06</span>
+        <h3 class="site-name">Duqm</h3>
+        <span class="site-country">Oman</span>
+        <span class="site-detail"><em class="site-note">Listed with the Seeb address and phone. Confirm this branch&#39;s own details.</em>        </span><span class="site-phone muted">—</span>      </li>      <li class="site-row" data-country="UAE" data-preview="assets/img/sharjah.jpg">
+        <span class="site-n">07</span>
+        <h3 class="site-name">Sharjah</h3>
+        <span class="site-country">UAE</span>
+        <span class="site-detail">Starcare Medical Center LLC, PO Box 25568, Malabar Plaza, Rolla, Sharjah, UAE        </span><a class="site-phone" href="tel:+97165611099">+971 6 561 1099</a>      </li>      <li class="site-row" data-country="India" data-preview="assets/img/calicut.jpg">
+        <span class="site-n">08</span>
+        <h3 class="site-name">Calicut</h3>
+        <span class="site-country">India</span>
+        <span class="site-detail"><em class="site-note">Listed with a Muscat, Oman address. Confirm the Calicut address.</em>        </span><span class="site-phone muted">—</span>      </li>    </ul>
+    <p class="empty" data-empty hidden>No sites match this filter.</p>
   </div>
 </section>
-
-<section class="section contact" id="contact">
+<section class="contact" id="contact">
   <div class="wrap contact-grid">
     <div>
-      <p class="kicker" data-reveal>Contact</p>
-      <h2 data-reveal style="--d: .08s">Book an appointment</h2>
-      <p data-reveal style="--d: .16s">Pick a site and send a request. For urgent care, call the site directly.</p>
+      <p class="eyebrow">Contact</p>
+      <h2 class="contact-title" data-anim="lines">Book an appointment</h2>
+      <p class="contact-intro" data-anim="up">Pick a site and send a request. For urgent care, call the site directly.</p>
+      <ul class="contact-list">        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><small>Address</small>Starcare Hospital, PO Box 198, PC 101, As Seeb, Sultanate of Oman</span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>Seeb</small><a href="tel:+96824557200">+968 2455 7200</a></span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>Seeb (second line)</small><a href="tel:+96824557201">+968 2455 7201</a></span></li>      </ul>
+<p class="contact-note">No emergency number is published on the site. The booking form is a concept preview.</p>    </div>
 
-      <ul class="contact-list">
-        <li data-reveal style="--d: .2s"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><small>Address</small>Starcare Hospital, PO Box 198, PC 101, As Seeb, Sultanate of Oman</span></li>
-        <li data-reveal style="--d: 0.25s"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-          <span>
-            <small>Seeb</small>
-              <a href="tel:+96824557200">+968 2455 7200</a>
-          </span>
-        </li>
-        <li data-reveal style="--d: 0.3s"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-          <span>
-            <small>Seeb (second line)</small>
-              <a href="tel:+96824557201">+968 2455 7201</a>
-          </span>
-        </li>
-      </ul>
-
-<p class="note contact-note">No emergency number is published on the site. The booking form is a concept preview.</p>    </div>
-
-    <form class="form card" data-form data-endpoint="" novalidate data-reveal style="--d: .15s">
+    <form class="form" data-form data-endpoint="" novalidate data-anim="up">
       <h3>Request appointment</h3>
-
       <div class="field" data-field>
         <label for="f-name">Full name</label>
         <input id="f-name" name="name" type="text" autocomplete="name" data-rule="name" required>
         <p class="err" data-err aria-live="polite"></p>
       </div>
-
       <div class="field" data-field>
         <label for="f-contact">Email or phone</label>
         <input id="f-contact" name="contact" type="text" autocomplete="email" inputmode="email" data-rule="contact" required>
         <p class="err" data-err aria-live="polite"></p>
-      </div>
-
-      <div class="field">
+      </div>      <div class="field">
         <label for="f-branch">Branch</label>
-        <select id="f-branch" name="branch">
-<option>Seeb · Oman</option><option>Barka · Oman</option><option>Mabela · Oman</option><option>Bousher · Oman</option><option>Saha · Oman</option><option>Duqm · Oman</option><option>Sharjah · UAE</option><option>Calicut · India</option>        </select>
-      </div>
-
-      <div class="field">
+        <select id="f-branch" name="branch"><option>Seeb · Oman</option><option>Barka · Oman</option><option>Mabela · Oman</option><option>Bousher · Oman</option><option>Saha · Oman</option><option>Duqm · Oman</option><option>Sharjah · UAE</option><option>Calicut · India</option></select>
+      </div>      <div class="field">
         <label for="f-topic">What is this about?</label>
-        <select id="f-topic" name="topic">
-<option>Book an appointment</option><option>Check-up package</option><option>Pharmacy</option><option>General enquiry</option>        </select>
+        <select id="f-topic" name="topic"><option>Book an appointment</option><option>Check-up package</option><option>Pharmacy</option><option>General enquiry</option></select>
       </div>
-
       <div class="field">
         <label for="f-msg">Message <span class="optional">(optional)</span></label>
         <textarea id="f-msg" name="message" rows="4"></textarea>
       </div>
-
-      <button class="btn btn-primary btn-block" type="submit">Request appointment</button>
+      <button class="btn btn-primary btn-block" type="submit">Request appointment <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="form-status" role="status" data-status></p>
     </form>
   </div>
-</section>
-
-</main>
+</section></main>
 
 <footer class="site-footer">
-  <div class="wrap foot-grid">
-    <div>
-      <a class="brand" href="#top">
-        <span class="brand-mark" aria-hidden="true">S</span>
-        <span class="brand-text">Starcare</span>
-      </a>
-      <p class="foot-meta">Starcare Hospital: eight sites across Oman, the UAE and India, with specialist departments, check-up packages and an in-house pharmacy.</p>
+  <div class="wrap">
+    <p class="foot-big" aria-hidden="true" data-drift="14">Starcare</p>
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">S</span><span class="brand-text">Starcare</span></a>
+        <p style="margin-top:1rem;max-width:38ch">Starcare Hospital: eight sites across Oman, the UAE and India, with specialist departments, check-up packages and an in-house pharmacy.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer"><a href="#about">About</a><a href="#services">Departments</a><a href="#locations">Locations</a><a href="#contact">Contact</a>      </nav>
+      <div class="foot-contact">
+<p>Starcare Hospital, PO Box 198, PC 101, As Seeb, Sultanate of Oman</p><p><a href="tel:+96824557200">+968 2455 7200</a></p><p><a href="tel:+96824557201">+968 2455 7201</a></p>      </div>
     </div>
-    <nav class="foot-nav" aria-label="Footer">
-      <a class="" href="#about">About</a><a class="" href="#services">Departments</a><a class="" href="#locations">Locations</a><a class="" href="#contact">Contact</a>
-    </nav>
-    <div class="foot-contact">
-<p>Starcare Hospital, PO Box 198, PC 101, As Seeb, Sultanate of Oman</p><p><a href="tel:+96824557200">+968 2455 7200</a></p><p><a href="tel:+96824557201">+968 2455 7201</a></p>    </div>
-  </div>
-  <div class="wrap foot-bottom">
-    <p>© 2026 Starcare Hospital. Concept redesign, not the company's official website. Facts to be verified before use.</p>
-    <a href="#top">Back to top</a>
-  </div>
+    <div class="foot-bottom">
+      <p>© 2026 Starcare Hospital. Concept redesign, not the company's official website. Facts to be verified before use.</p>
+      <a href="#top">Back to top</a>
+    </div>    <details class="credits">
+      <summary>Image credits</summary>
+      <ul>        <li>“Barka, Oman (6) (41446310861)” by Hans Birger Nilsen, BY-SA 2.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=70285689" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Kozhikode Beach Coastline” by Sulyab Thottungal, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=48507623" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Duqm Fishing Port” by AbdullahAlMaani, BY-SA 4.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=117467673" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Wings Laparoscopic operating theatre” by Dr.jayesh amin, BY-SA 3.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=29136994" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Sultan Qaboos Grand Mosque (1)” by Mostafameraji, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/w/index.php?curid=57591888" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Small Baby” by Studio 7042, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/small-baby-FKXNHWCQJK" rel="noopener">source</a></li>        <li>“Pills Medicine” by Freestocks.org, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/pills-medicine-S5WGVL18A9" rel="noopener">source</a></li>        <li>“Physiotherapy hospital”, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://www.rawpixel.com/image/6038567/photo-image-public-domain-house-person" rel="noopener">source</a></li>        <li>“Seeb, Muscat, Oman (4324767930)” by yeowatzup, BY 2.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=24520891" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Sharjah city skyline” by Mueed Ahmed, BY-SA 4.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=50574446" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Stethoscope Medical” by Negative Space, CC0 1.0 · <a href="https://stocksnap.io/photo/stethoscope-medical-RAW1RLRTM7" rel="noopener">source</a></li>      </ul>
+    </details>  </div>
 </footer>
-
 <a class="to-top" href="#top" data-to-top aria-label="Back to top"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 
-<script src="assets/motion.js" defer></script>
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/fx.js" defer></script>
+<script src="assets/core.js" defer></script>
 </body>
 </html>

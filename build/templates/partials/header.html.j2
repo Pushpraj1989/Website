@@ -1,0 +1,15 @@
+<header class="site-header" data-header>
+  <div class="wrap nav-row">
+    <a class="brand" href="#top" aria-label="{{ s.name }}, back to top">
+      <span class="brand-mark" aria-hidden="true">{{ s.short[0] }}</span>
+      <span class="brand-text">{{ s.short }}</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      {%- for n in s._nav %}<a href="#{{ n.id }}">{{ n.label }}</a>{% endfor %}
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-primary btn-sm" href="{{ s.cta.href }}" data-magnetic>{{ s.cta.label }}</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>
+    </div>
+  </div>
+</header>

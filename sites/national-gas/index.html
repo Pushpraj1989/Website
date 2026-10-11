@@ -5,282 +5,221 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>National Gas Company · Concept redesign</title>
 <meta name="description" content="National Gas Company: LPG plants and storage across Oman, the UAE and Malaysia.">
-<meta name="theme-color" content="#b45309">
+<meta name="theme-color" content="#05040a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="assets/site.css">
-<script>document.documentElement.classList.replace('no-js', 'js');</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Space+Grotesk:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500">
+<link rel="stylesheet" href="assets/core.css">
+<link rel="stylesheet" href="assets/cosmos.css"><script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
-<body style="--accent: #b45309">
-
+<body data-theme="cosmos" style="--accent: #c6ff4a">
 <a class="skip" href="#main">Skip to content</a>
 <div class="progress" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <p class="loader-name"><span>N</span><span>a</span><span>t</span><span>i</span><span>o</span><span>n</span><span>a</span><span>l</span><span> </span><span>G</span><span>a</span><span>s</span></p>
+    <div class="loader-bar"><i></i></div>
+    <p class="loader-count">000</p>
+  </div>
+</div>
+<div class="cursor" aria-hidden="true"><div class="cursor-ring"><span></span></div><div class="cursor-dot"></div></div>
 
 <header class="site-header" data-header>
   <div class="wrap nav-row">
     <a class="brand" href="#top" aria-label="National Gas Company, back to top">
-      <span class="brand-mark" aria-hidden="true">N</span>
-      <span class="brand-text">National Gas</span>
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text mono">NGC</span>
     </a>
-    <nav class="nav" id="nav" aria-label="Primary">
-      <a class="" href="#about">About</a><a class="" href="#services">Subsidiaries</a><a class="" href="#locations">Locations</a><a class="" href="#contact">Contact</a>
-    </nav>
+    <nav class="nav pill-nav" id="nav" aria-label="Primary"><a href="#about"><span data-scramble>About</span></a><a href="#services"><span data-scramble>Subsidiaries</span></a><a href="#locations"><span data-scramble>Locations</span></a><a href="#contact"><span data-scramble>Contact</span></a>    </nav>
     <div class="nav-actions">
-      <a class="btn btn-primary btn-sm cta-head" href="#contact">Contact us</a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu>
-        <span></span><span></span>
-      </button>
+      <a class="btn btn-primary btn-sm" href="#contact" data-magnetic>Contact us</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>
     </div>
   </div>
 </header>
 
 <main id="main">
-
 <section class="hero" id="top">
-  <div class="hero-bg" aria-hidden="true">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="grid"></div>
-  </div>
+  <canvas class="hero-fx" data-fx="sphere" aria-hidden="true"></canvas>
+  <div class="hud" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow" data-reveal>LPG production &amp; storage · Oman · UAE · Malaysia</p>
-      <h1 class="hero-title" aria-label="Energy supply across three countries"><span class="w" style="--i: 0" aria-hidden="true">Energy</span> <span class="w" style="--i: 1" aria-hidden="true">supply</span> <span class="w" style="--i: 2" aria-hidden="true">across</span> <span class="w" style="--i: 3" aria-hidden="true">three</span> <span class="w" style="--i: 4" aria-hidden="true">countries</span> </h1>
-      <p class="lede" data-reveal style="--d: .35s">Eleven LPG plants, more than 350,000 metric tonnes of LPG a year, and the largest LPG storage in the Sultanate of Oman.</p>
-      <div class="cta-row" data-reveal style="--d: .5s">
-        <a class="btn btn-primary" href="#contact">Contact us <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="#locations">Our footprint</a>
+      <p class="eyebrow mono" data-anim="up" data-intro>LPG production &amp; storage · Oman · UAE · Malaysia</p>
+      <h1 class="hero-title" data-scramble data-intro>Energy supply across three countries</h1>
+      <p class="hero-lede" data-anim="words" data-intro data-delay=".4">Eleven LPG plants, more than 350,000 metric tonnes of LPG a year, and the largest LPG storage in the Sultanate of Oman.</p>
+      <div class="cta-row" data-anim="up" data-intro data-delay=".7">
+        <a class="btn btn-primary" href="#contact" data-magnetic>Contact us <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#locations" data-magnetic>Our footprint</a>
       </div>
     </div>
 
-    <aside class="hero-panel" data-reveal style="--d: .6s" aria-label="Key figures">
-      <div class="glass">
-        <p class="glass-label">At a glance</p>
-        <ul class="glass-stats">
-          <li><strong><span data-count data-to="11" data-suffix="">11</span></strong><span>LPG plants</span></li>
-          <li><strong><span data-count data-to="350000" data-suffix="+">350,000+</span></strong><span>Metric tonnes of LPG a year</span></li>
-          <li><strong><span data-count data-to="2600" data-suffix="">2,600</span></strong><span>Tonnes of storage, the largest in Oman</span></li>
-        </ul>
-      </div>
+    <aside class="seek" aria-label="Quick links" data-anim="left" data-intro data-delay=".9">
+      <p class="seek-title mono">What are you looking for?</p>
+      <ul>        <li><a href="#contact"><span class="mono">→</span> <span data-scramble>Supply enquiry</span></a></li>        <li><a href="#services"><span class="mono">→</span> <span data-scramble>Group structure</span></a></li>        <li><a href="#locations"><span class="mono">→</span> <span data-scramble>Our footprint</span></a></li>        <li><a href="#contact"><span class="mono">→</span> <span data-scramble>Corporate &amp; investors</span></a></li>      </ul>
     </aside>
   </div>
-  <a class="scroll-cue" href="#about" aria-label="Scroll to about"><span></span></a>
+
+  <dl class="readout mono wrap" data-anim="up" data-intro data-delay="1">    <div><dt>LPG plants</dt><dd><span data-count data-to="11" data-suffix="">11</span></dd></div>    <div><dt>Metric tonnes of LPG a year</dt><dd><span data-count data-to="350000" data-suffix="+">350,000+</span></dd></div>    <div><dt>Tonnes of storage, the largest in Oman</dt><dd><span data-count data-to="2600" data-suffix="">2,600</span></dd></div>    <div><dt>Countries with plants</dt><dd><span data-count data-to="3" data-suffix="">3</span></dd></div>  </dl>
 </section>
 
-<div class="wrap">
-  <div class="stat-grid" aria-label="Key figures">
-    <div class="stat" data-reveal style="--d: 0.0s">
-      <div class="num"><span data-count data-to="11" data-suffix="">11</span></div>
-      <div class="lbl">LPG plants</div>
-    </div>
-    <div class="stat" data-reveal style="--d: 0.1s">
-      <div class="num"><span data-count data-to="350000" data-suffix="+">350,000+</span></div>
-      <div class="lbl">Metric tonnes of LPG a year</div>
-    </div>
-    <div class="stat" data-reveal style="--d: 0.2s">
-      <div class="num"><span data-count data-to="2600" data-suffix="">2,600</span></div>
-      <div class="lbl">Tonnes of storage, the largest in Oman</div>
-    </div>
-    <div class="stat" data-reveal style="--d: 0.30000000000000004s">
-      <div class="num"><span data-count data-to="3" data-suffix="">3</span></div>
-      <div class="lbl">Countries with plants</div>
-    </div>
-  </div>
+<div class="marquee mono-mq" data-marquee="0.8" data-dir="left" aria-label="LPG production, Bulk storage, Oman, United Arab Emirates, Malaysia, Saudi Arabia">
+  <div class="marquee-track" aria-hidden="true">    <div class="marquee-group"><span class="mq-item">LPG production</span><span class="mq-sep"></span><span class="mq-item">Bulk storage</span><span class="mq-sep"></span><span class="mq-item">Oman</span><span class="mq-sep"></span><span class="mq-item">United Arab Emirates</span><span class="mq-sep"></span><span class="mq-item">Malaysia</span><span class="mq-sep"></span><span class="mq-item">Saudi Arabia</span><span class="mq-sep"></span></div>    <div class="marquee-group"><span class="mq-item">LPG production</span><span class="mq-sep"></span><span class="mq-item">Bulk storage</span><span class="mq-sep"></span><span class="mq-item">Oman</span><span class="mq-sep"></span><span class="mq-item">United Arab Emirates</span><span class="mq-sep"></span><span class="mq-item">Malaysia</span><span class="mq-sep"></span><span class="mq-item">Saudi Arabia</span><span class="mq-sep"></span></div>  </div>
 </div>
 
-<div class="marquee section-gap" aria-label="Areas covered">
-  <div class="marquee-track">
-    <div class="marquee-group">
-<span>LPG production</span><span>Bulk storage</span><span>Oman</span><span>United Arab Emirates</span><span>Malaysia</span><span>Saudi Arabia</span>    </div>
-    <div class="marquee-group" aria-hidden="true">
-<span>LPG production</span><span>Bulk storage</span><span>Oman</span><span>United Arab Emirates</span><span>Malaysia</span><span>Saudi Arabia</span>    </div>
+<section class="fly" id="services" data-fly aria-label="Group structure">
+  <div class="fly-head wrap">
+    <p class="eyebrow mono">Subsidiaries</p>
+    <h2 data-scramble>Group structure</h2>
+    <p class="muted">Subsidiaries and the countries they operate in, as shown on the group&#39;s site.</p>
   </div>
-</div>
+  <div class="fly-stage">
+    <div class="fly-space" data-space>      <div class="fly-card" data-z="-300" style="--x: -22vw; --y: -6vh; --zz: -300px">
+        <div class="glass">          <span class="glass-k mono">Subsidiary · UAE</span>
+          <h3 class="glass-t">NGC Energy LLC</h3>
+<p class="glass-p">United Arab Emirates</p>        </div>
+      </div>      <div class="fly-card" data-z="-700" style="--x: 22vw; --y: 4vh; --zz: -700px">
+        <div class="glass glass-img">          <figure class="media glass-media">
+  <img src="assets/img/sphere.jpg" alt="Spherical gas storage tank" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure>          <span class="glass-k mono">Storage</span>
+          <h3 class="glass-t">2,600 MT</h3>
+<p class="glass-p">LPG storage, described by the group as the largest in Oman.</p>        </div>
+      </div>      <div class="fly-card" data-z="-1100" style="--x: -24vw; --y: 8vh; --zz: -1100px">
+        <div class="glass">          <span class="glass-k mono">Subsidiary · Malaysia</span>
+          <h3 class="glass-t">NGC Energy Sdn. Bhd.</h3>
+<p class="glass-p">Malaysia</p>        </div>
+      </div>      <div class="fly-card" data-z="-1500" style="--x: 20vw; --y: -8vh; --zz: -1500px">
+        <div class="glass">          <span class="glass-k mono">Plants</span>
+          <h3 class="glass-t">11 LPG plants</h3>
+<p class="glass-p">Across Oman, the UAE and Malaysia.</p>        </div>
+      </div>      <div class="fly-card" data-z="-1900" style="--x: -18vw; --y: -2vh; --zz: -1900px">
+        <div class="glass">          <span class="glass-k mono">Subsidiary · KSA</span>
+          <h3 class="glass-t">NGC Energy LLC</h3>
+<p class="glass-p">Saudi Arabia</p>        </div>
+      </div>      <div class="fly-card" data-z="-2300" style="--x: 18vw; --y: 6vh; --zz: -2300px">
+        <div class="glass glass-img">          <figure class="media glass-media">
+  <img src="assets/img/dark.jpg" alt="Pipes and valves in low light" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure>          <span class="glass-k mono">Throughput</span>
+          <h3 class="glass-t">350,000+ MT a year</h3>
+<p class="glass-p">Metric tonnes of LPG handled annually.</p>        </div>
+      </div>      <div class="fly-card" data-z="-2650" style="--x: 0vw; --y: 0vh; --zz: -2650px">
+        <div class="glass">          <span class="glass-k mono">Group</span>
+          <h3 class="glass-t">Three countries with plants</h3>
+<p class="glass-p">Oman · UAE · Malaysia</p>        </div>
+      </div>    </div>
+  </div>
+</section>
 
-<section class="section" id="about">
-  <div class="wrap split">
-    <div>
-      <p class="kicker" data-reveal>About</p>
-      <h2 data-reveal style="--d: .08s">Built around LPG supply</h2>
-      <p class="lead-p" data-reveal style="--d: .16s">National Gas Company runs LPG plants and storage in Oman, the UAE and Malaysia. Its subsidiaries operate in the UAE, Malaysia and Saudi Arabia.</p>
-    </div>
-    <ul class="points">
-      <li data-reveal style="--d: 0.0s">
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-copy">
+      <p class="eyebrow mono">About</p>
+      <h2 class="about-title" data-anim="lines">Built around LPG supply</h2><p class="about-p" data-anim="up">National Gas Company runs LPG plants and storage in Oman, the UAE and Malaysia. Its subsidiaries operate in the UAE, Malaysia and Saudi Arabia.</p>    </div>
+    <ul class="spec">      <li class="glass" data-anim="up" data-delay="0.0">
+        <span class="mono spec-i">01</span>
         <h3>Plants</h3>
         <p>Eleven LPG plants across Oman, the UAE and Malaysia.</p>
-      </li>
-      <li data-reveal style="--d: 0.1s">
+      </li>      <li class="glass" data-anim="up" data-delay="0.1">
+        <span class="mono spec-i">02</span>
         <h3>Storage</h3>
         <p>2,600 tonnes of LPG storage, which the group describes as the largest in Oman.</p>
-      </li>
-      <li data-reveal style="--d: 0.2s">
+      </li>      <li class="glass" data-anim="up" data-delay="0.2">
+        <span class="mono spec-i">03</span>
         <h3>Throughput</h3>
         <p>More than 350,000 metric tonnes of LPG a year.</p>
-      </li>
-    </ul>
+      </li>    </ul>
+  </div>
+  <div class="wrap duo">
+    <figure class="media duo-a" data-anim="img">
+  <img src="assets/img/pipes.jpg" alt="Industrial pipework" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure>
+    <figure class="media duo-b" data-anim="img">
+  <img src="assets/img/valves.jpg" alt="Rows of gas valves and gauges" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure>
   </div>
 </section>
 
-<section class="section alt" id="services">
+<section class="footprint" id="locations">
   <div class="wrap">
-    <header class="section-head" data-reveal>
-      <p class="kicker">Subsidiaries</p>
-      <h2>Group structure</h2>
-<p>Subsidiaries and the countries they operate in, as shown on the group&#39;s site.</p>    </header>
-
-    <div class="card-grid">
-      <article class="card spot" data-reveal style="--d: 0.0s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></div>
-        <h3>NGC Energy LLC</h3>
-<p>United Arab Emirates</p>      </article>
-      <article class="card spot" data-reveal style="--d: 0.1s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></div>
-        <h3>NGC Energy Sdn. Bhd.</h3>
-<p>Malaysia</p>      </article>
-      <article class="card spot" data-reveal style="--d: 0.2s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></div>
-        <h3>NGC Energy LLC</h3>
-<p>Saudi Arabia (KSA)</p>      </article>
-    </div>
-
+    <p class="eyebrow mono">Locations</p>
+    <h2 data-scramble>Our footprint</h2>
+    <p class="muted" data-anim="up">Eleven LPG plants in total. The site lists the countries but not each plant&#39;s address or per-country count.</p>
+    <div class="nodes" aria-hidden="true">      <div class="node" data-anim="scale" data-delay="0.0"><span class="node-dot"></span><span class="mono">Oman</span></div><span class="node-line"></span>      <div class="node" data-anim="scale" data-delay="0.12"><span class="node-dot"></span><span class="mono">UAE</span></div><span class="node-line"></span>      <div class="node" data-anim="scale" data-delay="0.24"><span class="node-dot"></span><span class="mono">Malaysia</span></div><span class="node-line"></span>      <div class="node" data-anim="scale" data-delay="0.36"><span class="node-dot"></span><span class="mono">KSA</span></div>    </div>
+      <div class="filters" role="group" aria-label="Filter locations by country" data-filters>
+    <button class="filter" type="button" data-filter="all" aria-pressed="true">All <span class="filter-n">4</span></button>    <button class="filter" type="button" data-filter="Oman" aria-pressed="false">Oman <span class="filter-n">2</span></button>    <button class="filter" type="button" data-filter="UAE" aria-pressed="false">UAE <span class="filter-n">1</span></button>    <button class="filter" type="button" data-filter="Malaysia" aria-pressed="false">Malaysia <span class="filter-n">1</span></button>  </div>  <p class="result-count" aria-live="polite" data-result></p>
+  <ul class="loc-grid">    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Head office</span><span>Oman</span></div>
+      <h3>Head office</h3>
+<p>Muscat, Sultanate of Oman. Street address not published.</p>    </li>    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">LPG plant &amp; storage</span><span>Oman</span></div>
+      <h3>LPG plants</h3>
+<p class="note">Count and sites to confirm.</p>    </li>    <li class="loc" data-country="UAE">
+      <div class="loc-top"><span class="pill">LPG plant</span><span>UAE</span></div>
+      <h3>LPG plants</h3>
+<p class="note">Count and sites to confirm.</p>    </li>    <li class="loc" data-country="Malaysia">
+      <div class="loc-top"><span class="pill">LPG plant</span><span>Malaysia</span></div>
+      <h3>LPG plants</h3>
+<p class="note">Count and sites to confirm.</p>    </li>  </ul>
+  <p class="empty" data-empty hidden>No locations match this filter.</p>
   </div>
 </section>
-
-
-<section class="section alt" id="locations">
-  <div class="wrap">
-    <header class="section-head" data-reveal>
-      <p class="kicker">Locations</p>
-      <h2>Our footprint</h2>
-<p>Eleven LPG plants in total. The site lists the countries but not each plant&#39;s address or per-country count.</p>    </header>
-
-    <div class="filters" role="group" aria-label="Filter locations by country" data-filters>
-      <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter" type="button" data-filter="Oman" aria-pressed="false">Oman <span class="filter-n">2</span></button>
-      <button class="filter" type="button" data-filter="UAE" aria-pressed="false">UAE <span class="filter-n">1</span></button>
-      <button class="filter" type="button" data-filter="Malaysia" aria-pressed="false">Malaysia <span class="filter-n">1</span></button>
-    </div>
-    <p class="result-count" aria-live="polite" data-result></p>
-
-    <ul class="loc-grid">
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">Head office</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>Head office</h3>
-<p class="loc-addr"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Muscat, Sultanate of Oman. Street address not published.</span></p>      </li>
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.06s">
-        <div class="loc-top">
-          <span class="pill">LPG plant &amp; storage</span>
-          <span class="country">Oman</span>
-        </div>
-        <h3>LPG plants</h3>
-<p class="note">Count and sites to confirm.</p>      </li>
-      <li class="loc card spot" data-country="UAE" data-reveal style="--d: 0.12s">
-        <div class="loc-top">
-          <span class="pill">LPG plant</span>
-          <span class="country">UAE</span>
-        </div>
-        <h3>LPG plants</h3>
-<p class="note">Count and sites to confirm.</p>      </li>
-      <li class="loc card spot" data-country="Malaysia" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">LPG plant</span>
-          <span class="country">Malaysia</span>
-        </div>
-        <h3>LPG plants</h3>
-<p class="note">Count and sites to confirm.</p>      </li>
-    </ul>
-    <p class="empty" data-empty hidden>No locations match this filter.</p>
-  </div>
-</section>
-
-<section class="section contact" id="contact">
+<section class="contact" id="contact">
   <div class="wrap contact-grid">
     <div>
-      <p class="kicker" data-reveal>Contact</p>
-      <h2 data-reveal style="--d: .08s">Contact us</h2>
-      <p data-reveal style="--d: .16s">For supply, corporate and investor enquiries.</p>
-
-      <ul class="contact-list">
-        <li data-reveal style="--d: .2s"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><small>Address</small>Location: Muscat, Sultanate of Oman (street address to confirm)</span></li>
-        <li data-reveal style="--d: 0.25s"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-          <span>
-            <small>Call centre</small>
-              <a href="tel:+96824162646">+968 2416 2646</a>
-          </span>
-        </li>
-        <li data-reveal style="--d: 0.3s"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-          <span>
-            <small>WhatsApp</small>
-              <a href="tel:+96890604445">+968 9060 4445</a>
-<a class="wa" href="https://wa.me/96890604445">WhatsApp</a>          </span>
-        </li>
-        <li data-reveal style="--d: .4s"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><small>Email</small><a href="mailto:info@nationalgasco.net">info@nationalgasco.net</a></span></li>
-      </ul>
-
+      <p class="eyebrow">Contact</p>
+      <h2 class="contact-title" data-anim="lines">Contact us</h2>
+      <p class="contact-intro" data-anim="up">For supply, corporate and investor enquiries.</p>
+      <ul class="contact-list">        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><small>Address</small>Location: Muscat, Sultanate of Oman (street address to confirm)</span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>Call centre</small><a href="tel:+96824162646">+968 2416 2646</a></span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>WhatsApp</small><a href="tel:+96890604445">+968 9060 4445</a><a class="wa" href="https://wa.me/96890604445">WhatsApp</a></span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><small>Email</small><a href="mailto:info@nationalgasco.net">info@nationalgasco.net</a></span></li>      </ul>
     </div>
 
-    <form class="form card" data-form data-endpoint="" novalidate data-reveal style="--d: .15s">
+    <form class="form" data-form data-endpoint="" novalidate data-anim="up">
       <h3>Send enquiry</h3>
-
       <div class="field" data-field>
         <label for="f-name">Full name</label>
         <input id="f-name" name="name" type="text" autocomplete="name" data-rule="name" required>
         <p class="err" data-err aria-live="polite"></p>
       </div>
-
       <div class="field" data-field>
         <label for="f-contact">Email or phone</label>
         <input id="f-contact" name="contact" type="text" autocomplete="email" inputmode="email" data-rule="contact" required>
         <p class="err" data-err aria-live="polite"></p>
-      </div>
-
-
-      <div class="field">
+      </div>      <div class="field">
         <label for="f-topic">What is this about?</label>
-        <select id="f-topic" name="topic">
-<option>Supply enquiry</option><option>Corporate or investor relations</option><option>Careers</option><option>Media</option><option>Other</option>        </select>
+        <select id="f-topic" name="topic"><option>Supply enquiry</option><option>Corporate or investor relations</option><option>Careers</option><option>Media</option><option>Other</option></select>
       </div>
-
       <div class="field">
         <label for="f-msg">Message <span class="optional">(optional)</span></label>
         <textarea id="f-msg" name="message" rows="4"></textarea>
       </div>
-
-      <button class="btn btn-primary btn-block" type="submit">Send enquiry</button>
+      <button class="btn btn-primary btn-block" type="submit">Send enquiry <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="form-status" role="status" data-status></p>
     </form>
   </div>
-</section>
-
-</main>
+</section></main>
 
 <footer class="site-footer">
-  <div class="wrap foot-grid">
-    <div>
-      <a class="brand" href="#top">
-        <span class="brand-mark" aria-hidden="true">N</span>
-        <span class="brand-text">National Gas</span>
-      </a>
-      <p class="foot-meta">National Gas Company: LPG plants and storage across Oman, the UAE and Malaysia.</p>
+  <div class="wrap">
+    <p class="foot-big" aria-hidden="true" data-drift="14">National Gas</p>
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">N</span><span class="brand-text">National Gas</span></a>
+        <p style="margin-top:1rem;max-width:38ch">National Gas Company: LPG plants and storage across Oman, the UAE and Malaysia.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer"><a href="#about">About</a><a href="#services">Subsidiaries</a><a href="#locations">Locations</a><a href="#contact">Contact</a>      </nav>
+      <div class="foot-contact">
+<p>Location: Muscat, Sultanate of Oman (street address to confirm)</p><p><a href="tel:+96824162646">+968 2416 2646</a></p><p><a href="tel:+96890604445">+968 9060 4445</a></p><p><a href="mailto:info@nationalgasco.net">info@nationalgasco.net</a></p>      </div>
     </div>
-    <nav class="foot-nav" aria-label="Footer">
-      <a class="" href="#about">About</a><a class="" href="#services">Subsidiaries</a><a class="" href="#locations">Locations</a><a class="" href="#contact">Contact</a>
-    </nav>
-    <div class="foot-contact">
-<p>Location: Muscat, Sultanate of Oman (street address to confirm)</p><p><a href="tel:+96824162646">+968 2416 2646</a></p><p><a href="tel:+96890604445">+968 9060 4445</a></p><p><a href="mailto:info@nationalgasco.net">info@nationalgasco.net</a></p>    </div>
-  </div>
-  <div class="wrap foot-bottom">
-    <p>© 2026 National Gas Company. Concept redesign, not the company's official website. Facts to be verified before use.</p>
-    <a href="#top">Back to top</a>
-  </div>
+    <div class="foot-bottom">
+      <p>© 2026 National Gas Company. Concept redesign, not the company's official website. Facts to be verified before use.</p>
+      <a href="#top">Back to top</a>
+    </div>    <details class="credits">
+      <summary>Image credits</summary>
+      <ul>        <li>“Industrial Gauges” by Jonas Nilsson Lee, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/industrial-gauges-IQDKLP8G2I" rel="noopener">source</a></li>        <li>“Industrial Silos” by Leeroy, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/industrial-silos-9865C0BA21" rel="noopener">source</a></li>        <li>“AMACO STORAGE TERMINAL” by jasonwoodhead23, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/80365963@N00/7150825737" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Utilities Meters” by Leeroy, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/utilities-meters-77695777DD" rel="noopener">source</a></li>      </ul>
+    </details>  </div>
 </footer>
-
 <a class="to-top" href="#top" data-to-top aria-label="Back to top"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 
-<script src="assets/motion.js" defer></script>
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/fx.js" defer></script>
+<script src="assets/core.js" defer></script>
 </body>
 </html>

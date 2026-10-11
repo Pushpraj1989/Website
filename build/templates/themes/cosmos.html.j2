@@ -1,0 +1,118 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+
+{% block header %}
+<header class="site-header" data-header>
+  <div class="wrap nav-row">
+    <a class="brand" href="#top" aria-label="{{ s.name }}, back to top">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text mono">{{ s.theme_data.code }}</span>
+    </a>
+    <nav class="nav pill-nav" id="nav" aria-label="Primary">
+      {%- for n in s._nav %}<a href="#{{ n.id }}"><span data-scramble>{{ n.label }}</span></a>{% endfor %}
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-primary btn-sm" href="{{ s.cta.href }}" data-magnetic>{{ s.cta.label }}</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<section class="hero" id="top">
+  <canvas class="hero-fx" data-fx="sphere" aria-hidden="true"></canvas>
+  <div class="hud" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow mono" data-anim="up" data-intro>{{ s.hero.eyebrow }}</p>
+      <h1 class="hero-title" data-scramble data-intro>{{ s.hero.title }}</h1>
+      <p class="hero-lede" data-anim="words" data-intro data-delay=".4">{{ s.hero.lede }}</p>
+      <div class="cta-row" data-anim="up" data-intro data-delay=".7">
+        <a class="btn btn-primary" href="{{ s.hero.primary.href }}" data-magnetic>{{ s.hero.primary.label }} {{ icon('arrow') }}</a>
+        <a class="btn btn-ghost" href="{{ s.hero.secondary.href }}" data-magnetic>{{ s.hero.secondary.label }}</a>
+      </div>
+    </div>
+
+    <aside class="seek" aria-label="Quick links" data-anim="left" data-intro data-delay=".9">
+      <p class="seek-title mono">What are you looking for?</p>
+      <ul>
+        {%- for q in s.theme_data.seek %}
+        <li><a href="{{ q.href }}"><span class="mono">→</span> <span data-scramble>{{ q.label }}</span></a></li>
+        {%- endfor %}
+      </ul>
+    </aside>
+  </div>
+
+  <dl class="readout mono wrap" data-anim="up" data-intro data-delay="1">
+    {%- for st in s.stats %}
+    <div><dt>{{ st.label }}</dt><dd>{{ m.count(st) }}</dd></div>
+    {%- endfor %}
+  </dl>
+</section>
+
+{{ m.marquee(s.marquee, 0.8, 'left', 'mono-mq') }}
+
+<section class="fly" id="services" data-fly aria-label="{{ s.services.title }}">
+  <div class="fly-head wrap">
+    <p class="eyebrow mono">{{ s.services.nav }}</p>
+    <h2 data-scramble>{{ s.services.title }}</h2>
+    <p class="muted">{{ s.services.intro }}</p>
+  </div>
+  <div class="fly-stage">
+    <div class="fly-space" data-space>
+      {%- for c in s.theme_data.space %}
+      <div class="fly-card" data-z="{{ c.z }}" style="--x: {{ c.x }}vw; --y: {{ c.y }}vh; --zz: {{ c.z }}px">
+        <div class="glass{% if c.image %} glass-img{% endif %}">
+          {%- if c.image %}
+          {{ m.img(c.image, 'glass-media') }}
+          {%- endif %}
+          <span class="glass-k mono">{{ c.kicker }}</span>
+          <h3 class="glass-t">{{ c.title }}</h3>
+          {% if c.text %}<p class="glass-p">{{ c.text }}</p>{% endif %}
+        </div>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-copy">
+      <p class="eyebrow mono">About</p>
+      <h2 class="about-title" data-anim="lines">{{ s.about.title }}</h2>
+      {%- for p in s.about.body %}<p class="about-p" data-anim="up">{{ p }}</p>{% endfor %}
+    </div>
+    <ul class="spec">
+      {%- for p in s.about.points %}
+      <li class="glass" data-anim="up" data-delay="{{ loop.index0 * 0.1 }}">
+        <span class="mono spec-i">0{{ loop.index }}</span>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.text }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+  <div class="wrap duo">
+    {{ m.img('pipes', 'duo-a', 'img') }}
+    {{ m.img('valves', 'duo-b', 'img') }}
+  </div>
+</section>
+
+<section class="footprint" id="locations">
+  <div class="wrap">
+    <p class="eyebrow mono">{{ s.locations.nav }}</p>
+    <h2 data-scramble>{{ s.locations.title }}</h2>
+    <p class="muted" data-anim="up">{{ s.locations.intro }}</p>
+    <div class="nodes" aria-hidden="true">
+      {%- for c in s.theme_data.nodes %}
+      <div class="node" data-anim="scale" data-delay="{{ loop.index0 * 0.12 }}"><span class="node-dot"></span><span class="mono">{{ c }}</span></div>
+      {%- if not loop.last %}<span class="node-line"></span>{% endif %}
+      {%- endfor %}
+    </div>
+    {{ m.locations() }}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+
+{% block content %}
+<section class="hero" id="top">
+  {{ m.img('hero', 'hero-media') }}
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="curtain curtain-l" aria-hidden="true"></div>
+  <div class="curtain curtain-r" aria-hidden="true"></div>
+
+  <div class="wrap hero-inner">
+    <p class="eyebrow" data-anim="up" data-intro data-delay=".6">{{ s.hero.eyebrow }}</p>
+    <h1 class="hero-title" data-anim="lines" data-intro data-delay=".7">{{ s.theme_data.hero_html | safe }}</h1>
+    <div class="hero-foot">
+      <p class="hero-lede" data-anim="up" data-intro data-delay="1">{{ s.hero.lede }}</p>
+      <div class="cta-row" data-anim="up" data-intro data-delay="1.1">
+        <a class="btn btn-primary" href="{{ s.hero.primary.href }}" data-magnetic>{{ s.hero.primary.label }} {{ icon('arrow') }}</a>
+        <a class="btn btn-ghost" href="{{ s.hero.secondary.href }}" data-magnetic>{{ s.hero.secondary.label }}</a>
+      </div>
+    </div>
+  </div>
+  <span class="hero-mark" aria-hidden="true">Est. {{ s.theme_data.est }}</span>
+</section>
+
+<section class="since" id="about">
+  <div class="wrap since-grid">
+    <div class="since-year" aria-hidden="true" data-anim="chars">{{ s.theme_data.est }}</div>
+    <div class="since-copy">
+      <p class="eyebrow">About</p>
+      <h2 data-anim="lines">{{ s.about.title }}</h2>
+      {%- for p in s.about.body %}<p class="since-p" data-anim="up">{{ p }}</p>{% endfor %}
+      <dl class="figures">
+        {%- for st in s.stats %}
+        <div data-anim="up" data-delay="{{ loop.index0 * 0.08 }}"><dt>{{ st.label }}</dt><dd>{{ m.count(st) }}</dd></div>
+        {%- endfor %}
+      </dl>
+    </div>
+  </div>
+  <div class="since-media wrap">{{ m.img('muttrah', 'since-img', 'img', '1.5') }}</div>
+</section>
+
+<section class="groups" id="services" data-hscroll aria-label="{{ s.services.title }}">
+  <div class="groups-pin">
+    <div class="wrap groups-head">
+      <p class="eyebrow">{{ s.services.nav }}</p>
+      <h2 data-anim="lines">{{ s.services.title }}</h2>
+      <p>{{ s.services.intro }}</p>
+    </div>
+    <div class="groups-track" data-htrack>
+      {%- for it in s.services['items'] %}
+      <article class="group-panel">
+        <figure class="media group-media">
+          <img src="{{ m.src(it.image) }}" alt="{{ s.images[it.image].alt }}" loading="lazy" data-hpar>
+          {%- if s.images[it.image].cap %}<figcaption class="media-cap">{{ s.images[it.image].cap }}</figcaption>{% endif %}
+        </figure>
+        <div class="group-copy">
+          <span class="group-n">{{ '%02d' % loop.index }} — {{ it.companies | length }} {{ 'company' if it.companies|length == 1 else 'companies' }}</span>
+          <h3>{{ it.title }}</h3>
+          <ul>{% for c in it.companies %}<li>{{ c }}</li>{% endfor %}</ul>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+    <div class="wrap"><div class="hbar"><i data-hbar></i></div></div>
+  </div>
+</section>
+
+<section class="index" id="highlights">
+  <div class="wrap">
+    <div class="index-head">
+      <p class="eyebrow">Index</p>
+      <h2 data-anim="lines">{{ s.theme_data.index_html | safe }}</h2>
+    </div>
+    <ol class="index-list" data-previews>
+      {%- set ns = namespace(i=0) %}
+      {%- for it in s.services['items'] %}
+        {%- for c in it.companies %}
+        {%- set ns.i = ns.i + 1 %}
+        <li class="index-row" data-preview="{{ m.src(it.image) }}">
+          <span class="index-n">{{ '%02d' % ns.i }}</span>
+          <span class="index-name">{{ c | replace(' (JV)', '') }}</span>
+          {%- if '(JV)' in c %}<span class="index-jv">Joint venture</span>{% else %}<span></span>{% endif %}
+          <span class="index-group">{{ it.title }}</span>
+        </li>
+        {%- endfor %}
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+{{ m.marquee(s.marquee, 0.9, 'left', 'serif-mq') }}
+
+<section class="pillars">
+  <div class="wrap pillar-grid">
+    {%- for p in s.about.points %}
+    <article class="pillar" data-anim="up" data-delay="{{ loop.index0 * 0.1 }}">
+      <span class="pillar-n">{{ ['I', 'II', 'III', 'IV'][loop.index0] }}</span>
+      <h3>{{ p.title }}</h3>
+      <p>{{ p.text }}</p>
+    </article>
+    {%- endfor %}
+  </div>
+  <div class="wrap pillar-media">{{ m.img('night', 'night-img', 'img') }}</div>
+</section>
+
+<section class="locs" id="locations">
+  <div class="wrap">
+    <p class="eyebrow">{{ s.locations.nav }}</p>
+    <h2 data-anim="lines">{{ s.locations.title }}</h2>
+    <p class="muted" data-anim="up">{{ s.locations.intro }}</p>
+    {{ m.locations() }}
+  </div>
+</section>
+{% endblock %}

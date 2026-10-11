@@ -10,6 +10,7 @@ or conflicting and should be checked against the live site, or with the client, 
 - Joint-venture ownership shares (Savills, Kone) are not published.
 - Only the corporate head office is published. Confirm whether any other office should appear.
 - The site's head office line gives 'Ruwi, Muscat' and a PO box; the building address still needs confirming.
+- Photography is Creative Commons imagery (see footer credits): Oman heritage sites and illustrative business images, not Assarain's own premises or products.
 
 Sources:
 - https://www.assarain.com (homepage read 11 Oct 2026)
@@ -21,6 +22,8 @@ Sources:
 - Service lines and the 220+ country figure come from the earlier audit, not a live check: the official site blocked automated access.
 - No address, phone number or email has been verified.
 - Government-owned: expect a tender process. This is a concept only, not an offer to the company.
+- The four-step 'How express delivery works' flow is concept copy written for the design, not taken from Asyad's site.
+- Photography is illustrative Creative Commons imagery (see footer credits), not Asyad's fleet or facilities.
 
 Sources:
 - https://asyad.om/logistics-solutions/asyad-express (redirects to asyad.com; blocked automated access on 11 Oct 2026)
@@ -33,6 +36,7 @@ Sources:
 - No email address is published on the site.
 - Branch street addresses and branch-level phone numbers are not on the page (city and facility type only).
 - Clinical wording on the concept is drafted, not reviewed. It needs medical sign-off before use.
+- Photography is illustrative Creative Commons imagery (see footer credits), not Badr Al Samaa's facilities or staff. Replace with the group's own photos before use.
 
 Sources:
 - https://www.badralsamaahospitals.com (homepage read 11 Oct 2026)
@@ -43,6 +47,7 @@ Sources:
 - The email address is obfuscated on the site. Confirm the public address.
 - The head office street address is not published.
 - The '1972' founding year and '54 years' are calculated; the site's own text says '52 years', which is out of date.
+- Photography is from Creative Commons sources (see footer credits). Unit and some project images are illustrative and labelled as such; replace with Galfar's own project photography.
 
 Sources:
 - https://galfar.com/oman/galfar/ (homepage read 11 Oct 2026)
@@ -53,6 +58,7 @@ Sources:
 - The Saudi subsidiary name (NGC Energy LLC) and the Malaysia company name were inferred from the site's labels and domain. Confirm both.
 - No founding year or listing details are published.
 - The head office street address is not published.
+- Photography is illustrative Creative Commons imagery (see footer credits), not NGC's plants. Replace with the company's own photos.
 
 Sources:
 - https://nationalgasco.net (homepage read 11 Oct 2026)
@@ -64,6 +70,7 @@ Sources:
 - The Sharjah entry lists both a UAE and an Oman phone number. The concept uses the UAE number.
 - No emergency number, bed count or founding year is published.
 - The staff figure ('over 500') is the group's own wording.
+- Photography is illustrative Creative Commons imagery (see footer credits): city views on the site list and stock clinical images, not Starcare's own facilities.
 
 Sources:
 - https://www.starcarehospital.com (homepage read 11 Oct 2026)

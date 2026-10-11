@@ -5,17 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Galfar Engineering &amp; Contracting · Concept redesign</title>
 <meta name="description" content="Galfar Engineering &amp; Contracting: multi-disciplined engineering, contracting and construction in Oman since 1972.">
-<meta name="theme-color" content="#1d4ed8">
+<meta name="theme-color" content="#0e0b08">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="assets/site.css">
-<script>document.documentElement.classList.replace('no-js', 'js');</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Anton&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500">
+<link rel="stylesheet" href="assets/core.css">
+<link rel="stylesheet" href="assets/ember.css"><link rel="preload" as="image" href="assets/img/salalah.jpg"><script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
-<body style="--accent: #1d4ed8">
-
+<body data-theme="ember" style="--accent: #ff5a1f">
 <a class="skip" href="#main">Skip to content</a>
 <div class="progress" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <p class="loader-name"><span>G</span><span>a</span><span>l</span><span>f</span><span>a</span><span>r</span></p>
+    <div class="loader-bar"><i></i></div>
+    <p class="loader-count">000</p>
+  </div>
+</div>
+<div class="cursor" aria-hidden="true"><div class="cursor-ring"><span></span></div><div class="cursor-dot"></div></div>
 
 <header class="site-header" data-header>
   <div class="wrap nav-row">
@@ -23,261 +31,234 @@
       <span class="brand-mark" aria-hidden="true">G</span>
       <span class="brand-text">Galfar</span>
     </a>
-    <nav class="nav" id="nav" aria-label="Primary">
-      <a class="" href="#about">About</a><a class="" href="#services">Capabilities</a><a class="" href="#highlights">Projects</a><a class="" href="#locations">Locations</a><a class="" href="#contact">Contact</a>
-    </nav>
+    <nav class="nav" id="nav" aria-label="Primary"><a href="#about">About</a><a href="#services">Capabilities</a><a href="#highlights">Projects</a><a href="#locations">Locations</a><a href="#contact">Contact</a>    </nav>
     <div class="nav-actions">
-      <a class="btn btn-primary btn-sm cta-head" href="#contact">Contact us</a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu>
-        <span></span><span></span>
-      </button>
+      <a class="btn btn-primary btn-sm" href="#contact" data-magnetic>Contact us</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>
     </div>
   </div>
 </header>
-
 <main id="main">
 
 <section class="hero" id="top">
-  <div class="hero-bg" aria-hidden="true">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="grid"></div>
-  </div>
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow" data-reveal>Engineering · Contracting · Construction · Oman</p>
-      <h1 class="hero-title" aria-label="Building Oman since 1972"><span class="w" style="--i: 0" aria-hidden="true">Building</span> <span class="w" style="--i: 1" aria-hidden="true">Oman</span> <span class="w" style="--i: 2" aria-hidden="true">since</span> <span class="w" style="--i: 3" aria-hidden="true">1972</span> </h1>
-      <p class="lede" data-reveal style="--d: .35s">One of the largest multi-disciplined engineering, contracting and construction companies in the Sultanate of Oman, delivering energy, civil and infrastructure projects.</p>
-      <div class="cta-row" data-reveal style="--d: .5s">
-        <a class="btn btn-primary" href="#services">Our capabilities <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="#contact">Contact us</a>
+  <figure class="media hero-media">
+  <img src="assets/img/salalah.jpg" alt="Salalah Airport terminal building" loading="eager" decoding="async"><figcaption class="media-cap">Salalah Airport · featured project</figcaption></figure>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <canvas class="hero-fx" data-fx="embers" aria-hidden="true"></canvas>
+
+  <span class="side-label side-l mono" aria-hidden="true">Est. 1972</span>
+  <span class="side-label side-r mono" aria-hidden="true">Muscat · Oman</span>
+
+  <div class="wrap hero-inner">
+    <p class="eyebrow hero-eyebrow" data-anim="up" data-intro>Engineering · Contracting · Construction · Oman</p>
+    <h1 class="hero-title" data-anim="chars" data-intro>Building Oman since 1972</h1>
+    <div class="hero-foot">
+      <p class="hero-lede" data-anim="up" data-intro data-delay=".5">One of the largest multi-disciplined engineering, contracting and construction companies in the Sultanate of Oman, delivering energy, civil and infrastructure projects.</p>
+      <div class="cta-row" data-anim="up" data-intro data-delay=".65">
+        <a class="btn btn-primary" href="#services" data-magnetic>Our capabilities <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#contact" data-magnetic>Contact us</a>
       </div>
     </div>
-
-    <aside class="hero-panel" data-reveal style="--d: .6s" aria-label="Key figures">
-      <div class="glass">
-        <p class="glass-label">At a glance</p>
-        <ul class="glass-stats">
-          <li><strong><span data-count data-to="54" data-suffix="">54</span></strong><span>Years of experience</span></li>
-          <li><strong><span data-count data-to="3" data-suffix="">3</span></strong><span>Business units</span></li>
-          <li><strong><span data-count data-to="7" data-suffix="">7</span></strong><span>Support units</span></li>
-        </ul>
-      </div>
-    </aside>
   </div>
-  <a class="scroll-cue" href="#about" aria-label="Scroll to about"><span></span></a>
+  <div class="hero-dots" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i></div>
 </section>
 
-<div class="wrap">
-  <div class="stat-grid" aria-label="Key figures">
-    <div class="stat" data-reveal style="--d: 0.0s">
-      <div class="num"><span data-count data-to="54" data-suffix="">54</span></div>
-      <div class="lbl">Years of experience</div>
-    </div>
-    <div class="stat" data-reveal style="--d: 0.1s">
-      <div class="num"><span data-count data-to="3" data-suffix="">3</span></div>
-      <div class="lbl">Business units</div>
-    </div>
-    <div class="stat" data-reveal style="--d: 0.2s">
-      <div class="num"><span data-count data-to="7" data-suffix="">7</span></div>
-      <div class="lbl">Support units</div>
-    </div>
-    <div class="stat" data-reveal style="--d: 0.30000000000000004s">
-      <div class="num"><span data-count data-to="4" data-suffix="">4</span></div>
-      <div class="lbl">Iconic projects featured</div>
-    </div>
-  </div>
-</div>
-
-<div class="marquee section-gap" aria-label="Areas covered">
-  <div class="marquee-track">
-    <div class="marquee-group">
-<span>Oil &amp; gas plants</span><span>Power generation</span><span>Airports</span><span>Seaports</span><span>Dams</span><span>Water networks</span><span>Wastewater treatment</span><span>Roads &amp; bridges</span>    </div>
-    <div class="marquee-group" aria-hidden="true">
-<span>Oil &amp; gas plants</span><span>Power generation</span><span>Airports</span><span>Seaports</span><span>Dams</span><span>Water networks</span><span>Wastewater treatment</span><span>Roads &amp; bridges</span>    </div>
-  </div>
-</div>
-
-<section class="section" id="about">
-  <div class="wrap split">
-    <div>
-      <p class="kicker" data-reveal>About</p>
-      <h2 data-reveal style="--d: .08s">Multi-disciplined, from design to operation</h2>
-      <p class="lead-p" data-reveal style="--d: .16s">Galfar has been established in Oman since 1972. Its work spans engineering, procurement and construction for energy and industrial plants, buildings and environmental works, and roads, airports, seaports, dams and water networks, including operation and maintenance.</p>
-    </div>
-    <ul class="points">
-      <li data-reveal style="--d: 0.0s">
-        <h3>Operation &amp; maintenance</h3>
-        <p>Galfar also operates and maintains several of the facilities it builds.</p>
-      </li>
-      <li data-reveal style="--d: 0.1s">
-        <h3>Quality, safety &amp; environment</h3>
-        <p>QHSSE is one of the group&#39;s dedicated support units.</p>
-      </li>
-      <li data-reveal style="--d: 0.2s">
-        <h3>Iconic projects</h3>
-        <p>Yibal Khuff, Salalah Airport, the Boushar-Amirat Road and Duqm Fishery Port.</p>
-      </li>
-    </ul>
-  </div>
+<section class="stats" aria-label="Key figures">
+  <div class="wrap stat-row">    <div class="stat" data-anim="up" data-delay="0.0">
+      <span class="stat-num"><span data-count data-to="54" data-suffix="">54</span></span>
+      <span class="stat-lbl">Years of experience</span>
+    </div>    <div class="stat" data-anim="up" data-delay="0.08">
+      <span class="stat-num"><span data-count data-to="3" data-suffix="">3</span></span>
+      <span class="stat-lbl">Business units</span>
+    </div>    <div class="stat" data-anim="up" data-delay="0.16">
+      <span class="stat-num"><span data-count data-to="7" data-suffix="">7</span></span>
+      <span class="stat-lbl">Support units</span>
+    </div>    <div class="stat" data-anim="up" data-delay="0.24">
+      <span class="stat-num"><span data-count data-to="4" data-suffix="">4</span></span>
+      <span class="stat-lbl">Iconic projects featured</span>
+    </div>  </div>
 </section>
 
-<section class="section alt" id="services">
+<section class="units" id="services">
   <div class="wrap">
-    <header class="section-head" data-reveal>
-      <p class="kicker">Capabilities</p>
-      <h2>Business units</h2>
-<p>Three business units cover energy, civil and infrastructure work.</p>    </header>
-
-    <div class="card-grid">
-      <article class="card spot" data-reveal style="--d: 0.0s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V10l5 3V10l5 3V6h3v15H3zM17 21V4h4v17"/></svg></div>
-        <h3>Energy &amp; Industrial</h3>
-<p>Engineering, construction and procurement for oil and gas plants, petrochemical and manufacturing facilities, power generation and power grids.</p>      </article>
-      <article class="card spot" data-reveal style="--d: 0.1s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14"/><path d="M5 19 13 11"/></svg></div>
-        <h3>Civil &amp; Environmental</h3>
-<p>Landmark buildings, MEP services, and wastewater treatment plants and networks, including operation and maintenance.</p>      </article>
-      <article class="card spot" data-reveal style="--d: 0.2s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h12v10H2zM14 10h4l3 3v3h-7"/><circle cx="6" cy="17.5" r="1.5"/><circle cx="17" cy="17.5" r="1.5"/></svg></div>
-        <h3>Infrastructure</h3>
-<p>Roads, bridges, airports, seaports, dams, water treatment plants and water networks, including operation and maintenance.</p>      </article>
-    </div>
-
-    <div class="chips-block" data-reveal>
-      <h3>Support units</h3>
-      <ul class="chips">
-<li>QHSSE</li><li>Project Services</li><li>Human Capital</li><li>Finance</li><li>Treasury &amp; IT</li><li>Supply Chain Management</li><li>Strategy &amp; Business Development</li>      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="highlights">
-  <div class="wrap">
-    <header class="section-head" data-reveal>
-      <p class="kicker">Projects</p>
-      <h2>Iconic projects</h2>
-<p>Projects the group features on its homepage.</p>    </header>
-    <div class="card-grid">
-      <article class="card spot" data-reveal style="--d: 0.0s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V10l5 3V10l5 3V6h3v15H3zM17 21V4h4v17"/></svg></div>
-        <h3>Yibal Khuff Project</h3>
-<p>Energy &amp; Industrial</p>      </article>
-      <article class="card spot" data-reveal style="--d: 0.08s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h8v17M13 9h6a1 1 0 0 1 1 1v11M3 21h18M7 8h2M7 12h2M7 16h2M16 13h1M16 17h1"/></svg></div>
-        <h3>Salalah Airport</h3>
-<p>Civil &amp; Environmental</p>      </article>
-      <article class="card spot" data-reveal style="--d: 0.16s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h12v10H2zM14 10h4l3 3v3h-7"/><circle cx="6" cy="17.5" r="1.5"/><circle cx="17" cy="17.5" r="1.5"/></svg></div>
-        <h3>Boushar-Amirat Road</h3>
-<p>Infrastructure</p>      </article>
-      <article class="card spot" data-reveal style="--d: 0.24s">
-        <div class="icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5zM3 13l9 5 9-5"/></svg></div>
-        <h3>Duqm Fishery Port</h3>
-<p>Infrastructure</p>      </article>
-    </div>
-  </div>
-</section>
-
-<section class="section alt" id="locations">
-  <div class="wrap">
-    <header class="section-head" data-reveal>
-      <p class="kicker">Locations</p>
-      <h2>Head office</h2>
-<p>The head office is in Muscat. The site publishes a postal address only.</p>    </header>
-
-    <p class="result-count" aria-live="polite" data-result></p>
-
-    <ul class="loc-grid">
-      <li class="loc card spot" data-country="Oman" data-reveal style="--d: 0.0s">
-        <div class="loc-top">
-          <span class="pill">Head office</span>
-          <span class="country">Oman</span>
+    <p class="eyebrow">Capabilities</p>
+    <h2 class="units-title" data-anim="lines">Three units. One contractor.</h2>
+    <p class="units-intro" data-anim="up">Three business units cover energy, civil and infrastructure work.</p>
+    <div class="unit-grid" data-assemble>      <article class="unit" data-piece="-260,180,-14">
+        <figure class="media unit-media">
+  <img src="assets/img/energy.jpg" alt="Industrial plant lit at night" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure>
+        <div class="unit-body">
+          <span class="unit-n mono">01</span>
+          <h3>Energy &amp; Industrial</h3>
+          <p>Engineering, construction and procurement for oil and gas plants, petrochemical and manufacturing facilities, power generation and power grids.</p>
         </div>
-        <h3>Head office</h3>
-<p class="loc-addr"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>P.O. Box 533, P.C. 100, Muscat, Sultanate of Oman</span></p>      </li>
-    </ul>
-    <p class="empty" data-empty hidden>No locations match this filter.</p>
+      </article>      <article class="unit" data-piece="0,260,8">
+        <figure class="media unit-media">
+  <img src="assets/img/civil.jpg" alt="Curved concrete structure" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure>
+        <div class="unit-body">
+          <span class="unit-n mono">02</span>
+          <h3>Civil &amp; Environmental</h3>
+          <p>Landmark buildings, MEP services, and wastewater treatment plants and networks, including operation and maintenance.</p>
+        </div>
+      </article>      <article class="unit" data-piece="260,160,16">
+        <figure class="media unit-media">
+  <img src="assets/img/infra.jpg" alt="Aerial view of a highway interchange" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative</figcaption></figure>
+        <div class="unit-body">
+          <span class="unit-n mono">03</span>
+          <h3>Infrastructure</h3>
+          <p>Roads, bridges, airports, seaports, dams, water treatment plants and water networks, including operation and maintenance.</p>
+        </div>
+      </article>    </div>
+    <div class="chip-row" data-anim="up">
+      <span class="chip-title">Support units</span><span class="chip">QHSSE</span><span class="chip">Project Services</span><span class="chip">Human Capital</span><span class="chip">Finance</span><span class="chip">Treasury &amp; IT</span><span class="chip">Supply Chain Management</span><span class="chip">Strategy &amp; Business Development</span>    </div>
   </div>
 </section>
 
-<section class="section contact" id="contact">
+<div class="marquee outline-mq" data-marquee="1.2" data-dir="left" aria-label="Oil &amp; gas plants, Power generation, Airports, Seaports, Dams, Water networks, Wastewater treatment, Roads &amp; bridges">
+  <div class="marquee-track" aria-hidden="true">    <div class="marquee-group"><span class="mq-item">Oil &amp; gas plants</span><span class="mq-sep"></span><span class="mq-item">Power generation</span><span class="mq-sep"></span><span class="mq-item">Airports</span><span class="mq-sep"></span><span class="mq-item">Seaports</span><span class="mq-sep"></span><span class="mq-item">Dams</span><span class="mq-sep"></span><span class="mq-item">Water networks</span><span class="mq-sep"></span><span class="mq-item">Wastewater treatment</span><span class="mq-sep"></span><span class="mq-item">Roads &amp; bridges</span><span class="mq-sep"></span></div>    <div class="marquee-group"><span class="mq-item">Oil &amp; gas plants</span><span class="mq-sep"></span><span class="mq-item">Power generation</span><span class="mq-sep"></span><span class="mq-item">Airports</span><span class="mq-sep"></span><span class="mq-item">Seaports</span><span class="mq-sep"></span><span class="mq-item">Dams</span><span class="mq-sep"></span><span class="mq-item">Water networks</span><span class="mq-sep"></span><span class="mq-item">Wastewater treatment</span><span class="mq-sep"></span><span class="mq-item">Roads &amp; bridges</span><span class="mq-sep"></span></div>  </div>
+</div>
+
+<section class="projects" id="highlights" aria-label="Iconic projects">
+  <div class="wrap projects-head">
+    <p class="eyebrow">Projects</p>
+    <h2 data-anim="lines">Iconic projects</h2>
+    <p data-anim="up">Projects the group features on its homepage.</p>
+  </div>
+  <div class="stack" data-stack>    <article class="panel" data-panel>
+      <div class="panel-inner" data-panel-inner>
+        <figure class="media panel-media">
+  <img src="assets/img/refinery.jpg" alt="Oil and gas plant at night" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative image, not the Yibal Khuff site</figcaption></figure>
+        <div class="panel-shade" aria-hidden="true"></div>
+        <div class="wrap panel-copy">
+          <span class="panel-n mono">01 / 04</span>
+          <h3 class="panel-title">Yibal Khuff Project</h3>
+          <span class="panel-tag">Energy &amp; Industrial</span>
+        </div>
+      </div>
+    </article>    <article class="panel" data-panel>
+      <div class="panel-inner" data-panel-inner>
+        <figure class="media panel-media">
+  <img src="assets/img/salalah.jpg" alt="Salalah Airport terminal building" loading="lazy" decoding="async"><figcaption class="media-cap">Salalah Airport</figcaption></figure>
+        <div class="panel-shade" aria-hidden="true"></div>
+        <div class="wrap panel-copy">
+          <span class="panel-n mono">02 / 04</span>
+          <h3 class="panel-title">Salalah Airport</h3>
+          <span class="panel-tag">Civil &amp; Environmental</span>
+        </div>
+      </div>
+    </article>    <article class="panel" data-panel>
+      <div class="panel-inner" data-panel-inner>
+        <figure class="media panel-media">
+  <img src="assets/img/road.jpg" alt="Multi-lane expressway in Muscat" loading="lazy" decoding="async"><figcaption class="media-cap">Illustrative: Muscat Expressway</figcaption></figure>
+        <div class="panel-shade" aria-hidden="true"></div>
+        <div class="wrap panel-copy">
+          <span class="panel-n mono">03 / 04</span>
+          <h3 class="panel-title">Boushar-Amirat Road</h3>
+          <span class="panel-tag">Infrastructure</span>
+        </div>
+      </div>
+    </article>    <article class="panel" data-panel>
+      <div class="panel-inner" data-panel-inner>
+        <figure class="media panel-media">
+  <img src="assets/img/duqm.jpg" alt="Duqm Fishing Port from above" loading="lazy" decoding="async"><figcaption class="media-cap">Duqm Fishing Port</figcaption></figure>
+        <div class="panel-shade" aria-hidden="true"></div>
+        <div class="wrap panel-copy">
+          <span class="panel-n mono">04 / 04</span>
+          <h3 class="panel-title">Duqm Fishery Port</h3>
+          <span class="panel-tag">Infrastructure</span>
+        </div>
+      </div>
+    </article>  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <p class="eyebrow">About</p>
+      <h2 class="about-title" data-anim="lines">Multi-disciplined, from design to operation</h2><p class="about-p" data-anim="up">Galfar has been established in Oman since 1972. Its work spans engineering, procurement and construction for energy and industrial plants, buildings and environmental works, and roads, airports, seaports, dams and water networks, including operation and maintenance.</p>      <ul class="points">        <li data-anim="up" data-delay="0.0"><h3>Operation &amp; maintenance</h3><p>Galfar also operates and maintains several of the facilities it builds.</p></li>        <li data-anim="up" data-delay="0.08"><h3>Quality, safety &amp; environment</h3><p>QHSSE is one of the group&#39;s dedicated support units.</p></li>        <li data-anim="up" data-delay="0.16"><h3>Iconic projects</h3><p>Yibal Khuff, Salalah Airport, the Boushar-Amirat Road and Duqm Fishery Port.</p></li>      </ul>
+    </div>
+    <div class="about-media">
+      <figure class="media about-img" data-anim="img">
+  <img src="assets/img/sparks.jpg" alt="Welding sparks on a work site" loading="lazy" decoding="async"></figure>
+      <canvas class="about-fx" data-fx="embers" data-density=".35" aria-hidden="true"></canvas>
+    </div>
+  </div>
+</section>
+
+<section class="locs" id="locations">
+  <div class="wrap">
+    <p class="eyebrow">Locations</p>
+    <h2 data-anim="lines">Head office</h2>
+    <p class="muted" data-anim="up">The head office is in Muscat. The site publishes a postal address only.</p>
+      <p class="result-count" aria-live="polite" data-result></p>
+  <ul class="loc-grid">    <li class="loc" data-country="Oman">
+      <div class="loc-top"><span class="pill">Head office</span><span>Oman</span></div>
+      <h3>Head office</h3>
+<p>P.O. Box 533, P.C. 100, Muscat, Sultanate of Oman</p>    </li>  </ul>
+  <p class="empty" data-empty hidden>No locations match this filter.</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
   <div class="wrap contact-grid">
     <div>
-      <p class="kicker" data-reveal>Contact</p>
-      <h2 data-reveal style="--d: .08s">Contact Galfar</h2>
-      <p data-reveal style="--d: .16s">For project, tender and corporate enquiries.</p>
+      <p class="eyebrow">Contact</p>
+      <h2 class="contact-title" data-anim="lines">Contact Galfar</h2>
+      <p class="contact-intro" data-anim="up">For project, tender and corporate enquiries.</p>
+      <ul class="contact-list">        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><small>Address</small>P.O. Box 533, P.C. 100, Muscat, Sultanate of Oman</span></li>        <li data-anim="up"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>Telephone</small><a href="tel:+96824525000">+968 2452 5000</a></span></li>      </ul>
+<p class="contact-note">The email address on the site is obfuscated and has not been published here.</p>    </div>
 
-      <ul class="contact-list">
-        <li data-reveal style="--d: .2s"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><small>Address</small>P.O. Box 533, P.C. 100, Muscat, Sultanate of Oman</span></li>
-        <li data-reveal style="--d: 0.25s"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-          <span>
-            <small>Telephone</small>
-              <a href="tel:+96824525000">+968 2452 5000</a>
-          </span>
-        </li>
-      </ul>
-
-<p class="note contact-note">The email address on the site is obfuscated and has not been published here.</p>    </div>
-
-    <form class="form card" data-form data-endpoint="" novalidate data-reveal style="--d: .15s">
+    <form class="form" data-form data-endpoint="" novalidate data-anim="up">
       <h3>Send enquiry</h3>
-
       <div class="field" data-field>
         <label for="f-name">Full name</label>
         <input id="f-name" name="name" type="text" autocomplete="name" data-rule="name" required>
         <p class="err" data-err aria-live="polite"></p>
       </div>
-
       <div class="field" data-field>
         <label for="f-contact">Email or phone</label>
         <input id="f-contact" name="contact" type="text" autocomplete="email" inputmode="email" data-rule="contact" required>
         <p class="err" data-err aria-live="polite"></p>
-      </div>
-
-
-      <div class="field">
+      </div>      <div class="field">
         <label for="f-topic">What is this about?</label>
-        <select id="f-topic" name="topic">
-<option>Project enquiry</option><option>Tender or supplier registration</option><option>Careers</option><option>Media</option><option>Other</option>        </select>
+        <select id="f-topic" name="topic"><option>Project enquiry</option><option>Tender or supplier registration</option><option>Careers</option><option>Media</option><option>Other</option></select>
       </div>
-
       <div class="field">
         <label for="f-msg">Message <span class="optional">(optional)</span></label>
         <textarea id="f-msg" name="message" rows="4"></textarea>
       </div>
-
-      <button class="btn btn-primary btn-block" type="submit">Send enquiry</button>
+      <button class="btn btn-primary btn-block" type="submit">Send enquiry <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="form-status" role="status" data-status></p>
     </form>
   </div>
-</section>
-
-</main>
+</section></main>
 
 <footer class="site-footer">
-  <div class="wrap foot-grid">
-    <div>
-      <a class="brand" href="#top">
-        <span class="brand-mark" aria-hidden="true">G</span>
-        <span class="brand-text">Galfar</span>
-      </a>
-      <p class="foot-meta">Galfar Engineering &amp; Contracting: multi-disciplined engineering, contracting and construction in Oman since 1972.</p>
+  <div class="wrap">
+    <p class="foot-big" aria-hidden="true" data-drift="14">Galfar</p>
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">G</span><span class="brand-text">Galfar</span></a>
+        <p style="margin-top:1rem;max-width:38ch">Galfar Engineering &amp; Contracting: multi-disciplined engineering, contracting and construction in Oman since 1972.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer"><a href="#about">About</a><a href="#services">Capabilities</a><a href="#highlights">Projects</a><a href="#locations">Locations</a><a href="#contact">Contact</a>      </nav>
+      <div class="foot-contact">
+<p>P.O. Box 533, P.C. 100, Muscat, Sultanate of Oman</p><p><a href="tel:+96824525000">+968 2452 5000</a></p>      </div>
     </div>
-    <nav class="foot-nav" aria-label="Footer">
-      <a class="" href="#about">About</a><a class="" href="#services">Capabilities</a><a class="" href="#highlights">Projects</a><a class="" href="#locations">Locations</a><a class="" href="#contact">Contact</a>
-    </nav>
-    <div class="foot-contact">
-<p>P.O. Box 533, P.C. 100, Muscat, Sultanate of Oman</p><p><a href="tel:+96824525000">+968 2452 5000</a></p>    </div>
-  </div>
-  <div class="wrap foot-bottom">
-    <p>© 2026 Galfar Engineering &amp; Contracting. Concept redesign, not the company's official website. Facts to be verified before use.</p>
-    <a href="#top">Back to top</a>
-  </div>
+    <div class="foot-bottom">
+      <p>© 2026 Galfar Engineering &amp; Contracting. Concept redesign, not the company's official website. Facts to be verified before use.</p>
+      <a href="#top">Back to top</a>
+    </div>    <details class="credits">
+      <summary>Image credits</summary>
+      <ul>        <li>“Concrete Texture” by The Building Envelope, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/concrete-texture-XA3VDI2RHU" rel="noopener">source</a></li>        <li>“Duqm Fishing Port” by AbdullahAlMaani, BY-SA 4.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=117467673" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Fábrica química Solvay” by Jorge Franganillo, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/46191841@N00/3129290866" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Shanghai interchange”, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://www.rawpixel.com/image/3343089/free-photo-image-view-shanghai-city-highway" rel="noopener">source</a></li>        <li>“Nippon Oil(Yamaguchi)” by kanegen, <a href="https://creativecommons.org/licenses/by/2.0/" rel="license noopener">BY 2.0</a> · <a href="https://www.flickr.com/photos/12527903@N00/4862607373" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Muscat Expressway” by Editor Socks, BY-SA 4.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=156439066" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“File:Neues Terminal SLL.jpg” by Baden65, BY-SA 4.0 · <a href="https://commons.wikimedia.org/w/index.php?curid=56182020" rel="noopener">source</a> · cropped and colour-graded</li>        <li>“Dark Night” by Darius Anton, <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a> · <a href="https://stocksnap.io/photo/dark-night-MO2OUO1MD5" rel="noopener">source</a></li>      </ul>
+    </details>  </div>
 </footer>
-
 <a class="to-top" href="#top" data-to-top aria-label="Back to top"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 
-<script src="assets/motion.js" defer></script>
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/fx.js" defer></script>
+<script src="assets/core.js" defer></script>
 </body>
 </html>
