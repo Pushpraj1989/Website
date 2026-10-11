@@ -11,7 +11,8 @@
       <div class="br-facts">
         {%- if l.doctors %}<div data-anim="up"><strong>{{ l.doctors }}</strong><span>doctors</span></div>{% endif %}
         {%- if l.specs %}<div data-anim="up"><strong>{{ l.specs | length }}</strong><span>specialities</span></div>{% endif %}
-        <div data-anim="up"><strong>24/7</strong><span>helpline</span></div>
+        {%- if l.emergency %}<div data-anim="up"><strong>24/7</strong><span>emergency</span></div>{% endif %}
+        {%- if l.opened %}<div data-anim="up"><strong>{{ l.opened }}</strong><span>opened</span></div>{% endif %}
       </div>
       {%- if l.specs %}
       <h2 class="pg-h3" data-anim="up">Specialities at {{ l.name }}</h2>
@@ -40,8 +41,21 @@
         <a class="btn btn-primary" href="contact.html" data-magnetic>{{ s.cta.label }} {{ icon('arrow') }}</a>
         {%- if l.phone %}<a class="side-line" href="tel:{{ l.phone }}">{{ icon('phone') }} {{ l.phone }}</a>{% endif %}
         {%- if l.email %}<a class="side-line" href="mailto:{{ l.email }}">{{ icon('mail') }} {{ l.email }}</a>{% endif %}
-        <a class="side-line" href="{{ l._map }}" target="_blank" rel="noopener">{{ icon('globe') }} Directions in Google Maps</a>
+        {%- for ph in (l.phones or [])[1:] %}<a class="side-line" href="tel:{{ digits(ph.number) }}">{{ icon('phone') }} {{ ph.label }} · {{ ph.number }}</a>{% endfor %}
+        <a class="side-line" href="{{ l.links.directions if l.links and l.links.directions else l._map }}" target="_blank" rel="noopener">{{ icon('pin') }} Directions in Google Maps</a>
+        {%- if l.links and l.links.reviews %}<a class="side-line" href="{{ l.links.reviews }}" target="_blank" rel="noopener">{{ icon('star') }} Google reviews</a>{% endif %}
+        {%- if l.links and l.links.instagram %}<a class="side-line" href="{{ l.links.instagram }}" target="_blank" rel="noopener">{{ icon('globe') }} Instagram</a>{% endif %}
       </div>
+      <div class="side-map" data-anim="up">
+        {%- set q = (l.lat ~ ',' ~ l.lng) if l.lat else (s.name ~ ' ' ~ (l.full_name or l.name) ~ ' ' ~ l.country) %}
+        <iframe src="https://maps.google.com/maps?q={{ q | urlencode }}&z=15&output=embed" title="Map of {{ l.name }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      {%- if l.hours %}
+      <div class="side-list">
+        <p class="side-h">Timings</p>
+        <ul class="bp-hours">{% for h in l.hours %}<li><span>{{ h.label }}</span><b class="{{ 'is-open' if '24/7' in h.value or 'open' in h.value.lower() else '' }}">{{ h.value }}</b></li>{% endfor %}</ul>
+      </div>
+      {%- endif %}
       <nav class="side-list" aria-label="Other branches">
         <p class="side-h">Other branches in {{ l.country }}</p>
         {%- for o in s.locations['items'] if o.country == l.country and o is not sameas l %}<a href="{{ o._file }}">{{ o.name }}</a>{% endfor %}

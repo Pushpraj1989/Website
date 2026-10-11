@@ -51,46 +51,83 @@
 {%- endmacro -%}
 
 {%- macro curve() -%}
-    <div class="curve" data-curve tabindex="0" aria-roledescription="carousel" aria-label="Branches">
-      <div class="filters curve-filters" role="group" aria-label="Filter branches by country">
-        <button class="filter" type="button" data-cfilter="all" aria-pressed="true">All <span class="filter-n">{{ s.locations['items'] | length }}</span></button>
-        {%- for c, n in s._countries %}
-        <button class="filter" type="button" data-cfilter="{{ c }}" aria-pressed="false">{{ c }} <span class="filter-n">{{ n }}</span></button>
-        {%- endfor %}
-      </div>
-      <div class="curve-stage" data-cursor="Drag">
-        <ul class="curve-track">
-          {%- for l in s.locations['items'] %}
-          {%- set im = s.images[l.image] if l.image else none %}
-          <li class="curve-card" data-c="{{ l.country }}" data-name="{{ l.name }}" data-type="{{ l.type }}" data-cap="{{ im.cap if im else '' }}" data-address="{{ l.address or '' }}" data-phone="{{ l.phone or '' }}" data-note="{{ l.note or '' }}" data-map="{{ l._map }}" data-href="{{ l._file or '' }}">
-            <img class="cc-bg" src="assets/img/{{ im.src if im else '' }}" alt="" loading="lazy" decoding="async" draggable="false">
-            <div class="cc-top"><span class="cc-pill">{{ l.type }}</span><span>{{ l.country }}</span></div>
-            <div class="cc-bottom">
-              <span class="cc-n">{{ '%02d' % loop.index }}</span>
-              <h3>{{ l.name }}</h3>
-              {% if im %}<span class="cc-cap">{{ im.cap }}</span>{% endif %}
-            </div>
-          </li>
-          {%- endfor %}
-        </ul>
-      </div>
-      {%- set first = s.locations['items'][0] %}
-      <div class="curve-ui">
-        <button class="curve-btn" type="button" data-cprev aria-label="Previous branch">{{ icon('arrow') }}</button>
-        <div class="curve-detail" aria-live="polite">
-          <span class="cd-type" data-d="type">{{ first.type }}</span>
-          <h3 class="cd-name" data-d="name">{{ first.name }}</h3>
-          <p class="cd-meta"><span data-d="country">{{ first.country }}</span> · <span data-d="cap">{{ s.images[first.image].cap if first.image else '' }}</span></p>
-          <p class="cd-line" data-d="info">{{ first.note or first.address or (first.type ~ " in " ~ first.country ~ ".") }}</p>
-          <div class="cd-actions">
-            <a class="btn btn-primary btn-sm" href="#contact" data-d="book" data-magnetic>{{ s.locations.book_label or "Contact this location" }} {{ icon('arrow') }}</a>
-            {%- set ph = s.contact.phones | rejectattr("fax") | first %}<a class="cd-phone" href="tel:{{ ph.tel }}" data-d="phone">{{ ph.label }} · {{ ph.number }}</a>
-            <a class="cd-phone" href="#" data-d="map" target="_blank" rel="noopener">Open in Maps</a>
-          </div>
+{%- set L = s.locations['items'] %}
+<div class="curve" data-curve tabindex="0" aria-roledescription="carousel" aria-label="{{ s.locations.nav or 'Locations' }}">
+  <div class="filters curve-filters" role="group" aria-label="Filter by country">
+    <button class="filter" type="button" data-cfilter="all" aria-pressed="true">All <span class="filter-n">{{ L | length }}</span></button>
+    {%- for c, n in s._countries %}
+    <button class="filter" type="button" data-cfilter="{{ c }}" aria-pressed="false">{{ c }} <span class="filter-n">{{ n }}</span></button>
+    {%- endfor %}
+  </div>
+  <div class="curve-stage" data-cursor="Drag">
+    <ul class="curve-track">
+      {%- for l in L %}
+      {%- set im = s.images[l.image] if l.image else none %}
+      <li class="curve-card" data-i="{{ loop.index0 }}" data-c="{{ l.country }}">
+        <img class="cc-bg" src="assets/img/{{ im.src if im else '' }}" alt="" loading="lazy" decoding="async" draggable="false">
+        <div class="cc-top"><span class="cc-pill">{{ l.type }}</span>{% if l.emergency %}<span class="cc-er" title="Emergency open 24/7"><i></i>24/7</span>{% else %}<span>{{ l.country }}</span>{% endif %}</div>
+        <div class="cc-bottom">
+          <span class="cc-n">{{ '%02d' % loop.index }} · {{ l.country }}</span>
+          <h3>{{ l.name }}</h3>
+          {% if im %}<span class="cc-cap">{{ im.cap }}</span>{% endif %}
         </div>
-        <button class="curve-btn next" type="button" data-cnext aria-label="Next branch">{{ icon('arrow') }}</button>
+        <div class="cc-actions" aria-hidden="true">
+          {%- set ph = (l.phones[0].number if l.phones else l.phone) %}
+          {%- if ph %}<a href="tel:{{ digits(ph) }}" tabindex="-1">{{ icon('phone') }}<span>Call</span></a>{% endif %}
+          <a href="{{ (l.links.directions if l.links and l.links.directions else l._map) }}" target="_blank" rel="noopener" tabindex="-1">{{ icon('pin') }}<span>Directions</span></a>
+          {%- if l._file %}<a href="{{ l._file }}" tabindex="-1">{{ icon('arrow') }}<span>Details</span></a>{% endif %}
+        </div>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+  <div class="curve-nav">
+    <button class="curve-btn" type="button" data-cprev aria-label="Previous">{{ icon('arrow') }}</button>
+    <div class="curve-progress"><span data-counter>01 / {{ '%02d' % L | length }}</span><i><b data-cbar></b></i></div>
+    <button class="curve-btn next" type="button" data-cnext aria-label="Next">{{ icon('arrow') }}</button>
+  </div>
+
+  {#- dynamic detail panel: filled from the JSON below as the slider moves -#}
+  <div class="bpanel" aria-live="polite">
+    <div class="bp-info">
+      <div class="bp-head">
+        <span class="bp-type" data-b="type"></span><span class="bp-er" data-b="er" hidden><i></i>Emergency 24/7</span><span class="bp-open" data-b="opened" hidden></span>
       </div>
-      <div class="curve-progress"><span data-counter>01 / {{ '%02d' % s.locations['items'] | length }}</span><i><b data-cbar></b></i></div>
+      <h3 class="bp-name" data-b="name"></h3>
+      <p class="bp-full" data-b="full"></p>
+      <p class="bp-addr" data-b="addr"></p>
+      <div class="bp-grid">
+        <div class="bp-block">
+          <p class="bp-h">{{ icon('clock') }} Timings</p>
+          <ul class="bp-hours" data-b="hours"></ul>
+        </div>
+        <div class="bp-block">
+          <p class="bp-h">{{ icon('phone') }} Contact</p>
+          <ul class="bp-phones" data-b="phones"></ul>
+        </div>
+      </div>
+      <div class="bp-stats">
+        <div><strong data-b="docs">–</strong><span>doctors</span></div>
+        <div><strong data-b="nspec">–</strong><span>specialities</span></div>
+      </div>
+      <ul class="bp-specs" data-b="specs"></ul>
+      <div class="bp-actions">
+        <a class="btn btn-primary btn-sm" href="contact.html" data-b="book" data-magnetic>{{ s.cta.label }} {{ icon('arrow') }}</a>
+        <a class="bp-act" href="#" data-b="page">{{ icon('layers') }}<span>Branch page</span></a>
+        <a class="bp-act" href="#" data-b="dir" target="_blank" rel="noopener">{{ icon('pin') }}<span>Directions</span></a>
+        <a class="bp-act" href="#" data-b="rev" target="_blank" rel="noopener" hidden>{{ icon('star') }}<span>Reviews</span></a>
+        <a class="bp-act" href="#" data-b="ig" target="_blank" rel="noopener" hidden>{{ icon('globe') }}<span>Instagram</span></a>
+      </div>
+    </div>
+    <div class="bp-map">
+      <iframe data-b="map" title="Map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" tabindex="-1"></iframe>
+      <div class="bp-map-veil" data-b="veil"><span>{{ icon('pin') }}</span><p>Loading map…</p></div>
+      <a class="bp-map-btn" href="#" data-b="dir2" target="_blank" rel="noopener">{{ icon('pin') }} Open in Google Maps</a>
+    </div>
+  </div>
+  <script type="application/json" data-branches>{{ s._branch_json | safe }}</script>
+  <noscript><p>Full list of {{ s.locations.nav | lower if s.locations.nav else 'locations' }} below.</p></noscript>
+</div>
 {%- endmacro -%}
 
 {%- macro news_grid(items) -%}

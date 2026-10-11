@@ -579,7 +579,48 @@
           "Spine Surgery"
         ],
         "doctors": 54,
-        "src": "https://ruwi.badralsamaahospitals.com/"
+        "src": "https://ruwi.badralsamaahospitals.com/",
+        "links": {
+          "directions": "https://goo.gl/maps/SvPEVHFNEszFVezq5",
+          "reviews": "https://g.page/r/CaiQL169LVRaEBM/review",
+          "instagram": "https://instagram.com/badralsamaaruwi",
+          "facebook": "https://www.facebook.com/badralsamaahospitalruwi",
+          "website": "https://ruwi.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+968 2271 7171"
+          },
+          {
+            "label": "Mobile",
+            "number": "+968 9399 1147"
+          },
+          {
+            "label": "Emergency",
+            "number": "+968 9820 1536"
+          }
+        ],
+        "whatsapp": "631",
+        "opened": 2002,
+        "friday_opd": true,
+        "lat": "23.597471",
+        "lng": "58.540099",
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Friday",
+            "value": "Outpatient clinics open"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Al Khoud",
@@ -624,7 +665,38 @@
           "Oncology"
         ],
         "doctors": 51,
-        "src": "https://al-khoud.badralsamaahospitals.com/"
+        "src": "https://al-khoud.badralsamaahospitals.com/",
+        "links": {
+          "directions": "https://goo.gl/maps/fmfgWgW3CuoJHeSXA",
+          "reviews": "https://g.page/r/CYGU95ImaXBdEBM/review",
+          "instagram": "https://instagram.com/badralsamaaalkhoud",
+          "facebook": "https://www.facebook.com/BadrAlKhoud",
+          "website": "https://al-khoud.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+96891442161+96821142600"
+          },
+          {
+            "label": "Emergency",
+            "number": "+968 9226 3488"
+          }
+        ],
+        "whatsapp": "41",
+        "lat": "23.654393",
+        "lng": "58.203370",
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Barka",
@@ -659,7 +731,42 @@
           "Physiotherapy"
         ],
         "doctors": 32,
-        "src": "https://barka.badralsamaahospitals.com/"
+        "src": "https://barka.badralsamaahospitals.com/",
+        "links": {
+          "directions": "https://goo.gl/maps/ebgDzoUkxE6uf8ks6",
+          "reviews": "https://g.page/r/CTSaKgyytUWqEBM/review",
+          "instagram": "https://instagram.com/badralsamaabarka",
+          "facebook": "https://www.facebook.com/badralsamaahospitalbarka/",
+          "website": "https://barka.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+968 2688 4910"
+          },
+          {
+            "label": "Mobile",
+            "number": "+968 9416 3828"
+          },
+          {
+            "label": "Emergency",
+            "number": "+968 9271 8965"
+          }
+        ],
+        "whatsapp": "371",
+        "lat": "23.664586",
+        "lng": "57.894130",
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Nizwa",
@@ -694,7 +801,42 @@
           "Audiology"
         ],
         "doctors": 24,
-        "src": "https://nizwa.badralsamaahospitals.com/"
+        "src": "https://nizwa.badralsamaahospitals.com/",
+        "links": {
+          "directions": "https://goo.gl/maps/JqMGjVMWeaXUnt4E7",
+          "reviews": "https://g.page/r/CUNuVOmyeQv2EBM/review",
+          "instagram": "https://instagram.com/badralsamaanizwa",
+          "facebook": "https://www.facebook.com/badralsamaahospitalnizwa",
+          "website": "https://nizwa.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+968 2544 7776"
+          },
+          {
+            "label": "Mobile",
+            "number": "+968 9985 2141"
+          },
+          {
+            "label": "Emergency",
+            "number": "+968 7949 1314"
+          }
+        ],
+        "whatsapp": "21",
+        "lat": "22.917103",
+        "lng": "57.536292",
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Salalah",
@@ -730,13 +872,77 @@
           "Oral, Maxillofacial & Dental Surgery"
         ],
         "doctors": 41,
-        "src": "https://salalah.badralsamaahospitals.com/"
+        "src": "https://salalah.badralsamaahospitals.com/",
+        "links": {
+          "directions": "https://goo.gl/maps/6A2M3JgXAo9KcdZa6",
+          "reviews": "https://g.page/r/CT77A71RVvcmEBM/review",
+          "instagram": "https://instagram.com/badralsamaasalalah",
+          "facebook": "https://www.facebook.com/profile.php",
+          "website": "https://salalah.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+968 2329 1830"
+          },
+          {
+            "label": "Mobile",
+            "number": "+968 9332 1286"
+          },
+          {
+            "label": "Emergency",
+            "number": "+968 2329 1831"
+          }
+        ],
+        "whatsapp": "51",
+        "lat": "17.050668",
+        "lng": "54.106586",
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Sohar",
         "type": "Hospital",
         "country": "Oman",
-        "image": "loc-sohar"
+        "image": "loc-sohar",
+        "links": {
+          "directions": "https://goo.gl/maps/DWEdJ9rWtL8z5yjV7",
+          "reviews": "https://g.page/r/CfoGXzS2wl63EBM/review",
+          "instagram": "https://instagram.com/badralsamaasohar",
+          "facebook": "https://www.facebook.com/profile.php"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Mobile",
+            "number": "+968 9847 6111"
+          },
+          {
+            "label": "Emergency",
+            "number": "+968 2684 6660"
+          }
+        ],
+        "whatsapp": "7421",
+        "opened": 2020,
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Al Khuwair",
@@ -771,7 +977,43 @@
           "Plastic, Reconstructive & Cosmetic Surgery"
         ],
         "doctors": 33,
-        "src": "https://al-khuwair.badralsamaahospitals.com/"
+        "src": "https://al-khuwair.badralsamaahospitals.com/",
+        "links": {
+          "directions": "https://maps.app.goo.gl/NXuzhZrmR86R1dqy9?g_st=ic",
+          "reviews": "https://g.page/r/CQJ3idrcW3ktEBM/review",
+          "website": "https://al-khuwair.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+968 9967 6589"
+          },
+          {
+            "label": "Mobile",
+            "number": "+968 9144 2161"
+          },
+          {
+            "label": "Emergency",
+            "number": "+968 2448 0865"
+          },
+          {
+            "label": "Emergency",
+            "number": "+968 2448 2470"
+          }
+        ],
+        "lat": "23.586504",
+        "lng": "58.426945",
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Falaj Al Qabail",
@@ -800,7 +1042,35 @@
           "General & Laparoscopic Surgery"
         ],
         "doctors": 14,
-        "src": "https://falaj.badralsamaahospitals.com/"
+        "src": "https://falaj.badralsamaahospitals.com/",
+        "links": {
+          "directions": "https://goo.gl/maps/pARUYCqgz5PoqmzC7",
+          "reviews": "https://g.page/r/Cc2P0WEmdpK6EBM/review",
+          "website": "https://falaj.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+968 2675 4131"
+          },
+          {
+            "label": "Emergency",
+            "number": "+968 9410 5262"
+          }
+        ],
+        "lat": "24.433356",
+        "lng": "56.626138",
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Sur",
@@ -829,7 +1099,31 @@
           "Physiotherapy"
         ],
         "doctors": 16,
-        "src": "https://sur.badralsamaahospitals.com/"
+        "src": "https://sur.badralsamaahospitals.com/",
+        "links": {
+          "directions": "https://goo.gl/maps/3q7a3tTrEFbz518j6",
+          "reviews": "https://g.page/r/CSB_xyFokB6OEBM/review",
+          "website": "https://sur.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+968 2554 6112"
+          }
+        ],
+        "lat": "22.570546",
+        "lng": "59.498613",
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Duqm",
@@ -856,7 +1150,27 @@
           "Dentistry"
         ],
         "doctors": 7,
-        "src": "https://duqm.badralsamaahospitals.com/"
+        "src": "https://duqm.badralsamaahospitals.com/",
+        "links": {
+          "directions": "https://goo.gl/maps/WUJfUEsXu4xoxYDC9",
+          "reviews": "https://g.page/r/CYzRXCj6UhvnEBM/review",
+          "website": "https://duqm.badralsamaahospitals.com"
+        },
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+968 2282 6435"
+          }
+        ],
+        "opened": 2020,
+        "lat": "19.639482",
+        "lng": "57.677911",
+        "hours": [
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Suwaiq",
@@ -886,7 +1200,27 @@
           "Dermatology"
         ],
         "doctors": 12,
-        "src": "https://suwaiq.badralsamaahospitals.com/"
+        "src": "https://suwaiq.badralsamaahospitals.com/",
+        "links": {
+          "directions": "https://goo.gl/maps/9qBP2vtjVgNuSh8m7",
+          "reviews": "https://g.page/r/CZDiMHHtxGfuEBM/review",
+          "website": "https://suwaiq.badralsamaahospitals.com"
+        },
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+96871704333+96826060612"
+          }
+        ],
+        "opened": 2019,
+        "lat": "23.822374",
+        "lng": "57.431675",
+        "hours": [
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Mabella",
@@ -919,7 +1253,25 @@
           "General Medicine"
         ],
         "doctors": 25,
-        "src": "https://mabella.badralsamaahospitals.com/"
+        "src": "https://mabella.badralsamaahospitals.com/",
+        "links": {
+          "directions": "https://goo.gl/maps/DaQoASopvyTh4ps9A",
+          "reviews": "https://g.page/r/CZjAziHBIaKxEBM/review",
+          "website": "https://mabella.badralsamaahospitals.com"
+        },
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+968 2282 6381"
+          }
+        ],
+        "opened": 2021,
+        "hours": [
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Muharraq",
@@ -955,7 +1307,24 @@
           "Paediatrics & Neonatology"
         ],
         "doctors": 36,
-        "src": "https://muharraq.badralsamaahospitals.com/"
+        "src": "https://muharraq.badralsamaahospitals.com/",
+        "links": {
+          "website": "https://muharraq.badralsamaahospitals.com"
+        },
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+973 1734 4700"
+          }
+        ],
+        "lat": "26.265074",
+        "lng": "50.622327",
+        "hours": [
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Riffa",
@@ -987,7 +1356,33 @@
           "General & Laparoscopic Surgery"
         ],
         "doctors": 23,
-        "src": "https://riffa.badralsamaahospitals.com/"
+        "src": "https://riffa.badralsamaahospitals.com/",
+        "links": {
+          "website": "https://riffa.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+973 1749 5555"
+          },
+          {
+            "label": "Emergency",
+            "number": "+973 3360 1410"
+          }
+        ],
+        "lat": "26.122606",
+        "lng": "50.534262",
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Manama",
@@ -1017,7 +1412,33 @@
           "Paediatrics & Neonatology"
         ],
         "doctors": 19,
-        "src": "https://manama.badralsamaahospitals.com/"
+        "src": "https://manama.badralsamaahospitals.com/",
+        "links": {
+          "website": "https://manama.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+973 1782 4444"
+          },
+          {
+            "label": "Emergency",
+            "number": "+973 3217 2444"
+          }
+        ],
+        "lat": "26.228516",
+        "lng": "50.586050",
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Salmabad",
@@ -1047,7 +1468,33 @@
           "Paediatrics & Neonatology"
         ],
         "doctors": 15,
-        "src": "https://salmabad.badralsamaahospitals.com/"
+        "src": "https://salmabad.badralsamaahospitals.com/",
+        "links": {
+          "website": "https://salmabad.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+973 3401 2345"
+          },
+          {
+            "label": "Emergency",
+            "number": "+973 1617 1111"
+          }
+        ],
+        "lat": "26.185217",
+        "lng": "50.529086",
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Askar",
@@ -1065,7 +1512,22 @@
           "General Practice"
         ],
         "doctors": 4,
-        "src": "https://askar.badralsamaahospitals.com/"
+        "src": "https://askar.badralsamaahospitals.com/",
+        "links": {
+          "website": "https://askar.badralsamaahospitals.com"
+        },
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+973 1617 1122"
+          }
+        ],
+        "hours": [
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Farwaniya",
@@ -1093,7 +1555,31 @@
           "Dermatology"
         ],
         "doctors": 13,
-        "src": "https://farwania.badralsamaahospitals.com/"
+        "src": "https://farwania.badralsamaahospitals.com/",
+        "links": {
+          "website": "https://farwania.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+965 2475 9250"
+          },
+          {
+            "label": "Emergency",
+            "number": "+965 6654 0553"
+          }
+        ],
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       },
       {
         "name": "Dubai",
@@ -1121,7 +1607,29 @@
           "General & Laparoscopic Surgery"
         ],
         "doctors": 11,
-        "src": "https://dubai.badralsamaahospitals.com/"
+        "src": "https://dubai.badralsamaahospitals.com/",
+        "links": {
+          "website": "https://dubai.badralsamaahospitals.com"
+        },
+        "emergency": true,
+        "phones": [
+          {
+            "label": "Reception",
+            "number": "+971 4357 8681"
+          }
+        ],
+        "lat": "25.214557",
+        "lng": "55.303291",
+        "hours": [
+          {
+            "label": "Emergency",
+            "value": "Open 24/7"
+          },
+          {
+            "label": "Outpatient clinics",
+            "value": "Hours not published. Call to confirm"
+          }
+        ]
       }
     ],
     "book_label": "View branch"
@@ -1194,7 +1702,8 @@
     "Doctor directory lists the 337 doctors on the Oman speciality pages; Bahrain, Kuwait, UAE and Qatar doctors are not on those pages.",
     "Map pins for Mabella, Askar and Farwaniya on the official site point to the wrong countries, so those branches use a search link instead.",
     "Testimonials are dated 2019 on the official site. Ask for recent ones.",
-    "Branch photos on the official site are thumbnails (215 px); most branch cards still use illustrative city views. Ask for full-size branch photography."
+    "Branch photos on the official site are thumbnails (215 px); most branch cards still use illustrative city views. Ask for full-size branch photography.",
+    "Branch opening hours are not published anywhere on the official site. The concept shows 'Emergency: open 24/7' only for centres on the group's emergency contact list, and asks visitors to call for outpatient hours. Get each branch's OPD timings from the group."
   ],
   "sources": [
     "https://badralsamaahospitals.com (homepage, about, news, packages, specialities, doctors, branch sites, insurance; read 11 Oct 2026)"

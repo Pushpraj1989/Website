@@ -52,6 +52,7 @@ Sources:
 - Map pins for Mabella, Askar and Farwaniya on the official site point to the wrong countries, so those branches use a search link instead.
 - Testimonials are dated 2019 on the official site. Ask for recent ones.
 - Branch photos on the official site are thumbnails (215 px); most branch cards still use illustrative city views. Ask for full-size branch photography.
+- Branch opening hours are not published anywhere on the official site. The concept shows 'Emergency: open 24/7' only for centres on the group's emergency contact list, and asks visitors to call for outpatient hours. Get each branch's OPD timings from the group.
 
 Sources:
 - https://badralsamaahospitals.com (homepage, about, news, packages, specialities, doctors, branch sites, insurance; read 11 Oct 2026)

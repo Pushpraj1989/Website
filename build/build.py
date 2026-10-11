@@ -206,6 +206,24 @@ def prepare(site):
     site["_country_counts"] = counts
     site["_show_filter"] = len(counts) > 1
 
+    build_pages(site)
+
+    # branch data for the curved slider's detail panel (one JSON blob, read by fx.js)
+    def map_embed(loc):
+        q = f"{loc['lat']},{loc['lng']}" if loc.get("lat") else f"{site['name']} {loc.get('full_name') or loc['name']} {loc['country']}"
+        return "https://maps.google.com/maps?q=" + q.replace(" ", "+") + "&z=15&output=embed"
+    blob = []
+    for loc in locations:
+        phones = loc.get("phones") or ([{"label": "Phone", "number": loc["phone"]}] if loc.get("phone") else [])
+        blob.append({"name": loc["name"], "full": loc.get("full_name") or "", "type": loc.get("type", ""), "country": loc["country"],
+                     "addr": loc.get("address") or loc.get("note") or "", "hours": loc.get("hours") or [],
+                     "phones": [{"label": ph["label"], "number": ph["number"], "tel": digits(ph["number"])} for ph in phones],
+                     "er": bool(loc.get("emergency")), "opened": loc.get("opened"), "docs": loc.get("doctors"),
+                     "specs": loc.get("specs") or [], "page": loc.get("_file") or "", "map": map_embed(loc),
+                     "dir": (loc.get("links") or {}).get("directions") or loc["_map"],
+                     "rev": (loc.get("links") or {}).get("reviews"), "ig": (loc.get("links") or {}).get("instagram")})
+    site["_branch_json"] = json.dumps(blob, ensure_ascii=False).replace("</", "<\\/")
+
     form = site["contact"].get("form", {})
     form.setdefault("topics", ["General enquiry", "Partnership", "Careers", "Media"])
     form.setdefault("submit", "Send enquiry")
@@ -213,7 +231,6 @@ def prepare(site):
     site["contact"]["form"] = form
     site["_branch_options"] = [loc["name"] + " · " + loc["country"] for loc in locations]
 
-    build_pages(site)
     site["_theme"] = THEMES[site["theme"]]
 
     # credits: every image this site uses, looked up from data/credits.json

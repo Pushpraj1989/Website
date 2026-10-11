@@ -390,6 +390,12 @@
     if (!reduce && items.length > 1) setInterval(() => { if (!hold && !document.hidden) show(i + 1); }, 7000);
   });
 
+  // branch chosen in the slider (possibly on another page) preselects the booking form
+  try {
+    const want = sessionStorage.getItem("t1-branch"), sel = document.getElementById("f-branch");
+    if (want && sel) Array.from(sel.options).forEach((o) => { if (o.text === want) sel.value = o.value || o.text; });
+  } catch {}
+
   // BMI tool (runs on the device; nothing is sent)
   $$("[data-bmi]").forEach((f) => {
     const h = f.elements.h, w = f.elements.w;
