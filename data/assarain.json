@@ -1,233 +1,3208 @@
 {
-  "slug": "assarain",
-  "tier": 1,
-  "name": "Assarain Group",
-  "short": "Assarain",
-  "sector": "Diversified group",
-  "meta": "Assarain Group of Companies: 18 companies across retail, wholesale, manufacturing, construction and property in Oman.",
-  "accent": "#8a2432",
-  "cta": {
-    "label": "Contact the group",
-    "href": "#contact"
+ "slug": "assarain",
+ "tier": 1,
+ "name": "Assarain Group",
+ "short": "Assarain",
+ "sector": "Diversified group · Oman",
+ "meta": "Assarain Group, part of the Said Salem Al Wahaibi Group: manufacturing, construction and property, retail and consumer services and food distribution in Oman since 1975.",
+ "footer_note": "Concept redesign made to test the website kit. Not the official Assarain Group website. Content from assarain.com and published press, read 11–12 Oct 2026.",
+ "accent": "#2169a5",
+ "theme": "studio",
+ "promo_fx": "blinds",
+ "img_dir": "assarain",
+ "brand": {
+  "mode": "light",
+  "style": "minimal",
+  "bg": "#f3f1ec",
+  "fg": "#111b26",
+  "accent": "#2169a5",
+  "accent_ink": "#ffffff",
+  "accent2": "#9c9d9e",
+  "alt": "#e8e5de",
+  "logo": "logo",
+  "font_display": "\"Archivo\", \"Helvetica Neue\", Arial, sans-serif",
+  "font_body": "\"Inter\", system-ui, sans-serif",
+  "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Archivo:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600"
+ },
+ "cta": {
+  "label": "Contact the Group",
+  "short": "Contact",
+  "href": "contact.html"
+ },
+ "images": {
+  "hq": {
+   "src": "hq.jpg",
+   "alt": "Said Salem Al Wahaibi Group of Companies building with the Hajar mountains behind",
+   "cap": "Group head office building, Muscat. Photo: Assarain"
   },
-  "hero": {
-    "eyebrow": "Diversified group · Ruwi, Muscat",
-    "title": "Eighteen companies, one group",
-    "lede": "From concrete and steel to food, furnishing, insurance and specialist clinics, Assarain Group has been operating in Oman since 1975.",
-    "primary": {
-      "label": "Explore the companies",
-      "href": "#services"
-    },
-    "secondary": {
-      "label": "Contact the group",
-      "href": "#contact"
-    }
+  "acp-aerial-poster": {
+   "src": "acp-aerial-poster.jpg",
+   "alt": "Aerial view of an Assarain Concrete Products plant and block yards",
+   "cap": "ACP plant from the air. Photo: Assarain"
   },
-  "stats": [
-    {
-      "value": 18,
-      "label": "Group companies"
-    },
-    {
-      "value": 4,
-      "label": "Business groups"
-    },
-    {
-      "years_since": 1975,
-      "label": "Years in operation"
-    },
-    {
-      "value": 2,
-      "label": "Joint ventures"
-    }
-  ],
-  "about": {
-    "title": "Five decades of diversified growth",
-    "body": [
-      "Assarain has operated since its inception in 1975. Its companies sit in four business groups: retail and consumer services, commercial wholesale, manufacturing, and construction, maintenance and property."
-    ],
-    "points": [
-      {
-        "title": "Joint ventures",
-        "text": "Savills and Partners Oman, and Kone Assarain LLC."
-      },
-      {
-        "title": "Manufacturing base",
-        "text": "Concrete products, modern steel mills, and plastic and acrylic industries."
-      },
-      {
-        "title": "Health & insurance",
-        "text": "Hatat Specialty Clinics and Assarain Insurance Services are part of the group."
-      }
-    ]
+  "muttrah-corniche": {
+   "src": "muttrah-corniche.jpg",
+   "alt": "Muttrah Corniche, Muscat",
+   "cap": "Muttrah Corniche. Photo: assarain.com"
   },
-  "services": {
-    "title": "Our business groups",
-    "nav": "Companies",
-    "intro": "Eighteen companies, organised into four business groups.",
-    "items": [
-      {
-        "title": "Retail & Consumer Services",
-        "icon": "building",
-        "companies": [
-          "Assarain Furnishing LLC",
-          "Assarain Insurance Services LLC",
-          "National Marketing & Trading Co. LLC",
-          "Hatat Specialty Clinics",
-          "Assarain Textiles LLC",
-          "Kalhat Services & Trading LLC"
-        ],
-        "image": "furnish"
-      },
-      {
-        "title": "Commercial Wholesale",
-        "icon": "truck",
-        "companies": [
-          "Assarain Food Products LLC"
-        ],
-        "image": "textile"
-      },
-      {
-        "title": "Manufacturing",
-        "icon": "factory",
-        "companies": [
-          "Assarain Concrete Products & Trading LLC",
-          "Modern Concrete Products LLC",
-          "Alserkal & Assarain Concrete Products",
-          "Modern Steel Mills",
-          "Shamal Plastic Industries LLC",
-          "Gulf Acrylic Industries LLC"
-        ],
-        "image": "concrete"
-      },
-      {
-        "title": "Construction, Maintenance & Property",
-        "icon": "layers",
-        "companies": [
-          "Savills and Partners Oman (JV)",
-          "Assarain International Contracting LLC",
-          "Hatat Complex",
-          "Assarain Properties",
-          "Kone Assarain LLC (JV)"
-        ],
-        "image": "property"
-      }
-    ]
+  "f-palace": {
+   "src": "f-palace.jpg",
+   "alt": "Busy souq scene from the Assarain corporate film",
+   "cap": "Still from the Assarain corporate film"
   },
-  "highlights": {
-    "nav": "Index",
-    "title": "Company index",
-    "items": []
+  "f-smile": {
+   "src": "f-smile.jpg",
+   "alt": "Smiling Omani man in a kumma",
+   "cap": "Still from the Assarain corporate film"
   },
-  "locations": {
-    "title": "Head office",
-    "nav": "Locations",
-    "intro": "The group's corporate head office is in Ruwi, Muscat.",
-    "items": [
-      {
-        "name": "Corporate Head Office",
-        "type": "Head office",
-        "country": "Oman",
-        "address": "PO Box 1475, PC 112, Ruwi, Muscat, Sultanate of Oman"
-      }
-    ]
+  "f-laptop": {
+   "src": "f-laptop.jpg",
+   "alt": "Assarain team member working at a laptop",
+   "cap": "Still from the Assarain corporate film"
   },
-  "marquee": [
-    "Assarain Furnishing",
-    "Assarain Textiles",
-    "Assarain Food Products",
-    "Assarain Concrete Products",
-    "Modern Steel Mills",
-    "Gulf Acrylic Industries",
-    "Savills and Partners Oman",
-    "Kone Assarain",
-    "Hatat Specialty Clinics",
-    "Assarain Insurance Services",
-    "Assarain Properties",
-    "Assarain International Contracting"
-  ],
-  "contact": {
-    "title": "Contact the group",
-    "intro": "For group enquiries, partnerships and joint ventures.",
-    "address": "Assarain Group of Companies (Corporate Head Office), PO Box 1475, PC 112, Ruwi, Muscat, Oman",
-    "phones": [
-      {
-        "label": "Telephone",
-        "number": "+968 2460 4811",
-        "tel": "+96824604811"
-      },
-      {
-        "label": "Fax",
-        "number": "+968 2460 4837",
-        "fax": true
-      }
-    ],
-    "email": "business@assarain.com",
-    "form": {
-      "branch": false,
-      "topics": [
-        "Business enquiry",
-        "Partnership or joint venture",
-        "Careers",
-        "Media",
-        "Other"
-      ],
-      "submit": "Send enquiry"
-    }
+  "f-craft": {
+   "src": "f-craft.jpg",
+   "alt": "Craftsman carving a traditional pattern",
+   "cap": "Still from the Assarain corporate film"
   },
-  "confirm": [
-    "Company descriptions use company names and group categories only. The site gives no one-line activity text, so none has been written.",
-    "Joint-venture ownership shares (Savills, Kone) are not published.",
-    "Only the corporate head office is published. Confirm whether any other office should appear.",
-    "The site's head office line gives 'Ruwi, Muscat' and a PO box; the building address still needs confirming.",
-    "Photography is Creative Commons imagery (see footer credits): Oman heritage sites and illustrative business images, not Assarain's own premises or products."
-  ],
-  "sources": [
-    "https://www.assarain.com (homepage read 11 Oct 2026)",
-    "https://www.assarain.com/contact-us/ (read 11 Oct 2026)"
-  ],
-  "theme": "editorial",
-  "img_dir": "assarain",
-  "images": {
-    "hero": {
-      "src": "hero.jpg",
-      "alt": "Nizwa Fort and the minaret of the Friday Mosque",
-      "cap": "Nizwa Fort, Oman"
-    },
-    "muttrah": {
-      "src": "muttrah.jpg",
-      "alt": "Muttrah corniche, Muscat",
-      "cap": "Muttrah, Muscat"
-    },
-    "night": {
-      "src": "nizwa-night.jpg",
-      "alt": "Nizwa Fort lit at night",
-      "cap": "Nizwa, Oman"
-    },
-    "furnish": {
-      "src": "furnish.jpg",
-      "alt": "Furnished interior",
-      "cap": "Illustrative"
-    },
-    "textile": {
-      "src": "textile.jpg",
-      "alt": "Woven textile",
-      "cap": "Illustrative"
-    },
-    "concrete": {
-      "src": "concrete.jpg",
-      "alt": "Concrete surface",
-      "cap": "Illustrative"
-    },
-    "property": {
-      "src": "property.jpg",
-      "alt": "Office buildings",
-      "cap": "Illustrative"
-    }
+  "f-tablet": {
+   "src": "f-tablet.jpg",
+   "alt": "Omani engineer with a tablet on site",
+   "cap": "Still from the Assarain corporate film"
   },
-  "theme_data": {
-    "est": 1975,
-    "hero_html": "Eighteen companies, <em>one group</em>",
-    "index_html": "All <em>eighteen</em> companies"
+  "f-city": {
+   "src": "f-city.jpg",
+   "alt": "Aerial view of Muscat at dusk",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-kalhat": {
+   "src": "f-kalhat.jpg",
+   "alt": "Kalhat rope-access team cleaning a glass facade",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-siteworker": {
+   "src": "f-siteworker.jpg",
+   "alt": "Site worker in a hard hat and safety vest",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-gm": {
+   "src": "f-gm.jpg",
+   "alt": "Assarain General Manager, thirty years with the Group",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-training": {
+   "src": "f-training.jpg",
+   "alt": "Leadership training session for young Omanis",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-training2": {
+   "src": "f-training2.jpg",
+   "alt": "Young Omani presenting at a whiteboard",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-muscat": {
+   "src": "f-muscat.jpg",
+   "alt": "Aerial view of Muscat between the mountains",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-hay": {
+   "src": "f-hay.jpg",
+   "alt": "Aerial view of a Hay Al Rahbah residential development",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-carcare": {
+   "src": "f-carcare.jpg",
+   "alt": "Luxury car in a detailing studio",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-carcare2": {
+   "src": "f-carcare2.jpg",
+   "alt": "Technician detailing a car interior",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-lawn": {
+   "src": "f-lawn.jpg",
+   "alt": "Children playing on a landscaped lawn",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-furnoffice": {
+   "src": "f-furnoffice.jpg",
+   "alt": "Office reception fitted out by Assarain Furnishing",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-furncorridor": {
+   "src": "f-furncorridor.jpg",
+   "alt": "Glass-walled office corridor by Assarain Furnishing",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-family": {
+   "src": "f-family.jpg",
+   "alt": "Family sharing a meal at home",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-doctor": {
+   "src": "f-doctor.jpg",
+   "alt": "Doctor examining a young patient",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-doctor2": {
+   "src": "f-doctor2.jpg",
+   "alt": "Smiling doctor with a stethoscope",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-bodyshop": {
+   "src": "f-bodyshop.jpg",
+   "alt": "Customer trying a product at The Body Shop",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-bodyshop-store": {
+   "src": "f-bodyshop-store.jpg",
+   "alt": "Inside a The Body Shop store in Oman",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-insurance": {
+   "src": "f-insurance.jpg",
+   "alt": "Assarain Insurance Services adviser at his desk",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-worker": {
+   "src": "f-worker.jpg",
+   "alt": "Worker in a yellow hard hat",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-kone": {
+   "src": "f-kone.jpg",
+   "alt": "KONE Assarain team member in front of the KONE logo",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "f-trust": {
+   "src": "f-trust.jpg",
+   "alt": "Framed photograph above the words Trust is our Capital",
+   "cap": "Still from the Assarain corporate film"
+  },
+  "a-muttrah": {
+   "src": "a-muttrah.jpg",
+   "alt": "Muttrah bay at sunset from the air",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-gate": {
+   "src": "a-gate.jpg",
+   "alt": "Muscat Gate",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-early": {
+   "src": "a-early.jpg",
+   "alt": "Archive image of an early concrete block plant in the desert",
+   "cap": "Archive still from the ACP corporate video"
+  },
+  "a-early2": {
+   "src": "a-early2.jpg",
+   "alt": "Archive image of early plant silos and conveyor",
+   "cap": "Archive still from the ACP corporate video"
+  },
+  "a-truck": {
+   "src": "a-truck.jpg",
+   "alt": "ACP delivery lorry with crane",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-yard": {
+   "src": "a-yard.jpg",
+   "alt": "ACP block yard from the air",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-park": {
+   "src": "a-park.jpg",
+   "alt": "Park with lake seen from the air",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-plant": {
+   "src": "a-plant.jpg",
+   "alt": "ACP production halls with block stacks",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-estate": {
+   "src": "a-estate.jpg",
+   "alt": "Industrial estate from the air",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-plantwide": {
+   "src": "a-plantwide.jpg",
+   "alt": "Rows of curing concrete products at an ACP plant",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-quarry": {
+   "src": "a-quarry.jpg",
+   "alt": "Loader working aggregate stockpiles",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-aggregate": {
+   "src": "a-aggregate.jpg",
+   "alt": "Aggregate feeding into a hopper",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-mould": {
+   "src": "a-mould.jpg",
+   "alt": "Freshly moulded concrete blocks on a production pallet",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-mouldworker": {
+   "src": "a-mouldworker.jpg",
+   "alt": "ACP worker checking freshly moulded blocks",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-pavers": {
+   "src": "a-pavers.jpg",
+   "alt": "Close-up of interlocking pavers",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-redpavers": {
+   "src": "a-redpavers.jpg",
+   "alt": "Red interlocking tiles on the production line",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-control": {
+   "src": "a-control.jpg",
+   "alt": "Plant control panel",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-machine": {
+   "src": "a-machine.jpg",
+   "alt": "Block-making machine",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-operator": {
+   "src": "a-operator.jpg",
+   "alt": "Assarain Concrete Products operator at the control box",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-cable": {
+   "src": "a-cable.jpg",
+   "alt": "Orange cable tiles",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-forklift": {
+   "src": "a-forklift.jpg",
+   "alt": "Forklift moving block stacks in the yard",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-samples": {
+   "src": "a-samples.jpg",
+   "alt": "Paving and tile samples on display",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-team": {
+   "src": "a-team.jpg",
+   "alt": "ACP staff walking through the stock yard",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-welding": {
+   "src": "a-welding.jpg",
+   "alt": "Welding in the plant workshop",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-stock": {
+   "src": "a-stock.jpg",
+   "alt": "Stock yard with grey and red block stacks",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-crane": {
+   "src": "a-crane.jpg",
+   "alt": "ACP lorry crane unloading blocks at a site",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-cranesite": {
+   "src": "a-cranesite.jpg",
+   "alt": "Blocks delivered to a villa under construction",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-lift": {
+   "src": "a-lift.jpg",
+   "alt": "A pallet of blocks lifted over a building site",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-paved": {
+   "src": "a-paved.jpg",
+   "alt": "Civic building with patterned paving",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-arches": {
+   "src": "a-arches.jpg",
+   "alt": "White arched building",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-mosque": {
+   "src": "a-mosque.jpg",
+   "alt": "Mosque with twin minarets",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-cityaerial": {
+   "src": "a-cityaerial.jpg",
+   "alt": "Muscat highway interchange from the air",
+   "cap": "Still from the ACP corporate video"
+  },
+  "a-plantaerial": {
+   "src": "a-plantaerial.jpg",
+   "alt": "ACP plant and stock yard from the air at dusk",
+   "cap": "Still from the ACP corporate video"
+  },
+  "furn-1": {
+   "src": "furn-1.jpg",
+   "alt": "Reception area fit-out by Assarain Furnishing",
+   "cap": "Photo: Assarain Furnishing"
+  },
+  "furn-2": {
+   "src": "furn-2.jpg",
+   "alt": "Cafeteria interior by Assarain Furnishing",
+   "cap": "Photo: Assarain Furnishing"
+  },
+  "furn-3": {
+   "src": "furn-3.jpg",
+   "alt": "Office corridor by Assarain Furnishing",
+   "cap": "Photo: Assarain Furnishing"
+  },
+  "furn-4": {
+   "src": "furn-4.jpg",
+   "alt": "Office reception desk by Assarain Furnishing",
+   "cap": "Photo: Assarain Furnishing"
+  },
+  "ins-1": {
+   "src": "ins-1.jpg",
+   "alt": "Assarain Insurance adviser handing over a policy",
+   "cap": "Photo: Assarain Insurance Services"
+  },
+  "ins-2": {
+   "src": "ins-2.jpg",
+   "alt": "Policy document being signed",
+   "cap": "Photo: Assarain Insurance Services"
+  },
+  "bs-1": {
+   "src": "bs-1.jpg",
+   "alt": "The Body Shop storefront in Oman",
+   "cap": "Photo: National Marketing & Trading Co."
+  },
+  "bs-2": {
+   "src": "bs-2.jpg",
+   "alt": "The Body Shop Japanese Cherry Blossom range",
+   "cap": "Photo: National Marketing & Trading Co."
+  },
+  "bs-3": {
+   "src": "bs-3.jpg",
+   "alt": "Hair care shelves in a The Body Shop store",
+   "cap": "Photo: National Marketing & Trading Co."
+  },
+  "tex-1": {
+   "src": "tex-1.jpg",
+   "alt": "Raymond showroom entrance, Ruwi",
+   "cap": "Photo: Assarain Textiles"
+  },
+  "tex-2": {
+   "src": "tex-2.jpg",
+   "alt": "Raymond fabric selvedge",
+   "cap": "Photo: Assarain Textiles"
+  },
+  "tex-3": {
+   "src": "tex-3.jpg",
+   "alt": "Raymond showroom interior with shirts and suits",
+   "cap": "Photo: Assarain Textiles"
+  },
+  "kal-1": {
+   "src": "kal-1.jpg",
+   "alt": "Kalhat ride-on scrubber outside a large building",
+   "cap": "Photo: Kalhat Services & Trading"
+  },
+  "kal-2": {
+   "src": "kal-2.jpg",
+   "alt": "Kalhat technician cleaning a chandelier",
+   "cap": "Photo: Kalhat Services & Trading"
+  },
+  "kal-3": {
+   "src": "kal-3.jpg",
+   "alt": "Kalhat landscaping team member on a lawn",
+   "cap": "Photo: Kalhat Services & Trading"
+  },
+  "kal-4": {
+   "src": "kal-4.jpg",
+   "alt": "Kalhat landscaping at a heritage site",
+   "cap": "Photo: Kalhat Services & Trading"
+  },
+  "food-1": {
+   "src": "food-1.jpg",
+   "alt": "Assarain Food Products refrigerated truck with Lutosa livery",
+   "cap": "Photo: Assarain Food Products"
+  },
+  "food-2": {
+   "src": "food-2.jpg",
+   "alt": "Refrigerated truck with Freshly Frozen Foods livery",
+   "cap": "Photo: Assarain Food Products"
+  },
+  "food-3": {
+   "src": "food-3.jpg",
+   "alt": "Refrigerated truck with Heinz Wattie's livery",
+   "cap": "Photo: Assarain Food Products"
+  },
+  "food-4": {
+   "src": "food-4.jpg",
+   "alt": "Assarain Food Products truck delivering to a hypermarket",
+   "cap": "Photo: Assarain Food Products"
+  },
+  "food-5": {
+   "src": "food-5.jpg",
+   "alt": "Assarain Food Products truck under palm trees",
+   "cap": "Photo: Assarain Food Products"
+  },
+  "food-6": {
+   "src": "food-6.jpg",
+   "alt": "Unilever Food Solutions range",
+   "cap": "Photo: Assarain Food Products"
+  },
+  "acp-1": {
+   "src": "acp-1.jpg",
+   "alt": "Operator at a plant control panel, ACP",
+   "cap": "Photo: Assarain Concrete Products"
+  },
+  "acp-2": {
+   "src": "acp-2.jpg",
+   "alt": "Strapped stacks of ACP concrete blocks",
+   "cap": "Photo: Assarain Concrete Products"
+  },
+  "acp-3": {
+   "src": "acp-3.jpg",
+   "alt": "Worker beside stacked blocks in the ACP yard",
+   "cap": "Photo: Assarain Concrete Products"
+  },
+  "acp-4": {
+   "src": "acp-4.jpg",
+   "alt": "Block-making machinery at the ACP factory",
+   "cap": "Photo: Assarain Concrete Products"
+  },
+  "mcp-1": {
+   "src": "mcp-1.jpg",
+   "alt": "Interlocking paving in a landscaped park",
+   "cap": "Photo: Modern Concrete Products"
+  },
+  "mcp-2": {
+   "src": "mcp-2.jpg",
+   "alt": "Multicolour interlock paving pattern",
+   "cap": "Photo: Modern Concrete Products"
+  },
+  "mcp-3": {
+   "src": "mcp-3.jpg",
+   "alt": "Hexagon-pattern paving in three colours",
+   "cap": "Photo: Modern Concrete Products"
+  },
+  "mcp-4": {
+   "src": "mcp-4.jpg",
+   "alt": "Coloured paving path by a seaside playground",
+   "cap": "Photo: Modern Concrete Products"
+  },
+  "aacp-1": {
+   "src": "aacp-1.jpg",
+   "alt": "AACP office with paver display, Dubai",
+   "cap": "Photo: Alserkal & Assarain Concrete Products"
+  },
+  "aacp-2": {
+   "src": "aacp-2.jpg",
+   "alt": "AACP office building, Dubai Investments Park",
+   "cap": "Photo: Alserkal & Assarain Concrete Products"
+  },
+  "aacp-3": {
+   "src": "aacp-3.jpg",
+   "alt": "AACP plant with blue silos",
+   "cap": "Photo: Alserkal & Assarain Concrete Products"
+  },
+  "aacp-4": {
+   "src": "aacp-4.jpg",
+   "alt": "AACP batching tower and block stacks",
+   "cap": "Photo: Alserkal & Assarain Concrete Products"
+  },
+  "msm-1": {
+   "src": "msm-1.jpg",
+   "alt": "Worker at the electric arc furnace, Modern Steel Mills",
+   "cap": "Photo: Modern Steel Mills"
+  },
+  "msm-2": {
+   "src": "msm-2.jpg",
+   "alt": "Molten steel pour, Modern Steel Mills",
+   "cap": "Photo: Modern Steel Mills"
+  },
+  "msm-3": {
+   "src": "msm-3.jpg",
+   "alt": "Furnace floor with glowing steel",
+   "cap": "Photo: Modern Steel Mills"
+  },
+  "msm-4": {
+   "src": "msm-4.jpg",
+   "alt": "Modern Steel Mills",
+   "cap": "Photo: Modern Steel Mills"
+  },
+  "sha-1": {
+   "src": "sha-1.jpg",
+   "alt": "Translucent polycarbonate roofing at sunset",
+   "cap": "Photo: Shamal Plastic Industries"
+  },
+  "sha-2": {
+   "src": "sha-2.jpg",
+   "alt": "Greenhouse clad in plastic sheeting",
+   "cap": "Photo: Shamal Plastic Industries"
+  },
+  "sha-3": {
+   "src": "sha-3.jpg",
+   "alt": "Coloured corrugated sheets",
+   "cap": "Photo: Shamal Plastic Industries"
+  },
+  "sha-4": {
+   "src": "sha-4.jpg",
+   "alt": "Polycarbonate greenhouse interior",
+   "cap": "Photo: Shamal Plastic Industries"
+  },
+  "sav-1": {
+   "src": "sav-1.jpg",
+   "alt": "Townhouses with balconies",
+   "cap": "Photo: Savills and Partners Oman (formerly Cluttons)"
+  },
+  "sav-2": {
+   "src": "sav-2.jpg",
+   "alt": "Residential indoor pool",
+   "cap": "Photo: Savills and Partners Oman (formerly Cluttons)"
+  },
+  "aicc-1": {
+   "src": "aicc-1.jpg",
+   "alt": "Shaded pool built by Assarain International Contracting",
+   "cap": "Photo: Assarain International Contracting"
+  },
+  "aicc-2": {
+   "src": "aicc-2.jpg",
+   "alt": "Indoor sports hall built by AICC",
+   "cap": "Photo: Assarain International Contracting"
+  },
+  "aicc-3": {
+   "src": "aicc-3.jpg",
+   "alt": "School building with outdoor courts, AICC",
+   "cap": "Photo: Assarain International Contracting"
+  },
+  "aicc-4": {
+   "src": "aicc-4.jpg",
+   "alt": "Classroom interior, AICC project",
+   "cap": "Photo: Assarain International Contracting"
+  },
+  "aicc-5": {
+   "src": "aicc-5.jpg",
+   "alt": "Assarain International Contracting project",
+   "cap": "Photo: Assarain International Contracting"
+  },
+  "hc-1": {
+   "src": "hc-1.jpg",
+   "alt": "Hatat Complex residential block, Muscat",
+   "cap": "Photo: Hatat Complex"
+  },
+  "hc-2": {
+   "src": "hc-2.jpg",
+   "alt": "Arched white facade of Hatat Complex",
+   "cap": "Photo: Hatat Complex"
+  },
+  "hc-3": {
+   "src": "hc-3.jpg",
+   "alt": "Hatat Complex at night",
+   "cap": "Photo: Hatat Complex"
+  },
+  "hc-4": {
+   "src": "hc-4.jpg",
+   "alt": "Hatat Complex pool and residential tower",
+   "cap": "Photo: Hatat Complex"
+  },
+  "hay-1": {
+   "src": "hay-1.jpg",
+   "alt": "White villas and lawn, Hay Al Rahbah",
+   "cap": "Photo: Assarain Properties"
+  },
+  "hay-2": {
+   "src": "hay-2.jpg",
+   "alt": "Villa courtyard, Hay Al Rahbah",
+   "cap": "Photo: Assarain Properties"
+  },
+  "hay-3": {
+   "src": "hay-3.jpg",
+   "alt": "Palm-lined street, Hay Al Rahbah",
+   "cap": "Photo: Assarain Properties"
+  },
+  "hay-4": {
+   "src": "hay-4.jpg",
+   "alt": "Residential street, Hay Al Rahbah",
+   "cap": "Photo: Assarain Properties"
+  },
+  "kone-1": {
+   "src": "kone-1.jpg",
+   "alt": "KONE escalators",
+   "cap": "Photo: KONE Assarain"
+  },
+  "kone-2": {
+   "src": "kone-2.jpg",
+   "alt": "KONE elevator call panel",
+   "cap": "Photo: KONE Assarain"
+  },
+  "wa-1": {
+   "src": "wa-1.jpg",
+   "alt": "Wadi Adai Auto Service Centre technician polishing a car",
+   "cap": "Photo: Wadi Adai Auto Service Centre"
+  },
+  "wa-2": {
+   "src": "wa-2.jpg",
+   "alt": "Hand-cleaning an alloy wheel",
+   "cap": "Photo: Wadi Adai Auto Service Centre"
+  },
+  "wa-3": {
+   "src": "wa-3.jpg",
+   "alt": "Interior detailing",
+   "cap": "Photo: Wadi Adai Auto Service Centre"
+  },
+  "bf-1": {
+   "src": "bf-1.jpg",
+   "alt": "Travel brochure, Blue Falcon Travel",
+   "cap": "Photo: Blue Falcon Travel"
+  },
+  "bf-2": {
+   "src": "bf-2.jpg",
+   "alt": "Reading a travel magazine",
+   "cap": "Photo: Blue Falcon Travel"
+  },
+  "ah-1": {
+   "src": "ah-1.jpg",
+   "alt": "Distribution lorry on the road",
+   "cap": "Photo: Al Haq Trading (as published on assarain.com)"
+  },
+  "str-1": {
+   "src": "str-1.jpg",
+   "alt": "STRABAG engineer on a building site",
+   "cap": "Photo: Strabag Oman"
+  },
+  "road": {
+   "src": "road.jpg",
+   "alt": "Highway through the Omani interior",
+   "cap": "Photo: assarain.com"
+  },
+  "logo": {
+   "src": "logo.png",
+   "alt": "Assarain globe logo",
+   "cap": "Logo: Assarain Group"
+  },
+  "logo-wordmark": {
+   "src": "logo-wordmark.png",
+   "alt": "Assarain Group of Companies logo",
+   "cap": "Logo: Assarain Group"
+  },
+  "hq-land": {
+   "src": "hq-land.webp",
+   "alt": "",
+   "cap": ""
+  },
+  "hq-front": {
+   "src": "hq-front.webp",
+   "alt": "Said Salem Al Wahaibi Group of Companies building, Muscat",
+   "cap": ""
+  },
+  "acp-plant-poster": {
+   "src": "acp-plant-poster.jpg",
+   "alt": "ACP plant from the air",
+   "cap": "Still from the ACP corporate video"
+  },
+  "film-promo-poster": {
+   "src": "film-promo-poster.jpg",
+   "alt": "Opening shot of the Assarain corporate film",
+   "cap": "Still from the Assarain corporate film"
   }
+ },
+ "ticker": {
+  "label": "News",
+  "items": [
+   {
+    "tag": "May 2026",
+    "text": "EDECS and Assarain Group awarded the EZAD dry port and veterinary quarantine",
+    "href": "@news:EDECS and Assarain Group awarded"
+   },
+   {
+    "tag": "Apr 2026",
+    "text": "AACP extends its finishing line in Dubai",
+    "href": "@news:Alserkal and Assarain"
+   },
+   {
+    "tag": "Feb 2025",
+    "text": "Strategic partnership signed with EDECS",
+    "href": "@news:Assarain Group and EDECS"
+   },
+   {
+    "tag": "Community",
+    "text": "28th Assarain Golf Classic at Ghala",
+    "href": "@news:28th Assarain"
+   }
+  ]
+ },
+ "promos": [
+  {
+   "image": "film-promo-poster",
+   "video": "film-promo.mp4",
+   "tag": "Film",
+   "kicker": "Assarain Group · since 1975",
+   "short": "The Group",
+   "title": "Trust is our capital",
+   "text": "Concrete, steel, property, clinics, food and retail companies, built in Oman over five decades.",
+   "cta": {
+    "label": "Meet the companies",
+    "href": "companies.html"
+   },
+   "cta2": {
+    "label": "Our story",
+    "href": "about.html"
+   }
+  },
+  {
+   "image": "f-tablet",
+   "tag": "May 2026",
+   "kicker": "A'Dhahirah Economic Zone",
+   "short": "EZAD dry port",
+   "title": "Building the EZAD dry port",
+   "text": "With EDECS, Assarain was awarded the dry port and veterinary quarantine at Ibri.",
+   "cta": {
+    "label": "Read the news",
+    "href": "@news:EDECS and Assarain Group awarded"
+   }
+  },
+  {
+   "image": "a-plantaerial",
+   "tag": "Manufacturing",
+   "kicker": "Assarain Concrete Products",
+   "short": "ACP",
+   "title": "15 million blocks a year",
+   "text": "Eleven plants across Oman and the UAE, making blocks, pavers and kerbs since 1984.",
+   "cta": {
+    "label": "Visit ACP",
+    "href": "@cat:Assarain Concrete Products"
+   }
+  },
+  {
+   "image": "hc-1",
+   "tag": "Property",
+   "kicker": "Hatat Complex",
+   "short": "Hatat Complex",
+   "title": "180 homes off Sultan Qaboos Highway",
+   "text": "Apartments, offices and leisure in two buildings in Muscat.",
+   "cta": {
+    "label": "See Hatat Complex",
+    "href": "@cat:Hatat Complex"
+   }
+  },
+  {
+   "image": "food-1",
+   "tag": "Wholesale",
+   "kicker": "Assarain Food Products",
+   "short": "Food",
+   "title": "Cold chain across Oman",
+   "text": "More than 23 refrigerated trucks from Muscat to Sohar, Nizwa and Al Kamil.",
+   "cta": {
+    "label": "Food Products",
+    "href": "@cat:Assarain Food Products"
+   }
+  }
+ ],
+ "rail": {
+  "title": "Find what you need",
+  "items": [
+   {
+    "label": "Group companies",
+    "sub": "21 companies",
+    "icon": "layers",
+    "href": "companies.html"
+   },
+   {
+    "label": "Divisions",
+    "sub": "Four of them",
+    "icon": "factory",
+    "href": "divisions.html"
+   },
+   {
+    "label": "Locations",
+    "sub": "Oman and the UAE",
+    "icon": "pin",
+    "href": "locations.html"
+   },
+   {
+    "label": "Newsroom",
+    "sub": "Press since 2014",
+    "icon": "star",
+    "href": "news.html"
+   },
+   {
+    "label": "Business enquiry",
+    "sub": "business@assarain.com",
+    "icon": "mail",
+    "href": "contact.html"
+   }
+  ]
+ },
+ "home": [
+  "promo",
+  "rail",
+  {
+   "type": "depth",
+   "id": "trust",
+   "height": 210,
+   "kicker": "Said Salem Al Wahaibi Group of Companies",
+   "title": "Trust is our capital",
+   "text": "Since 1975 the Group has grown from Muscat into manufacturing, construction, property, retail, healthcare and food.",
+   "cta": {
+    "label": "Our story",
+    "href": "about.html"
+   },
+   "cap": "Group head office building, Muscat. Photo: Assarain",
+   "layers": [
+    {
+     "image": "hq",
+     "speed": 0.1,
+     "scale": 0.06,
+     "lean": 5
+    },
+    {
+     "clouds": true,
+     "speed": 0.3,
+     "y": 30,
+     "tint": "#ffffff",
+     "count": 6
+    },
+    {
+     "image": "hq-land",
+     "speed": 0.2,
+     "lean": 8,
+     "alt": ""
+    },
+    {
+     "title": true,
+     "speed": 0.55
+    },
+    {
+     "image": "hq-front",
+     "speed": 0.32,
+     "lean": 12
+    },
+    {
+     "clouds": true,
+     "front": true,
+     "speed": 0.9,
+     "y": 86,
+     "tint": "#ffffff",
+     "count": 7
+    }
+   ]
+  },
+  "stats",
+  "services",
+  {
+   "type": "lineup",
+   "id": "companies",
+   "title": "Twenty-one companies.",
+   "text": "Concrete and steel, clinics and cold chains. Each company has its own page.",
+   "items": [
+    "Assarain Concrete Products (ACP)",
+    "Modern Steel Mills (MSM)",
+    "Hatat Complex",
+    "Assarain Food Products",
+    "The Body Shop Oman (NMTC)",
+    "Kalhat Services & Trading",
+    "Assarain International Contracting (AICC)",
+    "KONE Assarain",
+    "Assarain Furnishing",
+    "Shamal Plastic & Gulf Acrylic",
+    "Assarain Textiles (Raymond)",
+    "Alserkal & Assarain Concrete Products (AACP)"
+   ],
+   "more": "All 21 companies"
+  },
+  {
+   "type": "statement",
+   "kicker": "Our mission",
+   "text": "To continue to interconnect the world to Oman through the bridge of our organisation."
+  },
+  {
+   "type": "stages",
+   "id": "block",
+   "kicker": "Assarain Concrete Products",
+   "title": "From aggregate to the streets of Oman",
+   "stages": [
+    {
+     "image": "a-early",
+     "label": "1984",
+     "title": "Where ACP began",
+     "text": "Assarain Concrete Products was established in 1984. Archive footage from the company film shows its early plant.",
+     "date": "Since 1984"
+    },
+    {
+     "image": "a-aggregate",
+     "label": "Aggregate",
+     "title": "Raw material in",
+     "text": "Aggregate is fed from stockpiles into the plant hoppers.",
+     "date": "Plant"
+    },
+    {
+     "image": "a-mouldworker",
+     "label": "Moulding",
+     "title": "Pressed and checked",
+     "text": "Blocks and interlocking tiles come off the moulds and are checked on the line.",
+     "date": "Production"
+    },
+    {
+     "image": "a-stock",
+     "label": "Stock yard",
+     "title": "15 million blocks a year",
+     "text": "Annual capacity also covers 3 million m² of interlocking tiles and 1.5 million metres of kerbstones.",
+     "date": "Capacity"
+    },
+    {
+     "image": "a-lift",
+     "label": "Delivery",
+     "title": "Craned onto site",
+     "text": "Lorries with their own cranes deliver pallets of blocks straight to the build.",
+     "date": "Logistics"
+    },
+    {
+     "image": "a-paved",
+     "label": "Built",
+     "title": "In the streets of Oman",
+     "text": "Paving, kerbs and blocks from 11 plants across Oman and the UAE.",
+     "date": "Today"
+    }
+   ]
+  },
+  {
+   "type": "split",
+   "image": "f-training2",
+   "kicker": "People",
+   "title": "Training young Omanis for key roles",
+   "body": [
+    "The Group counts more than 4,000 employees and says its Omanization rate rises every year. ACP trains Omani staff on the job, and many now hold key positions."
+   ],
+   "points": [
+    "Leadership training for young Omanis",
+    "In-Country Value programme at ACP",
+    "Omani teams in every The Body Shop store"
+   ],
+   "cta": {
+    "label": "Apply online",
+    "href": "https://www.assarain.com/careers/apply-online/"
+   }
+  },
+  {
+   "type": "scrub",
+   "id": "plant",
+   "video": "acp-plant.mp4",
+   "video_m": "acp-plant-m.mp4",
+   "poster": "acp-plant-poster",
+   "height": 280,
+   "align": "left",
+   "beats": [
+    {
+     "at": 0,
+     "kicker": "From the air",
+     "title": "A concrete products group",
+     "text": "ACP has grown around ten times in turnover since 1984."
+    },
+    {
+     "at": 0.4,
+     "kicker": "11 plants",
+     "title": "Oman and the UAE",
+     "text": "Sister plants in Sohar (MCP) and Dubai (AACP) serve their regions."
+    },
+    {
+     "at": 0.72,
+     "kicker": "ISO 9001, 14001, OHSAS 18001",
+     "title": "Quality, environment, safety",
+     "text": "An integrated management system certification.",
+     "cta": {
+      "label": "Visit ACP",
+      "href": "@cat:Assarain Concrete Products"
+     }
+    }
+   ]
+  },
+  "partners",
+  "news",
+  "locations",
+  "faq"
+ ],
+ "stats": [
+  {
+   "value": 19,
+   "suffix": "+",
+   "label": "Group companies"
+  },
+  {
+   "years_since": 1975,
+   "label": "Years since 1975"
+  },
+  {
+   "value": 4000,
+   "suffix": "+",
+   "label": "Employees"
+  },
+  {
+   "value": 2,
+   "label": "Countries"
+  }
+ ],
+ "about": {
+  "title": "Trust is our capital",
+  "body": [
+   "The Assarain Group, part of the Said Salem Al Wahaibi (SSW) Group of Companies, is a trading and investment organisation based in Muscat. Since its inception in 1975 it has been part of business development across the Sultanate of Oman.",
+   "Its companies work in construction, manufacturing, national infrastructure, consumer products, food distribution, insurance and healthcare, and the Group has entered strategic collaborations with global companies including KONE, Savills, The Body Shop, Raymond, STRABAG and Alserkal."
+  ],
+  "more": [
+   "The Group says most of its business entities hold ISO certifications, and that it remains dedicated to vertical and lateral progress, innovation, customer orientation and total quality management, and Omanization alongside global collaboration.",
+   "Recent press names Sheikh Salem bin Said Al Wahaibi as Chairman of Assarain Group. The founder, Colonel Said bin Salem Al Wahaibi, passed away in October 2020."
+  ],
+  "timeline": [
+   {
+    "year": "1975",
+    "title": "Assarain Group founded",
+    "text": "Assarain Furnishing and Blue Falcon Travel were established the same year."
+   },
+   {
+    "year": "1984",
+    "title": "Assarain Concrete Products",
+    "text": "The future flagship company starts making concrete products."
+   },
+   {
+    "year": "1990",
+    "title": "Hatat clinics and Raymond",
+    "text": "Hatat Specialty Clinics and Assarain Textiles open."
+   },
+   {
+    "year": "1994",
+    "title": "AICC becomes independent",
+    "text": "Assarain International Contracting is set up as its own company."
+   },
+   {
+    "year": "1995",
+    "title": "Properties and The Body Shop",
+    "text": "Hay Al Rahbah (Assarain Properties) and NMTC are established."
+   },
+   {
+    "year": "2001",
+    "title": "Steel and plastics",
+    "text": "Modern Steel Mills at Rusayl and Shamal Plastic in Sohar."
+   },
+   {
+    "year": "2012",
+    "title": "KONE Assarain",
+    "text": "Joint venture with KONE for elevators and escalators."
+   },
+   {
+    "year": "2014",
+    "title": "ACP award",
+    "text": "Best Manufacturer in Construction Material, Concrete Products."
+   },
+   {
+    "year": "2018",
+    "title": "Duqm",
+    "text": "ACP signs a 25-year lease for a 60,000 m² plot in Duqm."
+   },
+   {
+    "year": "2025",
+    "title": "EDECS partnership",
+    "text": "Strategic partnership signed in Muscat in February."
+   },
+   {
+    "year": "2026",
+    "title": "EZAD dry port",
+    "text": "EDECS and Assarain awarded the dry port and veterinary quarantine."
+   }
+  ],
+  "values": [
+   {
+    "title": "Accountability",
+    "text": "An open-door culture where people own their work, and the Group owns its responsibilities to society."
+   },
+   {
+    "title": "Safety & Security",
+    "text": "Aiming for an accident-free workplace with defined policies and strict checks."
+   },
+   {
+    "title": "Service-oriented",
+    "text": "Customer satisfaction is the main measure of success."
+   },
+   {
+    "title": "Adaptability",
+    "text": "Adaptability to change is the mantra for constant improvement."
+   },
+   {
+    "title": "Reliability",
+    "text": "Trust is our Capital: quality is the hallmark of the Group."
+   },
+   {
+    "title": "Alliance & Teamwork",
+    "text": "Partnerships with leading global companies across every sector the Group works in."
+   },
+   {
+    "title": "Innovation",
+    "text": "New initiatives, distinctive products and new benchmarks."
+   },
+   {
+    "title": "Nation-building & Omanization",
+    "text": "Policies aligned with national Omanization goals, with the rate rising every year."
+   }
+  ],
+  "points": [
+   {
+    "title": "Vision",
+    "text": "To pioneer the continuing growth of Oman through innovative and evolving business practices and ventures."
+   },
+   {
+    "title": "Mission",
+    "text": "To continue to interconnect the world to Oman through the bridge of our organisation."
+   },
+   {
+    "title": "Commitments",
+    "text": "Committed to excellence, to being people-oriented and to nation-building."
+   }
+  ]
+ },
+ "services": {
+  "title": "Four divisions",
+  "nav": "Divisions",
+  "kicker": "What we do",
+  "intro": "The Group organises its companies into four divisions, as listed on assarain.com.",
+  "items": [
+   {
+    "title": "Manufacturing",
+    "icon": "factory",
+    "text": "Concrete products in Oman and the UAE, steel billets and thermoplastic sheet.",
+    "image": "a-plantwide",
+    "detail": {
+     "intro": "Assarain began making concrete products in 1984. Today the manufacturing arm runs concrete plants in Oman and Dubai, a steel mill at Rusayl and a plastics extrusion plant in Sohar.",
+     "body": [
+      "ACP describes itself as one of the largest concrete product makers in Oman, with 11 plants across Oman and the UAE.",
+      "Modern Steel Mills recycles ferrous scrap into billets in an electric arc furnace, now over 160,000 tonnes a year.",
+      "Shamal Plastic and Gulf Acrylic extrude polycarbonate, acrylic and other sheets for customers in four continents."
+     ],
+     "points": [
+      "Assarain Concrete Products (ACP)",
+      "Modern Concrete Products (MCP)",
+      "Alserkal & Assarain Concrete Products (AACP)",
+      "Modern Steel Mills (MSM)",
+      "Shamal Plastic & Gulf Acrylic"
+     ],
+     "points_title": "Companies in this division",
+     "facts": [
+      {
+       "label": "Concrete plants",
+       "value": "11"
+      },
+      {
+       "label": "Blocks a year (ACP)",
+       "value": "15 million"
+      },
+      {
+       "label": "Steel a year (MSM)",
+       "value": "160,000+ t"
+      }
+     ],
+     "src": "https://www.assarain.com/"
+    }
+   },
+   {
+    "title": "Construction, Maintenance & Property",
+    "icon": "building",
+    "text": "Contracting, property and facilities management, residences, consultancy and lifts.",
+    "image": "hc-1",
+    "detail": {
+     "intro": "The property arm builds, lets and looks after buildings: from AICC contracting to Hatat Complex, more than 2,000 managed units and KONE lifts.",
+     "body": [
+      "Assarain International Contracting designs and builds residential, commercial and industrial buildings with its own plant and workshops.",
+      "Assarain Properties (Hay Al Rahbah) manages more than 2,000 units in Oman and the UAE.",
+      "Savills and Partners Oman advises on valuation, leasing and investment, and KONE Assarain installs and maintains elevators and escalators."
+     ],
+     "points": [
+      "Savills and Partners Oman",
+      "Assarain International Contracting (AICC)",
+      "Hatat Complex",
+      "Assarain Properties (Hay Al Rahbah)",
+      "KONE Assarain"
+     ],
+     "points_title": "Companies in this division",
+     "facts": [
+      {
+       "label": "Units managed",
+       "value": "2,000+"
+      },
+      {
+       "label": "Hatat Complex apartments",
+       "value": "180"
+      },
+      {
+       "label": "KONE units in 12 months",
+       "value": "1,000+"
+      }
+     ],
+     "src": "https://www.assarain.com/"
+    }
+   },
+   {
+    "title": "Retail & Consumer Services",
+    "icon": "heart",
+    "text": "Furnishing, insurance, The Body Shop, clinics, Raymond menswear and facility services.",
+    "image": "f-bodyshop-store",
+    "detail": {
+     "intro": "The consumer companies meet people every day: in The Body Shop and Raymond stores, at Hatat clinics, with an insurance broker, or through Kalhat teams cleaning and landscaping buildings.",
+     "body": [
+      "Assarain Furnishing, founded with the Group in 1975, designs and fits out interiors.",
+      "National Marketing & Trading has run The Body Shop in Oman since 1995; Assarain Textiles has worked with Raymond since 1990.",
+      "Hatat Specialty Clinics has served patients since 1990, and Kalhat employs more than 2,800 people in soft services."
+     ],
+     "points": [
+      "Assarain Furnishing",
+      "Assarain Insurance Services",
+      "The Body Shop Oman (NMTC)",
+      "Hatat Specialty Clinics",
+      "Assarain Textiles (Raymond)",
+      "Kalhat Services & Trading"
+     ],
+     "points_title": "Companies in this division",
+     "facts": [
+      {
+       "label": "The Body Shop stores",
+       "value": "10"
+      },
+      {
+       "label": "Kalhat employees",
+       "value": "2,800+"
+      },
+      {
+       "label": "Clinic branches",
+       "value": "2"
+      }
+     ],
+     "src": "https://www.assarain.com/"
+    }
+   },
+   {
+    "title": "Commercial Wholesale",
+    "icon": "truck",
+    "text": "FMCG and frozen-food distribution across Oman from a central Muscat facility.",
+    "image": "food-1",
+    "detail": {
+     "intro": "Assarain Food Products distributes food brands across Oman with cold storage and more than 23 refrigerated trucks.",
+     "body": [
+      "The company operates from a central facility in Muscat with sales locations in Sohar, Nizwa and Al Kamil.",
+      "It says it was the first FMCG distributor in Oman to earn ISO 22000:2018 food-safety certification."
+     ],
+     "points": [
+      "Assarain Food Products"
+     ],
+     "points_title": "Companies in this division",
+     "facts": [
+      {
+       "label": "Refrigerated trucks",
+       "value": "23+"
+      },
+      {
+       "label": "Storage capacity",
+       "value": "1,250 t"
+      },
+      {
+       "label": "Sales locations",
+       "value": "4"
+      }
+     ],
+     "src": "https://www.assarain.com/"
+    }
+   }
+  ]
+ },
+ "catalogue": {
+  "title": "Group companies",
+  "nav": "Companies",
+  "kicker": "The Group",
+  "intro": "Every company in the Assarain Group, from concrete and steel to clinics, food and property.",
+  "home_title": "The companies",
+  "all_label": "All companies",
+  "categories": [
+   "Retail & Consumer Services",
+   "Commercial Wholesale",
+   "Manufacturing",
+   "Construction, Maintenance & Property",
+   "Other group companies"
+  ],
+  "compare": false,
+  "cta": "Contact the Group",
+  "specs_title": "Key facts",
+  "note": "Facts from each company page on assarain.com, read 11–12 Oct 2026. Companies under \"Other group companies\" appear only on the Arabic site.",
+  "items": [
+   {
+    "title": "Assarain Furnishing",
+    "category": "Retail & Consumer Services",
+    "text": "Interior design, fabrication and fit-out since 1975, from partitions and joinery to imported furniture.",
+    "body": [
+     "Established in 1975, at Assarain Furnishing LLC, we bring more than four decades of experience and expertise towards the design, fabrication and fitting of premium interior furnishings and furniture, and are dedicated towards beautifying the interiors of Oman.",
+     "Providing turnkey solutions to a consistently growing market, our company delivers a tremendous range of robust and customized interior solutions for all segments of industry and retail requirements. With a growing national and global distribution network, we offer inspirational designs, premium quality furnishings, innovative textures and refreshing colours.",
+     "In addition to providing specialized furnishing design and consulting services, our development of customized products knows no bounds, as we offer a plethora of products and services including furnishing and fittings, partition and false ceiling systems, flooring works, joinery works, imported loose and fixed furniture, mechanical, electrical & plumbing works, heating, ventilation & air conditioning systems, fire detection and interior firefighting equipment, telephone, data and structured cabling systems, sophisticated auditorium systems with integrated video conferencing, projection, audio and visual systems, as well as various signage services. Our company also offers building security and access control systems and takes care of health, safety and environment aspects in all the projects we undertake.",
+     "In addition, a modern, mechanized fabrication facility ensures all products are constructed according to set specifications and customizations as required. This unique combination of skills, experience and technology has allowed us to successfully implement a versatile range of interior fit-out and furnishing projects, including endeavours with the Diwan of Royal Court, various Government Ministries, Saud Bahwan Group, British Petroleum, British Gas, Weatherford, Schlumberger, ABB, Royal Sun Alliance Insurance, AXA Gulf Insurance, Denton SNR, National Bank of Oman, Qatar National Bank and Blue City and many other clients.",
+     "A state-of-the-art design studio allows our professional team of designers, draftsmen and specialists to conceptualize all elements of various furnishing projects with relentless precision. Periodic stringent quality checks help us to maintain high standards and set new benchmarks with every project that we undertake."
+    ],
+    "image": "furn-1",
+    "gallery": [
+     "furn-2",
+     "furn-3",
+     "furn-4",
+     "f-furnoffice",
+     "f-furncorridor"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "1975"
+     },
+     {
+      "label": "Division",
+      "value": "Retail & Consumer Services"
+     },
+     {
+      "label": "Sector",
+      "value": "Interior fit-out and furnishing"
+     },
+     {
+      "label": "Based in",
+      "value": "Ruwi, Muscat"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2459 3191"
+     },
+     {
+      "label": "Website",
+      "value": "assarainfurnishing.com"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "Design and build",
+      "text": "Turnkey interiors for corporate, commercial, retail, hospitality and residential clients."
+     },
+     {
+      "title": "Own studio and workshop",
+      "text": "An in-house design studio and a mechanised fabrication facility."
+     },
+     {
+      "title": "Clients named on the site",
+      "text": "Diwan of Royal Court, government ministries, Saud Bahwan Group, BP, BG, Schlumberger, ABB, National Bank of Oman and others."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/assarain-furnishing-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    },
+    "badge": "Since 1975",
+    "featured": true
+   },
+   {
+    "title": "Assarain Insurance Services",
+    "category": "Retail & Consumer Services",
+    "text": "Insurance broking: risk programmes, policy placement, portfolio and claims management.",
+    "body": [
+     "We are among the largest, fastest growing insurance broking houses of Oman and we take pride in being recognized as a trusted and customer-centric company that blends excellence in service with affordability and quality.",
+     "We have established a concrete reputation for our unparalleled technical expertise, value and integrity towards our clients. Our company develops customized risk management programs and caters to the insurance requirements of a variety of individual clients, businesses and industries.",
+     "Many prestigious clients have entrusted us with their portfolios for the proactive and innovative risk management strategies we offer. We play an integral role in the development of the local industry and our business encompasses all facets of the insurance business spectrum from small, private entities to major industrial organizations.",
+     "With the utmost care and attention, each client is presented with specialized insurance consulting services where all elements of risk are identified and quantified, with critical recommendations on mitigation. We strive to create long-term value for our stakeholders through our strong business fundamentals and arecommitted to setting new benchmarks in the Omani insurance industry.",
+     "A proud member of the \"Origin Oman\" campaign set forth by the Public Establishment for Industrial Estates (PEIE), we are dedicated to the continuous contribution to the initiatives that aim to preserve and enhance the economic, human and natural vitality of the Sultanate of Oman."
+    ],
+    "image": "f-insurance",
+    "gallery": [
+     "ins-1",
+     "ins-2"
+    ],
+    "specs": [
+     {
+      "label": "Division",
+      "value": "Retail & Consumer Services"
+     },
+     {
+      "label": "Sector",
+      "value": "Insurance broking"
+     },
+     {
+      "label": "Based in",
+      "value": "Ruwi, Muscat"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2469 5570"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "Individuals and businesses",
+      "text": "Life, savings, retirement, health and personal protection, plus group cover."
+     },
+     {
+      "title": "Claims handled for you",
+      "text": "Placement, portfolio management and claims management under one broker."
+     },
+     {
+      "title": "Origin Oman",
+      "text": "A member of the PEIE \"Origin Oman\" campaign."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/assarain-insurance-services-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "The Body Shop Oman (NMTC)",
+    "category": "Retail & Consumer Services",
+    "text": "National Marketing & Trading Co. has been the exclusive agent for The Body Shop in Oman since 1995.",
+    "body": [
+     "Thrilled to be the sole representative of a globally recognized brand, our company National Marketing & Trading Co.LLC (NMTC) is the exclusive agent for The Body Shop International plc in the Sultanate of Oman. Founded in 1976 as a small business providing natural hair and skin care products, today we are a prominent and trusted global beauty brand which focuses on accentuating the innate beauty of people. The Body Shop revolutionized the cosmetic industry by introducing concepts of natural simplicity, eco-friendly packaging, innovative cosmetic design and development and promoted ethical consumerism. After being acquired by L'Oréal in 2006, we are in the process of further scaling up our vision.",
+     "Established in 1995 in Oman, we deliver the international prestige of The Body Shop to our valued customers through a perfect balance of traditional culture and cosmetic product innovation. Our commitment to excellence found expression when The Body Shop (Oman) won laurels on being awarded recognition by The Body Shop International plc, UK, as the country with the \"Best Growth\" across small and medium operations across the globe.",
+     "Holding strong to Omani values in social responsibility, the vast majority of our specialized beauty consultants are members of the local community, trained and mentored by international professionals to meet The Body Shop standards and requirements. Extensive training on skin-care, make-up and other product related aspects are given to our Omani staff and currently all of our shops have Omani sales attendants. Our The Body Shop operations are presently spearheaded by an Omani who joined us 21 years ago as a salesgirl!",
+     "In addition, our company goes above and beyond to promote our values in social responsibility by actively participating in various Ministry of Health programs dedicated to women and children. These programs allow our specialized consultants to interactively promote the importance of skin-care and other health, wellness and beauty concepts. We are also extremely active members in supporting the various causes of DAR AL ATA'A, the leading local charitable organization in Oman."
+    ],
+    "image": "bs-1",
+    "gallery": [
+     "f-bodyshop-store",
+     "f-bodyshop",
+     "bs-2",
+     "bs-3"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "1995"
+     },
+     {
+      "label": "Division",
+      "value": "Retail & Consumer Services"
+     },
+     {
+      "label": "Sector",
+      "value": "Beauty retail, The Body Shop franchise"
+     },
+     {
+      "label": "Based in",
+      "value": "Muscat, Sohar and Salalah"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2449 2360"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "10 stores",
+      "text": "The Body Shop outlets in Muscat, Sohar and Salalah, as listed on the company page."
+     },
+     {
+      "title": "Omani teams",
+      "text": "Most beauty consultants are from the local community."
+     },
+     {
+      "title": "Best Growth",
+      "text": "Recognised by The Body Shop International for Best Growth among small and medium operations."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/national-marketing-trading-co-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    },
+    "badge": "The Body Shop",
+    "featured": true
+   },
+   {
+    "title": "Hatat Specialty Clinics",
+    "category": "Retail & Consumer Services",
+    "text": "Private clinics at Wadi Adai and Azaiba, each with a pharmacy. Established in 1990.",
+    "body": [
+     "A vital industry in any scenario, healthcare plays a critical role in the well-being of a nation and its people. Established in the year 1990, our organization Hatat Specialty Clinics is a key component in the evolution of top-notch healthcare systems in the medicare map of the Sultanate of Oman. Staffed with a highly specialized team of expert physicians, well-trained nurses and ancillary team members, we are committed to upholding exceptional standards towards medical treatment and therapy, medical technology and pharmaceuticals.",
+     "As the first fully-computerized private medical clinic in the Sultanate of Oman, we align our services with international standards, offering expert medical attention in a wide range of disciplines including general medicine, pediatrics, gynecology, dermatology, cosmetology, cardiology, endocrinology, diabetology, gastroenterology, radiology, otolaryngology(ENT), physiotherapy, ophthalmology, orthopedics, dentistry, psychiatry, family medicine and immunization. We take pride in being a member of the Oman Society for Petroleum Services(OPAL).",
+     "At Hatat Polyclinic, we are proud to utilize the best in highly sophisticated diagnostic, laboratory and X-ray facilities to ensure that all patient tests are accurately and efficiently conducted. A dedicated and constantly upgraded computer system supports our competence. In addition, our facilities are equipped with the latest advancements in ultrasound technology to cater to obstetrics and gynaecological requirements, as well as cutting edge machinery in echocardiography and CSA technology to address all cardiology-related concerns. Along with all standard facilities for general medicine and surgery, our dedicated physiotherapy unit provides expert treatment of all sports-related and muscular-skeletal injuries, along with additional dedicated units for dental and ophthalmology procedures. Regular quality assurance programs ensure that our laboratory equipment is kept modernized.",
+     "Our clientele includes individual patients, leading organizations, embassies, hotels, airlines, banks and industrial corporations for treatments ranging from general medicine to specialist care and diagnostic investigation.",
+     "In addition to our general medical service, we offer various medical packages such as pre-employment medical, periodic medical, annual medical, seafarer medical and diving medical which match up to international standards. We are also one of the panel clinics offering migration medicals to USA, Canada, Australia and New Zealand.",
+     "We operate out of two branches at Hatat House – Wadi Adai and Zubair Commercial Complex – Azaiba. Both the centres are supported by pharmacies well-stocked with globally reputed pharmaceutical brands and cosmetic products. Our Hatat Pharmacies also cater to both in-house and external prescriptions, and focus on the recuperation and support of valued patients."
+    ],
+    "image": "f-doctor2",
+    "gallery": [
+     "f-doctor"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "1990"
+     },
+     {
+      "label": "Division",
+      "value": "Retail & Consumer Services"
+     },
+     {
+      "label": "Sector",
+      "value": "Healthcare"
+     },
+     {
+      "label": "Based in",
+      "value": "Wadi Adai and Azaiba, Muscat"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2456 3641"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "Two branches",
+      "text": "Hatat House in Wadi Adai and Zubair Commercial Complex in Azaiba."
+     },
+     {
+      "title": "Specialist care",
+      "text": "General medicine, paediatrics, gynaecology, dermatology, cardiology, ENT, dentistry, ophthalmology and more."
+     },
+     {
+      "title": "Medicals",
+      "text": "Pre-employment, periodic and migration medicals for the USA, Canada, Australia and New Zealand."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/hatat-polyclinic-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Assarain Textiles (Raymond)",
+    "category": "Retail & Consumer Services",
+    "text": "Raymond menswear and tailoring in Oman, with a showroom on Ruwi High Street. Established in 1990.",
+    "body": [
+     "Giorgio Armani once said, \"Elegance is not standing out, but being remembered.\" Assarain Textiles LLC, in collaboration with the prestigious Raymond Limited of India, is always fresh in the memory of our valued customers for bringing in a complete range of premier men's clothing to the Sultanate of Oman and for catering to their impeccable sense of dressing with elegance and style. Established in 1990, we have always been offering the latest in global fashion trends by way of an affordable, practical and trusted clothing line that includes a wide spectrum of menswear. From exclusive formals to relaxed casuals, our Raymond showroom on Ruwi High Street is an established entity of high quality suits, shirts, trousers and fabrics, all bearing the world-renowned Raymond trademark of unsurpassed standards.",
+     "At Assarain Textiles, we have a diverse product range of many designs and colours of fabric and textiles to suit every age, occasion and style. Holding our own in-house design, fabrication and tailoring divisions, we employ a team of specialized master tailors and designers, each member exclusively trained by Raymond Limited fashion experts in India. Our employment of such finesse in expertise and execution, has ensured that our company also provides a wide range of uniforms for several airlines, hotels and sales personnel within Oman's booming service industry. Through our top-notch product range, we have always set new benchmarks for excellence in the Omani textile industry.",
+     "Our innovative designs are infused with superior quality and service, all backed by expert professionals: a simple formula that has allowed Assarain Textiles LLC to flourish over the past two and a half decades, and that will allow us to continue to grow hand in hand with the Sultanate of Oman."
+    ],
+    "image": "tex-1",
+    "gallery": [
+     "tex-3",
+     "tex-2"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "1990"
+     },
+     {
+      "label": "Division",
+      "value": "Retail & Consumer Services"
+     },
+     {
+      "label": "Sector",
+      "value": "Menswear retail and tailoring"
+     },
+     {
+      "label": "Partner",
+      "value": "Raymond Limited"
+     },
+     {
+      "label": "Based in",
+      "value": "Ruwi High Street, Muscat"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2483 0149"
+     },
+     {
+      "label": "Website",
+      "value": "assaraintextiles.com"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "Raymond showroom",
+      "text": "Fabrics and ready-made menswear on Ruwi High Street."
+     },
+     {
+      "title": "Tailoring",
+      "text": "Master tailors trained by Raymond fashion experts in India."
+     },
+     {
+      "title": "Uniforms",
+      "text": "Uniforms for airlines, hotels and sales teams."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/assarain-textiles-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Kalhat Services & Trading",
+    "category": "Retail & Consumer Services",
+    "text": "Cleaning, pest control, waste removal and landscaping, with offices in Ruwi, Sohar and Salalah.",
+    "body": [
+     "At Kalhat Services & Trading LLC, we are proud to be recognized as Oman's leading provider of industrial soft services.",
+     "We are backed by nearly four decades of experience in the provision of comprehensive cleaning, pest control, waste removal, landscaping and maintenance services. Moreover, the exclusive range of premium quality household and industrial cleaning products we offer, as well as wellness, hygiene, agricultural input and plant products which we import from Holland make us stand tall as market leaders.",
+     "As an ISO 9001:2008 Certified organization, we have earned the privilege of serving some of the most prestigious patrons in the region, including the Diwan of Royal Court, Majlis Oman, Bait Bahjat Al Andhar, Saud Bahwan Group Plaza, and various ministries & corporate houses across the Sultanate.",
+     "In addition to all-encompassing cleaning and landscaping services, we also provide a tremendous range of both household and industrial-grade cleaning products to the Sultanate of Oman. Automatic air fresheners, sanitary dispensers and consumables, toilet cleaners, disinfectants and sanitizers, floor care products, enzyme-based cleaners, degreasers and descalers, drain maintenance chemicals and detergents are merely a few in the long list of products available through Kalhat Services and Trading LLC.",
+     "Stylish and elegant solutions towards traditional gardening and our garden trading services supply a wide range of attractive pots, planters and jars in an effort to satisfy a broad spectrum of client requirements ranging from contemporary designs to traditional Islamic themes."
+    ],
+    "image": "f-kalhat",
+    "gallery": [
+     "kal-1",
+     "kal-2",
+     "kal-3",
+     "kal-4"
+    ],
+    "specs": [
+     {
+      "label": "Division",
+      "value": "Retail & Consumer Services"
+     },
+     {
+      "label": "Sector",
+      "value": "Facility soft services and landscaping"
+     },
+     {
+      "label": "Based in",
+      "value": "Ruwi, Sohar and Salalah"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2471 2119"
+     },
+     {
+      "label": "Website",
+      "value": "kalhat.com"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "2,800+ people",
+      "text": "Over 2,800 employees, as stated on the company page."
+     },
+     {
+      "title": "ISO 9001",
+      "text": "ISO 9001:2008 certified; member of ISSA, the Carpet Cleaners Association and the British Pest Control Association."
+     },
+     {
+      "title": "Products too",
+      "text": "Household and industrial cleaning products, pots, planters and garden trading."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/kalhat-services-trading-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    },
+    "featured": true
+   },
+   {
+    "title": "Assarain Food Products",
+    "category": "Commercial Wholesale",
+    "text": "FMCG distribution from a central Muscat facility, with cold storage and more than 23 refrigerated trucks.",
+    "body": [
+     "Assarain Food Products LLC occupies a place of pride among the market leaders in the Omani industry of Fast Moving Consumer Goods (FMCG), founded on a reputation built over three decades of excellence in food products and operations. Setting high benchmarks for other local competitors, we are the first FMCG sales and distribution company to acquire ISO 22000:2018 Certification for Food Safety Management Systems within the Sultanate.",
+     "Our commitment to maintaining high standards, delivering superior quality food products and services and the unwavering trust placed in us by our loyal consumer base reflects our desire and effort to provide only the best in handling, storage, logistics and distribution of a wide range of quality consumer products.",
+     "Our company operates primarily out of a central Muscat-based facility, and we also hold a well-connected network of strategic sales locations in Sohar, Nizwa and Al Kamil, with a total combined storage capacity of 1,250 metric tons.",
+     "Our vast operational processes, which include state of the art cold storage facilities, supplemented by a fleet of over 23 refrigerated trucks , enable us to offer efficient storage, transportation and distribution of products to all our customers in the Sultanate. In addition, our palletized storage systems, the use of forklifts and other advanced handling systems in coordination with technology and computer tracking systems ensure high standards of hygiene and services.",
+     "Locally owned and operated, we are dedicated to supporting and promoting traditional Omani culture, values and heritage."
+    ],
+    "image": "food-1",
+    "gallery": [
+     "food-2",
+     "food-3",
+     "food-4",
+     "food-5",
+     "food-6"
+    ],
+    "specs": [
+     {
+      "label": "Division",
+      "value": "Commercial Wholesale"
+     },
+     {
+      "label": "Sector",
+      "value": "FMCG and food distribution"
+     },
+     {
+      "label": "Based in",
+      "value": "Muscat; sales in Sohar, Nizwa and Al Kamil"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2469 8162"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "ISO 22000:2018",
+      "text": "The company says it was the first FMCG distributor in Oman with this food-safety certification."
+     },
+     {
+      "title": "1,250 tonnes",
+      "text": "Combined storage capacity across Muscat, Sohar, Nizwa and Al Kamil."
+     },
+     {
+      "title": "Brands",
+      "text": "Unilever Food Solutions, Heinz Wattie's, Lutosa, Seara, Freshly Frozen Foods, Fortune, K&N's, Olam Dairy and Leprino Foods."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/assarain-food-products-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    },
+    "badge": "Wholesale",
+    "featured": true
+   },
+   {
+    "title": "Assarain Concrete Products (ACP)",
+    "category": "Manufacturing",
+    "text": "The Group's flagship: blocks, interlocking tiles, kerbstones and landscape products since 1984.",
+    "body": [
+     "Assarain Concrete Products & Trading LLC (ACP) is a flagship company of the Assarain Group & is renowned for its brand and impeccable quality products and services across Oman & throughout the Gulf Region.",
+     "Originally established in 1984, we now lead the way as one of the largest manufacturers and suppliers of concrete products in Oman with our annual production capacities yielding 15 million concrete blocks, 3 million square meters of interlocking tiles, and 1.5 million linear meters of kerbstones. Our plant in Sohar is known as Modern Concrete Products (MCP) and the one in Dubai is known as Alserkal & Assarain Concrete Products (AACP).",
+     "Over the past three decades, we have grown into a prestigious \"concrete products manufacturing group\" by having additional mega manufacturing facilities in Sohar and Dubai. Modern Concrete Products-Sohar caters to the entire Al Batinah region whereas Alserkal – Assarain Concrete Products-Dubai supplies our wide range of products within the UAE markets. Our Group places the concrete products manufacturing companies in close focus as it forms the heart of our collective success.",
+     "A single source for a tremendous variety of products, we provide near limitless customized options to our available product range. Interlocking tiles, hydraulically pressed kerbstones, hydraulically pressed chamfered edge paving slabs, hydraulically pressed cable tiles, OPC and SRC building blocks, concrete patterned tiles and exposed aggregate tiles are among the key products offered by us that can be further customized towards specific customer requirements. In addition, specialized products are also available through our manufacturing facility such as surface shot blasted interlocking tiles, split finish blocks, rubber tiles, LED stone illumination tiles, light weight blocks, flower wall systems and retaining wall systems.",
+     "As part of our cumulative offering, we have exclusive agencies for the supply of smart construction solutions such as Tensar wall retaining systems, play equipment, LED lit pavers, & rubber tiles for playgrounds among many others.",
+     "We recognize the importance of \"In-Country Value\" and have assumed an integral role in the growth of our nation. A multi-phased strategy has been implemented to provide meaningful growth and Omanization across all of our operations. The work we have done has generated revenue and profit for the Sultanate, which in turn benefits business development, contributes to human capability and stimulates productivity in the Omani economy. We fully support the national ICV programme and have embedded ICV into our own business planning model. Through this, we aim to espouse our Group's specific initiatives that cover the development of a local workforce, the increase in local sourcing of raw materials, goods and services and our participation in Oman's Joint Supplier Registration System (JSRS). This further validates the ICV core value. Our ongoing commitment to Oman has grown to become a fundamental pillar in the ACP mission as our organization looks forward to sustained growth alongside the Sultanate.",
+     "We are the proud recipient of the \"Best Manufacturer in Construction Material – Concrete Products Award\" at the Construction Awards & Summit 2014.",
+     "We have also received awards from Yanqul Municipality towards corporate social responsibility (CSR) for supplying 10,000 sq. meters of interlocking tiles, free of cost, towards Yanqul's city development. Our company has received appreciation certificates from multiple customers such as Muscat and Sohar Municipalities."
+    ],
+    "image": "a-plantaerial",
+    "gallery": [
+     "a-plant",
+     "a-mouldworker",
+     "a-redpavers",
+     "a-forklift",
+     "a-samples",
+     "acp-2",
+     "acp-4",
+     "a-crane"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "1984"
+     },
+     {
+      "label": "Division",
+      "value": "Manufacturing"
+     },
+     {
+      "label": "Sector",
+      "value": "Concrete products"
+     },
+     {
+      "label": "Based in",
+      "value": "Muscat; showroom at Madinat Qaboos"
+     },
+     {
+      "label": "Capacity",
+      "value": "15 million blocks a year"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2443 7356"
+     },
+     {
+      "label": "Website",
+      "value": "assarainconcrete.com"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "11 plants",
+      "text": "Across Oman and the UAE, with sister plants MCP in Sohar and AACP in Dubai."
+     },
+     {
+      "title": "Annual capacity",
+      "text": "15 million blocks, 3 million m² of interlocking tiles and 1.5 million linear metres of kerbstones."
+     },
+     {
+      "title": "Award, 2014",
+      "text": "Best Manufacturer in Construction Material, Concrete Products, at the Construction Awards & Summit 2014."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/assarain-concrete-products-trading-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    },
+    "badge": "Flagship",
+    "featured": true
+   },
+   {
+    "title": "Modern Concrete Products (MCP)",
+    "category": "Manufacturing",
+    "text": "Concrete products plant in Sohar for Al Batinah: interlocking tiles, cable tiles, insulated and building blocks.",
+    "body": [
+     "Modern Concrete Products LLC was initially founded in Sohar to cater to the growing regional concrete needs and over the years we have now emerged as one of the largest concrete products producing companies with focused efforts towards Al Batinah projects.",
+     "Through offering exceptional product lines at highly competitive prices, we have grown to be recognized as an industry leader in the manufacture and provision of versatile interlocking tiles, cable tiles, high density polystyrene insulation blocks and high quality basic building blocks, all available in a variety of different combinations, designs and colours to facilitate a diverse range of client requirements.",
+     "Equipped with an arsenal of advanced technology, we were one of the initial companies in the region to produce concrete products through the use of an integrated MASA XL Plant. In addition, our highly experienced, competent and well-trained workforce contributes to all facets of general operations and management of our company's production and service. As qualified specialists in the industry, we are able to maintain a core philosophy founded on a strong work ethic, superior quality and innovation. Continuous devotion to these values is manifested in the ongoing development of advanced products and construction solutions.",
+     "Our company enjoys a trusted and prestigious brand name in the building and construction industry for the durability, long service and the permanence our products offer. As a loyal contributor to the constant development of the Al Batinah region, we are proud to serve as a frontrunner in construction and infrastructure projects and put in sustained efforts towards literally building a 'stronger' Sultanate. With an enduring commitment to teamwork, quality and service at Modern Concrete Products LLC, we strive to remain a leading concrete products manufacturer for the region and beyond."
+    ],
+    "image": "mcp-1",
+    "gallery": [
+     "mcp-2",
+     "mcp-3",
+     "mcp-4"
+    ],
+    "specs": [
+     {
+      "label": "Division",
+      "value": "Manufacturing"
+     },
+     {
+      "label": "Sector",
+      "value": "Concrete products"
+     },
+     {
+      "label": "Based in",
+      "value": "Sohar"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2670 1555"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "Built for Al Batinah",
+      "text": "Founded in Sohar to supply projects across the region."
+     },
+     {
+      "title": "MASA XL plant",
+      "text": "Products made on an integrated MASA XL plant."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/modern-concrete-products-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Alserkal & Assarain Concrete Products (AACP)",
+    "category": "Manufacturing",
+    "text": "Dubai joint venture with Nasser Bin Abdullatif Alserkal Est.: pavers, blocks, kerbs and slabs for the UAE.",
+    "body": [
+     "Alserkal & Assarain Concrete Products (AACP) is a joint venture between Assarain Concrete Products & Trading LLC, Oman & M/s Nasser Bin Abdullatif Alserkal Est, UAE.",
+     "We offer a diverse range of interlock pavers, concrete blocks, hydraulically pressed kerbstones, custom kerbs, paving slabs, roof slabs, cable tiles and covers for a variety of applications in both urban and interior areas in the UAE.",
+     "Catering to various Dubai Government Bodies, contracting companies and specialized clientele, we have been market leaders for over three decades, implementing state-of-the-art technology and experience to offer a multitude of innovative, high quality products. We also offer attractive landscaping products, creatively designed planters, benches, litter bins, park equipment and much more as part of the iconic backdrop for the UAE.",
+     "We utilize an immense, high capacity, advanced German plant to manufacture these superior quality concrete products. The plant is equipped with a MASA 9001XL Block Manufacturing System for the production of high density concrete blocks. These include Hollow, Solid, Hourdi and Insulated Blocks, as well as high density, abrasion-resistant interlocking paving tiles. Our manufacturing facility is equipped to produce up to 7 million masonry blocks and 1.5 million square meters of interlocking tiles per year, all within a wide variety of colours, sizes, shapes, finishes and textures.",
+     "We are proud to be recognized as one of the few concrete product suppliers with Integrated Management System (IMS) Certification. Reflecting international recognition for our management procedures, processes and customer focus, the IMS Certification represents the way we prioritize Quality, Environmental and Occupational Health & Safety Systems and ensure that we implement and sustain them in all processes throughout our organization. These measures, which outline stringent quality standards, ensure that our products align with the requirements in place for Dubai's superior levels of design and construction.",
+     "In addition to this, the Dubai Central Laboratories Department (DCLD) has accredited our AACP Laboratory Facilities as a self-certifying company, the first of its kind with such a distinction. Proud to be a leader and a favoured company, our organization Alserkal & Assarain Concrete Products is continually reinforcedwith the relentless supply of new ideas, technology and initiatives to not merely the UAE and the Middle East Region, but also the rest of the world."
+    ],
+    "image": "aacp-1",
+    "gallery": [
+     "aacp-2",
+     "aacp-3",
+     "aacp-4"
+    ],
+    "specs": [
+     {
+      "label": "Division",
+      "value": "Manufacturing"
+     },
+     {
+      "label": "Sector",
+      "value": "Concrete products, UAE"
+     },
+     {
+      "label": "Partner",
+      "value": "Nasser Bin Abdullatif Alserkal Est."
+     },
+     {
+      "label": "Based in",
+      "value": "Dubai Investments Park, UAE"
+     },
+     {
+      "label": "Capacity",
+      "value": "Up to 7 million blocks a year"
+     },
+     {
+      "label": "Phone",
+      "value": "+971 4 884 2207"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "German plant",
+      "text": "A MASA 9001XL block system."
+     },
+     {
+      "title": "Self-certifying lab",
+      "text": "Laboratory accredited by the Dubai Central Laboratories Department."
+     },
+     {
+      "title": "Capacity",
+      "text": "Up to 7 million masonry blocks and 1.5 million m² of interlocking tiles a year."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/alserkal-assarain-concrete-products/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Modern Steel Mills (MSM)",
+    "category": "Manufacturing",
+    "text": "Mild and alloy steel billets made from recycled scrap in an electric arc furnace at Rusayl. Since 2001.",
+    "body": [
+     "We, at Modern Steel Mills LLC (MSM) take pride in being Oman's prominent steel company and are the leading suppliers of trusted and quality steel products in all major markets. With steel often acting as one of the core foundations of all industrial sectors, our company has introduced a superior level of innovation in the competitive world of steel manufacturing. What sets us apart is not just the magnitude of our company's operations or the superiority of the products we offer; it is our innovative approach towards the manufacture of safe and sustainable steel and the commitment of our workforce as we continually strive towards setting benchmarks in excellence and creating value for our customers and our nation.",
+     "Specializing in the manufacture of various types of mild steel and alloy steel billets, we provide a critical contribution to the essential raw materials required for infrastructure development. Established in 2001 at the Rusayl Industrial Estate, our organization Modern Steel Mills LLC manufactures steel billets utilizing advanced Electrical Arc Furnace technology.",
+     "Originally operating with an annual capacity of 84,000 metric tons, our operations have grown to currently produce over 160,000 metric tons per annum, with efforts directed towards products distributed across both Oman and the U.A.E.",
+     "Our operations are extremely environmentally friendly, converting waste ferrous scrap into an intermediary product that can be used as raw materials in rerolling mills.",
+     "Manufactured billets are used for rebar, wire rods, angles, channels and girders, along with a tremendous amount of other components utilized in the rapidly advancing construction industry. Being the first in the Sultanate to use Electrical Arc Furnace technology, our operations are extremely environmentally friendly, converting waste ferrous scrap into an intermediary product that can be used as raw materials in rerolling mills. These unique innovations, along with a strict adherence to quality assurance, health and safety, uphold our reputation as an exclusive supplier in quality steel products."
+    ],
+    "image": "msm-2",
+    "gallery": [
+     "msm-1",
+     "msm-3",
+     "msm-4"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "2001"
+     },
+     {
+      "label": "Division",
+      "value": "Manufacturing"
+     },
+     {
+      "label": "Sector",
+      "value": "Steel billets"
+     },
+     {
+      "label": "Based in",
+      "value": "Rusayl Industrial Estate"
+     },
+     {
+      "label": "Capacity",
+      "value": "Over 160,000 tonnes a year"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2444 9063"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "160,000+ tonnes",
+      "text": "Up from an original 84,000 tonnes a year."
+     },
+     {
+      "title": "Electric arc furnace",
+      "text": "The company says it was the first in Oman to use EAF technology."
+     },
+     {
+      "title": "Recycled input",
+      "text": "Ferrous scrap becomes billets for rebar, wire rod, angles, channels and girders."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/modern-steel-mills/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    },
+    "badge": "Steel",
+    "featured": true
+   },
+   {
+    "title": "Shamal Plastic & Gulf Acrylic",
+    "category": "Manufacturing",
+    "text": "Polycarbonate, acrylic, ABS, PS, HIPS and PET-G sheet from Sohar Industrial Estate. Since 2001.",
+    "body": [
+     "We are a shared endeavour between the Assarain Group, Zubair Group, Mohsin Haider Darwish Group, OmniVest and Oman Arab Bank. Established in 2001 within the Sohar Industrial Estate, we are a driving and thriving force in the GCC region as we cater to the requirements of customers across Europe, Asia Pacific, Africa and the Middle East.",
+     "Equipped with two ultramodern thermoplastic extrusion lines supplied by Omipa of Italy, we utilize the latest in fabrication technology as we conform to international standards.",
+     "These two lines are capable of processing a tremendous range of polymer products including Polycarbonate (PC), Acrylic (PMMA), Thermoplastic (ABS), Polystyrene (PS), High Impact Polystyrene (HIPS) and Thermoplastic Polymer (PET-G). Additionally, the extrusion lines are capable of producing co-extruded sheets, combining qualities of two polymers in order to manufacture unique products tailored specifically towards distinctive client requirements.",
+     "With an annual capacity of 7,200 metric tons, our plant along with its state of the art technology is contributing to bringing about exponential growth in the operational facilities of Shamal Plastic Industries LLC and Gulf Acrylic Industries LLC. Our highly skilled and well-trained local and multinational workforce, equipped with strong domain expertise, guarantees quality service and technical assistance for projects and ensures that all our products maintain the highest levels of superior quality at all times and orders are executed on schedule, each time."
+    ],
+    "image": "sha-1",
+    "gallery": [
+     "sha-2",
+     "sha-3",
+     "sha-4"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "2001"
+     },
+     {
+      "label": "Division",
+      "value": "Manufacturing"
+     },
+     {
+      "label": "Sector",
+      "value": "Thermoplastic sheet extrusion"
+     },
+     {
+      "label": "Based in",
+      "value": "Sohar Industrial Estate"
+     },
+     {
+      "label": "Capacity",
+      "value": "7,200 tonnes a year"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2675 1762"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "Shared venture",
+      "text": "Assarain Group, Zubair Group, Mohsin Haider Darwish Group, OmniVest and Oman Arab Bank."
+     },
+     {
+      "title": "Two Omipa lines",
+      "text": "Extrusion lines supplied by Omipa of Italy."
+     },
+     {
+      "title": "Export",
+      "text": "Customers across Europe, Asia Pacific, Africa and the Middle East."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/shamal-plastic-industries-llc-gulf-acrylic-industries-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Savills and Partners Oman",
+    "category": "Construction, Maintenance & Property",
+    "text": "Property consultancy: valuation, leasing, brokerage, research and property and facilities management.",
+    "body": [
+     "We are a property powerhouse and an established source of qualified chartered surveyors and property consultants, serving both the Sultanate of Oman and beyond since 1976.",
+     "Savills is a UK listed firm, established in 1855 with a global office network of over 600 wholly owned and associate offices employing more than 35,000 people in over 60 countries throughout the Americas, the UK, Europe, Asia Pacific, Africa and the Middle East. The firm provides advisory, asset management, capital markets, hospitality and leisure, residential, commercial, industrial and retail sales and leasing, residential project sales, strata management and strategic consultancy services.",
+     "In Oman, Savills & Partners has approximately 45 staff members which include 3 chartered surveyors. We also have a Sohar office with 5 staff specialising in property management. As a result of our presence in the country for over 30 years (through acquisition of Cluttons Middle East), Savills & Partners LLC has unrivalled experience and expertise in all aspects of real estate in Oman."
+    ],
+    "image": "sav-1",
+    "gallery": [
+     "sav-2",
+     "f-muscat"
+    ],
+    "specs": [
+     {
+      "label": "Division",
+      "value": "Construction, Maintenance & Property"
+     },
+     {
+      "label": "Sector",
+      "value": "Real estate consultancy"
+     },
+     {
+      "label": "Partner",
+      "value": "Savills"
+     },
+     {
+      "label": "Based in",
+      "value": "Hatat House, Wadi Adai; office in Sohar"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 800 00 888"
+     },
+     {
+      "label": "Website",
+      "value": "savills.om"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "About 45 staff",
+      "text": "Including three chartered surveyors, plus a five-person Sohar office."
+     },
+     {
+      "title": "Full service",
+      "text": "Consultancy, research, marketing, leasing, property management and valuation."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/savills-oman/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Assarain International Contracting (AICC)",
+    "category": "Construction, Maintenance & Property",
+    "text": "Design and build of residential, commercial and industrial buildings, with its own plant and workshops.",
+    "body": [
+     "Backed by over 40 years of goodwill and experience as a predominant industry leader, at Assarain International Contracting Co. LLC (AICC) we have focused our energies towards the design and construction of premium grade residential, commercial and industrial buildings within the region. We have evolved into an independent company in 1994, strategically directing our primary focus towards exclusive endeavours held by the Assarain Group of Companies.",
+     "With our multi-skilled and well-trained workforce, our company retains powerful, self-sustaining operations and addresses all facets of our processes from quantity surveying, to purchasing, financing and administration.",
+     "Additionally, we present a competitive edge to the industry as we are well-resourced with our own dedicated plants, carpentry and welding workshops, vehicles, electrical, mechanical, maintenance and transport facilities.",
+     "We have successfully completed numerous projects for a wide variety of prominent organizations which range from government ministries to leading commercial establishments and high quality residential apartments for the private sector. We have made our presence felt within construction circles with our superior craftsmanship and professionalism in executing projects which comprise offices, restaurants, mosques and a whole residential township among others, as well as some of the most luxurious villas in the Sultanate. Our notable projects include the Hay Al Rahbah Residential Project, Hatat Complex, as well as the Wudam Naval Base Accommodation, College and Library."
+    ],
+    "image": "aicc-3",
+    "gallery": [
+     "aicc-1",
+     "aicc-2",
+     "aicc-4",
+     "aicc-5",
+     "f-siteworker"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "1994 (as an independent company)"
+     },
+     {
+      "label": "Division",
+      "value": "Construction, Maintenance & Property"
+     },
+     {
+      "label": "Sector",
+      "value": "Construction contracting"
+     },
+     {
+      "label": "Based in",
+      "value": "Al Hamriya, Muscat"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2450 4036"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "Excellent Grade",
+      "text": "Registered with the Tender Board, the Ministry of Defence and the Ministry of Health."
+     },
+     {
+      "title": "Projects named",
+      "text": "Hay Al Rahbah Residential Project, Hatat Complex, Wudam Naval Base accommodation, a college and a library."
+     },
+     {
+      "title": "EZAD, 2026",
+      "text": "Part of the coalition building the dry port and veterinary quarantine package at A'Dhahirah, per May 2026 press."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/assarain-international-contracting-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    },
+    "badge": "Contracting",
+    "featured": true
+   },
+   {
+    "title": "Hatat Complex",
+    "category": "Construction, Maintenance & Property",
+    "text": "Two buildings with 180 apartments and over 13,000 m² of commercial space, close to Sultan Qaboos Highway.",
+    "body": [
+     "One of the first of its kind in Oman, with its distinctive functional and aesthetic appeal, the Hatat Complex is home to residences and offices of corporate multinationals, local companies and tenants. Our two magnificent buildings, Hatat Complexes A and B comprise a total of 180 luxury residential apartments as well as over 13,000 square metres of prime commercial space in a much preferred location.",
+     "At par with world-class standards, our residential property at the Hatat Complex offers a unique blend of affordable luxury and comfort along with excellent facilities. All deluxe apartments are equipped with air-conditioning units, latest amenities and a fully fitted modern kitchen. Spacious two and three bedroom suites range from 163 m2 to 234 m2, each consisting of a bright, spacious living room with bedrooms overlooking the surrounding scenic landscape. Access to state-of-the-art recreational facilities that include two swimming pools, steam rooms, tennis courts, squash courts, facilities for indoor games such as table tennis, snooker and table hockey, as well as a children's play area is also offered to the residents of Hatat Complex.",
+     "All commercial units within the Hatat Complex offer an inspiring, modern and professional atmosphere for prospective long-term business tenants. Each property unit holds centralized air conditioning, glazed windows, false ceilings, suspended light fittings, tiled flooring, along with telephone and electrical access points. Our current commercial tenants include banks, auditors, lawyers, consultants, insurance brokers and travel agents. Also located onsite is an advanced medical polyclinic, saloon, pharmacy and coffee shop.",
+     "With the utmost convenience of residents and visitors in mind, the Hatat Complex has the provision of a total of 720 parking spaces consisting of both underground and shaded, aboveground units. The facilities of a 24-hour maintenance and security presence, upkeep of air conditioning, pest control, water, sewage, satellite, appliances and electrical systems is carried out in a systematic manner at frequent intervals. Added aspects of convenience are the easy access to the Sultan Qaboos Highway and various landmarks such as City Center Qurum, Sultan Centre, Al Qurum Complex, Al Araimi Complex and Lulu Hypermarket. We are always ready to welcome new enquiries from both residential and commercial prospects."
+    ],
+    "image": "hc-1",
+    "gallery": [
+     "hc-2",
+     "hc-3",
+     "hc-4"
+    ],
+    "specs": [
+     {
+      "label": "Division",
+      "value": "Construction, Maintenance & Property"
+     },
+     {
+      "label": "Sector",
+      "value": "Residential and commercial property"
+     },
+     {
+      "label": "Based in",
+      "value": "Muscat, near Sultan Qaboos Highway"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 9977 3981"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "180 apartments",
+      "text": "Two- and three-bedroom homes of 163 to 234 m²."
+     },
+     {
+      "title": "13,000 m² commercial",
+      "text": "Tenants include banks, auditors, lawyers, consultants and travel agents."
+     },
+     {
+      "title": "720 parking spaces",
+      "text": "Underground and shaded, with 24-hour maintenance and security."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/hatat-complex/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    },
+    "badge": "Residences",
+    "featured": true
+   },
+   {
+    "title": "Assarain Properties (Hay Al Rahbah)",
+    "category": "Construction, Maintenance & Property",
+    "text": "Property management, facilities management and consultancy for more than 2,000 units in Oman and the UAE.",
+    "body": [
+     "Our Company Hay Al Rahbah Trading & Contracting Co. LLC was established in 1995 as an effort to consolidate all the real estate projects of the Assarain Groupand to enhance operational efficiency through the streamlining of group initiatives.",
+     "Today, we are one of the largest facility management organizations within the Sultanate of Oman, currently holding over 2,000 units under our direct management across both the Sultanate and the United Arab Emirates. We offer a plethora of services covering purchase, rent and management of all types of properties.",
+     "At Hay Al Rahbah, we offer all the three critical pillars of the real estate industry: Property Management, Facilities Management and Property Consultation, while satisfying the immediate requirements of a growing market.",
+     "Our Property Management activities are an all-encompassing service towards both owners and tenants, and address all property concerns including valuations, planning, design, rent collection and review. These activities also include comprehensive project planning and consultation towards routine building maintenance as well as refurbishment and reconstruction projects for dated properties. With the client always being our primary focus, all property management activities are specifically customized towards individual personal needs or business requirements.",
+     "With all real estate initiatives comes a critical need for general and preventive building maintenance. Our in-house Facilities Management branch of Hay Al Rahbah provides access to highly skilled maintenance technicians, landscapers and security personnel to ensure all properties are maintained against the highest standards of class and quality. We provide services ranging from air-conditioning, electrical, mechanical and general maintenance, to garden landscaping and security services and our clients receive a unique opportunity to satisfy all real estate requirements simply through a single source provider. In the last two decades, we have developed and maintained over a thousand apartments, villas and town houses. Our strength lies in the fact that we work with a focus on the client´s interests. Our in-house maintenance team is available at hand to take care of all the plumbing, electrical and civil maintenance jobs of our clients quickly and efficiently. This has earned us a wide client base and a robust reputation for reliability and integrity."
+    ],
+    "image": "hay-1",
+    "gallery": [
+     "hay-2",
+     "hay-3",
+     "hay-4",
+     "f-hay"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "1995"
+     },
+     {
+      "label": "Division",
+      "value": "Construction, Maintenance & Property"
+     },
+     {
+      "label": "Sector",
+      "value": "Property and facilities management"
+     },
+     {
+      "label": "Based in",
+      "value": "Al Hamriya, Muscat"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2469 4088"
+     },
+     {
+      "label": "Website",
+      "value": "assarainproperties.com"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "2,000+ units",
+      "text": "Under direct management in Oman and the UAE."
+     },
+     {
+      "title": "Three services",
+      "text": "Property management, facilities management and property consultancy."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/hay-al-rahbah-trading-contracting-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "KONE Assarain",
+    "category": "Construction, Maintenance & Property",
+    "text": "Joint venture for KONE elevators and escalators: supply, installation and 24-hour maintenance. Since 2012.",
+    "body": [
+     "Twice documented in Forbes Magazine as one of the most innovative companies in the world, they have firmly established themselves as frontrunners in their field, guided by their mission to improve the flow of urban life. Our company KONE Assarain LLC was incepted in 2012 as a joint venture partnership between KONE and the Assarain Group and over the years we have emerged as a strategic powerhouse enabling greater access of ground-breaking KONE technology and services to not only the Sultanate of Oman, but also to the Middle East region as a whole.",
+     "With our professional team of specialized, factory-trained technicians with vast experience in the elevator and escalator industry, at KONE Assarain LLC we are more than equipped with the tools, equipment and facilities to guarantee 24-hours maintenance and after-sales service. Along with the ability to continuously raise the benchmark for the international elevator and escalator industry, we are at the helm of pioneering the introduction of eco-friendly products that look to take the world forward.",
+     "We truly believe that building cities is a part of the solution for a better future and a more developed nation. With the support of the Assarain Group, KONE Assarain LLC has installed over 1,000 units in the Sultanate of Oman, all within a span of 12 months. Despite the rapid implementation process and strategy, each of these projects adheres to the strict quality and standards policy in place with the internationally recognized KONE Installation and Maintenance Process – a process that was deservingly awarded ISO 9001 Certification in 2002.",
+     "At KONE Assarain LLC, we are committed to making people's journeys safe, convenient and reliable, in taller and smarter buildings. Safety and quality are the two high-priority areas that are of utmost significance in our daily operations and installations, as we seek to flourish as regional and national leaders in elevator and escalator design, products and services. Through this successful collaborative venture, we continue to scale greater heights with sophistication and excellence."
+    ],
+    "image": "f-kone",
+    "gallery": [
+     "kone-1",
+     "kone-2"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "2012"
+     },
+     {
+      "label": "Division",
+      "value": "Construction, Maintenance & Property"
+     },
+     {
+      "label": "Sector",
+      "value": "Elevators and escalators"
+     },
+     {
+      "label": "Partner",
+      "value": "KONE"
+     },
+     {
+      "label": "Based in",
+      "value": "Ruwi, Muscat"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2456 8145"
+     },
+     {
+      "label": "Website",
+      "value": "kone.com"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "1,000+ units",
+      "text": "Installed in Oman within 12 months, as stated on the company page."
+     },
+     {
+      "title": "24-hour service",
+      "text": "Factory-trained technicians for maintenance and after-sales."
+     }
+    ],
+    "src": "https://www.assarain.com/our-business-groups/kone-assarain-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    },
+    "badge": "KONE"
+   },
+   {
+    "title": "Strabag Oman",
+    "category": "Other group companies",
+    "text": "Partnership with STRABAG for roads, bridges, airports, dams and ports. Founded in 1971.",
+    "body": [
+     "Strabag Oman LLC is a partnership between the Assarain Group and STRABAG. Its Arabic company page lists work on roads, bridges, airports, dams, commercial complexes and ports.",
+     "Projects named on the page include the Nizwa to Ibri highway, the Sur suspension bridge, an air base, a dam in Salalah, airport rehabilitation, the Al Multaqa training centre, the Thumrait road and dualisation of the Sohar road.",
+     "The company is ISO 9001 certified. This summary is translated from the Arabic page on assarain.com; the company is not listed in the English navigation."
+    ],
+    "image": "str-1",
+    "gallery": [
+     "road"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "1971"
+     },
+     {
+      "label": "Division",
+      "value": "Listed on the Arabic site"
+     },
+     {
+      "label": "Sector",
+      "value": "Civil and infrastructure construction"
+     },
+     {
+      "label": "Partner",
+      "value": "STRABAG"
+     },
+     {
+      "label": "Based in",
+      "value": "Muscat"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2459 1500"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "Infrastructure",
+      "text": "Highways, bridges, airports, dams and ports."
+     }
+    ],
+    "src": "https://www.assarain.com/ar/our-business-groups/strabag-oman-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Blue Falcon Travel",
+    "category": "Other group companies",
+    "text": "IATA-accredited travel agency for government and corporate clients since 1975.",
+    "body": [
+     "Blue Falcon Travel & Commercial Co. plans travel for government and corporate clients and is an IATA-accredited airline sales agent.",
+     "It was founded in 1975 under a licence from the then Ministry of Transport and offers a 24-hour emergency booking service. Summary translated from the Arabic page on assarain.com."
+    ],
+    "image": "bf-1",
+    "gallery": [
+     "bf-2"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "1975"
+     },
+     {
+      "label": "Division",
+      "value": "Listed on the Arabic site"
+     },
+     {
+      "label": "Sector",
+      "value": "Travel"
+     },
+     {
+      "label": "Based in",
+      "value": "Muscat"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2460 4538"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "24-hour bookings",
+      "text": "Emergency booking service around the clock."
+     }
+    ],
+    "src": "https://www.assarain.com/ar/our-business-groups/blue-falcon-travel-commercial-company/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Wadi Adai Auto Service Centre",
+    "category": "Other group companies",
+    "text": "Car care at Shell stations in Muscat and Sohar: brushless wash, detailing and car-care products. Since 1979.",
+    "body": [
+     "Wadi Adai Auto Service Centre LLC runs car-care centres at Shell stations, with a brushless car wash, detailing and distribution of car-care products.",
+     "It started in 1979 and opened a second centre in Sohar in 1984. Summary translated from the Arabic page on assarain.com."
+    ],
+    "image": "wa-1",
+    "gallery": [
+     "wa-2",
+     "wa-3",
+     "f-carcare",
+     "f-carcare2"
+    ],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "1979"
+     },
+     {
+      "label": "Division",
+      "value": "Listed on the Arabic site"
+     },
+     {
+      "label": "Sector",
+      "value": "Car care"
+     },
+     {
+      "label": "Based in",
+      "value": "Wadi Adai, Muscat, and Sohar"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2456 1955"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "Two centres",
+      "text": "Wadi Adai in Muscat and Sohar."
+     }
+    ],
+    "src": "https://www.assarain.com/ar/our-business-groups/wadi-adai-auto-service-centre-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Al Haq Trading",
+    "category": "Other group companies",
+    "text": "Salalah trading house founded in 1976: furniture, frozen-food distribution, agriculture and travel.",
+    "body": [
+     "Al Haq Trading Co. LLC was founded in Dhofar in 1976 and started as a supermarket. Its Arabic page lists furniture, frozen-food distribution, agriculture and IATA travel divisions.",
+     "Clients named include Royal Court Affairs, Dhofar Municipality, the Royal Air Force of Oman and hotels in Salalah. Summary translated from the Arabic page on assarain.com."
+    ],
+    "image": "ah-1",
+    "gallery": [],
+    "specs": [
+     {
+      "label": "Founded",
+      "value": "1976"
+     },
+     {
+      "label": "Division",
+      "value": "Listed on the Arabic site"
+     },
+     {
+      "label": "Sector",
+      "value": "Diversified trading"
+     },
+     {
+      "label": "Based in",
+      "value": "Salalah"
+     },
+     {
+      "label": "Phone",
+      "value": "+968 2329 1044"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "Dhofar roots",
+      "text": "Based in Salalah since 1976."
+     }
+    ],
+    "src": "https://www.assarain.com/ar/our-business-groups/al-haq-trading-contracting-co-llc/",
+    "cta": {
+     "label": "Contact the Group",
+     "href": "contact.html"
+    }
+   }
+  ]
+ },
+ "partners": {
+  "kicker": "Partners and brands",
+  "intro": "Global names the Group works with in Oman",
+  "partners": [
+   "KONE",
+   "SAVILLS",
+   "THE BODY SHOP",
+   "RAYMOND",
+   "STRABAG",
+   "ALSERKAL",
+   "EDECS",
+   "MEDANTA",
+   "TENSAR",
+   "UNILEVER FOOD SOLUTIONS",
+   "HEINZ WATTIE'S",
+   "LUTOSA",
+   "OLAM DAIRY",
+   "LEPRINO FOODS",
+   "K&N'S",
+   "FORTUNE"
+  ]
+ },
+ "news": [
+  {
+   "title": "EDECS and Assarain Group awarded the EZAD dry port and veterinary quarantine",
+   "date": "May 22, 2026",
+   "tag": "Press",
+   "summary": "OPAZ awarded the dry port and veterinary quarantine at the Economic Zone at Al Dhahirah to EDECS, with Assarain Group as local partner.",
+   "image": "f-siteworker",
+   "body": [
+    "The Public Authority for Special Economic Zones and Free Zones (OPAZ) awarded EDECS the development of a dry port and veterinary quarantine at the Economic Zone at Al Dhahirah (EZAD) in Ibri. Assarain Group, also known as Said Salem Al Wahaibi Group, is the local partner in Oman.",
+    "The zone covers about 388 km² and lies roughly 20 km from the Rub Al Khali border crossing. Press coverage quoted Assarain Group Chairman Sheikh Salem bin Said Al Wahaibi.",
+    "Construction Business News Middle East, Container News and Gulf Construction also reported the award in May 2026."
+   ],
+   "src": "https://www.zawya.com/en/press-release/companies-news/edecs-and-assarain-group-awarded-strategic-dry-port-veterinary-quarantine-development-at-ezad-337958"
+  },
+  {
+   "title": "RO 73 million in agreements signed for A'Dhahirah Special Economic Zone",
+   "date": "May 21, 2026",
+   "tag": "Press",
+   "summary": "The third package, RO 48.058 million for dry port infrastructure and the veterinary quarantine, goes to a coalition that includes Assarain International Contracting.",
+   "image": "aicc-5",
+   "body": [
+    "Oman signed agreements worth RO 73 million for projects in the A'Dhahirah Special Economic Zone.",
+    "According to The Arabian Stories, the third package, worth RO 48.058 million and covering dry port infrastructure and the veterinary quarantine, will be built by a coalition of EDECS International Contracting, EDECS-KSA, EDECS Egypt and Assarain International Contracting Company."
+   ],
+   "src": "https://www.thearabianstories.com/2026/05/21/oman-signs-ro-73-million-agreements-for-adhahirah-special-economic-zone-projects/"
+  },
+  {
+   "title": "Alserkal and Assarain expands finishing capabilities in the UAE",
+   "date": "April 1, 2026",
+   "tag": "Industry",
+   "summary": "AACP, a user of SR Schindler finishing solutions for more than fifteen years, extended an existing line with an upgrade ordered in September 2024.",
+   "image": "aacp-4",
+   "body": [
+    "CPI worldwide reported that Alserkal and Assarain Concrete Products LLC has used SR Schindler finishing solutions for more than fifteen years.",
+    "The latest upgrade, ordered in September 2024, extended an existing finishing line at the Dubai plant."
+   ],
+   "src": "https://www.cpi-worldwide.com/journals/artikel/75174"
+  },
+  {
+   "title": "Assarain Group and EDECS sign a strategic partnership",
+   "date": "February 16, 2025",
+   "tag": "Press",
+   "summary": "Signed on 12 February 2025 at the Mandarin Hotel, Muscat, by Board Chairman Salem bin Said Al Wahaibi and Eng. Hussein El Dessouky of EDECS.",
+   "image": "f-training",
+   "body": [
+    "Assarain Group and EDECS signed a strategic partnership aimed at Oman's construction industry, Muscat Daily reported.",
+    "The agreement was signed by Salem bin Said Al Wahaibi, Board Chairman of Assarain Group, and Eng. Hussein El Dessouky of EDECS, under the patronage of the Undersecretary for Transport at the Ministry of Transport, Communications and Information Technology. The event took place on 12 February 2025 at the Mandarin Hotel in Muscat."
+   ],
+   "src": "https://www.muscatdaily.com/2025/02/16/assarain-group-edecs-forge-partnership-to-transform-oman-construction-industry/"
+  },
+  {
+   "title": "28th Assarain Golf Classic at Ghala Golf Club",
+   "date": "February 14, 2024",
+   "tag": "Community",
+   "summary": "About 135 golfers played the 28th edition on 2 and 3 February, sponsored by the Group and co-sponsored by Mistal and The Body Shop.",
+   "image": "f-lawn",
+   "body": [
+    "The 28th Assarain Golf Classic, described as one of the oldest golf tournaments in Oman, was held at Ghala Golf Club on 2 and 3 February 2024 with about 135 golfers, Oman Observer reported.",
+    "The tournament is sponsored by the Assarain Group of Companies and was co-sponsored by Mistal and The Body Shop. Group Director Ibrahim Al Wahaibi was quoted in the coverage."
+   ],
+   "src": "https://www.omanobserver.om/article/1149654/sports/golf/ahmed-al-wahaibi-clinches-assarain-classic-crown"
+  },
+  {
+   "title": "Construction begins on the ACP concrete plant in Duqm",
+   "date": "October 2, 2019",
+   "tag": "Manufacturing",
+   "summary": "SandRose Trading was appointed contractor and Semac & Partners consultant for the plant, which will supply Al Wusta and Dhofar.",
+   "image": "a-crane",
+   "body": [
+    "Assarain Concrete Products (Duqm) LLC began construction of its new factory in Duqm, Muscat Daily reported, with SandRose Trading as contractor and Semac & Partners as consultant.",
+    "The plant is planned to supply projects in Al Wusta and Dhofar. Managing Director Khalid Said Al Wahaibi was quoted."
+   ],
+   "src": "https://www.muscatdaily.com/2019/10/02/assarain-group-begins-construction-of-its-new-concrete-products-plant-in-duqm/"
+  },
+  {
+   "title": "ACP signs a 25-year land lease in Duqm",
+   "date": "August 28, 2018",
+   "tag": "Manufacturing",
+   "summary": "A renewable lease for a 60,000 m² plot with Duqm Industrial Land Company, a subsidiary of Port of Duqm Company.",
+   "image": "a-yard",
+   "body": [
+    "Assarain Concrete Products (Duqm) LLC signed a 25-year renewable land lease for a 60,000 m² plot with Duqm Industrial Land Company, a subsidiary of Port of Duqm Company, Technical Review Middle East reported.",
+    "The site is intended for a concrete block plant serving the Duqm region."
+   ],
+   "src": "https://technicalreviewmiddleeast.com/manufacturing/engineering/assarain-concrete-to-develop-mega-block-plant-in-oman-s-duqm"
+  },
+  {
+   "title": "ACP hosts a symposium on advances in concrete technology",
+   "date": "May 9, 2016",
+   "tag": "Manufacturing",
+   "summary": "A half-day symposium at the Grand Hyatt Muscat with speakers from the American Concrete Institute.",
+   "image": "a-samples",
+   "body": [
+    "Assarain Concrete Products hosted a half-day symposium on advances in concrete technology at the Grand Hyatt Muscat, described as the first of its kind in Oman, with speakers from the American Concrete Institute.",
+    "The report is archived on the ACP news page."
+   ],
+   "src": "https://assarainconcrete.com/news"
+  },
+  {
+   "title": "ACP named best concrete products manufacturer",
+   "date": "September 22, 2014",
+   "tag": "Award",
+   "summary": "ACP won 'Best manufacturer of construction materials, concrete products' at a ceremony on 17 September 2014.",
+   "image": "acp-2",
+   "body": [
+    "Assarain Concrete Products was named Best Manufacturer of Construction Materials, Concrete Products, at a ceremony at the InterContinental Muscat on 17 September 2014.",
+    "Khalid Said Al Wahaibi received the award on behalf of the company."
+   ],
+   "src": "https://assarainconcrete.com/news"
+  }
+ ],
+ "news_title": "Newsroom",
+ "news_intro": "Assarain Group in the press. assarain.com has no news section, so these come from published press and the ACP archive.",
+ "locations": {
+  "title": "Where we work",
+  "nav": "Locations",
+  "kicker": "Oman and the UAE",
+  "intro": "Offices, plants, clinics and showrooms from Muscat to Sohar, Salalah and Dubai.",
+  "book_label": "View location",
+  "items": [
+   {
+    "name": "Ruwi head office",
+    "full_name": "Assarain Group Corporate Head Office, Ruwi",
+    "type": "Head office",
+    "country": "Oman",
+    "image": "hq",
+    "address": "PO Box 1475, PC 112, Ruwi, Muscat",
+    "phone": "+968 2460 4811",
+    "phones": [
+     {
+      "label": "Head office",
+      "number": "+968 2460 4811"
+     },
+     {
+      "label": "Fax",
+      "number": "+968 2460 4837"
+     }
+    ],
+    "about": "Corporate head office of the Assarain Group. Email business@assarain.com.",
+    "src": "https://www.assarain.com/contact-us/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Ruwi%2C+Muscat%2C+Oman"
+    }
+   },
+   {
+    "name": "Hatat House",
+    "full_name": "Hatat House, Wadi Adai",
+    "type": "Clinic and offices",
+    "country": "Oman",
+    "image": "f-doctor",
+    "address": "Hatat House, Wadi Adai, Muscat",
+    "phone": "+968 2456 3641",
+    "phones": [
+     {
+      "label": "Hatat Specialty Clinics",
+      "number": "+968 2456 3641"
+     },
+     {
+      "label": "Savills Oman (first floor)",
+      "number": "+968 800 00 888"
+     }
+    ],
+    "about": "Home of the Hatat Specialty Clinics Wadi Adai branch and pharmacy, and Savills and Partners Oman on the first floor.",
+    "src": "https://www.assarain.com/our-business-groups/hatat-polyclinic-llc/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Hatat+House%2C+Wadi+Adai%2C+Oman"
+    }
+   },
+   {
+    "name": "Azaiba clinic",
+    "full_name": "Hatat Specialty Clinics, Zubair Commercial Complex, Azaiba",
+    "type": "Clinic",
+    "country": "Oman",
+    "image": "f-doctor2",
+    "address": "Zubair Commercial Complex, Azaiba, Muscat",
+    "phone": "+968 2449 9269",
+    "phones": [
+     {
+      "label": "Clinic",
+      "number": "+968 2449 9269"
+     },
+     {
+      "label": "Clinic",
+      "number": "+968 2339 6835"
+     }
+    ],
+    "about": "Second branch of Hatat Specialty Clinics, with a Hatat Pharmacy.",
+    "src": "https://www.assarain.com/our-business-groups/hatat-polyclinic-llc/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Hatat+Specialty+Clinics%2C+Zubair+Commercial+Complex%2C+Azaiba%2C+Oman"
+    }
+   },
+   {
+    "name": "ACP showroom",
+    "full_name": "Assarain Concrete Products Showroom, Madinat Qaboos",
+    "type": "Showroom",
+    "country": "Oman",
+    "image": "a-samples",
+    "address": "Madinat Qaboos, Muscat (PO Box 971, PC 111, CPO)",
+    "phone": "+968 2469 4321",
+    "phones": [
+     {
+      "label": "Showroom",
+      "number": "+968 2469 4321"
+     },
+     {
+      "label": "Factory",
+      "number": "+968 2443 7356"
+     }
+    ],
+    "about": "Showroom for ACP blocks, interlocking tiles, kerbs and landscape products. ACP also keeps a Design Park at its factory.",
+    "src": "https://www.assarain.com/our-business-groups/assarain-concrete-products-trading-llc/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Assarain+Concrete+Products+Showroom%2C+Madinat+Qaboos%2C+Oman"
+    }
+   },
+   {
+    "name": "Rusayl steel mill",
+    "full_name": "Modern Steel Mills, Rusayl Industrial Estate",
+    "type": "Steel mill",
+    "country": "Oman",
+    "image": "msm-2",
+    "address": "PO Box 174, PC 124, Rusayl Industrial Estate",
+    "phone": "+968 2444 9063",
+    "phones": [
+     {
+      "label": "Modern Steel Mills",
+      "number": "+968 2444 9063"
+     },
+     {
+      "label": "Modern Steel Mills",
+      "number": "+968 2444 9064"
+     }
+    ],
+    "about": "Electric arc furnace producing mild and alloy steel billets since 2001.",
+    "src": "https://www.assarain.com/our-business-groups/modern-steel-mills/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Modern+Steel+Mills%2C+Rusayl+Industrial+Estate%2C+Oman"
+    }
+   },
+   {
+    "name": "Al Hamriya",
+    "full_name": "Assarain International Contracting and Assarain Properties, Al Hamriya",
+    "type": "Offices",
+    "country": "Oman",
+    "image": "aicc-3",
+    "address": "PO Box 322 and PO Box 1031, PC 131, Al Hamriya, Muscat",
+    "phone": "+968 2450 4036",
+    "phones": [
+     {
+      "label": "AICC",
+      "number": "+968 2450 4036"
+     },
+     {
+      "label": "Assarain Properties",
+      "number": "+968 2469 4088"
+     }
+    ],
+    "about": "Postal base of the Group contracting company and of Assarain Properties (Hay Al Rahbah).",
+    "src": "https://www.assarain.com/our-business-groups/assarain-international-contracting-llc/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Al+Hamriya%2C+Muscat%2C+Oman"
+    }
+   },
+   {
+    "name": "Hatat Complex",
+    "full_name": "Hatat Complex, Muscat",
+    "type": "Residences",
+    "country": "Oman",
+    "image": "hc-2",
+    "address": "Muscat, near Sultan Qaboos Highway",
+    "phone": "+968 9977 3981",
+    "phones": [
+     {
+      "label": "Leasing",
+      "number": "+968 9977 3981"
+     }
+    ],
+    "about": "Two buildings with 180 apartments and over 13,000 m² of commercial space.",
+    "src": "https://www.assarain.com/our-business-groups/hatat-complex/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Hatat+Complex%2C+Muscat%2C+Oman"
+    }
+   },
+   {
+    "name": "Ruwi High Street",
+    "full_name": "Raymond showroom, Ruwi High Street",
+    "type": "Showroom",
+    "country": "Oman",
+    "image": "tex-1",
+    "address": "Ruwi High Street, Muscat",
+    "phone": "+968 2483 0149",
+    "phones": [
+     {
+      "label": "Assarain Textiles",
+      "number": "+968 2483 0149"
+     },
+     {
+      "label": "Assarain Textiles",
+      "number": "+968 2483 0126"
+     }
+    ],
+    "about": "Raymond menswear and tailoring by Assarain Textiles.",
+    "src": "https://www.assarain.com/our-business-groups/assarain-textiles-llc/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Raymond+showroom%2C+Ruwi+High+Street%2C+Oman"
+    }
+   },
+   {
+    "name": "Sohar concrete plant",
+    "full_name": "Modern Concrete Products, Sohar",
+    "type": "Plant",
+    "country": "Oman",
+    "image": "mcp-1",
+    "address": "PO Box 486, PC 322, Sohar",
+    "phone": "+968 2670 1555",
+    "phones": [
+     {
+      "label": "MCP",
+      "number": "+968 2670 1555"
+     },
+     {
+      "label": "MCP",
+      "number": "+968 2670 1666"
+     }
+    ],
+    "about": "Concrete products for Al Batinah, made on an integrated MASA XL plant.",
+    "src": "https://www.assarain.com/our-business-groups/modern-concrete-products-llc/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Modern+Concrete+Products%2C+Sohar%2C+Oman"
+    }
+   },
+   {
+    "name": "Sohar Industrial Estate",
+    "full_name": "Shamal Plastic Industries, Sohar Industrial Estate",
+    "type": "Plant",
+    "country": "Oman",
+    "image": "sha-1",
+    "address": "PO Box 31, PC 327, Sohar Industrial Estate",
+    "phone": "+968 2675 1174",
+    "phones": [
+     {
+      "label": "Shamal / Gulf Acrylic",
+      "number": "+968 2675 1174"
+     },
+     {
+      "label": "Shamal / Gulf Acrylic",
+      "number": "+968 2675 1762"
+     }
+    ],
+    "about": "Two Omipa extrusion lines with an annual capacity of 7,200 tonnes.",
+    "src": "https://www.assarain.com/our-business-groups/shamal-plastic-industries-llc-gulf-acrylic-industries-llc/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Shamal+Plastic+Industries%2C+Sohar+Industrial+Estate%2C+Oman"
+    }
+   },
+   {
+    "name": "Kalhat Sohar",
+    "full_name": "Kalhat Services & Trading, Sohar",
+    "type": "Branch office",
+    "country": "Oman",
+    "image": "kal-1",
+    "address": "PO Box 337, PC 311, Sohar",
+    "phone": "+968 2684 6961",
+    "phones": [
+     {
+      "label": "Kalhat Sohar",
+      "number": "+968 2684 6961"
+     },
+     {
+      "label": "Kalhat Sohar",
+      "number": "+968 2684 3888"
+     }
+    ],
+    "about": "Kalhat cleaning, pest control and landscaping for the Batinah region.",
+    "src": "https://www.assarain.com/our-business-groups/kalhat-services-trading-llc/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Kalhat+Services+and+Trading%2C+Sohar%2C+Oman"
+    }
+   },
+   {
+    "name": "Kalhat Salalah",
+    "full_name": "Kalhat Services & Trading, Salalah",
+    "type": "Branch office",
+    "country": "Oman",
+    "image": "kal-4",
+    "address": "PO Box 763, PC 211, Salalah",
+    "phone": "+968 2329 5150",
+    "phones": [
+     {
+      "label": "Kalhat Salalah",
+      "number": "+968 2329 5150"
+     },
+     {
+      "label": "Kalhat Salalah",
+      "number": "+968 2329 5625"
+     }
+    ],
+    "about": "Kalhat services in Dhofar.",
+    "src": "https://www.assarain.com/our-business-groups/kalhat-services-trading-llc/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Kalhat+Services+and+Trading%2C+Salalah%2C+Oman"
+    }
+   },
+   {
+    "name": "Dubai",
+    "full_name": "Alserkal & Assarain Concrete Products, Dubai Investments Park",
+    "type": "Plant",
+    "country": "UAE",
+    "image": "aacp-2",
+    "address": "PO Box 282935, Dubai Investments Park, Dubai",
+    "phone": "+971 4 884 2207",
+    "phones": [
+     {
+      "label": "AACP",
+      "number": "+971 4 884 2207"
+     },
+     {
+      "label": "AACP",
+      "number": "+971 4 884 2250"
+     }
+    ],
+    "about": "The Group concrete joint venture in the UAE.",
+    "src": "https://www.assarain.com/our-business-groups/alserkal-assarain-concrete-products/",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=Alserkal+and+Assarain+Concrete+Products%2C+Dubai+Investments+Park%2C+UAE"
+    }
+   }
+  ]
+ },
+ "faq_title": "Questions about the Group",
+ "faq": [
+  {
+   "q": "What is the Assarain Group?",
+   "a": "A Muscat-based trading and investment group, founded in 1975 and part of the Said Salem Al Wahaibi (SSW) Group of Companies."
+  },
+  {
+   "q": "How many companies are in the Group?",
+   "a": "assarain.com says 19+. Its English pages list 17 companies across four divisions, and its Arabic pages list four more: Strabag Oman, Blue Falcon Travel, Wadi Adai Auto Service Centre and Al Haq Trading."
+  },
+  {
+   "q": "Which sectors does it work in?",
+   "a": "Manufacturing (concrete, steel, plastics), construction, maintenance and property, retail and consumer services (furnishing, insurance, beauty retail, healthcare, menswear, facility services) and food distribution."
+  },
+  {
+   "q": "Where does the Group operate?",
+   "a": "Across Oman, with offices and plants in Muscat, Rusayl, Sohar and Salalah, and in the UAE through Alserkal & Assarain Concrete Products in Dubai."
+  },
+  {
+   "q": "How do I contact the head office?",
+   "a": "Call +968 2460 4811 or email business@assarain.com. The postal address is PO Box 1475, PC 112, Ruwi, Muscat."
+  },
+  {
+   "q": "How do I apply for a job?",
+   "a": "Use the Apply Online form on assarain.com: name, position, phone, email, years of experience and your CV. No vacancies are listed on the site."
+  }
+ ],
+ "nudges": {
+  "dock_label": "Contact the Group",
+  "offer": {
+   "id": "careers",
+   "kicker": "Careers",
+   "title": "Join Team Assarain",
+   "text": "Send your CV through the Apply Online form.",
+   "cta": "Apply online",
+   "href": "https://www.assarain.com/careers/apply-online/",
+   "image": "f-gm"
+  }
+ },
+ "cta_band": "Business enquiries to the Assarain Group head office in Ruwi.",
+ "detail_cta": {
+  "title": "Talk to the Group",
+  "text": "Send a business enquiry and the head office will route it to the right company."
+ },
+ "contact": {
+  "title": "Contact the Group",
+  "intro": "Business enquiries, feedback and everything else. This concept form is not connected.",
+  "address": "Assarain Group of Companies (Corporate Head Office), PO Box 1475, PC 112, Ruwi, Muscat, Oman",
+  "email": "business@assarain.com",
+  "phones": [
+   {
+    "label": "Head office",
+    "number": "+968 2460 4811"
+   },
+   {
+    "label": "Fax",
+    "number": "+968 2460 4837"
+   }
+  ],
+  "note": "Concept preview: connect the form before launch.",
+  "form": {
+   "branch": false,
+   "topics": [
+    "Business Inquiry",
+    "Feedback",
+    "Other"
+   ],
+   "submit": "Send"
+  }
+ },
+ "confirm": [
+  "Chairman: assarain.com still names Lt. Col. Said Salem Al Wahaibi as Chairman; an obituary says he died in October 2020 and 2025–2026 press names Sheikh Salem bin Said Al Wahaibi as Chairman. This site follows the press. Confirm the current leadership and how the founder should be referred to.",
+  "assarain.com refers to Sultan Qaboos bin Said as the current ruler on several pages; those passages were left out. Confirm any wording about His Majesty Sultan Haitham bin Tarik.",
+  "Company count: the site says 19+ companies; the English navigation lists 17 entities and Arabic-only pages list 4 more (Strabag Oman, Blue Falcon Travel, Wadi Adai Auto Service Centre, Al Haq Trading). Confirm which of the 21 are current.",
+  "The Our Business Groups page still lists Cluttons & Partners LLC and Hatat Polyclinic LLC; the menu uses Savills and Partners Oman and Hatat Specialty Clinics. This site uses the newer names. Hatat Complex page still says it is managed by Cluttons.",
+  "Stats '40+ years', '2+ countries', '4000+ employees' are from an undated page (around 2017). Years are shown as years since 1975. Confirm employee numbers.",
+  "Company facts (capacities, 10 The Body Shop stores, 2,800 Kalhat staff, 23 trucks, 2,000 managed units, 1,000 KONE units in 12 months) come from company pages last edited around 2017–2020. Confirm they are current.",
+  "No map coordinates are published for any office, plant or clinic. Branch maps search by name and area; confirm exact pins. Opening hours are not published.",
+  "ACP factory location (PO Box 971, CPO) and the Duqm plant (construction began 2019) are not described on the site; not shown as locations.",
+  "News: assarain.com has no news section. All articles come from third-party press (dated) and the ACP news archive. Gulf Construction Online article date inferred from its image path (27 May 2026).",
+  "News photos are the Group's own file photos, not photos of the events.",
+  "Hatat Specialty Clinics photos on assarain.com are stock images; this site uses stills from the Assarain corporate film instead. Strabag Oman and Al Haq Trading images are as published on assarain.com and may be stock.",
+  "Arabic-only company summaries (Strabag Oman, Blue Falcon Travel, Wadi Adai Auto Service Centre, Al Haq Trading) are translated from Arabic; check the wording.",
+  "The orphan /product-inquiry-page/ with Suntech solar copy and the Suntech posters in the media library were ignored.",
+  "Logo: taken from the assarain.com header (small raster files, 235 px and 99 px wide). Ask for a vector logo.",
+  "Leadership roles: Khalid Said Al Wahaibi (Managing Director, per 2019 press and the ACP page) and Ibrahim Said Al Wahaibi (Director, per 2024 press) appear only in news articles."
+ ],
+ "sources": [
+  "https://www.assarain.com/ (read 11–12 Oct 2026)",
+  "https://www.assarain.com/about-us/company-profile/ (read 11 Oct 2026)",
+  "https://www.assarain.com/about-us/history/ (read 11 Oct 2026)",
+  "https://www.assarain.com/about-us/vision-mission/ (read 11 Oct 2026)",
+  "https://www.assarain.com/about-us/values/ (read 11 Oct 2026)",
+  "https://www.assarain.com/about-us/business-with-assarain/ (read 12 Oct 2026)",
+  "https://www.assarain.com/contact-us/ (read 12 Oct 2026)",
+  "https://www.assarain.com/our-business-groups/ and each company page (read 11–12 Oct 2026)",
+  "https://www.assarain.com/ar/our-business-groups/ Arabic company pages (read 11 Oct 2026)",
+  "https://www.assarain.com/wp-json/wp/v2/media media library (read 12 Oct 2026)",
+  "Assarain Corporate Film and ACP Corporate Video, assarain.com home page (downloaded 12 Oct 2026)",
+  "https://www.zawya.com/en/press-release/companies-news/edecs-and-assarain-group-awarded-strategic-dry-port-veterinary-quarantine-development-at-ezad-337958 (read 11 Oct 2026)",
+  "https://www.thearabianstories.com/2026/05/21/oman-signs-ro-73-million-agreements-for-adhahirah-special-economic-zone-projects/ (read 11 Oct 2026)",
+  "https://www.cbnme.com/logistics-news/edecs-and-assarain-group-to-deliver-ezad-dry-port-development-in-al-dhahirah/ (read 11 Oct 2026)",
+  "https://container-news.com/edecs-and-assarain-group-win-oman-dry-port-project-at-ezad/ (read 11 Oct 2026)",
+  "https://gulfconstructiononline.com/Article/462991/edecs-assarain-sign-deal-for-oman-dry-port-facility (read 11 Oct 2026)",
+  "https://www.cpi-worldwide.com/journals/artikel/75174 (read 11 Oct 2026)",
+  "https://www.muscatdaily.com/2025/02/16/assarain-group-edecs-forge-partnership-to-transform-oman-construction-industry/ (read 11 Oct 2026)",
+  "https://www.omanobserver.om/article/1149654/sports/golf/ahmed-al-wahaibi-clinches-assarain-classic-crown (read 11 Oct 2026)",
+  "https://www.muscatdaily.com/2019/10/02/assarain-group-begins-construction-of-its-new-concrete-products-plant-in-duqm/ (read 11 Oct 2026)",
+  "https://technicalreviewmiddleeast.com/manufacturing/engineering/assarain-concrete-to-develop-mega-block-plant-in-oman-s-duqm (read 11 Oct 2026)",
+  "https://assarainconcrete.com/news (read 11 Oct 2026)",
+  "https://www.oman.org.uk/post/colonel-said-bin-salem-al-wahaibi (read 11 Oct 2026)"
+ ]
 }

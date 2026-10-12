@@ -1,278 +1,2193 @@
 {
-  "slug": "national-gas",
-  "tier": 1,
-  "name": "National Gas Company",
-  "short": "National Gas",
-  "sector": "Energy · LPG",
-  "meta": "National Gas Company: LPG plants and storage across Oman, the UAE and Malaysia.",
-  "accent": "#c6ff4a",
-  "cta": {
-    "label": "Contact us",
-    "href": "#contact"
+ "slug": "national-gas",
+ "tier": "Kit test",
+ "name": "National Gas Company SAOG",
+ "short": "National Gas",
+ "sector": "Energy · LPG",
+ "meta": "National Gas Company SAOG, Oman's first LPG bottler since 1981: LPG cylinders, the D-Cylinder, bulk LPG, SNG, cutting gas and gas engineering.",
+ "footer_note": "Concept rebuild made to test the website kit. Not the official website of National Gas Company SAOG. Content from nationalgasco.net and press reports, read 11-12 October 2026.",
+ "accent": "#5cc6ee",
+ "theme": "studio",
+ "promo_fx": "streak",
+ "img_dir": "national-gas",
+ "brand": {
+  "mode": "dark",
+  "style": "glass",
+  "logo": "logo",
+  "bg": "#06202c",
+  "fg": "#eef6fa",
+  "accent": "#5cc6ee",
+  "accent_ink": "#04161f",
+  "accent2": "#9fdcf5",
+  "alt": "#0a2a39",
+  "font_display": "\"Sora\", \"Inter\", system-ui, sans-serif",
+  "font_body": "\"IBM Plex Sans\", system-ui, sans-serif",
+  "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Sora:wght@300;400;500;600&family=IBM+Plex+Sans:wght@400;500;600"
+ },
+ "cta": {
+  "label": "Get a quote",
+  "short": "Quote",
+  "href": "contact.html"
+ },
+ "images": {
+  "tanker-plant-yard": {
+   "src": "tanker-plant-yard.jpg",
+   "alt": "A National Gas LPG road tanker crossing a plant yard, storage tanks and mountains behind",
+   "cap": "Photo: National Gas Company"
   },
-  "hero": {
-    "eyebrow": "LPG production & storage · Oman · UAE · Malaysia",
-    "title": "Energy supply across three countries",
-    "lede": "Eleven LPG plants, more than 350,000 metric tonnes of LPG a year, and the largest LPG storage in the Sultanate of Oman.",
-    "primary": {
-      "label": "Contact us",
-      "href": "#contact"
-    },
-    "secondary": {
-      "label": "Our footprint",
-      "href": "#locations"
-    }
+  "tanker-mountains": {
+   "src": "tanker-mountains.jpg",
+   "alt": "National Gas LPG tanker truck against the Hajar mountains",
+   "cap": "Photo: National Gas Company"
   },
-  "stats": [
-    {
-      "value": 11,
-      "label": "LPG plants"
-    },
-    {
-      "value": 350000,
-      "suffix": "+",
-      "label": "Metric tonnes of LPG a year"
-    },
-    {
-      "value": 2600,
-      "label": "Tonnes of storage, the largest in Oman"
-    },
-    {
-      "value": 3,
-      "label": "Countries with plants"
-    }
-  ],
-  "about": {
-    "title": "Built around LPG supply",
-    "body": [
-      "National Gas Company runs LPG plants and storage in Oman, the UAE and Malaysia. Its subsidiaries operate in the UAE, Malaysia and Saudi Arabia."
-    ],
-    "points": [
-      {
-        "title": "Plants",
-        "text": "Eleven LPG plants across Oman, the UAE and Malaysia."
-      },
-      {
-        "title": "Storage",
-        "text": "2,600 tonnes of LPG storage, which the group describes as the largest in Oman."
-      },
-      {
-        "title": "Throughput",
-        "text": "More than 350,000 metric tonnes of LPG a year."
-      }
-    ]
+  "tanker-road": {
+   "src": "tanker-road.jpg",
+   "alt": "National Gas LPG semi-trailer tanker on the road",
+   "cap": "Photo: National Gas Company"
   },
-  "services": {
-    "title": "Group structure",
-    "nav": "Subsidiaries",
-    "intro": "Subsidiaries and the countries they operate in, as shown on the group's site.",
-    "items": [
-      {
-        "title": "NGC Energy LLC",
-        "icon": "globe",
-        "text": "United Arab Emirates"
-      },
-      {
-        "title": "NGC Energy Sdn. Bhd.",
-        "icon": "globe",
-        "text": "Malaysia"
-      },
-      {
-        "title": "NGC Energy LLC",
-        "icon": "globe",
-        "text": "Saudi Arabia (KSA)"
-      }
-    ]
+  "tanker-energizing": {
+   "src": "tanker-energizing.jpg",
+   "alt": "National Gas tanker trailer in \"Energizing Lives\" livery",
+   "cap": "Photo: National Gas Company"
   },
-  "highlights": null,
-  "locations": {
-    "title": "Our footprint",
-    "nav": "Locations",
-    "intro": "Eleven LPG plants in total. The site lists the countries but not each plant's address or per-country count.",
-    "items": [
-      {
-        "name": "Head office",
-        "type": "Head office",
-        "country": "Oman",
-        "address": "Muscat, Sultanate of Oman. Street address not published."
-      },
-      {
-        "name": "LPG plants",
-        "type": "LPG plant & storage",
-        "country": "Oman",
-        "note": "Count and sites to confirm."
-      },
-      {
-        "name": "LPG plants",
-        "type": "LPG plant",
-        "country": "UAE",
-        "note": "Count and sites to confirm."
-      },
-      {
-        "name": "LPG plants",
-        "type": "LPG plant",
-        "country": "Malaysia",
-        "note": "Count and sites to confirm."
-      }
-    ]
+  "fleet-lineup": {
+   "src": "fleet-lineup.jpg",
+   "alt": "Line-up of National Gas LPG tanker trucks",
+   "cap": "Photo: National Gas Company"
   },
-  "marquee": [
-    "LPG production",
-    "Bulk storage",
-    "Oman",
-    "United Arab Emirates",
-    "Malaysia",
-    "Saudi Arabia"
-  ],
-  "contact": {
-    "title": "Contact us",
-    "intro": "For supply, corporate and investor enquiries.",
-    "address": "Location: Muscat, Sultanate of Oman (street address to confirm)",
-    "phones": [
-      {
-        "label": "Call centre",
-        "number": "+968 2416 2646",
-        "tel": "+96824162646"
-      },
-      {
-        "label": "WhatsApp",
-        "number": "+968 9060 4445",
-        "tel": "+96890604445",
-        "whatsapp": true
-      }
-    ],
-    "email": "info@nationalgasco.net",
-    "form": {
-      "branch": false,
-      "topics": [
-        "Supply enquiry",
-        "Corporate or investor relations",
-        "Careers",
-        "Media",
-        "Other"
-      ],
-      "submit": "Send enquiry"
-    }
+  "bullets-site": {
+   "src": "bullets-site.jpg",
+   "alt": "Row of horizontal LPG storage bullets at an installation site",
+   "cap": "Photo: National Gas Company"
   },
-  "confirm": [
-    "Only the total of 11 plants is published. Per-country counts and plant addresses are not on the site, so the footprint shows countries only.",
-    "The Saudi subsidiary name (NGC Energy LLC) and the Malaysia company name were inferred from the site's labels and domain. Confirm both.",
-    "No founding year or listing details are published.",
-    "The head office street address is not published.",
-    "Photography is illustrative Creative Commons imagery (see footer credits), not NGC's plants. Replace with the company's own photos."
-  ],
-  "sources": [
-    "https://nationalgasco.net (homepage read 11 Oct 2026)"
-  ],
-  "theme": "cosmos",
-  "img_dir": "ngc",
-  "images": {
-    "sphere": {
-      "src": "sphere.jpg",
-      "alt": "Spherical gas storage tank",
-      "cap": "Illustrative"
-    },
-    "pipes": {
-      "src": "pipes.jpg",
-      "alt": "Industrial pipework",
-      "cap": "Illustrative"
-    },
-    "valves": {
-      "src": "valves.jpg",
-      "alt": "Rows of gas valves and gauges",
-      "cap": "Illustrative"
-    },
-    "dark": {
-      "src": "dark.jpg",
-      "alt": "Pipes and valves in low light",
-      "cap": "Illustrative"
-    }
+  "d-cylinder-technician": {
+   "src": "d-cylinder-technician.jpg",
+   "alt": "Technician connecting a D-Cylinder in a customer gas bank",
+   "cap": "Photo: National Gas Company"
   },
-  "theme_data": {
-    "code": "NGC",
-    "seek": [
-      {
-        "label": "Supply enquiry",
-        "href": "#contact"
-      },
-      {
-        "label": "Group structure",
-        "href": "#services"
-      },
-      {
-        "label": "Our footprint",
-        "href": "#locations"
-      },
-      {
-        "label": "Corporate & investors",
-        "href": "#contact"
-      }
-    ],
-    "nodes": [
-      "Oman",
-      "UAE",
-      "Malaysia",
-      "KSA"
-    ],
-    "space": [
-      {
-        "kicker": "Subsidiary · UAE",
-        "title": "NGC Energy LLC",
-        "text": "United Arab Emirates",
-        "z": -300,
-        "x": -22,
-        "y": -6
-      },
-      {
-        "kicker": "Storage",
-        "title": "2,600 MT",
-        "text": "LPG storage, described by the group as the largest in Oman.",
-        "image": "sphere",
-        "z": -700,
-        "x": 22,
-        "y": 4
-      },
-      {
-        "kicker": "Subsidiary · Malaysia",
-        "title": "NGC Energy Sdn. Bhd.",
-        "text": "Malaysia",
-        "z": -1100,
-        "x": -24,
-        "y": 8
-      },
-      {
-        "kicker": "Plants",
-        "title": "11 LPG plants",
-        "text": "Across Oman, the UAE and Malaysia.",
-        "z": -1500,
-        "x": 20,
-        "y": -8
-      },
-      {
-        "kicker": "Subsidiary · KSA",
-        "title": "NGC Energy LLC",
-        "text": "Saudi Arabia",
-        "z": -1900,
-        "x": -18,
-        "y": -2
-      },
-      {
-        "kicker": "Throughput",
-        "title": "350,000+ MT a year",
-        "text": "Metric tonnes of LPG handled annually.",
-        "image": "dark",
-        "z": -2300,
-        "x": 18,
-        "y": 6
-      },
-      {
-        "kicker": "Group",
-        "title": "Three countries with plants",
-        "text": "Oman · UAE · Malaysia",
-        "z": -2650,
-        "x": 0,
-        "y": 0
-      }
-    ]
+  "sng-compound": {
+   "src": "sng-compound.jpg",
+   "alt": "SNG and LPG installation compound with canopy and red gas lines",
+   "cap": "Photo: National Gas Company"
+  },
+  "sng-skid-sunset": {
+   "src": "sng-skid-sunset.jpg",
+   "alt": "SNG vaporiser and mixing skid at sunset",
+   "cap": "Photo: National Gas Company"
+  },
+  "cylinder-range": {
+   "src": "cylinder-range.jpg",
+   "alt": "D-Cylinder, NC+ and industrial cylinders in front of LPG storage",
+   "cap": "Photo: National Gas Company"
+  },
+  "bulk-tank": {
+   "src": "bulk-tank.jpg",
+   "alt": "Customer bulk LPG tank on concrete saddles with yellow gas piping",
+   "cap": "Photo: National Gas Company"
+  },
+  "tank-sunset": {
+   "src": "tank-sunset.jpg",
+   "alt": "LPG storage tank silhouetted at sunset",
+   "cap": "Photo: National Gas Company"
+  },
+  "bullets-yard": {
+   "src": "bullets-yard.jpg",
+   "alt": "LPG storage bullets in a fenced yard",
+   "cap": "Photo: National Gas Company"
+  },
+  "tank-closeup": {
+   "src": "tank-closeup.jpg",
+   "alt": "Close-up of a white LPG storage tank on an industrial site",
+   "cap": "Photo: National Gas Company"
+  },
+  "branded-tank": {
+   "src": "branded-tank.jpg",
+   "alt": "LPG storage tank in National Gas livery",
+   "cap": "Photo: National Gas Company"
+  },
+  "rusayl-plant": {
+   "src": "rusayl-plant.jpg",
+   "alt": "\"Safety first\" storage tank at the National Gas Rusayl plant",
+   "cap": "Photo: National Gas Company"
+  },
+  "project-piping": {
+   "src": "project-piping.jpg",
+   "alt": "LPG tank and piping at a National Gas project site",
+   "cap": "Photo: National Gas Company"
+  },
+  "plant-dusk": {
+   "src": "plant-dusk.jpg",
+   "alt": "LPG storage spheres and bullets at dusk",
+   "cap": "Photo: National Gas Company"
+  },
+  "bullets-facility": {
+   "src": "bullets-facility.jpg",
+   "alt": "LPG bullet tanks at an industrial facility",
+   "cap": "Photo: National Gas Company"
+  },
+  "cylinders-yard": {
+   "src": "cylinders-yard.jpg",
+   "alt": "D-Cylinder and industrial cylinders at a storage yard",
+   "cap": "Photo: National Gas Company"
+  },
+  "sng-tanks": {
+   "src": "sng-tanks.jpg",
+   "alt": "Fenced SNG installation with LPG storage tanks",
+   "cap": "Photo: National Gas Company"
+  },
+  "sng-skid": {
+   "src": "sng-skid.jpg",
+   "alt": "SNG skid piping and controls",
+   "cap": "Photo: National Gas Company"
+  },
+  "sng-installation": {
+   "src": "sng-installation.jpg",
+   "alt": "SNG installation with LPG bullet tank behind a no-smoking fence",
+   "cap": "Photo: National Gas Company"
+  },
+  "pressure-station": {
+   "src": "pressure-station.jpg",
+   "alt": "Gas pressure reducing station with valves and regulators",
+   "cap": "Photo: National Gas Company"
+  },
+  "technician-valve": {
+   "src": "technician-valve.jpg",
+   "alt": "Technician servicing a gas valve under an annual maintenance contract",
+   "cap": "Photo: National Gas Company"
+  },
+  "technician-tanker": {
+   "src": "technician-tanker.jpg",
+   "alt": "Technician working on tanker valves in safety gear",
+   "cap": "Photo: National Gas Company"
+  },
+  "bottling-worker": {
+   "src": "bottling-worker.jpg",
+   "alt": "Plant worker handling domestic LPG cylinders on the bottling line",
+   "cap": "Photo: National Gas Company"
+  },
+  "cylinders-22kg": {
+   "src": "cylinders-22kg.jpg",
+   "alt": "Rows of 22 kg domestic LPG cylinders",
+   "cap": "Photo: National Gas Company"
+  },
+  "cylinders-bw": {
+   "src": "cylinders-bw.jpg",
+   "alt": "Domestic LPG cylinders, black and white",
+   "cap": "Photo: National Gas Company"
+  },
+  "historic-plant": {
+   "src": "historic-plant.jpg",
+   "alt": "Early National Gas bottling plant and cylinder lorries, black and white",
+   "cap": "Archive photo: National Gas Company"
+  },
+  "d-cylinder-gas-bank": {
+   "src": "d-cylinder-gas-bank.jpg",
+   "alt": "Technician filling D-Cylinders in a commercial gas bank",
+   "cap": "Photo: National Gas Company"
+  },
+  "d-cylinder-room": {
+   "src": "d-cylinder-room.jpg",
+   "alt": "D-Cylinders installed in a gas bank room",
+   "cap": "Photo: National Gas Company"
+  },
+  "d-cylinder-site": {
+   "src": "d-cylinder-site.jpg",
+   "alt": "D-Cylinder in front of an LPG storage site",
+   "cap": "Photo: National Gas Company"
+  },
+  "eor-skid": {
+   "src": "eor-skid.jpg",
+   "alt": "LPG vaporiser skid at a desert oilfield for enhanced oil recovery",
+   "cap": "Photo: National Gas Company"
+  },
+  "eor-site": {
+   "src": "eor-site.jpg",
+   "alt": "Enhanced oil recovery site with two LPG storage tanks",
+   "cap": "Photo: National Gas Company"
+  },
+  "cutting-torch": {
+   "src": "cutting-torch.jpg",
+   "alt": "NC+ cutting torch slicing a steel plate",
+   "cap": "Photo: National Gas Company"
+  },
+  "cutting-machine": {
+   "src": "cutting-machine.jpg",
+   "alt": "Machine cutting steel with NC+ gas in a workshop",
+   "cap": "Photo: National Gas Company"
+  },
+  "worker-steel": {
+   "src": "worker-steel.jpg",
+   "alt": "Worker handling cut steel sections",
+   "cap": "Photo: National Gas Company"
+  },
+  "worker-cutting": {
+   "src": "worker-cutting.jpg",
+   "alt": "Worker cutting metal in a steel workshop",
+   "cap": "Photo: National Gas Company"
+  },
+  "cutting-closeup": {
+   "src": "cutting-closeup.jpg",
+   "alt": "Close-up of a cutting flame on steel",
+   "cap": "Photo: National Gas Company"
+  },
+  "aerosol-plant": {
+   "src": "aerosol-plant.jpg",
+   "alt": "Deodorising columns of the aerosol propellant plant",
+   "cap": "Photo: National Gas Company"
+  },
+  "hp-neosynth": {
+   "src": "hp-neosynth.jpg",
+   "alt": "HP Neosynth engine oil campaign artwork",
+   "cap": "Campaign artwork: HP Lubricants / National Gas"
+  },
+  "hp-bottle": {
+   "src": "hp-bottle.jpg",
+   "alt": "HP Neosynth engine oil bottle",
+   "cap": "Photo: National Gas Company"
+  },
+  "psa-generator": {
+   "src": "psa-generator.jpg",
+   "alt": "PSA nitrogen generator with twin adsorber vessels",
+   "cap": "Photo: National Gas Company"
+  },
+  "membrane-generators": {
+   "src": "membrane-generators.jpg",
+   "alt": "Hollow-fibre membrane nitrogen generators",
+   "cap": "Photo: National Gas Company"
+  },
+  "gas-detector": {
+   "src": "gas-detector.jpg",
+   "alt": "Gas detector unit on an LPG installation",
+   "cap": "Photo: National Gas Company"
+  },
+  "plant-columns": {
+   "src": "plant-columns.jpg",
+   "alt": "Plant columns and pipework",
+   "cap": "Photo: National Gas Company"
+  },
+  "bullets-waterfront": {
+   "src": "bullets-waterfront.jpg",
+   "alt": "LPG bullet tanks beside water",
+   "cap": "Photo: National Gas Company"
+  },
+  "filling-carousel": {
+   "src": "filling-carousel.jpg",
+   "alt": "Cylinder filling carousel at a bottling plant",
+   "cap": "Photo: National Gas Company"
+  },
+  "bottling-line": {
+   "src": "bottling-line.jpg",
+   "alt": "Worker on a cylinder bottling line",
+   "cap": "Photo: National Gas Company"
+  },
+  "skid-dusk": {
+   "src": "skid-dusk.jpg",
+   "alt": "Gas skid and control cabinet at dusk",
+   "cap": "Photo: National Gas Company"
+  },
+  "branded-tank-dark": {
+   "src": "branded-tank-dark.jpg",
+   "alt": "National Gas storage tank under a dark sky",
+   "cap": "Photo: National Gas Company"
+  },
+  "eor-night": {
+   "src": "eor-night.jpg",
+   "alt": "Enhanced oil recovery skid at dusk",
+   "cap": "Photo: National Gas Company"
+  },
+  "fleet-night": {
+   "src": "fleet-night.jpg",
+   "alt": "National Gas tanker fleet at night",
+   "cap": "Photo: National Gas Company"
+  },
+  "d-cylinder-top": {
+   "src": "d-cylinder-top.jpg",
+   "alt": "Top view of a D-Cylinder with numbered fittings",
+   "cap": "Photo: National Gas Company"
+  },
+  "d-cylinder": {
+   "src": "d-cylinder.jpg",
+   "alt": "National Gas D-Cylinder, front view",
+   "cap": "Photo: National Gas Company"
+  },
+  "tanker-truck": {
+   "src": "tanker-truck.jpg",
+   "alt": "National Gas LPG tanker truck",
+   "cap": "Photo: National Gas Company"
+  },
+  "logo": {
+   "src": "logo.png",
+   "alt": "National Gas flame mark",
+   "cap": "Photo: National Gas Company"
+  },
+  "logo-full": {
+   "src": "logo-full.jpg",
+   "alt": "National Gas logo with the line Energizing Lives",
+   "cap": "Photo: National Gas Company"
+  },
+  "nc-plus-cylinder": {
+   "src": "nc-plus-cylinder.jpg",
+   "alt": "NC+ cutting gas cylinder",
+   "cap": "Photo: National Gas Company"
+  },
+  "fit-filler": {
+   "src": "fit-filler.jpg",
+   "alt": "D-Cylinder filler valve with its yellow cap",
+   "cap": "Photo: National Gas Company"
+  },
+  "fit-gauge": {
+   "src": "fit-gauge.jpg",
+   "alt": "D-Cylinder Rochester level gauge",
+   "cap": "Photo: National Gas Company"
+  },
+  "fit-shutoff": {
+   "src": "fit-shutoff.jpg",
+   "alt": "D-Cylinder LPG supply shut-off valve",
+   "cap": "Photo: National Gas Company"
+  },
+  "fit-pressure": {
+   "src": "fit-pressure.jpg",
+   "alt": "D-Cylinder pressure gauge",
+   "cap": "Photo: National Gas Company"
+  },
+  "fit-relief": {
+   "src": "fit-relief.jpg",
+   "alt": "D-Cylinder safety relief valve",
+   "cap": "Photo: National Gas Company"
+  },
+  "fit-check": {
+   "src": "fit-check.jpg",
+   "alt": "D-Cylinder check valve",
+   "cap": "Photo: National Gas Company"
   }
+ },
+ "ticker": {
+  "label": "Latest",
+  "items": [
+   {
+    "tag": "Press",
+    "text": "NGC asks for a review of the regulated LPG cylinder price",
+    "href": "@news:NGC calls for LPG"
+   },
+   {
+    "tag": "Results",
+    "text": "H1 2026: group revenue RO 47.6 million, back in profit",
+    "href": "@news:First-half 2026"
+   },
+   {
+    "tag": "Saudi",
+    "text": "NGC Energy Saudi and Zamil win LPG licences for Jeddah and Jazan",
+    "href": "@news:National Gas Saudi"
+   },
+   {
+    "tag": "Dhofar",
+    "text": "80% of Samahram Gas acquired",
+    "href": "@news:National Gas acquires"
+   }
+  ],
+  "emergency": {
+   "label": "WhatsApp",
+   "number": "+968 9060 4445",
+   "tel": "+96890604445"
+  }
+ },
+ "promos": [
+  {
+   "image": "cylinders-22kg",
+   "tag": "Since 1981",
+   "kicker": "Oman's LPG pioneer",
+   "short": "Energizing lives",
+   "title": "Gas for homes, business and industry",
+   "text": "LPG cylinders, the D-Cylinder, bulk supply and gas engineering from National Gas Company SAOG.",
+   "cta": {
+    "label": "See products",
+    "href": "products.html"
+   },
+   "cta2": {
+    "label": "Solutions",
+    "href": "solutions.html"
+   }
+  },
+  {
+   "image": "d-cylinder-gas-bank",
+   "tag": "Commercial",
+   "kicker": "D-Cylinder",
+   "short": "D-Cylinder",
+   "title": "Filled on site, billed by the meter",
+   "text": "The cylinder National Gas introduced in Oman, now used by more than 100 businesses in Muscat, Sohar, Nizwa and Izki.",
+   "cta": {
+    "label": "See the D-Cylinder",
+    "href": "@cat:D-Cylinder"
+   }
+  },
+  {
+   "image": "sng-skid",
+   "tag": "Energy solutions",
+   "kicker": "Synthetic Natural Gas",
+   "short": "SNG",
+   "title": "Natural gas performance, from LPG",
+   "text": "SNG systems from 20 to 2,000 MMBTU/hr. National Gas built the first one in Oman in 2008.",
+   "cta": {
+    "label": "How SNG works",
+    "href": "@svc:Synthetic"
+   }
+  },
+  {
+   "image": "tanker-road",
+   "tag": "Bulk LPG",
+   "kicker": "Largest fleet in Oman",
+   "short": "Bulk LPG",
+   "title": "22 tankers, 10 bobtails, 2,600 tonnes",
+   "text": "Bulk LPG for factories, hotels and resorts, scheduled so they never run out.",
+   "cta": {
+    "label": "Bulk LPG",
+    "href": "@cat:Bulk LPG"
+   }
+  },
+  {
+   "image": "bullets-facility",
+   "tag": "News",
+   "kicker": "Saudi Arabia",
+   "short": "Saudi licences",
+   "title": "LPG licences won in Saudi Arabia",
+   "text": "NGC Energy Saudi and Zamil Group will build cylinder filling and storage plants in Jeddah and Jazan.",
+   "cta": {
+    "label": "Read the news",
+    "href": "@news:National Gas Saudi"
+   }
+  }
+ ],
+ "rail": {
+  "title": "How can we help?",
+  "items": [
+   {
+    "label": "Bulk LPG quote",
+    "sub": "For industry and hotels",
+    "icon": "truck",
+    "href": "contact.html"
+   },
+   {
+    "label": "Switch to D-Cylinder",
+    "sub": "Pay for what you use",
+    "icon": "check",
+    "href": "@cat:D-Cylinder"
+   },
+   {
+    "label": "Gas safety",
+    "sub": "If you smell gas",
+    "icon": "shield",
+    "href": "@svc:Safety"
+   },
+   {
+    "label": "Investors",
+    "sub": "Results and reports",
+    "icon": "chart",
+    "href": "investors.html"
+   },
+   {
+    "label": "Call centre",
+    "sub": "+968 2416 2646",
+    "icon": "phone",
+    "href": "tel:+96824162646"
+   }
+  ]
+ },
+ "home": [
+  "promo",
+  "rail",
+  {
+   "type": "depth",
+   "id": "energizing-lives",
+   "height": 220,
+   "kicker": "National Gas Company SAOG · since 1979",
+   "title": "Energizing lives",
+   "text": "Oman's first LPG bottler, now supplying homes, businesses and industry across the Sultanate and beyond.",
+   "cta": {
+    "label": "Our story",
+    "href": "about.html"
+   },
+   "cap": "National Gas storage yard and tanker. Photos: National Gas",
+   "layers": [
+    {
+     "image": "plant-dusk",
+     "speed": 0.12,
+     "scale": 0.07,
+     "lean": 6,
+     "position": "center 60%"
+    },
+    {
+     "clouds": true,
+     "speed": 0.28,
+     "y": 46,
+     "tint": "#b9d7e6",
+     "count": 5
+    },
+    {
+     "title": true,
+     "speed": 0.55
+    },
+    {
+     "image": "cut:tanker-truck",
+     "speed": 0.22,
+     "fit": "contain",
+     "bottom": "34%",
+     "position": "0% 45%",
+     "lean": 14
+    },
+    {
+     "clouds": true,
+     "front": true,
+     "speed": 0.95,
+     "y": 88,
+     "tint": "#8fb4c8",
+     "count": 6
+    }
+   ]
+  },
+  "stats",
+  {
+   "type": "statement",
+   "kicker": "From 1981",
+   "text": "In the late 1970s Omani dealers drove to Dubai and Abu Dhabi for gas cylinders. In 1981 National Gas started bottling at home."
+  },
+  {
+   "type": "stages",
+   "id": "supply-chain",
+   "kicker": "Refinery to burner",
+   "title": "How LPG reaches you",
+   "stages": [
+    {
+     "image": "tanker-road",
+     "label": "Lift",
+     "title": "Lifted at the refinery",
+     "text": "Our tankers collect bulk LPG from refineries in the Sultanate. Every vehicle carries tracking and online monitoring, and drivers train regularly.",
+     "date": "22 tankers"
+    },
+    {
+     "image": "plant-dusk",
+     "label": "Store",
+     "title": "Stored in bulk",
+     "text": "About 2,600 tonnes of bulk storage, the largest in Oman, spread across strategic points in the Sultanate.",
+     "date": "2,600 t"
+    },
+    {
+     "image": "bottling-worker",
+     "label": "Bottle",
+     "title": "Bottled and sealed",
+     "text": "Plants fill each cylinder to the right quantity in controlled conditions, and every one leaves with the Silver Seal.",
+     "date": "Since 1981"
+    },
+    {
+     "image": "fleet-lineup",
+     "label": "Deliver",
+     "title": "Delivered by road",
+     "text": "Cylinders go out through distributors across North Oman; bobtails fill D-Cylinders and bulk tanks on site.",
+     "date": "10 bobtails"
+    },
+    {
+     "image": "bulk-tank",
+     "label": "Use",
+     "title": "Burned clean",
+     "text": "In kitchens, hotel boilers, ceramic kilns, glass furnaces and steel mills, with installations from 3,000 to 300,000 litres.",
+     "date": "Home to industry"
+    }
+   ]
+  },
+  {
+   "type": "converge",
+   "id": "d-cylinder",
+   "product": "D-Cylinder",
+   "dish": "cut:d-cylinder",
+   "height": 230,
+   "kicker": "D-Cylinder · introduced in Oman by NGC",
+   "title": "Six fittings.<br><em>One safer cylinder.</em>",
+   "text": "Filler valve, level gauge, shut-off, pressure gauge, relief valve and check valve: the fittings a 44 kg cylinder does not have, on one tank that is filled where it stands.",
+   "cta": {
+    "label": "See the D-Cylinder",
+    "href": "@cat:D-Cylinder"
+   },
+   "cta2": {
+    "label": "Ask for an installation",
+    "href": "contact.html"
+   },
+   "chips": [
+    {
+     "value": "440 L",
+     "label": "water capacity",
+     "angle": -150
+    },
+    {
+     "value": "350 L",
+     "label": "LPG fill",
+     "angle": -30
+    },
+    {
+     "value": "17.5",
+     "label": "bar design",
+     "angle": 30
+    },
+    {
+     "value": "4x",
+     "label": "44 kg cylinders",
+     "angle": 150
+    }
+   ],
+   "ingredients": [
+    {
+     "image": "cut:fit-filler",
+     "x": -16,
+     "y": -20,
+     "size": 170,
+     "rot": -12,
+     "z": 0.55
+    },
+    {
+     "image": "cut:fit-gauge",
+     "x": 26,
+     "y": -22,
+     "size": 150,
+     "rot": 10,
+     "z": 0.45
+    },
+    {
+     "image": "cut:fit-shutoff",
+     "x": 34,
+     "y": 8,
+     "size": 190,
+     "rot": 8,
+     "z": 0.7
+    },
+    {
+     "image": "cut:fit-pressure",
+     "x": 24,
+     "y": 32,
+     "size": 160,
+     "rot": -8,
+     "z": 0.6
+    },
+    {
+     "image": "cut:fit-relief",
+     "x": -20,
+     "y": 22,
+     "size": 130,
+     "rot": 14,
+     "z": 0.35
+    },
+    {
+     "image": "cut:fit-check",
+     "x": -2,
+     "y": 42,
+     "size": 140,
+     "rot": -16,
+     "z": 0.9
+    }
+   ],
+   "cap": "D-Cylinder and fittings: National Gas product photos"
+  },
+  {
+   "type": "lineup",
+   "title": "The range.",
+   "more": "All products",
+   "text": "Cylinders, bulk gas, cutting gas, lubricants and on-site gas generators, photographed by National Gas.",
+   "items": [
+    "D-Cylinder",
+    "NC+ cutting gas",
+    "Bulk LPG",
+    "HP Lubricants",
+    "PSA nitrogen and oxygen generators",
+    "Membrane nitrogen generators"
+   ]
+  },
+  "services",
+  {
+   "type": "split",
+   "image": "bullets-yard",
+   "kicker": "Investors",
+   "title": "Listed on the Muscat Stock Exchange",
+   "body": [
+    "National Gas Company SAOG returned to profit in the first half of 2026, on group revenue of RO 47.6 million, and won LPG licences in Saudi Arabia in June."
+   ],
+   "points": [
+    "H1 2026 profit after tax of RO 298,072",
+    "80% of Samahram Gas in Dhofar since June 2025",
+    "LPG business in West Malaysia since 2012"
+   ],
+   "cta": {
+    "label": "Investor relations",
+    "href": "investors.html"
+   }
+  },
+  "news",
+  "locations",
+  "faq"
+ ],
+ "stats": [
+  {
+   "value": 350000,
+   "suffix": "+",
+   "label": "Tonnes of LPG handled a year"
+  },
+  {
+   "value": 2600,
+   "label": "Tonnes of bulk storage, the most in Oman"
+  },
+  {
+   "value": 22,
+   "label": "LPG tankers, plus 10 bobtails"
+  },
+  {
+   "years_since": 1981,
+   "label": "Years since bottling began in 1981"
+  }
+ ],
+ "about": {
+  "title": "Oman's first LPG bottler",
+  "image": "historic-plant",
+  "body": [
+   "National Gas Company is a fully Omani-owned public joint stock company, listed on the Muscat Stock Exchange. It was incorporated in 1979 to meet the growing need for LPG, and in 1981 it started bottling, the beginning of the LPG industry in Oman.",
+   "From bottling plants across the Sultanate, the company grew into bulk supply, gas engineering, SNG, cutting gas, aerosol propellant and lubricants, and into LPG markets abroad, today chiefly Malaysia and Saudi Arabia."
+  ],
+  "more": [
+   "In the late 1970s, local dealers had to travel to Dubai and Abu Dhabi to collect cylinders, and shortages were common because Omani dealers were served last. The first chairman, Mr. Mohd Abdul Rasool Al Jamali, was instrumental in setting up a bottling plant at home.",
+   "A fleet of tankers lifts bulk LPG from refineries in the Sultanate to the plants, where it is bottled into cylinders in safe, controlled conditions. A separate projects and design department handles engineering, procurement, installation, commissioning, testing and after-sales service.",
+   "The company's logo was renewed at its 25th anniversary in 2006: the dark blue flame stands for pure energy and continuous innovation, the light blue flame for a caring hand."
+  ],
+  "timeline": [
+   {
+    "year": "1979",
+    "title": "Incorporated",
+    "text": "National Gas Company is incorporated on 9 April 1979."
+   },
+   {
+    "year": "1981",
+    "title": "Bottling begins",
+    "text": "Oman's LPG industry starts with National Gas's first bottling operation."
+   },
+   {
+    "year": "1987-2003",
+    "title": "Seven bottling plants",
+    "text": "Plants are set up at strategic locations in the Sultanate."
+   },
+   {
+    "year": "2005",
+    "title": "Aerosol propellant",
+    "text": "Production and sale of de-odorised propellant gas begins."
+   },
+   {
+    "year": "2006",
+    "title": "Exports and a new logo",
+    "text": "LP Gas exports to the UAE begin; the new logo marks 25 years."
+   },
+   {
+    "year": "2008",
+    "title": "First SNG in Oman",
+    "text": "The first Synthetic Natural Gas system in the Sultanate, and the NC+ cutting gas business."
+   },
+   {
+    "year": "2009",
+    "title": "Township gas in Sohar",
+    "text": "The first integrated township gas system in Oman."
+   },
+   {
+    "year": "2010",
+    "title": "D-Cylinder",
+    "text": "D-Cylinder business starts in Oman; NC+ goes international."
+   },
+   {
+    "year": "2011",
+    "title": "Largest SNG system",
+    "text": "Built for a major international steel plant in Saudi Arabia."
+   },
+   {
+    "year": "2012",
+    "title": "Malaysia",
+    "text": "National Gas acquires Shell's LPG business in West Malaysia."
+   },
+   {
+    "year": "2014",
+    "title": "Enhanced oil recovery",
+    "text": "The company explores LPG-fired EOR."
+   },
+   {
+    "year": "2015",
+    "title": "Saudi Arabia",
+    "text": "A fully owned entity starts in the Kingdom."
+   },
+   {
+    "year": "2016",
+    "title": "Lubricants",
+    "text": "The lubricants division is launched; HP Lubricants follows in 2020."
+   },
+   {
+    "year": "2022",
+    "title": "Refocus",
+    "text": "Exits from India and the UAE; the Unigaz stake is sold."
+   },
+   {
+    "year": "2025",
+    "title": "Dhofar",
+    "text": "80% of Samahram Gas acquired."
+   },
+   {
+    "year": "2026",
+    "title": "Saudi licences",
+    "text": "NGC Energy Saudi and Zamil win LPG licences for Jeddah and Jazan."
+   }
+  ],
+  "values_title": "Vision and mission",
+  "values": [
+   {
+    "title": "Vision",
+    "text": "To be the number one non-government energy company in its areas of operation, through innovative solutions, exceeding stakeholder expectations."
+   },
+   {
+    "title": "Innovation",
+    "text": "Pursuing innovation as a path to deliver superior energy products to our consumers."
+   },
+   {
+    "title": "Stakeholders",
+    "text": "Supporting shareholders, partners and employees to achieve and exceed their goals."
+   },
+   {
+    "title": "Performance",
+    "text": "High quality control, optimisation and advanced safety practices."
+   },
+   {
+    "title": "Integrity",
+    "text": "Integrity in all dealings, and responsibility towards the environment, community and nation."
+   }
+  ],
+  "points": [
+   {
+    "title": "Infrastructure",
+    "text": "Constant investment to be the leading energy player in the region."
+   },
+   {
+    "title": "Innovation",
+    "text": "Cleaner, more fuel-efficient products such as SNG, NC+ and the D-Cylinder."
+   },
+   {
+    "title": "Expertise",
+    "text": "\"Our greatest asset is our employees' expertise.\""
+   },
+   {
+    "title": "Certified",
+    "text": "Authorised by Civil Defence to certify tank testing for bulk LPG installations; member of the World Liquid Gas Association."
+   }
+  ]
+ },
+ "services": {
+  "title": "Energy solutions that work",
+  "nav": "Solutions",
+  "kicker": "For business",
+  "intro": "Engineering, conversion and service for industry, from a 3,000-litre tank to a 2,000 MMBTU/hr SNG plant.",
+  "items": [
+   {
+    "title": "LPG installation",
+    "icon": "layers",
+    "image": "bulk-tank",
+    "text": "Bulk LPG systems from 3,000 to 300,000 litres, designed, fabricated and commissioned by our engineers.",
+    "detail": {
+     "intro": "National Gas has installed some of the largest LPG systems in Oman and the GCC, from 3,000 to 300,000 litres.",
+     "body": [
+      "The team takes projects from design and fabrication to commissioning, and then keeps them supplied: bulk storage at strategic points across the Sultanate and the largest fleet of bulk tankers and bobtails in Oman.",
+      "We have designed, installed and commissioned LPG systems for poultry, glass, ceramic and powder plants across the GCC, and our engineers advise customers on running installations at international standards of safety and efficiency."
+     ],
+     "points_title": "Why LPG",
+     "points": [
+      "Clean burn, no carbon deposits",
+      "No spillage, no fumes",
+      "No pilferage from a closed, pressurised system",
+      "Higher efficiency than diesel"
+     ],
+     "facts": [
+      {
+       "label": "System size",
+       "value": "3,000 to 300,000 L"
+      },
+      {
+       "label": "Scope",
+       "value": "Design to commissioning"
+      }
+     ],
+     "src": "https://nationalgasco.net/lpg-installation/"
+    }
+   },
+   {
+    "title": "Synthetic Natural Gas",
+    "icon": "factory",
+    "image": "sng-skid",
+    "text": "LPG blended with air to replace natural gas: base load, standby or peak shaving, 20 to 2,000 MMBTU/hr.",
+    "detail": {
+     "intro": "SNG is LPG blended with a diluent, usually compressed air, at the ratio that matches the Wobbe Index of natural gas. Burners see the same fuel.",
+     "body": [
+      "National Gas designs, supplies, installs and commissions SNG systems with the LPG storage and bulk supply behind them, working with leading SNG equipment makers. Systems range from 20 to 2,000 MMBTU/hr for steel rolling mills, DRI and pelletising plants, ceramics, construction materials, aluminium, float glass and fibre glass.",
+      "The company built the first SNG system in Oman in 2008, the first in the GCC, and in 2011 the largest SNG system for a major international steel plant in Saudi Arabia. A 24x7 service team handles installation, testing and troubleshooting."
+     ],
+     "points_title": "Three ways to use SNG",
+     "points": [
+      "Base load, where natural gas is not available",
+      "Standby, when the natural gas supply is cut or under maintenance",
+      "Peak shaving, to cover shortages and price peaks"
+     ],
+     "facts": [
+      {
+       "label": "Range",
+       "value": "20 to 2,000 MMBTU/hr"
+      },
+      {
+       "label": "First in Oman",
+       "value": "2008"
+      }
+     ],
+     "src": "https://nationalgasco.net/synthetic-natural-gas/"
+    }
+   },
+   {
+    "title": "Gas engineering",
+    "icon": "building",
+    "image": "pressure-station",
+    "text": "Turnkey bottling plants, pressure reducing and metering stations, township gas and natural gas pipelines.",
+    "detail": {
+     "intro": "National Gas takes on turnkey design, engineering and commissioning of LPG bottling plants, de-odorising units, aerosol filling systems, autogas refuelling stations, pressure reducing and metering stations, SNG systems, gas-powered power systems and gas refrigeration.",
+     "body": [
+      "Customers have used our gas engineering for bulk LPG and SNG installations, piped gas distribution, natural gas pressure reducing stations, LPG-based mobile heat treatment and LPG-based enhanced oil recovery.",
+      "We integrate small to large industrial installations and township piped gas networks for LPG and natural gas. In 2009 National Gas set up the first integrated township gas system in Sohar."
+     ],
+     "points_title": "Turnkey scope",
+     "points": [
+      "LPG bottling plants",
+      "Pressure reducing and metering stations",
+      "Township piped gas networks",
+      "Natural gas pipelines",
+      "Gas-powered power and refrigeration"
+     ],
+     "src": "https://nationalgasco.net/gas-engineering/"
+    }
+   },
+   {
+    "title": "Diesel to LPG conversion",
+    "icon": "chart",
+    "image": "tank-closeup",
+    "text": "Feasibility, dual-fuel burners and a bulk tank: commissioned within 3 to 4 months of the order.",
+    "detail": {
+     "intro": "National Gas converts industries from diesel, natural gas and other fuels to LPG, and has converted many plants already.",
+     "body": [
+      "One litre of diesel is roughly equal to 0.796 kg of LPG, so about 20% less LPG is used for the same energy. To produce 2,000 MMBtu takes roughly 56,000 litres of diesel or 44,000 kg of LPG.",
+      "After conversion both fuels can still be used separately. The bulk tank and installation become an asset, and their payback is usually within two years."
+     ],
+     "points_title": "How a conversion runs",
+     "points": [
+      "Fill in the fuel plan with current fuel details",
+      "Check whether the burner is dual-fuel",
+      "Feasibility study, commercial and technical",
+      "Proposal and a 3 to 5 year LPG supply agreement",
+      "Commissioning within 3 to 4 months of the PO"
+     ],
+     "facts": [
+      {
+       "label": "Payback",
+       "value": "Usually within 2 years"
+      },
+      {
+       "label": "Commissioning",
+       "value": "3 to 4 months from PO"
+      }
+     ],
+     "src": "https://nationalgasco.net/diesel-to-lpg/"
+    }
+   },
+   {
+    "title": "Enhanced oil recovery",
+    "icon": "pulse",
+    "image": "eor-skid",
+    "text": "LPG-fired steam for oilfields: National Gas publishes a 3 to 6 month payback and at least 40% fuel savings.",
+    "detail": {
+     "intro": "Enhanced oil recovery, or tertiary recovery, extracts crude that cannot be produced any other way. National Gas supplies LPG-fuelled systems for it and explored the segment in 2014.",
+     "body": [
+      "Steam injection and steam flooding heat the reservoir: the oil's viscosity drops, it expands and flows more easily. National Gas supplies the LPG side: storage, vaporisers and burners selected for the customer's steam generator.",
+      "Equipment is chosen per site: mobile or fixed vaporisers, wheel-mounted or fixed tanks, burners sized to the flow rate."
+     ],
+     "points_title": "What we need from you",
+     "points": [
+      "Fuel requirement for the OTSG (flow rate and input pressure)",
+      "Batch or continuous process",
+      "Back-up or buffer stock required"
+     ],
+     "facts": [
+      {
+       "label": "ROI",
+       "value": "3 to 6 months (as published)"
+      },
+      {
+       "label": "Fuel saving",
+       "value": "At least 40% (as published)"
+      }
+     ],
+     "src": "https://nationalgasco.net/enhanced-oil-recovery/"
+    }
+   },
+   {
+    "title": "Equipment supply and AMC",
+    "icon": "shield",
+    "image": "technician-valve",
+    "text": "Maintenance contracts, testing of safety fittings, spare parts and training. Authorised by Civil Defence for tank testing.",
+    "detail": {
+     "intro": "From fuel consultancy to system design, fabrication and commissioning, National Gas covers the whole LPG system, then maintains it.",
+     "body": [
+      "We offer annual maintenance contracts for service and repair of LPG systems, LPG plant maintenance, operation and safety training, logistics planning and fleet optimisation, and operation of bulk systems.",
+      "National Gas is authorised by Civil Defence to test LPG tanks for bulk installations, and supplies LPG fire-fighting, deluge and peak-shaving systems."
+     ],
+     "points_title": "Service",
+     "points": [
+      "Preventive maintenance",
+      "Breakdown maintenance",
+      "Testing of safety fittings and equipment",
+      "Spare parts and training",
+      "Annual maintenance contracts"
+     ],
+     "src": "https://nationalgasco.net/equipment-supply-services/"
+    }
+   },
+   {
+    "title": "Consultancy and operations",
+    "icon": "globe",
+    "image": "plant-columns",
+    "text": "LPG market studies, terminal and bottling plant design, operating manuals and fleet planning.",
+    "detail": {
+     "intro": "National Gas shares what it learned running Oman's first bottling operation with companies building LPG businesses of their own.",
+     "body": [
+      "Consultancy and engineering cover LPG market assessment and strategy, design, engineering and installation of LPG terminals, bottling plants and bulk systems, integration with natural gas systems and fire safety design.",
+      "Operations support covers operating manuals, plant maintenance, operation and safety training, logistics planning and fleet optimisation, and operation of bulk systems."
+     ],
+     "points_title": "Areas",
+     "points": [
+      "Market assessment and strategy",
+      "Terminal and bottling plant design",
+      "Fire safety system design",
+      "Operating manuals and training",
+      "Fleet optimisation"
+     ],
+     "src": "https://nationalgasco.net/our-business/"
+    }
+   },
+   {
+    "title": "Safety and consumer awareness",
+    "icon": "heart",
+    "image": "rusayl-plant",
+    "text": "Safety tips with every cylinder, road shows with the ROP and Civil Defence, and the Safety Pays school campaign.",
+    "detail": {
+     "intro": "In the LPG business safety comes first: for employees, contractors, customers and the public.",
+     "body": [
+      "National Gas works on the two points bottlers do not control directly: homes and the distribution network. Safety tips go out with every cylinder, leaflets and road shows run in the capital and the interior with the Royal Oman Police and Civil Defence, and the Safety Pays campaign reaches children through school contests.",
+      "With Civil Defence, National Gas is developing safety training for distributors on cylinder handling, installation and emergency action. The QHSE policy sets the aim plainly: no injuries, occupational illnesses, unsafe practices or pollution."
+     ],
+     "points_title": "If you smell gas",
+     "points": [
+      "Open all doors and windows fully",
+      "Do not switch any lights, fans or appliances on or off",
+      "Close the cylinder valve and switch off the regulator",
+      "Put out any cigarette or flame",
+      "Check for leaks with soapy water, never with a flame"
+     ],
+     "src": "https://nationalgasco.net/safety/"
+    }
+   }
+  ]
+ },
+ "highlights": {
+  "title": "Investor relations",
+  "nav": "Investors",
+  "intro": "Results, reports, meetings and the people who run National Gas Company SAOG.",
+  "items": [
+   {
+    "title": "First-half 2026 results",
+    "icon": "chart",
+    "image": "branded-tank",
+    "text": "Group revenue of RO 47.6 million and a return to profit in the six months to 30 June 2026.",
+    "detail": {
+     "intro": "National Gas Company SAOG reported group revenue of RO 47,585,350 for the first half of 2026, up from RO 43,741,406 a year earlier.",
+     "body": [
+      "Group profit after tax was RO 298,072, against a loss of RO 348,026 in the first half of 2025. Total group assets stood at RO 52.34 million and net assets per share at 0.223.",
+      "The Chairman's report points to a three-year transformation plan launched in 2023, a profitable LPG business in Malaysia, and project delays that weighed on the Saudi unit."
+     ],
+     "facts": [
+      {
+       "label": "Group revenue",
+       "value": "RO 47.6 million"
+      },
+      {
+       "label": "Profit after tax",
+       "value": "RO 298,072"
+      },
+      {
+       "label": "Share capital",
+       "value": "RO 8,500,000"
+      }
+     ],
+     "src": "https://nationalgasco.net/wp-content/uploads/2026/08/Final-Q2_National-Gas-31x19-2026_English.pdf"
+    }
+   },
+   {
+    "title": "Annual and quarterly reports",
+    "icon": "layers",
+    "image": "plant-dusk",
+    "text": "Audited financial statements from 2014 to 2025 and the 2026 quarterly reports.",
+    "detail": {
+     "intro": "National Gas publishes its audited annual financial statements and quarterly results on its website, in English and Arabic.",
+     "body": [
+      "The reports page lists annual reports from 2016, audited statements back to 2014, and the first and second quarter reports for 2026."
+     ],
+     "points_title": "Latest documents",
+     "points": [
+      "Q2 2026 results (August 2026)",
+      "Q1 2026 results (May 2026)",
+      "Audited consolidated statements 2025",
+      "Audited group statements 2024",
+      "Annual report 2020"
+     ],
+     "src": "https://nationalgasco.net/annual-reports/"
+    }
+   },
+   {
+    "title": "Annual General Meeting 2026",
+    "icon": "check",
+    "image": "bullets-waterfront",
+    "text": "Held online on 25 March 2026, with the election of a new Board on the agenda.",
+    "detail": {
+     "intro": "The 2026 Annual General Meeting was held online through mcd.om on 25 March 2026, with a second call on 29 March.",
+     "body": [
+      "The agenda covered the 2025 reports, the election of a new Board of Directors, up to RO 10,000 for community support and the appointment of auditors. The notice was signed by Chairman Sheikh Abdulla Suleiman Al Harthy."
+     ],
+     "src": "https://nationalgasco.net/wp-content/uploads/2026/03/AGM-Agenda.pdf"
+    }
+   },
+   {
+    "title": "Board of Directors",
+    "icon": "star",
+    "image": "branded-tank-dark",
+    "text": "Seven directors, chaired by Sheikh Abdulla Suleiman Hamed Al Harthy.",
+    "detail": {
+     "intro": "The Board of Directors as listed on nationalgasco.net.",
+     "points_title": "Directors",
+     "points": [
+      "Sh. Abdulla Suleiman Hamed Al Harthy, Chairman",
+      "Mr. Khalid Said Salim Al Wahaibi, Vice Chairman",
+      "Dr. Hamdan Abdul Hafidh Hamdan Al Farsi, Director",
+      "Dr. Rashid Mohamed Al Ghailani, Director",
+      "Mr. Saad Mohammed Al Harthi, Director",
+      "Ms. Amaal Hamood Al Farei, Director",
+      "Mr. Hashim Mohammed Salim Al Hashimi, Director"
+     ],
+     "src": "https://nationalgasco.net/board-of-directors/"
+    }
+   },
+   {
+    "title": "Senior management",
+    "icon": "building",
+    "image": "skid-dusk",
+    "text": "Led by Chief Executive Officer Dr. Rachid Majjad.",
+    "detail": {
+     "intro": "The senior management team as listed on nationalgasco.net.",
+     "points_title": "Team",
+     "points": [
+      "Dr. Rachid Majjad, Chief Executive Officer",
+      "Mr. Mukesh Darji, Head of Finance",
+      "Mr. Lahiru Gawarammana, Deputy General Manager (Sales)",
+      "Mr. Nasser Salim Jaber Al Rahbi, HR and Administration Manager",
+      "Ms. Noor Khalfan Salim Al Habsi, Board Secretary and Compliance Officer",
+      "Mr. Majid Ali Abdullah Al Naabi, Acting Internal Audit Manager",
+      "Mr. Khalid Al Hosani, Industrial and Commercial Account Manager",
+      "Mr. Avinash Shetty, Assistant Manager IT"
+     ],
+     "src": "https://nationalgasco.net/senior-management/"
+    }
+   },
+   {
+    "title": "Governance and dividend policy",
+    "icon": "shield",
+    "image": "historic-plant",
+    "text": "Listed on the Muscat Stock Exchange and committed to the CMA code of corporate governance.",
+    "detail": {
+     "intro": "National Gas Company SAOG is a public joint stock company listed on the Muscat Stock Exchange, formerly the Muscat Securities Market.",
+     "body": [
+      "The company commits to the Capital Market Authority's code of corporate governance, works to written procedures manuals, and its Audit Committee oversees internal controls. The dividend policy is published in English and Arabic.",
+      "Investor relations: Mr. Nasser Salim Jaber Al Rahbi, nasser@nationalgasco.net."
+     ],
+     "facts": [
+      {
+       "label": "Commercial registration",
+       "value": "1083171"
+      },
+      {
+       "label": "Share capital",
+       "value": "RO 8,500,000"
+      }
+     ],
+     "src": "https://nationalgasco.net/corporate-governance/"
+    }
+   }
+  ]
+ },
+ "catalogue": {
+  "title": "Products",
+  "nav": "Products",
+  "kicker": "The range",
+  "intro": "Cylinders for homes, the D-Cylinder for business, bulk LPG for industry, and specialty gases, lubricants and equipment.",
+  "home_title": "Products",
+  "all_label": "All products",
+  "cutouts": true,
+  "categories": [
+   "Home & business",
+   "Commercial",
+   "Industry",
+   "Industrial gases",
+   "Specialty gases",
+   "Lubricants",
+   "Gas generators",
+   "Equipment"
+  ],
+  "cta": "Ask for a quote",
+  "specs_title": "Key facts",
+  "highlights_title": "Features",
+  "note": "National Gas does not publish consumer prices online. Product facts from nationalgasco.net, read 11-12 Oct 2026.",
+  "items": [
+   {
+    "title": "LPG cylinders",
+    "category": "Home & business",
+    "badge": "Silver Seal",
+    "featured": true,
+    "image": "cylinders-22kg",
+    "text": "22 kg cylinders for homes and 44 kg cylinders for restaurants, camps and canteens, filled at our own bottling plants.",
+    "body": [
+     "National Gas supplies LP Gas in cylinders from its bottling plants through a widespread network of distributors that covers almost every area of North Oman. Cylinders come mainly in 22 kg and 44 kg sizes, and to a lesser extent in 11 kg and as barbecue cylinders.",
+     "The 22 kg cylinder is easy to carry and store, and most households use it for cooking and water heating. Restaurants, labour camps and canteens use the 44 kg cylinder for cooking and heating.",
+     "Cylinders are designed, made and tested to the Omani standard OS-120:1986 or equivalent, and are tested again at intervals so that only safe cylinders reach homes and businesses. Every cylinder filled at National Gas carries the company's Silver Seal: the right quantity of gas, in a safe cylinder."
+    ],
+    "specs": [
+     {
+      "label": "Main sizes",
+      "value": "22 kg (homes), 44 kg (commercial)"
+     },
+     {
+      "label": "Also available",
+      "value": "11 kg and barbecue cylinders, in smaller numbers"
+     },
+     {
+      "label": "Standard",
+      "value": "OS-120:1986 or equivalent"
+     },
+     {
+      "label": "Seal",
+      "value": "Silver Seal on every filled cylinder"
+     },
+     {
+      "label": "Coverage",
+      "value": "Distributor network across North Oman"
+     },
+     {
+      "label": "Regulated bottler rate",
+      "value": "OMR 1.9 per 22 kg cylinder, unchanged since 1994 (Oman Observer, 31 Aug 2026). Not the retail price."
+     }
+    ],
+    "gallery": [
+     "bottling-worker",
+     "filling-carousel",
+     "cylinders-bw",
+     "historic-plant"
+    ],
+    "highlights": [
+     {
+      "title": "Correct quantity",
+      "text": "Bottling plants are run by trained staff so each cylinder leaving the plant holds the right quantity."
+     },
+     {
+      "title": "Tested cylinders",
+      "text": "Cylinders are re-tested at intervals; only safe cylinders go back to customers."
+     },
+     {
+      "title": "Safety tips with every cylinder",
+      "text": "Safety leaflets travel with cylinders, backed by road shows with the ROP and Civil Defence."
+     }
+    ],
+    "src": "https://nationalgasco.net/lpg-cylinders/",
+    "cta": {
+     "label": "Find a distributor",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "D-Cylinder",
+    "category": "Commercial",
+    "badge": "Introduced in Oman by NGC",
+    "featured": true,
+    "image": "d-cylinder",
+    "text": "A fixed 440-litre cylinder for hotels, restaurants and factories, filled on site by bobtail and billed by the meter.",
+    "body": [
+     "National Gas designed and introduced the D-Cylinder, built to DOT-4BW-250 / ASME Section VIII Division I. It stays fixed in the customer's gas bank; a National Gas bobtail fills it on site, and the bobtail's flow meter records exactly how much LPG went in. That is the amount invoiced.",
+     "A level gauge shows what is left, so customers pay for what they use and no gas is wasted. Handling cylinders by hand and leaks from hoses go away, and there is no need for the unsafe habit of putting cylinders in hot water.",
+     "More than 100 customers in Muscat, Sohar, Nizwa and Izki use D-Cylinders, from Lulu to Muscat Bakery."
+    ],
+    "specs": [
+     {
+      "label": "Design code",
+      "value": "DOT-4BW-250 / ASME Section VIII Div. I"
+     },
+     {
+      "label": "Water capacity",
+      "value": "440 litres"
+     },
+     {
+      "label": "LPG fill",
+      "value": "Up to 350 litres"
+     },
+     {
+      "label": "Design pressure",
+      "value": "17.5 bar"
+     },
+     {
+      "label": "Replaces",
+      "value": "4 x 44 kg cylinders (website table)"
+     },
+     {
+      "label": "Filling",
+      "value": "On site, by bobtail with flow meter"
+     },
+     {
+      "label": "Customers",
+      "value": "100+ in Muscat, Sohar, Nizwa and Izki"
+     }
+    ],
+    "gallery": [
+     "d-cylinder-gas-bank",
+     "d-cylinder-top",
+     "d-cylinder-room",
+     "d-cylinder-technician",
+     "d-cylinder-site"
+    ],
+    "highlights": [
+     {
+      "title": "Filler valve and check valve",
+      "text": "The bobtail fills through the filler valve; the check valve stops gas flowing back."
+     },
+     {
+      "title": "Rochester level gauge",
+      "text": "Shows the gas level, so you pay only for what you use."
+     },
+     {
+      "title": "Shut-off and pressure gauge",
+      "text": "An LPG supply shut-off valve and a pressure gauge on the crown."
+     },
+     {
+      "title": "Relief valve and OPD",
+      "text": "A safety relief valve and an overfill protection device, which a 44 kg cylinder does not have."
+     },
+     {
+      "title": "Excess flow check valves",
+      "text": "Limit the flow if a line downstream is damaged."
+     },
+     {
+      "title": "Liquid off-take",
+      "text": "Available on the D-Cylinder, not on a conventional 44 kg cylinder."
+     }
+    ],
+    "src": "https://nationalgasco.net/d-cylinder/",
+    "cta": {
+     "label": "Switch to D-Cylinder",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Bulk LPG",
+    "category": "Industry",
+    "badge": "Largest fleet in Oman",
+    "featured": true,
+    "image": "tanker-truck",
+    "text": "Bulk LPG for factories, hotels and resorts, delivered by the largest fleet of tankers and bobtails in Oman.",
+    "body": [
+     "Bulk LPG gives industrial users the flexibility to run several applications safely from one supply. Small and medium industries use it in food, ceramics, glass, metal works and dairies, and hotels and resorts use it for boilers, ovens and kitchens.",
+     "LP Gas is the preferred fuel where a clean burn matters: boilers, ovens and furnaces in hospitality, food and dairy, and direct firing in glass and ceramics.",
+     "National Gas runs the largest fleet of bulk tankers and bobtails in Oman, with bulk storage at strategic points across the Sultanate. Internal procedures and scheduling are designed so that customers never run out of gas, and our engineers advise on running bulk installations safely and efficiently."
+    ],
+    "specs": [
+     {
+      "label": "Fleet",
+      "value": "22 LPG tankers and 10 bobtails"
+     },
+     {
+      "label": "Bulk storage",
+      "value": "About 2,600 tonnes, the largest in Oman"
+     },
+     {
+      "label": "Users",
+      "value": "Food, ceramics, glass, metal works, dairy, hotels"
+     },
+     {
+      "label": "Benefits",
+      "value": "Clean burn, no spillage or fumes, no pilferage"
+     }
+    ],
+    "gallery": [
+     "bulk-tank",
+     "fleet-lineup",
+     "tanker-road",
+     "bullets-yard"
+    ],
+    "highlights": [
+     {
+      "title": "Clean burn",
+      "text": "Very low combustion emissions and no carbon deposits on burners and boiler internals."
+     },
+     {
+      "title": "No spillage, no fumes",
+      "text": "LPG does not stain floors or give off fumes, which matters in dairies, chocolate and biscuit plants and hotels."
+     },
+     {
+      "title": "No pilferage",
+      "text": "LP Gas is kept in a pressurised vessel and used through a closed system."
+     },
+     {
+      "title": "Higher efficiency",
+      "text": "Complete combustion leaves no deposits on heat-exchange surfaces."
+     }
+    ],
+    "src": "https://nationalgasco.net/bulk-lpg-supply/",
+    "cta": {
+     "label": "Ask for a bulk quote",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "NC+ cutting gas",
+    "category": "Industrial gases",
+    "badge": "Developed by NGC",
+    "featured": true,
+    "image": "nc-plus-cylinder",
+    "text": "A hydrocarbon cutting gas with an additive, used instead of acetylene for cutting, brazing and heat treatment.",
+    "body": [
+     "National Gas developed NC+, a hydrocarbon industrial gas mixed with an additive that raises flame temperature and leaves a fine cut finish. It replaces the oxy-acetylene mixture traditionally used to cut steel.",
+     "NC+ is non-toxic, stable in liquid and gas form, has a low backfire tendency and cannot auto-ignite. A pungent smell makes leaks easy to detect. One fuel covers hand cutting, machine cutting, flame hardening, metalising, brazing, soldering, pre-heating and stress relieving.",
+     "National Gas started the NC+ business in Oman in 2008 and took it to the UAE and other countries from 2010. NC+ is present in Oman, the UAE, Qatar, Saudi Arabia and Malaysia."
+    ],
+    "specs": [
+     {
+      "label": "Total heat value",
+      "value": "23,244 kcal/m3 (DA: 13,082)"
+     },
+     {
+      "label": "Operating pressure",
+      "value": "1 to 133 psi (DA: 1 to 15 psi)"
+     },
+     {
+      "label": "Tare weight, 22 kg cylinder",
+      "value": "19 to 21 kg (DA: 65 to 70 kg)"
+     },
+     {
+      "label": "Backfire tendency",
+      "value": "Low (DA: very high)"
+     },
+     {
+      "label": "Inventory",
+      "value": "1 NC+ cylinder replaces almost 6 DA"
+     },
+     {
+      "label": "Cuts",
+      "value": "Steel up to 12 in (300 mm) thick and more"
+     }
+    ],
+    "gallery": [
+     "cutting-torch",
+     "cutting-machine",
+     "worker-cutting",
+     "worker-steel",
+     "cutting-closeup"
+    ],
+    "highlights": [
+     {
+      "title": "Up to 30% saving",
+      "text": "On overall oxy-fuel cutting cost, as published by National Gas."
+     },
+     {
+      "title": "Smaller inventory",
+      "text": "Cylinder inventory falls five to six times, and logistics costs with it."
+     },
+     {
+      "title": "Clean cut",
+      "text": "Narrow kerf, smooth surface and less slag."
+     }
+    ],
+    "src": "https://nationalgasco.net/nc-cutting-gas/",
+    "cta": {
+     "label": "Switch from acetylene",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Commercial propane",
+    "category": "Industrial gases",
+    "image": "rusayl-plant",
+    "text": "Commercial and industrial grade propane for post-weld heat treatment and stress relief, in 44 kg cylinders or in bulk.",
+    "body": [
+     "National Gas supplies commercial and industrial grade propane for post-weld heat treatment, stress relief and other jobs that need a high heat value.",
+     "Propane comes in 44 kg cylinders. For larger needs, it is delivered in bulk by semi-trailers fitted with safety equipment and vaporisers.",
+     "Grades range from 60% and 70% up to 90% propane, and other ratios can be matched on request."
+    ],
+    "specs": [
+     {
+      "label": "Cylinders",
+      "value": "44 kg"
+     },
+     {
+      "label": "Bulk",
+      "value": "Semi-trailers with vaporisers"
+     },
+     {
+      "label": "Grades",
+      "value": "60%, 70% up to 90%, or to specification"
+     },
+     {
+      "label": "Uses",
+      "value": "PWHT, stress relief, high-heat work"
+     }
+    ],
+    "gallery": [
+     "tank-closeup",
+     "tanker-energizing",
+     "technician-tanker"
+    ],
+    "src": "https://nationalgasco.net/commercial-propane/",
+    "cta": {
+     "label": "Request propane",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Aerosol propellant",
+    "category": "Specialty gases",
+    "image": "aerosol-plant",
+    "text": "De-odorised LPG propellant from our Rusayl and Madha plants, a CFC-free choice for sprays and food-grade packs.",
+    "body": [
+     "National Gas runs de-odorising plants at its Rusayl and Madha facilities, where it produces aerosol propellant: an environmentally friendlier alternative to ozone-depleting CFC propellants. Production started in 2005.",
+     "To keep the product clean, the plant uses a fully separate system of dedicated pipelines, pumps and a storage tank, and dedicated bobtails deliver only aerosol propellant.",
+     "Typical uses include pesticides, air fresheners, perfumes, cosmetics, spray paint and food-grade packaging."
+    ],
+    "specs": [
+     {
+      "label": "Plants",
+      "value": "Rusayl and Madha"
+     },
+     {
+      "label": "Since",
+      "value": "2005"
+     },
+     {
+      "label": "Handling",
+      "value": "Dedicated pipelines, pumps, tank and bobtails"
+     }
+    ],
+    "gallery": [
+     "plant-columns",
+     "skid-dusk"
+    ],
+    "src": "https://nationalgasco.net/aerosol-propellent/",
+    "cta": {
+     "label": "Ask about propellant",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "HP Lubricants",
+    "category": "Lubricants",
+    "badge": "Power to Perform",
+    "featured": true,
+    "image": "hp-bottle",
+    "text": "Automotive, industrial and speciality oils and greases from HPCL, marketed in Oman by National Gas.",
+    "body": [
+     "National Gas offers HP Lubricants, 'Power to Perform', from HPCL, one of the world's largest lube marketers. HPCL owns one of the largest lube base-oil refineries and makes more than 450 grades of lubricants, greases and specialities.",
+     "The range covers transport, railways, manufacturing, mining, shipping, agriculture and power. National Gas launched its lubricants division in 2016 and HP Lubricants in Oman in September 2020."
+    ],
+    "specs": [
+     {
+      "label": "Automotive",
+      "value": "Car, motorcycle and diesel engine oils, gear and transmission oils, greases"
+     },
+     {
+      "label": "Industrial",
+      "value": "Hydraulic, compressor, turbine, gear and transformer oils, greases"
+     },
+     {
+      "label": "Specialities",
+      "value": "Quenching oils, thermic fluids, rust preventives, cutting fluids"
+     },
+     {
+      "label": "Contact",
+      "value": "lubes@nationalgasco.net"
+     }
+    ],
+    "gallery": [
+     "hp-neosynth"
+    ],
+    "src": "https://nationalgasco.net/lubricants/",
+    "cta": {
+     "label": "Order lubricants",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "PSA nitrogen and oxygen generators",
+    "category": "Gas generators",
+    "featured": true,
+    "image": "psa-generator",
+    "text": "On-site nitrogen or oxygen from compressed air, at high purity, sized to your plant.",
+    "body": [
+     "Pressure swing adsorption makes nitrogen or oxygen from compressed air on site, so you produce gas where and when you need it, at the purity you need. Air is the only raw material.",
+     "National Gas designs generators to the customer's specification, including higher capacities and extreme ambient conditions."
+    ],
+    "specs": [
+     {
+      "label": "Gases",
+      "value": "Nitrogen or oxygen"
+     },
+     {
+      "label": "Feed",
+      "value": "Compressed air"
+     },
+     {
+      "label": "Best at",
+      "value": "High product purities"
+     }
+    ],
+    "highlights": [
+     {
+      "title": "Cheaper than liquid nitrogen",
+      "text": "No orders, deliveries or high-pressure cylinders to store."
+     },
+     {
+      "title": "Control of purity",
+      "text": "Better control of gas purity, and of product quality downstream."
+     },
+     {
+      "title": "Modular",
+      "text": "Upgrade later by adding banks to the existing system."
+     }
+    ],
+    "src": "https://nationalgasco.net/nitrogen-oxygen-generators/",
+    "cta": {
+     "label": "Size a generator",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Membrane nitrogen generators",
+    "category": "Gas generators",
+    "featured": true,
+    "image": "membrane-generators",
+    "text": "Hollow-fibre membrane units that make nitrogen from compressed air, efficient at lower purities.",
+    "body": [
+     "Hollow-fibre membranes separate nitrogen from compressed air for on-site production. They are most efficient at lower product purities.",
+     "Units run automatically and unattended at low operating pressure, with no hazardous storage, and are compact enough to transport and install easily."
+    ],
+    "specs": [
+     {
+      "label": "Gas",
+      "value": "Nitrogen"
+     },
+     {
+      "label": "Feed",
+      "value": "Compressed air"
+     },
+     {
+      "label": "Best at",
+      "value": "Lower product purities"
+     },
+     {
+      "label": "Operation",
+      "value": "Automatic and unattended"
+     }
+    ],
+    "src": "https://nationalgasco.net/nitrogen-oxygen-generators/",
+    "cta": {
+     "label": "Size a generator",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "LPG and natural gas equipment",
+    "category": "Equipment",
+    "image": "pressure-station",
+    "text": "Vaporisers, pressure reducing stations, metering, gas detection, fire-fighting systems and valves.",
+    "body": [
+     "National Gas supplies complete LPG systems and individual equipment: vaporisers, pumps, regulators, pressure reducing stations, metering systems, secondary pipeline work, gas detectors, LPG leak detection, fire-fighting, deluge and peak-shaving systems, and all kinds of LPG valves.",
+     "For natural gas, the team handles pipeline work and the installation and commissioning of NG pressure reducing and metering stations."
+    ],
+    "specs": [
+     {
+      "label": "LPG",
+      "value": "Vaporisers, PRS, pipelines, gas detection, fire-fighting"
+     },
+     {
+      "label": "Natural gas",
+      "value": "Pipelines, PRS and metering"
+     },
+     {
+      "label": "Also",
+      "value": "Tanks, pumps, compressors, plant equipment"
+     }
+    ],
+    "gallery": [
+     "gas-detector",
+     "sng-skid",
+     "project-piping"
+    ],
+    "src": "https://nationalgasco.net/equipment-supply-services/",
+    "cta": {
+     "label": "Ask for equipment",
+     "href": "contact.html"
+    }
+   }
+  ]
+ },
+ "locations": {
+  "title": "Where we are",
+  "nav": "Locations",
+  "intro": "Head office in Muscat, plants in Oman, and subsidiaries in Dhofar, Saudi Arabia and Malaysia.",
+  "book_label": "View location",
+  "items": [
+   {
+    "name": "Head office",
+    "full_name": "National Gas Company SAOG, Al Khuwair",
+    "type": "Corporate office",
+    "country": "Oman",
+    "image": "tanker-mountains",
+    "address": "ONEIC Building, 2nd Floor, Al Khuwair, Muscat, Sultanate of Oman",
+    "about": "Head office of National Gas Company SAOG: sales, technical sales, investor relations and the call centre.",
+    "lat": "23.5863",
+    "lng": "58.4297",
+    "phones": [
+     {
+      "label": "Office",
+      "number": "+968 2208 4900"
+     },
+     {
+      "label": "Call centre",
+      "number": "+968 2416 2646"
+     },
+     {
+      "label": "WhatsApp",
+      "number": "+968 9060 4445"
+     }
+    ],
+    "phone": "+968 2208 4900",
+    "email": "info@nationalgasco.net",
+    "hours": [
+     {
+      "label": "Office hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "website": "https://nationalgasco.net/contact/"
+    },
+    "src": "https://nationalgasco.net/contact/"
+   },
+   {
+    "name": "Rusayl plant",
+    "full_name": "National Gas Rusayl plant",
+    "type": "Bottling and de-odorising plant",
+    "country": "Oman",
+    "image": "rusayl-plant",
+    "address": "PO Box 95, PC 124, Rusayl, Muscat, Sultanate of Oman",
+    "about": "Bottling plant with a telescopic conveyor and semi-automatic filling machine, and a de-odorising unit that makes aerosol propellant.",
+    "lat": "23.5566",
+    "lng": "58.1933",
+    "phones": [
+     {
+      "label": "Plant",
+      "number": "+968 2444 6073"
+     }
+    ],
+    "phone": "+968 2444 6073",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "src": "https://nationalgasco.net/wp-content/uploads/2022/12/National-Gas-Brochure-22.pdf"
+   },
+   {
+    "name": "Madha plant",
+    "full_name": "National Gas Madha facility",
+    "type": "De-odorising plant",
+    "country": "Oman",
+    "image": "aerosol-plant",
+    "address": "Madha, Musandam Governorate, Sultanate of Oman (street address not published)",
+    "about": "One of two National Gas facilities with a de-odorising plant for aerosol propellant.",
+    "phones": [
+     {
+      "label": "Head office",
+      "number": "+968 2208 4900"
+     }
+    ],
+    "phone": "+968 2208 4900",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call head office"
+     }
+    ],
+    "src": "https://nationalgasco.net/aerosol-propellent/"
+   },
+   {
+    "name": "Samahram Gas, Dhofar",
+    "full_name": "Samahram Gas Company (80% owned)",
+    "type": "Subsidiary",
+    "country": "Oman",
+    "image": "cylinders-yard",
+    "address": "Dhofar Governorate, Sultanate of Oman (address not published on nationalgasco.net)",
+    "about": "LPG cylinder filling, central gas system installation and operation, and bulk LPG supply in Dhofar. National Gas completed the purchase of 80% on 4 June 2025.",
+    "phones": [
+     {
+      "label": "NGC head office",
+      "number": "+968 2208 4900"
+     }
+    ],
+    "phone": "+968 2208 4900",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "src": "https://www.muscatdaily.com/2025/06/10/national-gas-acquires-80-stake-in-samahram-gas/"
+   },
+   {
+    "name": "Al Khobar",
+    "full_name": "NGC Energy Saudi LLC",
+    "type": "Subsidiary office",
+    "country": "Saudi Arabia",
+    "image": "sng-tanks",
+    "address": "1201, Hail Center, PO Box 3096, Al Rakha 34226, Kingdom of Saudi Arabia",
+    "about": "Wholly owned Saudi subsidiary for LPG distribution and SNG installations. In June 2026 it won licences with Zamil Group for cylinder filling and storage in Jeddah and Jazan and wholesale LPG distribution.",
+    "lat": "26.3509",
+    "lng": "50.2014",
+    "phones": [
+     {
+      "label": "Office",
+      "number": "+966 13 832 3313"
+     },
+     {
+      "label": "Mobile",
+      "number": "+966 54 467 7937"
+     },
+     {
+      "label": "Mobile",
+      "number": "+966 56 897 6707"
+     }
+    ],
+    "phone": "+966 13 832 3313",
+    "email": "sales@ngcenergy.com.sa",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "src": "https://nationalgasco.net/contact/"
+   },
+   {
+    "name": "Kuala Lumpur",
+    "full_name": "NGC Energy Sdn Bhd",
+    "type": "Subsidiary (60%)",
+    "country": "Malaysia",
+    "image": "bullets-facility",
+    "address": "Lot 3A-01, Level 3A, Menara Millenium, 8 Jalan Damanlela, Bukit Damansara, 50490 Kuala Lumpur, Malaysia",
+    "about": "LPG business in West Malaysia, acquired from Shell in 2012 and marketed under the MiraGas brand.",
+    "lat": "3.1524",
+    "lng": "101.6584",
+    "phones": [
+     {
+      "label": "Customer service",
+      "number": "1 300 88 5808"
+     }
+    ],
+    "phone": "1 300 88 5808",
+    "email": "csc@ngcenergy.com",
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "website": "https://ngcenergy.com.my"
+    },
+    "src": "https://nationalgasco.net/contact/"
+   }
+  ]
+ },
+ "news": [
+  {
+   "title": "NGC calls for LPG price review amid rising costs",
+   "date": "August 31, 2026",
+   "tag": "Press",
+   "image": "cylinders-22kg",
+   "summary": "National Gas has asked the Ministry of Commerce, Industry and Investment Promotion again to revise the regulated OMR 1.9 rate for a 22 kg cylinder, unchanged since 1994.",
+   "body": [
+    "National Gas Company SAOG resubmitted its request for a revision of the regulated LPG cylinder price to the Ministry of Commerce, Industry and Investment Promotion in early July 2026, CEO Dr Rachid Majjad told shareholders on the first-half earnings call.",
+    "The regulated rate of OMR 1.9 for the standard 22 kg cylinder applies to the bottler's part of the supply chain and is distinct from the retail price. According to Dr Majjad, the company's LPG purchase price has risen by around 50%, alongside payroll, transport and tax costs.",
+    "As an interim step, National Gas has been withdrawing discounts to traders and distributors: in selected areas from January 2026 and in Muscat from 1 September. The company is also awaiting guidance on colour-coded cylinders for each bottler; it plans yellow cylinders under its MiraGas brand, already used in Malaysia, with self-closing valves."
+   ],
+   "src": "https://www.omanobserver.om/article/1195388/business/energy/ngc-calls-for-lpg-price-review-amid-rising-costs"
+  },
+  {
+   "title": "First-half 2026: revenue up, back in profit",
+   "date": "August 2026",
+   "tag": "Results",
+   "image": "branded-tank",
+   "summary": "Group revenue rose to RO 47.6 million and the group made an after-tax profit of RO 298,072, against a loss a year earlier.",
+   "body": [
+    "National Gas reported group revenue of RO 47,585,350 for the six months to 30 June 2026, against RO 43,741,406 in the first half of 2025.",
+    "Group profit after tax was RO 298,072, compared with a loss of RO 348,026. The Chairman's report credits the transformation plan launched in 2023 and a profitable Malaysian LPG business; project delays affected the Saudi unit."
+   ],
+   "src": "https://nationalgasco.net/wp-content/uploads/2026/08/Final-Q2_National-Gas-31x19-2026_English.pdf"
+  },
+  {
+   "title": "National Gas Saudi unit and Zamil win LPG licences",
+   "date": "June 14, 2026",
+   "tag": "Press",
+   "image": "sng-tanks",
+   "summary": "NGC Energy Saudi LLC and Zamil Group won licences for cylinder filling and storage in Jeddah and Jazan and for wholesale LPG distribution across Saudi Arabia.",
+   "body": [
+    "Saudi Arabia's Ministry of Energy named a consortium of NGC Energy Saudi LLC, wholly owned by National Gas, and Zamil Group Holding Company among the winners of eight LPG filling, storage and bulk distribution licences.",
+    "The licences cover LPG cylinder filling and storage facilities in Jeddah and Jazan and wholesale LPG distribution across the Kingdom. Developing the two plants, including land and approvals, is expected to take about 24 months; wholesale distribution should begin within about 12 months.",
+    "National Gas has signed a memorandum of understanding with Zamil Group Investment Company and expects definitive agreements once regulatory approvals are in place."
+   ],
+   "src": "https://www.omanobserver.om/article/1191232/business/economy/national-gas-saudi-unit-zamil-win-lpg-licences"
+  },
+  {
+   "title": "Annual General Meeting held online",
+   "date": "March 25, 2026",
+   "tag": "Investors",
+   "image": "bullets-waterfront",
+   "summary": "Shareholders met online to approve the 2025 reports, elect a new Board and appoint auditors.",
+   "body": [
+    "The 2026 Annual General Meeting of National Gas Company SAOG took place online through mcd.om on 25 March 2026, with a second call on 29 March.",
+    "The agenda included the 2025 reports, the election of a new Board of Directors, up to RO 10,000 for community support and the appointment of auditors."
+   ],
+   "src": "https://nationalgasco.net/wp-content/uploads/2026/03/AGM-Agenda.pdf"
+  },
+  {
+   "title": "National Gas acquires 80% stake in Samahram Gas",
+   "date": "June 10, 2025",
+   "tag": "Press",
+   "image": "cylinders-yard",
+   "summary": "The purchase of 80% of Samahram Gas, an LPG filling and distribution company in Dhofar, was completed on 4 June 2025.",
+   "body": [
+    "National Gas told the Muscat Stock Exchange that it had completed the acquisition of an 80% stake in Samahram Gas Company on 4 June 2025, after regulatory approvals.",
+    "Samahram Gas fills LPG cylinders, installs and operates central gas systems and supplies bulk LPG in the Dhofar Governorate. National Gas said the deal strengthens its footprint in Oman's LPG market and should add to group revenue and net income."
+   ],
+   "src": "https://www.muscatdaily.com/2025/06/10/national-gas-acquires-80-stake-in-samahram-gas/"
+  },
+  {
+   "title": "HP Lubricants aims for a bigger share of Oman's lubricant market",
+   "date": "February 2023",
+   "tag": "Press",
+   "image": "hp-neosynth",
+   "summary": "HP Lubricants, sold in Oman by National Gas, plans to grow its sales; National Gas entered lubricants in 2016.",
+   "body": [
+    "HP Lubricants, marketed in Oman by National Gas, set out plans to capture a larger share of the Omani lubricant segment.",
+    "National Gas CEO Dr Rachid Majjad noted that the company entered the lubricants business in 2016."
+   ],
+   "src": "https://timesofoman.com/article/127428-hp-lubricants-aims-to-capture-substantial-market-share-in-omans-lubricant-segment"
+  },
+  {
+   "title": "National Gas sells its India investment for $15.6mn",
+   "date": "September 14, 2022",
+   "tag": "Press",
+   "image": "plant-dusk",
+   "summary": "The 60% stake in NGC Energy India, which was building an LPG terminal at Krishnapatnam, was sold for US$15.61 million.",
+   "body": [
+    "National Gas completed the sale of its 60% stake in NGC Energy India Pvt Ltd to Petregaz India Holdings for US$15.61 million, including a US$3.5 million premium. The proceeds were earmarked to reduce debt.",
+    "The same report noted the company's August 2022 decision to exit its UAE operations."
+   ],
+   "src": "https://www.muscatdaily.com/2022/09/14/national-gas-sells-its-india-investment-for-15-6mn/"
+  },
+  {
+   "title": "National Gas sells its 51% stake in Unigaz",
+   "date": "September 12, 2022",
+   "tag": "Press",
+   "image": "project-piping",
+   "summary": "Unigaz LLC, a gas distribution and cooking-gas pipe maintenance company, bought back National Gas's 51% for RO 407,000.",
+   "body": [
+    "National Gas sold its entire 51% stake in the Unigaz LLC joint venture, which distributes gas and maintains cooking gas pipes in Oman, for RO 407,000."
+   ],
+   "src": "https://www.muscatdaily.com/2022/09/12/national-gas-sells-its-entire-51-stake-in-unigaz-joint-venture/"
+  },
+  {
+   "title": "National Gas partners with HP Lubricants in Oman",
+   "date": "October 2021",
+   "tag": "Press",
+   "image": "hp-bottle",
+   "summary": "HP Lubricants was launched in Oman on 6 September 2020 through National Gas, which HPCL later named a best performer.",
+   "body": [
+    "National Gas launched HP Lubricants in Oman on 6 September 2020, offering HPCL's global portfolio of automotive, industrial and speciality lubricants.",
+    "HPCL recognised National Gas with a best performer award."
+   ],
+   "src": "https://timesofoman.com/article/108701-national-gas-partners-with-hp-lubricants-to-offer-global-lubricants-portfolio-to-customers-in-oman"
+  },
+  {
+   "title": "Consumer safety is the most important, says National Gas",
+   "date": "July 2020",
+   "tag": "Safety",
+   "image": "technician-tanker",
+   "summary": "A national LPG safety campaign used videos, social media and print to teach safe cylinder handling.",
+   "body": [
+    "National Gas ran an LPG safety awareness campaign through videos, social media and print, reminding households how to handle cylinders and what to do if they smell gas.",
+    "The article described National Gas as running six strategically located plants and more than 40 years of service."
+   ],
+   "src": "https://timesofoman.com/article/3017117/roundup/consumer-safety-is-the-most-important-national-gas"
+  },
+  {
+   "title": "National Gas joint venture to build an LPG terminal in India",
+   "date": "November 8, 2019",
+   "tag": "Press",
+   "image": "bullets-site",
+   "summary": "NGC Energy India (60%) and Petredec (40%) planned a 30,000-tonne LPG import terminal at Krishnapatnam port.",
+   "body": [
+    "NGC Energy India, a joint venture of National Gas (60%) and Petredec (40%), announced a refrigerated LPG import terminal at Krishnapatnam port with 30,000 tonnes of storage and 1.4 million tonnes a year of throughput.",
+    "National Gas later sold its stake, in September 2022."
+   ],
+   "src": "https://www.thehindubusinessline.com/news/oman-based-national-gas-jv-to-build-400-crore-lpg-terminal/article29923994.ece"
+  }
+ ],
+ "news_title": "News",
+ "news_intro": "Results, licences and acquisitions, from National Gas filings and the press.",
+ "faq_title": "Questions people ask",
+ "faq": [
+  {
+   "q": "What is LPG?",
+   "a": "LPG stands for liquefied petroleum gas. It is a mixture of propane and butane, compressed and stored as a liquid for use as fuel."
+  },
+  {
+   "q": "Where does LPG come from?",
+   "a": "LPG is a by-product of oil and natural gas production, and is also extracted at refineries and gas processing plants."
+  },
+  {
+   "q": "How do I buy LPG from National Gas?",
+   "a": "National Gas supplies LPG cylinders through its distributor network, and delivers bulk LPG and D-Cylinder refills directly to commercial and industrial customers. Call +968 2416 2646 or write to sales@nationalgasco.net."
+  },
+  {
+   "q": "How can I pay?",
+   "a": "Online, at company outlets, or by bank transfer."
+  },
+  {
+   "q": "What should I do if I smell gas?",
+   "a": "Open all doors and windows fully. Do not switch lights, fans or any appliance on or off. Close the cylinder valve and switch off the regulator, and put out any flame or cigarette."
+  },
+  {
+   "q": "How do I check a cylinder for leaks?",
+   "a": "Use a sponge or brush with soapy water on the joints. Never use a match or a flame. If there is a leak, close the valve and do not use the cylinder until an expert has repaired it."
+  },
+  {
+   "q": "Why is LPG heavier than air a safety point?",
+   "a": "LPG vapour is 1.5 to 2 times heavier than air, so a leak collects at ground level. Keep cylinders upright, out of the sun and outside the kitchen, never in a pit or basement."
+  },
+  {
+   "q": "What is a D-Cylinder?",
+   "a": "A fixed 440-litre LPG cylinder designed by National Gas for hotels, restaurants and factories. A bobtail fills it on site and you are billed for the metered quantity."
+  }
+ ],
+ "nudges": {
+  "dock_label": "Call or WhatsApp",
+  "offer": {
+   "id": "dcyl",
+   "kicker": "For restaurants and hotels",
+   "title": "Pay only for the gas you use",
+   "text": "The D-Cylinder is filled on site and billed by the meter.",
+   "cta": "See the D-Cylinder",
+   "href": "@cat:D-Cylinder",
+   "image": "d-cylinder-gas-bank"
+  }
+ },
+ "cta_band": "Tell us what you run on today and our engineers will propose the LPG option.",
+ "detail_cta": {
+  "title": "Talk to our sales team",
+  "text": "Send your requirement and National Gas will get back to you with a proposal."
+ },
+ "contact": {
+  "title": "Get a quote",
+  "intro": "Choose a product or service and our team will contact you. This concept form is not connected.",
+  "address": "National Gas Company SAOG, ONEIC Building, 2nd Floor, Al Khuwair, Muscat, Sultanate of Oman",
+  "email": "sales@nationalgasco.net",
+  "phones": [
+   {
+    "label": "Call centre",
+    "number": "+968 2416 2646"
+   },
+   {
+    "label": "WhatsApp",
+    "number": "+968 9060 4445",
+    "whatsapp": true
+   },
+   {
+    "label": "Head office",
+    "number": "+968 2208 4900"
+   }
+  ],
+  "note": "Concept preview: connect the form before launch. Other addresses: info@, careers@, technicalsales@ and lubes@nationalgasco.net.",
+  "form": {
+   "branch": false,
+   "topics": [
+    "Bulk LPG supply",
+    "LPG installation",
+    "SNG",
+    "Gas engineering",
+    "D-Cylinder",
+    "Cutting gas",
+    "Propane supply",
+    "LPG equipment",
+    "Nitrogen or oxygen generator",
+    "Lubricants",
+    "Investor relations",
+    "Other"
+   ],
+   "submit": "Send request"
+  }
+ },
+ "confirm": [
+  "Kit test build: not reviewed by National Gas Company SAOG.",
+  "Plant count conflicts on nationalgasco.net: '11 plants in Oman, Malaysia & UAE' (home, about), '7 strategically located plants' in Oman (about), '7 plants across Oman and the UAE' (NGC Edge), 6 / 10 plants in the 2022 brochure. The concept shows no plant count.",
+  "Experience claim is stale on the site ('over 35 years'); the concept counts years from 1981, when bottling began.",
+  "Certifications conflict: home/about list ISO 9001:2015, 14001:2015 and '18000-2007'; the ISO and safety pages cite ISO 9001:2008, 14001:2004 and OHSAS 18001:2007 (since replaced by ISO 45001). The concept does not list certificate versions.",
+  "UAE companies (NGC Energy LLC, Umm Al Quwain) still appear on the contact page, but the 2022 accounts and press say UAE operations stopped in late 2022; the concept leaves the UAE out of locations.",
+  "D-Cylinder equivalence: website table says 4 x 44 kg cylinders, the 2022 brochure says about 5. The concept uses 4.",
+  "Rusayl plant address and phone (+968 2444 6073) are from the 2022 brochure; the site footer also lists +968 2444 6073 as 'Corporate office'. Confirm which office answers that number.",
+  "Madha facility is named only on the aerosol page; no address or phone. Samahram Gas has no published address or phone on nationalgasco.net.",
+  "Map coordinates are area-level (OpenStreetMap: Al Khuwair, Rusayl, Al Rakah, Bukit Damansara), not exact building positions.",
+  "KSA address: contact page '1201, Hail Center, Al Rakha'; 2022 brochure '1202, Hail Center, Al Raka, Al Khobar'.",
+  "No consumer cylinder prices are published; the OMR 1.9 figure is the regulated bottler rate reported by the Oman Observer (31 Aug 2026), not a retail price.",
+  "Autogas: the site mentions autogas refuelling stations only as a gas engineering capability; no autogas product or station network is published, so the concept has none.",
+  "No distributor list or dedicated gas-leak emergency number is published; the ticker shows the call centre.",
+  "News dates for Times of Oman items (Feb 2023, Oct 2021, Jul 2020) are approximate, taken from image paths.",
+  "The Jan 2026 CEO interview in The Energy Year (80% bulk market share, LNG plans) could not be read (HTTP 403) and is not used.",
+  "Company films exist only as YouTube embeds (D-Cylinder filling operations, MSX session); none were downloaded, so the concept has no video slide or scrubbed film.",
+  "Photos are from nationalgasco.net; a few may be stock bought by the company. Confirm usage rights before launch.",
+  "The header mark is the flame from the site's favicon; the full logo is in shared/img/national-gas/logo-full.jpg."
+ ],
+ "sources": [
+  "https://nationalgasco.net/ (home, about, history, vision and mission, our business, NGC Edge, safety, consumer awareness, CSR, LPG cylinders, D-Cylinder, bulk LPG, LPG installation, gas engineering, SNG, equipment supply, NC+ cutting gas, commercial propane, aerosol propellant, lubricants, nitrogen and oxygen generators, EOR, fuel conversion, diesel to LPG, industries, FAQ, board, senior management, annual reports, news, contact; read 11-12 Oct 2026)",
+  "https://nationalgasco.net/wp-content/uploads/2026/08/Final-Q2_National-Gas-31x19-2026_English.pdf (H1 2026 results, read 11 Oct 2026)",
+  "https://nationalgasco.net/wp-content/uploads/2026/03/AGM-Agenda.pdf (read 11 Oct 2026)",
+  "https://nationalgasco.net/wp-content/uploads/2022/12/National-Gas-Brochure-22.pdf (2022 brochure, read 11 Oct 2026)",
+  "https://nationalgasco.net/wp-content/uploads/2023/03/ListOfNotes_EN.pdf (2022 notes to the accounts, read 11 Oct 2026)",
+  "https://www.omanobserver.om/article/1195388/business/energy/ngc-calls-for-lpg-price-review-amid-rising-costs (read 12 Oct 2026)",
+  "https://www.omanobserver.om/article/1191232/business/economy/national-gas-saudi-unit-zamil-win-lpg-licences (read 12 Oct 2026)",
+  "https://www.muscatdaily.com/2025/06/10/national-gas-acquires-80-stake-in-samahram-gas/ (read 12 Oct 2026)",
+  "https://www.muscatdaily.com/2022/09/14/national-gas-sells-its-india-investment-for-15-6mn/ (read 11 Oct 2026)",
+  "https://www.muscatdaily.com/2022/09/12/national-gas-sells-its-entire-51-stake-in-unigaz-joint-venture/ (read 11 Oct 2026)",
+  "https://timesofoman.com/article/108701 , /127428 , /3017117 (read 11 Oct 2026)",
+  "https://www.thehindubusinessline.com/news/oman-based-national-gas-jv-to-build-400-crore-lpg-terminal/article29923994.ece (read 11 Oct 2026)",
+  "https://nominatim.openstreetmap.org (area coordinates, 12 Oct 2026)"
+ ]
 }

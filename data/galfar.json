@@ -1,240 +1,2415 @@
 {
-  "slug": "galfar",
-  "tier": 1,
-  "name": "Galfar Engineering & Contracting",
-  "short": "Galfar",
-  "sector": "Engineering & construction",
-  "meta": "Galfar Engineering & Contracting: multi-disciplined engineering, contracting and construction in Oman since 1972.",
-  "accent": "#ff5a1f",
-  "cta": {
-    "label": "Contact us",
-    "href": "#contact"
+ "slug": "galfar",
+ "tier": 1,
+ "name": "Galfar Engineering & Contracting",
+ "short": "Galfar",
+ "sector": "Engineering & construction",
+ "meta": "Galfar Engineering & Contracting SAOG: roads, oil and gas, buildings, water and marine projects across Oman since 1972.",
+ "footer_note": "Concept redesign for pitch purposes. This is not the official website of Galfar Engineering & Contracting SAOG. Facts and photos from galfar.com, read 12 October 2026.",
+ "accent": "#d40f0a",
+ "theme": "studio",
+ "promo_fx": "burn",
+ "img_dir": "galfar",
+ "brand": {
+  "mode": "light",
+  "style": "minimal",
+  "logo": "logo",
+  "bg": "#f3f1ec",
+  "fg": "#17191c",
+  "accent": "#d40f0a",
+  "accent_ink": "#ffffff",
+  "accent2": "#2b3a48",
+  "alt": "#e8e4dc",
+  "font_display": "\"Barlow Condensed\", \"Arial Narrow\", sans-serif",
+  "font_body": "\"Poppins\", system-ui, sans-serif",
+  "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,600&family=Poppins:wght@400;500;600"
+ },
+ "cta": {
+  "label": "Contact Galfar",
+  "short": "Contact",
+  "href": "contact.html"
+ },
+ "hero": {
+  "eyebrow": "",
+  "title": "Galfar",
+  "lede": "",
+  "primary": {
+   "label": "Projects",
+   "href": "projects.html"
   },
-  "hero": {
-    "eyebrow": "Engineering · Contracting · Construction · Oman",
-    "title": "Building Oman since 1972",
-    "lede": "One of the largest multi-disciplined engineering, contracting and construction companies in the Sultanate of Oman, delivering energy, civil and infrastructure projects.",
-    "primary": {
-      "label": "Our capabilities",
-      "href": "#services"
-    },
-    "secondary": {
-      "label": "Contact us",
-      "href": "#contact"
-    }
-  },
-  "stats": [
-    {
-      "years_since": 1972,
-      "label": "Years of experience"
-    },
-    {
-      "value": 3,
-      "label": "Business units"
-    },
-    {
-      "value": 7,
-      "label": "Support units"
-    },
-    {
-      "value": 4,
-      "label": "Iconic projects featured"
-    }
-  ],
-  "about": {
-    "title": "Multi-disciplined, from design to operation",
-    "body": [
-      "Galfar has been established in Oman since 1972. Its work spans engineering, procurement and construction for energy and industrial plants, buildings and environmental works, and roads, airports, seaports, dams and water networks, including operation and maintenance."
-    ],
-    "points": [
-      {
-        "title": "Operation & maintenance",
-        "text": "Galfar also operates and maintains several of the facilities it builds."
-      },
-      {
-        "title": "Quality, safety & environment",
-        "text": "QHSSE is one of the group's dedicated support units."
-      },
-      {
-        "title": "Iconic projects",
-        "text": "Yibal Khuff, Salalah Airport, the Boushar-Amirat Road and Duqm Fishery Port."
-      }
-    ]
-  },
-  "services": {
-    "title": "Business units",
-    "nav": "Capabilities",
-    "intro": "Three business units cover energy, civil and infrastructure work.",
-    "items": [
-      {
-        "title": "Energy & Industrial",
-        "icon": "factory",
-        "text": "Engineering, construction and procurement for oil and gas plants, petrochemical and manufacturing facilities, power generation and power grids.",
-        "image": "u_energy"
-      },
-      {
-        "title": "Civil & Environmental",
-        "icon": "leaf",
-        "text": "Landmark buildings, MEP services, and wastewater treatment plants and networks, including operation and maintenance.",
-        "image": "u_civil"
-      },
-      {
-        "title": "Infrastructure",
-        "icon": "truck",
-        "text": "Roads, bridges, airports, seaports, dams, water treatment plants and water networks, including operation and maintenance.",
-        "image": "u_infra"
-      }
-    ],
-    "chips_title": "Support units",
-    "chips": [
-      "QHSSE",
-      "Project Services",
-      "Human Capital",
-      "Finance",
-      "Treasury & IT",
-      "Supply Chain Management",
-      "Strategy & Business Development"
-    ]
-  },
-  "highlights": {
-    "title": "Iconic projects",
-    "nav": "Projects",
-    "intro": "Projects the group features on its homepage.",
-    "items": [
-      {
-        "title": "Yibal Khuff Project",
-        "icon": "factory",
-        "text": "Energy & Industrial",
-        "image": "p_yibal"
-      },
-      {
-        "title": "Salalah Airport",
-        "icon": "building",
-        "text": "Civil & Environmental",
-        "image": "p_salalah"
-      },
-      {
-        "title": "Boushar-Amirat Road",
-        "icon": "truck",
-        "text": "Infrastructure",
-        "image": "p_road"
-      },
-      {
-        "title": "Duqm Fishery Port",
-        "icon": "layers",
-        "text": "Infrastructure",
-        "image": "p_duqm"
-      }
-    ]
-  },
-  "locations": {
-    "title": "Head office",
-    "nav": "Locations",
-    "intro": "The head office is in Muscat. The site publishes a postal address only.",
-    "items": [
-      {
-        "name": "Head office",
-        "type": "Head office",
-        "country": "Oman",
-        "address": "P.O. Box 533, P.C. 100, Muscat, Sultanate of Oman"
-      }
-    ]
-  },
-  "marquee": [
-    "Oil & gas plants",
-    "Power generation",
-    "Airports",
-    "Seaports",
-    "Dams",
-    "Water networks",
-    "Wastewater treatment",
-    "Roads & bridges"
-  ],
-  "contact": {
-    "title": "Contact Galfar",
-    "intro": "For project, tender and corporate enquiries.",
-    "address": "P.O. Box 533, P.C. 100, Muscat, Sultanate of Oman",
-    "phones": [
-      {
-        "label": "Telephone",
-        "number": "+968 2452 5000",
-        "tel": "+96824525000"
-      }
-    ],
-    "email": null,
-    "note": "The email address on the site is obfuscated and has not been published here.",
-    "form": {
-      "branch": false,
-      "topics": [
-        "Project enquiry",
-        "Tender or supplier registration",
-        "Careers",
-        "Media",
-        "Other"
-      ],
-      "submit": "Send enquiry"
-    }
-  },
-  "confirm": [
-    "The site's headline counters (projects delivered, workforce, shareholders, plant, vendors) show '+ 0' in the page code. They are left out until real figures are confirmed.",
-    "The email address is obfuscated on the site. Confirm the public address.",
-    "The head office street address is not published.",
-    "The '1972' founding year and '54 years' are calculated; the site's own text says '52 years', which is out of date.",
-    "Photography is from Creative Commons sources (see footer credits). Unit and some project images are illustrative and labelled as such; replace with Galfar's own project photography."
-  ],
-  "sources": [
-    "https://galfar.com/oman/galfar/ (homepage read 11 Oct 2026)"
-  ],
-  "theme": "ember",
-  "img_dir": "galfar",
-  "images": {
-    "hero": {
-      "src": "salalah.jpg",
-      "alt": "Salalah Airport terminal building",
-      "cap": "Salalah Airport · featured project"
-    },
-    "sparks": {
-      "src": "sparks.jpg",
-      "alt": "Welding sparks on a work site"
-    },
-    "u_energy": {
-      "src": "energy.jpg",
-      "alt": "Industrial plant lit at night",
-      "cap": "Illustrative"
-    },
-    "u_civil": {
-      "src": "civil.jpg",
-      "alt": "Curved concrete structure",
-      "cap": "Illustrative"
-    },
-    "u_infra": {
-      "src": "infra.jpg",
-      "alt": "Aerial view of a highway interchange",
-      "cap": "Illustrative"
-    },
-    "p_yibal": {
-      "src": "refinery.jpg",
-      "alt": "Oil and gas plant at night",
-      "cap": "Illustrative image, not the Yibal Khuff site"
-    },
-    "p_salalah": {
-      "src": "salalah.jpg",
-      "alt": "Salalah Airport terminal building",
-      "cap": "Salalah Airport"
-    },
-    "p_road": {
-      "src": "road.jpg",
-      "alt": "Multi-lane expressway in Muscat",
-      "cap": "Illustrative: Muscat Expressway"
-    },
-    "p_duqm": {
-      "src": "duqm.jpg",
-      "alt": "Duqm Fishing Port from above",
-      "cap": "Duqm Fishing Port"
-    }
-  },
-  "theme_data": {
-    "units_title": "Three units. One contractor.",
-    "est": 1972
+  "secondary": {
+   "label": "Contact",
+   "href": "contact.html"
   }
+ },
+ "images": {
+  "pj-yibal-khuff": {
+   "src": "pj-yibal-khuff.jpg",
+   "alt": "Aerial view of the Yibal Khuff central processing facility in the desert",
+   "cap": "Photo: Galfar"
+  },
+  "pj-yibal-khuff-2": {
+   "src": "pj-yibal-khuff-2.jpg",
+   "alt": "Yibal Khuff processing plant at sunrise",
+   "cap": "Photo: Galfar"
+  },
+  "pj-harweel": {
+   "src": "pj-harweel.jpg",
+   "alt": "Process columns of the Harweel cluster facility under a blue sky",
+   "cap": "Photo: Galfar"
+  },
+  "pj-khazzan": {
+   "src": "pj-khazzan.jpg",
+   "alt": "Crew in protective gear joining a large pipeline in the desert",
+   "cap": "Photo: Galfar"
+  },
+  "pj-qarn-alam": {
+   "src": "pj-qarn-alam.jpg",
+   "alt": "Pipeline manifold and valves at an oil field station",
+   "cap": "Photo: Galfar"
+  },
+  "pj-qarn-alam-2": {
+   "src": "pj-qarn-alam-2.jpg",
+   "alt": "Processing equipment and pipework at a PDO site",
+   "cap": "Photo: Galfar"
+  },
+  "pj-muscat-expressway": {
+   "src": "pj-muscat-expressway.jpg",
+   "alt": "Muscat Expressway running through a rocky valley",
+   "cap": "Photo: Galfar"
+  },
+  "pj-rusayl-bidbid": {
+   "src": "pj-rusayl-bidbid.jpg",
+   "alt": "Aerial view of the widened Rusayl to Bidbid road cutting through red hills",
+   "cap": "Photo: Galfar"
+  },
+  "pj-rusayl-bidbid-2": {
+   "src": "pj-rusayl-bidbid-2.jpg",
+   "alt": "Rusayl to Bidbid road crossing a wadi beside palm groves",
+   "cap": "Photo: Galfar"
+  },
+  "pj-rusayl-bidbid-3": {
+   "src": "pj-rusayl-bidbid-3.jpg",
+   "alt": "Four-lane carriageway with overhead gantry signs between mountains",
+   "cap": "Photo: Galfar"
+  },
+  "pj-rusayl-bidbid-4": {
+   "src": "pj-rusayl-bidbid-4.jpg",
+   "alt": "Expressway passing a mosque at the foot of the mountains",
+   "cap": "Photo: Galfar"
+  },
+  "pj-rusayl-bidbid-5": {
+   "src": "pj-rusayl-bidbid-5.jpg",
+   "alt": "Road winding between rocky hills",
+   "cap": "Photo: Galfar"
+  },
+  "pj-rusayl-bidbid-6": {
+   "src": "pj-rusayl-bidbid-6.jpg",
+   "alt": "Aerial view of the road beside a village and a wadi",
+   "cap": "Photo: Galfar"
+  },
+  "pj-bousher-amerat": {
+   "src": "pj-bousher-amerat.jpg",
+   "alt": "Bousher to Amerat mountain road at night, lit hairpin bends",
+   "cap": "Photo: Galfar"
+  },
+  "pj-bousher-amerat-2": {
+   "src": "pj-bousher-amerat-2.jpg",
+   "alt": "Long exposure of traffic on the Bousher to Amerat road above the lights of Muscat",
+   "cap": "Photo: Galfar"
+  },
+  "pj-hasik": {
+   "src": "pj-hasik.jpg",
+   "alt": "Hasik to Shuwaymiyah road cut into the cliffs above the sea",
+   "cap": "Photo: Galfar"
+  },
+  "pj-batinah": {
+   "src": "pj-batinah.jpg",
+   "alt": "Batinah Expressway, a divided four-lane road to the horizon",
+   "cap": "Photo: Galfar"
+  },
+  "pj-medical-city": {
+   "src": "pj-medical-city.jpg",
+   "alt": "Medical City for Military and Security Services under construction",
+   "cap": "Photo: Galfar"
+  },
+  "pj-ansab-stp": {
+   "src": "pj-ansab-stp.jpg",
+   "alt": "Process tanks of the Al Ansab sewage treatment plant",
+   "cap": "Photo: Galfar"
+  },
+  "pj-bank-muscat": {
+   "src": "pj-bank-muscat.jpg",
+   "alt": "Bank Muscat headquarters building with a patterned facade",
+   "cap": "Photo: Galfar"
+  },
+  "pj-salalah-airport": {
+   "src": "pj-salalah-airport.jpg",
+   "alt": "Aerial view of landscaped roads at Salalah International Airport",
+   "cap": "Photo: Galfar"
+  },
+  "pj-salalah-airport-2": {
+   "src": "pj-salalah-airport-2.jpg",
+   "alt": "Salalah International Airport terminal and control tower at dusk",
+   "cap": "Photo: Galfar"
+  },
+  "pj-duqm-port": {
+   "src": "pj-duqm-port.jpg",
+   "alt": "Duqm fishery harbour, breakwater and turquoise water below the cliffs",
+   "cap": "Photo: Galfar"
+  },
+  "pj-hafeet-rail": {
+   "src": "pj-hafeet-rail.jpg",
+   "alt": "Hafeet Rail visual of a freight train",
+   "cap": "Image: Hafeet Rail, as published by Galfar"
+  },
+  "pj-ansab-jifnain": {
+   "src": "pj-ansab-jifnain.jpg",
+   "alt": "Interchange with flyover bridges",
+   "cap": "Photo: Galfar"
+  },
+  "pj-raysut": {
+   "src": "pj-raysut.jpg",
+   "alt": "Excavator digging a trench in rock",
+   "cap": "Photo: Galfar"
+  },
+  "pj-dhahirah-water": {
+   "src": "pj-dhahirah-water.jpg",
+   "alt": "Water reservoir tank on a hillside",
+   "cap": "Photo: Galfar"
+  },
+  "pj-oxy": {
+   "src": "pj-oxy.jpg",
+   "alt": "Construction site with cranes and steelwork in the desert",
+   "cap": "Photo: Galfar"
+  },
+  "pj-grand-blue": {
+   "src": "pj-grand-blue.jpg",
+   "alt": "Concrete armour units along a breakwater",
+   "cap": "Photo: Galfar"
+  },
+  "en-refinery": {
+   "src": "en-refinery.jpg",
+   "alt": "Refinery columns and steel structures against a blue sky",
+   "cap": "Photo: Galfar"
+  },
+  "en-window": {
+   "src": "en-window.jpg",
+   "alt": "Process plant seen through a site office window",
+   "cap": "Photo: Galfar"
+  },
+  "en-cranes": {
+   "src": "en-cranes.jpg",
+   "alt": "Plant construction site with cranes in the desert",
+   "cap": "Photo: Galfar"
+  },
+  "en-piperack": {
+   "src": "en-piperack.jpg",
+   "alt": "Pipe rack and storage tank at an industrial facility",
+   "cap": "Photo: Galfar"
+  },
+  "en-plant": {
+   "src": "en-plant.jpg",
+   "alt": "Steel process structure under construction",
+   "cap": "Photo: Galfar"
+  },
+  "en-night": {
+   "src": "en-night.jpg",
+   "alt": "Process plant lit at night",
+   "cap": "Photo: Galfar"
+  },
+  "en-substation": {
+   "src": "en-substation.jpg",
+   "alt": "Power substation silhouetted at sunset",
+   "cap": "Photo: Galfar"
+  },
+  "en-coast": {
+   "src": "en-coast.jpg",
+   "alt": "Industrial plant lit at dusk beside the mountains",
+   "cap": "Photo: Galfar"
+  },
+  "en-tall": {
+   "src": "en-tall.jpg",
+   "alt": "Flare stack and plant lights at dusk",
+   "cap": "Photo: Galfar"
+  },
+  "en-pipework": {
+   "src": "en-pipework.jpg",
+   "alt": "Insulated pipework and steel structure at a plant",
+   "cap": "Photo: Galfar"
+  },
+  "en-pipeline": {
+   "src": "en-pipeline.jpg",
+   "alt": "Workers wrapping a pipeline joint",
+   "cap": "Photo: Galfar"
+  },
+  "en-welder": {
+   "src": "en-welder.jpg",
+   "alt": "Welder inside a large pipe",
+   "cap": "Photo: Galfar"
+  },
+  "in-coast-road": {
+   "src": "in-coast-road.jpg",
+   "alt": "Aerial view of a new road climbing the coastal cliffs above a blue sea",
+   "cap": "Photo: Galfar"
+  },
+  "in-beach": {
+   "src": "in-beach.jpg",
+   "alt": "Rollers and graders building a road along the shore",
+   "cap": "Photo: Galfar"
+  },
+  "in-breaker": {
+   "src": "in-breaker.jpg",
+   "alt": "Excavator breaking rock with the sea behind",
+   "cap": "Photo: Galfar"
+  },
+  "in-cut": {
+   "src": "in-cut.jpg",
+   "alt": "Excavators cutting a road through layered cliffs",
+   "cap": "Photo: Galfar"
+  },
+  "in-earth": {
+   "src": "in-earth.jpg",
+   "alt": "Earthworks terraces across a wide valley",
+   "cap": "Photo: Galfar"
+  },
+  "in-cliff": {
+   "src": "in-cliff.jpg",
+   "alt": "Road ledge cut into a cliff above the coast",
+   "cap": "Photo: Galfar"
+  },
+  "in-crusher": {
+   "src": "in-crusher.jpg",
+   "alt": "Excavator feeding a mobile crusher",
+   "cap": "Photo: Galfar"
+  },
+  "in-night-bends": {
+   "src": "in-night-bends.jpg",
+   "alt": "Hairpin bends glowing with traffic at night",
+   "cap": "Photo: Galfar"
+  },
+  "in-night-road": {
+   "src": "in-night-road.jpg",
+   "alt": "Mountain road at dusk with light trails",
+   "cap": "Photo: Galfar"
+  },
+  "in-interchange": {
+   "src": "in-interchange.jpg",
+   "alt": "Interchange under construction in the mountains",
+   "cap": "Photo: Galfar"
+  },
+  "in-grader": {
+   "src": "in-grader.jpg",
+   "alt": "Motor grader levelling a road base",
+   "cap": "Photo: Galfar"
+  },
+  "in-highway": {
+   "src": "in-highway.jpg",
+   "alt": "Empty new highway with lamp posts at sunrise",
+   "cap": "Photo: Galfar"
+  },
+  "in-bridge": {
+   "src": "in-bridge.jpg",
+   "alt": "Underside of a highway bridge",
+   "cap": "Photo: Galfar"
+  },
+  "in-bridge-2": {
+   "src": "in-bridge-2.jpg",
+   "alt": "Bridge parapet and road against the mountains",
+   "cap": "Photo: Galfar"
+  },
+  "in-port-works": {
+   "src": "in-port-works.jpg",
+   "alt": "Port reclamation works beside the sea",
+   "cap": "Photo: Galfar"
+  },
+  "in-road-works": {
+   "src": "in-road-works.jpg",
+   "alt": "New road and earthworks beside the sea",
+   "cap": "Photo: Galfar"
+  },
+  "in-breakwater": {
+   "src": "in-breakwater.jpg",
+   "alt": "Breakwater of rock and concrete armour units",
+   "cap": "Photo: Galfar"
+  },
+  "in-breakwater-2": {
+   "src": "in-breakwater-2.jpg",
+   "alt": "Breakwater road running out to sea",
+   "cap": "Photo: Galfar"
+  },
+  "in-dhow": {
+   "src": "in-dhow.jpg",
+   "alt": "Dhow passing marine construction cranes",
+   "cap": "Photo: Galfar"
+  },
+  "in-port-crane": {
+   "src": "in-port-crane.jpg",
+   "alt": "Crane on a new quay",
+   "cap": "Photo: Galfar"
+  },
+  "in-marine": {
+   "src": "in-marine.jpg",
+   "alt": "Marine cranes placing rock at sea",
+   "cap": "Photo: Galfar"
+  },
+  "in-excavators": {
+   "src": "in-excavators.jpg",
+   "alt": "Excavators on site",
+   "cap": "Photo: Galfar"
+  },
+  "in-aerial": {
+   "src": "in-aerial.jpg",
+   "alt": "Aerial view of a road interchange in the desert",
+   "cap": "Photo: Galfar"
+  },
+  "in-muscat-gate": {
+   "src": "in-muscat-gate.jpg",
+   "alt": "Road through Muscat Gate",
+   "cap": "Photo: Galfar"
+  },
+  "cv-glass": {
+   "src": "cv-glass.jpg",
+   "alt": "Glass and stone office building at dusk",
+   "cap": "Photo: Galfar"
+  },
+  "cv-palace": {
+   "src": "cv-palace.jpg",
+   "alt": "Domed civic building below the mountains",
+   "cap": "Photo: Galfar"
+  },
+  "cv-site": {
+   "src": "cv-site.jpg",
+   "alt": "Tower cranes over a large basement excavation",
+   "cap": "Photo: Galfar"
+  },
+  "cv-pic01": {
+   "src": "cv-pic01.jpg",
+   "alt": "Modern building entrance with red sculpture",
+   "cap": "Photo: Galfar"
+  },
+  "cv-pic02": {
+   "src": "cv-pic02.jpg",
+   "alt": "Hotel building framed by palm trees",
+   "cap": "Photo: Galfar"
+  },
+  "cv-pic04": {
+   "src": "cv-pic04.jpg",
+   "alt": "Hotel facade lit at dusk",
+   "cap": "Photo: Galfar"
+  },
+  "cv-pic05": {
+   "src": "cv-pic05.jpg",
+   "alt": "Domed building with arched windows at dusk",
+   "cap": "Photo: Galfar"
+  },
+  "cv-pic06": {
+   "src": "cv-pic06.jpg",
+   "alt": "Large building under construction with tower cranes",
+   "cap": "Photo: Galfar"
+  },
+  "cv-pic07": {
+   "src": "cv-pic07.jpg",
+   "alt": "Aerial view of a terminal building and landscaped grounds",
+   "cap": "Photo: Galfar"
+  },
+  "cv-mosque": {
+   "src": "cv-mosque.jpg",
+   "alt": "White mosque and civic building",
+   "cap": "Photo: Galfar"
+  },
+  "cv-minaret": {
+   "src": "cv-minaret.jpg",
+   "alt": "Minaret against the evening sky",
+   "cap": "Photo: Galfar"
+  },
+  "cv-interior": {
+   "src": "cv-interior.jpg",
+   "alt": "Stone columns beside an indoor pool",
+   "cap": "Photo: Galfar"
+  },
+  "cv-3d": {
+   "src": "cv-3d.jpg",
+   "alt": "3D printed building with a patterned screen",
+   "cap": "Photo: Galfar"
+  },
+  "cv-arch": {
+   "src": "cv-arch.jpg",
+   "alt": "Arched entrance of a hotel building",
+   "cap": "Photo: Galfar"
+  },
+  "pp-team": {
+   "src": "pp-team.jpg",
+   "alt": "Galfar engineers in hard hats reading drawings on site",
+   "cap": "Photo: Galfar"
+  },
+  "pp-engineers": {
+   "src": "pp-engineers.jpg",
+   "alt": "Two site engineers with drawings, one pointing",
+   "cap": "Photo: Galfar"
+  },
+  "pp-walk": {
+   "src": "pp-walk.jpg",
+   "alt": "Galfar team walking on site",
+   "cap": "Photo: Galfar"
+  },
+  "pp-portrait": {
+   "src": "pp-portrait.jpg",
+   "alt": "Smiling Galfar site engineer in a hard hat and vest",
+   "cap": "Photo: Galfar"
+  },
+  "pp-office": {
+   "src": "pp-office.jpg",
+   "alt": "Colleagues working at a desk in the head office",
+   "cap": "Photo: Galfar"
+  },
+  "pp-design": {
+   "src": "pp-design.jpg",
+   "alt": "Design team at their screens",
+   "cap": "Photo: Galfar"
+  },
+  "pp-cad": {
+   "src": "pp-cad.jpg",
+   "alt": "Engineer working on drawings in the design office",
+   "cap": "Photo: Galfar"
+  },
+  "qh-sparks": {
+   "src": "qh-sparks.jpg",
+   "alt": "Worker grinding steel in full protective gear, sparks flying",
+   "cap": "Photo: Galfar"
+  },
+  "qh-welders": {
+   "src": "qh-welders.jpg",
+   "alt": "Welders at work in a fabrication shop",
+   "cap": "Photo: Galfar"
+  },
+  "qh-welder": {
+   "src": "qh-welder.jpg",
+   "alt": "Welder behind a protective mask",
+   "cap": "Photo: Galfar"
+  },
+  "ps-khazain": {
+   "src": "ps-khazain.jpg",
+   "alt": "Aerial view of the Galfar integrated facilities yard",
+   "cap": "Photo: Galfar"
+  },
+  "ps-fleet": {
+   "src": "ps-fleet.jpg",
+   "alt": "Row of Galfar mobile cranes in the plant yard",
+   "cap": "Photo: Galfar"
+  },
+  "ps-workshop": {
+   "src": "ps-workshop.jpg",
+   "alt": "Technician operating a drilling machine in the workshop",
+   "cap": "Photo: Galfar"
+  },
+  "hi-early": {
+   "src": "hi-early.jpg",
+   "alt": "Archive photo of early Galfar construction work",
+   "cap": "Photo: Galfar"
+  },
+  "hi-award": {
+   "src": "hi-award.jpg",
+   "alt": "Archive photo of an award presentation",
+   "cap": "Photo: Galfar"
+  },
+  "hi-stage": {
+   "src": "hi-stage.jpg",
+   "alt": "Galfar team receiving an award on stage",
+   "cap": "Photo: Galfar"
+  },
+  "hi-hq": {
+   "src": "hi-hq.jpg",
+   "alt": "Galfar head office building with the red Galfar sign",
+   "cap": "Photo: Galfar"
+  },
+  "ev-expo": {
+   "src": "ev-expo.jpg",
+   "alt": "Galfar team at an exhibition stand",
+   "cap": "Photo: Galfar"
+  },
+  "cs-iftar": {
+   "src": "cs-iftar.jpg",
+   "alt": "Volunteers packing Iftar food boxes",
+   "cap": "Photo: Galfar"
+  },
+  "cs-blood": {
+   "src": "cs-blood.jpg",
+   "alt": "Employee donating blood",
+   "cap": "Photo: Galfar"
+  },
+  "cs-carnival": {
+   "src": "cs-carnival.jpg",
+   "alt": "Children at the Musandam carnival",
+   "cap": "Photo: Galfar"
+  },
+  "cs-tree": {
+   "src": "cs-tree.jpg",
+   "alt": "Volunteers planting an olive tree",
+   "cap": "Photo: Galfar"
+  },
+  "cs-olive": {
+   "src": "cs-olive.jpg",
+   "alt": "Young olive tree",
+   "cap": "Photo: Galfar"
+  },
+  "cs-group": {
+   "src": "cs-group.jpg",
+   "alt": "Community campaign group photo",
+   "cap": "Photo: Galfar"
+  },
+  "cs-tug": {
+   "src": "cs-tug.jpg",
+   "alt": "Employees in a tug of war on the beach",
+   "cap": "Photo: Galfar"
+  },
+  "ic-group": {
+   "src": "ic-group.jpg",
+   "alt": "Omani graduates at a training ceremony",
+   "cap": "Photo: Galfar"
+  },
+  "ic-work": {
+   "src": "ic-work.jpg",
+   "alt": "Omani employee at her workstation",
+   "cap": "Photo: Galfar"
+  },
+  "pb-ar2025": {
+   "src": "pb-ar2025.jpg",
+   "alt": "Cover of the Galfar Annual Report 2025",
+   "cap": "Photo: Galfar"
+  },
+  "pb-esg2025": {
+   "src": "pb-esg2025.jpg",
+   "alt": "Cover of the Galfar sustainability report 2025",
+   "cap": "Photo: Galfar"
+  },
+  "pb-ar2022": {
+   "src": "pb-ar2022.jpg",
+   "alt": "Cover of the Galfar Annual Report 2022",
+   "cap": "Photo: Galfar"
+  },
+  "pb-water": {
+   "src": "pb-water.jpg",
+   "alt": "Cover of Flowing Lifelines",
+   "cap": "Photo: Galfar"
+  },
+  "logo": {
+   "src": "logo.png",
+   "alt": "Galfar logo",
+   "cap": ""
+  }
+ },
+ "ticker": {
+  "label": "Latest",
+  "items": [
+   {
+    "tag": "Contract",
+    "text": "RO 117 million water networks for Ibri, Yanqul and Dank",
+    "href": "news-galfar-secures-ro117mn-contract-from-nama-water-services.html"
+   },
+   {
+    "tag": "Rail",
+    "text": "Joint venture wins RO 521 million Abu Dhabi–Suhar railway contract",
+    "href": "news-galfar-secures-major-rail-contract-poised-for-infra-diversif.html"
+   },
+   {
+    "tag": "Contract",
+    "text": "Five-year civil works contract from Occidental Oman",
+    "href": "news-galfar-wins-ro18-5mn-contract-from-oxy.html"
+   },
+   {
+    "tag": "Milestone",
+    "text": "Rusayl–Bidbid road expansion open to traffic",
+    "href": "news-rusayl-bidbid-road-expansion-project-opens-for-traffic.html"
+   },
+   {
+    "tag": "Reports",
+    "text": "Annual Report 2025 and ESG Report 2025 published",
+    "href": "svc-investor-relations.html"
+   }
+  ]
+ },
+ "promos": [
+  {
+   "image": "pj-rusayl-bidbid-2",
+   "tag": "Infrastructure",
+   "kicker": "Rusayl–Bidbid",
+   "short": "Roads",
+   "title": "27 km of new lanes, open to traffic",
+   "text": "Third and fourth lanes from the Muscat Expressway to Bidbid, with wider valley bridges and new interchanges.",
+   "cta": {
+    "label": "See the project",
+    "href": "@cat:Rusayl"
+   },
+   "cta2": {
+    "label": "All projects",
+    "href": "projects.html"
+   }
+  },
+  {
+   "image": "en-refinery",
+   "tag": "Energy & Industrial",
+   "kicker": "Yibal Khuff",
+   "short": "Energy",
+   "title": "Our most technically complex project",
+   "text": "A central processing facility for PDO, completed in 2021: separation, processing and sulphur recovery.",
+   "cta": {
+    "label": "Yibal Khuff",
+    "href": "@cat:Yibal"
+   },
+   "cta2": {
+    "label": "Energy & Industrial",
+    "href": "@svc:Energy"
+   }
+  },
+  {
+   "image": "pj-duqm-port",
+   "tag": "Marine",
+   "kicker": "Duqm Fishery Port",
+   "short": "Marine",
+   "title": "Harbours along the whole coast",
+   "text": "Ports, commercial harbours and fishing harbours from Musandam to Dhofar.",
+   "cta": {
+    "label": "Duqm Fishery Port",
+    "href": "@cat:Duqm"
+   },
+   "cta2": {
+    "label": "Infrastructure",
+    "href": "@svc:Infrastructure"
+   }
+  },
+  {
+   "image": "cv-glass",
+   "tag": "Civil & Environmental",
+   "kicker": "Buildings",
+   "short": "Buildings",
+   "title": "Hospitals, hotels and headquarters",
+   "text": "Galfar's first unit builds landmark buildings and the plants that clean Muscat's water.",
+   "cta": {
+    "label": "Civil & Environmental",
+    "href": "@svc:Civil"
+   },
+   "cta2": {
+    "label": "Medical City",
+    "href": "@cat:Medical"
+   }
+  },
+  {
+   "image": "ps-khazain",
+   "tag": "Project Services",
+   "kicker": "4,000+ machines",
+   "short": "Fleet",
+   "title": "Our own fleet, workshops and yards",
+   "text": "A 150,000 m² integrated facility in Khazain and a fabrication facility in Nizwa keep projects moving.",
+   "cta": {
+    "label": "Project Services",
+    "href": "@svc:Project"
+   },
+   "cta2": {
+    "label": "Become a supplier",
+    "href": "@svc:Supply"
+   }
+  }
+ ],
+ "rail": {
+  "title": "What are you looking for?",
+  "items": [
+   {
+    "label": "Projects",
+    "sub": "20 project pages",
+    "icon": "building",
+    "href": "projects.html"
+   },
+   {
+    "label": "Capabilities",
+    "sub": "Three business units",
+    "icon": "layers",
+    "href": "capabilities.html"
+   },
+   {
+    "label": "Investors",
+    "sub": "MSX: GECS",
+    "icon": "chart",
+    "href": "@svc:Investor"
+   },
+   {
+    "label": "Careers",
+    "sub": "16,000+ people",
+    "icon": "star",
+    "href": "@svc:Careers"
+   },
+   {
+    "label": "Suppliers",
+    "sub": "Vendor registration",
+    "icon": "truck",
+    "href": "@svc:Supply"
+   }
+  ]
+ },
+ "home": [
+  "promo",
+  "rail",
+  {
+   "type": "depth",
+   "id": "since-1972",
+   "height": 210,
+   "kicker": "Galfar · Since 1972",
+   "title": "We build the roads Oman drives on",
+   "text": "Over three decades Galfar has built nearly one third of the country's roads, from Musandam in the north to Dhofar in the south.",
+   "cta": {
+    "label": "See the projects",
+    "href": "projects.html"
+   },
+   "cap": "Galfar engineers and a Galfar road on the coast. Photos: Galfar",
+   "layers": [
+    {
+     "image": "in-coast-road",
+     "speed": 0.12,
+     "scale": 0.08,
+     "lean": 6,
+     "position": "center 40%"
+    },
+    {
+     "clouds": true,
+     "speed": 0.3,
+     "y": 30,
+     "tint": "#fff7ee",
+     "count": 6
+    },
+    {
+     "title": true,
+     "speed": 0.55
+    },
+    {
+     "image": "cut:pp-team",
+     "speed": 0.28,
+     "fit": "contain",
+     "bottom": "58%",
+     "position": "center bottom",
+     "lean": 10
+    },
+    {
+     "clouds": true,
+     "front": true,
+     "speed": 0.95,
+     "y": 88,
+     "tint": "#f4efe8",
+     "count": 7
+    }
+   ]
+  },
+  "stats",
+  "catalogue",
+  {
+   "type": "statement",
+   "kicker": "Fifty years of partnership",
+   "text": "From a villa for the Wali of Sur in 1972 to a railway to Abu Dhabi, Galfar has grown with Oman."
+  },
+  {
+   "type": "stages",
+   "id": "rock-to-road",
+   "kicker": "How a Galfar road is built",
+   "title": "From rock to road",
+   "stages": [
+    {
+     "image": "pp-team",
+     "label": "Plan",
+     "title": "Read the ground",
+     "text": "Engineers walk the alignment with the drawings before a machine moves.",
+     "date": "Design"
+    },
+    {
+     "image": "in-breaker",
+     "label": "Break",
+     "title": "Cut through rock",
+     "text": "Excavators and breakers open a path where the mountains had no access.",
+     "date": "Excavation"
+    },
+    {
+     "image": "in-cut",
+     "label": "Shape",
+     "title": "Carve the cliffs",
+     "text": "Galfar's roads include the highest mechanically stabilised walls in Oman.",
+     "date": "Earthworks"
+    },
+    {
+     "image": "in-beach",
+     "label": "Build",
+     "title": "Lay the base",
+     "text": "A fleet of more than 4,000 plant and machines grades, rolls and compacts.",
+     "date": "Pavement"
+    },
+    {
+     "image": "in-coast-road",
+     "label": "Open",
+     "title": "Open the road",
+     "text": "More than 4,000 km of roads so far, from mountain passes to expressways.",
+     "date": "Handover"
+    },
+    {
+     "image": "pj-bousher-amerat-2",
+     "label": "Flow",
+     "title": "Traffic flows",
+     "text": "The Bousher–Amerat road halved the drive from Amerat to Bousher.",
+     "date": "In service"
+    }
+   ]
+  },
+  {
+   "type": "split",
+   "image": "en-refinery",
+   "kicker": "Energy & Industrial",
+   "title": "8,000 km of pipelines and flowlines",
+   "body": [
+    "From wellhead hook-ups to gathering stations, Galfar works for Petroleum Development Oman, OQ, BP, Occidental Oman, Daleel and others. Its Energy & Industrial Unit has executed the largest contract in Oman's history, worth more than USD 2 billion."
+   ],
+   "points": [
+    "Yibal Khuff, completed 2021",
+    "Salalah LPG plant and Duqm Refinery",
+    "Power transmission from 11 kV to 132 kV"
+   ],
+   "cta": {
+    "label": "Energy & Industrial",
+    "href": "@svc:Energy"
+   }
+  },
+  "services",
+  "partners",
+  {
+   "type": "split",
+   "image": "pp-portrait",
+   "kicker": "People",
+   "title": "One of Oman's largest private employers",
+   "body": [
+    "More than 16,000 people work on Galfar projects, around 3,500 to 3,900 of them Omani. Galfar is among the three biggest national employers in the private sector."
+   ],
+   "points": [
+    "85% of 4,000+ shareholders are Omani",
+    "90% of purchases placed in Oman",
+    "Training for Omani nationals"
+   ],
+   "cta": {
+    "label": "Careers",
+    "href": "@svc:Careers"
+   },
+   "flip": true
+  },
+  "news",
+  "locations",
+  "faq"
+ ],
+ "stats": [
+  {
+   "years_since": 1972,
+   "label": "Years building Oman"
+  },
+  {
+   "value": 1000,
+   "suffix": "+",
+   "label": "Projects delivered"
+  },
+  {
+   "value": 4000,
+   "suffix": "+",
+   "label": "Km of roads built"
+  },
+  {
+   "value": 8000,
+   "suffix": "+",
+   "label": "Km of pipelines and flowlines"
+  },
+  {
+   "value": 16000,
+   "suffix": "+",
+   "label": "Workforce"
+  },
+  {
+   "value": 4000,
+   "suffix": "+",
+   "label": "Plant and machines"
+  }
+ ],
+ "about": {
+  "title": "A partner in Oman's renaissance since 1972",
+  "body": [
+   "Galfar Engineering & Contracting SAOG was established in 1972 and has grown into one of the largest publicly listed companies in Oman and one of the largest construction companies in the Middle East.",
+   "Its work runs through three business units: Energy & Industrial, Infrastructure, and Civil & Environmental, supported by units for QHSSE, project services, human capital, finance and IT, supply chain, and strategy and business development."
+  ],
+  "more": [
+   "Galfar has delivered more than 1,000 projects worth over US$10 billion, built over 4,000 km of roads and laid over 8,000 km of pipelines and flowlines. It owns more than 4,000 plant and machines and works with over 1,500 registered local vendors.",
+   "With partners, Galfar has also moved into 3D printing for construction."
+  ],
+  "timeline": [
+   {
+    "year": "1972",
+    "title": "First project",
+    "text": "A villa for the Wali of Sur."
+   },
+   {
+    "year": "1975",
+    "title": "Commercial registration"
+   },
+   {
+    "year": "1977",
+    "title": "First job with PDO"
+   },
+   {
+    "year": "1982",
+    "title": "Excellent grade with the Tender Board"
+   },
+   {
+    "year": "1983",
+    "title": "First PDO civil service contract"
+   },
+   {
+    "year": "1985",
+    "title": "PDO award for 1 million safe man-hours"
+   },
+   {
+    "year": "1990",
+    "title": "Al-Khalij Heavy Equipment & Engineering"
+   },
+   {
+    "year": "1994",
+    "title": "Galfar Emirates established (associate company)"
+   },
+   {
+    "year": "1995",
+    "title": "Galfar Al Misnad Qatar established (associate company)"
+   },
+   {
+    "year": "2007",
+    "title": "Listed as a public joint stock company (SAOG)"
+   },
+   {
+    "year": "2009",
+    "title": "Annual turnover reaches US$1 billion"
+   },
+   {
+    "year": "2010",
+    "title": "26% stake in Shaheen Al Ghanim, Kuwait"
+   },
+   {
+    "year": "2011",
+    "title": "Galfar Aspire Project & Services established"
+   },
+   {
+    "year": "2012",
+    "title": "Galfar Aspire Readymix established"
+   },
+   {
+    "year": "2020",
+    "title": "Turnaround and diversification strategy launched"
+   },
+   {
+    "year": "2021",
+    "title": "Yibal Khuff completed",
+    "text": "Galfar's most technically complex project."
+   }
+  ],
+  "values": [
+   {
+    "title": "Vision",
+    "text": "To be the preferred and trusted partner in development whilst creating value-based sustainable growth for all our stakeholders."
+   },
+   {
+    "title": "Mission",
+    "text": "Achieve world-class performance in project delivery. Innovate in projects and services execution. Maximise client value and satisfaction."
+   },
+   {
+    "title": "Values",
+    "text": "Integrity, respect, quality, safety, simplicity and continuous improvement."
+   }
+  ],
+  "points": [
+   {
+    "title": "Chairman",
+    "text": "Eng. Majid Salim Al Fannah Al Araimi"
+   },
+   {
+    "title": "Vice Chairman",
+    "text": "Eng. Mohiuddin Mohamad Ali"
+   },
+   {
+    "title": "Chief Executive Officer",
+    "text": "Dr. Hamoud Rashid Al Tobi, CEO since 2020"
+   },
+   {
+    "title": "Chief Operating Officer",
+    "text": "Eng. Elyas Rouhban"
+   },
+   {
+    "title": "Chief Finance Officer",
+    "text": "Mr. Mohammed Humaid Al Yahyaei"
+   },
+   {
+    "title": "Chief Human Resources Officer",
+    "text": "Mr. Salim Mohammed Al Harthy"
+   }
+  ]
+ },
+ "services": {
+  "title": "Capabilities",
+  "nav": "Capabilities",
+  "kicker": "Business and support units",
+  "intro": "Three business units deliver the projects. Support units keep people, plant and suppliers moving.",
+  "items": [
+   {
+    "title": "Energy & Industrial",
+    "icon": "factory",
+    "text": "Oil and gas, petrochemical and industrial plants, power generation and grids.",
+    "image": "en-refinery",
+    "detail": {
+     "intro": "This unit covers oil and gas work upstream and downstream, petrochemical, manufacturing and industrial plants, and conventional and green energy projects.",
+     "body": [
+      "With proven upstream service capability in design, civil, mechanical, electrical and instrumentation, the unit has executed the largest contract in the history of Oman, worth more than USD 2 billion.",
+      "It handles service contracts from wellhead hook-up up to delivery into gathering stations for Petroleum Development Oman, OQ, BP, Occidental Oman, Daleel and others. Recent work includes the Salalah LPG plant, Duqm Refinery and the Yibal Khuff separation, processing and sulphur recovery plant.",
+      "The unit has built oil storage tanks, gathering and compressor stations and enhanced oil recovery projects with DCS and SCADA controls, blast-proof buildings, and power transmission systems from 11 kV to 132 kV. Its team numbers more than 6,000. It was once honoured with the British Safety Council's Sword of Honour."
+     ],
+     "points": [
+      "Upstream and downstream oil and gas",
+      "Petrochemical and industrial plants",
+      "Flowlines, pipelines and well hook-ups",
+      "Storage tanks, gathering and compressor stations",
+      "Power transmission 11 kV to 132 kV",
+      "Conventional and green energy"
+     ],
+     "points_title": "Capabilities",
+     "facts": [
+      {
+       "label": "Completed projects",
+       "value": "400+"
+      },
+      {
+       "label": "Ongoing projects",
+       "value": "6"
+      },
+      {
+       "label": "Value delivered",
+       "value": "OMR 2.8 billion"
+      },
+      {
+       "label": "Pipelines and flowlines",
+       "value": "8,000+ km"
+      }
+     ],
+     "src": "https://galfar.com/oman/galfar/energy-industrial/"
+    }
+   },
+   {
+    "title": "Infrastructure",
+    "icon": "truck",
+    "text": "Roads, bridges, airports, seaports, dams, rail and water networks.",
+    "image": "in-coast-road",
+    "detail": {
+     "intro": "Roads and bridges, airports and seaports, flood protection and recharge dams, railways, water and wastewater networks, and large earthmoving projects, as EPC or construction contracts.",
+     "body": [
+      "Over the last three decades Galfar has built nearly one third of Oman's roads, including the Muscat Expressway, Batinah Expressway packages 1 and 3, the Jebel Al Akhdar road to Saiq, the Bousher–Amerat road and the Hasik–Shuwaymiyah road. These include the highest mechanically stabilised walls and the longest underpass tunnels in Oman.",
+      "With its fleet of heavy earthmoving equipment, the unit has handled excavation, backfill and reclamation, such as backfilling for Muscat International Airport and ground levelling for the refinery complex in Duqm. It executed the airside works at Salalah International Airport as a joint venture partner, built airports for PDO, airside facilities at Ras Al Hadd and rehabilitated the old Muscat International Airport.",
+      "The unit builds ports and fishing harbours, dams and recharge structures, and water transmission networks, and maintains about 75% of the existing water transmission and distribution network for Oman's water authorities. It has more than 7,000 employees, over 1,100 of them in specialised roles held by Omani nationals."
+     ],
+     "points": [
+      "Roads, bridges and tunnels",
+      "Airports and seaports",
+      "Dams and flood protection",
+      "Railways",
+      "Water transmission and distribution",
+      "Operation and maintenance of water networks"
+     ],
+     "points_title": "Capabilities",
+     "facts": [
+      {
+       "label": "Completed projects",
+       "value": "270+"
+      },
+      {
+       "label": "Ongoing projects",
+       "value": "17"
+      },
+      {
+       "label": "Value delivered",
+       "value": "OMR 1.5 billion"
+      },
+      {
+       "label": "Roads built",
+       "value": "4,000+ km"
+      }
+     ],
+     "src": "https://galfar.com/oman/galfar/infrastructure/"
+    }
+   },
+   {
+    "title": "Civil & Environmental",
+    "icon": "building",
+    "text": "Landmark buildings, MEP, wastewater plants and networks, operation and maintenance.",
+    "image": "cv-glass",
+    "detail": {
+     "intro": "Galfar's first operating unit builds landmark buildings and MEP services, wastewater treatment plants and networks, and operates and maintains them.",
+     "body": [
+      "Over the years the unit has built palaces, commercial buildings, housing, schools, hospitals, monuments, religious buildings, stadiums, showrooms and residences, large civil works for industrial plants, and several turnkey hotels across Oman.",
+      "Early hospitals at Ibri, Nizwa and Sur led to larger projects such as the Salalah Extended Health Centre, the National Heart Centre at the Royal Hospital, an Accident, Emergency and Burns unit and the Salalah Cardiac Centre, followed by operation and maintenance of these facilities. The unit has also built guest complexes, offices, border posts and utility buildings for the Royal Court Affairs and other authorities.",
+      "In the environment sector it completed Oman's first membrane bioreactor plant at Al Ansab, the region's largest vacuum sewer network at Seeb, several sewage treatment plants, collection networks and reverse osmosis plants."
+     ],
+     "points": [
+      "Hotels, hospitals and airport terminals",
+      "MEP services",
+      "Sewage treatment plants and networks",
+      "Reverse osmosis plants",
+      "Operation and maintenance of buildings and networks"
+     ],
+     "points_title": "Sectors",
+     "facts": [
+      {
+       "label": "Completed projects",
+       "value": "450+"
+      },
+      {
+       "label": "Ongoing projects",
+       "value": "6"
+      },
+      {
+       "label": "Value delivered",
+       "value": "OMR 1.6 billion"
+      }
+     ],
+     "src": "https://galfar.com/oman/galfar/civil-environmental/"
+    }
+   },
+   {
+    "title": "QHSSE",
+    "icon": "shield",
+    "text": "Quality, health, safety, security and environment, certified to ISO standards.",
+    "image": "qh-sparks",
+    "detail": {
+     "intro": "HSE is a top priority at Galfar: the health and safety of employees and stakeholders, and the protection of the environment.",
+     "body": [
+      "Quality, health, safety, security and environment combine into one management approach that reduces process errors, rework, workplace accidents, occupational illness and environmental impact, and protects project assets.",
+      "The QHSSE Systems Unit works with every other unit through risk assessments, corporate QHSSE plans, management system audits, staff competence development, compliance monitoring and management reviews. It runs lean management initiatives, flawless project delivery plans, task workshops and training, campaigns, observation reporting, inspections and incident investigations."
+     ],
+     "points": [
+      "ISO 9001",
+      "ISO/TS 29001",
+      "ISO 14001",
+      "ISO 45001"
+     ],
+     "points_title": "Certified management systems",
+     "src": "https://galfar.com/oman/galfar/qhsse/"
+    }
+   },
+   {
+    "title": "Project Services",
+    "icon": "layers",
+    "text": "Fleet, workshops, fabrication, engineering and design for every project.",
+    "image": "ps-khazain",
+    "detail": {
+     "intro": "The Project Services Unit gives Galfar central support: commercial and contract management, fleet and workforce planning, engineering and design, plant and fabrication workshops, and asset use.",
+     "body": [
+      "Galfar runs one of the largest repair and maintenance workshop networks in Oman. Its service workshops include the Nizwa Industrial Facility, a carpentry workshop, a waterproofing and coating complex, and scaffolding and formwork installations, placed across Oman to support projects.",
+      "The Nizwa Industrial Facility, established in 2006, serves in-house and third-party clients with structural fabrication, CS/LTCS and SS/DSS/SDSS/alloy piping fabrication, plate rolling, and blasting, coating and painting."
+     ],
+     "points": [
+      "Structural fabrication shop",
+      "CS/LTCS piping fabrication",
+      "SS/DSS/SDSS/alloy piping fabrication",
+      "Plate rolling",
+      "Blasting, coating and painting"
+     ],
+     "points_title": "Nizwa Industrial Facility",
+     "facts": [
+      {
+       "label": "Khazain facilities area",
+       "value": "150,000 m²"
+      },
+      {
+       "label": "Fleet holding",
+       "value": "4,800"
+      },
+      {
+       "label": "Machines repaired a year",
+       "value": "≈1,200"
+      },
+      {
+       "label": "Accommodation",
+       "value": "250+ staff and workers"
+      }
+     ],
+     "src": "https://galfar.com/oman/galfar/project-services/"
+    }
+   },
+   {
+    "title": "Careers & Human Capital",
+    "icon": "star",
+    "text": "A 16,000-strong, multinational team and a leader in Omanisation.",
+    "image": "pp-engineers",
+    "detail": {
+     "intro": "Galfar is a multidisciplinary, multinational team and one of the largest employers in the region.",
+     "body": [
+      "With a workforce of more than 16,000, around 3,500 of them Omani nationals, Galfar works to provide an environment that encourages excellence.",
+      "Its Omanisation programme is one of its proudest achievements: Galfar leads in providing job opportunities to nationals and in training and employing them.",
+      "Human Capital attracts, develops and keeps talent, and looks for lateral thinkers with a strong teamwork ethic. Open roles are listed on Galfar's careers portal."
+     ],
+     "points": [
+      "Apply on galfar.zohorecruit.com",
+      "Training for Omani nationals",
+      "Site, office and workshop roles"
+     ],
+     "points_title": "Join the team",
+     "facts": [
+      {
+       "label": "Workforce",
+       "value": "16,000+"
+      },
+      {
+       "label": "Omani employees",
+       "value": "≈3,500 to 3,900"
+      }
+     ],
+     "src": "https://galfar.com/oman/galfar/human-capital/"
+    }
+   },
+   {
+    "title": "In-Country Value",
+    "icon": "pin",
+    "text": "Omani shareholders, Omani staff and a local supply chain.",
+    "image": "ic-group",
+    "detail": {
+     "intro": "In-country value is a main goal for Galfar: growing local content through local procurement and developing its workforce.",
+     "body": [
+      "Galfar has been listed on the Muscat Stock Exchange since 2007 and has more than 4,000 shareholders. About 85% of them, individuals and institutions such as local companies and pension funds, are Omani.",
+      "Galfar is among the three biggest national employers in Oman's private sector, with about 3,900 Omanis, and places 90% of its purchases in the local market."
+     ],
+     "points": [
+      "Omanisation and training",
+      "Social investment",
+      "Local contractor and SME development",
+      "Local goods and services"
+     ],
+     "points_title": "ICV pillars",
+     "facts": [
+      {
+       "label": "Shareholders",
+       "value": "4,000+ (85% Omani)"
+      },
+      {
+       "label": "Omani employees",
+       "value": "≈3,900"
+      }
+     ],
+     "src": "https://galfar.com/oman/galfar/in-country-value/"
+    }
+   },
+   {
+    "title": "Supply Chain & Vendors",
+    "icon": "truck",
+    "text": "Register as a supplier and join 1,500 local vendors.",
+    "image": "ps-fleet",
+    "detail": {
+     "intro": "The Supply Chain Management Unit handles orders from vendors and runs vendor registration.",
+     "body": [
+      "Galfar wants reliable, quality-conscious vendors who supply goods and services in the required quality and quantity and keep their delivery promises, so they can take part in its tenders.",
+      "Vendors register through Galfar's Supply Chain Portal at gecs.galfar.com."
+     ],
+     "points": [
+      "97% local purchase (NRS) of total purchase order value",
+      "45% Made in Oman (excluding plant orders)",
+      "7% SMEs of total purchase order value"
+     ],
+     "points_title": "Published figures",
+     "facts": [
+      {
+       "label": "Registered vendors",
+       "value": "1,500+"
+      }
+     ],
+     "src": "https://galfar.com/oman/galfar/supply-chain-management/"
+    }
+   },
+   {
+    "title": "Social Responsibility",
+    "icon": "heart",
+    "text": "Iftar campaigns, blood drives, olive trees and community events.",
+    "image": "cs-tree",
+    "detail": {
+     "intro": "Galfar's CSR work rests on three pillars: social and community development, youth development and women's empowerment, and environmental preservation.",
+     "body": [
+      "Iftar campaigns distribute food packs to communities in the governorates where Galfar projects run. Blood donation campaigns support community health. Galfar's sponsorship of the Musandam carnival supported SMEs and local tourism in the governorate.",
+      "Galfar sponsors educational workshops and mentorship for young professionals and women, and supports environmental work such as planting olive trees and clean-up campaigns."
+     ],
+     "points": [
+      "Iftar campaigns",
+      "Blood donation campaigns",
+      "Musandam carnival",
+      "Olive tree planting"
+     ],
+     "points_title": "Initiatives",
+     "src": "https://galfar.com/oman/galfar/corporate-social-responsibility/"
+    }
+   },
+   {
+    "title": "Investor Relations",
+    "icon": "chart",
+    "text": "Listed on the Muscat Stock Exchange since 2007. Annual and ESG reports.",
+    "image": "pb-ar2025",
+    "detail": {
+     "intro": "Galfar Engineering & Contracting SAOG has been a public joint stock company on the Muscat Stock Exchange since 2007 (ticker GECS).",
+     "body": [
+      "Annual reports for 2021 to 2025 and ESG reports for 2024 and 2025 are published on galfar.com. Financial performance is shown on the MSX snapshot page.",
+      "For 2023 Galfar reported parent company revenue of RO 238.565 million (RO 166.120 million in 2022) and group revenue of RO 250.009 million. On 30 June 2024 its order book stood at RO 816 million, against RO 644 million a year earlier."
+     ],
+     "points": [
+      "Annual Reports 2021 to 2025",
+      "ESG reports 2024 and 2025",
+      "Zero-Carbon Emissions Glossary (Sept 2023)",
+      "Flowing Lifelines (Feb 2024)",
+      "Smart Cities Glossary (Sept 2024)"
+     ],
+     "points_title": "Publications",
+     "facts": [
+      {
+       "label": "Listed",
+       "value": "MSX, 2007"
+      },
+      {
+       "label": "Shareholders",
+       "value": "4,000+"
+      },
+      {
+       "label": "Order book (30 Jun 2024)",
+       "value": "RO 816 million"
+      }
+     ],
+     "src": "https://galfar.com/oman/galfar/contact-classic/"
+    }
+   }
+  ]
+ },
+ "catalogue": {
+  "title": "Projects",
+  "nav": "Projects",
+  "kicker": "Portfolio",
+  "home_title": "Projects that shaped Oman",
+  "all_label": "All projects",
+  "intro": "Roads, plants, hospitals, harbours and water networks, from Galfar's iconic projects and recent awards.",
+  "categories": [
+   "Roads & bridges",
+   "Oil & gas",
+   "Buildings",
+   "Water & environment",
+   "Airports & ports",
+   "Rail"
+  ],
+  "compare": false,
+  "cta": "Ask about this project",
+  "specs_title": "Key facts",
+  "note": "Project facts as published on galfar.com (read 12 Oct 2026). Values are contract values at award.",
+  "items": [
+   {
+    "title": "Yibal Khuff",
+    "category": "Oil & gas",
+    "text": "A new central processing facility in the Yibal Khuff area for Petroleum Development Oman.",
+    "body": [
+     "Construction of a new Central Processing Facility in the Yibal Khuff area, covering civil, mechanical, electrical and instrumentation works.",
+     "Galfar describes Yibal Khuff, completed in 2021, as its most technically complex project. The plant handles oil and gas separation and processing, and sulphur recovery."
+    ],
+    "image": "pj-yibal-khuff",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Energy & Industrial"
+     },
+     {
+      "label": "Client",
+      "value": "Petroleum Development Oman"
+     },
+     {
+      "label": "Type",
+      "value": "Mega sour hydrocarbon processing facility"
+     },
+     {
+      "label": "Scope",
+      "value": "Civil, mechanical, electrical & instrumentation"
+     },
+     {
+      "label": "Status",
+      "value": "Completed 2021"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/energy-industrial/",
+    "gallery": [
+     "pj-yibal-khuff-2"
+    ],
+    "featured": true,
+    "badge": "Most complex"
+   },
+   {
+    "title": "EPC Harweel Cluster",
+    "category": "Oil & gas",
+    "text": "Engineering, procurement, construction and commissioning of the Phase 2 facilities.",
+    "body": [
+     "The project covers the engineering, procurement, construction and commissioning of Phase 2 facilities: oil and gas separators, booster compressor, condensate stabiliser unit, gas sweetening unit, dehydration units, injection compressor and gas conditioning unit.",
+     "It also includes export oil storage and pumping, pipelines, trunk lines and flow lines, manifold stations and well hook-ups, and the electrical infrastructure."
+    ],
+    "image": "pj-harweel",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Energy & Industrial"
+     },
+     {
+      "label": "Client",
+      "value": "Petroleum Development Oman"
+     },
+     {
+      "label": "Type",
+      "value": "Mega sour hydrocarbon processing facility"
+     },
+     {
+      "label": "Contract",
+      "value": "EPC and commissioning"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/energy-industrial/",
+    "featured": true
+   },
+   {
+    "title": "Gas Gathering System, Block 61 Khazzan",
+    "category": "Oil & gas",
+    "text": "About 192 km of duplex stainless steel underground gas pipeline in 30 lines.",
+    "body": [
+     "Construction and installation of the Gas Gathering System (I and II): approximately 192 km of DSS underground gas pipeline for Block 61 Khazzan, a total of 30 lines including main headers and sub-headers.",
+     "Above-ground installation work included 3.3 kV power cables laid along the pipeline in a separate 200 km trench, communication backbone nodes and metal-clad distribution substations."
+    ],
+    "image": "pj-khazzan",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Energy & Industrial"
+     },
+     {
+      "label": "Client",
+      "value": "Petroleum Development Oman"
+     },
+     {
+      "label": "Pipeline",
+      "value": "≈192 km DSS, 30 lines"
+     },
+     {
+      "label": "Power cables",
+      "value": "3.3 kV, 200 km trench"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/energy-industrial/"
+   },
+   {
+    "title": "Qarn Alam Off-Plot Mechanical Contract",
+    "category": "Oil & gas",
+    "text": "Flow lines, pipelines, well hook-ups and manifolds for PDO at Qarn Alam.",
+    "body": [
+     "The contract provides engineering, sourcing and logistics, construction, pre-commissioning and commissioning, commissioning assistance and management services.",
+     "Mechanical scope covers flow line and pipeline design and construction (new and replacement), well hook-up design and construction, HPG well hook-ups and flow lines, hoist preparation (un-hook and re-hook) for oil and gas, and MSV and manifold design and construction.",
+     "In February 2024 Galfar announced a five-year contract of about RO 100 million for project delivery services on PDO's Qarn Alam project."
+    ],
+    "image": "pj-qarn-alam",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Energy & Industrial"
+     },
+     {
+      "label": "Client",
+      "value": "Petroleum Development Oman"
+     },
+     {
+      "label": "Value",
+      "value": "≈RO 100 million (5 years, awarded Jan 2024)"
+     },
+     {
+      "label": "Scope",
+      "value": "Engineering, construction, commissioning"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/energy-industrial/",
+    "gallery": [
+     "pj-qarn-alam-2"
+    ]
+   },
+   {
+    "title": "Oxy Blocks 53 & 72 civil works",
+    "category": "Oil & gas",
+    "text": "A five-year call-off contract for civil works services for Occidental Oman.",
+    "body": [
+     "Occidental Oman awarded Galfar the service contract for civil works services for Blocks 53 and 72. The contract was accepted by both parties on 25 July 2024.",
+     "Galfar estimates the call-off value at about RO 18.5 million over five years from 1 October 2024, with a two-year extension option worth an estimated RO 6.5 million more."
+    ],
+    "image": "pj-oxy",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Energy & Industrial"
+     },
+     {
+      "label": "Client",
+      "value": "Occidental Oman"
+     },
+     {
+      "label": "Value",
+      "value": "≈RO 18.5 million (estimate)"
+     },
+     {
+      "label": "Duration",
+      "value": "5 years from 1 Oct 2024 (+2 optional)"
+     },
+     {
+      "label": "Status",
+      "value": "Awarded 2024"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/2024/08/13/galfar-wins-ro18-5mn-contract-from-oxy/"
+   },
+   {
+    "title": "Muscat Expressway",
+    "category": "Roads & bridges",
+    "text": "A 54 km three-lane expressway from Qurm to Al Naseem.",
+    "body": [
+     "Muscat Expressway (54 km) starts from Qurm in Muscat and passes through Madinat Qaboos, Al Khuwair, Boushar, Al Ansab, Ghala, Airport Heights, Seeb, Al Khoud, Mabela, Rusayl and Halban towards Al Naseem, where it links with the Batinah Expressway."
+    ],
+    "image": "pj-muscat-expressway",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Infrastructure"
+     },
+     {
+      "label": "Client",
+      "value": "Muscat Municipality"
+     },
+     {
+      "label": "Length",
+      "value": "54 km"
+     },
+     {
+      "label": "Type",
+      "value": "Three-lane expressway"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/infrastructure/",
+    "featured": true
+   },
+   {
+    "title": "Rusayl–Bidbid Road Expansion",
+    "category": "Roads & bridges",
+    "text": "Third and fourth lanes over 27 km, opened to traffic in March 2024.",
+    "body": [
+     "The project adds third and fourth lanes over 27 km, from the Rusayl–Nizwa Interchange on the Muscat Expressway to the Al Sharqiya Expressway Interchange in Bidbid.",
+     "It includes service roads, pedestrian crossings, wider valley bridges such as the Wadi Al Jifnain and Wadi Fanja bridges, two new intersections on the Ghala and Al Sih Al Ahmar roads, wider Fanja and Bidbid interchanges, a new bridge in the Wadi Al Dabun area and box culverts for rainwater.",
+     "The Ministry of Transport, Communications and Information Technology opened the road in March 2024."
+    ],
+    "image": "pj-rusayl-bidbid",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Infrastructure"
+     },
+     {
+      "label": "Client",
+      "value": "Ministry of Transport, Communications and IT"
+     },
+     {
+      "label": "Length",
+      "value": "27 km"
+     },
+     {
+      "label": "Type",
+      "value": "Four-lane expressway"
+     },
+     {
+      "label": "Status",
+      "value": "Opened March 2024"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/infrastructure/",
+    "gallery": [
+     "pj-rusayl-bidbid-2",
+     "pj-rusayl-bidbid-3",
+     "pj-rusayl-bidbid-4",
+     "pj-rusayl-bidbid-5",
+     "pj-rusayl-bidbid-6"
+    ],
+    "featured": true,
+    "badge": "Opened 2024"
+   },
+   {
+    "title": "Bousher–Amerat Road",
+    "category": "Roads & bridges",
+    "text": "A 14.5 km mountain road that halved the drive from Amerat to Bousher.",
+    "body": [
+     "Design and construction of the Bousher–Al Amerat road: 14.5 km of mountainous road, a two-lane dual carriageway between Al Amerat and Bousher.",
+     "The road starts at Muscat Expressway Interchange No. 5 in Bousher and ends at Al Mahaj roundabout in Al Amerat. It cut the distance from Amerat to Bousher by half and considerably reduced congestion in Wadi Adai."
+    ],
+    "image": "pj-bousher-amerat",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Infrastructure"
+     },
+     {
+      "label": "Client",
+      "value": "Muscat Municipality"
+     },
+     {
+      "label": "Length",
+      "value": "14.5 km"
+     },
+     {
+      "label": "Type",
+      "value": "Mountain road, dual carriageway"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/infrastructure/",
+    "gallery": [
+     "pj-bousher-amerat-2"
+    ],
+    "featured": true,
+    "badge": "Iconic"
+   },
+   {
+    "title": "Hasik–Shuwaymiyah Road",
+    "category": "Roads & bridges",
+    "text": "About 94 km of road through mountains in Dhofar that had no access before.",
+    "body": [
+     "The Hasik–Shuwaymiyah road connects Hasik and Shuwaymiyah in the north-eastern part of the Governorate of Dhofar. It is a 7 m wide single carriageway, about 94 km long.",
+     "Seven kilometres near Hasik and 20 km near Ash Shuwaymiyah lie on flat ground. The rest runs through mountains of various heights that had no access."
+    ],
+    "image": "pj-hasik",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Infrastructure"
+     },
+     {
+      "label": "Client",
+      "value": "Ministry of Transport, Communications and IT"
+     },
+     {
+      "label": "Length",
+      "value": "≈94 km"
+     },
+     {
+      "label": "Width",
+      "value": "7 m single carriageway"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/infrastructure/",
+    "featured": true
+   },
+   {
+    "title": "Batinah Expressway",
+    "category": "Roads & bridges",
+    "text": "46.2 km of divided dual four-lane expressway.",
+    "body": [
+     "Galfar built Batinah Expressway packages 1 and 3. The package listed on galfar.com covers the construction of a divided dual four-lane expressway, 46.20 km long, and the superstructure for the structures needed to open the carriageway."
+    ],
+    "image": "pj-batinah",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Infrastructure"
+     },
+     {
+      "label": "Client",
+      "value": "Ministry of Transport, Communications and IT"
+     },
+     {
+      "label": "Length",
+      "value": "46.2 km"
+     },
+     {
+      "label": "Type",
+      "value": "Four-lane expressway"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/infrastructure/"
+   },
+   {
+    "title": "Al Ansab–Al Jifnain Road Dualisation",
+    "category": "Roads & bridges",
+    "text": "A RO 53 million road widening with bridges and underpasses for Muscat Municipality.",
+    "body": [
+     "Muscat Municipality awarded Galfar the RO 53 million Al Ansab–Al Jifnain Road Dualisation project, with a 30-month execution period plus 120 days of mobilisation.",
+     "The existing two-lane road is widened to three lanes in each direction, with bridges and underpasses replacing roundabouts. The road links the Governorate of Muscat with Al Dakhiliyah and North Al Sharqiyah."
+    ],
+    "image": "pj-ansab-jifnain",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Infrastructure"
+     },
+     {
+      "label": "Client",
+      "value": "Muscat Municipality"
+     },
+     {
+      "label": "Value",
+      "value": "RO 53 million"
+     },
+     {
+      "label": "Duration",
+      "value": "30 months + 120 days mobilisation"
+     },
+     {
+      "label": "Status",
+      "value": "Awarded Oct 2023"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/2023/10/31/ro-53m-contract-for-al-ansab-al-jifnain-road-dualisation-awarded/"
+   },
+   {
+    "title": "Abu Dhabi–Suhar Railway",
+    "category": "Rail",
+    "text": "A joint venture civil contract worth RO 521 million from Hafeet Rail.",
+    "body": [
+     "Oman–Etihad Rail (Hafeet Rail) awarded a joint venture including Galfar a contract worth RO 521 million (about US$1.4 billion) to build the Abu Dhabi–Suhar railway network.",
+     "The Omani–UAE consortium is led by Trojan Construction Group of the UAE and Galfar of Oman. Galfar called it a strategic step into railway projects."
+    ],
+    "image": "pj-hafeet-rail",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Infrastructure"
+     },
+     {
+      "label": "Client",
+      "value": "Oman–Etihad Rail Company (Hafeet Rail)"
+     },
+     {
+      "label": "Value",
+      "value": "RO 521 million (JV)"
+     },
+     {
+      "label": "Partner",
+      "value": "Trojan Construction Group"
+     },
+     {
+      "label": "Status",
+      "value": "Awarded April 2024"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/2024/04/24/galfar-secures-major-rail-contract-poised-for-infra-diversification/",
+    "badge": "Rail"
+   },
+   {
+    "title": "Salalah International Airport",
+    "category": "Airports & ports",
+    "text": "Airside and landside works for the new Salalah International Airport.",
+    "body": [
+     "Development of Salalah International Airport: taxiways and aprons with airfield lighting, landside roads and bridges, airside roads with perimeter security fencing, air quality and noise monitoring, storm water drainage, landscaping with irrigation and the landside traffic management system.",
+     "Galfar executed the airside works as a joint venture partner."
+    ],
+    "image": "pj-salalah-airport",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Civil & Environmental"
+     },
+     {
+      "label": "Client",
+      "value": "Ministry of Transport, Communications and IT"
+     },
+     {
+      "label": "Scope",
+      "value": "Taxiways, aprons, roads, bridges, drainage"
+     },
+     {
+      "label": "Role",
+      "value": "Joint venture partner"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/civil-environmental/",
+    "gallery": [
+     "pj-salalah-airport-2"
+    ],
+    "featured": true,
+    "badge": "Iconic"
+   },
+   {
+    "title": "Duqm Fishery Port",
+    "category": "Airports & ports",
+    "text": "A fishery harbour on the Al Wusta coast, listed among Galfar's iconic projects.",
+    "body": [
+     "Galfar lists Duqm Fishery Port among the iconic projects it has delivered. Its Infrastructure Unit builds ports, commercial harbours and fishing harbours along Oman's coast."
+    ],
+    "image": "pj-duqm-port",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Infrastructure"
+     },
+     {
+      "label": "Sector",
+      "value": "Marine"
+     },
+     {
+      "label": "Location",
+      "value": "Duqm, Al Wusta"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/",
+    "featured": true,
+    "badge": "Iconic"
+   },
+   {
+    "title": "Grand Blue City marine works",
+    "category": "Airports & ports",
+    "text": "Marine works for a seafront community at Al Sawadi, South Al Batinah.",
+    "body": [
+     "Galfar was awarded the construction of marine works at Grand Blue City in Al Sawadi, South Al Batinah. The letter of award was approved by both parties on 23 June 2024.",
+     "The project is valued at RO 12 million with an execution period of 24 months. The development will include villas, lagoon villas, a five-star hotel, serviced apartments and 270 residential apartments along the Al Sawadi seafront."
+    ],
+    "image": "pj-grand-blue",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Infrastructure"
+     },
+     {
+      "label": "Value",
+      "value": "RO 12 million"
+     },
+     {
+      "label": "Duration",
+      "value": "24 months"
+     },
+     {
+      "label": "Location",
+      "value": "Al Sawadi, South Al Batinah"
+     },
+     {
+      "label": "Status",
+      "value": "Awarded June 2024"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/2024/06/24/galfar-awarded-tender-for-marine-works-at-grand-blue-city/"
+   },
+   {
+    "title": "Medical City for Military and Security Services",
+    "category": "Buildings",
+    "text": "A 458-bed hospital with about 172,785 m² of programme space.",
+    "body": [
+     "Contract A covers the construction and commissioning of a main hospital building and associated ancillary buildings with all external works.",
+     "The hospital will accommodate 458 beds and approximately 172,785 m² of programme space, with three basement levels."
+    ],
+    "image": "pj-medical-city",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Civil & Environmental"
+     },
+     {
+      "label": "Client",
+      "value": "Royal Oman Police"
+     },
+     {
+      "label": "Beds",
+      "value": "458"
+     },
+     {
+      "label": "Programme space",
+      "value": "≈172,785 m²"
+     },
+     {
+      "label": "Basements",
+      "value": "3 levels"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/civil-environmental/",
+    "featured": true
+   },
+   {
+    "title": "Bank Muscat Headquarters",
+    "category": "Buildings",
+    "text": "Services works for a 36,000 m² head office, energy centre and car park.",
+    "body": [
+     "Services works for the main office building, the energy centre building and external car parking.",
+     "The main office building has a total built-up area of 36,000 m²: basement, ground floor and four upper floors. The basement footprint of about 5,000 m² is mainly used for services."
+    ],
+    "image": "pj-bank-muscat",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Civil & Environmental"
+     },
+     {
+      "label": "Client",
+      "value": "Bank Civil Service Employees Pension Fund"
+     },
+     {
+      "label": "Built-up area",
+      "value": "36,000 m²"
+     },
+     {
+      "label": "Floors",
+      "value": "B + G + 4"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/civil-environmental/"
+   },
+   {
+    "title": "Al Ansab Sewage Treatment Plant",
+    "category": "Water & environment",
+    "text": "Oman's first membrane bioreactor plant, 52,500 m³ a day.",
+    "body": [
+     "Supply, detailed engineering, construction, installation, testing and commissioning of a 52,500 m³/day extended aeration treatment complex with MBR technology, part of the Muscat wastewater scheme.",
+     "Scope included plot preparation, process RCC tanks and structures, non-process buildings, process equipment and piping, services, electrical supply and external roads and paving. Galfar describes it as Oman's first plant of its kind."
+    ],
+    "image": "pj-ansab-stp",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Civil & Environmental"
+     },
+     {
+      "label": "Client",
+      "value": "Nama Water Services"
+     },
+     {
+      "label": "Capacity",
+      "value": "52,500 m³/day"
+     },
+     {
+      "label": "Technology",
+      "value": "Extended aeration with MBR"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/civil-environmental/",
+    "featured": true
+   },
+   {
+    "title": "Raysut Water Reclamation Plant expansion",
+    "category": "Water & environment",
+    "text": "Phase III (Stage I) expansion for Nama Dhofar Services, RO 35 million.",
+    "body": [
+     "Nama Dhofar Services Company awarded Galfar the Expansion of Raysut Water Reclamation Plants, Phase III (Stage I).",
+     "The project is valued at RO 35 million with an execution period of 36 months from commencement."
+    ],
+    "image": "pj-raysut",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Civil & Environmental"
+     },
+     {
+      "label": "Client",
+      "value": "Nama Dhofar Services"
+     },
+     {
+      "label": "Value",
+      "value": "RO 35 million"
+     },
+     {
+      "label": "Duration",
+      "value": "36 months"
+     },
+     {
+      "label": "Status",
+      "value": "Awarded July 2024"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/2024/06/30/galfar-wins-ro35-million-contract/"
+   },
+   {
+    "title": "Dhahirah water distribution networks",
+    "category": "Water & environment",
+    "text": "Design and build of networks for Ibri, Yanqul and Dank, about RO 117 million.",
+    "body": [
+     "Nama Water Services awarded Galfar the design and build tender for water distribution networks in the wilayats of Ibri, Yanqul and Dank in Al Dhahirah Governorate, package 1.",
+     "The project is valued at about RO 117 million with an execution period of 44 months from commencement."
+    ],
+    "image": "pj-dhahirah-water",
+    "specs": [
+     {
+      "label": "Business unit",
+      "value": "Infrastructure"
+     },
+     {
+      "label": "Client",
+      "value": "Nama Water Services"
+     },
+     {
+      "label": "Value",
+      "value": "≈RO 117 million"
+     },
+     {
+      "label": "Duration",
+      "value": "44 months"
+     },
+     {
+      "label": "Status",
+      "value": "Awarded August 2024"
+     }
+    ],
+    "src": "https://galfar.com/oman/galfar/2024/08/26/galfar-secures-ro117mn-contract-from-nama-water-services/",
+    "badge": "2024 award"
+   }
+  ]
+ },
+ "partners": {
+  "kicker": "Clients",
+  "intro": "Trusted by ministries, utilities and energy companies",
+  "partners": [
+   "PETROLEUM DEVELOPMENT OMAN",
+   "MINISTRY OF TRANSPORT, COMMUNICATIONS AND IT",
+   "NAMA WATER SERVICES",
+   "OQ",
+   "OCCIDENTAL OMAN",
+   "SHELL",
+   "BP",
+   "OMAN LNG",
+   "DALEEL PETROLEUM",
+   "DUQM REFINERY",
+   "SAIPEM",
+   "VALE",
+   "ROYAL OMAN POLICE",
+   "MINISTRY OF DEFENCE",
+   "MINISTRY OF HEALTH",
+   "MUSCAT MUNICIPALITY",
+   "MINISTRY OF HOUSING AND URBAN PLANNING",
+   "OMRAN",
+   "MADAYN",
+   "OPAZ",
+   "OMAN ELECTRICITY TRANSMISSION COMPANY"
+  ]
+ },
+ "news": [
+  {
+   "title": "Galfar secures RO117mn contract from Nama Water Services",
+   "date": "August 26, 2024",
+   "tag": "Contract",
+   "summary": "A design and build contract for water distribution networks in Ibri, Yanqul and Dank, with a 44-month execution period.",
+   "image": "pj-dhahirah-water",
+   "src": "https://galfar.com/oman/galfar/2024/08/26/galfar-secures-ro117mn-contract-from-nama-water-services/",
+   "body": [
+    "Nama Water Services has awarded Galfar a contract worth about RO 117 million for the construction of water distribution networks in Al Dhahirah Governorate.",
+    "The design and build tender covers the wilayats of Ibri, Yanqul and Dank, package 1, with an execution period of 44 months from commencement. Galfar said the award strengthens its order book and its share of water sector projects.",
+    "It was the third major contract Galfar secured in less than a month, after the Raysut water reclamation plant expansion (about RO 35 million) and a five-year service contract from Occidental Oman (about RO 18.5 million).",
+    "As of 30 June 2024 Galfar's order book reached RO 816 million, compared with RO 644 million a year earlier, after new awards totalling RO 279 million. In the first half of 2024 the parent company's revenue rose 10.8% to RO 128.9 million, with a net profit of RO 0.86 million."
+   ],
+   "src_label": "Read on galfar.com"
+  },
+  {
+   "title": "Galfar wins RO18.5mn contract from Oxy",
+   "date": "August 13, 2024",
+   "tag": "Contract",
+   "summary": "A five-year civil works service contract for Blocks 53 and 72, with a two-year extension option.",
+   "image": "pj-oxy",
+   "src": "https://galfar.com/oman/galfar/2024/08/13/galfar-wins-ro18-5mn-contract-from-oxy/",
+   "body": [
+    "Occidental Oman has awarded Galfar a five-year service contract for civil works services for Blocks 53 and 72. The contract was accepted by both parties on 25 July.",
+    "Galfar estimates the call-off contract at about RO 18.5 million, with an execution period of five years from 1 October 2024. A two-year extension, if agreed, would add an estimated RO 6.5 million.",
+    "Galfar noted that the value may change with the services required. The company said the award supports its order book and its share of energy and industry projects."
+   ],
+   "src_label": "Read on galfar.com"
+  },
+  {
+   "title": "Galfar wins RO35 million contract",
+   "date": "June 30, 2024",
+   "tag": "Contract",
+   "summary": "Nama Dhofar Services awards the expansion of the Raysut Water Reclamation Plants, Phase III (Stage I).",
+   "image": "pj-raysut",
+   "src": "https://galfar.com/oman/galfar/2024/06/30/galfar-wins-ro35-million-contract/",
+   "body": [
+    "Galfar has received a tender worth RO 35 million from Nama Dhofar Services Company for the Expansion of Raysut Water Reclamation Plants, Phase III (Stage I).",
+    "The project has an execution period of 36 months from commencement. Galfar said the award will add to its order book and sustain its share of the wastewater sector."
+   ],
+   "src_label": "Read on galfar.com"
+  },
+  {
+   "title": "Galfar awarded tender for marine works at Grand Blue City",
+   "date": "June 24, 2024",
+   "tag": "Contract",
+   "summary": "RO 12 million of marine works on the Al Sawadi seafront in South Al Batinah.",
+   "image": "pj-grand-blue",
+   "src": "https://galfar.com/oman/galfar/2024/06/24/galfar-awarded-tender-for-marine-works-at-grand-blue-city/",
+   "body": [
+    "Galfar has been awarded the construction of marine works at Grand Blue City in Al Sawadi, South Al Batinah. The letter of award was approved by both parties on 23 June 2024.",
+    "The project is valued at RO 12 million, with an execution period of 24 months from commencement.",
+    "The development will include luxury villas, lagoon villas, a five-star hotel, serviced apartments and 270 residential apartments along the Al Sawadi seafront."
+   ],
+   "src_label": "Read on galfar.com"
+  },
+  {
+   "title": "Galfar secures major rail contract, poised for infra diversification",
+   "date": "April 24, 2024",
+   "tag": "Rail",
+   "summary": "Hafeet Rail awards a Galfar joint venture RO 521 million to build the Abu Dhabi–Suhar railway.",
+   "image": "pj-hafeet-rail",
+   "src": "https://galfar.com/oman/galfar/2024/04/24/galfar-secures-major-rail-contract-poised-for-infra-diversification/",
+   "body": [
+    "Oman–Etihad Rail (Hafeet Rail) has awarded a joint venture including Galfar a contract worth RO 521 million (about US$1.4 billion) to build the Abu Dhabi–Suhar railway network, Galfar said in a filing to the Muscat Stock Exchange.",
+    "The Omani–UAE consortium is led by Trojan Construction Group of the UAE and Galfar of Oman. The award was announced during the state visit of His Majesty Sultan Haitham bin Tarik to the UAE.",
+    "Galfar said the win strengthens its order book and positions the company for a strategic move into railway projects."
+   ],
+   "src_label": "Read on galfar.com"
+  },
+  {
+   "title": "Rusayl–Bidbid road expansion project opens for traffic",
+   "date": "March 7, 2024",
+   "tag": "Milestone",
+   "summary": "27 km of third and fourth lanes from the Rusayl–Nizwa Interchange to Bidbid are open.",
+   "image": "pj-rusayl-bidbid-2",
+   "src": "https://galfar.com/oman/galfar/2024/03/07/rusayl-bidbid-road-expansion-project-opens-for-traffic/",
+   "body": [
+    "The Ministry of Transport, Communications and Information Technology has opened the Rusayl–Bidbid Road Expansion Project, which adds third and fourth lanes over 27 km from the Rusayl–Nizwa Interchange on the Muscat Expressway to the Al Sharqiya Expressway Interchange in Bidbid.",
+    "Service roads and pedestrian crossings connect the communities on both sides. Valley bridges such as the Wadi Al Jifnain and Wadi Fanja bridges were widened, two intersections were built on the Ghala and Al Sih Al Ahmar roads, the Fanja and Bidbid interchanges were widened and a new bridge was built in the Wadi Al Dabun area.",
+    "Box culverts drain rainwater, and lighting, concrete and metal barriers, signs and road markings were installed."
+   ],
+   "src_label": "Read on galfar.com"
+  },
+  {
+   "title": "Galfar secures RO 100 million contract for PDO's Qarn Alam project",
+   "date": "February 7, 2024",
+   "tag": "Contract",
+   "summary": "A five-year project delivery services contract for Petroleum Development Oman.",
+   "image": "pj-qarn-alam-2",
+   "src": "https://galfar.com/oman/galfar/2024/02/07/galfar-secures-ro-100-million-contract-for-pdos-qarn-alalm-project/",
+   "body": [
+    "Galfar has been awarded a five-year contract worth about RO 100 million for project delivery services on Petroleum Development Oman's Qarn Alam project. The letter of award was accepted by both parties on 30 January 2024.",
+    "In unaudited results for 2023, Galfar recorded parent company revenue of RO 238.565 million, up from RO 166.120 million a year earlier. Group revenue totalled RO 250.009 million, up from RO 177.621 million in 2022."
+   ],
+   "src_label": "Read on galfar.com"
+  },
+  {
+   "title": "RO 53M contract for Al Ansab – Al Jifnain road dualisation awarded",
+   "date": "October 31, 2023",
+   "tag": "Contract",
+   "summary": "Muscat Municipality awards a 30-month road widening with bridges and underpasses.",
+   "image": "pj-ansab-jifnain",
+   "src": "https://galfar.com/oman/galfar/2023/10/31/ro-53m-contract-for-al-ansab-al-jifnain-road-dualisation-awarded/",
+   "body": [
+    "Galfar has won the RO 53 million Al Ansab–Al Jifnain Road Dualisation Project from Muscat Municipality, with a 30-month execution period plus 120 days of mobilisation.",
+    "The two-lane road will be widened to three lanes in each direction, with bridges and underpasses replacing the roundabouts. The project is part of the development package for the Governorate of Muscat in the 2021–2025 five-year plan.",
+    "It will improve movement between Muscat and the governorates of Al Dakhiliyah and North Al Sharqiyah."
+   ],
+   "src_label": "Read on galfar.com"
+  }
+ ],
+ "news_title": "News",
+ "news_intro": "Contract awards and milestones, as published by Galfar.",
+ "locations": {
+  "title": "Where we work from",
+  "nav": "Locations",
+  "intro": "Head office in Muscat, with workshops and yards across Oman.",
+  "book_label": "View location",
+  "items": [
+   {
+    "name": "Muscat",
+    "full_name": "Galfar head office",
+    "type": "Headquarters",
+    "country": "Oman",
+    "image": "hi-hq",
+    "address": "Way 6606, Muscat (plus code H9F4+F29). Post Box 533, Muscat, Postal Code 100, Sultanate of Oman",
+    "lat": "23.5737",
+    "lng": "58.3551",
+    "about": "Galfar Engineering & Contracting SAOG head office.",
+    "phone": "+968 2452 5000",
+    "email": "info@galfar.com",
+    "phones": [
+     {
+      "label": "Head office",
+      "number": "+968 2452 5000"
+     },
+     {
+      "label": "Fax",
+      "number": "+968 2459 1676"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Office hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "website": "https://galfar.com/oman/galfar/contact-us/",
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.5737,58.3551"
+    },
+    "src": "https://galfar.com/oman/galfar/contact-us/"
+   },
+   {
+    "name": "Nizwa",
+    "full_name": "Nizwa Industrial Facility",
+    "type": "Fabrication facility",
+    "country": "Oman",
+    "image": "qh-welders",
+    "address": "Nizwa, Al Dakhiliyah, Oman (exact address not published)",
+    "about": "Established in 2006 for structural and piping fabrication, plate rolling, blasting and coating, for Galfar and third-party clients.",
+    "phone": "+968 2452 5000",
+    "phones": [
+     {
+      "label": "Head office",
+      "number": "+968 2452 5000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "website": "https://galfar.com/oman/galfar/project-services/"
+    },
+    "src": "https://galfar.com/oman/galfar/project-services/",
+    "opened": 2006
+   },
+   {
+    "name": "Khazain",
+    "full_name": "Galfar Integrated Facilities, Khazain",
+    "type": "Plant yard and workshops",
+    "country": "Oman",
+    "image": "ps-khazain",
+    "address": "Khazaen, Al Batinah South, Oman (exact address not published)",
+    "about": "A 150,000 m² integrated facility for Galfar's fleet of about 4,800 units, repairing around 1,200 machines a year, with accommodation for 250+ staff and workers.",
+    "phone": "+968 2452 5000",
+    "phones": [
+     {
+      "label": "Head office",
+      "number": "+968 2452 5000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "website": "https://galfar.com/oman/galfar/project-services/"
+    },
+    "src": "https://galfar.com/oman/galfar/project-services/"
+   }
+  ]
+ },
+ "faq_title": "Questions people ask",
+ "faq": [
+  {
+   "q": "When was Galfar founded?",
+   "a": "Galfar was established in 1972. Its first project was a villa for the Wali of Sur, and it obtained its commercial registration in 1975."
+  },
+  {
+   "q": "Is Galfar a listed company?",
+   "a": "Yes. Galfar Engineering & Contracting SAOG has been listed on the Muscat Stock Exchange since 2007 under the ticker GECS, with more than 4,000 shareholders."
+  },
+  {
+   "q": "What kind of projects does Galfar build?",
+   "a": "Three business units cover oil and gas, industrial and power projects; roads, bridges, airports, ports, dams, rail and water networks; and buildings, MEP and wastewater plants, including operation and maintenance."
+  },
+  {
+   "q": "How do I register as a supplier?",
+   "a": "Vendors register through Galfar's Supply Chain Portal at gecs.galfar.com. More than 1,500 local vendors and suppliers are registered."
+  },
+  {
+   "q": "How do I apply for a job at Galfar?",
+   "a": "Open roles are listed on Galfar's careers portal at galfar.zohorecruit.com."
+  },
+  {
+   "q": "Where can I find the annual reports?",
+   "a": "Annual reports for 2021 to 2025 and ESG reports for 2024 and 2025 are published on the Investor Inquiries and Publications pages of galfar.com."
+  },
+  {
+   "q": "Which standards is Galfar certified to?",
+   "a": "Galfar's QHSSE management system is certified to ISO 9001, ISO/TS 29001, ISO 14001 and ISO 45001."
+  },
+  {
+   "q": "How do I contact Galfar?",
+   "a": "Call the head office on +968 2452 5000 or email info@galfar.com. The postal address is Post Box 533, Muscat, Postal Code 100, Sultanate of Oman."
+  }
+ ],
+ "nudges": {
+  "dock_label": "Call or email",
+  "offer": {
+   "id": "ar2025",
+   "kicker": "Investors",
+   "title": "Annual Report 2025 is out",
+   "text": "Read the 2025 annual report and the 2025 sustainability report.",
+   "cta": "Investor relations",
+   "href": "@svc:Investor",
+   "image": "pb-ar2025"
+  }
+ },
+ "cta_band": "Planning a road, plant, building or network in Oman? Talk to Galfar.",
+ "detail_cta": {
+  "title": "Talk to Galfar",
+  "text": "Call the head office on +968 2452 5000 or send a message."
+ },
+ "contact": {
+  "title": "Contact Galfar",
+  "intro": "Write to the head office about projects, careers, suppliers or investor relations. This concept form is not connected.",
+  "address": "Post Box 533, Muscat, Postal Code 100, Sultanate of Oman",
+  "email": "info@galfar.com",
+  "phones": [
+   {
+    "label": "Head office",
+    "number": "+968 2452 5000"
+   },
+   {
+    "label": "Fax",
+    "number": "+968 2459 1676"
+   }
+  ],
+  "note": "Concept preview: connect the form before launch.",
+  "form": {
+   "branch": false,
+   "topics": [
+    "Projects and tenders",
+    "Careers",
+    "Vendor support",
+    "Investor relations",
+    "CSR partnership",
+    "Others"
+   ],
+   "submit": "Send"
+  }
+ },
+ "marquee": [
+  "Muscat",
+  "Batinah",
+  "Dhofar",
+  "Al Wusta",
+  "Al Dhahirah",
+  "Al Dakhiliyah",
+  "Musandam",
+  "Sharqiyah"
+ ],
+ "confirm": [
+  "Workforce: the home page counter says 17,000+, Human Capital says 16,000+ and the overview says an average of more than 16,000 over six years. The site uses 16,000+.",
+  "Omani employees: Human Capital says around 3,500, ICV and the overview say about 3,900. Shown as 3,500 to 3,900.",
+  "Pipelines: the overview and unit text say 8,000+ km, the Energy & Industrial page header says over 10,000 km. The site uses 8,000+.",
+  "Local purchasing: ICV says 90% of purchases are local, Supply Chain says 97% local purchase (NRS). Both shown in their context.",
+  "Founding year: galfar.com says 1972; the rail news item says 1971. The site uses 1972. The home page still says 52 years' experience.",
+  "Galfar's site spells Qarn Alam as 'Qarn Alalm' and calls the company 'Gulf Engineering and Contracting' in the Grand Blue City item (value written R012 million). Corrected silently.",
+  "Raysut news is dated 30 June 2024 but says the letter of award was accepted on 25 July 2024 (announced elsewhere as 30 July). Check the date.",
+  "Qarn Alam: the Off-Plot Mechanical Contract (unit page) and the RO 100 million project delivery services contract (Feb 2024 news) are shown on one project page. Confirm they are the same contract.",
+  "Gas Gathering System, Block 61 Khazzan: galfar.com lists the client as PDO (Block 61 Khazzan is operated by BP). Confirm the client.",
+  "Status of 2023–2024 awards (Al Ansab–Al Jifnain, Raysut, Dhahirah, Oxy, Grand Blue City, Hafeet Rail) is shown as 'Awarded' only. Current progress is not published.",
+  "Photo assignment: the Rusayl–Bidbid gallery uses the May 2024 photo set (G-series) that includes the card image. Unit-page photos (coastal roads, plants, buildings) are captioned generally, without naming a project.",
+  "Nizwa and Khazain facility addresses and phone numbers are not published; the head office number is shown. Head office coordinates come from the plus code H9F4+F29 in the contact map.",
+  "Head office opening hours are not published.",
+  "No company film is published on galfar.com (YouTube channel only), so the home page has no video slide or scroll film.",
+  "Client names come from the logo wall on galfar.com; one emblem (gold crest) could not be identified and is left out.",
+  "Financial figures (2023 revenue, H1 2024 order book) are from news items in 2024. Update with the 2025 annual report before a pitch.",
+  "The logo was redrawn at 600 px from the 245 px PNG on galfar.com. Ask Galfar for a vector logo."
+ ],
+ "sources": [
+  "https://galfar.com/oman/galfar/ (home, read 12 Oct 2026)",
+  "https://galfar.com/oman/galfar/company-profile/ (read 12 Oct 2026)",
+  "https://galfar.com/oman/galfar/our-history/ (read 12 Oct 2026)",
+  "https://galfar.com/oman/galfar/our-mission-vision/ (read 12 Oct 2026)",
+  "https://galfar.com/oman/galfar/our-team/ and https://galfar.com/oman/galfar/who-we-are/ (read 12 Oct 2026)",
+  "https://galfar.com/oman/galfar/energy-industrial/, https://galfar.com/oman/galfar/infrastructure/, https://galfar.com/oman/galfar/civil-environmental/ (read 12 Oct 2026)",
+  "https://galfar.com/oman/galfar/qhsse/, project-services/, human-capital/, in-country-value/, supply-chain-management/, corporate-social-responsibility/ (read 12 Oct 2026)",
+  "https://galfar.com/oman/galfar/publications/ and https://galfar.com/oman/galfar/contact-classic/ (read 12 Oct 2026)",
+  "https://galfar.com/oman/galfar/contact-us/ (read 12 Oct 2026)",
+  "https://galfar.com/oman/galfar/latest-news/ and eight news posts, Oct 2023 to Aug 2024 (read 12 Oct 2026)",
+  "https://galfar.com/oman/galfar/wp-json/wp/v2/media (photo library, read 12 Oct 2026)"
+ ]
 }

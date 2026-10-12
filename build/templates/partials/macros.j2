@@ -301,7 +301,7 @@
   {%- for row, dir in [(s.insurance.partners[:half], 'left'), (s.insurance.partners[half:], 'right')] %}
   <div class="marquee ins-row" data-marquee="0.6" data-dir="{{ dir }}">
     <div class="marquee-track" aria-hidden="true">
-      {%- for pass in [0, 1] %}<div class="marquee-group">{% for p in row %}<span class="ins-chip">{{ p }}</span>{% endfor %}</div>{% endfor %}
+      {%- for pass in [0, 1] %}<div class="marquee-group">{% for p in row %}{% if p is mapping %}<span class="ins-chip is-logo"><img src="{{ src(p.image) }}" alt="{{ p.name }}" loading="lazy"></span>{% else %}<span class="ins-chip">{{ p }}</span>{% endif %}{% endfor %}</div>{% endfor %}
     </div>
   </div>
   {%- endfor %}
@@ -472,9 +472,9 @@
   <div class="wrap ins-head"><p class="eyebrow">{{ P.kicker or 'Partners' }}</p><h2 class="pg-h2" data-anim="lines">{{ P.intro }}</h2></div>
   {%- set half = (P.partners | length / 2) | round(0, 'ceil') | int %}
   {%- for row, dir in [(P.partners[:half], 'left'), (P.partners[half:], 'right')] %}
-  <div class="marquee ins-row" data-marquee="0.6" data-dir="{{ dir }}"><div class="marquee-track" aria-hidden="true">{% for pass in [0, 1] %}<div class="marquee-group">{% for p in row %}<span class="ins-chip">{{ p }}</span>{% endfor %}</div>{% endfor %}</div></div>
+  <div class="marquee ins-row" data-marquee="0.6" data-dir="{{ dir }}"><div class="marquee-track" aria-hidden="true">{% for pass in [0, 1] %}<div class="marquee-group">{% for p in row %}{% if p is mapping %}<span class="ins-chip is-logo"><img src="{{ src(p.image) }}" alt="{{ p.name }}" loading="lazy"></span>{% else %}<span class="ins-chip">{{ p }}</span>{% endif %}{% endfor %}</div>{% endfor %}</div></div>
   {%- endfor %}
-  <p class="visually-hidden">{{ P.partners | join(', ') }}</p>
+  <p class="visually-hidden">{% for p in P.partners %}{{ p.name if p is mapping else p }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
 </section>
 {%- endif %}
 {%- endmacro -%}
@@ -504,6 +504,7 @@
 {%- elif t == 'converge' %}{{ converge(m) }}
 {%- elif t == 'stack' %}{{ stack(m) }}
 {%- elif t == 'lineup' %}{{ lineup(m) }}
+{%- elif t == 'film' %}{{ film(m) }}
 {%- elif t == 'split' %}{% if m is mapping and m.title %}{{ split(m) }}{% endif %}
 {%- elif t == 'news' %}{{ home_news() }}
 {%- elif t == 'testimonials' %}{{ testimonials() }}
@@ -686,6 +687,51 @@
       {%- endfor %}
       <a class="lu-more" href="{{ C._file }}"><span>{{ m.more or 'Full menu' }}</span>{{ icon('arrow') }}</a>
     </div>
+  </div>
+</section>
+{%- endmacro -%}
+
+{%- macro film(m) -%}
+{#- Product film: a real packshot rises into a spotlight, turns, bursts into powder in its flavour
+    colour while its numbers count up, turns round to its real label, then its flavours line up.
+    Scroll-scrubbed and reversible. Reduced motion: the finished frame with label and flavours. -#}
+{%- set it = (s.catalogue['items'] | selectattr('title', 'equalto', m.product) | first) if m.product else none %}
+<section class="film" id="{{ m.id or 'film' }}" data-film{% if m.risen %} data-risen{% endif %} style="--film-h: {{ m.height or 420 }}vh; --flav: {{ m.color or 'var(--accent)' }}">
+  <div class="film-stage">
+    <div class="film-beam" aria-hidden="true"></div>
+    <canvas class="film-dust" aria-hidden="true"></canvas>
+    <div class="wrap film-copy">
+      {%- for b in m.beats %}
+      <div class="film-beat" data-at="{{ b.at }}">
+        {%- if b.kicker %}<p class="eyebrow">{{ b.kicker }}</p>{% endif %}
+        <h2 class="film-title">{{ b.title | safe }}</h2>
+        {%- if b.text %}<p class="film-text">{{ b.text }}</p>{% endif %}
+      </div>
+      {%- endfor %}
+    </div>
+    <div class="film-scene">
+      <div class="film-sibs" aria-hidden="true">
+        {%- for g in m.siblings or [] %}<figure class="film-sib" style="--k: {{ loop.index0 }}; --n: {{ m.siblings | length }}"><img src="{{ src(g.image) }}" alt="" loading="lazy"><figcaption>{{ g.label }}</figcaption></figure>{% endfor %}
+      </div>
+      <div class="film-pack">
+        <div class="film-turn">
+          <img class="film-front" src="{{ src(m.front) }}" alt="{{ m.product or s.images[m.front].alt }}">
+          {%- if m.back %}<img class="film-back{% if m.back_kind == 'label' %} is-label{% endif %}" src="{{ src(m.back) }}" alt="{{ (m.product or '') ~ ' label' }}">{% endif %}
+          <span class="film-sheen" aria-hidden="true" style="-webkit-mask-image: url('{{ src(m.front) }}'); mask-image: url('{{ src(m.front) }}')"></span>
+        </div>
+        <img class="film-reflect" src="{{ src(m.front) }}" alt="" aria-hidden="true">
+      </div>
+      {%- for st in m.stats or [] %}<span class="film-stat" style="--a: {{ st.angle or (loop.index0 * 90 - 135) }}deg"><b>{{ st.value }}</b>{{ st.label }}</span>{% endfor %}
+    </div>
+    {%- if it %}
+    <div class="cv-buy film-buy">
+      <a class="cv-buy-t" href="{{ it._file }}"><span>{{ it.category }}</span><b>{{ it.title }}</b></a>
+      {%- if it.price %}<span class="cv-buy-p">{{ it.price }}</span>{% endif %}
+      {%- if it._sku %}<button class="btn btn-primary btn-sm" type="button" data-add="{{ it._sku }}"{% if it.options %} data-go="{{ it._file }}"{% endif %}>{{ s.shop.add_label if s.shop else 'Add' }}</button>{% endif %}
+    </div>
+    {%- endif %}
+    <div class="film-bar" aria-hidden="true"><i></i></div>
+    {%- if m.cap %}<span class="cv-cap">{{ m.cap }}</span>{% endif %}
   </div>
 </section>
 {%- endmacro -%}

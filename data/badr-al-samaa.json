@@ -2405,6 +2405,10 @@
       "src": "r-dept-cardiology.jpg",
       "alt": "Cardiac monitoring",
       "cap": "Photo: Badr Al Samaa Group"
+    },
+    "logo": {
+      "src": "logo.png",
+      "alt": "Badr Al Samaa Group of Hospitals logo"
     }
   },
   "theme_data": {
@@ -7455,5 +7459,9 @@
       "name": "LinkedIn",
       "url": "https://www.linkedin.com/company/badralsamaagroupofhospitals/"
     }
-  ]
+  ],
+  "brand": {
+    "logo": "logo",
+    "logo_wide": true
+  }
 }

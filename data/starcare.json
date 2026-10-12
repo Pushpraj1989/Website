@@ -1,286 +1,3848 @@
 {
-  "slug": "starcare",
-  "tier": 1,
-  "name": "Starcare Hospital",
-  "short": "Starcare",
-  "sector": "Healthcare",
-  "meta": "Starcare Hospital: eight sites across Oman, the UAE and India, with specialist departments, check-up packages and an in-house pharmacy.",
-  "accent": "#2346d8",
-  "cta": {
-    "label": "Book appointment",
-    "href": "#contact"
+ "slug": "starcare",
+ "name": "Starcare Hospital",
+ "short": "Starcare",
+ "sector": "Hospitals and clinics",
+ "meta": "Starcare Oman: JCI, PSFHI and ISO accredited hospitals, medical centres and pharmacies in Seeb, Barka, Mabela, Bousher, Saha and Duqm, with branches in Sharjah and Calicut.",
+ "theme": "studio",
+ "promo_fx": "blinds",
+ "accent": "#16ac9d",
+ "img_dir": "starcare",
+ "footer_note": "Concept redesign made to test the website kit. Not the official Starcare Hospital website. Content and photos from starcarehospital.com, read 12 Oct 2026.",
+ "brand": {
+  "mode": "light",
+  "style": "glass",
+  "logo": "logo",
+  "bg": "#f4f8f7",
+  "fg": "#0f2b2d",
+  "accent": "#0f9e90",
+  "accent_ink": "#ffffff",
+  "accent2": "#e8304f",
+  "alt": "#e6f1ef",
+  "font_display": "\"Marcellus\", Georgia, serif",
+  "font_body": "\"Figtree\", system-ui, sans-serif",
+  "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Marcellus&family=Figtree:wght@400;500;600;700"
+ },
+ "cta": {
+  "label": "Book an appointment",
+  "short": "Book",
+  "href": "contact.html"
+ },
+ "images": {
+  "logo": {
+   "src": "logo.png",
+   "alt": "Starcare emblem"
   },
-  "hero": {
-    "eyebrow": "Hospital care · Oman · UAE · India",
-    "title": "Specialist care at eight sites",
-    "lede": "From Seeb and Barka to Muscat, Bousher, Saha, Duqm and Sharjah, with check-up packages, specialist departments and an in-house pharmacy.",
-    "primary": {
-      "label": "Book an appointment",
-      "href": "#contact"
-    },
-    "secondary": {
-      "label": "Find a site",
-      "href": "#locations"
-    }
+  "logo-full": {
+   "src": "logo-full.png",
+   "alt": "Starcare Oman logo, Keep Caring"
   },
-  "stats": [
-    {
-      "value": 8,
-      "label": "Listed sites"
-    },
-    {
-      "value": 3,
-      "label": "Countries"
-    },
-    {
-      "value": 500,
-      "suffix": "+",
-      "label": "Doctors, nurses & support staff"
-    },
-    {
-      "value": 5,
-      "label": "Specialist departments"
-    }
-  ],
-  "about": {
-    "title": "Eight sites, one hospital group",
-    "body": [
-      "Starcare operates six sites in Oman, one in Sharjah in the UAE, and one listed in Calicut, India. Each site lists its own address and phone number."
-    ],
-    "points": [
-      {
-        "title": "Workforce",
-        "text": "Over 500 doctors, nurses, paramedics and support staff, according to the group's site."
-      },
-      {
-        "title": "In-house pharmacy",
-        "text": "The pharmacy stocks a range of lifesaving medicines."
-      },
-      {
-        "title": "Check-ups & packages",
-        "text": "Health check packages are offered across the group."
-      }
-    ]
+  "doctor": {
+   "src": "doctor.jpg",
+   "alt": "Smiling doctor in a white coat with a stethoscope",
+   "cap": "Image: starcarehospital.com"
   },
-  "services": {
-    "title": "Specialist departments",
-    "nav": "Departments",
-    "intro": "Departments named on the group's homepage. Which site offers which department is not listed.",
-    "items": [
-      {
-        "title": "Pediatrics & Neonatology",
-        "icon": "heart",
-        "image": "peds"
-      },
-      {
-        "title": "ENT",
-        "icon": "pulse",
-        "image": "steth"
-      },
-      {
-        "title": "Physiotherapy & Rehabilitation",
-        "icon": "leaf",
-        "image": "physio"
-      },
-      {
-        "title": "Anaesthesiology & Pain Management",
-        "icon": "shield",
-        "image": "pharmacy"
-      },
-      {
-        "title": "General & Laparoscopic Surgery",
-        "icon": "layers",
-        "image": "hero"
-      }
-    ],
-    "chips_title": "Also offered",
-    "chips": [
-      "Check-ups & packages",
-      "In-house pharmacy"
-    ]
+  "depth-lobby": {
+   "src": "depth-lobby.jpg",
+   "alt": "Starcare hospital lobby with the teal reception desk",
+   "cap": "Render: Starcare facilities gallery"
   },
-  "highlights": null,
-  "locations": {
-    "title": "Find a site",
-    "nav": "Locations",
-    "intro": "Eight sites in three countries. Filter by country to narrow the list.",
-    "items": [
-      {
-        "name": "Seeb",
-        "type": "Branch",
-        "country": "Oman",
-        "address": "PO Box 198, PC 101, As Seeb, Sultanate of Oman",
-        "phone": "+968 2455 7200",
-        "image": "seeb"
-      },
-      {
-        "name": "Barka",
-        "type": "Branch",
-        "country": "Oman",
-        "address": "PO Box 539, PC 320, Barka, Sultanate of Oman",
-        "phone": "+968 2698 2200",
-        "image": "barka"
-      },
-      {
-        "name": "Mabela",
-        "type": "Branch",
-        "country": "Oman",
-        "address": "PO Box 198, PC 101, Mabela, Muscat, Sultanate of Oman",
-        "phone": "+968 2426 3300",
-        "note": "Shares its PO Box with Seeb. Confirm.",
-        "image": "muscat"
-      },
-      {
-        "name": "Bousher",
-        "type": "Branch",
-        "country": "Oman",
-        "address": "PO Box 59, PC 118, Bousher, near Mall of Oman",
-        "phone": "+968 2411 3900",
-        "image": "muscat"
-      },
-      {
-        "name": "Saha",
-        "type": "Branch",
-        "country": "Oman",
-        "note": "Listed with the Seeb address and phone. Confirm this branch's own details.",
-        "image": "seeb"
-      },
-      {
-        "name": "Duqm",
-        "type": "Branch",
-        "country": "Oman",
-        "note": "Listed with the Seeb address and phone. Confirm this branch's own details.",
-        "image": "duqm"
-      },
-      {
-        "name": "Sharjah",
-        "type": "Branch",
-        "country": "UAE",
-        "address": "Starcare Medical Center LLC, PO Box 25568, Malabar Plaza, Rolla, Sharjah, UAE",
-        "phone": "+971 6 561 1099",
-        "image": "sharjah"
-      },
-      {
-        "name": "Calicut",
-        "type": "Branch",
-        "country": "India",
-        "note": "Listed with a Muscat, Oman address. Confirm the Calicut address.",
-        "image": "calicut"
-      }
-    ]
+  "fac-lobby": {
+   "src": "fac-lobby.jpg",
+   "alt": "Hospital lobby with green armchairs and the teal Starcare reception",
+   "cap": "Render: Starcare facilities gallery"
   },
-  "marquee": [
-    "Pediatrics & Neonatology",
-    "ENT",
-    "Physiotherapy & Rehabilitation",
-    "Anaesthesiology & Pain Management",
-    "General & Laparoscopic Surgery",
-    "Check-ups & packages",
-    "In-house pharmacy"
-  ],
-  "contact": {
-    "title": "Book an appointment",
-    "intro": "Pick a site and send a request. For urgent care, call the site directly.",
-    "address": "Starcare Hospital, PO Box 198, PC 101, As Seeb, Sultanate of Oman",
-    "phones": [
-      {
-        "label": "Seeb",
-        "number": "+968 2455 7200",
-        "tel": "+96824557200"
-      },
-      {
-        "label": "Seeb (second line)",
-        "number": "+968 2455 7201",
-        "tel": "+96824557201"
-      }
-    ],
-    "email": null,
-    "note": "No emergency number is published on the site. The booking form is a concept preview.",
-    "form": {
-      "branch": true,
-      "topics": [
-        "Book an appointment",
-        "Check-up package",
-        "Pharmacy",
-        "General enquiry"
-      ],
-      "submit": "Request appointment"
-    }
+  "fac-stairs": {
+   "src": "fac-stairs.jpg",
+   "alt": "Marble staircase lined with paintings and lit display niches",
+   "cap": "Render: Starcare facilities gallery"
   },
-  "confirm": [
-    "Seeb, Saha, Duqm and Calicut all list the same address and phone numbers. Mabela shares Seeb's PO box. Verify each branch's own address and phone.",
-    "The Calicut entry gives an Oman address. Verify the Indian address.",
-    "The Sharjah entry lists both a UAE and an Oman phone number. The concept uses the UAE number.",
-    "No emergency number, bed count or founding year is published.",
-    "The staff figure ('over 500') is the group's own wording.",
-    "Photography is illustrative Creative Commons imagery (see footer credits): city views on the site list and stock clinical images, not Starcare's own facilities."
-  ],
-  "sources": [
-    "https://www.starcarehospital.com (homepage read 11 Oct 2026)"
-  ],
-  "theme": "clinic",
-  "img_dir": "starcare",
-  "images": {
-    "hero": {
-      "src": "hero.jpg",
-      "alt": "Laparoscopic operating theatre",
-      "cap": "Illustrative"
-    },
-    "peds": {
-      "src": "peds.jpg",
-      "alt": "Newborn baby's foot",
-      "cap": "Illustrative"
-    },
-    "steth": {
-      "src": "steth.jpg",
-      "alt": "Stethoscope on a desk",
-      "cap": "Illustrative"
-    },
-    "physio": {
-      "src": "physio.jpg",
-      "alt": "Physiotherapy exercise session",
-      "cap": "Illustrative"
-    },
-    "pharmacy": {
-      "src": "pharmacy.jpg",
-      "alt": "Assorted medicines",
-      "cap": "Illustrative"
-    },
-    "seeb": {
-      "src": "seeb.jpg",
-      "alt": "Seeb, Muscat"
-    },
-    "barka": {
-      "src": "barka.jpg",
-      "alt": "Barka, Oman"
-    },
-    "muscat": {
-      "src": "muscat.jpg",
-      "alt": "Muscat"
-    },
-    "duqm": {
-      "src": "duqm.jpg",
-      "alt": "Duqm coastline"
-    },
-    "sharjah": {
-      "src": "sharjah.jpg",
-      "alt": "Sharjah skyline"
-    },
-    "calicut": {
-      "src": "calicut.jpg",
-      "alt": "Kozhikode (Calicut) beach"
-    }
+  "fac-stairs-2": {
+   "src": "fac-stairs-2.jpg",
+   "alt": "Double-height stair hall with framed paintings",
+   "cap": "Render: Starcare facilities gallery"
   },
-  "theme_data": {
-    "lead": "Specialist care for",
-    "words": [
-      "newborns",
-      "recovery",
-      "surgery",
-      "pain relief"
-    ],
-    "depts_html": "Five <em>specialist</em> departments",
-    "about_html": "Eight sites, <em>one</em> hospital group",
-    "sites_html": "Find a <em>site</em>"
+  "fac-clinic": {
+   "src": "fac-clinic.jpg",
+   "alt": "Clinic reception with a pink feature wall and lounge chairs",
+   "cap": "Render: Starcare facilities gallery"
+  },
+  "fac-pharmacy": {
+   "src": "fac-pharmacy.jpg",
+   "alt": "Starcare pharmacy with shelving and counters",
+   "cap": "Render: Starcare facilities gallery"
+  },
+  "fac-pharmacy-2": {
+   "src": "fac-pharmacy-2.jpg",
+   "alt": "Pharmacy counters under pendant lights",
+   "cap": "Render: Starcare facilities gallery"
+  },
+  "fac-pedia": {
+   "src": "fac-pedia.jpg",
+   "alt": "Starcare Pedia reception with two origami giraffes",
+   "cap": "Render: Starcare facilities gallery"
+  },
+  "fac-pedia-2": {
+   "src": "fac-pedia-2.jpg",
+   "alt": "Children's waiting area with giraffes and pink seats",
+   "cap": "Render: Starcare facilities gallery"
+  },
+  "fac-pedia-3": {
+   "src": "fac-pedia-3.jpg",
+   "alt": "Starcare Pedia corridor with pink and blue walls",
+   "cap": "Render: Starcare facilities gallery"
+  },
+  "fac-pedia-4": {
+   "src": "fac-pedia-4.jpg",
+   "alt": "Children's play corner with origami animals",
+   "cap": "Render: Starcare facilities gallery"
+  },
+  "team-seeb": {
+   "src": "team-seeb.jpg",
+   "alt": "Starcare staff in a bright waiting hall",
+   "cap": "Photo: Starcare Seeb"
+  },
+  "waiting-lounge": {
+   "src": "waiting-lounge.jpg",
+   "alt": "Outpatient waiting lounge with white armchairs",
+   "cap": "Render: Starcare facilities gallery"
+  },
+  "bn-barka-stairs": {
+   "src": "bn-barka-stairs.jpg",
+   "alt": "Gallery staircase at Starcare Barka",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "bn-pedia": {
+   "src": "bn-pedia.jpg",
+   "alt": "Starcare Pedia reception with giraffes",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "bn-orionis": {
+   "src": "bn-orionis.jpg",
+   "alt": "Orionis Laser Derma Center reception at Starcare",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "bn-cuddles": {
+   "src": "bn-cuddles.jpg",
+   "alt": "Starcare Cuddles birthing centre reception",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "bn-keep-caring": {
+   "src": "bn-keep-caring.jpg",
+   "alt": "Paper family beside a house with the Starcare emblem on grass",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "bn-mother-baby": {
+   "src": "bn-mother-baby.jpg",
+   "alt": "Mother kissing her baby",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "bn-pregnancy": {
+   "src": "bn-pregnancy.jpg",
+   "alt": "Expectant mother in a white room",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "bn-doctor": {
+   "src": "bn-doctor.jpg",
+   "alt": "Smiling doctor with glasses",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "bn-baby": {
+   "src": "bn-baby.jpg",
+   "alt": "Baby held up by a paediatrician",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "bn-spine": {
+   "src": "bn-spine.jpg",
+   "alt": "Father carrying his son on his back, arms spread",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "bn-joint": {
+   "src": "bn-joint.jpg",
+   "alt": "Woman running up stadium steps",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "bn-child": {
+   "src": "bn-child.jpg",
+   "alt": "Smiling girl hugging soft toys",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "bn-dental": {
+   "src": "bn-dental.jpg",
+   "alt": "Smiling woman in a dental chair",
+   "cap": "Photo: Starcare campaign image"
+  },
+  "news-jci-4th": {
+   "src": "news-jci-4th.jpg",
+   "alt": "Starcare staff with a banner celebrating the fourth JCI accreditation",
+   "cap": "Photo: Starcare, 2021"
+  },
+  "news-best-employer": {
+   "src": "news-best-employer.jpg",
+   "alt": "Starcare leaders receiving the Best Employer award",
+   "cap": "Photo: Starcare, 2019"
+  },
+  "news-ceo": {
+   "src": "news-ceo.jpg",
+   "alt": "Newspaper clipping: Starcare names Batha as group CEO",
+   "cap": "Press clipping on starcarehospital.com"
+  },
+  "acc-jci": {
+   "src": "acc-jci.jpg",
+   "alt": "Joint Commission International gold seal"
+  },
+  "acc-psfhi": {
+   "src": "acc-psfhi.jpg",
+   "alt": "Patient Safety Friendly Hospital Initiative logos"
+  },
+  "acc-iso": {
+   "src": "acc-iso.jpg",
+   "alt": "ISO certification seal"
+  },
+  "acc-esqr": {
+   "src": "acc-esqr.jpg",
+   "alt": "European Society for Quality Research logo"
+  },
+  "br-seeb": {
+   "src": "br-seeb.jpg",
+   "alt": "Starcare Hospital Seeb",
+   "cap": "Photo: starcarehospital.com"
+  },
+  "br-barka": {
+   "src": "br-barka.jpg",
+   "alt": "Starcare Hospital Barka",
+   "cap": "Photo: starcarehospital.com"
+  },
+  "br-mabela": {
+   "src": "br-mabela.jpg",
+   "alt": "Starcare Medical Centre Mabela",
+   "cap": "Photo: starcarehospital.com"
+  },
+  "br-bousher": {
+   "src": "br-bousher.jpg",
+   "alt": "Starcare First Medical Centre Bousher",
+   "cap": "Photo: starcarehospital.com"
+  },
+  "br-saha": {
+   "src": "br-saha.jpg",
+   "alt": "Starcare Saha clinic",
+   "cap": "Photo: starcarehospital.com"
+  },
+  "br-duqm": {
+   "src": "br-duqm.jpg",
+   "alt": "Starcare Duqm Medical Centre",
+   "cap": "Photo: starcarehospital.com"
+  },
+  "br-sharjah": {
+   "src": "br-sharjah.jpg",
+   "alt": "Starcare Medical Centre, Rolla, Sharjah",
+   "cap": "Photo: starcarehospital.com"
+  },
+  "br-calicut": {
+   "src": "br-calicut.jpg",
+   "alt": "Starcare Calicut building",
+   "cap": "Photo: starcarehospital.com"
   }
+ },
+ "ticker": {
+  "label": "Latest",
+  "items": [
+   {
+    "tag": "JCI",
+    "text": "Re-accredited by Joint Commission International for the fourth time",
+    "href": "@news:Starcare re-accredited b"
+   },
+   {
+    "tag": "Barka",
+    "text": "Spine Clinic at Starcare Barka: surgeons, physiotherapists and pain specialists in one team",
+    "href": "@news:Starcare Barka launches "
+   },
+   {
+    "tag": "Packages",
+    "text": "General health check-up at Starcare Barka, OMR 59",
+    "href": "packages.html"
+   },
+   {
+    "tag": "Award",
+    "text": "Best Employer for Oman in Healthcare, World HRD Congress 2019",
+    "href": "@news:Starcare wins best emplo"
+   }
+  ],
+  "emergency": {
+   "label": "Emergency, Seeb 24/7",
+   "number": "+968 2455 7200",
+   "tel": "+96824557200"
+  }
+ },
+ "promos": [
+  {
+   "image": "fac-lobby",
+   "tag": "JCI · PSFHI · ISO",
+   "kicker": "Starcare Oman",
+   "short": "Accredited care",
+   "title": "Oman's first triple-accredited hospital",
+   "text": "Hospitals, medical centres and pharmacies across Oman, re-accredited by JCI for the fourth time in 2021.",
+   "cta": {
+    "label": "Find a doctor",
+    "href": "doctors.html"
+   },
+   "cta2": {
+    "label": "About Starcare",
+    "href": "about.html"
+   }
+  },
+  {
+   "image": "fac-pedia-2",
+   "tag": "Starcare Pedia",
+   "kicker": "Children",
+   "short": "Starcare Pedia",
+   "title": "A children's floor built for small patients",
+   "text": "Paediatrics, neonatology and paediatric surgery, with giraffes at reception.",
+   "cta": {
+    "label": "Children's care",
+    "href": "@svc:Children"
+   }
+  },
+  {
+   "image": "bn-mother-baby",
+   "tag": "Starcare Cuddles",
+   "kicker": "Mother and baby",
+   "short": "Mother and baby",
+   "title": "From the first scan to the first night home",
+   "text": "Antenatal packages from 24 weeks, then a normal or C-section delivery package with a companion in the room.",
+   "cta": {
+    "label": "See the packages",
+    "href": "packages.html"
+   },
+   "cta2": {
+    "label": "Mother and baby care",
+    "href": "@svc:Mother"
+   }
+  },
+  {
+   "image": "bn-spine",
+   "tag": "Barka",
+   "kicker": "Spine Clinic",
+   "short": "Spine Clinic",
+   "title": "Back and neck care in one team",
+   "text": "Orthopaedic and spine surgeons, physiotherapists and pain specialists at Starcare Barka.",
+   "cta": {
+    "label": "Read the story",
+    "href": "@news:Starcare Barka launches"
+   }
+  },
+  {
+   "image": "doctor",
+   "tag": "From OMR 59",
+   "kicker": "Health check-ups",
+   "short": "Check-ups",
+   "title": "Check-ups for every stage of life",
+   "text": "Well man, well woman, well child and premarital checks. The general check-up at Barka is OMR 59.",
+   "cta": {
+    "label": "Compare check-ups",
+    "href": "packages.html"
+   }
+  }
+ ],
+ "rail": {
+  "title": "How can we help?",
+  "items": [
+   {
+    "label": "Book an appointment",
+    "sub": "Choose a branch",
+    "icon": "check",
+    "href": "contact.html"
+   },
+   {
+    "label": "Find a doctor",
+    "sub": "104 doctors listed",
+    "icon": "heart",
+    "href": "doctors.html"
+   },
+   {
+    "label": "Health packages",
+    "sub": "Check-ups and maternity",
+    "icon": "chart",
+    "href": "packages.html"
+   },
+   {
+    "label": "Branches",
+    "sub": "8 in 3 countries",
+    "icon": "pin",
+    "href": "branches.html"
+   },
+   {
+    "label": "Emergency",
+    "sub": "Seeb, 24 hours",
+    "icon": "phone",
+    "href": "tel:+96824557200"
+   }
+  ]
+ },
+ "home": [
+  "promo",
+  "rail",
+  {
+   "type": "depth",
+   "id": "keep-caring",
+   "height": 210,
+   "kicker": "Starcare Oman",
+   "title": "Keep caring.",
+   "text": "More than 500 doctors, nurses and staff. Eight in ten of our patients are Omani.",
+   "cta": {
+    "label": "Meet our doctors",
+    "href": "doctors.html"
+   },
+   "cap": "Lobby render and doctor image from starcarehospital.com",
+   "layers": [
+    {
+     "image": "depth-lobby",
+     "speed": 0.12,
+     "scale": 0.08,
+     "lean": 6
+    },
+    {
+     "clouds": true,
+     "speed": 0.3,
+     "y": 62,
+     "tint": "#bfe9e3",
+     "count": 6
+    },
+    {
+     "title": true,
+     "speed": 0.55
+    },
+    {
+     "image": "cut:doctor",
+     "speed": 0.22,
+     "fit": "contain",
+     "bottom": "56%",
+     "position": "86% 100%",
+     "lean": 10,
+     "alt": "Smiling doctor in a white coat"
+    },
+    {
+     "clouds": true,
+     "front": true,
+     "speed": 0.9,
+     "y": 84,
+     "tint": "#f4f8f7",
+     "count": 8
+    }
+   ]
+  },
+  "stats",
+  "services",
+  {
+   "type": "statement",
+   "kicker": "Keep caring",
+   "text": "Eighty per cent of the people we treat are Omani nationals. We count that trust as our measure of care."
+  },
+  {
+   "type": "stages",
+   "id": "inside",
+   "kicker": "Inside Starcare · facility renders",
+   "title": "Step inside",
+   "stages": [
+    {
+     "image": "fac-lobby",
+     "label": "Arrive",
+     "title": "A calm lobby",
+     "text": "Wide halls, soft seating and the teal Starcare reception at the end."
+    },
+    {
+     "image": "waiting-lounge",
+     "label": "Wait",
+     "title": "Outpatient lounges",
+     "text": "Quiet waiting areas beside the clinics."
+    },
+    {
+     "image": "fac-pedia",
+     "label": "Children",
+     "title": "Starcare Pedia",
+     "text": "Origami giraffes, pink seats and cartoons for the youngest patients."
+    },
+    {
+     "image": "fac-clinic",
+     "label": "Consult",
+     "title": "Clinic receptions",
+     "text": "Each department has its own reception and seating."
+    },
+    {
+     "image": "fac-pharmacy-2",
+     "label": "Pharmacy",
+     "title": "Pharmacy on site",
+     "text": "Fill your prescription before you leave."
+    },
+    {
+     "image": "fac-stairs",
+     "label": "Barka",
+     "title": "The gallery staircase",
+     "text": "Paintings and lit display niches line the main staircase."
+    }
+   ]
+  },
+  {
+   "type": "split",
+   "image": "bn-barka-stairs",
+   "kicker": "Starcare Barka",
+   "title": "The largest hospital in the group",
+   "body": [
+    "75 beds serving the South Al Batinah region, with consultants, specialists and nurses trained in the region and abroad."
+   ],
+   "points": [
+    "Over 15 specialities and subspecialties",
+    "Spine Clinic opened in February 2020",
+    "Published prices for check-ups, endoscopy, ACL and knee arthroscopy"
+   ],
+   "cta": {
+    "label": "Visit Starcare Barka",
+    "href": "branch-barka.html"
+   }
+  },
+  {
+   "type": "split",
+   "image": "bn-cuddles",
+   "kicker": "Starcare Cuddles",
+   "title": "Packages for every stage of pregnancy",
+   "flip": true,
+   "body": [
+    "Choose antenatal care from 24, 30 or 36 weeks, or the full pregnancy, then a planned normal or C-section delivery."
+   ],
+   "points": [
+    "Full package: 12 consultant visits and 3 scans",
+    "Normal delivery: 1 night and 2 days, companion included",
+    "Newborn BCG and hepatitis B vaccines and hearing screening"
+   ],
+   "cta": {
+    "label": "See maternity packages",
+    "href": "packages.html"
+   }
+  },
+  "partners",
+  "news",
+  "locations",
+  "bmi",
+  "faq"
+ ],
+ "stats": [
+  {
+   "value": 500,
+   "suffix": "+",
+   "label": "Employees"
+  },
+  {
+   "value": 35,
+   "suffix": "+",
+   "label": "Specialities at Starcare Seeb"
+  },
+  {
+   "value": 8,
+   "label": "Branches in Oman, UAE and India"
+  },
+  {
+   "value": 4,
+   "label": "JCI accreditations"
+  },
+  {
+   "value": 80,
+   "suffix": "%",
+   "label": "Patients who are Omani nationals"
+  }
+ ],
+ "about": {
+  "title": "Keep caring is a way of life",
+  "body": [
+   "Headquartered in the capital region of Muscat, Starcare Oman is a network of hospitals, medical centres and pharmacies. More than 500 people work here, including experienced doctors, nurses and paramedics.",
+   "Accreditation by JCI, PSFHI and ISO made Starcare the first triple-accredited hospital in the Sultanate. Eighty per cent of our patients are Omani nationals."
+  ],
+  "more": [
+   "Starcare Hospital Seeb is a multi-speciality premium hospital designed to the standards of the American Architectural Institute. It offers 24-hour emergency care, outpatient, day-care and inpatient services, modular operating theatres, diagnostic facilities, labour and delivery suites and star-rated inpatient rooms.",
+   "The hospitals are managed by Starcare Health Systems Limited, a healthcare management and consultancy company incorporated in the UK and based in Manchester, with operations in Oman, the UAE and India."
+  ],
+  "timeline": [
+   {
+    "year": "2010",
+    "title": "Starcare Group starts in Oman",
+    "text": "The group begins its journey with Starcare Hospital in Seeb."
+   },
+   {
+    "year": "Year one",
+    "title": "JCI accreditation",
+    "text": "Starcare Hospital earns JCI accreditation within its first year of operation."
+   },
+   {
+    "year": "May 2019",
+    "title": "Nasser Batha named group CEO",
+    "text": "The founding partner takes charge of all Starcare operating units in Oman."
+   },
+   {
+    "year": "Jul 2019",
+    "title": "Best Employer, healthcare",
+    "text": "World HRD Congress names Starcare Best Employer for Oman in Healthcare, 2019."
+   },
+   {
+    "year": "Feb 2020",
+    "title": "Spine Clinic at Barka",
+    "text": "A multidisciplinary clinic for back, neck and spine disorders opens at Starcare Barka."
+   },
+   {
+    "year": "Aug 2021",
+    "title": "Fourth JCI accreditation",
+    "text": "Starcare is re-accredited by Joint Commission International for the fourth time."
+   }
+  ],
+  "values": [
+   {
+    "title": "Vision",
+    "text": "To be the most valuable organisation that promotes health and happiness in every community it operates."
+   },
+   {
+    "title": "Mission",
+    "text": "To find innovative ways to provide high quality healthcare affordable to all sections of the community."
+   }
+  ],
+  "points": [
+   {
+    "title": "JCI",
+    "text": "Joint Commission International, accredited four times."
+   },
+   {
+    "title": "PSFHI",
+    "text": "Patient Safety Friendly Hospital Initiative."
+   },
+   {
+    "title": "ISO",
+    "text": "International Organization for Standardization certification."
+   },
+   {
+    "title": "Starcare Health Systems UK",
+    "text": "Healthcare management company based in Manchester."
+   }
+  ]
+ },
+ "services": {
+  "title": "Care at Starcare",
+  "nav": "Care",
+  "intro": "Hospitals, medical centres and a pharmacy, with named centres for mothers, children, bones and skin.",
+  "items": [
+   {
+    "title": "Emergency and urgent care",
+    "icon": "pulse",
+    "image": "fac-lobby",
+    "text": "A 24-hour emergency department staffed by ACLS-certified doctors and nurses.",
+    "detail": {
+     "intro": "The emergency department at Starcare hospital is manned by ACLS certified doctors and nursing staff who are capable of managing all types of emergencies. The department follows internationally accepted ER protocols.",
+     "body": [
+      "The emergency department is a 24-hour fully-equipped medical facility, skilled to provide immediate pain relief, stabilizing the patients, and is the place where you can get immediate medical attention when it is crucially needed.",
+      "Call Starcare Seeb on +968 2455 7200 or the emergency line +968 9808 8705."
+     ],
+     "points_title": "Conditions treated",
+     "points": [
+      "Chest pain / Myocardial infarction",
+      "Difficulty in breathing / asthma attacks / pneumonia",
+      "Pulmonary embolism ( Blockage of a major blood vessel in the lung)",
+      "Unconsciousness",
+      "Altered sensorium (inability to think or concentrate clearly)",
+      "Food/drug poisoning or overdose",
+      "Hematemesis (Blood Vomiting)",
+      "Hemoptysis ( Blood when coughing)",
+      "Anaphylactic reaction (Allergy)",
+      "Seizures (sudden behavioral change due to abnormal electrical activity in the brain)",
+      "Trauma",
+      "Fractures",
+      "Acute abdominal emergencies",
+      "Minor burns",
+      "Psychiatric cases",
+      "Renal colic (blockage in the urinary tract)"
+     ],
+     "facts": [
+      {
+       "label": "Hours",
+       "value": "24 hours at Starcare Seeb"
+      },
+      {
+       "label": "Urgent care doctors listed",
+       "value": "11"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/urgent-care"
+    }
+   },
+   {
+    "title": "Mother and baby (Starcare Cuddles)",
+    "icon": "heart",
+    "image": "bn-mother-baby",
+    "text": "Birthing suites, Western and Arab midwives, antenatal and delivery packages.",
+    "detail": {
+     "intro": "Starcare Cuddles is the group's mother and baby care brand. The Obstetrics & Gynaecology department has a Hill-Rom multifunction birthing bed, star-rated suite rooms with central monitoring, and Western and Arab midwives.",
+     "body": [
+      "Antenatal packages cover 24 to 30 weeks, 30 to 36 weeks, 36 weeks onwards, or the whole pregnancy. Delivery packages cover a planned normal delivery or a planned C-section, with a companion staying in the room.",
+      "Each package lists what is excluded, such as emergency C-section, epidural, NICU stay and extra tests, which are charged at the hospital price list."
+     ],
+     "points_title": "Services offered",
+     "points": [
+      "Management of High Risk & Low Risk Pregnancies",
+      "Management of Diabetes & Medical Disorders in Pregnancies",
+      "2d / 4D Ultrasound",
+      "Infertility Treatment",
+      "Fallopian tube patency tests ( HyCoSy, HSG)",
+      "All major gynaecological surgeries",
+      "Foetal medicine and detailed anomaly scan",
+      "Detailed anomaly scan",
+      "Colposcopy",
+      "Painless labour",
+      "Contraceptive advice and postnatal services",
+      "Laparoscopic Gynecological Surgeries",
+      "Single port laparoscopic total hysterectomy",
+      "Laparoscopically assisted vaginal hysterectomy",
+      "Laparoscopic recanalization",
+      "Laparoscopic fibroid and ovarian surgeries",
+      "Diagnostic and operative hysteroscopy",
+      "Surgery for Cervical, Uterine and Ovarian Cancer",
+      "Tension vaginal tape insertion for female incontinence"
+     ],
+     "facts": [
+      {
+       "label": "Doctors listed",
+       "value": "9"
+      },
+      {
+       "label": "Available at",
+       "value": "Seeb, Barka, Mabela, Bousher"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/obstetrics-gynaecology"
+    }
+   },
+   {
+    "title": "Children (Starcare Pedia)",
+    "icon": "star",
+    "image": "fac-pedia-2",
+    "text": "Paediatrics, neonatology and paediatric surgery in rooms designed for children.",
+    "detail": {
+     "intro": "The Paediatric Department is well equipped to provide the various diagnostic evaluations and treatments, every attempt is made to deliver care in a manner that fosters optimal development of the newborn infant as well as incorporates the family into care plan initiatives and is well supported by paediatric specialist consultants. Care is delivered by a dedicated staff of neonatal nurses in collaboration with subspecialty-trained doctors and neonatologists.",
+     "body": [
+      "The Neonatology department in Starcare Hospital is well known for medical care in newborn infants having low birth weight, intrauterine growth retardation, congenital malformations (birth defects), sepsis, or birth asphyxias. The Department of Paediatric Surgery at Starcare hospital is well-equipped to handle all kinds of elective and emergency paediatric and neonatal surgeries. We have one of the best and state-of-the-art operation theatre and paediatric anaesthesia service. We imbibe new and innovative methods for better patient care.",
+      "Starcare Pedia is the children's brand, with origami giraffes at reception and its own neonatal intensive care unit brochure."
+     ],
+     "points_title": "Services offered",
+     "points": [
+      "Comprehensive Paediatric Services",
+      "Neonatal care",
+      "Well baby & child development clinic",
+      "Paediatric allergy & immunology",
+      "Paediatric cardiology",
+      "Paediatric surgery",
+      "Paediatric orthopedic",
+      "Paediatric physiotherapy",
+      "Vaccinations"
+     ],
+     "facts": [
+      {
+       "label": "Paediatricians listed",
+       "value": "9"
+      },
+      {
+       "label": "Available at",
+       "value": "Seeb, Barka, Mabela, Bousher"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/pediatrics-neonatology"
+    }
+   },
+   {
+    "title": "Bone, joint and spine",
+    "icon": "shield",
+    "image": "bn-spine",
+    "text": "Joint replacement, arthroscopy, trauma and a spine clinic at Barka.",
+    "detail": {
+     "intro": "The Orthopaedic Department at Starcare Hospital is well equipped and caters to all the bone and joint problems. The Department provides advanced diagnostic and treatment facilities in the specialized fields of sports medicine, complete trauma surgery, spinal and paediatric surgery.",
+     "body": [
+      "The team comes from diverse backgrounds, having been trained and experienced in top UK hospitals. The ultra-modern Orthopaedic operation theatres are fitted with the laminar airflow system that keeps them germfree, thus eliminating the risk of infection. It is fully equipped with the latest computer navigated instruments for precision in complex surgeries. Fracture tables, C-arms, arthroscopes, implants and assorted instruments are imported and conform to the highest international standards. The Orthopaedic Department is backed by dedicated & caring nursing staff & trained physical therapists to diagnose, manage, & treat disorders & injuries of the musculoskeletal system including rehabilitation after orthopaedic surgery. Our physiotherapists are trained in the treatment of post-operative orthopaedic procedures, fractures, acute sports injuries, arthritis, sprains, strains, back & neck pain, spinal conditions & amputations.",
+      "Starcare Barka opened a Spine Clinic in February 2020, bringing orthopaedic and spine surgeons, physiotherapists and pain specialists into one team. Published package prices at Barka: ACL OMR 1,200 and knee arthroscopy OMR 2,700."
+     ],
+     "points_title": "Services offered",
+     "points": [
+      "Hip and Knee Joint Replacement Surgery (Primary and revision).",
+      "Computer Assisted (Navigated) Joint Replacement Surgery.",
+      "Young Adult Hip Pathology management",
+      "Hip Arthroscopy",
+      "Trauma surgery",
+      "Spine Surgery",
+      "Soft Tissue Knee Surgery, ACL Reconstructions",
+      "Knee Arthroscopic surgery",
+      "Foot and Ankle surgery",
+      "Sports Medicine",
+      "Arthritis Management",
+      "Management of Osteoporosis",
+      "Spine Clinic",
+      "“Back and neck pain can result from a variety of causes, when nerves are stressed by adjacent bones and other tissues. This can happen from regular movements, such as simply bending over or from strenuous activity, trauma, ageing or infection. Having a multidisciplinary team to be able to correctly diagnose wide ranges of spine problems allow us to provide the best patient care possible,”",
+      "We specialize in minimally invasive spine surgeries and endoscopic spine surgeries, along with other treatments for common spinal problems like slipped or herniated disc, spondylosis, spinal trauma and fractures, spondylolisthesis and spine tumors etc. It is a multidisciplinary teamwork, making it easier for patients to receive care for a variety of spine and nerve problems, including surgical and non-surgical treatment, rehabilitation and pain management"
+     ],
+     "facts": [
+      {
+       "label": "Orthopaedic doctors listed",
+       "value": "7"
+      },
+      {
+       "label": "Spine Clinic",
+       "value": "Starcare Barka, since Feb 2020"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/orthopaedic-spine-care-trauma-care"
+    }
+   },
+   {
+    "title": "Skin and laser (Orionis)",
+    "icon": "leaf",
+    "image": "bn-orionis",
+    "text": "Dermatology, cosmetology and the Orionis Laser Derma Center.",
+    "detail": {
+     "intro": "Skin is the largest organ in the human body. Skin problems affect people of all age groups.",
+     "body": [
+      "The Department of Dermatology at Starcare Hospital aims to provide an extensive range of treatments for all kinds of skin, hair and nail problems. Our qualified experts are having vast experience in managing dermatological problems, performing dermatosurgery and lasers. The Department is geared towards providing a comprehensive solution and care for both common and rare dermatological problems. Cosmetology Care at Starcare help people to reinvent the true beauty of their skin. Driven by the passion and commitment of doctors and paramedics who have been serving in this field for many years, Starcare promises care beyond imagination. All this is reflected in the top-of-the-line infrastructural facility and service that has been ensured at Starcare",
+      "Laser treatments run under the Orionis Laser Derma Center name."
+     ],
+     "points_title": "Treatments",
+     "points": [
+      "Cosmetic removal of moles",
+      "Surgical removal of skin papilloma and epidermal cyst",
+      "Surgical removal of benign and malignant skin tumours",
+      "Cryotherapy for pre-cancerous lesions and warts",
+      "Chemical peels for pigmentation and skin rejuvenation",
+      "Skin Rejuvenation",
+      "Hair loss Treatment",
+      "Electrocautery for skin tags, Moles and seborrhoeic keratosis",
+      "Skin surgeries and biopsy",
+      "Treatment for Eczema, Psoriasis and Vitiligo",
+      "Treatment for Genital and Non-genital Warts",
+      "Iontophoresis for Excessive Sweating",
+      "Botox",
+      "Fillers",
+      "Intralesional injuctions",
+      "Derma roller",
+      "Mesotherapy"
+     ],
+     "facts": [
+      {
+       "label": "Dermatologists listed",
+       "value": "2"
+      },
+      {
+       "label": "Available at",
+       "value": "Seeb, Barka, Mabela"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/dermatology-cosmetology"
+    }
+   },
+   {
+    "title": "Dental care",
+    "icon": "check",
+    "image": "bn-dental",
+    "text": "Fillings, root canals, crowns, implants, whitening and children's dentistry.",
+    "detail": {
+     "intro": "Proper functioning of teeth is essential for good health and well-being. The smile also reveals the confidence and personality of an individual.",
+     "body": [
+      "The Starcare Dental Department is wholly focused on you, your health, and your comfort. We utilize the latest in technology and the newest procedures to ensure the quality of care. You will always be fully informed of the status of your dental health, and of the details of every available treatment option. Meanwhile, our experienced, friendly team is available to assist you in every possible way. We believe in correcting, restoring and maintaining your pearly whites and aim to impart health and a beautiful smile to our patients in a caring and gentle way. We have an experienced dental team, the complete range of treatments and the professional care to confirm your trust. We would like to offer the best in dental care to help you enhance your wellbeing, self-confidence and quality of life."
+     ],
+     "points_title": "Treatments",
+     "points": [
+      "Expertise in Preventive & Therapeutic Dentistry",
+      "Restorative Dentistry – All kind of Fillings & Root Canal Treatment",
+      "Pedodontics – Dental treatment for Children",
+      "Ceramic bridge / Zirconium crowns & bridges",
+      "Oral Surgery- Surgical Extraction, Apicoectomy & Biopsy",
+      "Oral Medicine/Pathologies",
+      "Surgery of Full Impacted Wisdom Teeth",
+      "Zoom Bleaching/Whitening",
+      "Periodontal & Gingival treatment"
+     ],
+     "facts": [
+      {
+       "label": "Dentists listed",
+       "value": "6"
+      },
+      {
+       "label": "Available at",
+       "value": "Seeb, Barka, Mabela, Bousher"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/dentistry-implantology"
+    }
+   },
+   {
+    "title": "Health check-ups",
+    "icon": "chart",
+    "image": "bn-doctor",
+    "text": "Well man, well woman, well child and premarital checks.",
+    "detail": {
+     "intro": "Periodic, systematic check-ups can reassure you that you are healthy, or give an early hint to act. Packages are chosen by sex, age and lifestyle risk factors.",
+     "body": [
+      "Every check-up includes a consultation with a physician or specialist, a body check and laboratory tests. Call +968 9808 8705 or +968 2455 7200 to choose the right one."
+     ],
+     "points_title": "Packages",
+     "points": [
+      "Well Man Checkup",
+      "Well Woman Checkup",
+      "Well Child Checkup",
+      "Premarital checks for men and women",
+      "Executive Wellness Checkup",
+      "General Health Check-up at Barka, OMR 59"
+     ],
+     "facts": [
+      {
+       "label": "From",
+       "value": "OMR 59 (Barka general check-up)"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/health-checkup/executive-wellness-checkup"
+    }
+   },
+   {
+    "title": "Pharmacy",
+    "icon": "layers",
+    "image": "fac-pharmacy",
+    "text": "In-house pharmacies stocked with medicines sourced worldwide.",
+    "detail": {
+     "intro": "Timely treatment matters as much as diagnosis. The Starcare pharmacy stocks a wide range of lifesaving drugs procured from across the globe.",
+     "body": [
+      "Pharmacies sit inside Starcare hospitals and medical centres, so prescriptions can be filled before you leave."
+     ],
+     "facts": [
+      {
+       "label": "Where",
+       "value": "Starcare hospitals and medical centres"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/"
+    }
+   }
+  ]
+ },
+ "specialities": {
+  "title": "All specialities",
+  "nav": "Specialities",
+  "in_nav": false,
+  "intro": "35 departments across the Starcare hospitals and medical centres, as listed on each branch website.",
+  "items": [
+   {
+    "title": "Anaesthesiology & Pain Management",
+    "icon": "shield",
+    "text": "The Department of Anaesthesiology offers consultation in the comprehensive management of anesthetic care for surgical, diagnostic, and therapeutic pro",
+    "detail": {
+     "intro": "The Department of Anaesthesiology offers consultation in the comprehensive management of anesthetic care for surgical, diagnostic, and therapeutic procedures, and provides pre-and post-operative care including pain therapy and critical care. Our anaesthesiologist’s first concern is always patient safety.",
+     "body": [
+      "They work closely with surgeons, obstetricians, and other staff to identify the safest, most effective anesthesia options for each patient. Communication with patients is the key and often begins before patients have surgery. Our anesthesia providers emphasize dialogue with patients to clarify their needs, answer their questions and allay any concerns or fears they may have."
+     ],
+     "points": [
+      "Pre Anaesthetic Evaluation",
+      "General Anaesthesia",
+      "Regional Anaesthesia",
+      "Epidural for Painless labour",
+      "Critical Care support",
+      "Pain Management",
+      "Pain Management..."
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "3"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/anaesthesiology-pain-management"
+    }
+   },
+   {
+    "title": "Ayurveda",
+    "icon": "leaf",
+    "text": "Ayurveda is offered at Starcare Barka.",
+    "detail": {
+     "intro": "Ayurveda is offered at Starcare Barka.",
+     "points": [
+      "Pain Management  ( Back Pain,knee Pain,joint Pain )",
+      "Diabetes Management",
+      "Weight Loss Program",
+      "Post Pregnancy Recovery",
+      "Blood Pressure Management",
+      "Gastritis",
+      "Stress Management",
+      "Depression",
+      "Paralysis",
+      "Cervical Spondylitis & Slip Disc",
+      "Sinusitis And Migraine",
+      "Eye Care",
+      "Allergy & Asthma",
+      "Skin Diseases",
+      "Multiple Sclerosis"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "2"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/barka-sub/speciality/ayurveda"
+    }
+   },
+   {
+    "title": "Bariatric & Laparoscopic Surgery",
+    "icon": "shield",
+    "text": "When it is decided for a surgery, it is also very important to decide where to do it.",
+    "detail": {
+     "intro": "When it is decided for a surgery, it is also very important to decide where to do it. Starcare offers highly experienced & skilled team of surgeons equipped with latest diagnostic and surgical technology, loving and caring nursing support, pleasant and nurturing environment for the fastest recovery of the patient.",
+     "body": [
+      "The department perform perform advanced gastrointestinal surgeries, working closely with other concerned specialists to provide timely surgical intervention for complex conditions. At Starcare Hospital, we have a highly experienced team of Obesity, Bariatric & Metabolic surgeons who provide a comprehensive service for surgical procedures."
+     ],
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Seeb"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/bariatric-laparoscopic-surgery"
+    },
+    "image": "fac-stairs-2"
+   },
+   {
+    "title": "Cardiology",
+    "icon": "heart",
+    "text": "The Cardiology department at Starcare hospital integrates a whole array of non-invasive cardiology services supported by diagnostic facilities like TM",
+    "detail": {
+     "intro": "The Cardiology department at Starcare hospital integrates a whole array of non-invasive cardiology services supported by diagnostic facilities like TMT, echocardiogram. The department offers lifestyle clinics and wellness programs detailing exercise patterns and comprehensive cardiac checkups.",
+     "body": [
+      "A high dependency unit equipped with the most modern life-supporting mechanisms and monitoring devices has been set up to handle any emergency cardiac situations."
+     ],
+     "points": [
+      "Management of Chest pain",
+      "ECG & ECH",
+      "Computerised Treadmill Test (TMT)",
+      "Management of Heart Failure",
+      "Intensive Care Unit (ICU)",
+      "Cardiac Emergency Services",
+      "Heart Check ups"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Bousher, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "4"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/cardiology"
+    },
+    "image": "team-seeb"
+   },
+   {
+    "title": "Dentistry & Implantology",
+    "icon": "shield",
+    "text": "Proper functioning of teeth is essential for good health and well-being.",
+    "detail": {
+     "intro": "Proper functioning of teeth is essential for good health and well-being. The smile also reveals the confidence and personality of an individual.",
+     "body": [
+      "The Starcare Dental Department is wholly focused on you, your health, and your comfort. We utilize the latest in technology and the newest procedures to ensure the quality of care. You will always be fully informed of the status of your dental health, and of the details of every available treatment option. Meanwhile, our experienced, friendly team is available to assist you in every possible way. We believe in correcting, restoring and maintaining your pearly whites and aim to impart health and a beautiful smile to our patients in a caring and gentle way. We have an experienced dental team, the complete range of treatments and the professional care to confirm your trust. We would like to offer the best in dental care to help you enhance your wellbeing, self-confidence and quality of life."
+     ],
+     "points": [
+      "Expertise in Preventive & Therapeutic Dentistry",
+      "Restorative Dentistry – All kind of Fillings & Root Canal Treatment",
+      "Pedodontics – Dental treatment for Children",
+      "Ceramic bridge / Zirconium crowns & bridges",
+      "Oral Surgery- Surgical Extraction, Apicoectomy & Biopsy",
+      "Oral Medicine/Pathologies",
+      "Surgery of Full Impacted Wisdom Teeth",
+      "Zoom Bleaching/Whitening",
+      "Periodontal & Gingival treatment"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Bousher, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "6"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/dentistry-implantology"
+    },
+    "image": "bn-dental"
+   },
+   {
+    "title": "Dermatology & Cosmetology",
+    "icon": "shield",
+    "text": "Skin is the largest organ in the human body.",
+    "detail": {
+     "intro": "Skin is the largest organ in the human body. Skin problems affect people of all age groups.",
+     "body": [
+      "The Department of Dermatology at Starcare Hospital aims to provide an extensive range of treatments for all kinds of skin, hair and nail problems. Our qualified experts are having vast experience in managing dermatological problems, performing dermatosurgery and lasers. The Department is geared towards providing a comprehensive solution and care for both common and rare dermatological problems. Cosmetology Care at Starcare help people to reinvent the true beauty of their skin. Driven by the passion and commitment of doctors and paramedics who have been serving in this field for many years, Starcare promises care beyond imagination. All this is reflected in the top-of-the-line infrastructural facility and service that has been ensured at Starcare"
+     ],
+     "points": [
+      "Cosmetic removal of moles",
+      "Surgical removal of skin papilloma and epidermal cyst",
+      "Surgical removal of benign and malignant skin tumours",
+      "Cryotherapy for pre-cancerous lesions and warts",
+      "Chemical peels for pigmentation and skin rejuvenation",
+      "Skin Rejuvenation",
+      "Hair loss Treatment",
+      "Electrocautery for skin tags, Moles and seborrhoeic keratosis",
+      "Skin surgeries and biopsy",
+      "Treatment for Eczema, Psoriasis and Vitiligo",
+      "Treatment for Genital and Non-genital Warts",
+      "Iontophoresis for Excessive Sweating",
+      "Botox",
+      "Fillers",
+      "Intralesional injuctions",
+      "Derma roller",
+      "Mesotherapy"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "2"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/dermatology-cosmetology"
+    },
+    "image": "bn-orionis"
+   },
+   {
+    "title": "Diabetology",
+    "icon": "shield",
+    "text": "Starcare Hospital runs an exclusive clinic for Diabetes, Endocrine and Metabolic disorders.",
+    "detail": {
+     "intro": "Starcare Hospital runs an exclusive clinic for Diabetes, Endocrine and Metabolic disorders. The department is committed to early diagnosis and evidence based management of type 1 & type 2 diabetes, gestational diabetes and long term and short term complications arising from the various kinds of diabetes.",
+     "body": [
+      "They are competently treated thanks to state-of -the art diagnostic facilities and a team of committed doctors. The Hospital is also fully equipped to handle other endocrine & metabolic issues like thyroid disorders, obesity and osteoporosis. The department also offers surgical treatment, which improve type 2 diabetes in nearly 90 percent of patients."
+     ],
+     "points": [
+      "Identification of “pre-diabetes” to prevent the onset of the disease.",
+      "Evaluation of type I and type II diabetes",
+      "Key hole surgery to cure type 2 diabetes",
+      "Provision of treatment protocols for women with prenatal diabetes.",
+      "Dietary and behavioral counseling.",
+      "Personal health and medical education.",
+      "Identification and management of other hormonal diseases",
+      "Supports major surgeries and procedures for diabetic patients"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Bousher, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "2"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/diabetology"
+    },
+    "image": "bn-doctor"
+   },
+   {
+    "title": "Diet & Nutrition",
+    "icon": "leaf",
+    "text": "Starcare Hospital offers comprehensive nutrition counselling for people with medical conditions requiring changes in diet and eating habits.",
+    "detail": {
+     "intro": "Starcare Hospital offers comprehensive nutrition counselling for people with medical conditions requiring changes in diet and eating habits. Our licensed dietitians work with the physician to create individualized plans to help the patients meet short-term and long-term goals for improved health.",
+     "body": [
+      "The goal is attained by educating patients on nutrient modifications. The department aims to aid the patients with management of specific dietary needs in different areas, including cardiac care, diabetes and childhood & adult obesity. The Department of Diet and Nutrition also provides nutrition care, advice and education to patients while they are in the hospital recovering from surgery or illness and after they are discharged."
+     ],
+     "points": [
+      "Dietary plan, Weight Management",
+      "Therapeutic diet management",
+      "Diet counseling for various disease conditions",
+      "Health Education"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Seeb"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/diet-nutrition"
+    },
+    "image": "bn-keep-caring"
+   },
+   {
+    "title": "ENT",
+    "icon": "shield",
+    "text": "The Department of Ear Nose and Throat (ENT) at Starcare Hospital is a state-of-the-art department with the most modern ENT workstation (first of its k",
+    "detail": {
+     "intro": "The Department of Ear Nose and Throat (ENT) at Starcare Hospital is a state-of-the-art department with the most modern ENT workstation (first of its kind in Oman). The Department offers comprehensive care of all the ENT & Head and Neck diseases under one roof.",
+     "body": [
+      "All aspects starting from patient’s examination to management are taken care. All common disorders of Ears, Nose, Throat and Head and Neck regions are dealt. Advanced Diagnostic like Impedance Audiometry, Flexible Scopies are also available. State- of-the-art Microscopes are used for micro ear surgeries. The Radio frequency Ablator is versatile equipment used for nasal allergy, tonsil reduction, snoring and related problems."
+     ],
+     "points": [
+      "Regular OPD",
+      "Snoring Management",
+      "ENT Surgeries",
+      "Adeno-tonsillectomy",
+      "Surgery for Polyp-(FESS)",
+      "Septoplasty",
+      "Septorhinoplasty",
+      "Surgery for ear infection",
+      "Mastoidectomy",
+      "Tympanoplasty",
+      "Hearing Problem – staples surgery",
+      "Voice disorder –micro laryngeal surgery",
+      "Hearing Evaluation (Audiometry / Tympanometry)"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "7"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/ent"
+    }
+   },
+   {
+    "title": "Endocrinology",
+    "icon": "shield",
+    "text": "Endocrinology is offered at Starcare Seeb.",
+    "detail": {
+     "intro": "Endocrinology is offered at Starcare Seeb.",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "1"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/endocrinology"
+    }
+   },
+   {
+    "title": "Family Medicine",
+    "icon": "shield",
+    "text": "Family medicine is a medical specialty devoted to comprehensive health care for people of all ages.",
+    "detail": {
+     "intro": "Family medicine is a medical specialty devoted to comprehensive health care for people of all ages. A family practitioner is a primary care doctor who provides continuing and comprehensive health care for the individual and family across all ages, genders, diseases, and parts of the body.",
+     "body": [
+      "It is based on knowledge of the patient in the context of the family and the community, emphasizing disease prevention and the promotion of health."
+     ],
+     "points": [
+      "Comprehensive family centered care",
+      "Travel advice",
+      "Vaccinations",
+      "Health checkups",
+      "Health education",
+      "Antenatal, Postnatal and Family Planning advise"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Bousher, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "3"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/family-medicine"
+    },
+    "image": "bn-keep-caring"
+   },
+   {
+    "title": "Gastroenterology",
+    "icon": "shield",
+    "text": "Gastroenterology is a medical specialty that focuses on the digestive system / oesophagus, stomach, small intestines , colon and rectum, and also incl",
+    "detail": {
+     "intro": "Gastroenterology is a medical specialty that focuses on the digestive system / oesophagus, stomach, small intestines , colon and rectum, and also includes diseases of the liver and associated organs like gall bladder, biliary tree and pancreas.The Gastroenterology department at Starcare Hospital is fully equipped with the latest technology facilities and headed by internationally qualified doctors & best among nursing care. The Department offers full service including laboratory testing, Ultrasound Scan, CT scan and Endoscopy Services.",
+     "body": [
+      "Gastroenterologist diagnose and treat all abnormalities of the gastrointestinal tract, as digestive diseases are becoming increasingly common and more people are at risk of developing serious complications if not diagnosed in time and treated. Most common issues that need Gastroenterology consultations are heartburn, swallowing difficulties, dyspepsia like abdominal gases and fullness, abdominal pain, diarrhea, constipation, rectal bleeding, poor appetite and weight loss. Endoscopy unit is equipped with advanced video-system and we carry out diagnostic and therapeutic upper and lower endoscopy / Gastroscopy, Colonoscopy, Sigmoideoscopy. We have also implemented screening colonoscopy examination, a method for screening colorectal cancer."
+     ],
+     "points": [
+      "OP & IP Management of Diseases like:",
+      "Gastroesophageal Reflux Disease (GERD)",
+      "Gallstones",
+      "Celiac Disease",
+      "Crohn’s Disease",
+      "Ulcerative Colitis",
+      "Irritable Bowel Syndrome",
+      "Hemorrhoids",
+      "Diverticulitis",
+      "Diarrhea",
+      "Gallbladder disorders",
+      "Ulcer Diseases",
+      "Hepatitis",
+      "Pancreatitis",
+      "Cirrhosis and portal hypertension",
+      "Constipation & loose motion",
+      "Diagnostic and Therapeutic Endoscopy Procedures",
+      "OesophagoGastroduodenoscopy",
+      "Sigmoidoscopy",
+      "Colonoscopy",
+      "Therapeutic Endoscopic Procedures",
+      "Sclerotherapy Treatments",
+      "Endoscopic Variceal Ligation",
+      "Foreign Body Removal"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "1"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/gasteroenterology"
+    }
+   },
+   {
+    "title": "General & Laparoscopic Surgery",
+    "icon": "shield",
+    "text": "When it is decided for a surgery, it is also very important to decide where to do it.",
+    "detail": {
+     "intro": "When it is decided for a surgery, it is also very important to decide where to do it. Starcare offers highly experienced & skilled team of surgeons equipped with latest diagnostic and surgical technology, loving and caring nursing support, pleasant and nurturing environment for the fastest recovery of the patient.",
+     "body": [
+      "The department perform advanced laparoscopic surgeries, working closely with other concerned specialists to provide timely surgical intervention for complex conditions. At Starcare Hospital, we have a highly experienced team of general surgeons who excel in critical situations and provide a comprehensive, round the clock service for all general surgical procedures. The surgeons are specially trained to conduct emergency surgeries to contain excessive bleeding, bowel obstructions, organ perforations, burns and abdominal trauma. Other than emergencies, they also routinely carry out operations for complications such as appendicitis, hernia, gallbladder removal, thyroid and removal of tumours. The department can perform advanced gastrointestinal surgeries, rectal and complex anal surgeries and laparoscopic procedures including advanced laparoscopic surgeries."
+     ],
+     "points": [
+      "General Surgery",
+      "All advanced Laparoscopic Surgeries",
+      "Diagnostic Laparoscopy",
+      "Hernia surgeries- TAPP, TEP, hiatus hernia, dual mesh repair for ventral hernias and repair of other kinds of hernia.",
+      "Hemorrhoid Treatment",
+      "Thyroid Surgery",
+      "Gastrointestinal Surgery",
+      "Intra gastric balloon placement",
+      "Appendectomy",
+      "Gall Bladder & Gall stones",
+      "OBESITY SURGERY, DIABETIC & METABOLIC SURGERY, AND ENDOSCOPIC THYROIDECTOMY",
+      "The department also offers specialized surgeries for Type 2 diabetes for obese as well as non-obese patients. Obesity surgery is a safe and effective option for patients whose diet controls have not produced desired results. The department also offers Scarless thyroid surgery which is one of the very few centers in the entire GCC."
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "5"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/general-laparoscopic-surgery"
+    },
+    "image": "fac-stairs-2"
+   },
+   {
+    "title": "Haematology",
+    "icon": "shield",
+    "text": "Haematology is offered at Starcare Bousher, Seeb.",
+    "detail": {
+     "intro": "Haematology is offered at Starcare Bousher, Seeb.",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Bousher, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "2"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/bousher-sub/speciality/haematology"
+    }
+   },
+   {
+    "title": "Internal Medicine",
+    "icon": "shield",
+    "text": "Internal Medicine is the medical specialty dealing with the prevention, diagnosis and treatment of general adult illness.",
+    "detail": {
+     "intro": "Internal Medicine is the medical specialty dealing with the prevention, diagnosis and treatment of general adult illness. People specializing in internal medicine are especially skilled in the management of patients who have multi-system illness.",
+     "body": [
+      "The Department of Internal Medicines at Starcare is one of the major departments consisting of consultants, who are trained and worked in leading hospitals. They provide a broad range of services for diagnosis and treatment of multiple adult medical problems."
+     ],
+     "points": [
+      "Diabetes & lipid disorders & metabolic syndrome",
+      "Hypertension (high blood pressure) & medical Management of obesity",
+      "Critical care",
+      "Management of chronic diseases involving multi-system failure",
+      "Health Check-ups under the Preventive Medicine program",
+      "Treatment advice of Infectious diseases including Malaria, Typhoid fever, Tuberculosis",
+      "Thyroid and other endocrine related problems",
+      "Chronic fatigue syndrome",
+      "Geriatric care"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Bousher, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "7"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/internal-medicine"
+    },
+    "image": "bn-doctor"
+   },
+   {
+    "title": "Neurology",
+    "icon": "shield",
+    "text": "Department of Neurology at Starcare Hospital addresses various disorders pertaining to the nervous system and offers comprehensive consultative servic",
+    "detail": {
+     "intro": "Department of Neurology at Starcare Hospital addresses various disorders pertaining to the nervous system and offers comprehensive consultative services, diagnostic testing and treatment for a broad spectrum of neurological conditions. At Starcare, the patients benefit from the wide experience of our in-house and visiting Neurologists who in turn are supported with radiologists, physiotherapists, neurosurgeons and other specialists.",
+     "points": [
+      "Treatment of Migraine & other types of Headaches",
+      "Management of Stroke",
+      "Treatment of Epilepsy & other types of Fits",
+      "Management of Seizures in children & adults",
+      "Management of Neurological complications of diabetes",
+      "Treatment of Movement disorders like Parkinsonism",
+      "Behavioural Neurology",
+      "CT Scan",
+      "Degenerative brain diseases",
+      "Memory problems/ dementia",
+      "Neck, back, lower back, arm & leg pains and tingling",
+      "Cervical, lumbro-sacral spondysosis 24 hours Emergency Neurology"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "1"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/neurology"
+    },
+    "image": "bn-spine"
+   },
+   {
+    "title": "Obstetrics & Gynaecology",
+    "icon": "shield",
+    "text": "The Obstetrics & Gynaecology Department at Starcare Hospital is equipped with most ultra-modern equipment including Hill Rom Multifunction Birthing Be",
+    "detail": {
+     "intro": "The Obstetrics & Gynaecology Department at Starcare Hospital is equipped with most ultra-modern equipment including Hill Rom Multifunction Birthing Bed providing sophisticated labour room facility. The Operation theatres are as per American Architect Institute Standards and the inpatient rooms are star rated suite rooms with centralized medical and monitoring system.",
+     "body": [
+      "The team of experienced & highly qualified gynaecologists, and Western, Arab midwives are available for safe and comfortable delivery. The department is committed to women’s health and we address all kinds of gynaecological issues. The team of doctors who are experienced and expertise in laparoscopic and open surgeries manage complex procedures."
+     ],
+     "points": [
+      "Management of High Risk & Low Risk Pregnancies",
+      "Management of Diabetes & Medical Disorders in Pregnancies",
+      "2d / 4D Ultrasound",
+      "Infertility Treatment",
+      "Fallopian tube patency tests ( HyCoSy, HSG)",
+      "All major gynaecological surgeries",
+      "Foetal medicine and detailed anomaly scan",
+      "Detailed anomaly scan",
+      "Colposcopy",
+      "Painless labour",
+      "Contraceptive advice and postnatal services",
+      "Laparoscopic Gynecological Surgeries",
+      "Single port laparoscopic total hysterectomy",
+      "Laparoscopically assisted vaginal hysterectomy",
+      "Laparoscopic recanalization",
+      "Laparoscopic fibroid and ovarian surgeries",
+      "Diagnostic and operative hysteroscopy",
+      "Surgery for Cervical, Uterine and Ovarian Cancer",
+      "Tension vaginal tape insertion for female incontinence"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Bousher, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "9"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/obstetrics-gynaecology"
+    },
+    "image": "bn-pregnancy"
+   },
+   {
+    "title": "Ophthalmology",
+    "icon": "shield",
+    "text": "Starcare Ophthalmology Department provides the best possible eye care to its patients and is dedicated to providing eye care ranging from routine eye ",
+    "detail": {
+     "intro": "Starcare Ophthalmology Department provides the best possible eye care to its patients and is dedicated to providing eye care ranging from routine eye examinations to complex surgical procedures. The department also performs refractions, prescribes corrective lenses and performs other tests as required to help maintain good vision.",
+     "body": [
+      "The department offers a complete range of examinations, with appropriate diagnostic tests & treats conditions such as infectious & allergic conjunctivitis, glaucoma, diabetic eye disease & cataracts; also provides comprehensive management for a wide variety of retinal conditions, including diabetic retinopathy, macular disorders, retinal detachment, proliferative vitreoretinopathy and non-diabetic vascular diseases."
+     ],
+     "points": [
+      "Refraction and Eye examination including Screening",
+      "Lens Prescriptions",
+      "Occupational eye checkups",
+      "Management of Eye movement disorders",
+      "Trauma Care",
+      "Management of glaucoma, medical retina and cornea problems",
+      "Foreign body removal",
+      "Anterior Segment Surgery",
+      "Minor Surgery-Chalazion"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Seeb"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/ophthalmology"
+    }
+   },
+   {
+    "title": "Oral & Maxillofacial Surgery",
+    "icon": "shield",
+    "text": "Oral & Maxillofacial Surgery is offered at Starcare Barka, Seeb.",
+    "detail": {
+     "intro": "Oral & Maxillofacial Surgery is offered at Starcare Barka, Seeb.",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "3"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/barka-sub/speciality/oral-maxillofacial-surgery"
+    },
+    "image": "bn-dental"
+   },
+   {
+    "title": "Orthopaedic, Spine Care & Trauma Care",
+    "icon": "shield",
+    "text": "The Orthopaedic Department at Starcare Hospital is well equipped and caters to all the bone and joint problems.",
+    "detail": {
+     "intro": "The Orthopaedic Department at Starcare Hospital is well equipped and caters to all the bone and joint problems. The Department provides advanced diagnostic and treatment facilities in the specialized fields of sports medicine, complete trauma surgery, spinal and paediatric surgery.",
+     "body": [
+      "The team comes from diverse backgrounds, having been trained and experienced in top UK hospitals. The ultra-modern Orthopaedic operation theatres are fitted with the laminar airflow system that keeps them germfree, thus eliminating the risk of infection. It is fully equipped with the latest computer navigated instruments for precision in complex surgeries. Fracture tables, C-arms, arthroscopes, implants and assorted instruments are imported and conform to the highest international standards. The Orthopaedic Department is backed by dedicated & caring nursing staff & trained physical therapists to diagnose, manage, & treat disorders & injuries of the musculoskeletal system including rehabilitation after orthopaedic surgery. Our physiotherapists are trained in the treatment of post-operative orthopaedic procedures, fractures, acute sports injuries, arthritis, sprains, strains, back & neck pain, spinal conditions & amputations."
+     ],
+     "points": [
+      "Hip and Knee Joint Replacement Surgery (Primary and revision).",
+      "Computer Assisted (Navigated) Joint Replacement Surgery.",
+      "Young Adult Hip Pathology management",
+      "Hip Arthroscopy",
+      "Trauma surgery",
+      "Spine Surgery",
+      "Soft Tissue Knee Surgery, ACL Reconstructions",
+      "Knee Arthroscopic surgery",
+      "Foot and Ankle surgery",
+      "Sports Medicine",
+      "Arthritis Management",
+      "Management of Osteoporosis",
+      "Spine Clinic",
+      "“Back and neck pain can result from a variety of causes, when nerves are stressed by adjacent bones and other tissues. This can happen from regular movements, such as simply bending over or from strenuous activity, trauma, ageing or infection. Having a multidisciplinary team to be able to correctly diagnose wide ranges of spine problems allow us to provide the best patient care possible,”",
+      "We specialize in minimally invasive spine surgeries and endoscopic spine surgeries, along with other treatments for common spinal problems like slipped or herniated disc, spondylosis, spinal trauma and fractures, spondylolisthesis and spine tumors etc. It is a multidisciplinary teamwork, making it easier for patients to receive care for a variety of spine and nerve problems, including surgical and non-surgical treatment, rehabilitation and pain management"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "7"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/orthopaedic-spine-care-trauma-care"
+    },
+    "image": "bn-joint"
+   },
+   {
+    "title": "Paediatric Cardiology",
+    "icon": "heart",
+    "text": "Children who have congenital and acquired heart disease need complex, multifaceted care for continued survival and better quality of life.",
+    "detail": {
+     "intro": "Children who have congenital and acquired heart disease need complex, multifaceted care for continued survival and better quality of life. Starcare Paediatric Cardiology department educates you and your child about your heart (cardiac) anatomy, future health and potential future heart conditions.",
+     "body": [
+      "The department is dedicated to achieving the best possible outcomes for every patient as well as providing long-term support for every family. At starcare a dedicated team of Paediatric Cardiologists along with the paramedics provides comprehensive evaluation and management for patients with a wide range of congenital and acquired heart disease. Care is provided to patients from fetal life through adolescence and extends to the care of adults with congenital heart disease."
+     ],
+     "points": [
+      "Paediatric Echocardiography",
+      "Heart murmur evaluation",
+      "Heart Rhythm problems",
+      "Paediatric Cardiac Check-ups & ECG",
+      "Pre – surgical cardiac evaluation for Neonates"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Seeb"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/paediatric-cardiology"
+    },
+    "image": "fac-pedia-4"
+   },
+   {
+    "title": "Paediatric Surgery",
+    "icon": "shield",
+    "text": "The health and wellbeing of the children is most important to the family and the society at large.",
+    "detail": {
+     "intro": "The health and wellbeing of the children is most important to the family and the society at large. At Starcare, children are a priority and we aim to please them in the best possible way in stressful situations.",
+     "body": [
+      "Paediatric surgeons specialize in handling surgery needs of newborn till 15 years of age. Many surgical conditions that affect children are significantly different from what is common in adulthood and call for special training, skill and compassionate attitude. The Department at Starcare is already reputed for handling complex surgeries even in newborns, which used to be handled only at Govt Hospitals."
+     ],
+     "points": [
+      "Pediatric Gynecology",
+      "Pediatric Laparoscopic surgery",
+      "Pediatric General Surgery",
+      "Neonatal surgery",
+      "Pediatric Urology",
+      "Treatment of Anorectal anomalies and hirschsprung disease",
+      "Other birth defects",
+      "Treatment of Tumor"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Mabela, Seeb"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/peadiatric-surgery"
+    },
+    "image": "fac-pedia-3"
+   },
+   {
+    "title": "Pathology",
+    "icon": "layers",
+    "text": "Medical laboratory tests play an important role in detection, diagnosis and treatment of diseases in patients.",
+    "detail": {
+     "intro": "Medical laboratory tests play an important role in detection, diagnosis and treatment of diseases in patients. The department of Laboratory Medicine at Starcare covers the complete range of pathology testing services.",
+     "body": [
+      "As part of a JCI accredited hospital, the Standard Operating Procedures (SOPs) are regularly reviewed and updated as per the guidance and recommendations. All tests are performed by qualified professionals and skilled lab technologists who work under strict quality assurance guidelines. The department is also a part of various external quality control programme. We do liaise with ISO 15189 accredited laboratories for rare investigations requests which are not done locally."
+     ],
+     "points": [
+      "Clinical Biochemistry",
+      "Hematology and Blood Transfusion",
+      "Microbiology",
+      "Histopathology and cytopathology",
+      "Routine blood transfusion service"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "1"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/pathology"
+    },
+    "image": "fac-clinic"
+   },
+   {
+    "title": "Pediatric Orthopedics",
+    "icon": "shield",
+    "text": "Pediatric Orthopedics is offered at Starcare Mabela.",
+    "detail": {
+     "intro": "Pediatric Orthopedics is offered at Starcare Mabela.",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Mabela"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/mabela-sub/speciality/pediatric-orthopedics"
+    }
+   },
+   {
+    "title": "Pediatrics & Neonatology",
+    "icon": "shield",
+    "text": "The Paediatric Department is well equipped to provide the various diagnostic evaluations and treatments, every attempt is made to deliver care in a ma",
+    "detail": {
+     "intro": "The Paediatric Department is well equipped to provide the various diagnostic evaluations and treatments, every attempt is made to deliver care in a manner that fosters optimal development of the newborn infant as well as incorporates the family into care plan initiatives and is well supported by paediatric specialist consultants. Care is delivered by a dedicated staff of neonatal nurses in collaboration with subspecialty-trained doctors and neonatologists.",
+     "body": [
+      "The Neonatology department in Starcare Hospital is well known for medical care in newborn infants having low birth weight, intrauterine growth retardation, congenital malformations (birth defects), sepsis, or birth asphyxias. The Department of Paediatric Surgery at Starcare hospital is well-equipped to handle all kinds of elective and emergency paediatric and neonatal surgeries. We have one of the best and state-of-the-art operation theatre and paediatric anaesthesia service. We imbibe new and innovative methods for better patient care."
+     ],
+     "points": [
+      "Comprehensive Paediatric Services",
+      "Neonatal care",
+      "Well baby & child development clinic",
+      "Paediatric allergy & immunology",
+      "Paediatric cardiology",
+      "Paediatric surgery",
+      "Paediatric orthopedic",
+      "Paediatric physiotherapy",
+      "Vaccinations"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Bousher, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "9"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/pediatrics-neonatology"
+    },
+    "image": "bn-baby"
+   },
+   {
+    "title": "Physiotherapy & Rehabilitation",
+    "icon": "shield",
+    "text": "The Starcare Hospital physiotherapy department is well equipped and aims to rehabilitate and improve the movement disorders in people by using evidenc",
+    "detail": {
+     "intro": "The Starcare Hospital physiotherapy department is well equipped and aims to rehabilitate and improve the movement disorders in people by using evidence-based, natural methods such as exercise, motivation, adapted equipment, education and advocacy. Our Physiotherapists are well experienced in medical science subjects such as anatomy, neuroscience and physiology to develop skills and attitudes necessary for health education, prevention, diagnosis, treatment and rehabilitation of patients with physical disorders and disabilities.",
+     "body": [
+      "The techniques employed are advanced and most up to date."
+     ],
+     "points": [
+      "Post surgical rehabilitation both in adults/paediatric.",
+      "Rehabilitation of conditions like post stroke, Cerebral palsy, Bell’s palsy and various other neurological conditions both in adults and children.",
+      "Treatment of conditions like disc related problems, arthritis, tendinitis, joint stiffness, muscular problems etc.",
+      "Rehabilitation of post reconstructive surgeries like TKR, THR, ACL reconstruction etc."
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "5"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/physiotherapy-rehabilitation"
+    },
+    "image": "bn-spine"
+   },
+   {
+    "title": "Plastic, Cosmetic & Reconstructive Surgery",
+    "icon": "shield",
+    "text": "Starcare Hospital offers the very best of Plastic, Reconstructive and Cosmetic Surgery by professionals trained in the latest techniques.",
+    "detail": {
+     "intro": "Starcare Hospital offers the very best of Plastic, Reconstructive and Cosmetic Surgery by professionals trained in the latest techniques. We treat patients with congenital and traumatic deformities of the face and neck in addition to providing cosmetic surgery of these areas.",
+     "body": [
+      "Reconstructive surgery is performed for burns, cancers, skin problems, traumatic injuries and birth defects."
+     ],
+     "points": [
+      "Facial plastic surgery",
+      "Craniofacial and cleft surgery",
+      "Hand surgery",
+      "Burn surgery",
+      "Cosmetic surgery",
+      "Rhinoplasty",
+      "Breast surgery",
+      "Breast reduction",
+      "Brest",
+      "Breast augmentation",
+      "Male breast surgery",
+      "Maxillofacial surgery",
+      "Soft tissue & trauma surgery",
+      "Diabetic foot",
+      "Cosmetic surgeries",
+      "Soft tissue- trauma surgery",
+      "Blepharoplasty surgery",
+      "Botox injections"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "1"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/plastic-cosmetic-reconstructive-surgery"
+    },
+    "image": "bn-orionis"
+   },
+   {
+    "title": "Psychiatry & Behavioural Medicine",
+    "icon": "shield",
+    "text": "Psychiatry is the medical specialty devoted to the study and treatment of mental disorders.",
+    "detail": {
+     "intro": "Psychiatry is the medical specialty devoted to the study and treatment of mental disorders. Starcare provides outpatient care for this usually neglected group of patients and is among the handful of private facilities in the Sultanate offering this service.",
+     "body": [
+      "Generally considered as a middle ground between Neurology and Psychology, the doctor - patient relationship is vital in diagnosis and treatment in Psychiatry. Rehabilitation of the mind is a very delicate process demanding firm commitment in all aspects. Starcare has the availability of in-house Neurologist and visiting Psychologist to complement departments."
+     ],
+     "points": [
+      "Psychotherapy",
+      "General Adult psychiatry",
+      "Addiction Psychiatry",
+      "Old Age psychiatry",
+      "Organic Psychiatry",
+      "Medication Management"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Bousher, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "1"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/psychiatry-behavioural-medicine"
+    }
+   },
+   {
+    "title": "Pulmonology",
+    "icon": "shield",
+    "text": "Pulmonology is offered at Starcare Barka, Seeb.",
+    "detail": {
+     "intro": "Pulmonology is offered at Starcare Barka, Seeb.",
+     "points": [
+      "Obstructive lung diseases-Asthma, Copd, Bronchiectasis",
+      "Tuberculosis",
+      "Pneumonia",
+      "Interstitial lung diseases",
+      "Pleural diseases",
+      "Pulmonary hypertension",
+      "Lung cancer",
+      "Occupational lung diseases",
+      "Sleep medicine",
+      "Smoking cessation",
+      "Covid care and treatment of post covid sequelae",
+      "Bronchoscopy procedures -BAL,TBLB,TBNA",
+      "ICU care and ICU procedures",
+      "Pulmonary function test interpretation"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "3"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/barka-sub/speciality/pulmonology"
+    }
+   },
+   {
+    "title": "Radiology & Imaging",
+    "icon": "layers",
+    "text": "The Department of Radiology at Starcare Hospital aims to provide professional and quality diagnostic and consultative services to referring physicians",
+    "detail": {
+     "intro": "The Department of Radiology at Starcare Hospital aims to provide professional and quality diagnostic and consultative services to referring physicians and patients. The department provides a wide range of diagnostic testing services utilizing state-of-the-art equipment ranging from computed radiology (CR) to multislice CT scan, which is an assurance to the patients of receiving one of the best imaging services.",
+     "body": [
+      "Starcare hospital is equipped with GE Multi slice CT scanner with multi projection volume reconstruction, 3D software surface and volumetric renderings. We also have a high resolution ultrasound scanner with colour Doppler and 4D facilities. Starcare patients are given individual attention by our cordial and professional staff members who are efficient in guiding them through their procedure and answering pertinent questions. The combined use of expertise and technology will help make an accurate diagnosis for all the patients’ health concerns."
+     ],
+     "points": [
+      "Multi- Slice CT Scan with VRT/MItP reconstruction",
+      "Whole Body Plain & Contrast",
+      "Angiogram",
+      "Virtual Colonography/virtual Colonoscopy",
+      "CT Guided FNAC / Biopsy",
+      "Ultra Sound",
+      "Routine Sonographic Examinations- Ultra Sound",
+      "Carotid Doppler",
+      "Doppler Peripheral Vascular & Renal",
+      "HSSG (Hystero Sonosalpingography)",
+      "Anomaly Scan with 3D/4D Scan",
+      "Neuro Sonogram",
+      "Transrectal",
+      "Prostate",
+      "Musculo Skeletal",
+      "Ultra Sound Guided FNAC & Biopsy",
+      "Special Procedures",
+      "Fistulogram/ Sinogram",
+      "X-RAY Routine (CR – Computerized Radiography)"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Bousher, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "4"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/radiology-imaging"
+    },
+    "image": "waiting-lounge"
+   },
+   {
+    "title": "Rheumatology",
+    "icon": "shield",
+    "text": "Rheumatologist specialises in the diagnosis and nonsurgical treatment of diseases involving muscles, joints, soft tissues and related connective tissu",
+    "detail": {
+     "intro": "Rheumatologist specialises in the diagnosis and nonsurgical treatment of diseases involving muscles, joints, soft tissues and related connective tissue disorders. Rheumatic conditions can be effectively managed with early diagnosis and targeted treatment.",
+     "body": [
+      "With increasing cases of Arthritis and Osteoporosis, the department offers screening clinics for early detection and educating on early symptoms."
+     ],
+     "points": [
+      "Pain Management",
+      "Osteoporosis clinic",
+      "Arthritis",
+      "Rheumatoid Arthritis management",
+      "SLE management",
+      "Joint injections",
+      "Muscle Biopsies",
+      "Advanced Laboratory tests",
+      "Synovitis"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Seeb"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/rheumatology"
+    }
+   },
+   {
+    "title": "Sports Medicine",
+    "icon": "shield",
+    "text": "Starcare offers specialized treatment of Orthopaedic problems and athletic injuries under the guidance of internationally acclaimed faculties supporte",
+    "detail": {
+     "intro": "Starcare offers specialized treatment of Orthopaedic problems and athletic injuries under the guidance of internationally acclaimed faculties supported by latest technologies and a team of Sports Surgeons, Physicians, Physiotherapist and Dietitian to guide the patient’s trough rehabilitation and ensure speedy recovery. Our experts have provided advice and treatment to professional players and athletes in the West, India and GCC region.",
+     "body": [
+      "Apart from the clinical expertise of our internationally experienced faculties, our patients are benefitted from the support facilities like state-of-the-art operation theatres, advanced equipments and surgical techniques like computer assisted navigation surgeries, reliable imaging facilities, Intensive Care Unit and high quality nursing care along with a dedicated rehabilitation team. Our focus is to get you back in action at the shortest time frame possible."
+     ],
+     "points": [
+      "Evaluation of all Sports related injuries",
+      "Keyhole (Arthroscopic) Knee, Shoulder, Elbow and Hip surgeries",
+      "Soft tissue surgeries",
+      "Meniscal Repairs",
+      "Ligament Reconstructions",
+      "Comprehensive Rehabilitation programs",
+      "Trauma & fracture surgeries",
+      "Non surgical managements",
+      "Specialized Pain relief injections"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Bousher, Mabela, Seeb"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/sports-medicine"
+    },
+    "image": "bn-joint"
+   },
+   {
+    "title": "Urgent Care",
+    "icon": "pulse",
+    "text": "The emergency department at Starcare hospital is manned by ACLS certified doctors and nursing staff who are capable of managing all types of emergenci",
+    "detail": {
+     "intro": "The emergency department at Starcare hospital is manned by ACLS certified doctors and nursing staff who are capable of managing all types of emergencies. The department follows internationally accepted ER protocols.",
+     "body": [
+      "The emergency department is a 24-hour fully-equipped medical facility, skilled to provide immediate pain relief, stabilizing the patients, and is the place where you can get immediate medical attention when it is crucially needed."
+     ],
+     "points": [
+      "Chest pain / Myocardial infarction",
+      "Difficulty in breathing / asthma attacks / pneumonia",
+      "Pulmonary embolism ( Blockage of a major blood vessel in the lung)",
+      "Unconsciousness",
+      "Altered sensorium (inability to think or concentrate clearly)",
+      "Food/drug poisoning or overdose",
+      "Hematemesis (Blood Vomiting)",
+      "Hemoptysis ( Blood when coughing)",
+      "Anaphylactic reaction (Allergy)",
+      "Seizures (sudden behavioral change due to abnormal electrical activity in the brain)",
+      "Trauma",
+      "Fractures",
+      "Acute abdominal emergencies",
+      "Minor burns",
+      "Psychiatric cases",
+      "Renal colic (blockage in the urinary tract)"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "11"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/urgent-care"
+    },
+    "image": "fac-lobby"
+   },
+   {
+    "title": "Urology",
+    "icon": "shield",
+    "text": "Starcare Hospital Urology Department devotes itself to helping with rapid, accurate diagnosis and immediate, effective treatment for a wide range of u",
+    "detail": {
+     "intro": "Starcare Hospital Urology Department devotes itself to helping with rapid, accurate diagnosis and immediate, effective treatment for a wide range of urological and genital problems. The department is staffed by consultants with specialized training in Laproscopic surgeries, Lithotripsy and management of common Urological problems.",
+     "body": [
+      "We focus on non-invasive and minimally invasive treatments so that we can give you the best possible results with the minimum amount of discomfort. Over half of all men are affected by prostate problems at some point in their lives, with illnesses ranging from enlarged prostates to prostatitis to prostate cancer. All of these disorders can be uncomfortable, painful and even life threatening. With a wide range of treatment options to cover all stages of disease, our urologists bring you relief using drug therapy, minimally invasive treatment and surgery. We were among the First in Oman in the private health sector to offer Bipolar TURP, which is very safe and minimally invasive treatment for the prostate enlargement. A common disorder, kidney stones is now easier to diagnose and treat. Endoscopic and percutaneous removals are among the many options available at Starcare Hospital. Diagnostic techniques at the Urology Center include all routine & some specialized bladder radiographic analysis to view the bladder urinary system using CT scan & x-rays. Treatment follows to improve bladder control and help regain confidence."
+     ],
+     "points": [
+      "Laparoscopic surgeries",
+      "Prostate Cancer",
+      "Male Infertility",
+      "Female Urology",
+      "Urology Incontinence",
+      "Urinary Tract Infections",
+      "Male Sexual Dysfunctions",
+      "Urinary Bladder Cancer",
+      "Kidney Cancer",
+      "Bipolar TURP / Ureteroscopy / PCML /Laparoscopy ect",
+      "Urinary Stone Disease",
+      "Holmium laser now at Starcare, Seeb",
+      "State of the art technology",
+      "No incision. No scar.",
+      "Fast recovery",
+      "Minimal or no blood loss",
+      "All types of kidney, ureter stones can be treated",
+      "Short hospital stay",
+      "Complications less than 1%."
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Barka, Mabela, Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "2"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/urology"
+    }
+   },
+   {
+    "title": "Vascular Surgery",
+    "icon": "shield",
+    "text": "Vascular surgery refers to open surgeries and minimally-invasive procedures that treat a range of blood vessel problems.",
+    "detail": {
+     "intro": "Vascular surgery refers to open surgeries and minimally-invasive procedures that treat a range of blood vessel problems. These include aortic aneurysms, peripheral artery disease, carotid artery disease, and chronic venous insufficiency.",
+     "body": [
+      "Common procedures include angioplasty and stenting, arterial or venous bypass surgery, and aortic aneurysm repair."
+     ],
+     "points": [
+      "Varicose vein surgery",
+      "Varicose vein endovenous procedures",
+      "(radio frequency venous ablation)",
+      "Veins sclerotherapy injection",
+      "Diabetic foot management",
+      "Vascular access and fistula",
+      "Chronic lower limb ischemia",
+      "management (surgical and endovascular)",
+      "Carotid surgery post-stroke or mini-stroke",
+      "Aortic surgery and endovascular procedures"
+     ],
+     "points_title": "Services offered",
+     "facts": [
+      {
+       "label": "Available at",
+       "value": "Seeb"
+      },
+      {
+       "label": "Doctors listed",
+       "value": "1"
+      }
+     ],
+     "src": "https://www.starcarehospital.com/seeb-sub/speciality/vascular-surgery"
+    }
+   }
+  ]
+ },
+ "doctors": {
+  "title": "Find a doctor",
+  "intro": "104 doctors and therapists listed on the Seeb, Barka, Mabela and Bousher websites. Search by name, speciality or branch.",
+  "items": [
+   {
+    "name": "Dr. Amandeep Kaur",
+    "title": "Specialist",
+    "q": "MD ANESTHESIOLOGY, MBBS, MD ANESTHESIOLOGY",
+    "branch": "Seeb",
+    "spec": "Anaesthesiology & Pain Management",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-amandeep-kaur"
+   },
+   {
+    "name": "Dr. Ismail Abdullah Ali Al Abri",
+    "title": "Doctor",
+    "q": "MD, MRCPCH",
+    "branch": "Seeb",
+    "spec": "Cardiology",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/cardiology"
+   },
+   {
+    "name": "Dr. Roghaiyeh Rahimi Asl",
+    "title": "Doctor",
+    "q": "MD (Iranian Board)",
+    "branch": "Seeb",
+    "spec": "Cardiology",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/cardiology"
+   },
+   {
+    "name": "Dr. Sonia Tahir",
+    "title": "General practitioner",
+    "q": "MBBS, PG Diploma in Cardiology (UK), Member British Society of Echo-UK",
+    "branch": "Seeb",
+    "spec": "Cardiology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-sonia-tahir"
+   },
+   {
+    "name": "Dr. Neha Raut Pokale",
+    "title": "General practitioner",
+    "q": "BDS",
+    "branch": "Seeb",
+    "spec": "Dentistry & Implantology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-neha-raut-pokale"
+   },
+   {
+    "name": "Dr. Safa Ali Salim Al Sinani",
+    "title": "Specialist",
+    "q": "BDS",
+    "branch": "Seeb",
+    "spec": "Dentistry & Implantology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-safa-ali-salim-al-sinani"
+   },
+   {
+    "name": "Dr. Mithun C Mohan",
+    "title": "Specialist",
+    "q": "MBBS, DNB (Int. Medicine), MNAMS, MIMSA, MRCP (UK), MRCPS (Glasg)",
+    "branch": "Seeb",
+    "spec": "Diabetology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-mithun-c-mohan"
+   },
+   {
+    "name": "Dr. Faisal Al Kalbani",
+    "title": "Doctor",
+    "q": "Head and Neck Surgical Oncology Fellowship, Asan Medical Center, Ulsan University, South K",
+    "branch": "Seeb",
+    "spec": "ENT",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/ent"
+   },
+   {
+    "name": "Dr. Janan Ahmed Al Abduwani",
+    "title": "Doctor",
+    "q": "European board ENT, Fellowship Rhinology, Rhinoplasty (UK) , DHONS ,OMSB board ENT , Arab ",
+    "branch": "Seeb",
+    "spec": "ENT",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/ent"
+   },
+   {
+    "name": "Dr. Mona Mazidi",
+    "title": "Doctor",
+    "q": "MD (Iranian board) Specialist, Ear, Nose & Throat",
+    "branch": "Seeb",
+    "spec": "ENT",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/ent"
+   },
+   {
+    "name": "Dr. Vivek Sasindran",
+    "title": "Consultant",
+    "q": "M.B.B.S, M.S (ENT), Fellowship in Endoscopic Sinus Surgery, Fellowship Diploma in Lateral ",
+    "branch": "Seeb",
+    "spec": "ENT",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-vivek-sasindran"
+   },
+   {
+    "name": "Dr. Ali Saif AL Mamari",
+    "title": "Doctor",
+    "q": "MBChB.MD FRCP",
+    "branch": "Seeb",
+    "spec": "Endocrinology",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/endocrinology"
+   },
+   {
+    "name": "Dr. Mohamed Hammad Al Hinai",
+    "title": "Doctor",
+    "q": "MD, MRCP-UK, OMSB, Fellow -Royal College of Ireland",
+    "branch": "Seeb",
+    "spec": "Gastroenterology",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/gasteroenterology"
+   },
+   {
+    "name": "Dr. Hani Ahmed Al Qadhi",
+    "title": "Doctor",
+    "q": "MD, FRCSC(Canada)",
+    "branch": "Seeb",
+    "spec": "General & Laparoscopic Surgery",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/general-laparoscopic-surgery"
+   },
+   {
+    "name": "Dr. Mohamed Abuelgasim Ahmed Mohamed",
+    "title": "Specialist",
+    "q": "MBBS, MD (Surgery), MRCS, Fellowship in Hepatobiliary surgery & Liver Transplantation",
+    "branch": "Seeb",
+    "spec": "General & Laparoscopic Surgery",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-mohamed-abuelgasim-ahmed-mohamed"
+   },
+   {
+    "name": "Dr. Mohammed Said Al Abri",
+    "title": "Doctor",
+    "q": "MD. FRCSC. FACS, ABOM, MRCS",
+    "branch": "Seeb",
+    "spec": "General & Laparoscopic Surgery",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/general-laparoscopic-surgery"
+   },
+   {
+    "name": "Dr. Khalid Al Hashmi",
+    "title": "Doctor",
+    "q": "M.D.Bsc",
+    "branch": "Seeb",
+    "spec": "Haematology",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/haematology"
+   },
+   {
+    "name": "Dr. Faisal Abdullah Al Tamimi",
+    "title": "Doctor",
+    "q": "FRCP, FRCPE,FRCPI, MRCP(UK), MRCPI, MBChB",
+    "branch": "Seeb",
+    "spec": "Internal Medicine",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/internal-medicine"
+   },
+   {
+    "name": "Dr. Mohammed Asfour",
+    "title": "Doctor",
+    "q": "MBBS",
+    "branch": "Seeb",
+    "spec": "Internal Medicine",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/internal-medicine"
+   },
+   {
+    "name": "Dr. Sharad S Rajamani",
+    "title": "Senior consultant",
+    "q": "MBBS,MCH(NEURO SURGERY),FICS,FAWNS,FEBNS- (Neurosurgeon)",
+    "branch": "Seeb",
+    "spec": "Neurology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-sharad-s-rajamani"
+   },
+   {
+    "name": "Dr. Dalia Nadem",
+    "title": "Specialist",
+    "q": "MD in OBG (Syrian Board)",
+    "branch": "Seeb",
+    "spec": "Obstetrics & Gynaecology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-dalia-nadem"
+   },
+   {
+    "name": "Dr. Moza Al-Kalbani",
+    "title": "Senior consultant",
+    "q": "MD, FRCOG, CCST (UK)",
+    "branch": "Seeb",
+    "spec": "Obstetrics & Gynaecology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-moza-al-kalbani"
+   },
+   {
+    "name": "Dr. Shahnaz Wasti",
+    "title": "Senior consultant",
+    "q": "B.Sc, MBBS, MRCOG(UK), FRCOG(UK)",
+    "branch": "Seeb",
+    "spec": "Obstetrics & Gynaecology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-shahnaz-wasti"
+   },
+   {
+    "name": "Dr. Mohammed Al Harthi",
+    "title": "Consultant",
+    "q": "BDS, MFDS (RCPS - Glasgow), FFD (RCI), Fellowship in cleft lip and palate surgery",
+    "branch": "Seeb",
+    "spec": "Oral & Maxillofacial Surgery",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-mohammed-al-harthi"
+   },
+   {
+    "name": "Dr. Sunil Richardson",
+    "title": "Specialist",
+    "q": "MDS, Dip.N.B, MOMSRCPS (Glasgow, UK)",
+    "branch": "Seeb",
+    "spec": "Oral & Maxillofacial Surgery",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-sunil-richardson"
+   },
+   {
+    "name": "Dr. Girish Hiremath",
+    "title": "Specialist",
+    "q": "MBBS, D Ortho(Trauma Surgeon), Fellowship in Joint Replacement, Arthroscopy (Germany)",
+    "branch": "Seeb",
+    "spec": "Orthopaedic, Spine Care & Trauma Care",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-girish-hiremath"
+   },
+   {
+    "name": "Dr. Khalid Abu Taha",
+    "title": "Specialist",
+    "q": "MD, LLD",
+    "branch": "Seeb",
+    "spec": "Orthopaedic, Spine Care & Trauma Care",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-khalid-abu-taha"
+   },
+   {
+    "name": "Dr. Shirish Madhusudan",
+    "title": "Doctor",
+    "q": "MBBS., D. Ortho., DNB. Ortho., Fellowship in Arthroscopy & Sports Medicine (Germany), Fell",
+    "branch": "Seeb",
+    "spec": "Orthopaedic, Spine Care & Trauma Care",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/orthopaedic-spine-care-trauma-care"
+   },
+   {
+    "name": "Dr. Waad Allah Sheref",
+    "title": "Senior consultant",
+    "q": "MBChB, MSc, FRCPath (UK)",
+    "branch": "Seeb",
+    "spec": "Pathology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-waad-allah-sheref"
+   },
+   {
+    "name": "Dr. Maryam Jamal",
+    "title": "Specialist",
+    "q": "BBS, M.D Iranian Board",
+    "branch": "Seeb",
+    "spec": "Pediatrics & Neonatology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-maryam-jamal"
+   },
+   {
+    "name": "Dr. Mohammed Abdellatif",
+    "title": "Specialist",
+    "q": "MBBch, MSc",
+    "branch": "Seeb",
+    "spec": "Pediatrics & Neonatology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-mohammed-abdellatif"
+   },
+   {
+    "name": "Dr. Osama Selman Yousef",
+    "title": "Specialist",
+    "q": "MD. Syrian Board",
+    "branch": "Seeb",
+    "spec": "Pediatrics & Neonatology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-osama-selman-yousef"
+   },
+   {
+    "name": "Dr. Samir Mahmood Mohammed Abudraz",
+    "title": "Consultant",
+    "q": "MB ChB, MRCP(UK), ABCP",
+    "branch": "Seeb",
+    "spec": "Pediatrics & Neonatology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-samir-mahmood-mohammed-abudraz"
+   },
+   {
+    "name": "Dr. Subhi Abdulwahed",
+    "title": "Specialist",
+    "q": "MBBS (Arab Board of Pediatrics)",
+    "branch": "Seeb",
+    "spec": "Pediatrics & Neonatology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-subhi-abdulwahed"
+   },
+   {
+    "name": "Mr. Sharan Kumar Hulsur",
+    "title": "Specialist",
+    "q": "MPT (Ortho & Sports), BPT, CMT",
+    "branch": "Seeb",
+    "spec": "Physiotherapy & Rehabilitation",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/mr-sharan-kumar-hulsur"
+   },
+   {
+    "name": "Ms. Maria Rainna C. Carretas",
+    "title": "Doctor",
+    "q": "BSPT",
+    "branch": "Seeb",
+    "spec": "Physiotherapy & Rehabilitation",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/physiotherapy-rehabilitation"
+   },
+   {
+    "name": "Ms. Nisha Joseph",
+    "title": "Specialist",
+    "q": "BPT, MIAP",
+    "branch": "Seeb",
+    "spec": "Physiotherapy & Rehabilitation",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/ms-nisha-joseph"
+   },
+   {
+    "name": "Dr. Fawaz Al Balushi",
+    "title": "Specialist",
+    "q": "Micro-plastic,Reconstructive & Aesthetic Surgeon",
+    "branch": "Seeb",
+    "spec": "Plastic",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-fawaz-al-balushi"
+   },
+   {
+    "name": "Ms. Zeyana Al Siyabi",
+    "title": "Specialist",
+    "q": "BSc (Hons) Podiatry",
+    "branch": "Seeb",
+    "spec": "Podiatry",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/ms-zeyana-al-siyabi"
+   },
+   {
+    "name": "Dr. Asmahan Rashid Al Yaqoubi",
+    "title": "Doctor",
+    "q": "MD, MRCPI (UK), Internal Medicine (Arab Board), Diploma in Adult Respiratory Medicine",
+    "branch": "Seeb",
+    "spec": "Pulmonology",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/pulmonology"
+   },
+   {
+    "name": "Dr. Haresh D Wagh",
+    "title": "Specialist",
+    "q": "MBBS, DNB (Pulmonary Medicine ), DTCD, CTCCM (Critical Care)",
+    "branch": "Seeb",
+    "spec": "Pulmonology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-haresh-d-wagh"
+   },
+   {
+    "name": "Dr. Fatima Al Aani",
+    "title": "Specialist",
+    "q": "MBBS, MD - Syrian Board",
+    "branch": "Seeb",
+    "spec": "Radiology & Imaging",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-fatima-al-aani"
+   },
+   {
+    "name": "Dr. Sooraj Nambala",
+    "title": "Specialist",
+    "q": "MBBS,MD (RADIODIAGNOSIS)",
+    "branch": "Seeb",
+    "spec": "Radiology & Imaging",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-sooraj-nambala"
+   },
+   {
+    "name": "Dr. Fatima Akhtar",
+    "title": "General practitioner",
+    "q": "MD (DOCTOR OF MEDICINE)",
+    "branch": "Seeb",
+    "spec": "Urgent Care",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-fatima-akhtar"
+   },
+   {
+    "name": "Dr. Juhaima Hassainar",
+    "title": "General practitioner",
+    "q": "MBBS",
+    "branch": "Seeb",
+    "spec": "Urgent Care",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-juhaima-hassainar"
+   },
+   {
+    "name": "Dr. Mustafa Issam Abulaziz",
+    "title": "General practitioner",
+    "q": "MBBS",
+    "branch": "Seeb",
+    "spec": "Urgent Care",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-mustafa-issam-abulaziz"
+   },
+   {
+    "name": "Dr. Nazanin Azadeh",
+    "title": "General practitioner",
+    "q": "MD (Doctor of Medicine), General Practitioner (Urgent Care)",
+    "branch": "Seeb",
+    "spec": "Urgent Care",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-nazanin-azadeh"
+   },
+   {
+    "name": "Dr. Sadra Nikseresht",
+    "title": "General practitioner",
+    "q": "MBBS",
+    "branch": "Seeb",
+    "spec": "Urgent Care",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-sadra-nikseresht"
+   },
+   {
+    "name": "Dr. Deepak Nagathan",
+    "title": "Specialist",
+    "q": "MBBS, MS, MCh Urology, DNB Urology",
+    "branch": "Seeb",
+    "spec": "Urology",
+    "src": "https://www.starcarehospital.com/seeb-sub/doctor/dr-deepak-nagathan"
+   },
+   {
+    "name": "Dr. Hesham Ghzayel",
+    "title": "Doctor",
+    "q": "Jordan Board - Jordan Arab Board in Urology - Syria",
+    "branch": "Seeb",
+    "spec": "Urology",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/urology"
+   },
+   {
+    "name": "Dr. Tamer Sayed",
+    "title": "Doctor",
+    "q": "Fellowship of European Board of Vascular Surgery (FEBVS), Doctorate of Surgery (MD), Membe",
+    "branch": "Seeb",
+    "spec": "Vascular Surgery",
+    "src": "https://www.starcarehospital.com/seeb-sub/speciality/vascular-surgery"
+   },
+   {
+    "name": "Dr. Aruna Pogaru",
+    "title": "Specialist",
+    "q": "MBBS,MD",
+    "branch": "Barka",
+    "spec": "Anaesthesiology & Pain Management",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/draruna-pogaru"
+   },
+   {
+    "name": "Dr. Sadik Kodakat",
+    "title": "Consultant",
+    "q": "MBBS,MD,FRCA CCST (UK)",
+    "branch": "Barka",
+    "spec": "Anaesthesiology & Pain Management",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-sadik-kodakat"
+   },
+   {
+    "name": "Dr. Sabnam K. Salim",
+    "title": "Specialist",
+    "q": "BAMS",
+    "branch": "Barka",
+    "spec": "Ayurveda",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-sabnam-k-salim"
+   },
+   {
+    "name": "Dr. Shaheer Basheer",
+    "title": "Specialist",
+    "q": "BAMS",
+    "branch": "Barka",
+    "spec": "Ayurveda",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-shaheer-basheer"
+   },
+   {
+    "name": "Dr. Roghaiyeh Rahimi Asl",
+    "title": "Specialist",
+    "q": "MD (Iranian Board)",
+    "branch": "Barka",
+    "spec": "Cardiology",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-roghaiyeh-rahimi-asl"
+   },
+   {
+    "name": "Dr. Mohammed Imran Azam",
+    "title": "Specialist",
+    "q": "BDS, Dip.In Clinical Endodontics",
+    "branch": "Barka",
+    "spec": "Dentistry & Implantology",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/drmohammed-imran-azam"
+   },
+   {
+    "name": "Dr. Raqiya AL Rajaibi",
+    "title": "Senior specialist",
+    "q": "MD, FRCPC",
+    "branch": "Barka",
+    "spec": "Dermatology & Cosmetology",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-raqiya-al-rajaibi"
+   },
+   {
+    "name": "Dr. Emad Alghoush",
+    "title": "Specialist",
+    "q": "Master Degree in Otorhinolaryngologist from Damascus Syrian Board Of Otorhinolaryngologist",
+    "branch": "Barka",
+    "spec": "ENT",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-emad-alghoush"
+   },
+   {
+    "name": "Dr. Mohamed Al Ajmi",
+    "title": "Consultant",
+    "q": "OMSB, Arab board, Qualified expert otolaryngology in sleep-disordered breathing surgery - ",
+    "branch": "Barka",
+    "spec": "ENT",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-mohamed-al-ajmi"
+   },
+   {
+    "name": "Dr. Vivek Sasindran",
+    "title": "Consultant",
+    "q": "M.B.B.S, M.S (ENT), Fellowship in Endoscopic Sinus Surgery, Fellowship Diploma in Lateral ",
+    "branch": "Barka",
+    "spec": "ENT",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-vivek-sasindran"
+   },
+   {
+    "name": "Dr. Adil Abdulrahman Alzadjali",
+    "title": "Senior consultant",
+    "q": "MB,Bch,BAO Surgery residency UKE (Hamburg) fellowship HBP Surgery (Hamburg), HOD of surger",
+    "branch": "Barka",
+    "spec": "General & Laparoscopic Surgery",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dradil-abdulrahman-alzadjali"
+   },
+   {
+    "name": "Dr. Habeeb Mohamed",
+    "title": "Specialist",
+    "q": "MBBS MS (GENERAL SURGERY), FAMS, DMAS",
+    "branch": "Barka",
+    "spec": "General & Laparoscopic Surgery",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-habeeb-mohamed"
+   },
+   {
+    "name": "Dr. Seyedeh Saeideh Naghibi",
+    "title": "Specialist",
+    "q": "MBBS, MD(Board of Internal Medicine)",
+    "branch": "Barka",
+    "spec": "Internal Medicine",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-seyedeh-saeideh-naghibi"
+   },
+   {
+    "name": "Dr. Hadil Babi",
+    "title": "Specialist",
+    "q": "Arab board in Obs & gyne & Master degree in Obs & gyne",
+    "branch": "Barka",
+    "spec": "Obstetrics & Gynaecology",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-hadil-babi"
+   },
+   {
+    "name": "Dr. Mamatha Swamy",
+    "title": "Consultant",
+    "q": "MBBS,MD (OBG)",
+    "branch": "Barka",
+    "spec": "Obstetrics & Gynaecology",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-mamatha-swamy"
+   },
+   {
+    "name": "Dr. Parnian Kord Jamshidi",
+    "title": "Consultant",
+    "q": "MD (Iranian board), Fellow of Gynecologic Laparoscopy",
+    "branch": "Barka",
+    "spec": "Obstetrics & Gynaecology",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-parnian-kord-jamshidi"
+   },
+   {
+    "name": "Dr. Mohammed Al Harthi",
+    "title": "Consultant",
+    "q": "BDS, MFDS (RCPS - Glasgow), FFD (RCI), Fellowship in cleft lip and palate surgery",
+    "branch": "Barka",
+    "spec": "Oral & Maxillofacial Surgery",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-mohammed-al-harthi"
+   },
+   {
+    "name": "Dr. Raphael Charrabeh",
+    "title": "Specialist",
+    "q": "MD,ORTHOPEDIC & TRAUMA SPECIALTY (SYRIAN BOARD)",
+    "branch": "Barka",
+    "spec": "Orthopaedic, Spine Care & Trauma Care",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-raphael-charrabeh"
+   },
+   {
+    "name": "Dr. Aqeel Hussain",
+    "title": "Specialist",
+    "q": "MBBS,PGPN",
+    "branch": "Barka",
+    "spec": "Pediatrics & Neonatology",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-aqeel-hussain"
+   },
+   {
+    "name": "Mr. Muhammed Fayis",
+    "title": "Specialist",
+    "q": "BPT, CSTMT, CDNT",
+    "branch": "Barka",
+    "spec": "Physiotherapy & Rehabilitation",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/mr-muhammed-fayis"
+   },
+   {
+    "name": "Ms. Maria Rainna C. Carretas",
+    "title": "Specialist",
+    "q": "BSPT",
+    "branch": "Barka",
+    "spec": "Physiotherapy & Rehabilitation",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/ms-maria-rainna-c-carretas"
+   },
+   {
+    "name": "Dr. Haresh D Wagh",
+    "title": "Specialist",
+    "q": "MBBS, DNB (Pulmonary Medicine ), DTCD, CTCCM (Critical Care)",
+    "branch": "Barka",
+    "spec": "Pulmonology",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-haresh-d-wagh"
+   },
+   {
+    "name": "Dr. Heba Mahmoud Elsayed Hassan Moustafa",
+    "title": "Specialist",
+    "q": "MBBCH, DBI , Master of Radiognosis",
+    "branch": "Barka",
+    "spec": "Radiology & Imaging",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-heba-mahmoud-elsayed-hassan-moustafa"
+   },
+   {
+    "name": "Dr. Andrew Binesh Sargunam",
+    "title": "General practitioner",
+    "q": "MBBS",
+    "branch": "Barka",
+    "spec": "Urgent Care",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/drandrew-binesh-sargunam"
+   },
+   {
+    "name": "Dr. Hira Noreen",
+    "title": "General practitioner",
+    "q": "MBBS",
+    "branch": "Barka",
+    "spec": "Urgent Care",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-hira-noreen"
+   },
+   {
+    "name": "Dr. Ibrahim Negm",
+    "title": "General practitioner",
+    "q": "MBBCh",
+    "branch": "Barka",
+    "spec": "Urgent Care",
+    "src": "https://www.starcarehospital.com/barka-sub/doctor/dr-ibrahim-negm"
+   },
+   {
+    "name": "Dr. Rania Hamouda El Garhy",
+    "title": "General practitioner",
+    "q": "BDS, Dip. In Periodontology",
+    "branch": "Bousher",
+    "spec": "Dentistry & Implantology",
+    "src": "https://www.starcarehospital.com/bousher-sub/doctor/dr-rania-hamouda-el-garhy"
+   },
+   {
+    "name": "Dr. Sini Nair",
+    "title": "Specialist",
+    "q": "BDS",
+    "branch": "Bousher",
+    "spec": "Dentistry & Implantology",
+    "src": "https://www.starcarehospital.com/bousher-sub/doctor/drsini-nair"
+   },
+   {
+    "name": "Dr. Muhammad Muneer",
+    "title": "Specialist",
+    "q": "MBBS, Dip Diab (UK), MSc Diab (UK), Dip Endo (UK), MSc Endo (UK), Fellowship Diab (India)",
+    "branch": "Bousher",
+    "spec": "Diabetology",
+    "src": "https://www.starcarehospital.com/bousher-sub/doctor/dr-muhammad-muneer"
+   },
+   {
+    "name": "Dr. Malathi Perera Ramachandra",
+    "title": "General practitioner",
+    "q": "MBBS, DCH (UK)",
+    "branch": "Bousher",
+    "spec": "Family Medicine",
+    "src": "https://www.starcarehospital.com/bousher-sub/doctor/dr-malathi-perera-ramachandra"
+   },
+   {
+    "name": "Dr. Mohammed Hilal Al Azri",
+    "title": "Doctor",
+    "q": "MD, FRCGP(INT-UK),MMEDSC(UK), PHD(UK)",
+    "branch": "Bousher",
+    "spec": "Family Medicine",
+    "src": "https://www.starcarehospital.com/bousher-sub/speciality/family-medicine"
+   },
+   {
+    "name": "Dr. Suhair Faiq Ali",
+    "title": "General practitioner",
+    "q": "MBBS",
+    "branch": "Bousher",
+    "spec": "Family Medicine",
+    "src": "https://www.starcarehospital.com/bousher-sub/doctor/dr-suhair-faiq-ali"
+   },
+   {
+    "name": "Dr. Khalid Al Hashmi",
+    "title": "Doctor",
+    "q": "M.D.Bsc",
+    "branch": "Bousher",
+    "spec": "Haematology",
+    "src": "https://www.starcarehospital.com/bousher-sub/speciality/haematology"
+   },
+   {
+    "name": "Dr. Ahmed Al Sajwani",
+    "title": "Consultant",
+    "q": "MBBS",
+    "branch": "Bousher",
+    "spec": "Internal Medicine",
+    "src": "https://www.starcarehospital.com/bousher-sub/doctor/dr-ahmed-al-sajwani"
+   },
+   {
+    "name": "Dr. Faisal Abdullah Al Tamimi",
+    "title": "Doctor",
+    "q": "FRCP, FRCPE,FRCPI, MRCP(UK), MRCPI, MBChB",
+    "branch": "Bousher",
+    "spec": "Internal Medicine",
+    "src": "https://www.starcarehospital.com/bousher-sub/speciality/internal-medicine"
+   },
+   {
+    "name": "Dr. Tasleem Quddus khan",
+    "title": "Specialist",
+    "q": "MCPS , MRCP ( Obs/Gyne - Dublin)",
+    "branch": "Bousher",
+    "spec": "Obstetrics & Gynaecology",
+    "src": "https://www.starcarehospital.com/bousher-sub/doctor/dr-tasleem-quddus-khan"
+   },
+   {
+    "name": "Dr. Shirin Kardoush",
+    "title": "Specialist",
+    "q": "MD.SYRIAN BOARD",
+    "branch": "Bousher",
+    "spec": "Pediatrics & Neonatology",
+    "src": "https://www.starcarehospital.com/bousher-sub/doctor/drshirin-kardoush"
+   },
+   {
+    "name": "Dr. Zienab Hussin",
+    "title": "Specialist",
+    "q": "Specialist in psychiatry & clinical associate of American board of Psychotherapists",
+    "branch": "Bousher",
+    "spec": "Psychiatry & Behavioural Medicine",
+    "src": "https://www.starcarehospital.com/bousher-sub/doctor/dr-zienab-hussin"
+   },
+   {
+    "name": "Dr. Maha Younis Ali Al Balushi",
+    "title": "Specialist",
+    "q": "BDS",
+    "branch": "Mabela",
+    "spec": "Dentistry & Implantology",
+    "src": "https://www.starcarehospital.com/mabela-sub/doctor/dr-maha-younis-ali-al-balushi"
+   },
+   {
+    "name": "Dr. Usama Al Haddabi",
+    "title": "Senior specialist",
+    "q": "Arab Board of Dermatology, OMSB Dermatology",
+    "branch": "Mabela",
+    "spec": "Dermatology & Cosmetology",
+    "src": "https://www.starcarehospital.com/mabela-sub/doctor/dr-usama-al-haddabi"
+   },
+   {
+    "name": "Dr. Arsalans Badar",
+    "title": "Specialist",
+    "q": "M.B.B.S ,F.C.P.S ( INTERNAL MEDICINE)",
+    "branch": "Mabela",
+    "spec": "Internal Medicine",
+    "src": "https://www.starcarehospital.com/mabela-sub/doctor/dr-arsalans-badar"
+   },
+   {
+    "name": "Dr. Fatemah Taslimi",
+    "title": "Specialist",
+    "q": "Internal Medicine (Iranian Board)",
+    "branch": "Mabela",
+    "spec": "Internal Medicine",
+    "src": "https://www.starcarehospital.com/mabela-sub/doctor/dr-fatemah-taslimi"
+   },
+   {
+    "name": "Dr. Gori Bai",
+    "title": "Specialist",
+    "q": "MBBS, FCPS (Pakistan)",
+    "branch": "Mabela",
+    "spec": "Obstetrics & Gynaecology",
+    "src": "https://www.starcarehospital.com/mabela-sub/doctor/dr-gori-bai"
+   },
+   {
+    "name": "Dr. Lama Yasser Ahmad",
+    "title": "Specialist",
+    "q": "MBBS, MD",
+    "branch": "Mabela",
+    "spec": "Obstetrics & Gynaecology",
+    "src": "https://www.starcarehospital.com/mabela-sub/doctor/dr-lama-yasser-ahmad"
+   },
+   {
+    "name": "Dr. Dhanesh",
+    "title": "Specialist",
+    "q": "MD, CO (orthopedics)",
+    "branch": "Mabela",
+    "spec": "Orthopaedic, Spine Care & Trauma Care",
+    "src": "https://www.starcarehospital.com/mabela-sub/doctor/dr-dhanesh"
+   },
+   {
+    "name": "Dr. Girish Hiremath",
+    "title": "Doctor",
+    "q": "MBBS, D Ortho(Trauma Surgeon), Fellowship in Joint Replacement, Arthroscopy (Germany)",
+    "branch": "Mabela",
+    "spec": "Orthopaedic, Spine Care & Trauma Care",
+    "src": "https://www.starcarehospital.com/mabela-sub/speciality/orthopaedic-spine-clinic-trauma-care"
+   },
+   {
+    "name": "Dr. Yaqoub Sulaiman Almufarji",
+    "title": "Senior consultant",
+    "q": "Bsc, MD, MRCSEd, SSC Ortho",
+    "branch": "Mabela",
+    "spec": "Orthopaedic, Spine Care & Trauma Care",
+    "src": "https://www.starcarehospital.com/mabela-sub/doctor/dr-yaqoub-sulaiman-almufarji"
+   },
+   {
+    "name": "Dr. Humera Nasreen",
+    "title": "Specialist",
+    "q": "MD (Pediatrics)",
+    "branch": "Mabela",
+    "spec": "Pediatrics & Neonatology",
+    "src": "https://www.starcarehospital.com/mabela-sub/doctor/dr-humera-nasreen"
+   },
+   {
+    "name": "Dr. Mirjana Stankovic",
+    "title": "Doctor",
+    "q": "MD (Pediatrics)",
+    "branch": "Mabela",
+    "spec": "Pediatrics & Neonatology",
+    "src": "https://www.starcarehospital.com/mabela-sub/speciality/pediatrics-neonatology"
+   },
+   {
+    "name": "Dr. Lakshmi Ratnam Kalyanaraman",
+    "title": "Senior specialist",
+    "q": "DMRD, MD",
+    "branch": "Mabela",
+    "spec": "Radiology & Imaging",
+    "src": "https://www.starcarehospital.com/mabela-sub/doctor/drlakshmi-ratnam-kalyanaraman"
+   },
+   {
+    "name": "Dr. Laqat Ali",
+    "title": "Doctor",
+    "q": "MBBS,DTCD",
+    "branch": "Mabela",
+    "spec": "Urgent Care",
+    "src": "https://www.starcarehospital.com/mabela-sub/speciality/urgent-care"
+   },
+   {
+    "name": "Dr. Samaneh Raza",
+    "title": "Doctor",
+    "q": "MBBS",
+    "branch": "Mabela",
+    "spec": "Urgent Care",
+    "src": "https://www.starcarehospital.com/mabela-sub/speciality/urgent-care"
+   },
+   {
+    "name": "Dr. Zulfiqar Ali",
+    "title": "General practitioner",
+    "q": "MBBS",
+    "branch": "Mabela",
+    "spec": "Urgent Care",
+    "src": "https://www.starcarehospital.com/mabela-sub/doctor/dr-zulfiqar-ali"
+   }
+  ]
+ },
+ "packages": {
+  "title": "Health check-ups and packages",
+  "nav": "Packages",
+  "intro": "Check-ups, antenatal care and delivery packages as published by Starcare Seeb and Barka. Ask for the current price when you book.",
+  "items": [
+   {
+    "name": "Well Man Checkup",
+    "price": "Price on enquiry",
+    "country": "Starcare Seeb",
+    "text": "Physician consultation, blood, kidney, liver and thyroid tests, urine, stool and an ECG.",
+    "incl": [
+     "Consultation : with Physician Blood Investigations",
+     "Complete Haemogram & ESR",
+     "Blood Grouping & Rh typing",
+     "Sickling Test",
+     "Blood sugar (Fasting)",
+     "Blood Sugar (PPBS)",
+     "Kidney Profile",
+     "Blood Urea",
+     "Serum Creatinine",
+     "Cholesterol",
+     "Triglycerides",
+     "HDL",
+     "LDL",
+     "LDL/HDL Ratio",
+     "Liver Function Test",
+     "Bilirubin",
+     "SGOT",
+     "SGPT",
+     "Total Protein",
+     "Albumin",
+     "Globulin",
+     "A/G Ratio",
+     "G-GT",
+     "Alkaline Phosphatase",
+     "Thyroid profile -TSH",
+     "Urine Routine examination",
+     "Uric Acid",
+     "Stool Routine examination",
+     "ECG"
+    ],
+    "at": [
+     "Seeb"
+    ],
+    "image": "bn-doctor",
+    "src": "https://www.starcarehospital.com/seeb-sub/package-details/well-man-checkup"
+   },
+   {
+    "name": "Well Woman Checkup",
+    "price": "Price on enquiry",
+    "country": "Starcare Seeb",
+    "text": "Blood panels, thyroid, abdominal ultrasound, ECG, body fat analysis and diet counselling.",
+    "incl": [
+     "Blood Investigations",
+     "CBC",
+     "ESR",
+     "Blood Grouping",
+     "FBS & PPBS",
+     "Lipid profile-Cholesterol",
+     "Triglycerides",
+     "HDL",
+     "LDL",
+     "Liver function Test Alkaline Phosphatase",
+     "AST",
+     "ALT",
+     "Bilirubin total and direct",
+     "Total Protein",
+     "Albumin",
+     "Creatine",
+     "Globulin",
+     "Kidney profile-BUN",
+     "Uric acid and Calcium",
+     "Electrolytes- Sodium",
+     "Potassium",
+     "Thyroid Function Test- TSH",
+     "Urine Routine examination",
+     "X-ray chest (optional)",
+     "ECG",
+     "Ultrasound Scan- Abdomen",
+     "Body fat Analysis & Diet Counseling",
+     "Physician consultation & physical examination",
+     "Breakfast",
+     "PSA (above age 50)"
+    ],
+    "at": [
+     "Seeb"
+    ],
+    "image": "bn-pregnancy",
+    "src": "https://www.starcarehospital.com/seeb-sub/package-details/well-woman-checkup"
+   },
+   {
+    "name": "Well Child Checkup",
+    "price": "Price on enquiry",
+    "country": "Starcare Seeb",
+    "text": "Paediatrician and dental check, blood and urine tests, abdominal ultrasound and a vaccination review.",
+    "incl": [
+     "Consultations",
+     "Paediatrician Dental Examination",
+     "Radiology Investigation",
+     "Liver function Test Alkaline Phosphatase",
+     "USG Abdomen",
+     "Pathology Investigation",
+     "Blood grouping and Rh typing",
+     "CBC",
+     "Urine Routine Developmental analysis",
+     "Vaccination review and advise BMI"
+    ],
+    "at": [
+     "Seeb"
+    ],
+    "image": "bn-child",
+    "src": "https://www.starcarehospital.com/seeb-sub/package-details/well-child-checkup"
+   },
+   {
+    "name": "Premarital check (men)",
+    "price": "Price on enquiry",
+    "country": "Starcare Seeb",
+    "text": "GP consultation with infection, blood group, sickle cell and haemoglobin screening.",
+    "incl": [
+     "Consultation: with GP Blood Investigations",
+     "Semen Analysis",
+     "HIV (ELISA)",
+     "Testosterone (Total)",
+     "RPR (VDRL)",
+     "HCV ELISA",
+     "HBS-AG (ELISA)",
+     "G6PD",
+     "HPLC",
+     "HBA2F (HAEMOGLOBIN A2/F)",
+     "Blood",
+     "Group & RH",
+     "Sickle",
+     "Cell - Screening",
+     "Glucose",
+     "Random (LAB)",
+     "Urine",
+     "Routine (Micro & Dipstick)"
+    ],
+    "at": [
+     "Seeb"
+    ],
+    "image": "bn-keep-caring",
+    "src": "https://www.starcarehospital.com/seeb-sub/package-details/premarital-men-health-check-up"
+   },
+   {
+    "name": "Premarital check (women)",
+    "price": "Price on enquiry",
+    "country": "Starcare Seeb",
+    "text": "GP consultation, pelvic ultrasound and blood screening.",
+    "incl": [
+     "Consultation: with GP Blood Investigations",
+     "US Pelvis",
+     "HIV (ELISA)",
+     "RPR (VDRL)",
+     "HCV ELISA",
+     "HBS-AG (ELISA)",
+     "HPLC",
+     "HBA2F (HAEMOGLOBIN A2/F)",
+     "Blood",
+     "Group & RH",
+     "Sickle",
+     "Cell - Screening",
+     "Glucose",
+     "Random (LAB)",
+     "Urine",
+     "Routine (Micro & Dipstick)"
+    ],
+    "at": [
+     "Seeb"
+    ],
+    "image": "bn-keep-caring",
+    "src": "https://www.starcarehospital.com/seeb-sub/package-details/premarital-women-health-check-up"
+   },
+   {
+    "name": "Full antenatal package",
+    "price": "Price on enquiry",
+    "country": "Starcare Seeb",
+    "text": "12 consultations with a consultant obstetrician, 3 scans and the standard pregnancy blood tests.",
+    "incl": [
+     "12 consultations with Consultant Obstetrician",
+     "3 Ultrasound Scans",
+     "3 Full blood counts",
+     "Dip stick urine test each visit",
+     "OGCT",
+     "Laboratory investigations",
+     "Blood grouping",
+     "Rubella",
+     "HIV",
+     "Hepatitis B",
+     "VDRL",
+     "Blood Sugar",
+     "Sickle cell",
+     "Urine routine",
+     "Vaginal swab culture and sensitivity"
+    ],
+    "at": [
+     "Seeb"
+    ],
+    "image": "bn-pregnancy",
+    "src": "https://www.starcarehospital.com/seeb-sub/package-details/full-antenatal-packages"
+   },
+   {
+    "name": "Antenatal, 24 to 30 weeks",
+    "price": "Price on enquiry",
+    "country": "Starcare Seeb",
+    "text": "9 consultations, 2 ultrasound scans and 2 full blood counts.",
+    "incl": [
+     "9 consultations with Consultant Obstetrician",
+     "2 Ultrasound Scans",
+     "2 Full blood counts",
+     "Dip stick urine test each visit"
+    ],
+    "at": [
+     "Seeb"
+    ],
+    "image": "bn-pregnancy",
+    "src": "https://www.starcarehospital.com/seeb-sub/package-details/24-30-weeks-antenatal-package"
+   },
+   {
+    "name": "Antenatal, 30 to 36 weeks",
+    "price": "Price on enquiry",
+    "country": "Starcare Seeb",
+    "text": "7 consultations, 1 ultrasound scan and 1 full blood count.",
+    "incl": [
+     "7 consultations with Consultant Obstetrician",
+     "1 Ultrasound Scans",
+     "1 Full blood counts",
+     "Dip stick urine test each visit"
+    ],
+    "at": [
+     "Seeb"
+    ],
+    "image": "bn-pregnancy",
+    "src": "https://www.starcarehospital.com/seeb-sub/package-details/30-36-weeks-antenatal-package"
+   },
+   {
+    "name": "Antenatal, 36 weeks onwards",
+    "price": "Price on enquiry",
+    "country": "Starcare Seeb",
+    "text": "4 consultations, 1 ultrasound scan and 1 full blood count.",
+    "incl": [
+     "4 consultations with Consultant Obstetrician",
+     "1 Ultrasound Scans",
+     "1 Full blood counts",
+     "Dip stick urine test each visit"
+    ],
+    "at": [
+     "Seeb"
+    ],
+    "image": "bn-pregnancy",
+    "src": "https://www.starcarehospital.com/seeb-sub/package-details/36-weeks-antenatal-package"
+   },
+   {
+    "name": "Normal delivery package",
+    "price": "Price on enquiry",
+    "country": "Starcare Seeb",
+    "text": "Planned, uncomplicated delivery: 1 night and 2 days for mother and baby, with a companion.",
+    "incl": [
+     "Normal Delivery -(uncomplicated) – 1 night & 2 days stay of mother and baby in standard room including meals.",
+     "Free accommodation for 1 companion during package length of stay.",
+     "Accommodation of baby in mother's room",
+     "1 companion food included.",
+     "CTG’s",
+     "Routine blood tests (mother)",
+     "Blood group test of baby & TSH (G6PD for Omani's)",
+     "Assessment of baby by Paediatrician",
+     "Vaccinations for new born baby (BCG & Hepatitis B vaccinations)",
+     "Hearing screening test for baby",
+     "One follow up within 2 weeks with Paediatrician",
+     "One follow up within 2 weeks with Obstetrician Postnatal & baby packages (please enquire for details)",
+     "Postnatal & Baby Package",
+     "(Please Enquire for details)",
+     "Vaccination & wellness check for the baby.",
+     "Screening test for the baby (optional)"
+    ],
+    "at": [
+     "Seeb"
+    ],
+    "image": "bn-mother-baby",
+    "src": "https://www.starcarehospital.com/seeb-sub/package-details/maternity-packages-normal-delivery-package"
+   },
+   {
+    "name": "C-section delivery package",
+    "price": "Price on enquiry",
+    "country": "Starcare Seeb",
+    "text": "Planned C-section: 3 nights in a standard room with meals, companion stay and newborn checks.",
+    "incl": [
+     "(Planned & Uncomplicated)",
+     "3 nights stay in standard room, including meals",
+     "Accommodation for 1 companion including meals (breakfast, lunch and dinner + soft drink)",
+     "Accommodation of baby in mother's room",
+     "Pre Anesthetic Assessment",
+     "CTG’s",
+     "Routine blood tests (mother)",
+     "Blood group test of baby & TSH (G6PD for Omani's)",
+     "Paediatrician attendance at C- section",
+     "Assessment of baby by Paediatrician",
+     "Vaccinations for new born baby (BCG & Hepatitis B vaccinations)",
+     "Hearing screening test for baby",
+     "One follow up within 2 weeks with Pediatrician",
+     "One follow up within 2 weeks with obstetrician Emergency C-section will be charged extra Postnatal & baby packages (please enquire for details)",
+     "Vaccination & wellness check for the baby.",
+     "Screening test for the baby (optional) What is not included in the package",
+     "Unscheduled / emergency consultations",
+     "Shoulder Dystocia",
+     "Cord Prolapse",
+     "Post Partum Hemorrhage",
+     "Twin Delivery",
+     "Vacuum / Forceps Delivery",
+     "VBAC - Vaginal Birth After C-section",
+     "Preterm delivery less than 34 weeks",
+     "Induction of labour",
+     "Anti-D injection if necessary",
+     "Biochemical screening",
+     "Emergency requested attendance by Paediatrician for delivery",
+     "Additional test & NICU stay for babies",
+     "Any additional procedures, treatments, tests, or medication required by the mother or baby are charged at the hospital price list."
+    ],
+    "at": [
+     "Seeb"
+    ],
+    "image": "bn-mother-baby",
+    "src": "https://www.starcarehospital.com/seeb-sub/package-details/maternity-packages-c-section-delivery-package"
+   },
+   {
+    "name": "General health check-up",
+    "price": "OMR 59",
+    "country": "Starcare Barka",
+    "text": "Internal medicine specialist consultation with glucose, lipid, liver, renal and urine tests.",
+    "incl": [
+     "Consultation with an internal medicine specialist",
+     "Creatinine",
+     "Fasting glucose",
+     "Lipid profile",
+     "Liver profile",
+     "Renal profile",
+     "Urine routine"
+    ],
+    "at": [
+     "Barka"
+    ],
+    "image": "bn-doctor",
+    "src": "https://www.starcarehospital.com/barka-sub/package-details/general-health-check-up-package-59-omr"
+   },
+   {
+    "name": "Endoscopy, gastroscopy or colonoscopy",
+    "price": "OMR 199",
+    "country": "Starcare Barka",
+    "text": "Gastro package as listed by Starcare Barka. ERCP is listed at OMR 899.",
+    "incl": [
+     "Endoscopy / gastroscopy / colonoscopy: OMR 199",
+     "ERCP: OMR 899"
+    ],
+    "at": [
+     "Barka"
+    ],
+    "image": "fac-clinic",
+    "src": "https://www.starcarehospital.com/barka-sub/package-details/gastro-packages"
+   },
+   {
+    "name": "ACL reconstruction",
+    "price": "OMR 1,200",
+    "country": "Starcare Barka",
+    "text": "Orthopaedic package as listed by Starcare Barka. Knee arthroscopy is listed at OMR 2,700.",
+    "incl": [
+     "ACL: OMR 1,200",
+     "Knee arthroscopy: OMR 2,700"
+    ],
+    "at": [
+     "Barka"
+    ],
+    "image": "bn-joint",
+    "src": "https://www.starcarehospital.com/barka-sub/package-details/ortho-packages"
+   }
+  ]
+ },
+ "locations": {
+  "title": "Eight branches, three countries",
+  "nav": "Branches",
+  "book_label": "View branch",
+  "intro": "Hospitals in Seeb and Barka, medical centres across Muscat and Duqm, and branches in Sharjah and Calicut.",
+  "items": [
+   {
+    "name": "Seeb",
+    "full_name": "Starcare Hospital Seeb",
+    "type": "Hospital",
+    "country": "Oman",
+    "image": "br-seeb",
+    "address": "Starcare Hospital, PO Box 198, PC 101, As Seeb, Sultanate of Oman",
+    "email": "info@starcarehospital.com",
+    "about": "The group's first hospital: a multi-speciality premium hospital designed to American Architectural Institute standards, with 24-hour emergency care, outpatient, day-care and inpatient services, modular operating theatres, labour and delivery suites and more than 35 specialities. JCI-accredited within its first year.",
+    "phones": [
+     {
+      "label": "Reception",
+      "number": "+968 2455 7200"
+     },
+     {
+      "label": "Reception",
+      "number": "+968 2455 7201"
+     },
+     {
+      "label": "Emergency care",
+      "number": "+968 9808 8705"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Emergency",
+      "value": "Open 24 hours"
+     },
+     {
+      "label": "Clinics",
+      "value": "Call to confirm"
+     }
+    ],
+    "emergency": true,
+    "links": {
+     "website": "https://www.starcarehospital.com/seeb-sub/index"
+    },
+    "src": "https://www.starcarehospital.com/seeb-sub/index",
+    "phone": "+968 2455 7200",
+    "specs": [
+     "Anaesthesiology & Pain Management",
+     "Bariatric & Laparoscopic Surgery",
+     "Cardiology",
+     "Dentistry & Implantology",
+     "Dermatology & Cosmetology",
+     "Diabetology",
+     "Diet & Nutrition",
+     "ENT",
+     "Gastroenterology",
+     "General & Laparoscopic Surgery",
+     "Internal Medicine",
+     "Obstetrics & Gynaecology",
+     "Oral & Maxillofacial Surgery",
+     "Orthopaedic, Spine Care & Trauma Care",
+     "Pathology",
+     "Paediatric Surgery",
+     "Pediatrics & Neonatology",
+     "Physiotherapy & Rehabilitation",
+     "Plastic, Cosmetic & Reconstructive Surgery",
+     "Pulmonology",
+     "Radiology & Imaging",
+     "Sports Medicine",
+     "Urgent Care",
+     "Urology",
+     "Family Medicine",
+     "Haematology",
+     "Psychiatry & Behavioural Medicine",
+     "Endocrinology",
+     "Neurology",
+     "Ophthalmology",
+     "Paediatric Cardiology",
+     "Rheumatology",
+     "Vascular Surgery"
+    ],
+    "doctors": 51
+   },
+   {
+    "name": "Barka",
+    "full_name": "Starcare Hospital Barka",
+    "type": "Hospital",
+    "country": "Oman",
+    "image": "br-barka",
+    "address": "PO Box 539, PC 320, Barka, Sultanate of Oman",
+    "email": "info@starcarehospitalbarka.com",
+    "about": "A 75-bed hospital and the largest in the Starcare Group, serving the South Al Batinah region with over 15 specialities and subspecialties. Home of the Spine Clinic, opened in February 2020.",
+    "phones": [
+     {
+      "label": "Reception",
+      "number": "+968 2698 2200"
+     },
+     {
+      "label": "Reception",
+      "number": "+968 2698 2201"
+     },
+     {
+      "label": "Emergency care",
+      "number": "+968 9331 7359"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Emergency",
+      "value": "Call to confirm"
+     }
+    ],
+    "links": {
+     "website": "https://www.starcarehospital.com/barka-sub/index"
+    },
+    "src": "https://www.starcarehospital.com/barka-sub/index",
+    "phone": "+968 2698 2200",
+    "specs": [
+     "Anaesthesiology & Pain Management",
+     "Ayurveda",
+     "Bariatric & Laparoscopic Surgery",
+     "Cardiology",
+     "Dentistry & Implantology",
+     "Dermatology & Cosmetology",
+     "Diabetology",
+     "Diet & Nutrition",
+     "ENT",
+     "Gastroenterology",
+     "General & Laparoscopic Surgery",
+     "Internal Medicine",
+     "Obstetrics & Gynaecology",
+     "Oral & Maxillofacial Surgery",
+     "Orthopaedic, Spine Care & Trauma Care",
+     "Pathology",
+     "Paediatric Surgery",
+     "Pediatrics & Neonatology",
+     "Physiotherapy & Rehabilitation",
+     "Plastic, Cosmetic & Reconstructive Surgery",
+     "Pulmonology",
+     "Radiology & Imaging",
+     "Sports Medicine",
+     "Urgent Care",
+     "Urology"
+    ],
+    "doctors": 26
+   },
+   {
+    "name": "Mabela",
+    "full_name": "Starcare Medical Centre Mabela",
+    "type": "Medical centre",
+    "country": "Oman",
+    "image": "br-mabela",
+    "address": "PO Box 198, PC 101, Mabela, Muscat, Sultanate of Oman",
+    "email": "info@starcaremedicalcentre.com",
+    "about": "A fully equipped medical centre for residents of Mabela, with clinics, radiology and a pharmacy.",
+    "phones": [
+     {
+      "label": "Reception",
+      "number": "+968 2426 3300"
+     },
+     {
+      "label": "Reception",
+      "number": "+968 2426 3399"
+     },
+     {
+      "label": "Mobile",
+      "number": "+968 9829 4807"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "website": "https://www.starcarehospital.com/mabela-sub/index"
+    },
+    "src": "https://www.starcarehospital.com/mabela-sub/index",
+    "phone": "+968 2426 3300",
+    "specs": [
+     "Dentistry & Implantology",
+     "Dermatology & Cosmetology",
+     "Diabetology",
+     "ENT",
+     "General & Laparoscopic Surgery",
+     "Internal Medicine",
+     "Obstetrics & Gynaecology",
+     "Orthopaedic, Spine Care & Trauma Care",
+     "Pathology",
+     "Paediatric Surgery",
+     "Pediatrics & Neonatology",
+     "Physiotherapy & Rehabilitation",
+     "Radiology & Imaging",
+     "Sports Medicine",
+     "Urgent Care",
+     "Urology",
+     "Psychiatry & Behavioural Medicine",
+     "Pediatric Orthopedics"
+    ],
+    "doctors": 15
+   },
+   {
+    "name": "Bousher",
+    "full_name": "Starcare First Medical Centre Bousher",
+    "type": "Medical centre",
+    "country": "Oman",
+    "image": "br-bousher",
+    "address": "PO Box 59, PC 118, Bousher, near Mall of Oman, Sultanate of Oman",
+    "about": "A medical centre near Mall of Oman for residents of Bousher, with family medicine, paediatrics, women's health, dentistry and psychiatry.",
+    "phones": [
+     {
+      "label": "Reception",
+      "number": "+968 2411 3900"
+     },
+     {
+      "label": "Mobile",
+      "number": "+968 9808 5381"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "links": {
+     "website": "https://www.starcarehospital.com/bousher-sub/index"
+    },
+    "src": "https://www.starcarehospital.com/bousher-sub/index",
+    "phone": "+968 2411 3900",
+    "specs": [
+     "Cardiology",
+     "Dentistry & Implantology",
+     "Diabetology",
+     "Internal Medicine",
+     "Obstetrics & Gynaecology",
+     "Pediatrics & Neonatology",
+     "Radiology & Imaging",
+     "Sports Medicine",
+     "Family Medicine",
+     "Haematology",
+     "Psychiatry & Behavioural Medicine"
+    ],
+    "doctors": 12
+   },
+   {
+    "name": "Saha",
+    "full_name": "Starcare Saha Clinic",
+    "type": "Clinic",
+    "country": "Oman",
+    "image": "br-saha",
+    "address": "Samail, Oman (full address not published)",
+    "about": "Listed on the group website as Starcare Saha, Samail.",
+    "phones": [
+     {
+      "label": "Group helpline (Seeb)",
+      "number": "+968 2455 7200"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "src": "https://www.starcarehospital.com/",
+    "phone": "+968 2455 7200"
+   },
+   {
+    "name": "Duqm",
+    "full_name": "Starcare Duqm Medical Centre",
+    "type": "Medical centre",
+    "country": "Oman",
+    "image": "br-duqm",
+    "address": "Duqm, Oman (full address not published)",
+    "about": "A medical centre serving the Duqm neighbourhood.",
+    "phones": [
+     {
+      "label": "Group helpline (Seeb)",
+      "number": "+968 2455 7200"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "src": "https://www.starcarehospital.com/",
+    "phone": "+968 2455 7200"
+   },
+   {
+    "name": "Sharjah",
+    "full_name": "Starcare Medical Center, Sharjah",
+    "type": "Medical centre",
+    "country": "UAE",
+    "image": "br-sharjah",
+    "address": "Starcare Medical Center LLC, PO Box 25568, Malabar Plaza, Rolla, Sharjah, UAE",
+    "about": "Starcare Medical Center in Malabar Plaza, Rolla.",
+    "phones": [
+     {
+      "label": "Reception",
+      "number": "+971 6 561 1099"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "src": "https://www.starcarehospital.com/",
+    "phone": "+971 6 561 1099"
+   },
+   {
+    "name": "Calicut",
+    "full_name": "Starcare Calicut",
+    "type": "Hospital",
+    "country": "India",
+    "image": "br-calicut",
+    "address": "Kozhikode (Calicut), Kerala, India (full address not published)",
+    "about": "The group's branch in Kerala, India.",
+    "phones": [
+     {
+      "label": "Group helpline (Seeb)",
+      "number": "+968 2455 7200"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Opening hours",
+      "value": "Not published. Call to confirm"
+     }
+    ],
+    "src": "https://www.starcarehospital.com/",
+    "phone": "+968 2455 7200"
+   }
+  ]
+ },
+ "news": [
+  {
+   "title": "Starcare re-accredited by JCI for the fourth time",
+   "date": "August 29, 2021",
+   "tag": "Accreditation",
+   "image": "news-jci-4th",
+   "summary": "Starcare is proud to be re-accredited by Joint Commission International for the fourth time.",
+   "body": [
+    "Starcare announced on 29 August 2021 that it had been re-accredited by Joint Commission International (JCI) for the fourth time in a row.",
+    "Starcare Hospital first earned JCI accreditation within its first year of operation. Together with PSFHI and ISO, it made Starcare the first triple-accredited hospital in the Sultanate."
+   ],
+   "src": "https://www.starcarehospital.com/seeb-sub/index"
+  },
+  {
+   "title": "Starcare Barka launches Spine Clinic",
+   "date": "February 10, 2020",
+   "tag": "Barka",
+   "image": "bn-spine",
+   "summary": "A multidisciplinary clinic for back, neck and spine disorders, headed by Dr. Ahmed Jahwari.",
+   "body": [
+    "Barka February 10, 2020: Starcare Hospital, Barka has officially opened a Spine Clinic that bring together the region’s top Ortho/Spine surgeons to provide multidisciplinary, patient-focused care for a variety of back, neck and spine disorders. The Clinic is headed by Dr. Ahmed Jahwari, MD, FRCS CANADA, Sr. Consultant- Orthopaedic & Trauma Care. The Orthopaedic & Spine Clinic at Starcare Barka has full-fledged team of experienced surgeons, Dr.Paul P Antony, MBBS, MS (Orthopedics) SICOT Fellow Shoulder & Elbow Surgery (Germany) AO Fellow (Germany).",
+    "Dr.Raphael Charrabeh, MD Orthopedic & Trauma Specialty (Syrian Board) and Dr.Ahmed Said Ali Al-Mandhari, BSc, MD, MRCS , MCCE, ( Fellow in shoulder and Elbow surgery - UK ). Expert Physiotherapists are also part of the Spine care Team. Dr. Ahmed Jahwari completed his graduation from Sultan Qaboos University, Oman and MD from College of Medicine SQU. He is a certified Orthopedic Surgeon from the Royal College of Physicians and Surgeons of Canada.",
+    "He is honored and awarded with Best Trainer of the Year OMSB, Bernard Ghert Award for resident excellence in patient focused care, University of Toronto, Zimmer Research Grant Awarded 1st prize and has received an honor degree from Sultan Qaboos University. “Back and Neck pain are most common health issues for a large number of people. However, there are many misconceptions and fear among people regarding the results of treatment of spinal problems.",
+    "Many people put up with the suffering rather than getting correct treatment simply because of lack of awareness about what all modern Spine care treatment methods can offer” said Dr. Sadik Kodakat, Consultant Anesthesiologist & Chairman of Starcare Group in the press meet conducted at the Hospital in Barka. Mr. Nasser Batha Group CEO of Starcare Oman added that, with the addition of Spine Clinic in the orthopedic division of Starcare Barka, we intend to provide accurate diagnosis, choose best treatment, and execute the treatment in best possible manner for every single patient.",
+    "Surgery option chosen only when non-surgical treatment fails to provide adequate relief to the patient. When needed, surgeries will be carried out with the latest technologies at our well-equipped operation theaters. We specialize in minimally invasive spine surgeries and endoscopic spine surgeries, along with other treatments for common spinal problems like slipped or herniated disc, spondylosis, spinal trauma and fractures, spondylolisthesis and spine tumors etc.",
+    "It is a multidisciplinary teamwork, making it easier for patients to receive care for a variety of spine and nerve problems, including surgical and non-surgical treatment, rehabilitation and pain management said Dr. Ahmed Jahwari “Back and neck pain can result from a variety of causes, when nerves are stressed by adjacent bones and other tissues. This can happen from regular movements, such as simply bending over or from strenuous activity, trauma, ageing or infection.",
+    "Having a multi-disciplinary team to be able to correctly diagnose wide ranges of spine problems allow us to provide the best patient care possible.,” “We are all working together for the patient’s best interests in mind.” He added. Starcare Barka has strived to provide the services of experienced and well known doctors and Senior Visiting Consultants from different specialties including Orthopedic Surgeries, weight reduction surgery, Gynecologic Laparoscopic Surgery, Pediatric Surgery and ENT surgeries.",
+    "Now it has become the preferred centre for complex orthopedic surgeries like joint replacement, shoulder arthroscopy and Spine surgeries. We were in the news last year for doing the first Shoulder Joint Replacement surgery in the private sector in Oman. We are now looking forward to be the Centre of Excellence in Spine care” Said Mr. Vinod, Chief Operating officer of Starcare Hospital Barka."
+   ],
+   "src": "https://www.starcarehospital.com/barka-sub/news/starcare-barka-launches-spine-clinic"
+  },
+  {
+   "title": "Starcare wins best employer award",
+   "date": "July 30, 2019",
+   "tag": "Award",
+   "image": "news-best-employer",
+   "summary": "World HRD Congress named Starcare the Best Employer for Oman in Healthcare, 2019.",
+   "body": [
+    "Starcare hospital has been selected by the prestigious World HRD Congress as the Best Employer for Oman in Healthcare, 2019 after carefully considering multiple parameters including diversified culture, equal opportunity for women leaders, employee benefits and engagements, empowering and developing Omani nationals. “People are the backbone of our organisation and the most valuable assets. We consider it as a symbiotic relationship extending value to each other,” remarked Nasser Batha, CEO, Starcare Group.",
+    "The 28th edition of the World HRD Congress aims to recognise the efforts of the healthcare organisations that have strived to attract and retain talent. Featuring the best organisations in Oman, Starcare Group was selected by World HRD Congress as the Preferred Employer in healthcare by the international jury. “At Starcare we aim to promote the professional and personal growth of the employees, it is important to maintain a healthy work-life balance to attain productivity”, commented Dr Sadik Kodakat, chairman of Starcare Group, expressing his happiness on being selected as the best employer.",
+    "The Starcare family has a staff strength of more than 500 employees and growing with its presence in three countries including Oman, India and UAE. The group is always in line with the government vision to enhance Omanisation. A culture of patient safety and care beyond everything else runs deep in the vein of the organisation helping to bridge the differences in nationality, language and training. The private healthcare sector in Oman has been at the forefront driving the changes and ushering progress and technological advancements in the field.",
+    "Established in 2010, Starcare Group has since then redefined the standards of healthcare delivery and established itself as the benchmark for quality healthcare. Having achieved the rare feat of JCI accreditation, the gold standard for healthcare excellence in less than a year of operation, Starcare has been on a continuous search for improvement and excellence. Healthcare more than any other industry depends on the people, their expertise and passionate approach to achieving success.",
+    "“I always knew that Starcare is one of the good places to work because I have so many fond memories during my last five years here. Now I am really excited to hear that our team has been appreciated by independent experts in the field too,” said Mariyam Juma al Balushi, a supervisor at Customer Care in Mawaleh branch. Starcare group has hospitals in Seeb, Barka and medical centres in Bausher, Ma’abela and Duqm. A brand new 80-bed Mother & Child Hospital will come up in Al Hail in 2020."
+   ],
+   "src": "https://www.starcarehospital.com/barka-sub/news/starcare-wins-best-employer-award"
+  },
+  {
+   "title": "Starcare names Nasser Batha as group CEO",
+   "date": "May 1, 2019",
+   "tag": "Leadership",
+   "image": "news-ceo",
+   "summary": "The founding partner takes charge of the hospitals at Seeb and Barka and the medical centres at Bowsher, Mabela and Duqm.",
+   "body": [
+    "The Starcare Group which started its journey in 2010 in Oman has made remarkable progress in establishing itself as the benchmark for accreditation quality healthcare in the country. The group has expanded its footprints beyond Oman to India and UAE in the past years apart from the ambitious super speciality projects in progress. Clearly, on the verge of a new horizon, the group is in need of strong and multifaceted leader with astute business acumen.",
+    "The Chairman and Board of Directors unanimously nominated Mr Nasser Batha, Founding Partner of the Group to assume responsibility as the CEO of Starcare Group in Oman. A sought after management professional and a passionate entrepreneur, Nasser Batha has been heading business units of international brands like EMAAR, AMADEUS, Emirates, KLM and others across the globe in an extensive career spanning 3 decades. Hailed for expansions, start-ups and turnaround ventures, he demonstrates pro-active leadership and ability to deliver financial and business growth.",
+    "An MBA from Bradford, UK, Nasser keeps abreast with the developments in the field and remains a strong advocate of technology and innovation. Welcoming the new CEO, Dr Sadik Kodakat, Chairman, Starcare Group remarked “Nasser has always been part of the key decisions and strategies made by Starcare. But now, we will have his dedicated attention to the business as we pursue our ambitious growth plans in Oman”. An analytical thinker and quick decision maker, Nasser benefits from his vast experience in the Middle East and Europe part from his ability to handle seven languages.",
+    "He would be responsible for all the operating units of Starcare in Oman including hospitals at Seeb, Barka and Medical Centres at Bowsher, Mabela and Duqm. “We hope the new CEO would be able to shape the Corporate strategy in line with the expansion plans of the group and the specific requirements of Oman.” said Dr Askar Kukkadi, Managing Director, Starcare Group. The healthcare sector in Oman is undergoing rapid changes highlighted by the presence of private hospitals and the government initiatives to encourage private sector and PPP ventures.",
+    "Oman is a youthful country with strong economic indicators and rising population along with prevalence of chronic diseases indicating the need for customized healthcare solutions. Starcare has always believed in adapting the Western standards of quality to suit the healthcare requirements of the nation. “It is my personal goal to increase opportunities for Omani nationals, train and enhance their skills in the process to develop a sustainable healthcare delivery model” commented Nasser Batha in his interaction with the staff members.",
+    "The group is planning to add 400 beds in the next 5 years including the prestigious Starcare Healthcity Muscat and a chain of low-cost clinics."
+   ],
+   "src": "https://www.starcarehospital.com/barka-sub/news/starcare-name-nasser-batha-as-group-ceo"
+  }
+ ],
+ "news_title": "News and updates",
+ "news_intro": "Accreditation, awards and new clinics from Starcare.",
+ "partners": {
+  "kicker": "Insurance",
+  "title": "Insurance partners",
+  "intro": "Cashless and direct billing with most insurers and TPAs",
+  "partners": [
+   "AETNA",
+   "AXA",
+   "BUPA",
+   "CIGNA",
+   "MEDNET",
+   "MSH INTERNATIONAL",
+   "NEXTCARE",
+   "SAICO",
+   "VIPUL BETTERCARE",
+   "METLIFE",
+   "NATIONAL LIFE & GENERAL INSURANCE"
+  ]
+ },
+ "faq_title": "Questions patients ask",
+ "faq": [
+  {
+   "q": "Is Starcare accredited?",
+   "a": "Yes. Starcare holds JCI, PSFHI and ISO accreditation, which made it the first triple-accredited hospital in Oman. JCI re-accredited Starcare for the fourth time in August 2021."
+  },
+  {
+   "q": "Is there a 24-hour emergency department?",
+   "a": "Starcare Hospital Seeb runs a 24-hour emergency department staffed by ACLS-certified doctors and nurses. Call +968 2455 7200 or +968 9808 8705."
+  },
+  {
+   "q": "Which insurance do you accept?",
+   "a": "Starcare works with most insurers and TPAs for cashless or direct billing, including Aetna, AXA, Bupa, Cigna, MedNet, MSH International, NEXtCARE, SAICO, Vipul BetterCare and MetLife. Starcare Barka also accepts National Life & General Insurance cards. Check your policy with the branch before your visit."
+  },
+  {
+   "q": "How do I book an appointment?",
+   "a": "Call your branch, or use the form on this site. Starcare Barka also takes appointment requests by WhatsApp on +968 9331 7359."
+  },
+  {
+   "q": "What does the 24 to 30 week antenatal package include?",
+   "a": "Nine consultations with a consultant obstetrician, two ultrasound scans, two full blood counts and a dipstick urine test at each visit. Other tests, admissions and extra consultations are charged separately."
+  },
+  {
+   "q": "What is in the normal delivery package?",
+   "a": "A planned, uncomplicated delivery with 1 night and 2 days for mother and baby in a standard room, meals, a companion, routine tests, the baby's BCG and hepatitis B vaccines, a hearing screen and follow-ups with the paediatrician and obstetrician within two weeks."
+  },
+  {
+   "q": "Which check-up should I choose?",
+   "a": "It depends on your sex, age and lifestyle risk factors. Call +968 9808 8705 or +968 2455 7200 and the team will suggest one."
+  },
+  {
+   "q": "Where are Starcare branches?",
+   "a": "Hospitals in Seeb and Barka, medical centres in Mabela, Bousher and Duqm, a clinic in Saha (Samail), and branches in Rolla, Sharjah and in Calicut, India."
+  }
+ ],
+ "nudges": {
+  "dock_label": "Book or call",
+  "offer": {
+   "id": "gh59",
+   "kicker": "Starcare Barka",
+   "title": "General check-up, OMR 59",
+   "text": "Specialist consultation with glucose, lipid, liver, renal and urine tests.",
+   "cta": "See packages",
+   "href": "packages.html",
+   "image": "bn-doctor"
+  }
+ },
+ "cta_band": "Book with a Starcare doctor at the branch nearest you.",
+ "detail_cta": {
+  "title": "Book an appointment",
+  "text": "Choose a branch and a speciality, and the team will call you to confirm a time."
+ },
+ "contact": {
+  "title": "Book an appointment",
+  "intro": "Choose your branch and tell us what you need. This concept form is not connected; call the branch to book today.",
+  "address": "Starcare Hospital, PO Box 198, PC 101, As Seeb, Sultanate of Oman",
+  "email": "info@starcarehospital.com",
+  "phones": [
+   {
+    "label": "Starcare Seeb",
+    "number": "+968 2455 7200"
+   },
+   {
+    "label": "Emergency care, Seeb",
+    "number": "+968 9808 8705"
+   },
+   {
+    "label": "Starcare Barka",
+    "number": "+968 2698 2200"
+   },
+   {
+    "label": "WhatsApp, Barka",
+    "number": "+968 9331 7359",
+    "whatsapp": true
+   }
+  ],
+  "note": "Concept preview: connect the form before launch.",
+  "form": {
+   "branch": true,
+   "topics": [
+    "Appointment",
+    "Health check-up",
+    "Maternity package",
+    "Insurance",
+    "Feedback",
+    "Careers"
+   ],
+   "submit": "Request appointment"
+  }
+ },
+ "confirm": [
+  "The site content is dated: newest news item is August 2021 and the footer says 2023. Check that doctors, packages and phone numbers are still current.",
+  "Package prices: only Barka publishes prices (general check-up OMR 59, endoscopy OMR 199, ERCP OMR 899, ACL OMR 1,200, knee arthroscopy OMR 2,700). Seeb packages show no price; shown as \"Price on enquiry\".",
+  "Saha, Duqm and Calicut are listed with the Seeb PO Box and phone numbers on the group homepage. Their own addresses and phones are not published.",
+  "Mabela and Bousher subsites reuse the Seeb \"About\" text (24-hour emergency, operating theatres); not repeated here as their own facilities.",
+  "Facility images are interior renders from the Barka facilities gallery; which branch each render shows is not stated.",
+  "The doctor portrait on the group homepage (used in the hero) may be a licensed stock image rather than a Starcare doctor; confirm the licence covers reuse.",
+  "Starcare Barka's 2020 news says it did \"the first Shoulder Joint Replacement surgery in the private sector in Oman\" in 2019; not repeated as fact here.",
+  "The best employer article (2019) says an 80-bed Mother & Child Hospital would open in Al Hail in 2020, and the CEO article mentions 400 beds and Starcare Healthcity Muscat; no later update found, so left out.",
+  "Branch opening hours (other than Seeb emergency, 24 hours) are not published.",
+  "Map coordinates are not published; branch maps search by name.",
+  "Doctor directory merges branch doctor pages and doctors named only on speciality pages (shown with title \"Doctor\"). Some names appear at two branches.",
+  "JCI 4th accreditation article: only the headline, date and photo are published; the body here restates the headline.",
+  "Company films are on YouTube only (4 embeds on the videos page); not downloaded.",
+  "Spelling on their site fixed silently: Gasteroenterology, Peadiatric, Baraka, Brest augumentation."
+ ],
+ "sources": [
+  "https://www.starcarehospital.com/ (group homepage, read 12 Oct 2026)",
+  "https://www.starcarehospital.com/seeb-sub/index and subpages (about, specialities, doctors, packages, news, facilities, insurance), read 12 Oct 2026",
+  "https://www.starcarehospital.com/barka-sub/index and subpages (about, specialities, doctors, packages, news, facilities, insurance), read 12 Oct 2026",
+  "https://www.starcarehospital.com/mabela-sub/index and subpages (about, specialities, doctors, packages, news, facilities, insurance), read 12 Oct 2026",
+  "https://www.starcarehospital.com/bousher-sub/index and subpages (about, specialities, doctors, packages, news, facilities, insurance), read 12 Oct 2026",
+  "https://www.starcarehospital.com/seeb-sub/starcare-videos (read 12 Oct 2026)"
+ ]
 }

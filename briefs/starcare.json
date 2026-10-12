@@ -1,0 +1,17 @@
+{
+  "slug": "starcare",
+  "name": "Starcare Hospital",
+  "short": "Starcare",
+  "sector": "healthcare",
+  "goal": "concept redesign (upgrade to the kit's motion standard)",
+  "languages": ["en"],
+  "website": "https://www.starcarehospital.com",
+  "references": [{"url": "data/badr-al-samaa.json", "like": "hospital modules: specialities, doctors directory, packages, branches with maps, BMI"},
+                 {"url": "data/dar-global.json", "like": "studio theme, depth hero, stages, scrub"}],
+  "motion": "cinematic",
+  "brand": {"style": "chosen by builder", "colours": "Starcare red and navy from the logo"},
+  "signature": ["depth hero from a real hospital photo", "stages story from real photos", "scrubbed hospital film if available"],
+  "hosting": "existing server (same as Tier 1 concepts)",
+  "forms": "preview only",
+  "verifier": "internal"
+}

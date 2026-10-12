@@ -1,0 +1,15 @@
+{
+  "slug": "national-gas",
+  "name": "National Gas Company SAOG",
+  "sector": "energy",
+  "goal": "kit upgrade: concept rebuild on the studio theme (internal)",
+  "languages": ["en"],
+  "website": "https://nationalgasco.net/",
+  "references": [{"url": "data/dar-global.json, data/healthy-lab.json", "like": "depth hero, stages story, real cut-outs with converge and lineup"}],
+  "motion": "cinematic",
+  "brand": {"style": "glass", "colours": "deep teal-navy #003a52 from their headings, flame blues from the logo"},
+  "signature": ["depth hero: real tanker cut-out in front of the storage yard at dusk", "stages: refinery to customer supply chain from their photos", "converge: D-Cylinder with its six real fittings", "lineup of cut-out products"],
+  "hosting": "existing server (same as Tier 1 concepts)",
+  "forms": "preview only",
+  "verifier": "internal"
+}

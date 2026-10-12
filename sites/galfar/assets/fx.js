@@ -796,6 +796,207 @@
     requestAnimationFrame(tick);
   }
 
+  /* ---------- converge: real ingredients fly into the dish as you scroll ---------- */
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  function convergeHero(sec, T1) {
+    sec.classList.add("is-live");
+    const stage = sec.querySelector(".cv-stage"), scene = sec.querySelector(".cv-scene");
+    const dish = sec.querySelector(".cv-dish"), plate = sec.querySelector(".cv-plate");
+    const copy = sec.querySelector(".cv-copy"), hint = sec.querySelector(".cv-hint");
+    const ings = Array.from(sec.querySelectorAll(".cv-ing")).map((el, i) => {
+      const z = parseFloat(el.dataset.z) || 0.5;
+      if (z > 0.8) el.style.filter = `blur(${((z - 0.8) * 14).toFixed(1)}px)`;
+      const ang = i * 2.39996, rad = 0.06 + (i % 4) * 0.045; // golden-angle landing spots inside the dish
+      return { el, x: +el.dataset.x / 100, y: +el.dataset.y / 100, r: +el.dataset.r, z, tx: Math.cos(ang) * rad, ty: Math.sin(ang) * rad * 0.7, spin: (i % 2 ? 1 : -1) * (90 + (i % 3) * 60), ph: i * 1.7 };
+    });
+    const parts = Array.from(sec.querySelectorAll(".cv-part:not(.is-base)")).map((el, i) => ({ el, x: +el.dataset.x / 100, y: +el.dataset.y / 100, r: +el.dataset.r, z: parseFloat(el.dataset.z) || 0.5, i, ph: i * 2.1 }));
+    const explode = parts.length > 0 && sec.dataset.mode !== "in";
+    let mx = 0, my = 0, tx = 0, ty = 0, cur = 0, done = false;
+    if (T1.fine) sec.addEventListener("pointermove", (e) => { tx = (e.clientX / innerWidth - 0.5) * 2; ty = (e.clientY / innerHeight - 0.5) * 2; });
+    const tick = (t) => {
+      if (visibleNow(sec)) {
+        const target = sectionProgress(sec);
+        cur += (target - cur) * 0.12; if (Math.abs(target - cur) < 0.0004) cur = target;
+        mx += (tx - mx) * 0.05; my += (ty - my) * 0.05;
+        const W = scene.clientWidth, H = scene.clientHeight, D = dish.clientWidth || W * 0.4;
+        const a = ease(clamp01((cur - 0.06) / 0.52)), time = t / 1000;
+        // exploded view (exact parts, default): the real dish opens into its ingredients, names show, then it closes
+        const ex = cur < 0.55 ? ease(clamp01((cur - 0.06) / 0.3)) : 1 - ease(clamp01((cur - 0.6) / 0.2));
+        const glide = explode ? ease(clamp01((cur - 0.03) / 0.3)) : a;
+        // the dish glides from its spot beside the headline to the centre while the headline leaves
+        const pr = plate.offsetLeft + plate.offsetWidth / 2, shift = (W / 2 - pr) * glide;
+        ings.forEach((g) => {
+          const fl = (1 - a);
+          const x = lerp(g.x * W, g.tx * D, a) + shift + Math.sin(time * 0.7 + g.ph) * 10 * fl - mx * g.z * 40 * fl;
+          const y = lerp(g.y * H, g.ty * D, a) + Math.cos(time * 0.9 + g.ph) * 14 * fl - my * g.z * 30 * fl;
+          const sc = lerp(0.55 + g.z * 0.8, 0.22, a);
+          g.el.style.transform = `translate3d(calc(${x.toFixed(1)}px - 50%), calc(${y.toFixed(1)}px - 50%), 0) rotate(${(g.r + g.spin * a).toFixed(1)}deg) scale(${sc.toFixed(3)})`;
+          g.el.style.opacity = String(a > 0.8 ? Math.max(0, 1 - (a - 0.8) / 0.2) : 1);
+        });
+        // exact parts: each ingredient group flies in from off-frame and lands in its real place, one after another
+        sec.style.setProperty("--ex", explode ? ex.toFixed(3) : 0);
+        parts.forEach((g) => {
+          const b = explode ? 1 - ex * 0.62 : ease(clamp01((cur - 0.05 - g.i * 0.055) / 0.42)), fl = 1 - b;
+          const x = g.x * W * fl + Math.sin(time * 0.7 + g.ph) * 8 * fl - mx * g.z * 36 * fl;
+          const y = g.y * H * fl + Math.cos(time * 0.9 + g.ph) * 10 * fl - my * g.z * 26 * fl;
+          g.el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${(g.r * fl).toFixed(1)}deg) scale(${(1 + g.z * 0.5 * fl).toFixed(3)})`;
+          g.el.style.filter = g.z > 0.8 && fl > 0.05 ? `blur(${((g.z - 0.8) * 12 * fl).toFixed(1)}px)` : "";
+        });
+        if (explode) {
+          plate.style.transform = `translate3d(${(shift - mx * 10).toFixed(1)}px, ${(-my * 8).toFixed(1)}px, 0) scale(${(1 - ex * 0.18).toFixed(3)})`;
+          dish.style.transform = `rotate(${(cur * 10).toFixed(2)}deg)`;
+        } else {
+          plate.style.transform = `translate3d(${(shift - mx * 10).toFixed(1)}px, ${(-my * 8).toFixed(1)}px, 0) scale(${lerp(0.7, 1, a).toFixed(3)})`;
+          dish.style.transform = `rotate(${(lerp(-28, 0, a) + cur * 14).toFixed(2)}deg)`;
+        }
+        if (copy) { const f = clamp01((cur - 0.04) / 0.22); copy.style.opacity = String(1 - f); copy.style.transform = `translateY(${(-f * 60).toFixed(1)}px)`; copy.style.pointerEvents = f > 0.5 ? "none" : ""; }
+        if (hint) hint.style.opacity = String(1 - clamp01(cur / 0.03));
+        const d = cur > (explode ? 0.8 : 0.6); if (d !== done) { done = d; sec.classList.toggle("is-done", d); }
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- stack: a product made of real photographed layers opens and closes on scroll ---------- */
+  function photoStack(sec) {
+    sec.classList.add("is-live");
+    const view = sec.querySelector(".stk-view");
+    const layers = Array.from(sec.querySelectorAll(".stk-l"));
+    const items = Array.from(sec.querySelectorAll(".stk-list li"));
+    const n = layers.length;
+    let cur = 0, active = -1;
+    const tick = () => {
+      if (visibleNow(sec)) {
+        const target = sectionProgress(sec);
+        cur += (target - cur) * 0.12; if (Math.abs(target - cur) < 0.0004) cur = target;
+        const H = view.clientHeight, box = sec.querySelector(".stk-box");
+        const open = cur < 0.5 ? ease(clamp01((cur - 0.1) / 0.4)) : 1 - ease(clamp01((cur - 0.82) / 0.18));
+        const thick = layers.map((l) => (parseFloat(l.dataset.t) || 10) / 100 * H);
+        const top = layers[n - 1].clientHeight || H * 0.3;
+        const sumT = thick.slice(0, n - 1).reduce((x, y) => x + y, 0);
+        const gap = Math.max(18, (H * 0.92 - top - sumT) / Math.max(1, n - 1));
+        if (box) {  // exact mode: layers start where they sat in the photo, then spread apart
+          const g = Math.max(18, (H * 0.94 - box.clientHeight) / Math.max(1, n - 1));
+          layers.forEach((l, i) => {
+            const dx = (parseFloat(l.dataset.dx) || 0) * open, rot = (parseFloat(l.dataset.rot) || 0) * open;
+            l.style.transform = `translate3d(${dx}px, ${(-i * g * open).toFixed(1)}px, 0) rotate(${rot}deg)`;
+          });
+        }
+        let y = 0;
+        if (!box) layers.forEach((l, i) => {
+          const yy = y + i * gap * open, dx = (parseFloat(l.dataset.dx) || 0) * open, rot = (parseFloat(l.dataset.rot) || 0) * open;
+          l.style.transform = `translate3d(calc(-50% + ${dx}px), ${(-yy).toFixed(1)}px, 0) rotate(${rot}deg)`;
+          y += thick[i];
+        });
+        sec.style.setProperty("--open", open.toFixed(3));
+        const k = open > 0.6 ? Math.min(n - 1, Math.floor(clamp01((cur - 0.42) / 0.4) * n)) : -1;
+        if (k !== active) { active = k; items.forEach((li) => li.classList.toggle("is-on", +li.dataset.i === k)); layers.forEach((l, i) => l.classList.toggle("is-on", i === k)); }
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- lineup: products slide sideways while the section is pinned (desktop) ---------- */
+  function lineupSlide(sec) {
+    const track = sec.querySelector("[data-lu-track]");
+    const size = () => {
+      const live = innerWidth > 900;
+      sec.classList.toggle("is-live", live);
+      const over = Math.max(0, track.scrollWidth - innerWidth + 48);
+      sec.style.height = live ? `${over + innerHeight}px` : "";
+      return over;
+    };
+    let over = size(), cur = 0;
+    addEventListener("resize", () => { over = size(); });
+    const tick = () => {
+      if (sec.classList.contains("is-live") && visibleNow(sec)) {
+        const target = sectionProgress(sec);
+        cur += (target - cur) * 0.12;
+        track.style.transform = `translate3d(${(-cur * over).toFixed(1)}px, 0, 0)`;
+      } else track.style.transform = "";
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- film: a real packshot's scroll-scrubbed product film (rise, turn, powder, label, flavours) ---------- */
+  function productFilm(sec, T1) {
+    sec.classList.add("is-live");
+    const $ = (q) => sec.querySelector(q), $$ = (q) => Array.from(sec.querySelectorAll(q));
+    const pack = $(".film-pack"), turn = $(".film-turn"), sheen = $(".film-sheen"), beam = $(".film-beam");
+    const back = $(".film-back"), canvas = $(".film-dust"), bar = $(".film-bar i");
+    const beats = $$(".film-beat"), sibs = $$(".film-sib"), stats = $$(".film-stat"), sibWrap = $(".film-sibs");
+    const ats = beats.map((b) => parseFloat(b.dataset.at) || 0);
+    const ctx = canvas.getContext("2d");
+    // the flavour colour, resolved from the --flav custom property
+    const probe = document.createElement("i"); probe.style.color = "var(--flav)"; sec.appendChild(probe);
+    const flav = getComputedStyle(probe).color; probe.remove();
+    const rgb = (flav.match(/\d+/g) || [200, 120, 80]).slice(0, 3).map(Number);
+    let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    const grains = Array.from({ length: innerWidth < 760 ? 140 : 260 }, () => {
+      const a = -Math.PI / 2 + (rnd() - 0.5) * Math.PI * 1.7;
+      return { a, v: 0.35 + rnd() * 0.9, r: 0.6 + rnd() * 2.6, l: (rnd() - 0.5) * 70, d: rnd() * 0.25 };
+    });
+    const motes = Array.from({ length: 50 }, () => ({ x: rnd(), y: rnd(), r: 0.4 + rnd() * 1.4, s: 0.2 + rnd() * 0.6 }));
+    const size = () => { const d = Math.min(devicePixelRatio || 1, 2); canvas.width = canvas.clientWidth * d; canvas.height = canvas.clientHeight * d; ctx.setTransform(d, 0, 0, d, 0, 0); };
+    size(); addEventListener("resize", size);
+    const shade = (l, a) => `rgba(${rgb.map((c) => Math.max(0, Math.min(255, c + l))).join(",")},${a})`;
+    const risen = sec.hasAttribute("data-risen");  // first section on the page: start in the spotlight
+    let cur = 0, beat = -1, statsOn = false, buyOn = false;
+    const tick = (time) => {
+      if (visibleNow(sec)) {
+        const target = sectionProgress(sec);
+        cur += (target - cur) * 0.1; if (Math.abs(target - cur) < 0.0003) cur = target;
+        const p = cur, H = innerHeight, W = canvas.clientWidth, Hc = canvas.clientHeight;
+        const rise = risen ? 1 : ease(clamp01(p / 0.13));
+        const spin = clamp01((p - 0.12) / 0.26);
+        const flip = back ? ease(clamp01((p - 0.58) / 0.14)) : 0;
+        const unflip = ease(clamp01((p - 0.78) / 0.08));
+        const line = ease(clamp01((p - 0.8) / 0.14));
+        const ang = lerp(-26, 20, spin) * (1 - flip) + 180 * flip * (1 - unflip);
+        const sc = lerp(0.86, 1, rise) * lerp(1, 0.72, line) * (1 + 0.08 * flip * (1 - unflip));
+        const drop = line * H * (innerWidth < 760 ? 0.08 : 0.17);
+        pack.style.transform = `translate3d(0, ${((1 - rise) * H * 0.55 + drop).toFixed(1)}px, 0) scale(${sc.toFixed(3)})`;
+        sibWrap.style.transform = `translateY(${drop.toFixed(1)}px)`;
+        turn.style.transform = `rotateY(${ang.toFixed(2)}deg)`;
+        if (back) sec.classList.toggle("is-back", ang > 90 && ang < 270);
+        beam.style.opacity = String(rise * (1 - line * 0.5));
+        sheen.style.backgroundPosition = `${lerp(-60, 160, clamp01((p - 0.16) / 0.2)).toFixed(1)}% 0`;
+        // powder burst: a pure function of scroll, so it rewinds when you scroll back up
+        ctx.clearRect(0, 0, W, Hc);
+        const ox = W / 2, oy = Hc * 0.5 - pack.clientHeight * 0.32 * sc, R = Math.min(W, Hc) * 0.62;
+        const tb = (p - 0.36) / 0.24;
+        if (tb > 0 && tb < 1.3) {
+          grains.forEach((g) => {
+            const t = clamp01((tb - g.d) / (1 - g.d)); if (t <= 0) return;
+            const e = 1 - Math.pow(1 - t, 3), x = ox + Math.cos(g.a) * g.v * R * e, y = oy + Math.sin(g.a) * g.v * R * e * 0.85 + t * t * R * 0.35;
+            const al = Math.max(0, (1 - t) * 0.9) * (tb > 1 ? Math.max(0, 1 - (tb - 1) / 0.3) : 1);
+            ctx.fillStyle = shade(g.l, al.toFixed(3)); ctx.beginPath(); ctx.arc(x, y, g.r * (1 + t * 1.6), 0, 6.283); ctx.fill();
+          });
+        }
+        const tt = time / 1000; // slow motes in the beam, always drifting
+        motes.forEach((m) => { const y = ((m.y - tt * m.s * 0.02) % 1 + 1) % 1; ctx.fillStyle = `rgba(255,255,255,${(0.12 * rise).toFixed(3)})`; ctx.beginPath(); ctx.arc((m.x * 0.5 + 0.25) * W, y * Hc, m.r, 0, 6.283); ctx.fill(); });
+        const so = p > 0.4 && p < 0.62; if (so !== statsOn) { statsOn = so; sec.classList.toggle("is-stats", so); }
+        sibs.forEach((el) => {
+          const k = +el.style.getPropertyValue("--k"), n = +el.style.getPropertyValue("--n");
+          const slot = (k - (n - 1) / 2) * Math.min(W / (n + 1.6), 230) + (k < n / 2 ? -1 : 1) * Math.min(W * 0.12, 120);
+          el.style.transform = `translate3d(${(slot * line + (k < n / 2 ? -1 : 1) * (1 - line) * W * 0.6).toFixed(1)}px, 0, 0) scale(${lerp(0.7, 1, line).toFixed(3)})`;
+          el.style.opacity = String(line);
+        });
+        let b = 0; ats.forEach((a, i) => { if (p >= a - 0.001) b = i; });
+        if (b !== beat) { beat = b; beats.forEach((el, i) => el.classList.toggle("is-on", i === b)); }
+        const bo = p > 0.86; if (bo !== buyOn) { buyOn = bo; sec.classList.toggle("is-done", bo); }
+        if (bar) bar.style.transform = `scaleX(${p.toFixed(4)})`;
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
   /* ---------- layered depth hero: planes move at different rates and lean with the pointer ---------- */
   function depthHero(sec, T1) {
     const layers = Array.from(sec.querySelectorAll(".depth-layer"));
@@ -1129,8 +1330,13 @@
       document.querySelectorAll("[data-scrub]").forEach((r) => scrubFilm(r, T1));
       document.querySelectorAll("[data-depth]").forEach((r) => depthHero(r, T1));
       document.querySelectorAll("[data-stages]").forEach((r) => stagesStory(r));
+      document.querySelectorAll("[data-converge]").forEach((r) => convergeHero(r, T1));
+      document.querySelectorAll("[data-stack]").forEach((r) => photoStack(r));
+      document.querySelectorAll("[data-lineup]").forEach((r) => lineupSlide(r));
+      document.querySelectorAll("[data-film]").forEach((r) => productFilm(r, T1));
     } else {
       document.querySelectorAll(".scrub-beat, .stg-text").forEach((b) => b.classList.add("is-on"));
+      document.querySelectorAll("[data-film]").forEach((f) => { const last = f.querySelectorAll(".film-beat"); if (last.length) last[last.length - 1].classList.add("is-on"); });
     }
     if (!T1.motion || !THEMES[theme]) return;
     THEMES[theme](T1);

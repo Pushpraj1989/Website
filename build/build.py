@@ -242,7 +242,7 @@ def prepare(site):
     cut_dir = SHARED / "img" / site["img_dir"] / "cut"
     if cut_dir.exists():
         for key, im in list(site["images"].items()):
-            stem = im["src"].rsplit(".", 1)[0]
+            stem = Path(im["src"]).stem  # cut-outs sit flat in cut/, whatever folder the photo is in
             if not key.startswith("cut:") and (cut_dir / (stem + ".webp")).exists():
                 site["images"].setdefault("cut:" + key, {"src": f"cut/{stem}.webp", "alt": im.get("alt", ""), "cap": im.get("cap")})
     for stat in site["stats"]:

@@ -3,7 +3,7 @@
     <p class="foot-big" aria-hidden="true" data-drift="14">{{ s.short }}</p>
     <div class="foot-grid">
       <div>
-        <a class="brand" href="index.html">{% if s.brand and s.brand.logo %}<img class="brand-logo" src="assets/img/{{ s.images[s.brand.logo].src }}" alt="" width="44" height="44">{% else %}<span class="brand-mark" aria-hidden="true">{{ s.short[0] }}</span>{% endif %}<span class="brand-text">{{ s.short }}</span></a>
+        <a class="brand" href="index.html">{% if s.brand and s.brand.logo %}<img class="brand-logo{% if s.brand.logo_wide %} is-wide{% endif %}" src="assets/img/{{ s.images[s.brand.logo].src }}" alt="" width="44" height="44">{% else %}<span class="brand-mark" aria-hidden="true">{{ s.short[0] }}</span>{% endif %}{% if not (s.brand and s.brand.logo_wide) %}<span class="brand-text">{{ s.short }}</span>{% endif %}</a>
         <p style="margin-top:1rem;max-width:38ch">{{ s.meta }}</p>
       </div>
       <nav class="foot-nav" aria-label="Footer">
