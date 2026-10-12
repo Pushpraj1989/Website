@@ -180,7 +180,7 @@ Sources:
 - Delivery fee under OMR 25 and delivery areas (the store says free over OMR 25).
 - Al Hail and Azaiba show the same address (285 Seeb St, Seeb 122) and phone on the store; confirm both.
 - Store opening hours (not published on the homepage).
-- Nutrition figures are parsed from product descriptions; a few products have inconsistent descriptions (for example Critical Whey flavours list 21 g or 24 g protein).
+- Nutrition figures are parsed from product descriptions. Critical Whey uses the 24 g protein printed on every pack, because some of its online descriptions say 21 g; worth correcting on macroboost.com.
 - Payment gateway for this concept (Thawani Pay) versus the store's current Shopify checkout.
 - Product list is the best-selling 188 products of 788 on 12 Oct 2026; stock and prices change daily.
 
