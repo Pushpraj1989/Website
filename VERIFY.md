@@ -1,6 +1,6 @@
 # Verify before pitching
 
-Built 2026-10-11. Facts come from each company's homepage
+Built 2026-10-12. Facts come from each company's homepage
 read on 11 Oct 2026 and from the prospects document. Anything below is unconfirmed
 or conflicting and should be checked against the live site, or with the client, first.
 
@@ -86,6 +86,27 @@ Sources:
 
 Sources:
 - https://galfar.com/oman/galfar/ (homepage read 11 Oct 2026)
+
+## Healthy Lab · The Guilt-Free Food Hub
+
+- Phone and WhatsApp number: not published on Talabat. Add them to shop.whatsapp and contact.phones to switch on WhatsApp ordering and the call buttons.
+- Opening hours of the Al Ghubra branch.
+- Own delivery: areas, fee and minimum order (the site says the fee is confirmed by phone).
+- Prices for dishes priced by options on Talabat (lean burgers, rice buckets, juices, coffee, water) so they can be ordered online.
+- Menu prices are Talabat prices on 12 Oct 2026; confirm in-house prices, which may differ.
+- Spelling fixed in dish names (Moroccan, Roasted, Avocado); 'Healthy Lab' prefix dropped from dish names.
+- Meal plans: real plan prices, delivery days and rules, if Healthy Lab already sells plans.
+- Supplements: Talabat lists protein shakes and C4 pre-workout drinks only. Send the list of packaged supplements to add them as a shop category.
+- Thawani Pay: merchant account, live keys and webhook secret; until then card payments run in Thawani's test mode.
+- Kitchen video is Mixkit stock; replace with Healthy Lab's own footage.
+- Instagram and social links (none found in public search).
+
+Sources:
+- https://www.talabat.com/oman/restaurant/669005/healthy-lab?aid=1380 (menu, prices, photos, rating; read 12 Oct 2026)
+- https://www.talabat.com/oman/healthy-lab (best sellers, payment methods; read 12 Oct 2026)
+- https://thawani-technologies.stoplight.io/docs/thawani-ecommerce-api (checkout API; read 12 Oct 2026)
+- https://macroboost.com and https://musclehouse.com checkouts (local payment reference: Visa, Mastercard, OmanNet, cash on delivery)
+- Mixkit clips 2994, 40524, 40531 (Mixkit Stock Video Free License)
 
 ## National Gas Company
 
