@@ -7,7 +7,7 @@
 
 For each page, at 1440x900 and 390x844, it fails on:
   - JavaScript errors and console errors
-  - local files that return 4xx/5xx (missing CSS, JS, images)
+  - local files that return 4xx/5xx (missing CSS, JS, images); /api/ calls are skipped (order service, tested separately)
   - horizontal scroll (content wider than the screen)
   - broken images
   - content that never appears after scrolling down and back up
@@ -100,7 +100,7 @@ def main():
                     errs, bad = [], []
                     pg.on("pageerror", lambda e: errs.append(str(e)[:160]))
                     pg.on("console", lambda m: errs.append(m.text[:160]) if m.type == "error" and "Failed to load resource" not in m.text else None)
-                    pg.on("response", lambda r: bad.append(f"{r.status} {r.url.split(str(port))[-1]}") if r.status >= 400 and f"127.0.0.1:{port}" in r.url and not r.url.endswith("favicon.ico") else None)
+                    pg.on("response", lambda r: bad.append(f"{r.status} {r.url.split(str(port))[-1]}") if r.status >= 400 and f"127.0.0.1:{port}" in r.url and not r.url.endswith("favicon.ico") and "/api/" not in r.url else None)
                     url = f"http://127.0.0.1:{port}/sites/{slug}/{f.name}"
                     try:
                         pg.goto(url, wait_until="load", timeout=45000)
