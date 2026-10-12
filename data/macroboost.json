@@ -1165,24 +1165,29 @@
    "alt": "Barebells logo"
   },
   "film-whey-poster": {
-   "src": "film-whey.jpg",
+   "src": "film-whey-clean.jpg",
    "alt": "Frame from the Macro Boost product film",
    "cap": "Product film made from Macro Boost's product photos"
   },
   "film-abe-poster": {
-   "src": "film-abe.jpg",
+   "src": "film-abe-clean.jpg",
    "alt": "Frame from the Macro Boost product film",
    "cap": "Product film made from Macro Boost's product photos"
   },
   "film-beef-poster": {
-   "src": "film-beef.jpg",
+   "src": "film-beef-clean.jpg",
    "alt": "Frame from the Macro Boost product film",
    "cap": "Product film made from Macro Boost's product photos"
   },
   "film-creatine-poster": {
-   "src": "film-creatine.jpg",
+   "src": "film-creatine-clean.jpg",
    "alt": "Frame from the Macro Boost product film",
    "cap": "Product film made from Macro Boost's product photos"
+  },
+  "hero": {
+   "src": "film-whey-clean.jpg",
+   "alt": "Critical Whey in the spotlight",
+   "cap": "Frame from the Macro Boost product film"
   },
   "logo": {
    "src": "logo.png",
@@ -1237,7 +1242,7 @@
  "promos": [
   {
    "image": "film-whey-poster",
-   "video": "film-whey.mp4",
+   "video": "film-whey-clean.mp4",
    "tag": "Film",
    "kicker": "Applied Nutrition · Critical Whey",
    "short": "Critical Whey",
@@ -1250,7 +1255,7 @@
   },
   {
    "image": "film-abe-poster",
-   "video": "film-abe.mp4",
+   "video": "film-abe-clean.mp4",
    "tag": "Film",
    "kicker": "ABE Performance Energy",
    "short": "ABE can",
@@ -1263,7 +1268,7 @@
   },
   {
    "image": "film-beef-poster",
-   "video": "film-beef.mp4",
+   "video": "film-beef-clean.mp4",
    "tag": "Film",
    "kicker": "Applied Nutrition · Beef-XP",
    "short": "Beef-XP",
@@ -1276,7 +1281,7 @@
   },
   {
    "image": "film-creatine-poster",
-   "video": "film-creatine.mp4",
+   "video": "film-creatine-clean.mp4",
    "tag": "Film",
    "kicker": "Allmax Nutrition",
    "short": "Creatine",
@@ -1732,7 +1737,7 @@
     "title": "Protein",
     "icon": "pulse",
     "text": "Whey, isolate, hydrolysed, casein, beef and plant protein, mass gainers and ready-to-drink shakes.",
-    "image": "bpi-hydro-hd-4-8lb-choco-lava-cake",
+    "image": "film-whey-poster",
     "detail": {
      "intro": "Whey, isolate, hydrolysed, casein, beef and plant protein, mass gainers and ready-to-drink shakes.",
      "body": [
@@ -1765,7 +1770,7 @@
     "title": "Performance",
     "icon": "chart",
     "text": "Pre-workouts, creatine, BCAAs, EAAs, amino energy, electrolytes and endurance gels.",
-    "image": "allmax-creatine-400g",
+    "image": "film-creatine-poster",
     "detail": {
      "intro": "Pre-workouts, creatine, BCAAs, EAAs, amino energy, electrolytes and endurance gels.",
      "body": [
@@ -1802,7 +1807,7 @@
     "title": "Lean & burn",
     "icon": "leaf",
     "text": "Fat burners, L-carnitine and CLA.",
-    "image": "nutrend-carnitine-3000-shot-60ml-pineapple",
+    "image": "blog-2",
     "detail": {
      "intro": "Fat burners, L-carnitine and CLA.",
      "body": [
@@ -1831,7 +1836,7 @@
     "title": "Health & vitamins",
     "icon": "heart",
     "text": "Vitamins, minerals, omega-3, collagen, joint, sleep, digestive and herbal support.",
-    "image": "applied-nutrition-zinc-magnesium-vitamins-b-6-90-capsules",
+    "image": "blog-0",
     "detail": {
      "intro": "Vitamins, minerals, omega-3, collagen, joint, sleep, digestive and herbal support.",
      "body": [
@@ -1867,7 +1872,7 @@
     "title": "Snacks & drinks",
     "icon": "star",
     "text": "Protein bars, chips and snacks, energy drinks, Green Cola and Icelandic Glacial water.",
-    "image": "abe-performance-energy-drink-apple-burst",
+    "image": "film-abe-poster",
     "detail": {
      "intro": "Protein bars, chips and snacks, energy drinks, Green Cola and Icelandic Glacial water.",
      "body": [
@@ -1896,7 +1901,7 @@
     "title": "Gear",
     "icon": "shield",
     "text": "Belts, gloves, wraps, sleeves, straps and shakers.",
-    "image": "hmr-usa-fitness-twist-cap-bottle-500-ml-green-copy",
+    "image": "blog-1",
     "detail": {
      "intro": "Belts, gloves, wraps, sleeves, straps and shakers.",
      "body": [
@@ -8587,7 +8592,7 @@
     "full_name": "Macro Boost Al Khuwair",
     "type": "Store",
     "country": "Oman",
-    "image": "banner",
+    "image": "film-whey-poster",
     "address": "Duhat al Adab Street, Al Khuwair, Muscat",
     "phone": "+968 7220 0072",
     "email": "info@macroboost.com",
@@ -8601,7 +8606,7 @@
     "full_name": "Macro Boost Al Hail",
     "type": "Store",
     "country": "Oman",
-    "image": "banner",
+    "image": "film-whey-poster",
     "address": "285 Seeb Street, Seeb 122",
     "phone": "+968 7227 7799",
     "email": "info@macroboost.com",
@@ -8615,7 +8620,7 @@
     "full_name": "Macro Boost Azaiba",
     "type": "Store",
     "country": "Oman",
-    "image": "banner",
+    "image": "film-whey-poster",
     "address": "Azaiba, Muscat",
     "phone": "+968 7227 7799",
     "email": "info@macroboost.com",

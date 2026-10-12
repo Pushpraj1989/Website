@@ -1289,6 +1289,8 @@ html.is-arriving .page-wipe { clip-path: inset(0 0 0 0); }
 .promo-p { max-width: 52ch; margin: 0 0 2rem; font-size: clamp(1rem, 1.3vw, 1.18rem); color: rgba(255, 255, 255, 0.86); }
 .promo .btn-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.45); }
 .promo-cap { display: inline-block; margin-top: 1.6rem; padding: 0.25rem 0.6rem; border-radius: 6px; background: rgba(0, 0, 0, 0.45); font-size: 0.72rem; color: rgba(255, 255, 255, 0.8); }
+@media (min-width: 761px) { .promo-copy.has-video .promo-p { max-width: min(52ch, 33vw); } .promo-copy.has-video .promo-t { max-width: 40vw; } }
+@media (max-width: 760px) { .promo:has(.promo-copy.has-video.is-on) .promo-shade { background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.75) 45%, rgba(0, 0, 0, 0.1) 75%), linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, transparent 25%); } .promo-copy.has-video .promo-p { text-shadow: 0 1px 12px rgba(0, 0, 0, 0.8); } }
 .no-motion .promo-copy:not(.is-on), html:not(.js) .promo-copy:not(:first-child) { display: none; }
 .promo-ui { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; padding-bottom: 2rem; }
 .promo-tabs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1rem; flex: 1; min-width: 0; max-width: 1000px; }
@@ -2283,6 +2285,7 @@ body[data-page="checkout"] .action-bar, body[data-page="checkout"] .dock, body[d
 .film-beat .eyebrow { color: var(--flav); }
 .film-title { margin: 0.4rem 0 0.8rem; font: 400 clamp(2.4rem, 5vw, 4.6rem)/0.98 var(--font-display); letter-spacing: -0.03em; }
 .film-title em { font-style: italic; color: var(--flav); }
+@media (min-width: 761px) { .film-beat { max-width: min(30rem, 27vw); } .film-title { font-size: clamp(2.2rem, 4.4vw, 4.6rem); } }
 .film-text { margin: 0; color: rgba(246, 239, 233, 0.72); font-size: 1.02rem; max-width: 24rem; }
 .film-scene { position: relative; z-index: 4; width: min(92vw, 1200px); height: 100%; display: grid; place-items: center; }
 .film-pack { position: relative; z-index: 4; width: min(34vw, 420px); perspective: 1400px; will-change: transform; }
@@ -2311,7 +2314,7 @@ body[data-page="checkout"] .action-bar, body[data-page="checkout"] .dock, body[d
 .film .cv-cap { color: rgba(246, 239, 233, 0.5); }
 @media (max-width: 760px) {
   .film-pack { width: 62vw; }
-  .film-copy { top: calc(var(--header-h, 70px) + 2svh); }
+  .film-copy { top: calc(var(--header-h, 70px) + 6svh); }
   .film-title { font-size: clamp(2rem, 9vw, 2.8rem); }
   .film-text { font-size: 0.92rem; }
   .film-scene { padding-top: 22svh; }

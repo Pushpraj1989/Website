@@ -159,7 +159,7 @@
   </div>
   <div class="wrap promo-copy-wrap">
     {%- for p in s.promos %}
-    <div class="promo-copy{% if loop.first %} is-on{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}"{% if not loop.first %} aria-hidden="true"{% endif %}>
+    <div class="promo-copy{% if loop.first %} is-on{% endif %}{% if p.video %} has-video{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}"{% if not loop.first %} aria-hidden="true"{% endif %}>
       <p class="promo-k">{% if p.tag %}<b>{{ p.tag }}</b>{% endif %}{{ p.kicker }}</p>
       {% if loop.first %}<h1 class="promo-t">{{ p.title }}</h1>{% else %}<h2 class="promo-t">{{ p.title }}</h2>{% endif %}
       <p class="promo-p">{{ p.text }}</p>

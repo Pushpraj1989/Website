@@ -5651,5 +5651,37 @@
     "license_url": "",
     "landing": "https://macroboost.com",
     "owner": true
+  },
+  "macroboost/film-whey-clean": {
+    "title": "Critical Whey in the spotlight",
+    "creator": "Macro Boost",
+    "license": "Owner's photo",
+    "license_url": "",
+    "landing": "https://macroboost.com",
+    "owner": true
+  },
+  "macroboost/film-abe-clean": {
+    "title": "Frame from the Macro Boost product film",
+    "creator": "Macro Boost",
+    "license": "Owner's photo",
+    "license_url": "",
+    "landing": "https://macroboost.com",
+    "owner": true
+  },
+  "macroboost/film-beef-clean": {
+    "title": "Frame from the Macro Boost product film",
+    "creator": "Macro Boost",
+    "license": "Owner's photo",
+    "license_url": "",
+    "landing": "https://macroboost.com",
+    "owner": true
+  },
+  "macroboost/film-creatine-clean": {
+    "title": "Frame from the Macro Boost product film",
+    "creator": "Macro Boost",
+    "license": "Owner's photo",
+    "license_url": "",
+    "landing": "https://macroboost.com",
+    "owner": true
   }
 }
