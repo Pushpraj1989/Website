@@ -1,0 +1,4556 @@
+{
+ "slug": "healthy-lab",
+ "name": "Healthy Lab · The Guilt-Free Food Hub",
+ "short": "Healthy Lab",
+ "sector": "Healthy restaurant",
+ "meta": "Healthy Lab, the guilt-free food hub in Al Ghubra, Muscat: macro-counted meals, coconut-flour pizza, lean burgers, protein shakes and meal plans. Order for delivery or pickup.",
+ "theme": "studio",
+ "promo_fx": "ripple",
+ "accent": "#8fd14f",
+ "img_dir": "healthy-lab",
+ "footer_note": "Concept website for Healthy Lab (مطعم المعمل الصحي), built from its public Talabat menu on 12 October 2026. Not yet reviewed by Healthy Lab. Kitchen footage is free Mixkit stock (Mixkit Stock Video Free License) used as a placeholder.",
+ "brand": {
+  "mode": "dark",
+  "style": "glass",
+  "logo": "logo",
+  "bg": "#0b1310",
+  "fg": "#eef5e6",
+  "accent": "#8fd14f",
+  "accent_ink": "#0b1310",
+  "alt": "#101b16",
+  "font_display": "\"Bricolage Grotesque\", system-ui, sans-serif",
+  "font_body": "\"Inter\", system-ui, sans-serif",
+  "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Inter:wght@400;500;600;700"
+ },
+ "cta": {
+  "label": "Order now",
+  "short": "Order",
+  "href": "menu.html"
+ },
+ "images": {
+  "grilled-chicken-with-steamed-greens": {
+   "src": "grilled-chicken-with-steamed-greens.jpg",
+   "alt": "Grilled Chicken With Steamed Greens, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "beef-steak-with-mashed-potatoes": {
+   "src": "beef-steak-with-mashed-potatoes.jpg",
+   "alt": "Beef Steak With Mashed Potatoes, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "low-fat-alfredo-chicken-pasta": {
+   "src": "low-fat-alfredo-chicken-pasta.jpg",
+   "alt": "Low-Fat Alfredo Chicken Pasta, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "roasted-chicken-and-sweet-potato-with-spinach-basil-pesto-sa": {
+   "src": "roasted-chicken-and-sweet-potato-with-spinach-basil-pesto-sa.jpg",
+   "alt": "Roasted Chicken And Sweet Potato With Spinach Basil Pesto Sauce, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "rosted-beef-steak-and-baked-potato-with-mushroom-steak-sauce": {
+   "src": "rosted-beef-steak-and-baked-potato-with-mushroom-steak-sauce.jpg",
+   "alt": "Roasted Beef Steak And Baked Potato With Mushroom Steak Sauce, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "chicken-breast-and-steamed-rice-with-blended-tomato-beetroot": {
+   "src": "chicken-breast-and-steamed-rice-with-blended-tomato-beetroot.jpg",
+   "alt": "Chicken Breast And Steamed Rice With Blended Tomato Beetroot Sauce, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "beef-steak-and-steamed-rice-with-roasted-mushroom-steak-sauc": {
+   "src": "beef-steak-and-steamed-rice-with-roasted-mushroom-steak-sauc.jpg",
+   "alt": "Beef Steak And Steamed Rice With Roasted Mushroom Steak Sauces, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "beef-steak-creamy-beetroot-pasta": {
+   "src": "beef-steak-creamy-beetroot-pasta.jpg",
+   "alt": "Beef Steak Creamy Beetroot Pasta, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "steamed-chicken-and-rice-with-creamy-mushroom-and-cauliflowe": {
+   "src": "steamed-chicken-and-rice-with-creamy-mushroom-and-cauliflowe.jpg",
+   "alt": "Steamed Chicken And Rice With Creamy Mushroom And Cauliflower Sauce, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "cod-reef-with-steamed-greens": {
+   "src": "cod-reef-with-steamed-greens.jpg",
+   "alt": "Cod Reef With Steamed Greens, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "jaggery-light-teriyaki-chicken-with-steamed-rice": {
+   "src": "jaggery-light-teriyaki-chicken-with-steamed-rice.jpg",
+   "alt": "Jaggery Light Teriyaki Chicken With Steamed Rice, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "jaggery-light-teriyaki-beef-with-steamed-rice": {
+   "src": "jaggery-light-teriyaki-beef-with-steamed-rice.jpg",
+   "alt": "Jaggery Light Teriyaki Beef With Steamed Rice, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "jaggery-light-teriyaki-salmon-and-steamed-rice": {
+   "src": "jaggery-light-teriyaki-salmon-and-steamed-rice.jpg",
+   "alt": "Jaggery Light Teriyaki Salmon And Steamed Rice, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "cod-reef-and-steamed-rice-with-lemon-zest-cajun-sauce": {
+   "src": "cod-reef-and-steamed-rice-with-lemon-zest-cajun-sauce.jpg",
+   "alt": "Cod Reef And Steamed Rice With Lemon Zest Cajun Sauce, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "pumpkin-feta-quinoa-salad": {
+   "src": "pumpkin-feta-quinoa-salad.jpg",
+   "alt": "Pumpkin Feta Quinoa Salad, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "mexican-salad": {
+   "src": "mexican-salad.jpg",
+   "alt": "Mexican Salad, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "moroccon-dream-salad": {
+   "src": "moroccon-dream-salad.jpg",
+   "alt": "Moroccan Dream Salad, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "peanut-thai-salad": {
+   "src": "peanut-thai-salad.jpg",
+   "alt": "Peanut Thai Salad, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "chilli-flake-chicken-thin-crust-pizza": {
+   "src": "chilli-flake-chicken-thin-crust-pizza.jpg",
+   "alt": "Chilli Flake Chicken Thin Crust Pizza, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "juicy-cherry-tomato-steak-pizza": {
+   "src": "juicy-cherry-tomato-steak-pizza.jpg",
+   "alt": "Juicy Cherry Tomato Steak Pizza, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "thin-crust-low-fat-mozzarella-alfredo-pizza": {
+   "src": "thin-crust-low-fat-mozzarella-alfredo-pizza.jpg",
+   "alt": "Thin Crust Low-Fat Mozzarella Alfredo Pizza, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "eggplant-broccoli-thin-crust-veg-pizza": {
+   "src": "eggplant-broccoli-thin-crust-veg-pizza.jpg",
+   "alt": "Eggplant Broccoli Thin Crust Veg Pizza, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "thin-crust-low-calorie-pepperoni-pizza": {
+   "src": "thin-crust-low-calorie-pepperoni-pizza.jpg",
+   "alt": "Thin Crust Low Calorie Pepperoni Pizza, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "lean-beef-burger": {
+   "src": "lean-beef-burger.jpg",
+   "alt": "Lean Beef Burger, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "grilled-chicken-burger": {
+   "src": "grilled-chicken-burger.jpg",
+   "alt": "Grilled Chicken Burger, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-beef-steak-sandwich": {
+   "src": "healthy-lab-beef-steak-sandwich.jpg",
+   "alt": "Beef Steak Sandwich, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "lean-beef-wrap": {
+   "src": "lean-beef-wrap.jpg",
+   "alt": "Lean Beef Wrap, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-grilled-chicken-sandwich": {
+   "src": "healthy-lab-grilled-chicken-sandwich.jpg",
+   "alt": "Grilled Chicken Sandwich, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "chicken-salad-sandwich": {
+   "src": "chicken-salad-sandwich.jpg",
+   "alt": "Chicken Salad Sandwich, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "ranch-chicken-wrap": {
+   "src": "ranch-chicken-wrap.jpg",
+   "alt": "Ranch Chicken Wrap, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-avocado-tuna-sandwich": {
+   "src": "healthy-lab-avocado-tuna-sandwich.jpg",
+   "alt": "Avocado Tuna Sandwich, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "smoked-turkey-sandwich": {
+   "src": "smoked-turkey-sandwich.jpg",
+   "alt": "Smoked Turkey Sandwich, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "roasted-beef-sandwich": {
+   "src": "roasted-beef-sandwich.jpg",
+   "alt": "Roasted Beef Sandwich, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "open-tuna-sandwich": {
+   "src": "open-tuna-sandwich.jpg",
+   "alt": "Open Tuna Sandwich, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-egg-and-cucumber-toast": {
+   "src": "healthy-lab-egg-and-cucumber-toast.jpg",
+   "alt": "Egg And Cucumber Toast, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-banana-and-chocolate-toast": {
+   "src": "healthy-lab-banana-and-chocolate-toast.jpg",
+   "alt": "Banana And Chocolate Toast, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-on-the-go-egg-toast": {
+   "src": "healthy-lab-on-the-go-egg-toast.jpg",
+   "alt": "On-The-Go Egg Toast, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-avacado-toast": {
+   "src": "healthy-lab-avacado-toast.jpg",
+   "alt": "Avocado Toast, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-original-egg-sandwich": {
+   "src": "healthy-lab-original-egg-sandwich.jpg",
+   "alt": "Original Egg Sandwich, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-egg-roll": {
+   "src": "healthy-lab-egg-roll.jpg",
+   "alt": "Egg Roll, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-seasonal-berry-oats": {
+   "src": "healthy-lab-seasonal-berry-oats.jpg",
+   "alt": "Seasonal Berry Oats, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-protein-dense-pancakes-4-pcs": {
+   "src": "healthy-lab-protein-dense-pancakes-4-pcs.jpg",
+   "alt": "Protein Dense Pancakes 4 Pcs, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "boiled-eggs-3-pcs": {
+   "src": "boiled-eggs-3-pcs.jpg",
+   "alt": "Boiled Eggs 3 Pcs, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "rolled-oat-cookies": {
+   "src": "rolled-oat-cookies.jpg",
+   "alt": "Rolled Oat Cookies, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "chicken-breast-and-steamed-rice-bucket": {
+   "src": "chicken-breast-and-steamed-rice-bucket.jpg",
+   "alt": "Chicken Breast And Steamed Rice Bucket, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "yellow-fin-tuna-and-steamed-rice-bucket": {
+   "src": "yellow-fin-tuna-and-steamed-rice-bucket.jpg",
+   "alt": "Yellow Fin Tuna And Steamed Rice Bucket, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "beef-steak-and-steamed-rice-bucket": {
+   "src": "beef-steak-and-steamed-rice-bucket.jpg",
+   "alt": "Beef Steak And Steamed Rice Bucket, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-signature-beef-100g": {
+   "src": "healthy-lab-signature-beef-100g.jpg",
+   "alt": "Signature Beef (100 g), as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-signature-chicken-100g": {
+   "src": "healthy-lab-signature-chicken-100g.jpg",
+   "alt": "Signature Chicken (100 g), as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-low-fat-alfredo-pasta-150g": {
+   "src": "healthy-lab-low-fat-alfredo-pasta-150g.jpg",
+   "alt": "Low Fat Alfredo Pasta 150 g, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-herb-sauce-pasta-150g": {
+   "src": "healthy-lab-herb-sauce-pasta-150g.jpg",
+   "alt": "Herb Sauce Pasta 150 g, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-crimson-sauce-pasta-150g": {
+   "src": "healthy-lab-crimson-sauce-pasta-150g.jpg",
+   "alt": "Crimson Sauce Pasta 150 g, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "roasted-potato-150g": {
+   "src": "roasted-potato-150g.jpg",
+   "alt": "Roasted Potato 150 g, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-steamed-rice-150g": {
+   "src": "healthy-lab-steamed-rice-150g.jpg",
+   "alt": "Steamed Rice 150 g, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "organic-greens-and-avocado-salad": {
+   "src": "organic-greens-and-avocado-salad.jpg",
+   "alt": "Organic Greens And Avocado Salad, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "grilled-chicken-caesar-salad": {
+   "src": "grilled-chicken-caesar-salad.jpg",
+   "alt": "Grilled Chicken Caesar Salad, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-fattoush-salad": {
+   "src": "healthy-lab-fattoush-salad.jpg",
+   "alt": "Fattoush Salad, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-mixed-exotic-fruit-salad": {
+   "src": "healthy-lab-mixed-exotic-fruit-salad.jpg",
+   "alt": "Mixed Exotic Fruit Salad, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-greek-salad": {
+   "src": "healthy-lab-greek-salad.jpg",
+   "alt": "Greek Salad, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "proffee-shake": {
+   "src": "proffee-shake.jpg",
+   "alt": "Proffee Shake, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "strawberry-cashew-shake": {
+   "src": "strawberry-cashew-shake.jpg",
+   "alt": "Strawberry Cashew Shake, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "walnut-passion-fruit-shake": {
+   "src": "walnut-passion-fruit-shake.jpg",
+   "alt": "Walnut Passion Fruit Shake, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "chocolate-walnut-protein-shake": {
+   "src": "chocolate-walnut-protein-shake.jpg",
+   "alt": "Chocolate Walnut Protein Shake, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "hazel-caramel-protein-shake": {
+   "src": "hazel-caramel-protein-shake.jpg",
+   "alt": "Hazel Caramel Protein Shake, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "icy-blue-razz": {
+   "src": "icy-blue-razz.jpg",
+   "alt": "Icy Blue Razz, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "watermelon": {
+   "src": "watermelon.jpg",
+   "alt": "Watermelon, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "rolled-oat-cookies-8-pieces": {
+   "src": "rolled-oat-cookies-8-pieces.jpg",
+   "alt": "Rolled Oat Cookies 8 Pieces, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "sea-salt-steviana-cookies-8-pieces": {
+   "src": "sea-salt-steviana-cookies-8-pieces.jpg",
+   "alt": "Sea Salt Steviana Cookies 8 Pieces, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "dates-cake-with-jaggery-syrup": {
+   "src": "dates-cake-with-jaggery-syrup.jpg",
+   "alt": "Dates Cake With Jaggery Syrup, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "walnut-jaggery-choco-brownie": {
+   "src": "walnut-jaggery-choco-brownie.jpg",
+   "alt": "Walnut Jaggery Choco Brownie, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "low-fat-labneh-cheese-cake": {
+   "src": "low-fat-labneh-cheese-cake.jpg",
+   "alt": "Low Fat Labneh Cheese Cake, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "sea-salt-steviana-cookies": {
+   "src": "sea-salt-steviana-cookies.jpg",
+   "alt": "Sea Salt Steviana Cookies, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-nutty-carrot-cake": {
+   "src": "healthy-lab-nutty-carrot-cake.jpg",
+   "alt": "Nutty Carrot Cake, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "orange-juice": {
+   "src": "orange-juice.jpg",
+   "alt": "Orange Juice, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "apple-juice": {
+   "src": "apple-juice.jpg",
+   "alt": "Apple Juice, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "watermelon-juice": {
+   "src": "watermelon-juice.jpg",
+   "alt": "Watermelon Juice, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "super-green-detox-juice": {
+   "src": "super-green-detox-juice.jpg",
+   "alt": "Super Green Detox Juice, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "carrot-fizzle": {
+   "src": "carrot-fizzle.jpg",
+   "alt": "Carrot Fizzle, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "water": {
+   "src": "water.jpg",
+   "alt": "Water, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "diet-pepsi-can": {
+   "src": "diet-pepsi-can.jpg",
+   "alt": "Diet Pepsi Can, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "ice-spanish-latte": {
+   "src": "ice-spanish-latte.jpg",
+   "alt": "Ice Spanish Latte, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "iced-americano": {
+   "src": "iced-americano.jpg",
+   "alt": "Iced Americano, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "espresso": {
+   "src": "espresso.jpg",
+   "alt": "Espresso, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "cappuccino": {
+   "src": "cappuccino.jpg",
+   "alt": "Cappuccino, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "spanish-latte": {
+   "src": "spanish-latte.jpg",
+   "alt": "Spanish Latte, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "americano": {
+   "src": "americano.jpg",
+   "alt": "Americano, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "healthy-lab-picnic-and-snack-platter": {
+   "src": "healthy-lab-picnic-and-snack-platter.jpg",
+   "alt": "Picnic And Snack Platter, as served at Healthy Lab",
+   "cap": "Healthy Lab menu photo"
+  },
+  "hero": {
+   "src": "grill-poster.jpg",
+   "alt": "Steaks searing on a grill",
+   "cap": "Stock footage, placeholder"
+  },
+  "prep": {
+   "src": "prep-poster.jpg",
+   "alt": "Hands slicing cucumber beside tomato, lettuce and avocado",
+   "cap": "Stock footage, placeholder"
+  },
+  "logo": {
+   "src": "logo.jpg",
+   "alt": "Healthy Lab logo"
+  },
+  "banner": {
+   "src": "hero.jpg",
+   "alt": "Healthy Lab bread on a wooden tray",
+   "cap": "Healthy Lab photo"
+  }
+ },
+ "ticker": {
+  "label": "Today",
+  "items": [
+   {
+    "tag": "Best seller",
+    "text": "Pumpkin Feta Quinoa Salad, 354 kcal",
+    "href": "@cat:Pumpkin Feta Quinoa Salad"
+   },
+   {
+    "tag": "New",
+    "text": "Build a weekly meal plan from the menu",
+    "href": "plans.html"
+   },
+   {
+    "tag": "4.5 ★",
+    "text": "Rated 4.5 by 2,083 customers on Talabat",
+    "href": "menu.html"
+   },
+   {
+    "tag": "Pay",
+    "text": "Card, cash on delivery or pay when you collect in Al Ghubra",
+    "href": "checkout.html"
+   }
+  ]
+ },
+ "promos": [
+  {
+   "image": "hero",
+   "video": "grill.mp4",
+   "tag": "Guilt-free",
+   "kicker": "The guilt-free food hub",
+   "short": "Macro-counted",
+   "title": "Food that does the maths for you",
+   "text": "Almost every dish on our menu lists its calories, protein, fat and carbs.",
+   "cta": {
+    "label": "See the menu",
+    "href": "menu.html"
+   },
+   "cta2": {
+    "label": "Meal plans",
+    "href": "plans.html"
+   }
+  },
+  {
+   "image": "pumpkin-feta-quinoa-salad",
+   "tag": "Best seller",
+   "kicker": "Exotic salads",
+   "short": "Quinoa salad",
+   "title": "Pumpkin, feta and quinoa",
+   "text": "Our best-selling salad: 354 kcal and 11 g protein, OMR 2.600.",
+   "cta": {
+    "label": "Add to order",
+    "href": "@cat:Pumpkin Feta Quinoa Salad"
+   }
+  },
+  {
+   "image": "chilli-flake-chicken-thin-crust-pizza",
+   "tag": "Pizza night",
+   "kicker": "Coconut-flour crust",
+   "short": "Lean pizza",
+   "title": "Pizza with 52 g of protein",
+   "text": "Chilli flake chicken on a thin coconut-flour crust, 511 kcal.",
+   "cta": {
+    "label": "See the pizzas",
+    "href": "@cat:Chilli Flake Chicken Thin Crust Pizza"
+   }
+  },
+  {
+   "image": "proffee-shake",
+   "tag": "Protein",
+   "kicker": "Protein shakes",
+   "short": "Shakes",
+   "title": "28 g of protein in a cold brew",
+   "text": "The Proffee Shake: cold brew coffee and protein, 170 kcal.",
+   "cta": {
+    "label": "All shakes",
+    "href": "@cat:Proffee Shake"
+   }
+  }
+ ],
+ "rail": {
+  "title": "What can we get you?",
+  "items": [
+   {
+    "label": "Order now",
+    "sub": "72 dishes online",
+    "icon": "check",
+    "href": "menu.html"
+   },
+   {
+    "label": "Meal plans",
+    "sub": "Weekly, by goal",
+    "icon": "chart",
+    "href": "plans.html"
+   },
+   {
+    "label": "Protein shakes",
+    "sub": "From OMR 1.250",
+    "icon": "pulse",
+    "href": "@cat:Proffee Shake"
+   },
+   {
+    "label": "Pickup",
+    "sub": "Al Ghubra",
+    "icon": "pin",
+    "href": "branches.html"
+   },
+   {
+    "label": "Checkout",
+    "sub": "Card or cash",
+    "icon": "shield",
+    "href": "checkout.html"
+   }
+  ]
+ },
+ "home": [
+  "promo",
+  "rail",
+  {
+   "type": "statement",
+   "kicker": "مطعم المعمل الصحي",
+   "text": "Healthy Lab is Muscat's guilt-free food hub: real meals, weighed and counted, so eating well never feels like a diet."
+  },
+  "catalogue",
+  {
+   "type": "scrub",
+   "id": "kitchen",
+   "video": "prep.mp4",
+   "video_m": "prep-m.mp4",
+   "poster": "prep",
+   "height": 300,
+   "label": "From the kitchen",
+   "cap": "Placeholder stock footage until Healthy Lab films its own kitchen",
+   "beats": [
+    {
+     "at": 0,
+     "kicker": "01 · Prep",
+     "title": "Greens, avocado, tomato",
+     "text": "The base of our salads and bowls, cut and assembled for each order."
+    },
+    {
+     "at": 0.36,
+     "kicker": "02 · Grill",
+     "title": "Lean protein, by the 100 g",
+     "text": "Signature beef and chicken, also sold on their own by weight."
+    },
+    {
+     "at": 0.7,
+     "kicker": "03 · Count",
+     "title": "Every number on the menu",
+     "text": "Calories, protein, fat and carbs, listed dish by dish.",
+     "cta": {
+      "label": "Order now",
+      "href": "menu.html"
+     }
+    }
+   ]
+  },
+  {
+   "type": "assemble",
+   "id": "lean-burger"
+  },
+  "stats",
+  {
+   "type": "split",
+   "image": "low-fat-alfredo-chicken-pasta",
+   "kicker": "Meal plans",
+   "title": "Your week, already cooked",
+   "body": [
+    "Pick a goal, how many meals a day and the dishes you like. We see the request and call you to agree the plan, the days and the price."
+   ],
+   "points": [
+    "Lose fat, stay lean or build muscle",
+    "2 or 3 meals a day, 5 or 6 days a week",
+    "Built from the menu you already know"
+   ],
+   "cta": {
+    "label": "Build my plan",
+    "href": "plans.html"
+   }
+  },
+  {
+   "type": "assemble",
+   "id": "proffee"
+  },
+  "locations",
+  "faq"
+ ],
+ "stats": [
+  {
+   "value": 90,
+   "label": "Dishes and drinks on the menu"
+  },
+  {
+   "value": 4.5,
+   "suffix": " ★",
+   "label": "Talabat rating"
+  },
+  {
+   "value": 2083,
+   "label": "Customer ratings on Talabat"
+  },
+  {
+   "value": 16,
+   "label": "Menu categories"
+  }
+ ],
+ "about": {
+  "title": "The guilt-free food hub",
+  "body": [
+   "Healthy Lab (مطعم المعمل الصحي) is a healthy restaurant in Al Ghubra Ash Shamaliyyah, Muscat. The menu runs to 90 dishes and drinks, from exotic salads, lean burgers and coconut-flour pizza to rice buckets, protein shakes and guilt-free sweets.",
+   "Almost every dish lists its calories, protein, fat and carbohydrates, and the protein and carb sources are sold by weight, so you can build a meal to your own numbers."
+  ],
+  "points": [
+   {
+    "title": "Counted",
+    "text": "Calories and macros printed on the menu, dish by dish."
+   },
+   {
+    "title": "Lean swaps",
+    "text": "Coconut-flour pizza crusts, jaggery and stevia sweets, low-fat Alfredo."
+   },
+   {
+    "title": "By weight",
+    "text": "Signature beef and chicken per 100 g; rice, pasta and potato per 150 g."
+   }
+  ]
+ },
+ "catalogue": {
+  "title": "The menu",
+  "nav": "Menu",
+  "home_title": "Best sellers and favourites",
+  "kicker": "Order online",
+  "intro": "Every price as listed on Talabat on 12 October 2026. Add to your order, then choose delivery or pickup.",
+  "categories": [
+   "Signature meals",
+   "Exotic salads",
+   "Coconut-flour pizza",
+   "Lean burgers",
+   "Sandwiches & toast",
+   "Morning bites",
+   "Rice buckets",
+   "Protein by weight",
+   "Carbs by weight",
+   "Salads",
+   "Protein shakes",
+   "Pre-workout",
+   "Guilt-free sweets",
+   "Fresh juices",
+   "Coffee & drinks",
+   "Platters"
+  ],
+  "cta": "Add to order",
+  "nutrition_title": "Nutrition",
+  "all_label": "Full menu",
+  "note": "Prices in Omani rials as listed on Talabat on 12 October 2026. Items marked 'price depends on options' are priced when you choose; ask us to order them.",
+  "items": [
+   {
+    "title": "Grilled Chicken With Steamed Greens",
+    "category": "Signature meals",
+    "amount": 2.4,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "304"
+     },
+     {
+      "label": "protein",
+      "value": "36 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "304 kcal",
+      "pct": 15
+     },
+     {
+      "label": "Protein",
+      "value": "36 g",
+      "pct": 72
+     },
+     {
+      "label": "Fat",
+      "value": "8 g",
+      "pct": 11
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "15 g",
+      "pct": 6
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "grilled-chicken-with-steamed-greens",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Beef Steak With Mashed Potatoes",
+    "category": "Signature meals",
+    "amount": 2.5,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "525"
+     },
+     {
+      "label": "protein",
+      "value": "38 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "525 kcal",
+      "pct": 26
+     },
+     {
+      "label": "Protein",
+      "value": "38 g",
+      "pct": 76
+     },
+     {
+      "label": "Fat",
+      "value": "13 g",
+      "pct": 19
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "40 g",
+      "pct": 15
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "beef-steak-with-mashed-potatoes",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Low-Fat Alfredo Chicken Pasta",
+    "category": "Signature meals",
+    "amount": 2.4,
+    "text": "Indulge in a guilt-free delight with this flavorful dish of tender chicken, al dente pasta,2 pieces of garlic bread, a creamy alfredo sauce, all with reduced fat content with our creamy cauliflower, and mushroom based sauce, offering a satisfying and delicious meal.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "480"
+     },
+     {
+      "label": "protein",
+      "value": "32 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "480 kcal",
+      "pct": 24
+     },
+     {
+      "label": "Protein",
+      "value": "32 g",
+      "pct": 64
+     },
+     {
+      "label": "Fat",
+      "value": "9 g",
+      "pct": 13
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "61 g",
+      "pct": 23
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "low-fat-alfredo-chicken-pasta",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab",
+    "featured": true
+   },
+   {
+    "title": "Roasted Chicken And Sweet Potato With Spinach Basil Pesto Sauce",
+    "category": "Signature meals",
+    "amount": 2.6,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "420"
+     },
+     {
+      "label": "protein",
+      "value": "35 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "420 kcal",
+      "pct": 21
+     },
+     {
+      "label": "Protein",
+      "value": "35 g",
+      "pct": 70
+     },
+     {
+      "label": "Fat",
+      "value": "10 g",
+      "pct": 14
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "50 g",
+      "pct": 19
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "roasted-chicken-and-sweet-potato-with-spinach-basil-pesto-sa",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Roasted Beef Steak And Baked Potato With Mushroom Steak Sauce",
+    "category": "Signature meals",
+    "amount": 2.6,
+    "text": "This satisfying combination of flavors and textures will leave you craving more.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "450"
+     },
+     {
+      "label": "protein",
+      "value": "40 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "450 kcal",
+      "pct": 22
+     },
+     {
+      "label": "Protein",
+      "value": "40 g",
+      "pct": 80
+     },
+     {
+      "label": "Fat",
+      "value": "18 g",
+      "pct": 26
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "30 g",
+      "pct": 12
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "rosted-beef-steak-and-baked-potato-with-mushroom-steak-sauce",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Make Your Own Meal",
+    "category": "Signature meals",
+    "text": "Choose your own protein source and carbohydrates source along with custom measurements.",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Chicken Breast And Steamed Rice With Blended Tomato Beetroot Sauce",
+    "category": "Signature meals",
+    "amount": 2.5,
+    "text": "This combination of flavors brings a touch of vibrancy to your plate while providing a satisfying and wholesome dining experience.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "510"
+     },
+     {
+      "label": "protein",
+      "value": "41 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "510 kcal",
+      "pct": 26
+     },
+     {
+      "label": "Protein",
+      "value": "41 g",
+      "pct": 82
+     },
+     {
+      "label": "Fat",
+      "value": "14 g",
+      "pct": 20
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "52 g",
+      "pct": 20
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "chicken-breast-and-steamed-rice-with-blended-tomato-beetroot",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Beef Steak And Steamed Rice With Roasted Mushroom Steak Sauces",
+    "category": "Signature meals",
+    "amount": 2.7,
+    "text": "This delectable combination offers a perfect balance of flavors and textures, making it a hearty and satisfying meal.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "580"
+     },
+     {
+      "label": "protein",
+      "value": "48 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "580 kcal",
+      "pct": 29
+     },
+     {
+      "label": "Protein",
+      "value": "48 g",
+      "pct": 96
+     },
+     {
+      "label": "Fat",
+      "value": "18 g",
+      "pct": 26
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "52 g",
+      "pct": 20
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "beef-steak-and-steamed-rice-with-roasted-mushroom-steak-sauc",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Beef Steak Creamy Beetroot Pasta",
+    "category": "Signature meals",
+    "amount": 2.5,
+    "text": "Harmoniously blending the richness of beef with the earthy flavors of beetroot and a velvety cream sauce, this dish creates an unforgettable and satisfying dining experience.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "486"
+     },
+     {
+      "label": "protein",
+      "value": "36 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "486 kcal",
+      "pct": 24
+     },
+     {
+      "label": "Protein",
+      "value": "36 g",
+      "pct": 72
+     },
+     {
+      "label": "Fat",
+      "value": "18 g",
+      "pct": 26
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "45 g",
+      "pct": 17
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "beef-steak-creamy-beetroot-pasta",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Steamed Chicken And Rice With Creamy Mushroom And Cauliflower Sauce",
+    "category": "Signature meals",
+    "amount": 2.6,
+    "text": "This combination provides a balance of protein, carbohydrates, and savory flavors, creating a delicious and satisfying dining experience.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "502"
+     },
+     {
+      "label": "protein",
+      "value": "42 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "502 kcal",
+      "pct": 25
+     },
+     {
+      "label": "Protein",
+      "value": "42 g",
+      "pct": 84
+     },
+     {
+      "label": "Fat",
+      "value": "12 g",
+      "pct": 17
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "52 g",
+      "pct": 20
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "steamed-chicken-and-rice-with-creamy-mushroom-and-cauliflowe",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Cod Reef With Steamed Greens",
+    "category": "Signature meals",
+    "amount": 2.7,
+    "text": "This combination provides a light and flavorful meal packed with protein and essential nutrients.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "280"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "280 kcal",
+      "pct": 14
+     },
+     {
+      "label": "Fat",
+      "value": "8 g",
+      "pct": 11
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "15 g",
+      "pct": 6
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "cod-reef-with-steamed-greens",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Jaggery Light Teriyaki Chicken With Steamed Rice",
+    "category": "Signature meals",
+    "amount": 2.3,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "480"
+     },
+     {
+      "label": "protein",
+      "value": "32 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "480 kcal",
+      "pct": 24
+     },
+     {
+      "label": "Protein",
+      "value": "32 g",
+      "pct": 64
+     },
+     {
+      "label": "Fat",
+      "value": "12 g",
+      "pct": 17
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "45 g",
+      "pct": 17
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "jaggery-light-teriyaki-chicken-with-steamed-rice",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Jaggery Light Teriyaki Beef With Steamed Rice",
+    "category": "Signature meals",
+    "amount": 2.75,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "500"
+     },
+     {
+      "label": "protein",
+      "value": "34 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "500 kcal",
+      "pct": 25
+     },
+     {
+      "label": "Protein",
+      "value": "34 g",
+      "pct": 68
+     },
+     {
+      "label": "Fat",
+      "value": "15 g",
+      "pct": 21
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "45 g",
+      "pct": 17
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "jaggery-light-teriyaki-beef-with-steamed-rice",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Jaggery Light Teriyaki Salmon And Steamed Rice",
+    "category": "Signature meals",
+    "amount": 3.1,
+    "text": "This combination offers a balance of sweet and savory flavors that will tantalize your taste buds while providing a satisfying and nutritious meal.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "459"
+     },
+     {
+      "label": "protein",
+      "value": "29 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "459 kcal",
+      "pct": 23
+     },
+     {
+      "label": "Protein",
+      "value": "29 g",
+      "pct": 58
+     },
+     {
+      "label": "Fat",
+      "value": "15 g",
+      "pct": 21
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "52 g",
+      "pct": 20
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "jaggery-light-teriyaki-salmon-and-steamed-rice",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab",
+    "featured": true
+   },
+   {
+    "title": "Steamed Rice And Lemon Zest Salmon",
+    "category": "Signature meals",
+    "amount": 3.6,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "525"
+     },
+     {
+      "label": "protein",
+      "value": "35 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "525 kcal",
+      "pct": 26
+     },
+     {
+      "label": "Protein",
+      "value": "35 g",
+      "pct": 70
+     },
+     {
+      "label": "Fat",
+      "value": "18 g",
+      "pct": 26
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "48 g",
+      "pct": 18
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Cod Reef And Steamed Rice With Lemon Zest Cajun Sauce",
+    "category": "Signature meals",
+    "amount": 2.7,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "465"
+     },
+     {
+      "label": "protein",
+      "value": "34 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "465 kcal",
+      "pct": 23
+     },
+     {
+      "label": "Protein",
+      "value": "34 g",
+      "pct": 68
+     },
+     {
+      "label": "Fat",
+      "value": "12 g",
+      "pct": 17
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "52 g",
+      "pct": 20
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "cod-reef-and-steamed-rice-with-lemon-zest-cajun-sauce",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Pumpkin Feta Quinoa Salad",
+    "category": "Exotic salads",
+    "amount": 2.6,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "354"
+     },
+     {
+      "label": "protein",
+      "value": "11 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "354 kcal",
+      "pct": 18
+     },
+     {
+      "label": "Protein",
+      "value": "11 g",
+      "pct": 22
+     },
+     {
+      "label": "Fat",
+      "value": "12 g",
+      "pct": 17
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "50 g",
+      "pct": 19
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "pumpkin-feta-quinoa-salad",
+    "badge": "Best seller",
+    "featured": true,
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Mexican Salad",
+    "category": "Exotic salads",
+    "amount": 2.4,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "330"
+     },
+     {
+      "label": "protein",
+      "value": "15 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "330 kcal",
+      "pct": 16
+     },
+     {
+      "label": "Protein",
+      "value": "15 g",
+      "pct": 30
+     },
+     {
+      "label": "Fat",
+      "value": "10 g",
+      "pct": 14
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "45 g",
+      "pct": 17
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "mexican-salad",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab",
+    "featured": true
+   },
+   {
+    "title": "Moroccan Dream Salad",
+    "category": "Exotic salads",
+    "amount": 2.6,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "384"
+     },
+     {
+      "label": "protein",
+      "value": "13 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "384 kcal",
+      "pct": 19
+     },
+     {
+      "label": "Protein",
+      "value": "13 g",
+      "pct": 26
+     },
+     {
+      "label": "Fat",
+      "value": "14 g",
+      "pct": 20
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "50 g",
+      "pct": 19
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "moroccon-dream-salad",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Peanut Thai Salad",
+    "category": "Exotic salads",
+    "amount": 2.6,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "396"
+     },
+     {
+      "label": "protein",
+      "value": "14 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "396 kcal",
+      "pct": 20
+     },
+     {
+      "label": "Protein",
+      "value": "14 g",
+      "pct": 28
+     },
+     {
+      "label": "Fat",
+      "value": "20 g",
+      "pct": 29
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "40 g",
+      "pct": 15
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "peanut-thai-salad",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Chilli Flake Chicken Thin Crust Pizza",
+    "category": "Coconut-flour pizza",
+    "amount": 3.7,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "511"
+     },
+     {
+      "label": "protein",
+      "value": "52 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "511 kcal",
+      "pct": 26
+     },
+     {
+      "label": "Protein",
+      "value": "52 g",
+      "pct": 100
+     },
+     {
+      "label": "Fat",
+      "value": "11 g",
+      "pct": 16
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "52 g",
+      "pct": 20
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "chilli-flake-chicken-thin-crust-pizza",
+    "badge": "Best seller",
+    "featured": true,
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Juicy Cherry Tomato Steak Pizza",
+    "category": "Coconut-flour pizza",
+    "amount": 3.7,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "555"
+     },
+     {
+      "label": "protein",
+      "value": "55 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "555 kcal",
+      "pct": 28
+     },
+     {
+      "label": "Protein",
+      "value": "55 g",
+      "pct": 100
+     },
+     {
+      "label": "Fat",
+      "value": "15 g",
+      "pct": 21
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "52 g",
+      "pct": 20
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "juicy-cherry-tomato-steak-pizza",
+    "badge": "Best seller",
+    "featured": true,
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Thin Crust Low-Fat Mozzarella Alfredo Pizza",
+    "category": "Coconut-flour pizza",
+    "amount": 3.5,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "468"
+     },
+     {
+      "label": "protein",
+      "value": "48 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "468 kcal",
+      "pct": 23
+     },
+     {
+      "label": "Protein",
+      "value": "48 g",
+      "pct": 96
+     },
+     {
+      "label": "Fat",
+      "value": "11 g",
+      "pct": 16
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "40 g",
+      "pct": 15
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "thin-crust-low-fat-mozzarella-alfredo-pizza",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Eggplant Broccoli Thin Crust Veg Pizza",
+    "category": "Coconut-flour pizza",
+    "amount": 3.3,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "470"
+     },
+     {
+      "label": "protein",
+      "value": "31 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "470 kcal",
+      "pct": 24
+     },
+     {
+      "label": "Protein",
+      "value": "31 g",
+      "pct": 62
+     },
+     {
+      "label": "Fat",
+      "value": "15 g",
+      "pct": 21
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "52 g",
+      "pct": 20
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "eggplant-broccoli-thin-crust-veg-pizza",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Thin Crust Low Calorie Pepperoni Pizza",
+    "category": "Coconut-flour pizza",
+    "amount": 3.4,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "425"
+     },
+     {
+      "label": "protein",
+      "value": "38 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "425 kcal",
+      "pct": 21
+     },
+     {
+      "label": "Protein",
+      "value": "38 g",
+      "pct": 76
+     },
+     {
+      "label": "Fat",
+      "value": "9 g",
+      "pct": 13
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "48 g",
+      "pct": 18
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "thin-crust-low-calorie-pepperoni-pizza",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Lean Beef Burger",
+    "category": "Lean burgers",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "399"
+     },
+     {
+      "label": "protein",
+      "value": "21 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "399 kcal",
+      "pct": 20
+     },
+     {
+      "label": "Protein",
+      "value": "21 g",
+      "pct": 42
+     },
+     {
+      "label": "Fat",
+      "value": "15 g",
+      "pct": 21
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "45 g",
+      "pct": 17
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "lean-beef-burger",
+    "badge": "Best seller",
+    "featured": true,
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Grilled Chicken Burger",
+    "category": "Lean burgers",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "366"
+     },
+     {
+      "label": "protein",
+      "value": "24 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "366 kcal",
+      "pct": 18
+     },
+     {
+      "label": "Protein",
+      "value": "24 g",
+      "pct": 48
+     },
+     {
+      "label": "Fat",
+      "value": "10 g",
+      "pct": 14
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "45 g",
+      "pct": 17
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "grilled-chicken-burger",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Beef Steak Sandwich",
+    "category": "Sandwiches & toast",
+    "amount": 1.8,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "325"
+     },
+     {
+      "label": "protein",
+      "value": "29 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "325 kcal",
+      "pct": 16
+     },
+     {
+      "label": "Protein",
+      "value": "29 g",
+      "pct": 58
+     },
+     {
+      "label": "Fat",
+      "value": "14 g",
+      "pct": 20
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "20 g",
+      "pct": 8
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-beef-steak-sandwich",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Lean Beef Wrap",
+    "category": "Sandwiches & toast",
+    "amount": 1.7,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "375"
+     },
+     {
+      "label": "protein",
+      "value": "34 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "375 kcal",
+      "pct": 19
+     },
+     {
+      "label": "Protein",
+      "value": "34 g",
+      "pct": 68
+     },
+     {
+      "label": "Fat",
+      "value": "11 g",
+      "pct": 16
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "35 g",
+      "pct": 13
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "lean-beef-wrap",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Grilled Chicken Sandwich",
+    "category": "Sandwiches & toast",
+    "amount": 1.8,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "325"
+     },
+     {
+      "label": "protein",
+      "value": "28 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "325 kcal",
+      "pct": 16
+     },
+     {
+      "label": "Protein",
+      "value": "28 g",
+      "pct": 56
+     },
+     {
+      "label": "Fat",
+      "value": "15 g",
+      "pct": 21
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "20 g",
+      "pct": 8
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-grilled-chicken-sandwich",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Chicken Salad Sandwich",
+    "category": "Sandwiches & toast",
+    "amount": 1.6,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "325"
+     },
+     {
+      "label": "protein",
+      "value": "30 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "325 kcal",
+      "pct": 16
+     },
+     {
+      "label": "Protein",
+      "value": "30 g",
+      "pct": 60
+     },
+     {
+      "label": "Fat",
+      "value": "13 g",
+      "pct": 19
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "20 g",
+      "pct": 8
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "chicken-salad-sandwich",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Ranch Chicken Wrap",
+    "category": "Sandwiches & toast",
+    "amount": 1.5,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "303"
+     },
+     {
+      "label": "protein",
+      "value": "35 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "303 kcal",
+      "pct": 15
+     },
+     {
+      "label": "Protein",
+      "value": "35 g",
+      "pct": 70
+     },
+     {
+      "label": "Fat",
+      "value": "6 g",
+      "pct": 9
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "25 g",
+      "pct": 10
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "ranch-chicken-wrap",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Avocado Tuna Sandwich",
+    "category": "Sandwiches & toast",
+    "amount": 1.75,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "370"
+     },
+     {
+      "label": "protein",
+      "value": "29 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "370 kcal",
+      "pct": 18
+     },
+     {
+      "label": "Protein",
+      "value": "29 g",
+      "pct": 58
+     },
+     {
+      "label": "Fat",
+      "value": "16 g",
+      "pct": 23
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "28 g",
+      "pct": 11
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-avocado-tuna-sandwich",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Smoked Turkey Sandwich",
+    "category": "Sandwiches & toast",
+    "amount": 1.75,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "305"
+     },
+     {
+      "label": "protein",
+      "value": "26 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "305 kcal",
+      "pct": 15
+     },
+     {
+      "label": "Protein",
+      "value": "26 g",
+      "pct": 52
+     },
+     {
+      "label": "Fat",
+      "value": "15 g",
+      "pct": 21
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "20 g",
+      "pct": 8
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "smoked-turkey-sandwich",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Roasted Beef Sandwich",
+    "category": "Sandwiches & toast",
+    "amount": 1.6,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "330"
+     },
+     {
+      "label": "protein",
+      "value": "28 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "330 kcal",
+      "pct": 16
+     },
+     {
+      "label": "Protein",
+      "value": "28 g",
+      "pct": 56
+     },
+     {
+      "label": "Fat",
+      "value": "15 g",
+      "pct": 21
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "20 g",
+      "pct": 8
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "roasted-beef-sandwich",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Open Tuna Sandwich",
+    "category": "Sandwiches & toast",
+    "amount": 0.9,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "279"
+     },
+     {
+      "label": "protein",
+      "value": "15 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "279 kcal",
+      "pct": 14
+     },
+     {
+      "label": "Protein",
+      "value": "15 g",
+      "pct": 30
+     },
+     {
+      "label": "Fat",
+      "value": "15 g",
+      "pct": 21
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "25 g",
+      "pct": 10
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "open-tuna-sandwich",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Egg And Cucumber Toast",
+    "category": "Sandwiches & toast",
+    "amount": 1.6,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "220"
+     },
+     {
+      "label": "protein",
+      "value": "12 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "220 kcal",
+      "pct": 11
+     },
+     {
+      "label": "Protein",
+      "value": "12 g",
+      "pct": 24
+     },
+     {
+      "label": "Fat",
+      "value": "7 g",
+      "pct": 10
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "12 g",
+      "pct": 5
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-egg-and-cucumber-toast",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Banana And Chocolate Toast",
+    "category": "Sandwiches & toast",
+    "amount": 1.6,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "278"
+     },
+     {
+      "label": "protein",
+      "value": "5 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "278 kcal",
+      "pct": 14
+     },
+     {
+      "label": "Protein",
+      "value": "5 g",
+      "pct": 10
+     },
+     {
+      "label": "Fat",
+      "value": "7 g",
+      "pct": 10
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "15 g",
+      "pct": 6
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-banana-and-chocolate-toast",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "On-The-Go Egg Toast",
+    "category": "Sandwiches & toast",
+    "amount": 1.6,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "230"
+     },
+     {
+      "label": "protein",
+      "value": "10 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "230 kcal",
+      "pct": 12
+     },
+     {
+      "label": "Protein",
+      "value": "10 g",
+      "pct": 20
+     },
+     {
+      "label": "Fat",
+      "value": "6 g",
+      "pct": 9
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "15 g",
+      "pct": 6
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-on-the-go-egg-toast",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Avocado Toast",
+    "category": "Sandwiches & toast",
+    "amount": 1.7,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "370"
+     },
+     {
+      "label": "protein",
+      "value": "21 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "370 kcal",
+      "pct": 18
+     },
+     {
+      "label": "Protein",
+      "value": "21 g",
+      "pct": 42
+     },
+     {
+      "label": "Fat",
+      "value": "19 g",
+      "pct": 27
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "30 g",
+      "pct": 12
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-avacado-toast",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Original Egg Sandwich",
+    "category": "Sandwiches & toast",
+    "amount": 1.6,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "290"
+     },
+     {
+      "label": "protein",
+      "value": "15 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "290 kcal",
+      "pct": 14
+     },
+     {
+      "label": "Protein",
+      "value": "15 g",
+      "pct": 30
+     },
+     {
+      "label": "Fat",
+      "value": "11 g",
+      "pct": 16
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "15 g",
+      "pct": 6
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-original-egg-sandwich",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Egg Roll",
+    "category": "Morning bites",
+    "amount": 0.89,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "310"
+     },
+     {
+      "label": "protein",
+      "value": "18 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "310 kcal",
+      "pct": 16
+     },
+     {
+      "label": "Protein",
+      "value": "18 g",
+      "pct": 36
+     },
+     {
+      "label": "Fat",
+      "value": "12 g",
+      "pct": 17
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "27 g",
+      "pct": 10
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-egg-roll",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Seasonal Berry Oats",
+    "category": "Morning bites",
+    "amount": 1.55,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "396"
+     },
+     {
+      "label": "protein",
+      "value": "27 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "396 kcal",
+      "pct": 20
+     },
+     {
+      "label": "Protein",
+      "value": "27 g",
+      "pct": 54
+     },
+     {
+      "label": "Fat",
+      "value": "5 g",
+      "pct": 7
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "32 g",
+      "pct": 12
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-seasonal-berry-oats",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Protein Dense Pancakes 4 Pcs",
+    "category": "Morning bites",
+    "amount": 1.65,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "385"
+     },
+     {
+      "label": "protein",
+      "value": "30 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "385 kcal",
+      "pct": 19
+     },
+     {
+      "label": "Protein",
+      "value": "30 g",
+      "pct": 60
+     },
+     {
+      "label": "Fat",
+      "value": "6 g",
+      "pct": 9
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "19 g",
+      "pct": 7
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-protein-dense-pancakes-4-pcs",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Boiled Eggs 3 Pcs",
+    "category": "Morning bites",
+    "amount": 0.65,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "210"
+     },
+     {
+      "label": "protein",
+      "value": "18 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "210 kcal",
+      "pct": 10
+     },
+     {
+      "label": "Protein",
+      "value": "18 g",
+      "pct": 36
+     },
+     {
+      "label": "Fat",
+      "value": "15 g",
+      "pct": 21
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "3 g",
+      "pct": 1
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "boiled-eggs-3-pcs",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Rolled Oat Cookies",
+    "category": "Morning bites",
+    "amount": 0.25,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "22"
+     },
+     {
+      "label": "protein",
+      "value": "2 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "22 kcal",
+      "pct": 1
+     },
+     {
+      "label": "Protein",
+      "value": "2 g",
+      "pct": 4
+     },
+     {
+      "label": "Fat",
+      "value": "0.5 g",
+      "pct": 1
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "4 g",
+      "pct": 2
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "rolled-oat-cookies",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Chicken Breast And Steamed Rice Bucket",
+    "category": "Rice buckets",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "420"
+     },
+     {
+      "label": "protein",
+      "value": "27 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "420 kcal",
+      "pct": 21
+     },
+     {
+      "label": "Protein",
+      "value": "27 g",
+      "pct": 54
+     },
+     {
+      "label": "Fat",
+      "value": "10 g",
+      "pct": 14
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "25 g",
+      "pct": 10
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "chicken-breast-and-steamed-rice-bucket",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Yellow Fin Tuna And Steamed Rice Bucket",
+    "category": "Rice buckets",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "420"
+     },
+     {
+      "label": "protein",
+      "value": "32 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "420 kcal",
+      "pct": 21
+     },
+     {
+      "label": "Protein",
+      "value": "32 g",
+      "pct": 64
+     },
+     {
+      "label": "Fat",
+      "value": "12 g",
+      "pct": 17
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "45 g",
+      "pct": 17
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "yellow-fin-tuna-and-steamed-rice-bucket",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Beef Steak And Steamed Rice Bucket",
+    "category": "Rice buckets",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "485"
+     },
+     {
+      "label": "protein",
+      "value": "33 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "485 kcal",
+      "pct": 24
+     },
+     {
+      "label": "Protein",
+      "value": "33 g",
+      "pct": 66
+     },
+     {
+      "label": "Fat",
+      "value": "11 g",
+      "pct": 16
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "25 g",
+      "pct": 10
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "beef-steak-and-steamed-rice-bucket",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Signature Beef (100 g)",
+    "category": "Protein by weight",
+    "amount": 1.8,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "210"
+     },
+     {
+      "label": "protein",
+      "value": "36 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "210 kcal",
+      "pct": 10
+     },
+     {
+      "label": "Protein",
+      "value": "36 g",
+      "pct": 72
+     },
+     {
+      "label": "Fat",
+      "value": "11 g",
+      "pct": 16
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "5 g",
+      "pct": 2
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-signature-beef-100g",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Signature Chicken (100 g)",
+    "category": "Protein by weight",
+    "amount": 1.2,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "145"
+     },
+     {
+      "label": "protein",
+      "value": "30 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "145 kcal",
+      "pct": 7
+     },
+     {
+      "label": "Protein",
+      "value": "30 g",
+      "pct": 60
+     },
+     {
+      "label": "Fat",
+      "value": "1 g",
+      "pct": 1
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "3 g",
+      "pct": 1
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-signature-chicken-100g",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Low Fat Alfredo Pasta 150 g",
+    "category": "Carbs by weight",
+    "amount": 0.95,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "410"
+     },
+     {
+      "label": "protein",
+      "value": "18 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "410 kcal",
+      "pct": 20
+     },
+     {
+      "label": "Protein",
+      "value": "18 g",
+      "pct": 36
+     },
+     {
+      "label": "Fat",
+      "value": "2 g",
+      "pct": 3
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "69 g",
+      "pct": 27
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-low-fat-alfredo-pasta-150g",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Herb Sauce Pasta 150 g",
+    "category": "Carbs by weight",
+    "amount": 1.05,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "410"
+     },
+     {
+      "label": "protein",
+      "value": "18 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "410 kcal",
+      "pct": 20
+     },
+     {
+      "label": "Protein",
+      "value": "18 g",
+      "pct": 36
+     },
+     {
+      "label": "Fat",
+      "value": "2 g",
+      "pct": 3
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "69 g",
+      "pct": 27
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-herb-sauce-pasta-150g",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Crimson Sauce Pasta 150 g",
+    "category": "Carbs by weight",
+    "amount": 0.95,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "378"
+     },
+     {
+      "label": "protein",
+      "value": "13 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "378 kcal",
+      "pct": 19
+     },
+     {
+      "label": "Protein",
+      "value": "13 g",
+      "pct": 26
+     },
+     {
+      "label": "Fat",
+      "value": "3 g",
+      "pct": 4
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "60 g",
+      "pct": 23
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-crimson-sauce-pasta-150g",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Roasted Potato 150 g",
+    "category": "Carbs by weight",
+    "amount": 0.75,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "278"
+     },
+     {
+      "label": "protein",
+      "value": "2 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "278 kcal",
+      "pct": 14
+     },
+     {
+      "label": "Protein",
+      "value": "2 g",
+      "pct": 4
+     },
+     {
+      "label": "Fat",
+      "value": "8 g",
+      "pct": 11
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "40 g",
+      "pct": 15
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "roasted-potato-150g",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Steamed Rice 150 g",
+    "category": "Carbs by weight",
+    "amount": 0.95,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "310"
+     },
+     {
+      "label": "protein",
+      "value": "4 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "310 kcal",
+      "pct": 16
+     },
+     {
+      "label": "Protein",
+      "value": "4 g",
+      "pct": 8
+     },
+     {
+      "label": "Fat",
+      "value": "1 g",
+      "pct": 1
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "48 g",
+      "pct": 18
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-steamed-rice-150g",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Mashed Potato 150 g",
+    "category": "Carbs by weight",
+    "amount": 0.75,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "230"
+     },
+     {
+      "label": "protein",
+      "value": "4 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "230 kcal",
+      "pct": 12
+     },
+     {
+      "label": "Protein",
+      "value": "4 g",
+      "pct": 8
+     },
+     {
+      "label": "Fat",
+      "value": "7 g",
+      "pct": 10
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "35 g",
+      "pct": 13
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Organic Greens And Avocado Salad",
+    "category": "Salads",
+    "amount": 1.95,
+    "text": "A vibrant and nourishing salad showcasing a mix of fresh, organic greens, creamy avocado slices, diced tomatoes, cucumbers, and a tangy dressing.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "270"
+     },
+     {
+      "label": "protein",
+      "value": "5 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "270 kcal",
+      "pct": 14
+     },
+     {
+      "label": "Protein",
+      "value": "5 g",
+      "pct": 10
+     },
+     {
+      "label": "Fat",
+      "value": "15 g",
+      "pct": 21
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "24 g",
+      "pct": 9
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "organic-greens-and-avocado-salad",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Grilled Chicken Caesar Salad",
+    "category": "Salads",
+    "amount": 1.85,
+    "text": "A classic salad with a twist, featuring tender grilled chicken breast atop a bed of crisp romaine lettuce, tossed in a creamy Caesar dressing, and topped with shaved Parmesan cheese and crunchy croutons.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "280"
+     },
+     {
+      "label": "protein",
+      "value": "28 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "280 kcal",
+      "pct": 14
+     },
+     {
+      "label": "Protein",
+      "value": "28 g",
+      "pct": 56
+     },
+     {
+      "label": "Fat",
+      "value": "15 g",
+      "pct": 21
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "11 g",
+      "pct": 4
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "grilled-chicken-caesar-salad",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Fattoush Salad",
+    "category": "Salads",
+    "amount": 1.95,
+    "text": "A refreshing Middle Eastern salad featuring a vibrant mix of crisp lettuce, crunchy cucumbers, juicy tomatoes, tangy radishes, fresh herbs and toasted pita chips, all tossed in a zesty lemon and olive oil dressing.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "245"
+     },
+     {
+      "label": "protein",
+      "value": "6 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "245 kcal",
+      "pct": 12
+     },
+     {
+      "label": "Protein",
+      "value": "6 g",
+      "pct": 12
+     },
+     {
+      "label": "Fat",
+      "value": "10 g",
+      "pct": 14
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "32 g",
+      "pct": 12
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-fattoush-salad",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Mixed Exotic Fruit Salad",
+    "category": "Salads",
+    "amount": 2.1,
+    "text": "Indulge in delightful medley of sweet melon, juicy grapes, succulent pears, tangy kiwi, and hints of luscious strawberries, creating refreshing and vibrant salad bursting with natural flavors.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "135"
+     },
+     {
+      "label": "protein",
+      "value": "2 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "135 kcal",
+      "pct": 7
+     },
+     {
+      "label": "Protein",
+      "value": "2 g",
+      "pct": 4
+     },
+     {
+      "label": "Fat",
+      "value": "0 g",
+      "pct": 0
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "33 g",
+      "pct": 13
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-mixed-exotic-fruit-salad",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Greek Salad",
+    "category": "Salads",
+    "amount": 2,
+    "text": "A refreshing and vibrant salad bursting with Mediterranean flavors, featuring crisp cucumbers, juicy tomatoes, tangy feta cheese, briny olives, and a zesty dressing.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "252"
+     },
+     {
+      "label": "protein",
+      "value": "8 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "252 kcal",
+      "pct": 13
+     },
+     {
+      "label": "Protein",
+      "value": "8 g",
+      "pct": 16
+     },
+     {
+      "label": "Fat",
+      "value": "11 g",
+      "pct": 16
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "30 g",
+      "pct": 12
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-greek-salad",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Proffee Shake",
+    "category": "Protein shakes",
+    "amount": 1.3,
+    "text": "A creamy and energizing blend of cold brew coffee and protein powder.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "170"
+     },
+     {
+      "label": "protein",
+      "value": "28 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "170 kcal",
+      "pct": 8
+     },
+     {
+      "label": "Protein",
+      "value": "28 g",
+      "pct": 56
+     },
+     {
+      "label": "Fat",
+      "value": "4 g",
+      "pct": 6
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "proffee-shake",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab",
+    "featured": true
+   },
+   {
+    "title": "Strawberry Cashew Shake",
+    "category": "Protein shakes",
+    "amount": 1.25,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "212"
+     },
+     {
+      "label": "protein",
+      "value": "28 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "212 kcal",
+      "pct": 11
+     },
+     {
+      "label": "Protein",
+      "value": "28 g",
+      "pct": 56
+     },
+     {
+      "label": "Fat",
+      "value": "8 g",
+      "pct": 11
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "12 g",
+      "pct": 5
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "strawberry-cashew-shake",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Walnut Passion Fruit Shake",
+    "category": "Protein shakes",
+    "amount": 1.35,
+    "text": "A tropical delight infused with the exotic flavor of passion fruit and the nutty goodness of walnuts, enhanced with protein for a nourishing and flavorful shake.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "270"
+     },
+     {
+      "label": "protein",
+      "value": "31 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "270 kcal",
+      "pct": 14
+     },
+     {
+      "label": "Protein",
+      "value": "31 g",
+      "pct": 62
+     },
+     {
+      "label": "Fat",
+      "value": "8 g",
+      "pct": 11
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "18 g",
+      "pct": 7
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "walnut-passion-fruit-shake",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Chocolate Walnut Protein Shake",
+    "category": "Protein shakes",
+    "amount": 1.6,
+    "text": "Indulge in the rich and velvety taste of chocolate combined with the crunch of walnuts, blended to perfection with protein for a decadent and satisfying shake.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "240"
+     },
+     {
+      "label": "protein",
+      "value": "30 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "240 kcal",
+      "pct": 12
+     },
+     {
+      "label": "Protein",
+      "value": "30 g",
+      "pct": 60
+     },
+     {
+      "label": "Fat",
+      "value": "9 g",
+      "pct": 13
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "14 g",
+      "pct": 5
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "chocolate-walnut-protein-shake",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Hazel Caramel Protein Shake",
+    "category": "Protein shakes",
+    "amount": 1.55,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "226"
+     },
+     {
+      "label": "protein",
+      "value": "29 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "226 kcal",
+      "pct": 11
+     },
+     {
+      "label": "Protein",
+      "value": "29 g",
+      "pct": 58
+     },
+     {
+      "label": "Fat",
+      "value": "7 g",
+      "pct": 10
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "15 g",
+      "pct": 6
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "hazel-caramel-protein-shake",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Icy Blue Razz",
+    "category": "Pre-workout",
+    "amount": 1,
+    "text": "0 calories, consists of c4 and is drank before hitting the gym.",
+    "image": "icy-blue-razz",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Watermelon",
+    "category": "Pre-workout",
+    "amount": 1,
+    "text": "0 calories, consists of c4 and is drank before hitting the gym.",
+    "image": "watermelon",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Rolled Oat Cookies 8 Pieces",
+    "category": "Guilt-free sweets",
+    "amount": 1.25,
+    "text": "Wholesome and chewy cookies baked with hearty rolled oats, a touch of sweetness, and hints of warm spices.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "55"
+     },
+     {
+      "label": "protein",
+      "value": "2 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "55 kcal",
+      "pct": 3
+     },
+     {
+      "label": "Protein",
+      "value": "2 g",
+      "pct": 4
+     },
+     {
+      "label": "Fat",
+      "value": "1 g",
+      "pct": 1
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "9 g",
+      "pct": 3
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "rolled-oat-cookies-8-pieces",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Sea Salt Steviana Cookies 8 Pieces",
+    "category": "Guilt-free sweets",
+    "amount": 1.45,
+    "text": "Delicate and satisfying cookies featuring a perfect balance of sweet and salty flavors, made with the natural sweetness of Stevia and a touch of sea salt.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "70"
+     },
+     {
+      "label": "protein",
+      "value": "1 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "70 kcal",
+      "pct": 4
+     },
+     {
+      "label": "Protein",
+      "value": "1 g",
+      "pct": 2
+     },
+     {
+      "label": "Fat",
+      "value": "3 g",
+      "pct": 4
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "10 g",
+      "pct": 4
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "sea-salt-steviana-cookies-8-pieces",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Dates Cake With Jaggery Syrup",
+    "category": "Guilt-free sweets",
+    "amount": 1.8,
+    "text": "A moist and decadent cake made with luscious dates, infused with the rich sweetness of jaggery syrup.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "220"
+     },
+     {
+      "label": "protein",
+      "value": "2 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "220 kcal",
+      "pct": 11
+     },
+     {
+      "label": "Protein",
+      "value": "2 g",
+      "pct": 4
+     },
+     {
+      "label": "Fat",
+      "value": "7 g",
+      "pct": 10
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "40 g",
+      "pct": 15
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "dates-cake-with-jaggery-syrup",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Walnut Jaggery Choco Brownie",
+    "category": "Guilt-free sweets",
+    "amount": 1.8,
+    "text": "Indulge in the irresistible combination of rich dark chocolate, crunchy walnuts, and the natural sweetness of jaggery in this decadent and fudgy brownie.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "200"
+     },
+     {
+      "label": "protein",
+      "value": "4 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "200 kcal",
+      "pct": 10
+     },
+     {
+      "label": "Protein",
+      "value": "4 g",
+      "pct": 8
+     },
+     {
+      "label": "Fat",
+      "value": "12 g",
+      "pct": 17
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "20 g",
+      "pct": 8
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "walnut-jaggery-choco-brownie",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Low Fat Labneh Cheese Cake",
+    "category": "Guilt-free sweets",
+    "amount": 1.65,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "245"
+     },
+     {
+      "label": "protein",
+      "value": "9 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "245 kcal",
+      "pct": 12
+     },
+     {
+      "label": "Protein",
+      "value": "9 g",
+      "pct": 18
+     },
+     {
+      "label": "Fat",
+      "value": "10 g",
+      "pct": 14
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "25 g",
+      "pct": 10
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "low-fat-labneh-cheese-cake",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Sea Salt Steviana Cookies",
+    "category": "Guilt-free sweets",
+    "amount": 0.3,
+    "text": "Delicate and satisfying cookies featuring a perfect balance of sweet and salty flavors, made with the natural sweetness of Stevia and a touch of sea salt.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "70"
+     },
+     {
+      "label": "protein",
+      "value": "1 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "70 kcal",
+      "pct": 4
+     },
+     {
+      "label": "Protein",
+      "value": "1 g",
+      "pct": 2
+     },
+     {
+      "label": "Fat",
+      "value": "3 g",
+      "pct": 4
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "10 g",
+      "pct": 4
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "sea-salt-steviana-cookies",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Nutty Carrot Cake",
+    "category": "Guilt-free sweets",
+    "amount": 1.3,
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "310"
+     },
+     {
+      "label": "protein",
+      "value": "6 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "310 kcal",
+      "pct": 16
+     },
+     {
+      "label": "Protein",
+      "value": "6 g",
+      "pct": 12
+     },
+     {
+      "label": "Fat",
+      "value": "12 g",
+      "pct": 17
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "44 g",
+      "pct": 17
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "healthy-lab-nutty-carrot-cake",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Orange Juice",
+    "category": "Fresh juices",
+    "text": "A pure and tangy delight bursting with the refreshing flavor of freshly squeezed oranges.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "110"
+     },
+     {
+      "label": "protein",
+      "value": "2 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "110 kcal",
+      "pct": 6
+     },
+     {
+      "label": "Protein",
+      "value": "2 g",
+      "pct": 4
+     },
+     {
+      "label": "Fat",
+      "value": "0 g",
+      "pct": 0
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "26 g",
+      "pct": 10
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "orange-juice",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Apple Juice",
+    "category": "Fresh juices",
+    "text": "A crisp and naturally sweet elixir made from the juiciest apples, delivering a burst of fruity goodness.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "120"
+     },
+     {
+      "label": "protein",
+      "value": "0 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "120 kcal",
+      "pct": 6
+     },
+     {
+      "label": "Protein",
+      "value": "0 g",
+      "pct": 0
+     },
+     {
+      "label": "Fat",
+      "value": "0 g",
+      "pct": 0
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "28 g",
+      "pct": 11
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "apple-juice",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Watermelon Juice",
+    "category": "Fresh juices",
+    "text": "A thirst quenching and hydrating elixir made from juicy watermelons, boasting a refreshing and subtly sweet taste.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "80"
+     },
+     {
+      "label": "protein",
+      "value": "1 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "80 kcal",
+      "pct": 4
+     },
+     {
+      "label": "Protein",
+      "value": "1 g",
+      "pct": 2
+     },
+     {
+      "label": "Fat",
+      "value": "0 g",
+      "pct": 0
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "20 g",
+      "pct": 8
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "watermelon-juice",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Super Green Detox Juice",
+    "category": "Fresh juices",
+    "text": "Revitalizing blend of nutrient packed greens like green apples, grapes, peaches and cucumber, combined with the zing of lemon and the freshness of mint.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "60"
+     },
+     {
+      "label": "protein",
+      "value": "2 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "60 kcal",
+      "pct": 3
+     },
+     {
+      "label": "Protein",
+      "value": "2 g",
+      "pct": 4
+     },
+     {
+      "label": "Fat",
+      "value": "0 g",
+      "pct": 0
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "14 g",
+      "pct": 5
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "super-green-detox-juice",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Carrot Fizzle",
+    "category": "Fresh juices",
+    "text": "A vibrant and vitamin-rich elixir made from freshly pressed carrots, delivering a naturally sweet and earthy flavor.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "70"
+     },
+     {
+      "label": "protein",
+      "value": "2 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "70 kcal",
+      "pct": 4
+     },
+     {
+      "label": "Protein",
+      "value": "2 g",
+      "pct": 4
+     },
+     {
+      "label": "Fat",
+      "value": "0 g",
+      "pct": 0
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "16 g",
+      "pct": 6
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "carrot-fizzle",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Water",
+    "category": "Coffee & drinks",
+    "text": "Keep yourself hydrated.",
+    "image": "water",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Diet Pepsi Can",
+    "category": "Coffee & drinks",
+    "amount": 0.45,
+    "text": "Soft Drink.",
+    "image": "diet-pepsi-can",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Ice Spanish Latte",
+    "category": "Coffee & drinks",
+    "text": "Refreshing twist on the classic Spanish Latte, this chilled delight combines the richness of espresso, condensed milk, and a touch of exotic spices over ice for a cool and invigorating treat.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "180"
+     },
+     {
+      "label": "protein",
+      "value": "6 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "180 kcal",
+      "pct": 9
+     },
+     {
+      "label": "Protein",
+      "value": "6 g",
+      "pct": 12
+     },
+     {
+      "label": "Fat",
+      "value": "7 g",
+      "pct": 10
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "24 g",
+      "pct": 9
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "ice-spanish-latte",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Iced Americano",
+    "category": "Coffee & drinks",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "10"
+     },
+     {
+      "label": "protein",
+      "value": "0.5 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "10 kcal",
+      "pct": 0
+     },
+     {
+      "label": "Protein",
+      "value": "0.5 g",
+      "pct": 1
+     },
+     {
+      "label": "Fat",
+      "value": "0 g",
+      "pct": 0
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "2 g",
+      "pct": 1
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "iced-americano",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Espresso",
+    "category": "Coffee & drinks",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "3"
+     },
+     {
+      "label": "protein",
+      "value": "0.3 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "3 kcal",
+      "pct": 0
+     },
+     {
+      "label": "Protein",
+      "value": "0.3 g",
+      "pct": 1
+     },
+     {
+      "label": "Fat",
+      "value": "0 g",
+      "pct": 0
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "0.1 g",
+      "pct": 0
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "espresso",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Cappuccino",
+    "category": "Coffee & drinks",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "90"
+     },
+     {
+      "label": "protein",
+      "value": "6 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "90 kcal",
+      "pct": 4
+     },
+     {
+      "label": "Protein",
+      "value": "6 g",
+      "pct": 12
+     },
+     {
+      "label": "Fat",
+      "value": "4 g",
+      "pct": 6
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "7 g",
+      "pct": 3
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "cappuccino",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Spanish Latte",
+    "category": "Coffee & drinks",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "150"
+     },
+     {
+      "label": "protein",
+      "value": "7 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "150 kcal",
+      "pct": 8
+     },
+     {
+      "label": "Protein",
+      "value": "7 g",
+      "pct": 14
+     },
+     {
+      "label": "Fat",
+      "value": "6 g",
+      "pct": 9
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "19 g",
+      "pct": 7
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "spanish-latte",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Americano",
+    "category": "Coffee & drinks",
+    "text": "A bold and invigorating black coffee experience created by combining a shot of espresso with hot water, delivering a robust flavor with a smooth finish.",
+    "macros": [
+     {
+      "label": "kcal",
+      "value": "5"
+     },
+     {
+      "label": "protein",
+      "value": "0.5 g"
+     }
+    ],
+    "nutrition": [
+     {
+      "label": "Energy",
+      "value": "5 kcal",
+      "pct": 0
+     },
+     {
+      "label": "Protein",
+      "value": "0.5 g",
+      "pct": 1
+     },
+     {
+      "label": "Fat",
+      "value": "0 g",
+      "pct": 0
+     },
+     {
+      "label": "Carbohydrates",
+      "value": "1 g",
+      "pct": 0
+     }
+    ],
+    "serving": "per serving, as listed by Healthy Lab",
+    "image": "americano",
+    "price_note": "Price depends on the options you choose",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   },
+   {
+    "title": "Picnic And Snack Platter",
+    "category": "Platters",
+    "amount": 6,
+    "text": "Smoked turkey sandwich, egg sandwich, grilled beef sandwich, grilled chicken sandwich.",
+    "image": "healthy-lab-picnic-and-snack-platter",
+    "price_note": "Menu price on Talabat, 12 Oct 2026",
+    "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
+   }
+  ]
+ },
+ "assemble": [
+  {
+   "id": "lean-burger",
+   "product": "Lean Beef Burger",
+   "kicker": "Best seller",
+   "title": "How the Lean Beef Burger stacks up",
+   "intro": "399 kcal, 21 g protein, 15 g fat and 45 g carbs, as listed on our menu.",
+   "price_label": "Lean Beef Burger",
+   "cta": {
+    "label": "See the burger",
+    "href": "@cat:Lean Beef Burger"
+   },
+   "layers": [
+    {
+     "name": "Toasted bun",
+     "note": "The base",
+     "shape": "disc",
+     "color": "#7a4a2c",
+     "h": 26,
+     "w": 0.94
+    },
+    {
+     "name": "Lettuce",
+     "note": "Crisp and fresh",
+     "shape": "leaf",
+     "color": "#6fbf4a",
+     "h": 14,
+     "w": 1.0
+    },
+    {
+     "name": "Tomato",
+     "note": "Sliced to order",
+     "shape": "disc",
+     "color": "#e0472f",
+     "h": 12,
+     "w": 0.9
+    },
+    {
+     "name": "Lean beef",
+     "note": "The protein",
+     "shape": "disc",
+     "color": "#5b3423",
+     "h": 30,
+     "w": 0.98
+    },
+    {
+     "name": "Cheddar",
+     "note": "Melted over the beef",
+     "shape": "drip",
+     "color": "#f2b233",
+     "h": 12,
+     "w": 1.0
+    },
+    {
+     "name": "Sesame bun",
+     "note": "Toasted top",
+     "shape": "dome",
+     "color": "#8a5634",
+     "h": 56,
+     "w": 0.96,
+     "dots": true
+    }
+   ]
+  },
+  {
+   "id": "proffee",
+   "product": "Proffee Shake",
+   "kicker": "Protein shake",
+   "title": "What goes into a Proffee Shake",
+   "intro": "Cold brew coffee and protein: 170 kcal and 28 g protein, as listed on our menu.",
+   "price": "OMR 1.300",
+   "price_label": "Proffee Shake",
+   "cta": {
+    "label": "Add to order",
+    "href": "@cat:Proffee Shake"
+   },
+   "layers": [
+    {
+     "name": "Ice",
+     "note": "Served cold",
+     "shape": "ice",
+     "color": "#dfeef0",
+     "h": 30,
+     "w": 0.8
+    },
+    {
+     "name": "Cold brew coffee",
+     "note": "The coffee half",
+     "shape": "liquid",
+     "color": "#4a2c1d",
+     "h": 70,
+     "w": 0.9
+    },
+    {
+     "name": "Protein",
+     "note": "28 g in every shake",
+     "shape": "liquid",
+     "color": "#d9c3a5",
+     "h": 50,
+     "w": 0.94
+    },
+    {
+     "name": "Foam",
+     "note": "A creamy top",
+     "shape": "foam",
+     "color": "#efe2cf",
+     "h": 16,
+     "w": 0.98
+    },
+    {
+     "name": "Glass",
+     "note": "Ready to go",
+     "shape": "glass",
+     "h": 30,
+     "w": 1.06,
+     "wb": 0.84
+    }
+   ]
+  }
+ ],
+ "locations": {
+  "title": "Find us",
+  "nav": "Branches",
+  "intro": "Order for pickup and collect from the counter, or order delivery.",
+  "book_label": "View branch",
+  "items": [
+   {
+    "name": "Al Ghubra",
+    "full_name": "Healthy Lab, Al Ghubra Ash Shamaliyyah",
+    "type": "Restaurant",
+    "country": "Oman",
+    "image": "banner",
+    "address": "Al Ghubra Ash Shamaliyyah, Bausher, Muscat",
+    "about": "Our kitchen and pickup counter. Order online for pickup and pay by card, or pay at the counter when you collect.",
+    "lat": "23.589896812047613",
+    "lng": "58.3852346918139",
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.589896812047613,58.3852346918139",
+     "reviews": "https://www.talabat.com/oman/healthy-lab"
+    },
+    "specs": [
+     "Healthy",
+     "Beverages",
+     "Sandwiches"
+    ]
+   }
+  ]
+ },
+ "faq_title": "Questions people ask",
+ "faq": [
+  {
+   "q": "Do you list calories and macros?",
+   "a": "Yes. Almost every dish on the menu shows its calories, protein, fat and carbohydrates, as written by our kitchen. Open any dish to see them."
+  },
+  {
+   "q": "How can I pay?",
+   "a": "Online by debit or credit card through Thawani Pay, cash on delivery, or cash or card at the counter when you collect."
+  },
+  {
+   "q": "Why do some dishes say the price depends on options?",
+   "a": "Those dishes, such as the lean burgers, buckets, juices and coffee, are priced by the options you choose. Ask us and we confirm the price before you order."
+  },
+  {
+   "q": "How do meal plans work?",
+   "a": "Choose a goal, the size of the plan and the dishes you like. We call you to agree the menu, delivery days and price. The estimate on the page uses today's menu prices."
+  },
+  {
+   "q": "Where are you?",
+   "a": "In Al Ghubra Ash Shamaliyyah, Muscat. Open the branch page for the map and directions."
+  }
+ ],
+ "nudges": {
+  "dock_label": "Order",
+  "offer": {
+   "id": "plans1",
+   "kicker": "New",
+   "title": "Build a weekly meal plan",
+   "text": "Pick your goal and the dishes you like. We call you to confirm.",
+   "cta": "Build my plan",
+   "href": "plans.html",
+   "image": "jaggery-light-teriyaki-salmon-and-steamed-rice"
+  }
+ },
+ "cta_band": "Hungry? Your guilt-free order is two minutes away.",
+ "contact": {
+  "title": "Order or ask a question",
+  "intro": "Order online for delivery or pickup, or send us a question about the menu or meal plans.",
+  "address": "Al Ghubra Ash Shamaliyyah, Bausher, Muscat",
+  "phones": [],
+  "note": "Preview form. Online orders go through the checkout.",
+  "form": {
+   "topics": [
+    "Menu question",
+    "Meal plan",
+    "Office or event order",
+    "Feedback"
+   ],
+   "submit": "Send"
+  }
+ },
+ "shop": {
+  "currency": "OMR",
+  "payments": [
+   "card",
+   "cod",
+   "counter",
+   "whatsapp"
+  ],
+  "whatsapp": "",
+  "gateway": "Thawani Pay",
+  "card_logos": [
+   "VISA",
+   "Mastercard"
+  ],
+  "add_label": "Add to order",
+  "ask_label": "Price on options",
+  "ask_note": "This dish is priced by the options you choose. Ask us and we confirm the price.",
+  "delivery": {
+   "label": "Delivery",
+   "short": "In Muscat",
+   "fee": null,
+   "fee_label": "Confirmed when we call",
+   "note": "We call to confirm your delivery time and fee before the rider leaves."
+  },
+  "pickup": {
+   "label": "Pickup",
+   "short": "Al Ghubra counter",
+   "address": "Healthy Lab, Al Ghubra Ash Shamaliyyah, Muscat",
+   "map": "https://www.google.com/maps/search/?api=1&query=23.589896812047613,58.3852346918139"
+  },
+  "fine": "Prices are checked again on our side before you pay. Card payments open Thawani Pay's secure page.",
+  "plans": {
+   "title": "Meal plans",
+   "nav": "Meal plans",
+   "kicker": "Meal plans",
+   "image": "low-fat-alfredo-chicken-pasta",
+   "intro": "A week of guilt-free meals, built from the menu around your goal. Send a request and we call you to agree the details.",
+   "steps": [
+    {
+     "title": "Pick a goal",
+     "text": "Lose fat, stay lean or build muscle."
+    },
+    {
+     "title": "Choose your dishes",
+     "text": "Tick the meals you like; we see calories and protein as you go."
+    },
+    {
+     "title": "We call you",
+     "text": "We agree the menu, the delivery days and the price, then start cooking."
+    }
+   ],
+   "goals": [
+    {
+     "label": "Lose fat",
+     "text": "Lighter meals, high protein"
+    },
+    {
+     "label": "Stay lean",
+     "text": "Balanced, everyday"
+    },
+    {
+     "label": "Build muscle",
+     "text": "More protein and carbs"
+    }
+   ],
+   "meals": [
+    2,
+    3
+   ],
+   "days": [
+    5,
+    6
+   ],
+   "weeks": [
+    1,
+    4
+   ],
+   "categories": [
+    "Signature meals",
+    "Exotic salads",
+    "Salads",
+    "Sandwiches & toast",
+    "Coconut-flour pizza"
+   ],
+   "note": "The estimate uses today's menu prices. Healthy Lab confirms the plan price, which may differ.",
+   "submit": "Send my plan request"
+  }
+ },
+ "confirm": [
+  "Phone and WhatsApp number: not published on Talabat. Add them to shop.whatsapp and contact.phones to switch on WhatsApp ordering and the call buttons.",
+  "Opening hours of the Al Ghubra branch.",
+  "Own delivery: areas, fee and minimum order (the site says the fee is confirmed by phone).",
+  "Prices for dishes priced by options on Talabat (lean burgers, rice buckets, juices, coffee, water) so they can be ordered online.",
+  "Menu prices are Talabat prices on 12 Oct 2026; confirm in-house prices, which may differ.",
+  "Spelling fixed in dish names (Moroccan, Roasted, Avocado); 'Healthy Lab' prefix dropped from dish names.",
+  "Meal plans: real plan prices, delivery days and rules, if Healthy Lab already sells plans.",
+  "Supplements: Talabat lists protein shakes and C4 pre-workout drinks only. Send the list of packaged supplements to add them as a shop category.",
+  "Thawani Pay: merchant account, live keys and webhook secret; until then card payments run in Thawani's test mode.",
+  "Kitchen video is Mixkit stock; replace with Healthy Lab's own footage.",
+  "Instagram and social links (none found in public search)."
+ ],
+ "sources": [
+  "https://www.talabat.com/oman/restaurant/669005/healthy-lab?aid=1380 (menu, prices, photos, rating; read 12 Oct 2026)",
+  "https://www.talabat.com/oman/healthy-lab (best sellers, payment methods; read 12 Oct 2026)",
+  "https://thawani-technologies.stoplight.io/docs/thawani-ecommerce-api (checkout API; read 12 Oct 2026)",
+  "https://macroboost.com and https://musclehouse.com checkouts (local payment reference: Visa, Mastercard, OmanNet, cash on delivery)",
+  "Mixkit clips 2994, 40524, 40531 (Mixkit Stock Video Free License)"
+ ]
+}

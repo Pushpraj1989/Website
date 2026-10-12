@@ -48,6 +48,9 @@ put the recommended option first.
     booking/appointments · online ordering · store/branch locator with maps · search/directory ·
     calculators (loan EMI, BMI, compare) · tracking box · news/press · FAQ · WhatsApp/call dock ·
     offers pop-up · careers · forms to email/CRM.
+    If they sell online: payment methods (card gateway and merchant account, cash on delivery,
+    pay on pickup, WhatsApp), delivery areas and fee, pickup branch, subscriptions or meal plans.
+    See [commerce.md](commerce.md).
 12. **Photography.** Can we use the photos on your site? Do you have a photo library?
     Is free stock (CC0) acceptable where you have nothing?
 

@@ -159,6 +159,15 @@ def build_pages(site):
             pages.append({"file": "compare.html", "kind": "compare", "title": cat.get("compare_title", "Compare " + label.lower()), "label": label, "listing": file})
         nav.append({"file": file, "label": label, "items": items, "title": cat.get("title") or label})
 
+    shop = site.get("shop")
+    if shop:
+        plans = shop.get("plans")
+        if plans:
+            pages.append({"file": "plans.html", "kind": "plans", "title": plans.get("title", "Meal plans"), "label": plans.get("nav", "Meal plans")})
+            nav.append({"file": "plans.html", "label": plans.get("nav", "Meal plans")})
+        pages.append({"file": "checkout.html", "kind": "checkout", "title": shop.get("checkout_title", "Checkout")})
+        pages.append({"file": "order.html", "kind": "order", "title": "Your order"})
+
     locations = (site.get("locations") or {}).get("items", [])
     if locations:
         label = site["locations"].get("nav", "Locations")
@@ -282,6 +291,28 @@ def prepare(site):
         if it.get("layers"):
             it["_art"], it["_art_h"], _ = art.stack("p-" + slugify(it["title"]), it["layers"], img_src, explode=False)
 
+    # shop: items with a numeric "amount" can be added to the cart; the same price list is
+    # written to assets/shop.json, which server/shop_api.py uses to re-price every order
+    shop = site.get("shop")
+    if shop:
+        cur = shop.setdefault("currency", "OMR")
+        items = {}
+        for it in (site.get("catalogue") or {}).get("items", []):
+            if isinstance(it.get("amount"), (int, float)) and it["amount"] > 0:
+                it["_sku"] = slugify(it["title"])[:48]
+                it.setdefault("price", f"{cur} {it['amount']:.3f}")
+            items[slugify(it["title"])[:48]] = {"t": it["title"], "a": it.get("amount") if it.get("_sku") else None,
+                                                  "img": img_src.get(it.get("_img")) or "", "url": it["_file"],
+                                                  "cat": it.get("category", ""), "opts": [o["label"] for o in it.get("options") or []],
+                                                  **{k[0]: float(re.sub(r"[^\d.]", "", x["value"]) or 0) for x in it.get("macros") or []
+                                                     for k in [x["label"].lower()] if k in ("kcal", "protein")}}
+        wa = shop.get("whatsapp") or ""
+        site["_shop"] = {"slug": site["slug"], "currency": cur, "items": items, "api": shop.get("api", "/api"),
+                         "wa": digits(wa) if wa else "", "name": site["short"],
+                         "delivery": shop.get("delivery") or {}, "pickup": shop.get("pickup") or {},
+                         "payments": shop.get("payments") or ["cod"], "min": shop.get("minimum", 0)}
+        site["_shop_json"] = json.dumps(site["_shop"], ensure_ascii=False)
+
     if site["theme"] == "studio":
         b = site.setdefault("brand", {})
         site["_theme"] = {"fonts": b.get("fonts_url") or GF + "Fraunces:opsz,wght@9..144,300..600&family=Inter:wght@400;500;600;700",
@@ -312,6 +343,10 @@ def render_site(env, site):
     shutil.copy(SHARED / "css" / "styles.css", out_dir / "assets" / "styles.css")
     for js in ("core.js", "fx.js"):
         shutil.copy(SHARED / "js" / js, out_dir / "assets" / js)
+    if site.get("_shop"):
+        shutil.copy(SHARED / "js" / "shop.js", out_dir / "assets" / "shop.js")
+        (out_dir / "assets" / "shop.json").write_text(site["_shop_json"], encoding="utf-8")
+        (out_dir / "assets" / "shop-data.js").write_text("window.T1SHOP=" + site["_shop_json"].replace("</", "<\\/") + ";\n", encoding="utf-8")
     shutil.copytree(SHARED / "vendor", out_dir / "assets" / "vendor")
     for im in {im["src"] for im in site.get("images", {}).values()}:
         src = SHARED / "img" / site["img_dir"] / im

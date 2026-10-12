@@ -20,10 +20,24 @@
         {%- for o in it.options %}<div class="pd-opt"><span>{{ o.label }}</span><div class="pd-chips">{% for v in o['values'] %}<button type="button" class="pd-chip{% if loop.first %} is-on{% endif %}" data-chip>{{ v }}</button>{% endfor %}</div></div>{% endfor %}
       </div>
       {%- endif %}
+      {%- if s.shop %}
+      <div class="cta-row buy-row" data-anim="up" data-intro>
+        {%- if it._sku %}
+        <div class="qty" data-qty><button type="button" data-step="-1" aria-label="One less">&minus;</button><output>1</output><button type="button" data-step="1" aria-label="One more">+</button></div>
+        <button class="btn btn-primary" type="button" data-add="{{ it._sku }}" data-from-page data-magnetic>{{ s.shop.add_label or 'Add to order' }} {{ icon('arrow') }}</button>
+        {%- elif s._shop.wa %}
+        <a class="btn btn-primary" href="https://wa.me/{{ s._shop.wa | replace('+', '') }}?text={{ ('Hello ' ~ s.short ~ ', I would like to order: ' ~ it.title) | urlencode }}" target="_blank" rel="noopener" data-magnetic>Order on WhatsApp {{ icon('arrow') }}</a>
+        {%- else %}
+        <a class="btn btn-primary" href="contact.html" data-magnetic>Ask about this item {{ icon('arrow') }}</a>
+        {%- endif %}
+      </div>
+      {%- if not it._sku %}<p class="buy-note">{{ s.shop.ask_note or 'Priced when you choose options. Ask us and we will confirm the price.' }}</p>{% endif %}
+      {%- else %}
       <div class="cta-row" data-anim="up" data-intro>
         <a class="btn btn-primary" href="{{ it.cta.href if it.cta else 'contact.html' }}" data-magnetic>{{ it.cta.label if it.cta else (C.cta or s.cta.label) }} {{ icon('arrow') }}</a>
         {%- if C.compare %}<a class="btn btn-ghost" href="compare.html">Compare</a>{% endif %}
       </div>
+      {%- endif %}
       {%- if it.tags %}<ul class="spec-chips pd-tags">{% for t in it.tags %}<li><span>{{ t }}</span></li>{% endfor %}</ul>{% endif %}
     </div>
   </div>

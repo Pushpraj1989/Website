@@ -31,6 +31,9 @@ about · services listing + one page per service · specialities · catalogue + 
 product + compare · doctors directory (search, filters, show more) · packages (country tabs,
 inclusions) · locations (curve slider + full list) + one page per branch (map, timings,
 phones, specialities, doctors, links) · news + articles · contact (form preselects the branch).
+With a `shop` block: cart drawer, add buttons on cards, `checkout.html` (delivery/pickup, card via
+Thawani Pay, cash on delivery, pay at counter, WhatsApp), `order.html` (result), `plans.html`
+(meal-plan or subscription builder) and the order service `server/shop_api.py`. See [commerce.md](commerce.md).
 
 ## Site-wide
 

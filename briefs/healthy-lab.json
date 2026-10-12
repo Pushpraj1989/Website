@@ -1,0 +1,20 @@
+{
+  "slug": "healthy-lab",
+  "name": "Healthy Lab - The Guilt-Free Food Hub (مطعم المعمل الصحي)",
+  "sector": "food",
+  "goal": "first website with online ordering and local payments",
+  "languages": ["en"],
+  "website": null,
+  "content_source": "Talabat menu https://www.talabat.com/oman/healthy-lab",
+  "references": [
+    {"url": "https://macroboost.com", "like": "local checkout: Visa, Mastercard, OmanNet, wallets, cash on delivery"},
+    {"url": "https://musclehouse.com", "like": "local supplement store checkout, OMR, local delivery"}
+  ],
+  "motion": "rich",
+  "brand": {"style": "chosen by builder", "colours": "logo lime green and magenta", "logo": "Talabat listing logo"},
+  "signature": ["food preparation video (free stock placeholder)", "product assembly of best sellers"],
+  "commerce": {"gateway": "Thawani Pay (test mode until merchant account)", "order_types": ["cash on delivery", "WhatsApp order", "pickup at the restaurant", "meal-plan subscriptions"]},
+  "hosting": "existing server (same as Tier 1 concepts)",
+  "forms": "orders to the built-in order service",
+  "verifier": "Healthy Lab owner"
+}

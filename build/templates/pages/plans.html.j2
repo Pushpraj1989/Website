@@ -1,0 +1,61 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set PL = s.shop.plans %}
+{%- set hero_img = PL.image or ('hero' if 'hero' in s.images else none) %}
+{%- set kicker = PL.kicker or PL.nav or 'Meal plans' %}{% set intro = PL.intro %}{% set crumb = PL.nav or 'Meal plans' %}
+{% include "partials/pagehero.html.j2" %}
+{%- if PL.steps %}
+<section class="pg-section">
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <div class="point-grid">{% for h in PL.steps %}<article class="point-card" data-anim="up" data-delay="{{ (loop.index0 % 3) * 0.08 }}"><span class="point-n">{{ '%02d' % loop.index }}</span><h3>{{ h.title }}</h3><p>{{ h.text }}</p></article>{% endfor %}</div>
+  </div>
+</section>
+{%- endif %}
+<section class="pg-section alt" data-plan>
+  <div class="wrap plan-grid">
+    <form class="plan-form" data-plan-form novalidate>
+      <h2 class="pg-h2" data-anim="lines">{{ PL.builder_title or 'Build your plan' }}</h2>
+      <fieldset class="co-step"><legend><span class="co-n">1</span>Your goal</legend>
+        <div class="seg seg-wrap">{% for g in PL.goals %}<label class="seg-opt"><input type="radio" name="goal" value="{{ g.label }}"{% if loop.first %} checked{% endif %}><span><b>{{ g.label }}</b><small>{{ g.text }}</small></span></label>{% endfor %}</div>
+      </fieldset>
+      <fieldset class="co-step"><legend><span class="co-n">2</span>Size</legend>
+        <div class="plan-dials">
+          {%- for key, label, opts in [('meals', 'Meals a day', PL.meals or [2, 3]), ('days', 'Days a week', PL.days or [5, 6]), ('weeks', 'Weeks', PL.weeks or [1, 4])] %}
+          <div class="dial"><span>{{ label }}</span><div class="pd-chips">{% for o in opts %}<label class="pd-chip-r"><input type="radio" name="{{ key }}" value="{{ o }}"{% if loop.first %} checked{% endif %}><span>{{ o }}</span></label>{% endfor %}</div></div>
+          {%- endfor %}
+        </div>
+      </fieldset>
+      <fieldset class="co-step"><legend><span class="co-n">3</span>Pick the meals you like <i class="plan-pick-n" data-plan-n></i></legend>
+        <div class="plan-picks">
+          {%- for it in s.catalogue['items'] if it.category in (PL.categories or []) and it._sku %}
+          <label class="plan-pick"><input type="checkbox" name="pick" value="{{ it._sku }}"{% if it.featured %} checked{% endif %}>
+            <span class="pp-img">{% if it._img %}<img src="{{ m.src(it._img) }}" alt="" loading="lazy">{% endif %}</span>
+            <span class="pp-t"><b>{{ it.title }}</b><small>{{ it.price }}{% for k in it.macros or [] if k.label in ('kcal', 'protein') %} · {{ k.value }} {{ k.label }}{% endfor %}</small></span></label>
+          {%- endfor %}
+        </div>
+      </fieldset>
+      <fieldset class="co-step"><legend><span class="co-n">4</span>Your details</legend>
+        <div class="co-fields">
+          <label class="fld"><span>Name</span><input name="name" autocomplete="name" required></label>
+          <label class="fld"><span>Mobile</span><input name="phone" type="tel" autocomplete="tel" placeholder="+968" required></label>
+          <label class="fld fld-wide"><span>Allergies or notes <i>(optional)</i></span><input name="notes"></label>
+        </div>
+      </fieldset>
+      <p class="co-error" data-co-error role="alert" hidden></p>
+      <button class="btn btn-primary" type="submit">{{ PL.submit or 'Send my plan request' }} {{ icon('arrow') }}</button>
+    </form>
+    <aside class="plan-sum" data-plan-sum>
+      <p class="side-h">Your plan</p>
+      <p class="plan-big"><b data-plan-meals>0</b> meals</p>
+      <dl class="co-totals">
+        <div><dt>Average a day</dt><dd data-plan-kcal>–</dd></div>
+        <div><dt>Protein a day</dt><dd data-plan-protein>–</dd></div>
+        <div class="co-grand"><dt>Estimate</dt><dd data-plan-est>–</dd></div>
+      </dl>
+      <p class="co-hint">{{ PL.note }}</p>
+    </aside>
+  </div>
+</section>
+{% endblock %}

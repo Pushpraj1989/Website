@@ -122,6 +122,10 @@ phone, mail, truck, clock, arrow, check.
 ```
 Pages: `<nav>.html` (filters + search), `p-<title>.html` per item, `compare.html`.
 
+Selling online: add `"amount": 2.4` (number) to items and a top-level `shop` block; schema in
+[commerce.md](commerce.md). `macros` (`[{"label": "kcal", "value": "330"}]`) show as chips on cards.
+`brand.logo` (image key) replaces the letter mark in the header.
+
 ## Product assembly
 
 ```json

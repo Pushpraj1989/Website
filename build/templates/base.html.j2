@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{{ s._theme.fonts }}">
+{%- if s.brand and s.brand.logo %}<link rel="icon" href="{{ m.src(s.brand.logo) }}">{% endif %}
 <link rel="stylesheet" href="assets/core.css">
 <link rel="stylesheet" href="assets/{{ s.theme }}.css">
 {%- if s.brand and s.brand.style %}<link rel="stylesheet" href="assets/styles.css">{% endif %}
@@ -44,7 +45,7 @@
 {% block content %}{% endblock %}
 {%- if not page or page.kind in ('home', 'contact') %}
 {% include "partials/contact.html.j2" %}
-{%- else %}
+{%- elif page.kind not in ('checkout', 'order') %}
 {% include "partials/cta.html.j2" %}
 {%- endif %}
 </main>
@@ -52,11 +53,18 @@
 {% include "partials/footer.html.j2" %}
 
 {% include "partials/nudges.html.j2" %}
+{%- if s.shop %}
+{% include "partials/cart.html.j2" %}
+{%- endif %}
 
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>
 <script src="assets/fx.js" defer></script>
 <script src="assets/core.js" defer></script>
+{%- if s.shop %}
+<script src="assets/shop-data.js" defer></script>
+<script src="assets/shop.js" defer></script>
+{%- endif %}
 </body>
 </html>

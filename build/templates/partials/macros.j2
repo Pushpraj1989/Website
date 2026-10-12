@@ -339,7 +339,7 @@
 {%- endmacro -%}
 
 {%- macro product_card(it) -%}
-<a class="pc" href="{{ it._file }}" data-cat="{{ it.category }}" data-q="{{ (it.title ~ ' ' ~ (it.tags or []) | join(' ') ~ ' ' ~ (it.category or '')) | lower }}">
+{%- set inner %}
   <div class="pc-media{% if it._art %} is-art{% endif %}">
     {%- if it._img %}<img src="{{ src(it._img) }}" alt="{{ s.images[it._img].alt }}" loading="lazy">
     {%- elif it._art %}<svg viewBox="0 0 400 {{ it._art_h }}" aria-hidden="true">{{ it._art | safe }}</svg>{% endif %}
@@ -349,9 +349,20 @@
     {%- if it.category %}<span class="pc-cat">{{ it.category }}</span>{% endif %}
     <h3>{{ it.title }}</h3>
     {%- if it.text %}<p>{{ it.text }}</p>{% endif %}
-    <div class="pc-foot">{% if it.price %}<b>{{ it.price }}</b>{% endif %}<span class="pc-go">{{ icon('arrow') }}</span></div>
+    {%- if it.macros %}<ul class="pc-macros">{% for k in it.macros %}<li><b>{{ k.value }}</b>{{ k.label }}</li>{% endfor %}</ul>{% endif %}
+    <div class="pc-foot">{% if it.price %}<b>{{ it.price }}</b>{% elif s.shop %}<b class="pc-ask">{{ s.shop.ask_label or 'Price on request' }}</b>{% endif %}{% if not s.shop %}<span class="pc-go">{{ icon('arrow') }}</span>{% endif %}</div>
   </div>
-</a>
+{%- endset %}
+{%- set q = (it.title ~ ' ' ~ (it.tags or []) | join(' ') ~ ' ' ~ (it.category or '')) | lower %}
+{%- if s.shop %}
+<article class="pc pc-buy" data-cat="{{ it.category }}" data-q="{{ q }}">
+  <a class="pc-link" href="{{ it._file }}">{{ inner }}</a>
+  {%- if it._sku %}<button class="pc-add" type="button" data-add="{{ it._sku }}"{% if it.options %} data-go="{{ it._file }}"{% endif %} aria-label="Add {{ it.title }} to cart"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  {%- else %}<a class="pc-add is-wa" href="{{ it._file }}" aria-label="Ask about {{ it.title }}">{{ icon('phone') }}</a>{% endif %}
+</article>
+{%- else %}
+<a class="pc" href="{{ it._file }}" data-cat="{{ it.category }}" data-q="{{ q }}">{{ inner }}</a>
+{%- endif %}
 {%- endmacro -%}
 
 {%- macro catalogue_strip() -%}

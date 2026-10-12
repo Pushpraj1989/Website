@@ -175,20 +175,21 @@
   };
 
   /* ---------- counters ---------- */
-  const fmt = (n, suffix) => Math.round(n).toLocaleString("en-US") + suffix;
+  const fmt = (n, suffix, dp = 0) => n.toLocaleString("en-US", { minimumFractionDigits: dp, maximumFractionDigits: dp }) + suffix;
   const initCounters = () => {
     $$("[data-count]").forEach((el) => {
       const to = parseFloat(el.dataset.to);
       const suffix = el.dataset.suffix || "";
+      const dp = (el.dataset.to.split(".")[1] || "").length;
       if (!Number.isFinite(to)) return;
       const obj = { v: 0 };
       const run = () => {
         gsap.killTweensOf(obj);
         obj.v = 0;
-        gsap.to(obj, { v: to, duration: 2.2, ease: "expo.out", onUpdate: () => (el.textContent = fmt(obj.v, suffix)) });
+        gsap.to(obj, { v: to, duration: 2.2, ease: "expo.out", onUpdate: () => (el.textContent = fmt(obj.v, suffix, dp)) });
       };
       ST.create({ trigger: el, start: "top 92%", end: "bottom 8%", onEnter: run, onEnterBack: run });
-      el.textContent = fmt(0, suffix);
+      el.textContent = fmt(0, suffix, dp);
     });
   };
 

@@ -1,0 +1,20 @@
+<div class="cart" data-cart hidden>
+  <div class="cart-scrim" data-cart-close></div>
+  <aside class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-h">
+    <header class="cart-head">
+      <p class="cart-h" id="cart-h">Your order</p>
+      <button class="cart-x" type="button" data-cart-close aria-label="Close">&times;</button>
+    </header>
+    <div class="cart-lines" data-cart-lines></div>
+    <div class="cart-empty" data-cart-empty>
+      <p>Your order is empty.</p>
+      {%- if s.catalogue %}<a class="btn btn-ghost btn-sm" href="{{ s.catalogue._file }}">Browse the {{ (s.catalogue.nav or 'menu') | lower }}</a>{% endif %}
+    </div>
+    <footer class="cart-foot" data-cart-foot hidden>
+      <div class="cart-total"><span>Subtotal</span><b data-cart-total>0</b></div>
+      <p class="cart-note">{{ s.shop.cart_note or 'Delivery or pickup is chosen at checkout.' }}</p>
+      <a class="btn btn-primary" href="checkout.html">Checkout {{ icon('arrow') }}</a>
+    </footer>
+  </aside>
+</div>
+<div class="toast" data-toast role="status" aria-live="polite"></div>

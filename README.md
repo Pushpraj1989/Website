@@ -22,6 +22,10 @@ People can follow the same steps by hand.
   on phones, a one-time offer slide-in, and a scroll progress ring.
 - **Motion:** smooth scroll, reveals in both scroll directions, page transitions, a mega menu with
   previews, and scroll-scrubbed graphics. Reduced-motion and no-JavaScript fallbacks are included.
+- **Online ordering:** a cart drawer, checkout (delivery or pickup; card through Thawani Pay, cash on
+  delivery, pay at the counter, WhatsApp), an order status page, a meal-plan builder and a small order
+  service (`server/shop_api.py`) that re-prices every order and verifies payments. See
+  `.claude/skills/premium-website/references/commerce.md`.
 - **Real content:** scraped from the company's site, with sources and a `VERIFY.md` of open questions.
 
 ## Quick start
@@ -49,6 +53,8 @@ Open `sites/<slug>/index.html`, or the hub `index.html` that lists every site.
 | --- | --- | --- |
 | `badr-al-samaa` | story | 90 pages from real content: 337-doctor directory, 41 priced packages, 36 specialities, 19 branch pages with maps, 18 news posts, glass anatomy |
 | `demo-coffee` | studio | Fictional café: menu with drawn product art, product pages with options and nutrition, a compare table, a latte and a sandwich that assemble on scroll |
+| `healthy-lab` | studio | 99 pages: a restaurant with no website, built from its Talabat menu (90 dishes with prices and macros), online ordering with Thawani Pay, meal-plan builder, scrubbed kitchen film, burger and shake that assemble |
+| `dar-global` | studio | 81 pages: real-estate developer, tower in drifting clouds, construction stages, scrubbed walk-through, offices with maps |
 | `galfar` | ember | Industrial: rising embers, project panels |
 | `national-gas` | cosmos | Energy: particle sphere, 3D fly-through |
 | `starcare` | clinic | Clinical: kinetic type, horizontal departments |
@@ -63,6 +69,8 @@ Open `sites/<slug>/index.html`, or the hub `index.html` that lists every site.
 | `presets/<sector>.json` | 16 sector presets: pages, home order, rail, tools, signature graphics, scrape focus, questions, compliance |
 | `tools/scrape.py` | Crawls any site (robots-aware): pages, headings, text, prices, phones, emails, socials, news, products, locations, large photos |
 | `tools/new_site.py` | Writes `data/<slug>.json` from a preset + brief + scrape, ready to build |
+| `tools/serve.py` | Local preview that also forwards `/api/` to the order service |
+| `server/shop_api.py` | Order and payment service for sites with a `shop` block (standard library, systemd on the server) |
 | `tools/qa.py` | Browser QA of every page on desktop and phone, plus reduced motion; exits 1 on problems |
 | `data/<slug>.json` | One company's content and settings. `data/credits.json` holds image credits |
 | `build/build.py` | Renders every site (all pages), the hub and `VERIFY.md`. `ONLY=<slug>` builds one |

@@ -76,6 +76,8 @@ Show the person a short sitemap and home section list. Continue unless they obje
    - Promos and the news ticker come from real news, campaigns and offers.
    - Every catalogue item: title, category, price (as published, dated), text, specs or nutrition.
    - Branches: address, phones, hours, map coordinates or a directions link.
+   - Selling online: catalogue items get a numeric `amount`, plus a `shop` block (payments, delivery,
+     pickup, plans). Read [references/commerce.md](references/commerce.md).
    - `assemble`: 1–2 hero products, bottom layer first, 4–7 layers, each with a name and a
      one-line note. Use `image` layers with transparent packshots when the brand has them.
 3. Run the copy pass on everything you wrote: [references/copy.md](references/copy.md).
@@ -115,6 +117,7 @@ items they must confirm. Say plainly what is sample or unverified.
   at least one scroll-scrubbed graphic; page transitions; same graphic level on phones.
 - Craft: one grammar, one peak, one style, typography floor (craft.md); copy pass done.
 - Real content with sources; nothing invented; `confirm` lists every open question.
+- Shops: add to cart, checkout, a cash order and a test card payment all work end to end.
 - `tools/qa.py` passes: no errors, no missing files, no sideways scroll, nothing stuck hidden,
   reduced motion shows everything.
 

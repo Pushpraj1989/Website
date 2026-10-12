@@ -37,3 +37,7 @@ graphics (3D slider, assembly) and not a bare list; offer pop-up not covering ke
 - GitHub Pages: `.github/workflows/pages.yml` (set repository variable DEPLOY_PAGES=true).
 - Any static host: upload `index.html`, `assets/`, `sites/`. All links are relative.
 Send one link per site: `http://<host>/sites/<slug>/`.
+- Sites with a `shop`: `install.sh` also installs the order service (systemd `tier1-shop`, nginx
+  `/api/`) and creates `/etc/tier1-shop.env` once. The owner adds gateway keys there themselves
+  (`nano /etc/tier1-shop.env && systemctl restart tier1-shop`); never ask for keys in chat.
+  Test the whole order flow before sending the link (commerce.md, "Test locally").

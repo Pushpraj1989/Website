@@ -1,0 +1,17 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+<section class="co co-done" data-order-page>
+  <div class="wrap co-done-in">
+    <div class="done-mark" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M19 33l9 9 17-19" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <p class="eyebrow" data-o-kicker>Your order</p>
+    <h1 class="pg-h2" data-o-title>Checking your order…</h1>
+    <p class="pg-lead" data-o-text></p>
+    <dl class="facts o-facts" data-o-facts hidden></dl>
+    <div class="cta-row">
+      {%- if s.catalogue %}<a class="btn btn-primary" href="{{ s.catalogue._file }}">Back to the {{ (s.catalogue.nav or 'menu') | lower }} {{ icon('arrow') }}</a>{% endif %}
+      <a class="btn btn-ghost" href="checkout.html" data-o-retry hidden>Try again</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

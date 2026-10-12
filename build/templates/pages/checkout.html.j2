@@ -1,0 +1,69 @@
+{% extends "base.html.j2" %}
+{% import "partials/macros.j2" as m with context %}
+{% block content %}
+{%- set S = s.shop %}{% set D = S.delivery or {} %}{% set P = S.pickup or {} %}
+<section class="co" data-checkout>
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>{% if s.catalogue %}<a href="{{ s.catalogue._file }}">{{ s.catalogue.nav }}</a><span>/</span>{% endif %}<span aria-current="page">Checkout</span></nav>
+    <h1 class="pg-h2 co-title">{{ S.checkout_title or 'Checkout' }}</h1>
+    <div class="co-grid">
+      <form class="co-form" data-co-form novalidate>
+        <fieldset class="co-step">
+          <legend><span class="co-n">1</span>How would you like it?</legend>
+          <div class="seg" role="radiogroup" aria-label="Delivery or pickup">
+            {%- if D %}<label class="seg-opt"><input type="radio" name="fulfilment" value="delivery" checked><span>{{ icon('truck') }}<b>{{ D.label or 'Delivery' }}</b><small>{{ D.short or '' }}</small></span></label>{% endif %}
+            {%- if P %}<label class="seg-opt"><input type="radio" name="fulfilment" value="pickup"{% if not D %} checked{% endif %}><span>{{ icon('pin') }}<b>{{ P.label or 'Pickup' }}</b><small>{{ P.short or '' }}</small></span></label>{% endif %}
+          </div>
+          {%- if P.address %}<p class="co-hint" data-show-for="pickup" hidden>{{ icon('pin') }} {{ P.address }}{% if P.map %} · <a href="{{ P.map }}" target="_blank" rel="noopener">Directions</a>{% endif %}</p>{% endif %}
+        </fieldset>
+        <fieldset class="co-step">
+          <legend><span class="co-n">2</span>Your details</legend>
+          <div class="co-fields">
+            <label class="fld"><span>Name</span><input name="name" autocomplete="name" required></label>
+            <label class="fld"><span>Mobile</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+968" required></label>
+            <label class="fld fld-wide"><span>Email <i>(optional, for the receipt)</i></span><input name="email" type="email" autocomplete="email"></label>
+            {%- if D %}
+            <label class="fld" data-show-for="delivery"><span>Area</span>
+              {%- if D.areas %}<select name="area">{% for a in D.areas %}<option>{{ a }}</option>{% endfor %}<option value="Other">Other area</option></select>
+              {%- else %}<input name="area" autocomplete="address-level2">{% endif %}</label>
+            <label class="fld" data-show-for="delivery"><span>Building, street, way</span><input name="address" autocomplete="street-address"></label>
+            {%- endif %}
+            <label class="fld"><span>When</span><select name="when"><option>As soon as possible</option>{% for t in S.slots or [] %}<option>{{ t }}</option>{% endfor %}</select></label>
+            <label class="fld fld-wide"><span>Notes for the kitchen <i>(optional)</i></span><input name="notes" placeholder="No onions, extra sauce on the side…"></label>
+          </div>
+        </fieldset>
+        <fieldset class="co-step">
+          <legend><span class="co-n">3</span>Payment</legend>
+          <div class="pay-opts">
+            {%- for p in S.payments %}
+            {%- if p == 'card' %}
+            <label class="pay" data-pay="card"><input type="radio" name="payment" value="card"><span class="pay-body"><b>{{ S.card_label or 'Debit or credit card' }}</b><small>Secure payment page by {{ S.gateway or 'Thawani Pay' }}</small><span class="pay-logos" aria-label="Visa, Mastercard">{% for l in S.card_logos or ['VISA', 'Mastercard'] %}<i>{{ l }}</i>{% endfor %}</span><small class="pay-off" data-card-off hidden>Card payments switch on when the payment service is connected.</small></span></label>
+            {%- elif p == 'cod' %}
+            <label class="pay" data-pay="cod" data-show-for="delivery"><input type="radio" name="payment" value="cod"><span class="pay-body"><b>Cash on delivery</b><small>Pay the rider in cash.</small></span></label>
+            {%- elif p == 'counter' %}
+            <label class="pay" data-pay="counter" data-show-for="pickup" hidden><input type="radio" name="payment" value="counter"><span class="pay-body"><b>Pay at the counter</b><small>Cash or card when you collect.</small></span></label>
+            {%- elif p == 'whatsapp' and s._shop.wa %}
+            <label class="pay" data-pay="whatsapp"><input type="radio" name="payment" value="whatsapp"><span class="pay-body"><b>Order on WhatsApp</b><small>We open WhatsApp with your order written out. Send it and we confirm.</small></span></label>
+            {%- endif %}
+            {%- endfor %}
+          </div>
+        </fieldset>
+        <p class="co-error" data-co-error role="alert" hidden></p>
+        <button class="btn btn-primary co-submit" type="submit" data-co-submit>Place order · <span data-co-total>0</span></button>
+        <p class="co-fine">{{ S.fine or 'Prices are checked again on our side before you pay.' }}</p>
+      </form>
+      <aside class="co-sum" aria-label="Order summary">
+        <p class="side-h">Order summary</p>
+        <div class="co-lines" data-co-lines></div>
+        <p class="co-empty" data-co-empty hidden>Your order is empty. {% if s.catalogue %}<a href="{{ s.catalogue._file }}">Browse the {{ (s.catalogue.nav or 'menu') | lower }}</a>.{% endif %}</p>
+        <dl class="co-totals">
+          <div><dt>Subtotal</dt><dd data-co-sub>0</dd></div>
+          <div data-show-for="delivery"><dt>Delivery</dt><dd>{{ D.fee_label or ('%s %.3f' % (S.currency, D.fee) if D.fee is number else 'Confirmed by phone') }}</dd></div>
+          <div class="co-grand"><dt>Total</dt><dd data-co-grand>0</dd></div>
+        </dl>
+        {%- if D.note %}<p class="co-hint">{{ D.note }}</p>{% endif %}
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}
