@@ -1,185 +1,2673 @@
 {
-  "slug": "asyad-express",
-  "tier": 1,
-  "name": "Asyad Express",
-  "short": "Asyad Express",
-  "sector": "Courier & logistics",
-  "meta": "Asyad Express: courier and distribution across Oman, with shipments to more than 220 countries.",
-  "accent": "#ff5b00",
-  "cta": {
-    "label": "Contact us",
-    "href": "#contact"
+ "slug": "asyad-express",
+ "tier": 1,
+ "name": "Asyad Express",
+ "short": "Asyad Express",
+ "sector": "Courier & logistics",
+ "meta": "Asyad Express: door-to-door delivery across Oman, international express to 220+ destinations, fulfilment and warehousing near Muscat International Airport.",
+ "footer_note": "Concept redesign made to test the website kit. Not the official Asyad Express website. Content from Asyad Express pages, press releases and news coverage, read 12 Oct 2026.",
+ "accent": "#2cb5e8",
+ "theme": "studio",
+ "promo_fx": "streak",
+ "img_dir": "asyad-express",
+ "brand": {
+  "mode": "dark",
+  "style": "spatial",
+  "logo": "logo",
+  "logo_wide": true,
+  "bg": "#130c22",
+  "fg": "#f2eefb",
+  "accent": "#2cb5e8",
+  "accent_ink": "#130c22",
+  "accent2": "#8b4fd8",
+  "alt": "#1b1230",
+  "font_display": "\"Sora\", system-ui, sans-serif",
+  "font_body": "\"Inter\", system-ui, sans-serif",
+  "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600;700"
+ },
+ "cta": {
+  "label": "Ship with us",
+  "short": "Ship",
+  "href": "contact.html"
+ },
+ "hero": {
+  "eyebrow": "",
+  "title": "Asyad Express",
+  "lede": "",
+  "primary": {
+   "label": "Services",
+   "href": "services.html"
   },
-  "hero": {
-    "eyebrow": "Express delivery · Asyad Group",
-    "title": "Express delivery across Oman and beyond",
-    "lede": "A distribution network across Oman, with shipments to more than 220 countries.",
-    "primary": {
-      "label": "Contact us",
-      "href": "#contact"
-    },
-    "secondary": {
-      "label": "Our services",
-      "href": "#services"
-    }
-  },
-  "stats": [
-    {
-      "value": 11,
-      "label": "Distribution centres (to confirm)"
-    },
-    {
-      "value": 220,
-      "suffix": "+",
-      "label": "Countries served (to confirm)"
-    }
-  ],
-  "about": {
-    "title": "A national network with international reach",
-    "body": [
-      "Asyad Express is the courier service of Asyad Group, a government-owned logistics group. It delivers through distribution centres across Oman and ships to international destinations."
-    ],
-    "points": [
-      {
-        "title": "Government-owned",
-        "text": "Part of Asyad Group, a government-owned logistics group."
-      },
-      {
-        "title": "Distribution network",
-        "text": "Distribution centres across Oman. The exact list is to be confirmed."
-      }
-    ]
-  },
-  "services": {
-    "title": "Express services",
-    "nav": "Services",
-    "intro": "Service lines to be confirmed with the client. These are the two lines the earlier audit identified.",
-    "items": [
-      {
-        "title": "Domestic express",
-        "icon": "truck",
-        "text": "Delivery through the Oman distribution network.",
-        "image": "road"
-      },
-      {
-        "title": "International express",
-        "icon": "globe",
-        "text": "Shipments to more than 220 countries.",
-        "image": "plane"
-      }
-    ]
-  },
-  "highlights": {
-    "nav": "How it works",
-    "title": "How express delivery works",
-    "intro": "Concept flow for illustration. Confirm the actual process with Asyad Express.",
-    "items": [
-      {
-        "title": "Book",
-        "text": "Create a shipment or open a business account."
-      },
-      {
-        "title": "Collect",
-        "text": "Parcels enter the network at a distribution centre."
-      },
-      {
-        "title": "Sort",
-        "text": "Routed through the Oman distribution network."
-      },
-      {
-        "title": "Deliver",
-        "text": "Delivered in Oman, or sent on to international destinations."
-      }
-    ]
-  },
-  "locations": null,
-  "marquee": [
-    "Domestic express",
-    "International express",
-    "Distribution centres",
-    "Oman",
-    "220+ countries"
-  ],
-  "contact": {
-    "title": "Contact Asyad Express",
-    "intro": "For shipments, business accounts and partnerships.",
-    "address": null,
-    "phones": [],
-    "email": null,
-    "note": "Contact details have not been verified. The official site blocked automated access; add them from the official site.",
-    "form": {
-      "branch": false,
-      "topics": [
-        "Shipping enquiry",
-        "Business account",
-        "Partnership or tender",
-        "Media",
-        "Other"
-      ],
-      "submit": "Send enquiry"
-    }
-  },
-  "confirm": [
-    "Distribution centre count: group pages give 6 in one place and 11 in another. The concept shows 11. Verify before use.",
-    "Service lines and the 220+ country figure come from the earlier audit, not a live check: the official site blocked automated access.",
-    "No address, phone number or email has been verified.",
-    "Government-owned: expect a tender process. This is a concept only, not an offer to the company.",
-    "The four-step 'How express delivery works' flow is concept copy written for the design, not taken from Asyad's site.",
-    "Photography is illustrative Creative Commons imagery (see footer credits), not Asyad's fleet or facilities."
-  ],
-  "sources": [
-    "https://asyad.om/logistics-solutions/asyad-express (redirects to asyad.com; blocked automated access on 11 Oct 2026)",
-    "Earlier audit notes (prospects document, 11 Oct 2026)"
-  ],
-  "theme": "route",
-  "img_dir": "asyad",
-  "images": {
-    "plane": {
-      "src": "hero.jpg",
-      "alt": "Aircraft at an airport gate at sunrise",
-      "cap": "Illustrative"
-    },
-    "road": {
-      "src": "road.jpg",
-      "alt": "Vehicle on a mountain road in Oman",
-      "cap": "Oman"
-    },
-    "containers": {
-      "src": "containers.jpg",
-      "alt": "Stacked shipping containers",
-      "cap": "Illustrative"
-    },
-    "stack": {
-      "src": "stack.jpg",
-      "alt": "Container stack from below",
-      "cap": "Illustrative"
-    },
-    "parcel": {
-      "src": "parcel.jpg",
-      "alt": "Parcel being wrapped",
-      "cap": "Illustrative"
-    },
-    "boxes": {
-      "src": "boxes.jpg",
-      "alt": "Cardboard box",
-      "cap": "Illustrative"
-    },
-    "dunes": {
-      "src": "dunes.jpg",
-      "alt": "Desert dunes in Oman",
-      "cap": "Oman"
-    }
-  },
-  "theme_data": {
-    "hero_html": "Express delivery across Oman <em>and beyond</em>",
-    "giant": "Oman → World",
-    "tiles": [
-      "containers",
-      "parcel",
-      "dunes",
-      "stack",
-      "boxes",
-      "road"
-    ]
+  "secondary": {
+   "label": "Contact",
+   "href": "contact.html"
   }
+ },
+ "images": {
+  "van-highway": {
+   "src": "van-highway.jpg",
+   "alt": "Asyad Express van on a highway lined with palms",
+   "cap": "Asyad Express delivery van"
+  },
+  "van-road": {
+   "src": "van-road.jpg",
+   "alt": "Light-blue Asyad Express van on an open road under a cloudy sky",
+   "cap": "Asyad Express International"
+  },
+  "van-purple-door": {
+   "src": "van-purple-door.jpg",
+   "alt": "Courier in purple uniform at a villa door beside a purple Asyad van",
+   "cap": "Last-mile delivery"
+  },
+  "van-purple-family": {
+   "src": "van-purple-family.jpg",
+   "alt": "Courier handing a parcel to a family at their door",
+   "cap": "Doorstep delivery"
+  },
+  "van-purple-gate": {
+   "src": "van-purple-gate.jpg",
+   "alt": "Purple Asyad Express van passing a Muscat landmark gate",
+   "cap": "Asyad Express van"
+  },
+  "van-courier-box": {
+   "src": "van-courier-box.jpg",
+   "alt": "Courier holding an Asyad Express box beside a light-blue van",
+   "cap": "Asyad Express courier"
+  },
+  "courier-branch": {
+   "src": "courier-branch.jpg",
+   "alt": "Courier checking a parcel at an Oman Post branch beside his van",
+   "cap": "Collection from a branch"
+  },
+  "hub-aerial": {
+   "src": "hub-aerial.jpg",
+   "alt": "Aerial view of an Asyad warehouse with light-blue trucks at the loading bays",
+   "cap": "Asyad Express hub"
+  },
+  "courier-van-film": {
+   "src": "courier-van-film.jpg",
+   "alt": "Courier loading a light-blue Asyad Express van",
+   "cap": "From the Asyad Express Fulfilment film"
+  },
+  "van-street": {
+   "src": "van-street.jpg",
+   "alt": "Courier stepping out of a light-blue Asyad Express van",
+   "cap": "From an Asyad Express film"
+  },
+  "van-purple-back": {
+   "src": "van-purple-back.jpg",
+   "alt": "Courier in purple uniform walking to a purple Asyad van",
+   "cap": "From an Asyad Express film"
+  },
+  "courier-door": {
+   "src": "courier-door.jpg",
+   "alt": "Asyad Express courier arriving at a house door",
+   "cap": "From an Asyad Express film"
+  },
+  "hub-racks": {
+   "src": "hub-racks.jpg",
+   "alt": "Worker holding a parcel between tall racks in the Asyad fulfilment centre",
+   "cap": "e-Fulfilment centre"
+  },
+  "dock-door": {
+   "src": "dock-door.jpg",
+   "alt": "Worker moving a pallet of boxes through a loading-dock door",
+   "cap": "Warehouse dock"
+  },
+  "dock-door-2": {
+   "src": "dock-door-2.jpg",
+   "alt": "Pallet of cartons at a warehouse dock door",
+   "cap": "Warehouse solutions"
+  },
+  "sorter": {
+   "src": "sorter.jpg",
+   "alt": "Operator at a parcel-sorting machine with purple Asyad boxes",
+   "cap": "Parcel sorting"
+  },
+  "packing": {
+   "src": "packing.jpg",
+   "alt": "Staff packing Asyad Express boxes on a conveyor",
+   "cap": "Pick and pack"
+  },
+  "packing-2": {
+   "src": "packing-2.jpg",
+   "alt": "Asyad Express boxes on a packing line",
+   "cap": "Pick and pack"
+  },
+  "operator": {
+   "src": "operator.jpg",
+   "alt": "Operator handling parcels in a fulfilment centre",
+   "cap": "Fulfilment operations"
+  },
+  "handover": {
+   "src": "handover.jpg",
+   "alt": "Courier handing a light-blue Asyad box to a customer",
+   "cap": "Delivery to the customer"
+  },
+  "customer-parcel": {
+   "src": "customer-parcel.jpg",
+   "alt": "Father and daughter opening a delivered parcel at home",
+   "cap": "E-commerce delivery"
+  },
+  "customer-1": {
+   "src": "customer-1.jpg",
+   "alt": "Smiling customer in an office corridor",
+   "cap": "From an Asyad Express film"
+  },
+  "seller-phone": {
+   "src": "seller-phone.jpg",
+   "alt": "Shop owner taking an order by phone",
+   "cap": "From an Asyad Express film"
+  },
+  "seller-shop": {
+   "src": "seller-shop.jpg",
+   "alt": "Shop owner smiling behind his counter",
+   "cap": "From an Asyad Express film"
+  },
+  "customer-2": {
+   "src": "customer-2.jpg",
+   "alt": "Customer smiling at home",
+   "cap": "From an Asyad Express film"
+  },
+  "roaster": {
+   "src": "roaster.jpg",
+   "alt": "Coffee roaster smiling at his small business",
+   "cap": "From an Asyad Express film"
+  },
+  "customer-3": {
+   "src": "customer-3.jpg",
+   "alt": "Customer receiving good news at home",
+   "cap": "From an Asyad Express film"
+  },
+  "roaster-2": {
+   "src": "roaster-2.jpg",
+   "alt": "Small-business owner with his roaster",
+   "cap": "From an Asyad Express film"
+  },
+  "retail-tablet": {
+   "src": "retail-tablet.jpg",
+   "alt": "Shop manager checking stock on a tablet",
+   "cap": "From the Asyad warehouse film"
+  },
+  "retail-tablet-2": {
+   "src": "retail-tablet-2.jpg",
+   "alt": "Shop manager reviewing stock levels",
+   "cap": "From the Asyad warehouse film"
+  },
+  "merchant": {
+   "src": "merchant.jpg",
+   "alt": "Merchant in his store",
+   "cap": "From the Asyad warehouse film"
+  },
+  "entrepreneur": {
+   "src": "entrepreneur.jpg",
+   "alt": "Perfume retailer in his shop",
+   "cap": "From the Asyad Express Fulfilment film"
+  },
+  "intl-film": {
+   "src": "intl-film.jpg",
+   "alt": "Young entrepreneur working late",
+   "cap": "From the Asyad Express International film"
+  },
+  "intl-film-2": {
+   "src": "intl-film-2.jpg",
+   "alt": "Entrepreneur smiling in an office",
+   "cap": "From the Asyad Express International film"
+  },
+  "destinations": {
+   "src": "destinations.jpg",
+   "alt": "Asyad Express graphic: we deliver to more than 220 destinations",
+   "cap": "Asyad Express campaign"
+  },
+  "destinations-en": {
+   "src": "destinations-en.jpg",
+   "alt": "Asyad Express graphic: we deliver your products to more than 220 destinations worldwide",
+   "cap": "Asyad Express campaign"
+  },
+  "khedmah": {
+   "src": "khedmah.jpg",
+   "alt": "Khedmah branch counter offering Oman Post and Asyad Express services",
+   "cap": "Khedmah touchpoint"
+  },
+  "po-boxes": {
+   "src": "po-boxes.jpg",
+   "alt": "Customer collecting mail at a wall of PO boxes",
+   "cap": "PO box service"
+  },
+  "sohar-signing": {
+   "src": "sohar-signing.jpg",
+   "alt": "Oman Post officials at a signing with Sohar Port and Freezone",
+   "cap": "Sohar Port and Freezone agreement"
+  },
+  "booth-1": {
+   "src": "booth-1.jpg",
+   "alt": "Asyad Express stand at DELIVER Europe 2026 in Amsterdam",
+   "cap": "DELIVER Europe 2026"
+  },
+  "booth-2": {
+   "src": "booth-2.jpg",
+   "alt": "Asyad Express booth A58 at DELIVER Europe 2026",
+   "cap": "DELIVER Europe 2026"
+  },
+  "seamless": {
+   "src": "seamless.jpg",
+   "alt": "Visitors at the Oman Post and Asyad Express stand at Seamless Middle East 2024",
+   "cap": "Seamless Middle East 2024"
+  },
+  "seamless-2": {
+   "src": "seamless-2.jpg",
+   "alt": "Team welcoming visitors at Seamless Middle East 2024",
+   "cap": "Seamless Middle East 2024"
+  },
+  "evri-hub": {
+   "src": "evri-hub.jpg",
+   "alt": "Evri parcel hub in the UK with a line of vans",
+   "cap": "Evri hub, UK"
+  },
+  "vodafone": {
+   "src": "vodafone.jpg",
+   "alt": "Asyad Express and Vodafone Oman signing their fulfilment agreement",
+   "cap": "Agreement signing, July 2021"
+  },
+  "scalex": {
+   "src": "scalex.jpg",
+   "alt": "Speaker on a panel at Scalex Dubai",
+   "cap": "Scalex Dubai 2021"
+  },
+  "rally": {
+   "src": "rally.jpg",
+   "alt": "Hamed Al Wahaibi and co-driver Ilka Minor with their rally car",
+   "cap": "Rally partnership, 2021"
+  },
+  "tanzania": {
+   "src": "tanzania.jpg",
+   "alt": "Asyad and Tanzania Posts officials exchange the signed MoU",
+   "cap": "Tanzania Posts MoU, 2022"
+  },
+  "wujha": {
+   "src": "wujha.jpg",
+   "alt": "Signing ceremony for the land investment agreement",
+   "cap": "Investment agreement signing"
+  },
+  "scalex-stage": {
+   "src": "scalex-stage.jpg",
+   "alt": "Panel session on stage at Scalex Dubai",
+   "cap": "Scalex Dubai 2021"
+  },
+  "airport-facility": {
+   "src": "airport-facility.jpg",
+   "alt": "Rendering of the redeveloped former Muscat airport terminal area",
+   "cap": "Render: Oman Aviation Group"
+  },
+  "ship-your-cart": {
+   "src": "ship-your-cart.jpg",
+   "alt": "Child at home in a Ship Your Cart cinema advert",
+   "cap": "From the Ship Your Cart advert"
+  },
+  "ship-your-cart-2": {
+   "src": "ship-your-cart-2.jpg",
+   "alt": "Two men talking in the Ship Your Cart cinema advert",
+   "cap": "From the Ship Your Cart advert"
+  },
+  "camping": {
+   "src": "camping.jpg",
+   "alt": "Ship Your Cart campaign art with camping gear around a parcel",
+   "cap": "Ship Your Cart campaign"
+  },
+  "portal": {
+   "src": "portal.jpg",
+   "alt": "Asyad Express client portal dashboard",
+   "cap": "Client portal"
+  },
+  "rally-helmet": {
+   "src": "rally-helmet.jpg",
+   "alt": "Rally helmet of Hamed Al Wahaibi with an Oman flag design",
+   "cap": "From an Asyad Express film"
+  },
+  "returns": {
+   "src": "returns.jpg",
+   "alt": "Courier holding a purple Asyad returns box",
+   "cap": "Reverse logistics campaign"
+  },
+  "seamless-3": {
+   "src": "seamless-3.jpg",
+   "alt": "Visitor at the interactive table at Seamless Middle East 2024",
+   "cap": "Seamless Middle East 2024"
+  },
+  "intl-film-3": {
+   "src": "intl-film-3.jpg",
+   "alt": "Two friends talking in a car",
+   "cap": "From the Asyad Express International film"
+  },
+  "logo": {
+   "src": "logo.png",
+   "alt": "Asyad Express logo",
+   "cap": ""
+  }
+ },
+ "ticker": {
+  "label": "Latest",
+  "items": [
+   {
+    "tag": "Events",
+    "text": "Asyad Express at DELIVER Europe 2026 in Amsterdam",
+    "href": "@news:Asyad Express at DELIVER Europ"
+   },
+   {
+    "tag": "Press",
+    "text": "Asyad Express strengthens last-mile delivery leadership",
+    "href": "@news:Asyad Express strengthens last"
+   },
+   {
+    "tag": "Partnerships",
+    "text": "Asyad Express forms alliance with Temu, Landmark Group and Amazon",
+    "href": "@news:Asyad Express forms alliance w"
+   },
+   {
+    "tag": "Partnerships",
+    "text": "Asyad Express partners with Caddie Couture",
+    "href": "@news:Asyad Express partners with Ca"
+   },
+   {
+    "tag": "New service",
+    "text": "Asyad Express launches a reverse logistics platform",
+    "href": "@news:Asyad Express launches a rever"
+   }
+  ],
+  "emergency": {
+   "label": "Call centre",
+   "number": "1001",
+   "tel": "1001"
+  }
+ },
+ "promos": [
+  {
+   "image": "van-purple-door",
+   "tag": "Last mile",
+   "kicker": "Across all governorates",
+   "short": "Same day in Muscat",
+   "title": "Same day in Muscat. Up to 72 hours anywhere in Oman.",
+   "text": "Door-to-door delivery with cash on delivery, returns, insurance and packaging.",
+   "cta": {
+    "label": "Domestic Express",
+    "href": "@svc:Domestic"
+   },
+   "cta2": {
+    "label": "Read the news",
+    "href": "@news:Asyad Express strengthens"
+   }
+  },
+  {
+   "image": "van-highway",
+   "tag": "International",
+   "kicker": "Asyad Express International",
+   "short": "220+ destinations",
+   "title": "Your parcel, at a door in 220 destinations",
+   "text": "24 to 48 hours within the GCC, 48 to 72 hours to the rest of the world.",
+   "cta": {
+    "label": "International Express",
+    "href": "@svc:International"
+   }
+  },
+  {
+   "image": "hub-racks",
+   "tag": "Fulfilment",
+   "kicker": "Next to Muscat International Airport",
+   "short": "Fulfilment centre",
+   "title": "We store, pick, pack and ship for you",
+   "text": "More than 3,500 m² of warehousing with airside access, bonded storage and in-house customs clearance.",
+   "cta": {
+    "label": "Fulfilment Centre",
+    "href": "@svc:Fulfilment"
+   },
+   "cta2": {
+    "label": "Warehouse",
+    "href": "@svc:Warehouse"
+   }
+  },
+  {
+   "image": "van-purple-family",
+   "tag": "New",
+   "kicker": "Reverse logistics",
+   "short": "Returns, sorted",
+   "title": "Returns picked up at the door, checked and restocked",
+   "text": "A GCC-wide returns service for online brands, tracked all the way.",
+   "cta": {
+    "label": "How returns work",
+    "href": "@svc:Reverse"
+   }
+  },
+  {
+   "image": "customer-parcel",
+   "tag": "Ship Your Cart",
+   "kicker": "Shop the US and UK",
+   "short": "Ship Your Cart",
+   "title": "Shop in London or New York. Open it in Muscat.",
+   "text": "Free virtual addresses, consolidation and delivery to your door.",
+   "cta": {
+    "label": "Ship Your Cart",
+    "href": "@svc:Ship Your Cart"
+   }
+  }
+ ],
+ "rail": {
+  "title": "What do you need to send?",
+  "items": [
+   {
+    "label": "Track a parcel",
+    "sub": "Preview form",
+    "icon": "pin",
+    "href": "contact.html"
+   },
+   {
+    "label": "Send in Oman",
+    "sub": "24–72 hours",
+    "icon": "truck",
+    "href": "@svc:Domestic"
+   },
+   {
+    "label": "Send abroad",
+    "sub": "220+ destinations",
+    "icon": "globe",
+    "href": "@svc:International"
+   },
+   {
+    "label": "Fulfilment",
+    "sub": "Store, pack, ship",
+    "icon": "layers",
+    "href": "@svc:Fulfilment"
+   },
+   {
+    "label": "Find a branch",
+    "sub": "Office locator",
+    "icon": "building",
+    "href": "branches.html"
+   }
+  ]
+ },
+ "home": [
+  "promo",
+  "rail",
+  {
+   "type": "depth",
+   "id": "every-corner",
+   "height": 210,
+   "kicker": "Asyad Express",
+   "title": "To every corner of Oman",
+   "text": "From Khasab to Salalah, door-to-door delivery for businesses and the people who buy from them.",
+   "cta": {
+    "label": "Find a branch",
+    "href": "branches.html"
+   },
+   "cap": "Asyad Express van. Photo: Asyad Express",
+   "layers": [
+    {
+     "image": "van-road",
+     "speed": 0.12,
+     "scale": 0.06,
+     "lean": 6,
+     "position": "center 60%"
+    },
+    {
+     "clouds": true,
+     "speed": 0.3,
+     "y": 40,
+     "tint": "#ffffff",
+     "count": 7
+    },
+    {
+     "title": true,
+     "speed": 0.55
+    },
+    {
+     "clouds": true,
+     "front": true,
+     "speed": 0.95,
+     "y": 78,
+     "tint": "#efe9ff",
+     "count": 9
+    }
+   ]
+  },
+  "stats",
+  "services",
+  {
+   "type": "statement",
+   "kicker": "A parcel's journey",
+   "text": "Every order starts on a shelf in Muscat and ends at somebody's door."
+  },
+  {
+   "type": "stages",
+   "id": "parcel-journey",
+   "kicker": "How a parcel moves",
+   "title": "From order to door",
+   "stages": [
+    {
+     "image": "seller-phone",
+     "label": "Order",
+     "title": "An order comes in",
+     "text": "A seller takes an order online, in the client portal or by phone, and books it with Asyad Express."
+    },
+    {
+     "image": "hub-racks",
+     "label": "Store",
+     "title": "Stock waits on the racks",
+     "text": "Fulfilment customers keep inventory in the warehouse near Muscat International Airport, tracked by a management system."
+    },
+    {
+     "image": "packing",
+     "label": "Pack",
+     "title": "Picked and packed",
+     "text": "Orders are picked, packed in Asyad boxes or flyers and labelled."
+    },
+    {
+     "image": "sorter",
+     "label": "Sort",
+     "title": "Sorted for its route",
+     "text": "Labelled parcels are sorted for domestic and international routes."
+    },
+    {
+     "image": "dock-door",
+     "label": "Dispatch",
+     "title": "Out through the dock",
+     "text": "Seven dock doors load the vans and trucks. International shipments clear customs in-house."
+    },
+    {
+     "image": "van-highway",
+     "label": "Drive",
+     "title": "On the road",
+     "text": "Same day in Muscat, up to 72 hours to remote areas, 24 to 48 hours to GCC cities."
+    },
+    {
+     "image": "van-purple-door",
+     "label": "Deliver",
+     "title": "At the door",
+     "text": "The courier collects cash or card on delivery and the sender gets online proof of delivery."
+    }
+   ]
+  },
+  "catalogue",
+  {
+   "type": "split",
+   "image": "hub-aerial",
+   "kicker": "Fulfilment and warehousing",
+   "title": "A warehouse with airside access",
+   "body": [
+    "The Asyad Express warehouse sits at Muscat International Airport, with a bonded goods area, a customs office and x-ray machines to speed up inspection and clearance."
+   ],
+   "points": [
+    "More than 3,500 m² of warehousing",
+    "Over 1,200 m² of fulfilment space",
+    "Seven dock doors, three dock levellers",
+    "24-hour security and CCTV",
+    "ISO 9001, ISO 14001 and ISO 45001 certified"
+   ],
+   "cta": {
+    "label": "Warehouse Solutions",
+    "href": "@svc:Warehouse"
+   }
+  },
+  "partners",
+  {
+   "type": "split",
+   "image": "booth-1",
+   "flip": true,
+   "kicker": "For international brands",
+   "title": "A gateway into the GCC",
+   "body": [
+    "European, UK, US and Chinese retailers use Asyad Express to reach GCC and MENA shoppers, with fulfilment in Oman and in-house customs clearance. In June 2026 the team met retailers at DELIVER Europe in Amsterdam."
+   ],
+   "points": [
+    "Presence in Saudi Arabia, the UAE, Kuwait, Bahrain, Qatar and Egypt",
+    "Air freight alliance with Oman Air",
+    "Exclusive Middle East fulfilment hub for Evri"
+   ],
+   "cta": {
+    "label": "E-commerce Gateway",
+    "href": "@svc:E-commerce"
+   }
+  },
+  "locations",
+  "news",
+  "faq"
+ ],
+ "stats": [
+  {
+   "value": 220,
+   "suffix": "+",
+   "label": "International destinations"
+  },
+  {
+   "value": 79,
+   "label": "Branches on the office locator"
+  },
+  {
+   "value": 103,
+   "label": "Touchpoints with partners"
+  },
+  {
+   "value": 3500,
+   "suffix": " m²",
+   "label": "Warehousing near the airport"
+  },
+  {
+   "value": 925,
+   "suffix": "k+",
+   "label": "Lifestyle e-commerce shipments, Jan–Nov 2024"
+  }
+ ],
+ "about": {
+  "title": "Oman's express delivery company",
+  "body": [
+   "Asyad Express, a subsidiary of Asyad Group, provides express delivery, e-commerce solutions and warehousing. It works alongside Oman Post, sharing its leadership and its branch network.",
+   "It delivers door to door across all governorates of Oman, ships to more than 220 destinations and runs a fulfilment centre and warehouse at Muscat International Airport, with in-house customs clearance for international shipments."
+  ],
+  "more": [
+   "Asyad Express says it is an Omani company through and through, with a nationwide network served by a professional Omani workforce.",
+   "Customers range from growing SMEs to international companies in e-commerce, manufacturing, services and finance."
+  ],
+  "timeline": [
+   {
+    "year": "2020",
+    "title": "Move to Muscat International Airport",
+    "text": "Agreement with Oman Aviation Group to move Oman Post and Asyad Express operations to the former airport terminal area."
+   },
+   {
+    "year": "2021",
+    "title": "Asyad Express International",
+    "text": "Door-to-door shipping to 220+ destinations, available at all 86 Oman Post branches."
+   },
+   {
+    "year": "2021",
+    "title": "Fulfilment centre opens",
+    "text": "Storage, pick, pack, dispatch and returns near the airport."
+   },
+   {
+    "year": "2022",
+    "title": "107 partner outlets",
+    "text": "Private-sector outlets reach 107, with Khedmah offering services at 44 branches."
+   },
+   {
+    "year": "2022",
+    "title": "Tanzania Posts MoU",
+    "text": "First Oman–Tanzania cooperation in e-commerce and postal services."
+   },
+   {
+    "year": "2023",
+    "title": "Ship Your Cart and Evri",
+    "text": "US and UK shopping service launched; Oman named Evri's Middle East fulfilment hub."
+   },
+   {
+    "year": "2024",
+    "title": "Temu partnership",
+    "text": "Local fulfilment partner for Temu, with cash on delivery."
+   },
+   {
+    "year": "2025",
+    "title": "Reverse logistics",
+    "text": "GCC-wide returns service for online brands."
+   },
+   {
+    "year": "2026",
+    "title": "DELIVER Europe",
+    "text": "Asyad Express meets European retailers in Amsterdam."
+   }
+  ],
+  "points": [
+   {
+    "title": "Global reach",
+    "text": "Delivering to over 220 destinations worldwide."
+   },
+   {
+    "title": "Express delivery",
+    "text": "24–48 hours in GCC countries and 48–72 hours in other countries."
+   },
+   {
+    "title": "Next to the airport",
+    "text": "Airside access to Muscat International Airport."
+   },
+   {
+    "title": "Secure",
+    "text": "Shipments are secured throughout the delivery process."
+   },
+   {
+    "title": "e-Fulfilment",
+    "text": "Warehouse and inventory management systems."
+   },
+   {
+    "title": "ISO certified",
+    "text": "ISO 14001:2015, ISO 9001:2015 and ISO 45001:2018."
+   }
+  ]
+ },
+ "services": {
+  "title": "Services",
+  "nav": "Services",
+  "kicker": "What we deliver",
+  "intro": "Delivery in Oman and abroad, fulfilment, warehousing and services for online shoppers and brands.",
+  "items": [
+   {
+    "title": "Domestic Express",
+    "icon": "truck",
+    "text": "Door-to-door collection and delivery across Oman, in 24 to 72 hours.",
+    "image": "van-highway",
+    "detail": {
+     "intro": "Domestic Express provides door-to-door collection and deliveries across Oman for business and consumer customers within 24 to 72 hours.",
+     "body": [
+      "Asyad Express covers every governorate, including remote areas. In December 2025 the company described same-day delivery within Muscat and up to 72 hours nationwide.",
+      "Shipments are tracked online from collection to delivery, with online proof of delivery and cash on delivery that also accepts card payments."
+     ],
+     "points": [
+      "Door to door delivery",
+      "Full coverage across Oman",
+      "Online tracking from collection to delivery",
+      "Next business day or 24-hour delivery to most destinations",
+      "Maximum 72-hour delivery to remote locations",
+      "Online proof of delivery",
+      "Cash on delivery, including card payments",
+      "Return service",
+      "Boxes, flyers and envelopes"
+     ],
+     "points_title": "Features",
+     "facts": [
+      {
+       "label": "Delivery",
+       "value": "24–72 hours"
+      },
+      {
+       "label": "Muscat",
+       "value": "Same day (Dec 2025)"
+      },
+      {
+       "label": "Coverage",
+       "value": "All governorates"
+      }
+     ],
+     "src": "https://asyad.baryons.net/express-domestic"
+    }
+   },
+   {
+    "title": "International Express",
+    "icon": "globe",
+    "text": "Documents and parcels to more than 220 destinations, door to door.",
+    "image": "van-road",
+    "detail": {
+     "intro": "International outbound premium express for documents and merchandise, delivered to the recipient's door in more than 220 destinations with insurance and tracking.",
+     "body": [
+      "Delivery takes 24 to 48 hours within the GCC and 48 to 72 hours to other countries. The service is offered at Oman Post retail offices, the largest mailing network in Oman.",
+      "Price is based on actual or volumetric weight, whichever is higher; volumetric weight is length × width × height ÷ 5000. Customs fees in the destination country are paid by the receiver, or by the sender if they choose."
+     ],
+     "points": [
+      "End-to-end tracking",
+      "SMS to the receiver when the shipment arrives",
+      "SMS to the sender when it is delivered",
+      "Optional insurance at 2.5% of the shipment value",
+      "Proof of delivery",
+      "Bring sender and recipient ID, a valid phone number and the original invoice"
+     ],
+     "points_title": "Features",
+     "facts": [
+      {
+       "label": "Destinations",
+       "value": "220+"
+      },
+      {
+       "label": "GCC",
+       "value": "24–48 hours"
+      },
+      {
+       "label": "Max weight",
+       "value": "30 kg"
+      }
+     ],
+     "src": "https://asyad.baryons.net/asyad-express-international"
+    }
+   },
+   {
+    "title": "Fulfilment Centre",
+    "icon": "layers",
+    "text": "Storage, pick, pack, label and dispatch for online sellers.",
+    "image": "hub-racks",
+    "detail": {
+     "intro": "A dedicated warehouse space for receiving inventory, managing storage and completing orders, including picking, packing, labelling, dispatch and delivery with full tracking.",
+     "body": [
+      "The fulfilment centre sits near Muscat International Airport and opened in March 2021. It handles online orders for domestic and international delivery and the returns that come back.",
+      "A fulfilment management system gives end-to-end visibility and reporting, from stock arriving to the parcel leaving the dock."
+     ],
+     "points": [
+      "Over 1,200 m² of fulfilment space",
+      "Total warehouse space of more than 3,500 m²",
+      "Receiving, secure storage, picking and packing, labelling and dispatch",
+      "Racking and shelving",
+      "Ambient storage",
+      "Shipping to domestic and international destinations"
+     ],
+     "points_title": "Features",
+     "facts": [
+      {
+       "label": "Fulfilment space",
+       "value": "1,200 m²+"
+      },
+      {
+       "label": "Warehouse",
+       "value": "3,500 m²+"
+      },
+      {
+       "label": "Opened",
+       "value": "March 2021"
+      }
+     ],
+     "src": "https://asyad.baryons.net/express-fulfilment"
+    }
+   },
+   {
+    "title": "Warehouse Solutions",
+    "icon": "building",
+    "text": "Contract logistics space with airside access to Muscat International Airport.",
+    "image": "dock-door",
+    "detail": {
+     "intro": "Flexible space for contract logistics: storage of spare parts and finished goods for domestic or international distribution, monitored by a warehouse management system.",
+     "body": [
+      "Stock is tracked from receipt and storage to order preparation, dispatch and delivery.",
+      "A bonded goods area with a customs office and x-ray machines speeds up inspection and clearance."
+     ],
+     "points": [
+      "Over 3,500 m² of warehousing space",
+      "Airside access to Muscat International Airport",
+      "Bonded goods area, customs office and x-ray machines",
+      "Seven dock doors and three dock levellers",
+      "Ambient and temperature-controlled environment",
+      "24-hour security with CCTV",
+      "10 m free height and flexible racking"
+     ],
+     "points_title": "Features",
+     "facts": [
+      {
+       "label": "Space",
+       "value": "3,500 m²+"
+      },
+      {
+       "label": "Dock doors",
+       "value": "7"
+      },
+      {
+       "label": "Free height",
+       "value": "10 m"
+      }
+     ],
+     "src": "https://asyad.baryons.net/warehouse-service"
+    }
+   },
+   {
+    "title": "Ship Your Cart",
+    "icon": "star",
+    "text": "Shop in the US and UK, ship to Oman through your own virtual address.",
+    "image": "ship-your-cart",
+    "detail": {
+     "intro": "Ship Your Cart lets customers in Oman buy from online stores in the United States and the United Kingdom and ship the purchases home through shipyourcart.com.",
+     "body": [
+      "Members get free virtual addresses in the US and UK. Parcels from different stores can be consolidated and shipped together.",
+      "Orders are processed within 24 hours and all fees are paid upfront, so nothing more is due when the shipment arrives."
+     ],
+     "points": [
+      "Sign up free and get an overseas virtual address",
+      "Shop online and send purchases to that address",
+      "Declare the value, choose delivery and pay online",
+      "Collect from a branch or have it delivered to your door",
+      "Free consolidation",
+      "Shipment insurance on purchases"
+     ],
+     "points_title": "How it works",
+     "facts": [
+      {
+       "label": "From",
+       "value": "US and UK"
+      },
+      {
+       "label": "Processing",
+       "value": "Within 24 hours"
+      },
+      {
+       "label": "Launched",
+       "value": "May 2023"
+      }
+     ],
+     "src": "https://asyad.baryons.net/why-choose-ship-your-cart"
+    }
+   },
+   {
+    "title": "Reverse Logistics",
+    "icon": "arrow",
+    "text": "Doorstep pickup, quality checks and restocking of returns across the GCC.",
+    "image": "returns",
+    "detail": {
+     "intro": "An end-to-end returns service launched in July 2025 for retailers and digital-first brands.",
+     "body": [
+      "With GCC-wide coverage, returns are picked up from the customer's door, checked and put back into inventory, with tracking for the whole cycle.",
+      "The service plugs into existing e-commerce and retail workflows for SMEs and large enterprises alike."
+     ],
+     "points": [
+      "Doorstep pickup",
+      "Quality checks",
+      "Reintegration into inventory",
+      "Tracking throughout the return",
+      "GCC-wide coverage"
+     ],
+     "points_title": "Features",
+     "facts": [
+      {
+       "label": "Coverage",
+       "value": "GCC"
+      },
+      {
+       "label": "Launched",
+       "value": "July 2025"
+      }
+     ],
+     "src": "https://www.omanobserver.om/article/1173763/oman/community/asyad-express-launches-reverse-logistics-platform"
+    }
+   },
+   {
+    "title": "E-commerce Gateway",
+    "icon": "chart",
+    "text": "A route into GCC and MENA markets for international brands.",
+    "image": "operator",
+    "detail": {
+     "intro": "For international retailers, Asyad Express acts as a gateway to the GCC and MENA region: fulfilment in Oman, customs clearance in-house and delivery across the region.",
+     "body": [
+      "Asyad Express describes a network with a strong presence in Saudi Arabia, the UAE, Kuwait, Bahrain, Qatar and Egypt, and an alliance with Oman Air for air freight.",
+      "Partners named in its announcements include Amazon, ASOS, Shein, iHerb, Evri, Landmark Group, Mumzworld, Temu and Caddie Couture."
+     ],
+     "points": [
+      "Express delivery",
+      "Land and air freight",
+      "In-house customs clearance",
+      "Fulfilment and warehousing",
+      "Cash on delivery and returns management"
+     ],
+     "points_title": "What it includes",
+     "facts": [
+      {
+       "label": "Markets",
+       "value": "GCC and MENA"
+      },
+      {
+       "label": "Destinations",
+       "value": "220+"
+      }
+     ],
+     "src": "https://timesofoman.com/article/149160-asyad-express-emerges-as-premier-gateway-to-gcc-and-mena-region-for-international-partners"
+    }
+   }
+  ]
+ },
+ "catalogue": {
+  "title": "Delivery features",
+  "nav": "Features",
+  "kicker": "Built into every shipment",
+  "home_title": "What comes with a shipment",
+  "all_label": "All features",
+  "intro": "Payment, tracking, protection, packaging and digital tools that come with Asyad Express services.",
+  "categories": [
+   "Payments",
+   "Tracking",
+   "Protection",
+   "Packaging",
+   "Cross-border",
+   "Storage",
+   "Digital"
+  ],
+  "compare": false,
+  "cta": "Ask about this",
+  "specs_title": "Details",
+  "note": "From Asyad Express service pages and announcements, read 12 Oct 2026. Rates are not published here; contact Asyad Express for a quote.",
+  "items": [
+   {
+    "title": "Cash on delivery",
+    "category": "Payments",
+    "text": "Your customer pays the courier, in cash or by card.",
+    "image": "handover",
+    "body": [
+     "Cash on delivery is part of Domestic Express and accepts card payments as well as cash.",
+     "Temu added a cash-on-delivery option for shoppers in Oman through its partnership with Asyad Express in December 2024."
+    ],
+    "specs": [
+     {
+      "label": "Service",
+      "value": "Domestic Express"
+     },
+     {
+      "label": "Payment",
+      "value": "Cash or card"
+     }
+    ],
+    "src": "https://asyad.baryons.net/express-domestic",
+    "cta": {
+     "label": "Ask about this",
+     "href": "contact.html"
+    },
+    "badge": "Popular",
+    "featured": true
+   },
+   {
+    "title": "Online tracking",
+    "category": "Tracking",
+    "text": "Follow a shipment from collection to delivery.",
+    "image": "portal",
+    "body": [
+     "Domestic shipments are tracked online from collection to delivery; international shipments are tracked end to end.",
+     "Track and trace is available on the Asyad Express website, in the app and through the contact centres."
+    ],
+    "specs": [
+     {
+      "label": "Domestic",
+      "value": "Collection to delivery"
+     },
+     {
+      "label": "International",
+      "value": "End to end"
+     }
+    ],
+    "src": "https://asyad.baryons.net/express-domestic",
+    "cta": {
+     "label": "Ask about this",
+     "href": "contact.html"
+    },
+    "featured": true
+   },
+   {
+    "title": "Proof of delivery",
+    "category": "Tracking",
+    "text": "Online proof that the parcel arrived.",
+    "image": "courier-door",
+    "body": [
+     "Domestic Express includes online proof of delivery (POD). International Express also provides proof of delivery."
+    ],
+    "specs": [
+     {
+      "label": "Format",
+      "value": "Online POD"
+     }
+    ],
+    "src": "https://asyad.baryons.net/express-domestic",
+    "cta": {
+     "label": "Ask about this",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "SMS notifications",
+    "category": "Tracking",
+    "text": "Texts to the receiver on arrival and to the sender on delivery.",
+    "image": "customer-3",
+    "body": [
+     "For international shipments, the receiver gets an SMS when the shipment arrives, and the sender gets an SMS when the international recipient receives it."
+    ],
+    "specs": [
+     {
+      "label": "Service",
+      "value": "International Express"
+     }
+    ],
+    "src": "https://asyad.baryons.net/asyad-express-international",
+    "cta": {
+     "label": "Ask about this",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Shipment insurance",
+    "category": "Protection",
+    "text": "Insure an international shipment for 2.5% of its value.",
+    "image": "van-courier-box",
+    "body": [
+     "International shipments can be insured for 2.5% of the shipment value. In case of loss or damage, the shipment value is refunded in full.",
+     "Ship Your Cart purchases are also protected with shipment insurance."
+    ],
+    "specs": [
+     {
+      "label": "Rate",
+      "value": "2.5% of value"
+     },
+     {
+      "label": "Cover",
+      "value": "Full value refund"
+     }
+    ],
+    "src": "https://asyad.baryons.net/asyad-express-international",
+    "cta": {
+     "label": "Ask about this",
+     "href": "contact.html"
+    },
+    "featured": true
+   },
+   {
+    "title": "Boxes, flyers and envelopes",
+    "category": "Packaging",
+    "text": "A range of Asyad packaging for every size of shipment.",
+    "image": "packing-2",
+    "body": [
+     "Domestic Express comes with an extensive range of boxes, flyers and envelopes."
+    ],
+    "specs": [
+     {
+      "label": "Range",
+      "value": "Boxes, flyers, envelopes"
+     }
+    ],
+    "src": "https://asyad.baryons.net/express-domestic",
+    "cta": {
+     "label": "Ask about this",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Packing and wrapping",
+    "category": "Packaging",
+    "text": "Full packaging and wrapping at the fulfilment centre.",
+    "image": "packing",
+    "body": [
+     "The fulfilment centre provides a full packaging and wrapping solution for online orders before they are labelled and dispatched."
+    ],
+    "specs": [
+     {
+      "label": "Where",
+      "value": "Fulfilment centre"
+     }
+    ],
+    "src": "https://asyad.baryons.net/news/supporting-growth-ecommerce-oman-post-asyad-express-opens-state-art-fulfilment-centre-0",
+    "cta": {
+     "label": "Ask about this",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "In-house customs clearance",
+    "category": "Cross-border",
+    "text": "Clearance handled in-house to cut transit times.",
+    "image": "airport-facility",
+    "body": [
+     "Asyad Express offers in-house customs clearance for international shipments, which it says reduces transit times and costs.",
+     "The warehouse has a bonded goods area, a customs office and x-ray machines."
+    ],
+    "specs": [
+     {
+      "label": "Includes",
+      "value": "Bonded area, customs office, x-ray"
+     }
+    ],
+    "src": "https://timesofoman.com/article/149160-asyad-express-emerges-as-premier-gateway-to-gcc-and-mena-region-for-international-partners",
+    "cta": {
+     "label": "Ask about this",
+     "href": "contact.html"
+    },
+    "featured": true
+   },
+   {
+    "title": "Temperature-controlled storage",
+    "category": "Storage",
+    "text": "Ambient and temperature-controlled space for imports and exports.",
+    "image": "dock-door-2",
+    "body": [
+     "The warehouse offers ambient and temperature-controlled environments, and the fulfilment centre was opened with cold and temperature-controlled storage for imports and exports."
+    ],
+    "specs": [
+     {
+      "label": "Options",
+      "value": "Ambient, temperature-controlled"
+     }
+    ],
+    "src": "https://asyad.baryons.net/warehouse-service",
+    "cta": {
+     "label": "Ask about this",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Virtual US and UK addresses",
+    "category": "Cross-border",
+    "text": "Free overseas addresses for online shopping, through Ship Your Cart.",
+    "image": "camping",
+    "body": [
+     "Ship Your Cart members get free virtual addresses in the United States and the United Kingdom, with consolidation of parcels from different stores."
+    ],
+    "specs": [
+     {
+      "label": "Countries",
+      "value": "US, UK"
+     },
+     {
+      "label": "Membership",
+      "value": "Free"
+     }
+    ],
+    "src": "https://asyad.baryons.net/why-choose-ship-your-cart",
+    "cta": {
+     "label": "Ask about this",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Client portal",
+    "category": "Digital",
+    "text": "Business customers create orders, book pickups and print waybills online.",
+    "image": "seller-shop",
+    "body": [
+     "The Asyad Express client portal is where business customers manage their shipments. Asyad Express published a tutorial and an update video for it on its YouTube channel.",
+     "The dashboard menu includes an address book, express orders, fulfilment orders, reports, invoices, bulk waybills and support tickets."
+    ],
+    "specs": [
+     {
+      "label": "Users",
+      "value": "Business customers"
+     }
+    ],
+    "src": "https://www.youtube.com/watch?v=Jp90O0dlkRA",
+    "cta": {
+     "label": "Ask about this",
+     "href": "contact.html"
+    }
+   },
+   {
+    "title": "Asyad Express app",
+    "category": "Digital",
+    "text": "Manage orders, schedule deliveries, calculate rates and find branches.",
+    "image": "seller-phone",
+    "body": [
+     "The Asyad Express app, published by Oman Post SAOC, lets customers manage orders, request new ones, schedule deliveries, calculate rates and locate branches and touchpoints."
+    ],
+    "specs": [
+     {
+      "label": "Platforms",
+      "value": "iOS, Android"
+     },
+     {
+      "label": "Publisher",
+      "value": "Oman Post SAOC"
+     }
+    ],
+    "src": "https://apps.apple.com/om/app/asyad-express/id6446076409",
+    "cta": {
+     "label": "Ask about this",
+     "href": "contact.html"
+    }
+   }
+  ]
+ },
+ "partners": {
+  "kicker": "Brands we deliver for",
+  "intro": "Partners named in Asyad Express announcements",
+  "partners": [
+   "AMAZON",
+   "ASOS",
+   "SHEIN",
+   "IHERB",
+   "EVRI",
+   "LANDMARK GROUP",
+   "MUMZWORLD",
+   "TEMU",
+   "AMOUAGE",
+   "BOUTIQAAT",
+   "RYDAN",
+   "LATTAFA",
+   "CADDIE COUTURE",
+   "VODAFONE OMAN"
+  ]
+ },
+ "news": [
+  {
+   "title": "Asyad Express at DELIVER Europe 2026 in Amsterdam",
+   "date": "June 3, 2026",
+   "tag": "Events",
+   "image": "booth-1",
+   "summary": "At booth A58, the team presented cross-border logistics that help European retailers reach GCC and MENA customers.",
+   "body": [
+    "Asyad Express took part in DELIVER Europe 2026 at TAETS Event Park in Amsterdam on 3 and 4 June, an event bringing together more than 2,000 industry leaders and 140 logistics innovators.",
+    "At booth A58 the team showcased integrated logistics and cross-border e-commerce services designed to help European retailers access GCC and MENA markets."
+   ],
+   "src": "https://www.linkedin.com/company/asyadexpress/",
+   "src_label": "Asyad Express on LinkedIn"
+  },
+  {
+   "title": "Asyad Express strengthens last-mile delivery leadership",
+   "date": "December 24, 2025",
+   "tag": "Press",
+   "image": "van-purple-door",
+   "summary": "Same-day delivery within Muscat and up to 72 hours nationwide, with cash on delivery, returns, insurance and packaging for growing businesses.",
+   "body": [
+    "With an integrated delivery network covering all governorates of Oman, including remote areas, Asyad Express offers same-day delivery within Muscat and delivery of up to 72 hours nationwide.",
+    "Beyond core delivery, Asyad Express provides cash-on-delivery options, returns management, shipment insurance and packaging solutions that help SMEs streamline operations and reach more customers.",
+    "The company says it is intensifying its focus on digital transformation to improve efficiency, widen coverage and deliver a fully integrated logistics experience, in line with Oman Vision 2040."
+   ],
+   "src": "https://www.omanobserver.om/article/1181615/business/economy/asyad-express-strengthens-last-mile-delivery-leadership",
+   "src_label": "Oman Observer"
+  },
+  {
+   "title": "Asyad Express forms alliance with Temu, Landmark Group and Amazon",
+   "date": "December 7, 2025",
+   "tag": "Partnerships",
+   "image": "handover",
+   "summary": "Partners include Amazon, ASOS, Shein, iHerb, Evri, Landmark Group, Mumzworld and Temu, with delivery across Oman, the GCC, the Middle East and North Africa.",
+   "body": [
+    "Asyad Express, part of Asyad Group, works with global e-commerce and retail brands including Amazon, ASOS, Shein, iHerb, Evri, Landmark Group, Mumzworld and Temu, as well as luxury and lifestyle players.",
+    "Its delivery solutions span Oman, the GCC, the Middle East and North Africa, supported by direct connectivity with Oman's ports, airports and free zones and by digital systems for real-time shipment tracking."
+   ],
+   "src": "https://www.omanobserver.om/article/1180759/oman/community/asyad-express-forms-alliance-with-temu-landmark-group-amazon",
+   "src_label": "Oman Observer"
+  },
+  {
+   "title": "Asyad Express partners with Caddie Couture",
+   "date": "September 15, 2025",
+   "tag": "Partnerships",
+   "image": "van-purple-gate",
+   "summary": "Asyad Express will manage end-to-end fulfilment and delivery across the GCC for the UK golf fashion brand.",
+   "body": [
+    "Asyad Express has signed a strategic agreement with Caddie Couture, a UK-based premium golf fashion brand.",
+    "Under the partnership, Asyad Express manages end-to-end fulfilment and delivery across the GCC, from warehousing and inventory management to last-mile delivery.",
+    "Jason Ashbrook, VP Commercial at Asyad Express, said the agreement combines Caddie Couture's designs with Asyad Express's logistics network to serve GCC customers."
+   ],
+   "src": "https://www.omanobserver.om/article/1176561/oman/community/asyad-express-partners-with-caddie-couture-brand",
+   "src_label": "Oman Observer"
+  },
+  {
+   "title": "Asyad Express launches a reverse logistics platform",
+   "date": "July 20, 2025",
+   "tag": "New service",
+   "image": "van-purple-family",
+   "summary": "Doorstep pickup, quality checks and restocking of returned goods across the GCC, tracked from start to finish.",
+   "body": [
+    "Asyad Express has launched an end-to-end reverse logistics service for retailers and digital-first brands.",
+    "With GCC-wide coverage, the service includes doorstep pickup, quality checks and the reintegration of returned goods into inventory, with visibility and tracking throughout.",
+    "It is built to plug into existing e-commerce and retail workflows for businesses of all sizes, from SMEs to large enterprises, so they can offer more flexible return policies and shorter turnaround times."
+   ],
+   "src": "https://www.omanobserver.om/article/1173763/oman/community/asyad-express-launches-reverse-logistics-platform",
+   "src_label": "Oman Observer"
+  },
+  {
+   "title": "Asyad Express expands its partnership with Amazon",
+   "date": "February 1, 2025",
+   "tag": "Partnerships",
+   "image": "courier-branch",
+   "summary": "Next-day delivery to every corner of Oman for Amazon customers, after an 81% rise in Amazon volume in Oman in 2024.",
+   "body": [
+    "Combining Amazon's global reach with Asyad Express's local network gives customers tracking and next-day delivery services to every corner of Oman.",
+    "Amazon operations in Oman grew 81% in volume in 2024, according to the announcement.",
+    "Asyad Express ships to more than 220 destinations and territories, completes deliveries in 24 to 72 hours and provides in-house customs clearance for international shipments."
+   ],
+   "src": "https://www.omanobserver.om/article/1165643/oman/community/asyad-express-expands-partnership-with-amazon",
+   "src_label": "Oman Observer"
+  },
+  {
+   "title": "A key player in GCC e-commerce and luxury lifestyle products",
+   "date": "December 26, 2024",
+   "tag": "Feature",
+   "image": "packing",
+   "summary": "More than 925,000 shipments from January to November 2024 in luxury and lifestyle e-commerce, up from over 600,000 in 2023.",
+   "body": [
+    "Asyad Express reports significant growth in luxury and lifestyle e-commerce. In 2023 it handled over 600,000 shipments; from January to November 2024 it processed more than 925,000.",
+    "Its services include storage facilities covering over 5,700 square metres, delivery connecting local and regional markets and a distribution network reaching more than 220 destinations.",
+    "Asyad Express names Shein, ASOS, Amouage, Boutiqaat, Rydan and Lattafa among its partners, and offers cash on delivery, returns management, customs clearance, packaging and shipment tracking."
+   ],
+   "src": "https://asyad.baryons.net/news/asyad-express-key-player-growth-e-commerce-and-luxury-lifestyle-products-gcc",
+   "src_label": "Asyad Express"
+  },
+  {
+   "title": "Temu and Asyad Express partner on fulfilment in Oman",
+   "date": "December 9, 2024",
+   "tag": "Partnerships",
+   "image": "customer-parcel",
+   "summary": "Temu named Asyad Express its local fulfilment partner in Oman and added cash on delivery for shoppers.",
+   "body": [
+    "Temu announced a strategic partnership with Asyad Express to improve delivery across Oman and the fulfilment process for its customers.",
+    "As part of the alliance, Temu added a cash-on-delivery payment option.",
+    "Jason Ashbrook, Vice President of Commercial at Asyad Express, said the companies aim to ensure customer satisfaction in delivery and fulfilment."
+   ],
+   "src": "https://prnewswire.co.uk/news-releases/temu-and-asyad-express-in-strategic-partnership-to-elevate-e-commerce-fulfillment-in-oman-302325528.html",
+   "src_label": "PR Newswire"
+  },
+  {
+   "title": "Asyad Express signs pacts with e-commerce firms",
+   "date": "September 17, 2024",
+   "tag": "Partnerships",
+   "image": "retail-tablet",
+   "summary": "Partners include Amazon, ASOS, Shein, iHerb, Evri, Landmark Group and Mumzworld.",
+   "body": [
+    "Asyad Express partners with brands such as Amazon, ASOS, Shein, iHerb, Evri, Landmark Group and Mumzworld to speed up online purchasing and delivery across the region.",
+    "In 2023 and early 2024, Asyad Express supported ASOS, Shein and Landmark Retail with over $12 million in logistics support and delivery services covering Saudi Arabia, Bahrain, Kuwait, Qatar and the UAE."
+   ],
+   "src": "https://www.omanobserver.om/article/1159234/oman/community/asyad-express-signs-pact-with-e-commerce-firms",
+   "src_label": "Oman Observer"
+  },
+  {
+   "title": "A gateway to the GCC and MENA for international partners",
+   "date": "August 26, 2024",
+   "tag": "Feature",
+   "image": "hub-aerial",
+   "summary": "Presence in Saudi Arabia, the UAE, Kuwait, Bahrain, Qatar and Egypt, in-house customs clearance and an air freight alliance with Oman Air.",
+   "body": [
+    "Asyad Express describes its network as spanning the GCC and MENA region, with a strong presence in Saudi Arabia, the United Arab Emirates, Kuwait, Bahrain, Qatar and Egypt, delivering to over 220 destinations.",
+    "Its in-house customs clearance and its alliance with Oman Air for air freight make it a one-stop shop for logistics and express delivery.",
+    "Services for international partners include express delivery, land and air freight and customs clearance, supported by e-fulfilment centres with parcel security, labelling and temperature control."
+   ],
+   "src": "https://timesofoman.com/article/149160-asyad-express-emerges-as-premier-gateway-to-gcc-and-mena-region-for-international-partners",
+   "src_label": "Times of Oman"
+  },
+  {
+   "title": "Oman Post and Asyad Express at Seamless Middle East 2024",
+   "date": "May 25, 2024",
+   "tag": "Events",
+   "image": "seamless",
+   "summary": "The team showed fulfilment, warehousing and in-house customs clearance to visitors in Dubai.",
+   "body": [
+    "Oman Post and Asyad Express presented their postal and logistics services at the Seamless Middle East 2024 exhibition in Dubai.",
+    "Visitors to the booth explored postal and e-commerce express solutions, including e-fulfilment centres, AI-based systems for warehousing and in-house customs clearance."
+   ],
+   "src": "https://www.omanobserver.om/article/1154182/business/markets/oman-post-asyad-express-showcase-innovative-postal-and-last-mile-delivery-solutions",
+   "src_label": "Oman Observer"
+  },
+  {
+   "title": "Land investment agreements in Bausher and Amerat",
+   "date": "October 31, 2023",
+   "tag": "Group",
+   "image": "wujha",
+   "summary": "Wujha Real Estate and Bayan Investment House will develop two Asyad sites under 25-year agreements.",
+   "body": [
+    "Asyad Group, represented by Oman Post and Asyad Express, signed investment partnerships with Wujha Real Estate Development Company and Bayan Investment House.",
+    "Under Design, Build, Finance, Operate and Transfer arrangements, the two companies will invest in two Asyad sites in Bausher and Amerat. The partnership runs for 25 years."
+   ],
+   "src": "https://asyad.baryons.net/news/part-asyad-group-asset-investment-strategy-oman-post-and-asyad-express-inks-significant-land",
+   "src_label": "Asyad Express"
+  },
+  {
+   "title": "Asyad Express partners with Evri on an e-commerce gateway hub",
+   "date": "October 9, 2023",
+   "tag": "Partnerships",
+   "image": "operator",
+   "summary": "Oman becomes Evri's exclusive e-commerce fulfilment hub in the Middle East, and Omani SMEs gain a route to sell worldwide.",
+   "body": [
+    "Asyad Express signed an agreement with Evri, the UK's largest dedicated parcel delivery company, during Bloomberg's event 'Foreign Direct Investment: Scaling New Heights'.",
+    "Jason Ashbrook, VP Commercial at Asyad Express, said the partnership places Oman as Evri's exclusive e-commerce fulfilment hub in the Middle East, and that the two companies will develop an international outbound product giving Omani SMEs a platform to sell worldwide.",
+    "Shaikh Ibrahim bin Sultan Al Hosni, then Acting CEO of Oman Post and Asyad Express, said the alliance will also provide international customer service support in local languages."
+   ],
+   "src": "https://timesofoman.com/article/137048-asyad-express-partners-with-evri-to-launch-transformational-e-commerce-gateway-hub-in-oman-and-the-middle-east",
+   "src_label": "Times of Oman"
+  },
+  {
+   "title": "Ship Your Cart brings US and UK shopping to Oman",
+   "date": "May 29, 2023",
+   "tag": "New service",
+   "image": "ship-your-cart-2",
+   "summary": "Free virtual addresses in the US and UK, consolidation, tracking and delivery to the door or the nearest post office.",
+   "body": [
+    "Asyad Express introduced Ship Your Cart, an e-commerce service for shipping purchases from online stores in the United States and the United Kingdom to Oman through shipyourcart.com.",
+    "Jason Ashbrook, then Vice President Commercial, said the service includes free virtual addresses in the US and UK, order consolidation, shipment tracking and doorstep delivery or collection from the nearest post office.",
+    "Orders are processed within 24 hours and all fees are paid in advance, so there are no extra charges when the shipment arrives."
+   ],
+   "src": "https://timesofoman.com/article/131450-asyad-express-launches-ship-your-cart-service-to-enhance-omans-e-commerce-connectivity-with-global-platforms",
+   "src_label": "Times of Oman"
+  },
+  {
+   "title": "Asyad Express partners with Tanzania Posts",
+   "date": "June 5, 2022",
+   "tag": "Partnerships",
+   "image": "tanzania",
+   "summary": "A memorandum to promote last-mile services and e-commerce between Oman and Tanzania, including e-locker know-how.",
+   "body": [
+    "Asyad Group, represented by Oman Post and Asyad Express, signed a memorandum of understanding with Tanzania Posts Corporation to promote last-mile services and e-commerce solutions between the two countries.",
+    "The MoU covers knowledge transfer, including the introduction of e-locker solutions in Tanzania, and a joint postal stamp celebrating the two countries' shared history."
+   ],
+   "src": "https://www.omanobserver.om/article/1120333/business/economy/asyad-express-partners-with-tanzania-posts",
+   "src_label": "Oman Observer"
+  },
+  {
+   "title": "Khedmah offers Oman Post and Asyad Express services at 44 branches",
+   "date": "May 24, 2022",
+   "tag": "Network",
+   "image": "khedmah",
+   "summary": "PO box subscriptions and local and international parcels at Khedmah locations across Oman.",
+   "body": [
+    "Oman Investment & Finance Company (Khedmah) now provides Oman Post and Asyad Express services at 44 Khedmah branches across the Sultanate.",
+    "Services include PO box subscriptions, renewals and fee payments, and mailing parcels locally and internationally.",
+    "Locations include Muscat City Center, Muscat Grand Mall, Nesto Hypermarket Al Maabilah, Liwan Al Safina Complex in Al Ghubra, Al Nawras Mall in Al Khuwair, Safeer Mall Sohar, Al Jabal Al Akhdar and Al Ashkharah."
+   ],
+   "src": "https://timesofoman.com/article/117087-khedmah-provides-oman-post-asyad-express-services-in-44-branches",
+   "src_label": "Times of Oman"
+  },
+  {
+   "title": "Private-sector outlets reach 107, with 213 planned",
+   "date": "April 17, 2022",
+   "tag": "Network",
+   "image": "po-boxes",
+   "summary": "New service outlets opened with private partners lifted postal revenue in Muscat Governorate by 43%.",
+   "body": [
+    "Oman Post and Asyad Express, with the Authority for Small and Medium Enterprises Development, opened registration for SMEs to provide postal services.",
+    "CEO Nasser al Sharji said the number of new outlets set up through private-sector partners had reached 107, and that they had helped postal revenue rise by 43% in Muscat Governorate.",
+    "Another 48 outlets were planned by the end of 2022, for a total of 213."
+   ],
+   "src": "https://www.omanobserver.om/article/1117849/business/markets/oman-post-asyad-express-partner-with-smes-to-provide-postal-services",
+   "src_label": "Oman Observer"
+  },
+  {
+   "title": "Vodafone Oman picks Asyad Express for fulfilment and delivery",
+   "date": "July 7, 2021",
+   "tag": "Partnerships",
+   "image": "vodafone",
+   "summary": "End-to-end fulfilment and express delivery, run from the fulfilment centre on Sultan Qaboos Highway near Muscat International Airport.",
+   "body": [
+    "Asyad Express signed an agreement with Vodafone Oman for end-to-end fulfilment and express delivery services.",
+    "The service runs from the fulfilment centre on Sultan Qaboos Highway in Muscat, part of the 3,000 m² Asyad Express hub near Muscat International Airport, which handles storage, pick, pack and dispatch of online orders and returns."
+   ],
+   "src": "https://timesofoman.com/article/103795-asyad-express-vodafone-oman-sign-pact-for-fulfilment-and-express-delivery-solutions",
+   "src_label": "Times of Oman"
+  },
+  {
+   "title": "Al Wahaibi returns to international rallying with Asyad Express",
+   "date": "May 23, 2021",
+   "tag": "Community",
+   "image": "rally",
+   "summary": "Omani driver Hamed Al Wahaibi began his programme at the Jordan Rally with Asyad Express support.",
+   "body": [
+    "Omani rally driver Hamed Al Wahaibi returned to international rallying with the support of Asyad Express, starting at the Jordan Rally, round two of the FIA Middle East Rally Championship.",
+    "The release noted that Asyad Express then ran its business through six centres around the Sultanate, providing express pick-up and delivery across sectors including e-commerce, manufacturing, services and finance."
+   ],
+   "src": "https://www.omanobserver.om/article/1101243/sports/motor-sports/al-wahaibi-teams-up-with-asyad-express",
+   "src_label": "Oman Observer"
+  },
+  {
+   "title": "Fulfilment centre opens near Muscat International Airport",
+   "date": "March 21, 2021",
+   "tag": "Facilities",
+   "image": "van-courier-box",
+   "summary": "Storage, pick, pack and dispatch, returns handling, and cold and temperature-controlled storage under one roof.",
+   "body": [
+    "Oman Post ASYAD Express opened its fulfilment centre close to Muscat International Airport, offering storage, pick, pack and dispatch of online orders for domestic and international delivery, and the handling of returns.",
+    "The centre offers next-day delivery to many addresses in select locations across Oman and up to three days to remote areas; deliveries to the GCC, the wider Middle East and the rest of the world take one to four days.",
+    "It provides packaging and wrapping, cold and temperature-controlled storage, a logistics management system with end-to-end visibility, and 24-hour on-site security with CCTV."
+   ],
+   "src": "https://asyad.baryons.net/news/supporting-growth-ecommerce-oman-post-asyad-express-opens-state-art-fulfilment-centre-0",
+   "src_label": "Asyad Express"
+  },
+  {
+   "title": "Asyad Express International launches to 220+ destinations",
+   "date": "January 24, 2021",
+   "tag": "New service",
+   "image": "van-road",
+   "summary": "Door-to-door shipping of parcels up to 25 kg, in 48 to 72 hours, and as little as 24 hours to major GCC cities.",
+   "body": [
+    "Oman Post ASYAD Express launched ASYAD Express International, a door-to-door shipping service to over 220 destinations, available at all 86 Oman Post branches and with pickup for corporate customers.",
+    "Customers can ship packages of up to 25 kg, delivered in 48 to 72 hours, and to major GCC cities in as little as 24 hours, with track and trace on the website and through the contact centres."
+   ],
+   "src": "https://asyad.baryons.net/news/oman-post-asyad-express-launches-international-delivery-service-over-220-destinations",
+   "src_label": "Asyad Express"
+  }
+ ],
+ "news_title": "News",
+ "news_intro": "Launches, partnerships and milestones from Asyad Express.",
+ "locations": {
+  "title": "Branches across Oman",
+  "nav": "Branches",
+  "kicker": "Office locator",
+  "intro": "Asyad Express services are available through Oman Post branches. These are 26 of the 79 branches on the office locator, plus 103 partner touchpoints.",
+  "book_label": "View branch",
+  "items": [
+   {
+    "name": "Ruwi",
+    "full_name": "Oman Post Office - Ruwi",
+    "type": "Branch",
+    "country": "Muscat",
+    "address": "Markzi Mutrah Al Tijari St, Next To Muscat Municipality, postal code 112, Oman",
+    "image": "courier-branch",
+    "about": "Oman Post branch in Ruwi, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "23.603138",
+    "lng": "58.54604",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.603138,58.54604"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Al Khuwair",
+    "full_name": "Oman Post Office - Al Khuwair",
+    "type": "Branch",
+    "country": "Muscat",
+    "address": "4907 Way, Opposite Saeed Bin Taimour Mosque, Al Khuwair South, postal code 133, Oman",
+    "image": "van-street",
+    "about": "Oman Post branch in Al Khuwair, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "23.581903",
+    "lng": "58.431967",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.581903,58.431967"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Seeb",
+    "full_name": "Oman Post Office - Seeb",
+    "type": "Branch",
+    "country": "Muscat",
+    "address": "4077 Way, Near Assalam Private School, postal code 121, Oman",
+    "image": "van-highway",
+    "about": "Oman Post branch in Seeb, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "23.683045",
+    "lng": "58.181448",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.683045,58.181448"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Airport Heights",
+    "full_name": "Oman Post Office - Airport Heights",
+    "type": "Branch",
+    "country": "Muscat",
+    "address": "Al Matar St, Near Communications Regulatory Authority, Airport Heights, postal code 111, Oman",
+    "image": "van-purple-gate",
+    "about": "Oman Post branch in Airport Heights, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "23.583358",
+    "lng": "58.292449",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.583358,58.292449"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Jawharat Ashati",
+    "full_name": "Oman Post Office - Jawharat Ashati",
+    "type": "Branch",
+    "country": "Muscat",
+    "address": "Jawharat Ashati Commercial Complex, Way 2817, Shati Al Qurum, postal code 134, Oman",
+    "image": "khedmah",
+    "about": "Oman Post branch in Jawharat Ashati, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "23.616198",
+    "lng": "58.462908",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.616198,58.462908"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Hay Al Mina",
+    "full_name": "Oman Post Office - Hay Al Mina",
+    "type": "Branch",
+    "country": "Muscat",
+    "address": "Rd 924, Behind Bank Muscat, Jibroo, Al Sultan Qabous Port, postal code 114, Oman",
+    "image": "van-courier-box",
+    "about": "Oman Post branch in Hay Al Mina, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "23.623788",
+    "lng": "58.55725",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.623788,58.55725"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Al Amarat",
+    "full_name": "Oman Post Office - Al Amarat",
+    "type": "Branch",
+    "country": "Muscat",
+    "address": "Near Al Raneem Private School, postal code 119, Oman",
+    "image": "courier-door",
+    "about": "Oman Post branch in Al Amarat, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "23.499102",
+    "lng": "58.482494",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.499102,58.482494"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Sultan Qaboos University",
+    "full_name": "Oman Post Office - Sultan Qaboos University",
+    "type": "Branch",
+    "country": "Muscat",
+    "address": "Sultan Qaboos University, Dr Ali Al Bimani St Off Al Khoudh St, Al Khoudh, postal code 123, Oman",
+    "image": "van-road",
+    "about": "Oman Post branch in Sultan Qaboos University, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "23.5926584",
+    "lng": "58.1650728",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.5926584,58.1650728"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Al Maabilah",
+    "full_name": "Oman Post Office - Al Maabilah",
+    "type": "Branch",
+    "country": "Muscat",
+    "address": "Maabilah Industrial Area, Al Maabilah, postal code 122, Oman",
+    "image": "po-boxes",
+    "about": "Oman Post branch in Al Maabilah, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "23.658942",
+    "lng": "58.097508",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.658942,58.097508"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Nizwa",
+    "full_name": "Oman Post Office - Nizwa",
+    "type": "Branch",
+    "country": "Al Dakhiliyah",
+    "address": "Near Nizwa Fort, postal code 611, Oman",
+    "image": "van-purple-back",
+    "about": "Oman Post branch in Nizwa, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "22.932918",
+    "lng": "57.532114",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=22.932918,57.532114"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Bahla",
+    "full_name": "Oman Post Office - Bahla",
+    "type": "Branch",
+    "country": "Al Dakhiliyah",
+    "address": "Nizwa-Ibri Rd, Near Bahla Fort, postal code 612, Oman",
+    "image": "courier-van-film",
+    "about": "Oman Post branch in Bahla, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "22.965374",
+    "lng": "57.302027",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=22.965374,57.302027"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Manah",
+    "full_name": "Oman Post Office - Manah",
+    "type": "Branch · regional delivery point",
+    "country": "Al Dakhiliyah",
+    "address": "Next To Manah Wali Office, postal code 619, Oman",
+    "image": "handover",
+    "about": "Oman Post branch in Manah, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches. The locator also lists this site as the Nizwa regional delivery point.",
+    "lat": "22.785712",
+    "lng": "57.610343",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=22.785712,57.610343"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Sur",
+    "full_name": "Oman Post Office - Sur",
+    "type": "Branch",
+    "country": "Al Sharqiyah",
+    "address": "Rd 23, Next To Five Continents Hotel, Hillat Al Kahraba, postal code 411, Oman",
+    "image": "courier-branch",
+    "about": "Oman Post branch in Sur, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "22.578102",
+    "lng": "59.512136",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=22.578102,59.512136"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Ibra",
+    "full_name": "Oman Post Office - Ibra",
+    "type": "Branch · regional delivery point",
+    "country": "Al Sharqiyah",
+    "address": "Rd 23, Near Directorate of Education, postal code 400, Oman",
+    "image": "van-street",
+    "about": "Oman Post branch in Ibra, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches. The locator also lists this site as the Ibra regional delivery point.",
+    "lat": "22.695798",
+    "lng": "58.545687",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=22.695798,58.545687"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Al Musanaa",
+    "full_name": "Oman Post Office - Al Musanaa",
+    "type": "Branch · regional delivery point",
+    "country": "Al Batinah",
+    "address": "Near Om Kolthoum Girls School, postal code 312, Oman",
+    "image": "van-highway",
+    "about": "Oman Post branch in Al Musanaa, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches. The locator also lists this site as the Rustaq regional delivery point.",
+    "lat": "23.775576",
+    "lng": "57.632817",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.775576,57.632817"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Barka",
+    "full_name": "Oman Post Office - Barka",
+    "type": "Branch",
+    "country": "Al Batinah",
+    "address": "Near Barkaa Consumer Protection Agency, postal code 320, Oman",
+    "image": "van-purple-gate",
+    "about": "Oman Post branch in Barka, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "23.70722",
+    "lng": "57.879419",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.70722,57.879419"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Al Turayf",
+    "full_name": "Oman Post Office - Al Turayf",
+    "type": "Branch · regional delivery point",
+    "country": "Al Batinah",
+    "address": "Al Jinan St, Near Al Turaif Health Center, postal code 321, Oman",
+    "image": "khedmah",
+    "about": "Oman Post branch in Al Turayf, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches. The locator also lists this site as the Sohar regional delivery point.",
+    "lat": "24.362644",
+    "lng": "56.715056",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=24.362644,56.715056"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Shinas",
+    "full_name": "Oman Post Office - Shinas",
+    "type": "Branch",
+    "country": "Al Batinah",
+    "address": "Near Shinas Old Market, Shinas Souq, postal code 324, Oman",
+    "image": "van-courier-box",
+    "about": "Oman Post branch in Shinas, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "24.743118",
+    "lng": "56.465226",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=24.743118,56.465226"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Ibri",
+    "full_name": "Oman Post Office - Ibri",
+    "type": "Branch",
+    "country": "Al Dhahirah & Al Buraimi",
+    "address": "Ibri - Dariz Rd, Near General Council, postal code 511, Oman",
+    "image": "courier-door",
+    "about": "Oman Post branch in Ibri, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "23.238575",
+    "lng": "56.513326",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.238575,56.513326"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Al Akhdar",
+    "full_name": "Oman Post Office - Al Akhdar",
+    "type": "Branch · regional delivery point",
+    "country": "Al Dhahirah & Al Buraimi",
+    "address": "Ibri-Hafeet Rd, Next To Al Akhdar Health Center, postal code 516, Oman",
+    "image": "van-road",
+    "about": "Oman Post branch in Al Akhdar, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches. The locator also lists this site as the Ibri regional delivery point.",
+    "lat": "23.218954",
+    "lng": "56.458066",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.218954,56.458066"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Al Buraimi",
+    "full_name": "Oman Post Office - Al Buraimi",
+    "type": "Branch",
+    "country": "Al Dhahirah & Al Buraimi",
+    "address": "Near Buraimi City Center, postal code 512, Oman",
+    "image": "po-boxes",
+    "about": "Oman Post branch in Al Buraimi, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "24.246862",
+    "lng": "55.7801992",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=24.246862,55.7801992"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Central Salalah",
+    "full_name": "Oman Post Office - Central Salalah",
+    "type": "Branch · regional delivery point",
+    "country": "Dhofar",
+    "address": "Al Nahdah St, Near Salalah El Jadidah Health Center, Al Jadidah, postal code 211, Oman",
+    "image": "van-purple-back",
+    "about": "Oman Post branch in Central Salalah, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches. The locator also lists this site as the Salalah regional delivery point.",
+    "lat": "17.019407",
+    "lng": "54.091493",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=17.019407,54.091493"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Khasab",
+    "full_name": "Oman Post Office - Khasab",
+    "type": "Branch · regional delivery point",
+    "country": "Musandam",
+    "address": "Next To Sultan Qabous Mosque, Al Salam, postal code 811, Oman",
+    "image": "courier-van-film",
+    "about": "Oman Post branch in Khasab, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches. The locator also lists this site as the Musandam regional delivery point.",
+    "lat": "26.183501",
+    "lng": "56.248028",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=26.183501,56.248028"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Duqm",
+    "full_name": "Oman Post Office - Duqm",
+    "type": "Branch · regional delivery point",
+    "country": "Al Wusta",
+    "address": "Rd 32, Next To Shell Gas Station, postal code 700, Oman",
+    "image": "handover",
+    "about": "Oman Post branch in Duqm, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches. The locator also lists this site as the Duqm regional delivery point.",
+    "lat": "19.6251854",
+    "lng": "57.6359668",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=19.6251854,57.6359668"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Masirah",
+    "full_name": "Oman Post Office - Masirah",
+    "type": "Branch · regional delivery point",
+    "country": "Al Sharqiyah",
+    "address": "Rd 51, Behind Masirah Municipality, Masirah, postal code 414, Oman",
+    "image": "courier-branch",
+    "about": "Oman Post branch in Masirah, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches. The locator also lists this site as the Masirah regional delivery point.",
+    "lat": "20.661569",
+    "lng": "58.874835",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=20.661569,58.874835"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   },
+   {
+    "name": "Al Rustaq",
+    "full_name": "Oman Post Office - Al Rustaq",
+    "type": "Branch",
+    "country": "Al Batinah",
+    "address": "Near Dar Al Hekma School, postal code 318, Oman",
+    "image": "van-street",
+    "about": "Oman Post branch in Al Rustaq, listed on the Asyad Express office locator. Asyad Express International shipments can be sent from Oman Post branches.",
+    "lat": "23.387177",
+    "lng": "57.427581",
+    "phone": "1001",
+    "phones": [
+     {
+      "label": "Asyad Express call centre",
+      "number": "1001"
+     },
+     {
+      "label": "From outside Oman",
+      "number": "+968 2492 2000"
+     }
+    ],
+    "hours": [
+     {
+      "label": "Branch hours",
+      "value": "Not published. Call 1001 to confirm"
+     },
+     {
+      "label": "Call centre",
+      "value": "Sun–Thu and Sat, 8am–4pm"
+     }
+    ],
+    "links": {
+     "directions": "https://www.google.com/maps/search/?api=1&query=23.387177,57.427581"
+    },
+    "src": "https://asyad.baryons.net/office-locator"
+   }
+  ]
+ },
+ "faq_title": "Questions people ask",
+ "faq": [
+  {
+   "q": "How long will the shipment take to be delivered?",
+   "a": "Asyad Express's FAQ says two days within Muscat Governorate and three days to other regions, with deliveries to Musandam once a week. In December 2025 the company described same-day delivery within Muscat and up to 72 hours nationwide."
+  },
+  {
+   "q": "Can I reschedule the delivery time?",
+   "a": "Yes. Call the Asyad Express call centre on 1001 to reschedule your delivery."
+  },
+  {
+   "q": "What is Asyad Express?",
+   "a": "Asyad Express provides pick-up and delivery for businesses of all types in Oman, from growing SMEs to international companies in e-commerce, manufacturing, services and finance."
+  },
+  {
+   "q": "What is Asyad Express fulfilment?",
+   "a": "A dedicated warehouse space for receiving inventory, managing storage and completing orders for businesses, including picking, packing, labelling, dispatch and delivery with full tracking."
+  },
+  {
+   "q": "How much can I send abroad?",
+   "a": "International Express takes documents and merchandise up to 30 kg to more than 220 destinations. Price is based on actual or volumetric weight (L × W × H ÷ 5000), whichever is higher."
+  },
+  {
+   "q": "Can I insure an international shipment?",
+   "a": "Yes. Insurance costs 2.5% of the shipment value, and the full value is refunded in case of loss or damage."
+  },
+  {
+   "q": "How do I reach the sales team?",
+   "a": "Fill in the contact form with your details and the sales team will reply within two working days."
+  },
+  {
+   "q": "What if my shipment is damaged, wrong or missing?",
+   "a": "Send the details through the contact form and customer service will reply within two working days."
+  }
+ ],
+ "nudges": {
+  "dock_label": "Call 1001",
+  "offer": {
+   "id": "syc10",
+   "kicker": "Ship Your Cart",
+   "title": "10% off your first shipment",
+   "text": "Shop in the US and UK and ship to Oman with your own virtual address.",
+   "cta": "See how it works",
+   "href": "@svc:Ship Your Cart",
+   "image": "camping"
+  }
+ },
+ "cta_band": "Send a parcel, open a business account or ask about fulfilment.",
+ "detail_cta": {
+  "title": "Talk to Asyad Express",
+  "text": "Tell us what you ship and where, and the team will get back to you within two working days."
+ },
+ "contact": {
+  "title": "Contact Asyad Express",
+  "intro": "Questions, feedback, complaints or a new business account. This concept form is not connected; tracking runs on the official Asyad Express site and app.",
+  "address": "Asyad Express, Muscat International Airport area, Sultanate of Oman",
+  "email": "customers@asyadexpress.com",
+  "phones": [
+   {
+    "label": "Call centre (in Oman)",
+    "number": "1001"
+   },
+   {
+    "label": "Outside Oman",
+    "number": "+968 2492 2000"
+   },
+   {
+    "label": "Tenders",
+    "number": "+968 2492 2122"
+   }
+  ],
+  "note": "Call centre: Sunday to Thursday and Saturday, 8am to 4pm.",
+  "form": {
+   "branch": true,
+   "topics": [
+    "Track a shipment",
+    "General",
+    "Enquiry",
+    "Feedback",
+    "Complaint",
+    "Business account",
+    "Fulfilment and warehousing"
+   ],
+   "submit": "Send"
+  }
+ },
+ "marquee": [
+  "Muscat",
+  "Sohar",
+  "Nizwa",
+  "Sur",
+  "Ibri",
+  "Salalah",
+  "Khasab",
+  "Duqm",
+  "220+ destinations"
+ ],
+ "confirm": [
+  "The official sites (asyadexpress.om, asyadexpress.com, asyad.com) rejected automated access from our network. Service pages, FAQ, office locator and some news were read from asyad.baryons.net, a public copy of the Asyad Express site that still contains placeholder text; confirm everything against the live site.",
+  "International weight limit: the service page says 30 kg; the January 2021 launch release says 25 kg. The concept shows 30 kg.",
+  "Domestic delivery times: the FAQ says 2 days in Muscat and 3 days elsewhere (Musandam weekly); the December 2025 article says same day in Muscat and up to 72 hours nationwide. Both are shown, attributed.",
+  "Outside-Oman phone: the contact page copy shows +968 2492 2000; a third-party tracker lists +968 2115 3500. Asyad's address directory lists +968 2450 6999. Confirm the current number.",
+  "Branch opening hours are not published on the locator; branch pages say 'call 1001 to confirm'. Branch photos are generic Asyad Express photos, not the branch itself.",
+  "Branch count (79) and touchpoints (103) are counts of the office-locator data on 12 Oct 2026. The 2021 release mentions 86 Oman Post branches; the 2021 rally release mentions six centres.",
+  "'10% off your first shipment' (Ship Your Cart) appears on the site copy without dates; confirm it is still running before using the offer slide-in.",
+  "Photos come from Asyad Express's own channels as republished by Times of Oman, Oman Observer, Muscat Daily, LinkedIn and YouTube (thumbnails and video stills). Get original files and permission from Asyad Express before launch. The Evri hub photo belongs to Evri; the airport render belongs to Oman Aviation Group.",
+  "Leadership named in the news (Nasser Al Sharji, Shaikh Ibrahim Al Hosni, Jason Ashbrook) is as of each article's date; check current titles.",
+  "No company film could be downloaded from an official site, so the slider has no video slide.",
+  "Logo extracted from the Asyad Express app icon (App Store) and made transparent; replace with the vector logo.",
+  "The 'track a parcel' entry points to the contact form preview; the real tracking box must connect to Asyad Express systems.",
+  "Government-owned group: a redesign would go through a tender. This is a concept only."
+ ],
+ "sources": [
+  "https://asyad.baryons.net/ (public copy of asyadexpress.om: services, FAQ, contact, office locator data, news; read 12 Oct 2026)",
+  "https://www.omanobserver.om/search?query=asyad%20express (22 articles, 2020–2025, read 12 Oct 2026)",
+  "https://timesofoman.com/article/149160 and other Times of Oman articles (read 12 Oct 2026)",
+  "https://www.muscatdaily.com/2023/10/09/asyad-express-partners-with-uks-evri-to-launch-e-commerce-gateway-hub/ (read 12 Oct 2026)",
+  "https://prnewswire.co.uk/news-releases/temu-and-asyad-express-in-strategic-partnership-to-elevate-e-commerce-fulfillment-in-oman-302325528.html (read 12 Oct 2026)",
+  "https://www.linkedin.com/company/asyadexpress/ (posts to Aug 2026, read 12 Oct 2026)",
+  "https://apps.apple.com/om/app/asyad-express/id6446076409 (app description, read 12 Oct 2026)",
+  "https://www.youtube.com/@asyadexpress-OM (video thumbnails and stills, read 12 Oct 2026)"
+ ]
 }

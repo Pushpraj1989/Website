@@ -388,7 +388,7 @@
    "height": 210,
    "kicker": "Starcare Oman",
    "title": "Keep caring.",
-   "text": "More than 500 doctors, nurses and staff. Eight in ten of our patients are Omani.",
+   "text": "Over 500 people, from doctors and nurses to paramedics. Eight in ten of our patients are Omani.",
    "cta": {
     "label": "Meet our doctors",
     "href": "doctors.html"
@@ -564,7 +564,7 @@
    {
     "year": "2010",
     "title": "Starcare Group starts in Oman",
-    "text": "The group begins its journey with Starcare Hospital in Seeb."
+    "text": "The Starcare Group is established in Oman."
    },
    {
     "year": "Year one",
@@ -3323,7 +3323,7 @@
     "image": "br-seeb",
     "address": "Starcare Hospital, PO Box 198, PC 101, As Seeb, Sultanate of Oman",
     "email": "info@starcarehospital.com",
-    "about": "The group's first hospital: a multi-speciality premium hospital designed to American Architectural Institute standards, with 24-hour emergency care, outpatient, day-care and inpatient services, modular operating theatres, labour and delivery suites and more than 35 specialities. JCI-accredited within its first year.",
+    "about": "A multi-speciality premium hospital designed to American Architectural Institute standards, with 24-hour emergency care, outpatient, day-care and inpatient services, modular operating theatres, labour and delivery suites and more than 35 specialities. JCI-accredited within its first year.",
     "phones": [
      {
       "label": "Reception",
@@ -3396,7 +3396,7 @@
     "full_name": "Starcare Hospital Barka",
     "type": "Hospital",
     "country": "Oman",
-    "image": "br-barka",
+    "image": "fac-lobby",
     "address": "PO Box 539, PC 320, Barka, Sultanate of Oman",
     "email": "info@starcarehospitalbarka.com",
     "about": "A 75-bed hospital and the largest in the Starcare Group, serving the South Al Batinah region with over 15 specialities and subspecialties. Home of the Spine Clinic, opened in February 2020.",
@@ -3668,7 +3668,7 @@
    "image": "bn-spine",
    "summary": "A multidisciplinary clinic for back, neck and spine disorders, headed by Dr. Ahmed Jahwari.",
    "body": [
-    "Barka February 10, 2020: Starcare Hospital, Barka has officially opened a Spine Clinic that bring together the region’s top Ortho/Spine surgeons to provide multidisciplinary, patient-focused care for a variety of back, neck and spine disorders. The Clinic is headed by Dr. Ahmed Jahwari, MD, FRCS CANADA, Sr. Consultant- Orthopaedic & Trauma Care. The Orthopaedic & Spine Clinic at Starcare Barka has full-fledged team of experienced surgeons, Dr.Paul P Antony, MBBS, MS (Orthopedics) SICOT Fellow Shoulder & Elbow Surgery (Germany) AO Fellow (Germany).",
+    "Starcare Hospital, Barka has officially opened a Spine Clinic that bring together the region’s top Ortho/Spine surgeons to provide multidisciplinary, patient-focused care for a variety of back, neck and spine disorders. The Clinic is headed by Dr. Ahmed Jahwari, MD, FRCS CANADA, Sr. Consultant- Orthopaedic & Trauma Care. The Orthopaedic & Spine Clinic at Starcare Barka has full-fledged team of experienced surgeons, Dr.Paul P Antony, MBBS, MS (Orthopedics) SICOT Fellow Shoulder & Elbow Surgery (Germany) AO Fellow (Germany).",
     "Dr.Raphael Charrabeh, MD Orthopedic & Trauma Specialty (Syrian Board) and Dr.Ahmed Said Ali Al-Mandhari, BSc, MD, MRCS , MCCE, ( Fellow in shoulder and Elbow surgery - UK ). Expert Physiotherapists are also part of the Spine care Team. Dr. Ahmed Jahwari completed his graduation from Sultan Qaboos University, Oman and MD from College of Medicine SQU. He is a certified Orthopedic Surgeon from the Royal College of Physicians and Surgeons of Canada.",
     "He is honored and awarded with Best Trainer of the Year OMSB, Bernard Ghert Award for resident excellence in patient focused care, University of Toronto, Zimmer Research Grant Awarded 1st prize and has received an honor degree from Sultan Qaboos University. “Back and Neck pain are most common health issues for a large number of people. However, there are many misconceptions and fear among people regarding the results of treatment of spinal problems.",
     "Many people put up with the suffering rather than getting correct treatment simply because of lack of awareness about what all modern Spine care treatment methods can offer” said Dr. Sadik Kodakat, Consultant Anesthesiologist & Chairman of Starcare Group in the press meet conducted at the Hospital in Barka. Mr. Nasser Batha Group CEO of Starcare Oman added that, with the addition of Spine Clinic in the orthopedic division of Starcare Barka, we intend to provide accurate diagnosis, choose best treatment, and execute the treatment in best possible manner for every single patient.",
@@ -3826,7 +3826,7 @@
   "Package prices: only Barka publishes prices (general check-up OMR 59, endoscopy OMR 199, ERCP OMR 899, ACL OMR 1,200, knee arthroscopy OMR 2,700). Seeb packages show no price; shown as \"Price on enquiry\".",
   "Saha, Duqm and Calicut are listed with the Seeb PO Box and phone numbers on the group homepage. Their own addresses and phones are not published.",
   "Mabela and Bousher subsites reuse the Seeb \"About\" text (24-hour emergency, operating theatres); not repeated here as their own facilities.",
-  "Facility images are interior renders from the Barka facilities gallery; which branch each render shows is not stated.",
+  "Facility images are interior renders from the Barka facilities gallery (the lobby render is also Barka's branch photo on the homepage); confirm they match the finished building.",
   "The doctor portrait on the group homepage (used in the hero) may be a licensed stock image rather than a Starcare doctor; confirm the licence covers reuse.",
   "Starcare Barka's 2020 news says it did \"the first Shoulder Joint Replacement surgery in the private sector in Oman\" in 2019; not repeated as fact here.",
   "The best employer article (2019) says an 80-bed Mother & Child Hospital would open in Al Hail in 2020, and the CEO article mentions 400 beds and Starcare Healthcity Muscat; no later update found, so left out.",

@@ -690,6 +690,11 @@
    "alt": "Assarain Group of Companies logo",
    "cap": "Logo: Assarain Group"
   },
+  "hq-tall": {
+   "src": "hq-tall.jpg",
+   "alt": "Said Salem Al Wahaibi Group of Companies building under a clear sky, Muscat",
+   "cap": "Group head office building, Muscat. Photo: Assarain (sky extended)"
+  },
   "hq-land": {
    "src": "hq-land.webp",
    "alt": "",
@@ -709,6 +714,71 @@
    "src": "film-promo-poster.jpg",
    "alt": "Opening shot of the Assarain corporate film",
    "cap": "Still from the Assarain corporate film"
+  },
+  "L-hq": {
+   "src": "hq.jpg",
+   "alt": "Said Salem Al Wahaibi Group of Companies building with the Hajar mountains behind",
+   "cap": "Photo: Assarain"
+  },
+  "L-f-doctor": {
+   "src": "f-doctor.jpg",
+   "alt": "Doctor examining a young patient",
+   "cap": "Illustrative. Assarain film still"
+  },
+  "L-f-doctor2": {
+   "src": "f-doctor2.jpg",
+   "alt": "Smiling doctor with a stethoscope",
+   "cap": "Illustrative. Assarain film still"
+  },
+  "L-a-samples": {
+   "src": "a-samples.jpg",
+   "alt": "Paving and tile samples on display",
+   "cap": "Illustrative. Assarain film still"
+  },
+  "L-msm-2": {
+   "src": "msm-2.jpg",
+   "alt": "Molten steel pour, Modern Steel Mills",
+   "cap": "Photo: Assarain"
+  },
+  "L-aicc-3": {
+   "src": "aicc-3.jpg",
+   "alt": "School building with outdoor courts, AICC",
+   "cap": "Photo: Assarain"
+  },
+  "L-hc-2": {
+   "src": "hc-2.jpg",
+   "alt": "Arched white facade of Hatat Complex",
+   "cap": "Photo: Assarain"
+  },
+  "L-tex-1": {
+   "src": "tex-1.jpg",
+   "alt": "Raymond showroom entrance, Ruwi",
+   "cap": "Photo: Assarain"
+  },
+  "L-mcp-1": {
+   "src": "mcp-1.jpg",
+   "alt": "Interlocking paving in a landscaped park",
+   "cap": "Photo: Assarain"
+  },
+  "L-sha-1": {
+   "src": "sha-1.jpg",
+   "alt": "Translucent polycarbonate roofing at sunset",
+   "cap": "Photo: Assarain"
+  },
+  "L-kal-1": {
+   "src": "kal-1.jpg",
+   "alt": "Kalhat ride-on scrubber outside a large building",
+   "cap": "Photo: Assarain"
+  },
+  "L-kal-4": {
+   "src": "kal-4.jpg",
+   "alt": "Kalhat landscaping at a heritage site",
+   "cap": "Photo: Assarain"
+  },
+  "L-aacp-2": {
+   "src": "aacp-2.jpg",
+   "alt": "AACP office building, Dubai Investments Park",
+   "cap": "Photo: Assarain"
   }
  },
  "ticker": {
@@ -844,7 +914,7 @@
   {
    "type": "depth",
    "id": "trust",
-   "height": 210,
+   "height": 180,
    "kicker": "Said Salem Al Wahaibi Group of Companies",
    "title": "Trust is our capital",
    "text": "Since 1975 the Group has grown from Muscat into manufacturing, construction, property, retail, healthcare and food.",
@@ -855,40 +925,35 @@
    "cap": "Group head office building, Muscat. Photo: Assarain",
    "layers": [
     {
-     "image": "hq",
-     "speed": 0.1,
-     "scale": 0.06,
-     "lean": 5
+     "image": "hq-tall",
+     "speed": 0.08,
+     "scale": 0.05,
+     "lean": 4,
+     "position": "center 72%"
     },
     {
      "clouds": true,
-     "speed": 0.3,
-     "y": 30,
+     "speed": 0.25,
+     "y": 22,
      "tint": "#ffffff",
      "count": 6
     },
     {
      "image": "hq-land",
-     "speed": 0.2,
+     "speed": 0.18,
      "lean": 8,
-     "alt": ""
+     "alt": "",
+     "position": "center 72%"
     },
     {
      "title": true,
-     "speed": 0.55
+     "speed": 0.5
     },
     {
      "image": "hq-front",
-     "speed": 0.32,
-     "lean": 12
-    },
-    {
-     "clouds": true,
-     "front": true,
-     "speed": 0.9,
-     "y": 86,
-     "tint": "#ffffff",
-     "count": 7
+     "speed": 0.3,
+     "lean": 12,
+     "position": "center 72%"
     }
    ]
   },
@@ -972,7 +1037,7 @@
   },
   {
    "type": "split",
-   "image": "f-training2",
+   "image": "a-team",
    "kicker": "People",
    "title": "Training young Omanis for key roles",
    "body": [
@@ -2710,7 +2775,7 @@
     "full_name": "Assarain Group Corporate Head Office, Ruwi",
     "type": "Head office",
     "country": "Oman",
-    "image": "hq",
+    "image": "L-hq",
     "address": "PO Box 1475, PC 112, Ruwi, Muscat",
     "phone": "+968 2460 4811",
     "phones": [
@@ -2740,7 +2805,7 @@
     "full_name": "Hatat House, Wadi Adai",
     "type": "Clinic and offices",
     "country": "Oman",
-    "image": "f-doctor",
+    "image": "L-f-doctor",
     "address": "Hatat House, Wadi Adai, Muscat",
     "phone": "+968 2456 3641",
     "phones": [
@@ -2770,7 +2835,7 @@
     "full_name": "Hatat Specialty Clinics, Zubair Commercial Complex, Azaiba",
     "type": "Clinic",
     "country": "Oman",
-    "image": "f-doctor2",
+    "image": "L-f-doctor2",
     "address": "Zubair Commercial Complex, Azaiba, Muscat",
     "phone": "+968 2449 9269",
     "phones": [
@@ -2800,7 +2865,7 @@
     "full_name": "Assarain Concrete Products Showroom, Madinat Qaboos",
     "type": "Showroom",
     "country": "Oman",
-    "image": "a-samples",
+    "image": "L-a-samples",
     "address": "Madinat Qaboos, Muscat (PO Box 971, PC 111, CPO)",
     "phone": "+968 2469 4321",
     "phones": [
@@ -2830,7 +2895,7 @@
     "full_name": "Modern Steel Mills, Rusayl Industrial Estate",
     "type": "Steel mill",
     "country": "Oman",
-    "image": "msm-2",
+    "image": "L-msm-2",
     "address": "PO Box 174, PC 124, Rusayl Industrial Estate",
     "phone": "+968 2444 9063",
     "phones": [
@@ -2860,7 +2925,7 @@
     "full_name": "Assarain International Contracting and Assarain Properties, Al Hamriya",
     "type": "Offices",
     "country": "Oman",
-    "image": "aicc-3",
+    "image": "L-aicc-3",
     "address": "PO Box 322 and PO Box 1031, PC 131, Al Hamriya, Muscat",
     "phone": "+968 2450 4036",
     "phones": [
@@ -2890,7 +2955,7 @@
     "full_name": "Hatat Complex, Muscat",
     "type": "Residences",
     "country": "Oman",
-    "image": "hc-2",
+    "image": "L-hc-2",
     "address": "Muscat, near Sultan Qaboos Highway",
     "phone": "+968 9977 3981",
     "phones": [
@@ -2916,7 +2981,7 @@
     "full_name": "Raymond showroom, Ruwi High Street",
     "type": "Showroom",
     "country": "Oman",
-    "image": "tex-1",
+    "image": "L-tex-1",
     "address": "Ruwi High Street, Muscat",
     "phone": "+968 2483 0149",
     "phones": [
@@ -2946,7 +3011,7 @@
     "full_name": "Modern Concrete Products, Sohar",
     "type": "Plant",
     "country": "Oman",
-    "image": "mcp-1",
+    "image": "L-mcp-1",
     "address": "PO Box 486, PC 322, Sohar",
     "phone": "+968 2670 1555",
     "phones": [
@@ -2976,7 +3041,7 @@
     "full_name": "Shamal Plastic Industries, Sohar Industrial Estate",
     "type": "Plant",
     "country": "Oman",
-    "image": "sha-1",
+    "image": "L-sha-1",
     "address": "PO Box 31, PC 327, Sohar Industrial Estate",
     "phone": "+968 2675 1174",
     "phones": [
@@ -3006,7 +3071,7 @@
     "full_name": "Kalhat Services & Trading, Sohar",
     "type": "Branch office",
     "country": "Oman",
-    "image": "kal-1",
+    "image": "L-kal-1",
     "address": "PO Box 337, PC 311, Sohar",
     "phone": "+968 2684 6961",
     "phones": [
@@ -3036,7 +3101,7 @@
     "full_name": "Kalhat Services & Trading, Salalah",
     "type": "Branch office",
     "country": "Oman",
-    "image": "kal-4",
+    "image": "L-kal-4",
     "address": "PO Box 763, PC 211, Salalah",
     "phone": "+968 2329 5150",
     "phones": [
@@ -3066,7 +3131,7 @@
     "full_name": "Alserkal & Assarain Concrete Products, Dubai Investments Park",
     "type": "Plant",
     "country": "UAE",
-    "image": "aacp-2",
+    "image": "L-aacp-2",
     "address": "PO Box 282935, Dubai Investments Park, Dubai",
     "phone": "+971 4 884 2207",
     "phones": [

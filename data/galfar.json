@@ -193,29 +193,9 @@
    "alt": "Refinery columns and steel structures against a blue sky",
    "cap": "Photo: Galfar"
   },
-  "en-window": {
-   "src": "en-window.jpg",
-   "alt": "Process plant seen through a site office window",
-   "cap": "Photo: Galfar"
-  },
-  "en-cranes": {
-   "src": "en-cranes.jpg",
-   "alt": "Plant construction site with cranes in the desert",
-   "cap": "Photo: Galfar"
-  },
   "en-piperack": {
    "src": "en-piperack.jpg",
    "alt": "Pipe rack and storage tank at an industrial facility",
-   "cap": "Photo: Galfar"
-  },
-  "en-plant": {
-   "src": "en-plant.jpg",
-   "alt": "Steel process structure under construction",
-   "cap": "Photo: Galfar"
-  },
-  "en-night": {
-   "src": "en-night.jpg",
-   "alt": "Process plant lit at night",
    "cap": "Photo: Galfar"
   },
   "en-substation": {
@@ -223,29 +203,9 @@
    "alt": "Power substation silhouetted at sunset",
    "cap": "Photo: Galfar"
   },
-  "en-coast": {
-   "src": "en-coast.jpg",
-   "alt": "Industrial plant lit at dusk beside the mountains",
-   "cap": "Photo: Galfar"
-  },
-  "en-tall": {
-   "src": "en-tall.jpg",
-   "alt": "Flare stack and plant lights at dusk",
-   "cap": "Photo: Galfar"
-  },
-  "en-pipework": {
-   "src": "en-pipework.jpg",
-   "alt": "Insulated pipework and steel structure at a plant",
-   "cap": "Photo: Galfar"
-  },
   "en-pipeline": {
    "src": "en-pipeline.jpg",
    "alt": "Workers wrapping a pipeline joint",
-   "cap": "Photo: Galfar"
-  },
-  "en-welder": {
-   "src": "en-welder.jpg",
-   "alt": "Welder inside a large pipe",
    "cap": "Photo: Galfar"
   },
   "in-coast-road": {
@@ -268,44 +228,9 @@
    "alt": "Excavators cutting a road through layered cliffs",
    "cap": "Photo: Galfar"
   },
-  "in-earth": {
-   "src": "in-earth.jpg",
-   "alt": "Earthworks terraces across a wide valley",
-   "cap": "Photo: Galfar"
-  },
-  "in-cliff": {
-   "src": "in-cliff.jpg",
-   "alt": "Road ledge cut into a cliff above the coast",
-   "cap": "Photo: Galfar"
-  },
   "in-crusher": {
    "src": "in-crusher.jpg",
    "alt": "Excavator feeding a mobile crusher",
-   "cap": "Photo: Galfar"
-  },
-  "in-night-bends": {
-   "src": "in-night-bends.jpg",
-   "alt": "Hairpin bends glowing with traffic at night",
-   "cap": "Photo: Galfar"
-  },
-  "in-night-road": {
-   "src": "in-night-road.jpg",
-   "alt": "Mountain road at dusk with light trails",
-   "cap": "Photo: Galfar"
-  },
-  "in-interchange": {
-   "src": "in-interchange.jpg",
-   "alt": "Interchange under construction in the mountains",
-   "cap": "Photo: Galfar"
-  },
-  "in-grader": {
-   "src": "in-grader.jpg",
-   "alt": "Motor grader levelling a road base",
-   "cap": "Photo: Galfar"
-  },
-  "in-highway": {
-   "src": "in-highway.jpg",
-   "alt": "Empty new highway with lamp posts at sunrise",
    "cap": "Photo: Galfar"
   },
   "in-bridge": {
@@ -313,59 +238,9 @@
    "alt": "Underside of a highway bridge",
    "cap": "Photo: Galfar"
   },
-  "in-bridge-2": {
-   "src": "in-bridge-2.jpg",
-   "alt": "Bridge parapet and road against the mountains",
-   "cap": "Photo: Galfar"
-  },
-  "in-port-works": {
-   "src": "in-port-works.jpg",
-   "alt": "Port reclamation works beside the sea",
-   "cap": "Photo: Galfar"
-  },
-  "in-road-works": {
-   "src": "in-road-works.jpg",
-   "alt": "New road and earthworks beside the sea",
-   "cap": "Photo: Galfar"
-  },
   "in-breakwater": {
    "src": "in-breakwater.jpg",
    "alt": "Breakwater of rock and concrete armour units",
-   "cap": "Photo: Galfar"
-  },
-  "in-breakwater-2": {
-   "src": "in-breakwater-2.jpg",
-   "alt": "Breakwater road running out to sea",
-   "cap": "Photo: Galfar"
-  },
-  "in-dhow": {
-   "src": "in-dhow.jpg",
-   "alt": "Dhow passing marine construction cranes",
-   "cap": "Photo: Galfar"
-  },
-  "in-port-crane": {
-   "src": "in-port-crane.jpg",
-   "alt": "Crane on a new quay",
-   "cap": "Photo: Galfar"
-  },
-  "in-marine": {
-   "src": "in-marine.jpg",
-   "alt": "Marine cranes placing rock at sea",
-   "cap": "Photo: Galfar"
-  },
-  "in-excavators": {
-   "src": "in-excavators.jpg",
-   "alt": "Excavators on site",
-   "cap": "Photo: Galfar"
-  },
-  "in-aerial": {
-   "src": "in-aerial.jpg",
-   "alt": "Aerial view of a road interchange in the desert",
-   "cap": "Photo: Galfar"
-  },
-  "in-muscat-gate": {
-   "src": "in-muscat-gate.jpg",
-   "alt": "Road through Muscat Gate",
    "cap": "Photo: Galfar"
   },
   "cv-glass": {
@@ -373,79 +248,14 @@
    "alt": "Glass and stone office building at dusk",
    "cap": "Photo: Galfar"
   },
-  "cv-palace": {
-   "src": "cv-palace.jpg",
-   "alt": "Domed civic building below the mountains",
-   "cap": "Photo: Galfar"
-  },
-  "cv-site": {
-   "src": "cv-site.jpg",
-   "alt": "Tower cranes over a large basement excavation",
-   "cap": "Photo: Galfar"
-  },
-  "cv-pic01": {
-   "src": "cv-pic01.jpg",
-   "alt": "Modern building entrance with red sculpture",
-   "cap": "Photo: Galfar"
-  },
-  "cv-pic02": {
-   "src": "cv-pic02.jpg",
-   "alt": "Hotel building framed by palm trees",
-   "cap": "Photo: Galfar"
-  },
   "cv-pic04": {
    "src": "cv-pic04.jpg",
    "alt": "Hotel facade lit at dusk",
    "cap": "Photo: Galfar"
   },
-  "cv-pic05": {
-   "src": "cv-pic05.jpg",
-   "alt": "Domed building with arched windows at dusk",
-   "cap": "Photo: Galfar"
-  },
-  "cv-pic06": {
-   "src": "cv-pic06.jpg",
-   "alt": "Large building under construction with tower cranes",
-   "cap": "Photo: Galfar"
-  },
-  "cv-pic07": {
-   "src": "cv-pic07.jpg",
-   "alt": "Aerial view of a terminal building and landscaped grounds",
-   "cap": "Photo: Galfar"
-  },
-  "cv-mosque": {
-   "src": "cv-mosque.jpg",
-   "alt": "White mosque and civic building",
-   "cap": "Photo: Galfar"
-  },
-  "cv-minaret": {
-   "src": "cv-minaret.jpg",
-   "alt": "Minaret against the evening sky",
-   "cap": "Photo: Galfar"
-  },
-  "cv-interior": {
-   "src": "cv-interior.jpg",
-   "alt": "Stone columns beside an indoor pool",
-   "cap": "Photo: Galfar"
-  },
-  "cv-3d": {
-   "src": "cv-3d.jpg",
-   "alt": "3D printed building with a patterned screen",
-   "cap": "Photo: Galfar"
-  },
-  "cv-arch": {
-   "src": "cv-arch.jpg",
-   "alt": "Arched entrance of a hotel building",
-   "cap": "Photo: Galfar"
-  },
   "pp-team": {
    "src": "pp-team.jpg",
    "alt": "Galfar engineers in hard hats reading drawings on site",
-   "cap": "Photo: Galfar"
-  },
-  "pp-engineers": {
-   "src": "pp-engineers.jpg",
-   "alt": "Two site engineers with drawings, one pointing",
    "cap": "Photo: Galfar"
   },
   "pp-walk": {
@@ -456,21 +266,6 @@
   "pp-portrait": {
    "src": "pp-portrait.jpg",
    "alt": "Smiling Galfar site engineer in a hard hat and vest",
-   "cap": "Photo: Galfar"
-  },
-  "pp-office": {
-   "src": "pp-office.jpg",
-   "alt": "Colleagues working at a desk in the head office",
-   "cap": "Photo: Galfar"
-  },
-  "pp-design": {
-   "src": "pp-design.jpg",
-   "alt": "Design team at their screens",
-   "cap": "Photo: Galfar"
-  },
-  "pp-cad": {
-   "src": "pp-cad.jpg",
-   "alt": "Engineer working on drawings in the design office",
    "cap": "Photo: Galfar"
   },
   "qh-sparks": {
@@ -493,29 +288,9 @@
    "alt": "Aerial view of the Galfar integrated facilities yard",
    "cap": "Photo: Galfar"
   },
-  "ps-fleet": {
-   "src": "ps-fleet.jpg",
-   "alt": "Row of Galfar mobile cranes in the plant yard",
-   "cap": "Photo: Galfar"
-  },
-  "ps-workshop": {
-   "src": "ps-workshop.jpg",
-   "alt": "Technician operating a drilling machine in the workshop",
-   "cap": "Photo: Galfar"
-  },
   "hi-early": {
    "src": "hi-early.jpg",
    "alt": "Archive photo of early Galfar construction work",
-   "cap": "Photo: Galfar"
-  },
-  "hi-award": {
-   "src": "hi-award.jpg",
-   "alt": "Archive photo of an award presentation",
-   "cap": "Photo: Galfar"
-  },
-  "hi-stage": {
-   "src": "hi-stage.jpg",
-   "alt": "Galfar team receiving an award on stage",
    "cap": "Photo: Galfar"
   },
   "hi-hq": {
@@ -528,69 +303,14 @@
    "alt": "Galfar team at an exhibition stand",
    "cap": "Photo: Galfar"
   },
-  "cs-iftar": {
-   "src": "cs-iftar.jpg",
-   "alt": "Volunteers packing Iftar food boxes",
-   "cap": "Photo: Galfar"
-  },
-  "cs-blood": {
-   "src": "cs-blood.jpg",
-   "alt": "Employee donating blood",
-   "cap": "Photo: Galfar"
-  },
-  "cs-carnival": {
-   "src": "cs-carnival.jpg",
-   "alt": "Children at the Musandam carnival",
-   "cap": "Photo: Galfar"
-  },
-  "cs-tree": {
-   "src": "cs-tree.jpg",
-   "alt": "Volunteers planting an olive tree",
-   "cap": "Photo: Galfar"
-  },
-  "cs-olive": {
-   "src": "cs-olive.jpg",
-   "alt": "Young olive tree",
-   "cap": "Photo: Galfar"
-  },
-  "cs-group": {
-   "src": "cs-group.jpg",
-   "alt": "Community campaign group photo",
-   "cap": "Photo: Galfar"
-  },
   "cs-tug": {
    "src": "cs-tug.jpg",
    "alt": "Employees in a tug of war on the beach",
    "cap": "Photo: Galfar"
   },
-  "ic-group": {
-   "src": "ic-group.jpg",
-   "alt": "Omani graduates at a training ceremony",
-   "cap": "Photo: Galfar"
-  },
-  "ic-work": {
-   "src": "ic-work.jpg",
-   "alt": "Omani employee at her workstation",
-   "cap": "Photo: Galfar"
-  },
   "pb-ar2025": {
    "src": "pb-ar2025.jpg",
    "alt": "Cover of the Galfar Annual Report 2025",
-   "cap": "Photo: Galfar"
-  },
-  "pb-esg2025": {
-   "src": "pb-esg2025.jpg",
-   "alt": "Cover of the Galfar sustainability report 2025",
-   "cap": "Photo: Galfar"
-  },
-  "pb-ar2022": {
-   "src": "pb-ar2022.jpg",
-   "alt": "Cover of the Galfar Annual Report 2022",
-   "cap": "Photo: Galfar"
-  },
-  "pb-water": {
-   "src": "pb-water.jpg",
-   "alt": "Cover of Flowing Lifelines",
    "cap": "Photo: Galfar"
   },
   "logo": {
@@ -789,17 +509,17 @@
      "image": "cut:pp-team",
      "speed": 0.06,
      "fit": "contain",
-     "bottom": "40%",
-     "position": "center bottom",
+     "bottom": "38%",
+     "position": "90% bottom",
      "lean": 10
     },
     {
      "clouds": true,
      "front": true,
-     "speed": 0.5,
-     "y": 90,
+     "speed": 0.3,
+     "y": 95,
      "tint": "#f4efe8",
-     "count": 8
+     "count": 5
     }
    ]
   },
@@ -936,6 +656,7 @@
  ],
  "about": {
   "title": "A partner in Oman's renaissance since 1972",
+  "image": "hi-early",
   "body": [
    "Galfar Engineering & Contracting SAOG was established in 1972 and has grown into one of the largest publicly listed companies in Oman and one of the largest construction companies in the Middle East.",
    "Its work runs through three business units: Energy & Industrial, Infrastructure, and Civil & Environmental, supported by units for QHSSE, project services, human capital, finance and IT, supply chain, and strategy and business development."
@@ -1245,7 +966,7 @@
     "title": "Careers & Human Capital",
     "icon": "star",
     "text": "A 16,000-strong, multinational team and a leader in Omanisation.",
-    "image": "pp-engineers",
+    "image": "pp-team",
     "detail": {
      "intro": "Galfar is a multidisciplinary, multinational team and one of the largest employers in the region.",
      "body": [
@@ -1276,7 +997,7 @@
     "title": "In-Country Value",
     "icon": "pin",
     "text": "Omani shareholders, Omani staff and a local supply chain.",
-    "image": "ic-group",
+    "image": "pp-walk",
     "detail": {
      "intro": "In-country value is a main goal for Galfar: growing local content through local procurement and developing its workforce.",
      "body": [
@@ -1307,7 +1028,7 @@
     "title": "Supply Chain & Vendors",
     "icon": "truck",
     "text": "Register as a supplier and join 1,500 local vendors.",
-    "image": "ps-fleet",
+    "image": "en-piperack",
     "detail": {
      "intro": "The Supply Chain Management Unit handles orders from vendors and runs vendor registration.",
      "body": [
@@ -1333,7 +1054,7 @@
     "title": "Social Responsibility",
     "icon": "heart",
     "text": "Iftar campaigns, blood drives, olive trees and community events.",
-    "image": "cs-tree",
+    "image": "cs-tug",
     "detail": {
      "intro": "Galfar's CSR work rests on three pillars: social and community development, youth development and women's empowerment, and environmental preservation.",
      "body": [
@@ -1354,7 +1075,7 @@
     "title": "Investor Relations",
     "icon": "chart",
     "text": "Listed on the Muscat Stock Exchange since 2007. Annual and ESG reports.",
-    "image": "pb-ar2025",
+    "image": "ev-expo",
     "detail": {
      "intro": "Galfar Engineering & Contracting SAOG has been a public joint stock company on the Muscat Stock Exchange since 2007 (ticker GECS).",
      "body": [
@@ -2054,6 +1775,205 @@
     ],
     "src": "https://galfar.com/oman/galfar/2024/08/26/galfar-secures-ro117mn-contract-from-nama-water-services/",
     "badge": "2024 award"
+   }
+  ]
+ },
+ "highlights": {
+  "title": "Sectors",
+  "nav": "Sectors",
+  "kicker": "What we build",
+  "intro": "The kinds of work behind Galfar's 1,000+ projects, as described by its units.",
+  "items": [
+   {
+    "title": "Marine & harbours",
+    "icon": "globe",
+    "text": "Ports, commercial harbours and fishing harbours along Oman's coast.",
+    "image": "in-breakwater",
+    "detail": {
+     "intro": "Galfar's Infrastructure Unit has built ports, commercial harbours and fishing harbours along Oman's coastline.",
+     "body": [
+      "Duqm Fishery Port is listed among Galfar's iconic projects. In June 2024 Galfar was awarded RO 12 million of marine works for Grand Blue City on the Al Sawadi seafront."
+     ],
+     "points": [
+      "Duqm Fishery Port",
+      "Grand Blue City marine works",
+      "Breakwaters and reclamation"
+     ],
+     "points_title": "Work",
+     "src": "https://galfar.com/oman/galfar/infrastructure/"
+    }
+   },
+   {
+    "title": "Airports",
+    "icon": "globe",
+    "text": "Airside works at Salalah, PDO airfields, Ras Al Hadd and Muscat.",
+    "image": "pj-salalah-airport-2",
+    "detail": {
+     "intro": "Galfar has built several airports in Oman.",
+     "body": [
+      "It executed all airside works at Salalah International Airport as a joint venture partner, and built airports for Petroleum Development Oman so oil fields have all-weather, round-the-clock air operations.",
+      "Other work includes the airside facilities at Ras Al Hadd Airport for the Ministry of Transport and the rehabilitation of the old Muscat International Airport."
+     ],
+     "points": [
+      "Salalah International Airport",
+      "PDO airfields",
+      "Ras Al Hadd Airport airside",
+      "Old Muscat International Airport rehabilitation"
+     ],
+     "points_title": "Airports",
+     "src": "https://galfar.com/oman/galfar/infrastructure/"
+    }
+   },
+   {
+    "title": "Bridges & tunnels",
+    "icon": "layers",
+    "text": "The highest stabilised walls and longest underpass tunnels in Oman.",
+    "image": "in-bridge",
+    "detail": {
+     "intro": "Galfar's roads include the highest mechanically stabilised walls and the longest underpass tunnels in Oman.",
+     "body": [
+      "Recent work includes widened valley bridges on the Rusayl–Bidbid road, such as the Wadi Al Jifnain and Wadi Fanja bridges, and bridges and underpasses replacing roundabouts on the Al Ansab–Al Jifnain road."
+     ],
+     "points": [
+      "Valley bridges",
+      "Interchanges and flyovers",
+      "Underpass tunnels",
+      "Mechanically stabilised walls"
+     ],
+     "points_title": "Structures",
+     "src": "https://galfar.com/oman/galfar/infrastructure/"
+    }
+   },
+   {
+    "title": "Earthworks",
+    "icon": "truck",
+    "text": "Excavation, backfill and reclamation with Galfar's own heavy fleet.",
+    "image": "in-crusher",
+    "detail": {
+     "intro": "With its fleet of heavy earthmoving equipment, Galfar's Infrastructure Unit handles excavation, backfill and reclamation at scale.",
+     "body": [
+      "Projects include backfilling for Muscat International Airport and ground levelling for the refinery complex in Duqm."
+     ],
+     "points": [
+      "Muscat International Airport backfilling",
+      "Duqm refinery ground levelling",
+      "Reclamation"
+     ],
+     "points_title": "Work",
+     "facts": [
+      {
+       "label": "Plant and machines",
+       "value": "4,000+"
+      }
+     ],
+     "src": "https://galfar.com/oman/galfar/infrastructure/"
+    }
+   },
+   {
+    "title": "Pipelines & flowlines",
+    "icon": "pulse",
+    "text": "More than 8,000 km laid, from wellhead to gathering station.",
+    "image": "en-pipeline",
+    "detail": {
+     "intro": "Galfar's Energy & Industrial Unit has built more than 8,000 km of flowlines and pipelines of different diameters and materials, above and below ground.",
+     "body": [
+      "Its service contracts run from wellhead hook-up to delivery into gathering stations, for Petroleum Development Oman, OQ, BP, Occidental Oman, Daleel and others."
+     ],
+     "points": [
+      "Flowlines and trunk lines",
+      "Well hook-ups",
+      "Manifold stations",
+      "Gas gathering systems"
+     ],
+     "points_title": "Work",
+     "facts": [
+      {
+       "label": "Pipelines and flowlines",
+       "value": "8,000+ km"
+      }
+     ],
+     "src": "https://galfar.com/oman/galfar/energy-industrial/"
+    }
+   },
+   {
+    "title": "Power transmission",
+    "icon": "pulse",
+    "text": "Transmission systems from 11 kV to 132 kV.",
+    "image": "en-substation",
+    "detail": {
+     "intro": "Galfar has designed and built power transmission systems from 11 kV to 132 kV and can deliver power generation facilities.",
+     "body": [
+      "Its energy work also covers DCS and SCADA control facilities and blast-proof buildings in the oil and gas sector."
+     ],
+     "points": [
+      "11 kV to 132 kV transmission",
+      "Substations",
+      "Power generation"
+     ],
+     "points_title": "Work",
+     "src": "https://galfar.com/oman/galfar/energy-industrial/"
+    }
+   },
+   {
+    "title": "Hospitals",
+    "icon": "heart",
+    "text": "From Ibri, Nizwa and Sur to the National Heart Centre.",
+    "image": "pj-medical-city",
+    "detail": {
+     "intro": "Galfar's Civil & Environmental Unit started in healthcare with the Ibri, Nizwa and Sur general hospitals.",
+     "body": [
+      "The Nizwa hospital included mechanical, electrical, plumbing and HVAC work, which led to larger projects: the Salalah Extended Health Centre, the National Heart Centre at the Royal Hospital, an Accident, Emergency and Burns unit and the Salalah Cardiac Centre, followed by operation and maintenance.",
+      "The unit is now building the 458-bed Medical City for Military and Security Services for the Royal Oman Police."
+     ],
+     "points": [
+      "Ibri, Nizwa and Sur hospitals",
+      "National Heart Centre, Royal Hospital",
+      "Salalah Cardiac Centre",
+      "Medical City for Military and Security Services"
+     ],
+     "points_title": "Hospitals",
+     "src": "https://galfar.com/oman/galfar/civil-environmental/"
+    }
+   },
+   {
+    "title": "Hotels & landmarks",
+    "icon": "building",
+    "text": "Palaces, monuments, stadiums and turnkey hotels across Oman.",
+    "image": "cv-pic04",
+    "detail": {
+     "intro": "As Galfar's first operating unit, Civil & Environmental has built palaces, commercial buildings, housing, schools, monuments, religious buildings, stadiums and residences.",
+     "body": [
+      "It has built several hotels on a turnkey basis across Oman, and guest complexes, offices, border posts and utility buildings for the Royal Court Affairs and other authorities."
+     ],
+     "points": [
+      "Turnkey hotels",
+      "Palaces and guest complexes",
+      "Monuments and religious buildings",
+      "Offices and headquarters"
+     ],
+     "points_title": "Buildings",
+     "src": "https://galfar.com/oman/galfar/civil-environmental/"
+    }
+   },
+   {
+    "title": "Fabrication",
+    "icon": "factory",
+    "text": "Structural steel and alloy piping from the Nizwa Industrial Facility.",
+    "image": "qh-welder",
+    "detail": {
+     "intro": "The Nizwa Industrial Facility, established in 2006, fabricates for Galfar projects and third-party clients.",
+     "body": [
+      "It runs structural fabrication, CS/LTCS and SS/DSS/SDSS/alloy piping fabrication, plate rolling, and blasting, coating and painting. Galfar also runs a carpentry workshop, a waterproofing and coating complex and scaffolding and formwork installations."
+     ],
+     "points": [
+      "Structural fabrication",
+      "Alloy piping fabrication",
+      "Plate rolling",
+      "Blasting and coating"
+     ],
+     "points_title": "Shops",
+     "src": "https://galfar.com/oman/galfar/project-services/"
+    }
    }
   ]
  },

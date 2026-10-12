@@ -1,0 +1,15 @@
+{
+  "slug": "galfar",
+  "name": "Galfar Engineering & Contracting SAOG",
+  "sector": "construction-engineering",
+  "goal": "concept redesign for a pitch (Tier 1 motion upgrade)",
+  "languages": ["en"],
+  "website": "https://galfar.com/oman/galfar/",
+  "references": [],
+  "motion": "cinematic",
+  "brand": {"colours": "Galfar red on warm concrete", "fonts": "Barlow Condensed + Poppins (site uses Poppins)", "style": "minimal"},
+  "signature": ["depth hero from a real coastal road photo with a cut-out Galfar crew", "construction stages story from real project photos", "projects as a catalogue with a page per project"],
+  "hosting": "existing server (same as Tier 1 concepts)",
+  "forms": "preview only",
+  "verifier": "internal"
+}
