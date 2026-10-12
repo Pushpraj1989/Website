@@ -635,16 +635,16 @@
    "ingredients": [
     {
      "image": "cut:fit-filler",
-     "x": -16,
-     "y": -20,
+     "x": -18,
+     "y": 10,
      "size": 170,
      "rot": -12,
      "z": 0.55
     },
     {
      "image": "cut:fit-gauge",
-     "x": 26,
-     "y": -22,
+     "x": 28,
+     "y": 6,
      "size": 150,
      "rot": 10,
      "z": 0.45
@@ -652,31 +652,31 @@
     {
      "image": "cut:fit-shutoff",
      "x": 34,
-     "y": 8,
+     "y": 30,
      "size": 190,
      "rot": 8,
      "z": 0.7
     },
     {
      "image": "cut:fit-pressure",
-     "x": 24,
-     "y": 32,
+     "x": 14,
+     "y": 40,
      "size": 160,
      "rot": -8,
      "z": 0.6
     },
     {
      "image": "cut:fit-relief",
-     "x": -20,
-     "y": 22,
+     "x": -8,
+     "y": 30,
      "size": 130,
      "rot": 14,
      "z": 0.35
     },
     {
      "image": "cut:fit-check",
-     "x": -2,
-     "y": 42,
+     "x": -26,
+     "y": 36,
      "size": 140,
      "rot": -16,
      "z": 0.9

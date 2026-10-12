@@ -597,6 +597,11 @@
    "src": "logo.png",
    "alt": "Galfar logo",
    "cap": ""
+  },
+  "depth-coast": {
+   "src": "depth-coast.jpg",
+   "alt": "Aerial view of a Galfar road climbing the coastal cliffs above the sea",
+   "cap": "Photo: Galfar (sky darkened for legibility)"
   }
  },
  "ticker": {
@@ -763,18 +768,18 @@
    "cap": "Galfar engineers and a Galfar road on the coast. Photos: Galfar",
    "layers": [
     {
-     "image": "in-coast-road",
+     "image": "depth-coast",
      "speed": 0.12,
      "scale": 0.08,
      "lean": 6,
-     "position": "center 40%"
+     "position": "center 45%"
     },
     {
      "clouds": true,
      "speed": 0.3,
-     "y": 30,
+     "y": 66,
      "tint": "#fff7ee",
-     "count": 6
+     "count": 5
     },
     {
      "title": true,
@@ -782,19 +787,19 @@
     },
     {
      "image": "cut:pp-team",
-     "speed": 0.28,
+     "speed": 0.06,
      "fit": "contain",
-     "bottom": "58%",
+     "bottom": "40%",
      "position": "center bottom",
      "lean": 10
     },
     {
      "clouds": true,
      "front": true,
-     "speed": 0.95,
-     "y": 88,
+     "speed": 0.5,
+     "y": 90,
      "tint": "#f4efe8",
-     "count": 7
+     "count": 8
     }
    ]
   },
@@ -2240,7 +2245,9 @@
     "type": "Fabrication facility",
     "country": "Oman",
     "image": "qh-welders",
-    "address": "Nizwa, Al Dakhiliyah, Oman (exact address not published)",
+    "address": "Nizwa, Al Dakhiliyah, Oman. Exact site not published; the map shows Nizwa town.",
+    "lat": "22.9333",
+    "lng": "57.5333",
     "about": "Established in 2006 for structural and piping fabrication, plate rolling, blasting and coating, for Galfar and third-party clients.",
     "phone": "+968 2452 5000",
     "phones": [
@@ -2267,7 +2274,9 @@
     "type": "Plant yard and workshops",
     "country": "Oman",
     "image": "ps-khazain",
-    "address": "Khazaen, Al Batinah South, Oman (exact address not published)",
+    "address": "Khazaen, Barka, South Al Batinah, Oman. Exact site not published; the map shows Barka.",
+    "lat": "23.6790",
+    "lng": "57.8860",
     "about": "A 150,000 m² integrated facility for Galfar's fleet of about 4,800 units, repairing around 1,200 machines a year, with accommodation for 250+ staff and workers.",
     "phone": "+968 2452 5000",
     "phones": [
@@ -2392,7 +2401,7 @@
   "Gas Gathering System, Block 61 Khazzan: galfar.com lists the client as PDO (Block 61 Khazzan is operated by BP). Confirm the client.",
   "Status of 2023–2024 awards (Al Ansab–Al Jifnain, Raysut, Dhahirah, Oxy, Grand Blue City, Hafeet Rail) is shown as 'Awarded' only. Current progress is not published.",
   "Photo assignment: the Rusayl–Bidbid gallery uses the May 2024 photo set (G-series) that includes the card image. Unit-page photos (coastal roads, plants, buildings) are captioned generally, without naming a project.",
-  "Nizwa and Khazain facility addresses and phone numbers are not published; the head office number is shown. Head office coordinates come from the plus code H9F4+F29 in the contact map.",
+  "Nizwa and Khazain facility addresses and phone numbers are not published; their map pins sit on the town centres (Nizwa, Barka), not the sites; the head office number is shown. Head office coordinates come from the plus code H9F4+F29 in the contact map.",
   "Head office opening hours are not published.",
   "No company film is published on galfar.com (YouTube channel only), so the home page has no video slide or scroll film.",
   "Client names come from the logo wall on galfar.com; one emblem (gold crest) could not be identified and is left out.",

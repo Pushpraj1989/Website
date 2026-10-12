@@ -404,9 +404,9 @@
     {
      "clouds": true,
      "speed": 0.3,
-     "y": 62,
-     "tint": "#bfe9e3",
-     "count": 6
+     "y": 66,
+     "tint": "#a9ddd5",
+     "count": 4
     },
     {
      "title": true,
@@ -425,9 +425,9 @@
      "clouds": true,
      "front": true,
      "speed": 0.9,
-     "y": 84,
-     "tint": "#f4f8f7",
-     "count": 8
+     "y": 94,
+     "tint": "#dff2ee",
+     "count": 5
     }
    ]
   },
@@ -441,7 +441,7 @@
   {
    "type": "stages",
    "id": "inside",
-   "kicker": "Inside Starcare · facility renders",
+   "kicker": "Facility renders",
    "title": "Step inside",
    "stages": [
     {
@@ -484,7 +484,7 @@
   },
   {
    "type": "split",
-   "image": "bn-barka-stairs",
+   "image": "fac-stairs-2",
    "kicker": "Starcare Barka",
    "title": "The largest hospital in the group",
    "body": [
@@ -502,7 +502,7 @@
   },
   {
    "type": "split",
-   "image": "bn-cuddles",
+   "image": "bn-pregnancy",
    "kicker": "Starcare Cuddles",
    "title": "Packages for every stage of pregnancy",
    "flip": true,

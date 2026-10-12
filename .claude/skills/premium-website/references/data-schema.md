@@ -68,6 +68,12 @@ testimonials, partners, locations, faq, bmi, emi, depth, scrub, stages. Order is
    // default: starts whole, explodes into labelled ingredients, closes; "mode": "in" makes the parts fly in instead
 {"type": "stack", "aspect": 1.105, "width": 82, "layers": [{"image": "lay-beef", "name": "Lean beef", "left": 0, "width": 1, "bottom": 0.17, "dx": 0, "rot": 0}], …}
 
+{"type": "film", "id": "critical-whey", "product": "<catalogue title>", "front": "cut:<key>", "back": "<key>-1", "back_kind": "label",  // label | pack (a real back-of-pack cut-out) | none
+ "color": "#f2a0b4", "height": 420, "risen": true,   // risen: first section on the page starts in the spotlight
+ "beats": [{"at": 0, "kicker": "…", "title": "Critical <em>Whey.</em>", "text": "…"}, {"at": 0.36, …}, {"at": 0.58, …}, {"at": 0.8, …}],
+ "stats": [{"value": "24 g", "label": "protein", "angle": -150}],   // real figures, printed on the pack or in the description
+ "siblings": [{"image": "cut:<key>", "label": "Caramel latte"}]}    // other flavours or sizes
+
 {"type": "lineup", "title": "The lineup.", "text": "…", "items": ["Product title", "…"]}   // default: featured items
 
 {"type": "stages", "id": "progress", "kicker": "Construction", "title": "From plot to keys",

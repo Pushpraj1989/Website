@@ -407,8 +407,19 @@ def render_hub(env, sites):
     shutil.copy(SHARED / "css" / "hub.css", ROOT / "assets" / "hub.css")
     if (SHARED / "hub").exists():
         shutil.copytree(SHARED / "hub", ROOT / "assets" / "hub")
+    (ROOT / "assets" / "hub" / "logos").mkdir(parents=True, exist_ok=True)
     for site in sites:
         site["_thumb"] = (SHARED / "hub" / f"{site['slug']}.jpg").exists()
+        logo = (site.get("brand") or {}).get("logo")
+        site["_logo"] = None
+        if logo and logo in site.get("images", {}):  # the client's real logo on its card
+            src = SHARED / "img" / site["img_dir"] / site["images"][logo]["src"]
+            if src.exists():
+                shutil.copy(src, ROOT / "assets" / "hub" / "logos" / (site["slug"] + src.suffix))
+                site["_logo"] = "assets/hub/logos/" + site["slug"] + src.suffix
+    # client sites only (demos opt out with "hub": false), in the order the pitch pack wants
+    order = ["badr-al-samaa", "macroboost", "healthy-lab", "dar-global", "galfar", "starcare", "assarain", "national-gas", "asyad-express"]
+    sites = sorted([x for x in sites if x.get("hub", True)], key=lambda x: order.index(x["slug"]) if x["slug"] in order else 99)
     html = env.get_template("hub.html.j2").render(sites=sites, year=YEAR, fonts=GF + "Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700")
     (ROOT / "index.html").write_text(html, encoding="utf-8")
 

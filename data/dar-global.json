@@ -20,7 +20,9 @@
     "alt": "#121318",
     "font_display": "\"Cormorant Garamond\", Georgia, serif",
     "font_body": "\"Manrope\", system-ui, sans-serif",
-    "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700"
+    "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700",
+    "logo": "logo",
+    "logo_wide": true
   },
   "cta": {
     "label": "Register interest",
@@ -880,6 +882,10 @@
       "src": "walk-poster.jpg",
       "alt": "Marea living room with sea view",
       "cap": "Film still: Dar Global"
+    },
+    "logo": {
+      "src": "logo.png",
+      "alt": "Dar Global logo"
     }
   },
   "ticker": {

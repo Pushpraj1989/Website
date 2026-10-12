@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tier 1 Concepts</title>
-<meta name="description" content="Six concept redesigns for the Tier 1 prospects, each with its own visual system and motion.">
+<title>Client Sites</title>
+<meta name="description" content="Concept websites built with the premium website kit, each from the client's own content, photos and logo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{{ fonts }}">
@@ -14,16 +14,16 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="hub-head">
   <div class="wrap hub-head-row">
-    <span class="hub-brand">Tier 1 · Concept redesigns</span>
+    <span class="hub-brand">Client sites · Concept builds</span>
     <span class="hub-meta">{{ sites|length }} sites · Oman</span>
   </div>
 </header>
 
 <main id="main">
   <section class="hub-hero wrap">
-    <p class="hub-kicker">Prospects pitch pack</p>
-    <h1>Six companies. <em>Six</em> distinct sites.</h1>
-    <p class="hub-lede">Each concept has its own visual language and motion, built from one data file per company. Open a site, then work through its “to verify” items before showing it to anyone.</p>
+    <p class="hub-kicker">Pitch pack · {{ sites|length }} clients · {{ sites | map(attribute='_pages') | map('length') | sum }} pages</p>
+    <h1>Every client. <em>Its own</em> moving site.</h1>
+    <p class="hub-lede">Built from each company's real website, photos and logo, with scroll-driven motion, product films and detail pages. Open a site, then work through its “to verify” items before showing it to anyone.</p>
   </section>
 
   <section class="wrap hub-grid" aria-label="Concept sites">
@@ -31,19 +31,21 @@
     <a class="hub-card" href="sites/{{ s.slug }}/index.html" style="--accent: {{ s.accent }}; --i: {{ loop.index0 }}">
       <figure class="hub-shot">
         {%- if s._thumb %}<img src="assets/hub/{{ s.slug }}.jpg" alt="Preview of the {{ s.name }} concept" loading="lazy">{% endif %}
-        <span class="hub-theme">{{ s._theme.label }}</span>
+        {%- if s._logo %}<span class="hub-logo"><img src="{{ s._logo }}" alt="{{ s.name }} logo"></span>{% endif %}
+        <span class="hub-theme">{{ s._pages | length }} pages</span>
       </figure>
       <div class="hub-body">
         <p class="hub-sector">{{ s.sector }}</p>
         <h2>{{ s.name }}</h2>
-        <p class="hub-motion">{{ s._theme.motion }}</p>
+        <p class="hub-motion">{{ s.hub_line or s.meta | truncate(120) }}</p>
+        <p class="hub-url">/sites/{{ s.slug }}/</p>
         <p class="hub-foot"><span>{{ s.confirm|length }} to verify</span><span class="hub-open">Open concept →</span></p>
       </div>
     </a>
     {%- endfor %}
   </section>
 
-  <p class="wrap hub-note">Concept redesigns, not the companies' official websites, and not affiliated with them. Facts come from each homepage read on 11 Oct 2026 and the prospects document. Photography is Creative Commons, credited in each site's footer. The full checklist is in <code>VERIFY.md</code>.</p>
+  <p class="wrap hub-note">Concept redesigns, not the companies' official websites, and not affiliated with them. Facts, products and photos come from each company's own website (read 11–12 Oct 2026); any stock imagery is credited in the site's footer. The full checklist is in <code>VERIFY.md</code>.</p>
 </main>
 
 <footer class="hub-footer wrap">

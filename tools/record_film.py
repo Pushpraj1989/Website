@@ -4,7 +4,7 @@ the scroll frame by frame in headless Chromium and capturing clean frames (heade
 Use the clips as promo-slider video slides or as social reels.
 
   python3 tools/serve.py &   # the site must be served over http
-  python3 tools/record_film.py http://localhost:8080/sites/<slug>/index.html "#film-id" shared/img/<slug>/film-x.mp4 [--seconds 10] [--size 1280x720] [--from 0 --to 1]
+  python3 tools/record_film.py http://localhost:8080/sites/<slug>/index.html "#film-id" shared/img/<slug>/film-x.mp4 [--seconds 10] [--size 1280x720] [--from 0 --to 1] [--hide ".film-copy"]
 Writes the .mp4 (H.264) and a .webm twin, plus a .jpg poster.
 """
 import argparse, shutil, subprocess, tempfile
@@ -17,7 +17,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("url"); ap.add_argument("selector"); ap.add_argument("out")
     ap.add_argument("--seconds", type=float, default=10); ap.add_argument("--fps", type=int, default=30)
-    ap.add_argument("--size", default="1280x720"); ap.add_argument("--from", dest="a", type=float, default=0); ap.add_argument("--to", dest="b", type=float, default=1)
+    ap.add_argument("--size", default="1280x720"); ap.add_argument("--hide", default="", help="extra CSS selectors to hide, e.g. '.film-copy' for a clean clip under slide text"); ap.add_argument("--from", dest="a", type=float, default=0); ap.add_argument("--to", dest="b", type=float, default=1)
     a = ap.parse_args()
     w, h = map(int, a.size.split("x"))
     out = Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
@@ -27,7 +27,7 @@ def main():
         b = p.chromium.launch(executable_path="/opt/pw-browsers/chromium", args=["--no-sandbox"])
         pg = b.new_page(viewport={"width": w, "height": h}, device_scale_factor=1.5)
         pg.goto(a.url, wait_until="load"); pg.wait_for_timeout(3500)
-        pg.add_style_tag(content=HIDE)
+        pg.add_style_tag(content=HIDE + (f"{a.hide}{{display:none!important}}" if a.hide else ""))
         top = pg.evaluate(f"document.querySelector('{a.selector}').getBoundingClientRect().top + scrollY")
         span = pg.evaluate(f"document.querySelector('{a.selector}').offsetHeight") - h
         go = lambda f: pg.evaluate(f"T1.lenis.scrollTo({top + span * f}, {{immediate: true, force: true}})")

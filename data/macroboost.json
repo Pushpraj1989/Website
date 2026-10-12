@@ -1164,6 +1164,26 @@
    "src": "brands/barebelles.png",
    "alt": "Barebells logo"
   },
+  "film-whey-poster": {
+   "src": "film-whey.jpg",
+   "alt": "Frame from the Macro Boost product film",
+   "cap": "Product film made from Macro Boost's product photos"
+  },
+  "film-abe-poster": {
+   "src": "film-abe.jpg",
+   "alt": "Frame from the Macro Boost product film",
+   "cap": "Product film made from Macro Boost's product photos"
+  },
+  "film-beef-poster": {
+   "src": "film-beef.jpg",
+   "alt": "Frame from the Macro Boost product film",
+   "cap": "Product film made from Macro Boost's product photos"
+  },
+  "film-creatine-poster": {
+   "src": "film-creatine.jpg",
+   "alt": "Frame from the Macro Boost product film",
+   "cap": "Product film made from Macro Boost's product photos"
+  },
   "logo": {
    "src": "logo.png",
    "alt": "Macro Boost logo"
@@ -1215,6 +1235,58 @@
   ]
  },
  "promos": [
+  {
+   "image": "film-whey-poster",
+   "video": "film-whey.mp4",
+   "tag": "Film",
+   "kicker": "Applied Nutrition · Critical Whey",
+   "short": "Critical Whey",
+   "title": "24 g protein, 61 servings",
+   "text": "Whey concentrate, isolate and hydrolysed whey in one 2 kg tub. OMR 24.000.",
+   "cta": {
+    "label": "Shop Critical Whey",
+    "href": "@cat:AN Critical Whey 2kg Strawberry Milkshake"
+   }
+  },
+  {
+   "image": "film-abe-poster",
+   "video": "film-abe.mp4",
+   "tag": "Film",
+   "kicker": "ABE Performance Energy",
+   "short": "ABE can",
+   "title": "200 mg caffeine, zero sugar",
+   "text": "The pre-workout in a 330 ml can. OMR 1.000.",
+   "cta": {
+    "label": "Shop ABE",
+    "href": "@cat:ABE Performance Energy Drink – Apple Burst"
+   }
+  },
+  {
+   "image": "film-beef-poster",
+   "video": "film-beef.mp4",
+   "tag": "Film",
+   "kicker": "Applied Nutrition · Beef-XP",
+   "short": "Beef-XP",
+   "title": "30 g protein in a can",
+   "text": "Sparkling, zero sugar and dairy-free. OMR 0.950.",
+   "cta": {
+    "label": "Shop Beef-XP",
+    "href": "@cat:AN Beef XP Can Cherry Slushie 500ml"
+   }
+  },
+  {
+   "image": "film-creatine-poster",
+   "video": "film-creatine.mp4",
+   "tag": "Film",
+   "kicker": "Allmax Nutrition",
+   "short": "Creatine",
+   "title": "Creapure creatine, 400 g",
+   "text": "Micronised German creatine monohydrate. OMR 4.670.",
+   "cta": {
+    "label": "Shop creatine",
+    "href": "@cat:Allmax Creatine 400g"
+   }
+  },
   {
    "image": "blog-1",
    "tag": "Guide",

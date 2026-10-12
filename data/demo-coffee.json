@@ -1298,5 +1298,6 @@
   ],
   "sources": [
     "Fictional demo content written for the website kit."
-  ]
+  ],
+  "hub": false
 }

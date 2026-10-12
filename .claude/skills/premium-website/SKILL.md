@@ -81,6 +81,9 @@ Show the person a short sitemap and home section list. Continue unless they obje
    - Realism: cut out real product photos (`python3 tools/cutout.py … --out shared/img/<slug>/cut`) and use
      `converge`, `stack`, `lineup` with them; split one hero product into its real layers with
      `tools/split_layers.py`; drawn `assemble` art only when no photos exist (craft.md §7).
+   - Packaged products (supplements, drinks, cosmetics): one `film` per hero product (front cut-out + real
+     label photo + real figures + sibling flavours), then `python3 tools/record_film.py <url> "#id" out.mp4
+     --hide ".film-copy,.film-stat"` for clean video slides and social clips.
    - `assemble`: 1–2 hero products, bottom layer first, 4–7 layers, each with a name and a
      one-line note. Use `image` layers with transparent packshots when the brand has them.
 3. Run the copy pass on everything you wrote: [references/copy.md](references/copy.md).
@@ -103,7 +106,7 @@ weak, not only what errors. Checklist: [references/qa-deploy.md](references/qa-d
 
 ### 6. Deliver
 
-Full build (`python3 build/build.py`), commit, push, deploy (`deploy/` scripts, GitHub
+Refresh hub thumbnails (`python3 tools/hub_shots.py`), full build (`python3 build/build.py`), commit, push, deploy (`deploy/` scripts, GitHub
 Pages or any static host) and send the person one link per site plus the `VERIFY.md`
 items they must confirm. Say plainly what is sample or unverified.
 

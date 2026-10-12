@@ -2332,10 +2332,11 @@ body[data-page="checkout"] .action-bar, body[data-page="checkout"] .dock, body[d
 .film-sib img { height: min(24svh, 240px); width: auto; max-width: 100%; margin: 0 auto; object-fit: contain; }
 .film-sib { width: auto; max-width: min(15vw, 190px); }
 @media (max-width: 760px) { .film-front { height: 46svh; max-width: 70vw; } .film-sib img { height: 16svh; } .film-sib { max-width: 24vw; } }
-.brand-logo.is-wide { width: auto; height: 42px; padding: 6px 14px; border-radius: 99px; background: #fff; object-fit: contain; box-shadow: 0 4px 14px -8px rgba(0, 0, 0, 0.25); }
+.brand-logo.is-wide { width: auto; height: 50px; max-width: 220px; padding: 7px 16px; border-radius: 99px; background: #fff; object-fit: contain; box-shadow: 0 4px 14px -8px rgba(0, 0, 0, 0.25); }
 .site-footer .brand-logo.is-wide { background: transparent; padding: 0; height: 36px; }
 .film-sib { width: max-content; max-width: none; }
 .film-sib img { max-width: none; height: min(26svh, 250px); }
 .film-sib figcaption { max-width: 150px; margin: 0.6rem auto 0; line-height: 1.25; }
 @media (max-width: 760px) { .film-sib img { height: 15svh; } .film-sib figcaption { display: none; } }
 .film.is-done .film-beat.is-on .film-text { opacity: 0; transition: opacity 0.4s; }
+@media (max-width: 760px) { .brand-logo.is-wide { height: 42px; max-width: 170px; padding: 6px 12px; } }

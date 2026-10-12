@@ -5611,5 +5611,45 @@
     "license_url": "",
     "landing": "https://badralsamaahospitals.com",
     "owner": true
+  },
+  "dar-global/logo": {
+    "title": "Dar Global logo",
+    "creator": "Dar Global",
+    "license": "Owner's logo",
+    "license_url": "",
+    "landing": "https://darglobal.co.uk",
+    "owner": true
+  },
+  "macroboost/film-whey": {
+    "title": "Frame from the Macro Boost product film",
+    "creator": "Macro Boost",
+    "license": "Owner's photo",
+    "license_url": "",
+    "landing": "https://macroboost.com",
+    "owner": true
+  },
+  "macroboost/film-abe": {
+    "title": "Frame from the Macro Boost product film",
+    "creator": "Macro Boost",
+    "license": "Owner's photo",
+    "license_url": "",
+    "landing": "https://macroboost.com",
+    "owner": true
+  },
+  "macroboost/film-beef": {
+    "title": "Frame from the Macro Boost product film",
+    "creator": "Macro Boost",
+    "license": "Owner's photo",
+    "license_url": "",
+    "landing": "https://macroboost.com",
+    "owner": true
+  },
+  "macroboost/film-creatine": {
+    "title": "Frame from the Macro Boost product film",
+    "creator": "Macro Boost",
+    "license": "Owner's photo",
+    "license_url": "",
+    "landing": "https://macroboost.com",
+    "owner": true
   }
 }
