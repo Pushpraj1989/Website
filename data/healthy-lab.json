@@ -8,7 +8,7 @@
  "promo_fx": "ripple",
  "accent": "#3f8f2b",
  "img_dir": "healthy-lab",
- "footer_note": "Concept website for Healthy Lab (مطعم المعمل الصحي), built from its public Talabat menu on 12 October 2026. Not yet reviewed by Healthy Lab. Kitchen footage is free Mixkit stock (Mixkit Stock Video Free License) used as a placeholder.",
+ "footer_note": "Concept website for Healthy Lab (مطعم المعمل الصحي), built from its public Talabat menu on 12 October 2026. Not yet reviewed by Healthy Lab. Dish scenes are Healthy Lab's own photos, cut out and separated into layers. Kitchen footage is free Mixkit stock (Mixkit Stock Video Free License) used as a placeholder.",
  "brand": {
   "mode": "light",
   "style": "minimal",
@@ -4758,7 +4758,8 @@
   "Supplements: Talabat lists protein shakes and C4 pre-workout drinks only. Send the list of packaged supplements to add them as a shop category.",
   "Thawani Pay: merchant account, live keys and webhook secret; until then card payments run in Thawani's test mode.",
   "Kitchen video is Mixkit stock; replace with Healthy Lab's own footage.",
-  "Instagram and social links (none found in public search)."
+  "Instagram and social links (none found in public search).",
+  "The burger, salad and shake scenes use Healthy Lab's own menu photos, cut out and separated into layers; parts hidden in the photo were filled digitally. A short layered photo shoot (each ingredient shot on its own) would make them sharper."
  ],
  "sources": [
   "https://www.talabat.com/oman/restaurant/669005/healthy-lab?aid=1380 (menu, prices, photos, rating; read 12 Oct 2026)",
