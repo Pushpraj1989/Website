@@ -1,0 +1,53 @@
+{
+ "aspect": 1.1279,
+ "layers": [
+  {
+   "layer": "base",
+   "file": "salad-0-base.webp",
+   "left": 0.0,
+   "width": 0.9911,
+   "bottom": 0.0,
+   "height": 1.0
+  },
+  {
+   "layer": "seeds",
+   "file": "salad-1-seeds.webp",
+   "left": 0.3757,
+   "width": 0.3353,
+   "bottom": 0.0801,
+   "height": 0.2681
+  },
+  {
+   "layer": "feta",
+   "file": "salad-2-feta.webp",
+   "left": 0.5779,
+   "width": 0.2771,
+   "bottom": 0.1813,
+   "height": 0.3637
+  },
+  {
+   "layer": "pomegranate",
+   "file": "salad-3-pomegranate.webp",
+   "left": 0.4675,
+   "width": 0.3807,
+   "bottom": 0.5539,
+   "height": 0.3793
+  },
+  {
+   "layer": "pumpkin",
+   "file": "salad-4-pumpkin.webp",
+   "left": 0.3205,
+   "width": 0.2712,
+   "bottom": 0.6674,
+   "height": 0.3081
+  },
+  {
+   "layer": "pot",
+   "file": "salad-5-pot.webp",
+   "left": 0.3314,
+   "width": 0.3037,
+   "bottom": 0.3326,
+   "height": 0.3437
+  }
+ ]
+}

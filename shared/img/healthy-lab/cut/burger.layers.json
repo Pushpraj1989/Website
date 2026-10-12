@@ -1,0 +1,45 @@
+{
+ "aspect": 1.1051,
+ "layers": [
+  {
+   "layer": "lettuce",
+   "file": "burger-0-lettuce.webp",
+   "left": 0.0492,
+   "width": 0.9508,
+   "bottom": 0.0,
+   "height": 0.2011
+  },
+  {
+   "layer": "tomato",
+   "file": "burger-1-tomato.webp",
+   "left": 0.1164,
+   "width": 0.6885,
+   "bottom": 0.0707,
+   "height": 0.2355
+  },
+  {
+   "layer": "beef",
+   "file": "burger-2-beef.webp",
+   "left": 0.0,
+   "width": 1.0,
+   "bottom": 0.1685,
+   "height": 0.4239
+  },
+  {
+   "layer": "cheese",
+   "file": "burger-3-cheese.webp",
+   "left": 0.1984,
+   "width": 0.7361,
+   "bottom": 0.2645,
+   "height": 0.2736
+  },
+  {
+   "layer": "bun",
+   "file": "burger-4-bun.webp",
+   "left": 0.0869,
+   "width": 0.8131,
+   "bottom": 0.5489,
+   "height": 0.4511
+  }
+ ]
+}

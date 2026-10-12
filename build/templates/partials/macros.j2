@@ -582,7 +582,7 @@
 {#- Real ingredients (cut-out photos) float around the frame and fly into the dish as you scroll;
     the dish settles, then its numbers appear around it. Reduced motion: the finished scene. -#}
 {%- set it = (s.catalogue['items'] | selectattr('title', 'equalto', m.product) | first) if m.product else none %}
-<section class="cv" id="{{ m.id or 'converge' }}" data-converge style="--cv-h: {{ m.height or 240 }}vh">
+<section class="cv" id="{{ m.id or 'converge' }}" data-converge{% if m.mode %} data-mode="{{ m.mode }}"{% endif %} style="--cv-h: {{ m.height or 240 }}vh">
   <div class="cv-stage">
     <div class="cv-bg" aria-hidden="true"><i></i></div>
     <div class="wrap cv-copy">
@@ -592,9 +592,21 @@
       <div class="cta-row">{% if m.cta %}<a class="btn btn-primary" href="{{ m.cta.href }}" data-magnetic>{{ m.cta.label }} {{ icon('arrow') }}</a>{% endif %}{% if m.cta2 %}<a class="btn btn-ghost" href="{{ m.cta2.href }}">{{ m.cta2.label }}</a>{% endif %}</div>
     </div>
     <div class="cv-scene">
-      <div class="cv-plate">
+      <div class="cv-plate"{% if m.aspect %} style="aspect-ratio: {{ m.aspect }}"{% endif %}>
         <span class="cv-shadow" aria-hidden="true"></span>
+        {%- if m.parts %}
+        {#- exact mode: the dish photo split into ingredient groups (tools/split_layers.py); each lands in its real spot -#}
+        <div class="cv-dish is-exact">
+          {%- for g in m.parts %}
+          <figure class="cv-part{% if g.base %} is-base{% endif %}" data-x="{{ g.x or 0 }}" data-y="{{ g.y or 0 }}" data-r="{{ g.rot or 0 }}" data-z="{{ g.z or 0.5 }}" style="left: {{ '%.2f' % (g.left * 100) }}%; width: {{ '%.2f' % (g.width * 100) }}%; bottom: {{ '%.2f' % (g.bottom * 100) }}%">
+            <img src="{{ src(g.image) }}" alt="{{ (s.images[m.dish].alt if g.base else '') }}"{% if not g.base %} aria-hidden="true"{% endif %}>
+            {%- if g.label %}<figcaption class="cv-tag">{{ g.label }}</figcaption>{% endif %}
+          </figure>
+          {%- endfor %}
+        </div>
+        {%- else %}
         <img class="cv-dish" src="{{ src(m.dish) }}" alt="{{ s.images[m.dish].alt }}">
+        {%- endif %}
         {%- for c in m.chips or [] %}<span class="cv-chip" style="--a: {{ c.angle or (loop.index0 * 90 - 45) }}deg"><b>{{ c.value }}</b>{{ c.label }}</span>{% endfor %}
       </div>
       {%- for g in m.ingredients %}
@@ -632,9 +644,17 @@
       </div>
       <div class="stk-view" style="--stk-w: {{ m.width or 78 }}%">
         <span class="stk-shadow" aria-hidden="true"></span>
+        {%- if m.aspect %}
+        <div class="stk-box" style="aspect-ratio: {{ m.aspect }}; width: {{ m.width or 80 }}%">
+          {%- for l in m.layers %}
+          <figure class="stk-l is-exact" data-i="{{ loop.index0 }}" data-dx="{{ l.dx or 0 }}" data-rot="{{ l.rot or 0 }}" style="left: {{ '%.2f' % (l.left * 100) }}%; width: {{ '%.2f' % (l.width * 100) }}%; bottom: {{ '%.2f' % (l.bottom * 100) }}%; --i: {{ loop.index0 }}; z-index: {{ loop.index }}"><img src="{{ src(l.image) }}" alt="{{ l.name }}"><figcaption>{{ l.name }}</figcaption></figure>
+          {%- endfor %}
+        </div>
+        {%- else %}
         {%- for l in m.layers %}
         <figure class="stk-l" data-i="{{ loop.index0 }}" data-t="{{ l.t or 10 }}" data-dx="{{ l.dx or 0 }}" data-rot="{{ l.rot or 0 }}" style="--lw: {{ l.w or 78 }}%; --i: {{ loop.index0 }}; z-index: {{ loop.index }}"><img src="{{ src(l.image) }}" alt="{{ l.name }}"><figcaption>{{ l.name }}</figcaption></figure>
         {%- endfor %}
+        {%- endif %}
       </div>
     </div>
     {%- if m.cap %}<span class="cv-cap">{{ m.cap }}</span>{% endif %}

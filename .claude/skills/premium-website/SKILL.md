@@ -79,7 +79,8 @@ Show the person a short sitemap and home section list. Continue unless they obje
    - Selling online: catalogue items get a numeric `amount`, plus a `shop` block (payments, delivery,
      pickup, plans). Read [references/commerce.md](references/commerce.md).
    - Realism: cut out real product photos (`python3 tools/cutout.py … --out shared/img/<slug>/cut`) and use
-     `converge`, `stack`, `lineup` with them; drawn `assemble` art only when no photos exist (craft.md §7).
+     `converge`, `stack`, `lineup` with them; split one hero product into its real layers with
+     `tools/split_layers.py`; drawn `assemble` art only when no photos exist (craft.md §7).
    - `assemble`: 1–2 hero products, bottom layer first, 4–7 layers, each with a name and a
      one-line note. Use `image` layers with transparent packshots when the brand has them.
 3. Run the copy pass on everything you wrote: [references/copy.md](references/copy.md).

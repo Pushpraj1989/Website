@@ -482,6 +482,62 @@
    "src": "hero.jpg",
    "alt": "Healthy Lab bread on a wooden tray",
    "cap": "Healthy Lab photo"
+  },
+  "lay-lettuce": {
+   "src": "cut/burger-0-lettuce.webp",
+   "alt": "Lettuce from Healthy Lab's Lean Beef Burger"
+  },
+  "lay-tomato": {
+   "src": "cut/burger-1-tomato.webp",
+   "alt": "Tomato from Healthy Lab's Lean Beef Burger"
+  },
+  "lay-beef": {
+   "src": "cut/burger-2-beef.webp",
+   "alt": "Lean beef from Healthy Lab's Lean Beef Burger"
+  },
+  "lay-cheese": {
+   "src": "cut/burger-3-cheese.webp",
+   "alt": "Cheddar from Healthy Lab's Lean Beef Burger"
+  },
+  "lay-bun": {
+   "src": "cut/burger-4-bun.webp",
+   "alt": "Sesame bun from Healthy Lab's Lean Beef Burger"
+  },
+  "sal-base": {
+   "src": "cut/salad-0-base.webp",
+   "alt": "Pumpkin Feta Quinoa Salad"
+  },
+  "sal-seeds": {
+   "src": "cut/salad-1-seeds.webp",
+   "alt": "Pumpkin seeds"
+  },
+  "sal-feta": {
+   "src": "cut/salad-2-feta.webp",
+   "alt": "Feta"
+  },
+  "sal-pomegranate": {
+   "src": "cut/salad-3-pomegranate.webp",
+   "alt": "Pomegranate"
+  },
+  "sal-pumpkin": {
+   "src": "cut/salad-4-pumpkin.webp",
+   "alt": "Roast pumpkin"
+  },
+  "sal-pot": {
+   "src": "cut/salad-5-pot.webp",
+   "alt": "Dressing"
+  },
+  "ing-strawberries": {
+   "src": "cut/ing-strawberries.webp",
+   "alt": ""
+  },
+  "ing-cashew": {
+   "src": "cut/ing-cashew.webp",
+   "alt": ""
+  },
+  "ing-cashew-leaf": {
+   "src": "cut/ing-cashew-leaf.webp",
+   "alt": ""
   }
  },
  "ticker": {
@@ -603,6 +659,81 @@
   {
    "type": "converge",
    "id": "real-food",
+   "aspect": 1.1279,
+   "parts": [
+    {
+     "image": "sal-base",
+     "left": 0.0,
+     "width": 0.9911,
+     "bottom": 0.0,
+     "x": 0,
+     "y": 0,
+     "rot": 0,
+     "z": 0.5,
+     "base": true,
+     "label": null
+    },
+    {
+     "image": "sal-seeds",
+     "left": 0.3757,
+     "width": 0.3353,
+     "bottom": 0.0801,
+     "x": 4,
+     "y": 50,
+     "rot": 14,
+     "z": 0.9,
+     "base": false,
+     "label": "Pumpkin seeds"
+    },
+    {
+     "image": "sal-feta",
+     "left": 0.5779,
+     "width": 0.2771,
+     "bottom": 0.1813,
+     "x": 50,
+     "y": 22,
+     "rot": -14,
+     "z": 0.6,
+     "base": false,
+     "label": "Feta"
+    },
+    {
+     "image": "sal-pomegranate",
+     "left": 0.4675,
+     "width": 0.3807,
+     "bottom": 0.5539,
+     "x": 48,
+     "y": -38,
+     "rot": 12,
+     "z": 0.4,
+     "base": false,
+     "label": "Pomegranate"
+    },
+    {
+     "image": "sal-pumpkin",
+     "left": 0.3205,
+     "width": 0.2712,
+     "bottom": 0.6674,
+     "x": -44,
+     "y": -40,
+     "rot": -16,
+     "z": 0.7,
+     "base": false,
+     "label": "Roast pumpkin"
+    },
+    {
+     "image": "sal-pot",
+     "left": 0.3314,
+     "width": 0.3037,
+     "bottom": 0.3326,
+     "x": -46,
+     "y": 30,
+     "rot": 0,
+     "z": 0.3,
+     "base": false,
+     "label": "Dressing"
+    }
+   ],
    "product": "Pumpkin Feta Quinoa Salad",
    "dish": "cut:pumpkin-feta-quinoa-salad",
    "height": 250,
@@ -640,9 +771,8 @@
     }
    ],
    "ingredients": [],
-   "cap": "Dish: Healthy Lab menu photo. Ingredients: illustrative open-licence photos."
+   "cap": "Healthy Lab's own salad photo, separated into its ingredients."
   },
-  "rail",
   {
    "type": "lineup",
    "title": "The lineup.",
@@ -664,6 +794,71 @@
    "type": "statement",
    "kicker": "The guilt-free food hub",
    "text": "Healthy Lab cooks real meals, weighs them and prints the numbers, so eating well never feels like a diet."
+  },
+  {
+   "type": "stack",
+   "id": "the-stack",
+   "product": "Lean Beef Burger",
+   "height": 320,
+   "aspect": 1.1051,
+   "width": 82,
+   "kicker": "Best seller · Lean Beef Burger",
+   "title": "The <em>stack.</em>",
+   "intro": "Our Lean Beef Burger, taken apart layer by layer: 399 kcal, 21 g protein, 15 g fat and 45 g carbs, as listed on our menu.",
+   "layers": [
+    {
+     "image": "lay-lettuce",
+     "name": "Lettuce",
+     "note": "Crisp leaves at the base",
+     "left": 0.0492,
+     "width": 0.9508,
+     "bottom": 0.0,
+     "dx": -18,
+     "rot": -3
+    },
+    {
+     "image": "lay-tomato",
+     "name": "Tomato",
+     "note": "Fresh slices",
+     "left": 0.1164,
+     "width": 0.6885,
+     "bottom": 0.0707,
+     "dx": 22,
+     "rot": 3
+    },
+    {
+     "image": "lay-beef",
+     "name": "Lean beef",
+     "note": "Sliced, 21 g protein in the burger",
+     "left": 0.0,
+     "width": 1.0,
+     "bottom": 0.1685,
+     "dx": 0,
+     "rot": 0
+    },
+    {
+     "image": "lay-cheese",
+     "name": "Cheddar",
+     "note": "Melted over the beef",
+     "left": 0.1984,
+     "width": 0.7361,
+     "bottom": 0.2645,
+     "dx": -14,
+     "rot": -2
+    },
+    {
+     "image": "lay-bun",
+     "name": "Sesame bun",
+     "note": "Toasted, with its cocktail pick",
+     "left": 0.0869,
+     "width": 0.8131,
+     "bottom": 0.5489,
+     "dx": 0,
+     "rot": 0
+    }
+   ],
+   "cta_label": "See the burger",
+   "cap": "Healthy Lab's own burger photo, separated into its layers."
   },
   {
    "type": "scrub",
@@ -698,6 +893,93 @@
      }
     }
    ]
+  },
+  {
+   "type": "converge",
+   "id": "shake",
+   "product": "Strawberry Cashew Shake",
+   "dish": "cut:strawberry-cashew-shake",
+   "height": 200,
+   "kicker": "Protein shakes",
+   "title": "Strawberries, cashews, <em>28 g</em> of protein.",
+   "text": "The Strawberry Cashew Shake: 212 kcal, 28 g protein, OMR 1.250.",
+   "cta": {
+    "label": "All shakes",
+    "href": "@cat:Strawberry Cashew Shake"
+   },
+   "chips": [
+    {
+     "value": "212",
+     "label": "kcal",
+     "angle": -140
+    },
+    {
+     "value": "28 g",
+     "label": "protein",
+     "angle": -40
+    },
+    {
+     "value": "8 g",
+     "label": "fat",
+     "angle": 140
+    },
+    {
+     "value": "12 g",
+     "label": "carbs",
+     "angle": 40
+    }
+   ],
+   "ingredients": [
+    {
+     "image": "ing-strawberries",
+     "x": -12,
+     "y": -40,
+     "size": 240,
+     "rot": -15,
+     "z": 0.55
+    },
+    {
+     "image": "ing-cashew",
+     "x": 26,
+     "y": -38,
+     "size": 120,
+     "rot": 30,
+     "z": 0.4
+    },
+    {
+     "image": "ing-cashew-leaf",
+     "x": 30,
+     "y": 30,
+     "size": 200,
+     "rot": -10,
+     "z": 0.9
+    },
+    {
+     "image": "ing-strawberries",
+     "x": -36,
+     "y": 34,
+     "size": 170,
+     "rot": 40,
+     "z": 0.3
+    },
+    {
+     "image": "ing-cashew",
+     "x": -12,
+     "y": 40,
+     "size": 90,
+     "rot": -40,
+     "z": 0.2
+    },
+    {
+     "image": "ing-cashew",
+     "x": 32,
+     "y": -2,
+     "size": 140,
+     "rot": 60,
+     "z": 0.95
+    }
+   ],
+   "cap": "Shake, strawberries and cashews: Healthy Lab's own photo."
   },
   "stats",
   {

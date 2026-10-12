@@ -11,6 +11,14 @@ video) the person shares to items here; build new modules only for what is missi
 converge). Drawn SVG art (`assemble` with shapes) is a last resort for products with no photos;
 never use it for food when photos exist. Supporting ingredients and layers come from open-licence
 photos (Openverse, Wikimedia; CC0 / CC BY), cut out the same way and captioned "illustrative".
+Better still, take them from the company's own photos: loose produce beside a dish (strawberries,
+cashews, tomato halves) comes out as separate pieces of the cut-out, and
+`tools/split_layers.py` splits ONE real product photo into its layers (burger: bun, cheddar, beef,
+tomato, lettuce; salad bowl: pumpkin, pomegranate, feta, seeds, dressing) by colour and region,
+filling hidden parts from the layer's own texture, and writes `<name>.layers.json` with each
+layer's place. `stack` (`aspect` + layers with `left/width/bottom`) and `converge` (`aspect` +
+`parts`) then rebuild the real product exactly and open it into its real ingredients.
+Open-licence stock for single ingredients is scarce and often share-alike; prefer the company's photos.
 
 | Type | What it is | Use when |
 | --- | --- | --- |

@@ -62,6 +62,12 @@ testimonials, partners, locations, faq, bmi, emi, depth, scrub, stages. Order is
 {"type": "stack", "id": "the-stack", "product": "Lean Beef Burger", "title": "The <em>stack.</em>", "intro": "…", "height": 320,
  "layers": [{"image": "lay-bun-bottom", "name": "Toasted bun", "note": "…", "w": 66, "t": 7, "dx": 0, "rot": 0}]}  // bottom first; w = width %, t = thickness % of the view
 
+// exact modes, from tools/split_layers.py (<name>.layers.json): the real product is rebuilt, then opens up
+{"type": "converge", "aspect": 1.128, "parts": [{"image": "sal-base", "left": 0, "width": 0.99, "bottom": 0, "base": true},
+   {"image": "sal-feta", "left": 0.58, "width": 0.28, "bottom": 0.18, "x": 50, "y": 22, "rot": -14, "z": 0.6, "label": "Feta"}], …}
+   // default: starts whole, explodes into labelled ingredients, closes; "mode": "in" makes the parts fly in instead
+{"type": "stack", "aspect": 1.105, "width": 82, "layers": [{"image": "lay-beef", "name": "Lean beef", "left": 0, "width": 1, "bottom": 0.17, "dx": 0, "rot": 0}], …}
+
 {"type": "lineup", "title": "The lineup.", "text": "…", "items": ["Product title", "…"]}   // default: featured items
 
 {"type": "stages", "id": "progress", "kicker": "Construction", "title": "From plot to keys",

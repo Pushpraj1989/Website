@@ -811,6 +811,8 @@
       const ang = i * 2.39996, rad = 0.06 + (i % 4) * 0.045; // golden-angle landing spots inside the dish
       return { el, x: +el.dataset.x / 100, y: +el.dataset.y / 100, r: +el.dataset.r, z, tx: Math.cos(ang) * rad, ty: Math.sin(ang) * rad * 0.7, spin: (i % 2 ? 1 : -1) * (90 + (i % 3) * 60), ph: i * 1.7 };
     });
+    const parts = Array.from(sec.querySelectorAll(".cv-part:not(.is-base)")).map((el, i) => ({ el, x: +el.dataset.x / 100, y: +el.dataset.y / 100, r: +el.dataset.r, z: parseFloat(el.dataset.z) || 0.5, i, ph: i * 2.1 }));
+    const explode = parts.length > 0 && sec.dataset.mode !== "in";
     let mx = 0, my = 0, tx = 0, ty = 0, cur = 0, done = false;
     if (T1.fine) sec.addEventListener("pointermove", (e) => { tx = (e.clientX / innerWidth - 0.5) * 2; ty = (e.clientY / innerHeight - 0.5) * 2; });
     const tick = (t) => {
@@ -820,8 +822,11 @@
         mx += (tx - mx) * 0.05; my += (ty - my) * 0.05;
         const W = scene.clientWidth, H = scene.clientHeight, D = dish.clientWidth || W * 0.4;
         const a = ease(clamp01((cur - 0.06) / 0.52)), time = t / 1000;
+        // exploded view (exact parts, default): the real dish opens into its ingredients, names show, then it closes
+        const ex = cur < 0.55 ? ease(clamp01((cur - 0.06) / 0.3)) : 1 - ease(clamp01((cur - 0.6) / 0.2));
+        const glide = explode ? ease(clamp01((cur - 0.03) / 0.3)) : a;
         // the dish glides from its spot beside the headline to the centre while the headline leaves
-        const pr = plate.offsetLeft + plate.offsetWidth / 2, shift = (W / 2 - pr) * a;
+        const pr = plate.offsetLeft + plate.offsetWidth / 2, shift = (W / 2 - pr) * glide;
         ings.forEach((g) => {
           const fl = (1 - a);
           const x = lerp(g.x * W, g.tx * D, a) + shift + Math.sin(time * 0.7 + g.ph) * 10 * fl - mx * g.z * 40 * fl;
@@ -830,11 +835,25 @@
           g.el.style.transform = `translate3d(calc(${x.toFixed(1)}px - 50%), calc(${y.toFixed(1)}px - 50%), 0) rotate(${(g.r + g.spin * a).toFixed(1)}deg) scale(${sc.toFixed(3)})`;
           g.el.style.opacity = String(a > 0.8 ? Math.max(0, 1 - (a - 0.8) / 0.2) : 1);
         });
-        plate.style.transform = `translate3d(${(shift - mx * 10).toFixed(1)}px, ${(-my * 8).toFixed(1)}px, 0) scale(${lerp(0.7, 1, a).toFixed(3)})`;
-        dish.style.transform = `rotate(${(lerp(-28, 0, a) + cur * 14).toFixed(2)}deg)`;
+        // exact parts: each ingredient group flies in from off-frame and lands in its real place, one after another
+        sec.style.setProperty("--ex", explode ? ex.toFixed(3) : 0);
+        parts.forEach((g) => {
+          const b = explode ? 1 - ex * 0.62 : ease(clamp01((cur - 0.05 - g.i * 0.055) / 0.42)), fl = 1 - b;
+          const x = g.x * W * fl + Math.sin(time * 0.7 + g.ph) * 8 * fl - mx * g.z * 36 * fl;
+          const y = g.y * H * fl + Math.cos(time * 0.9 + g.ph) * 10 * fl - my * g.z * 26 * fl;
+          g.el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${(g.r * fl).toFixed(1)}deg) scale(${(1 + g.z * 0.5 * fl).toFixed(3)})`;
+          g.el.style.filter = g.z > 0.8 && fl > 0.05 ? `blur(${((g.z - 0.8) * 12 * fl).toFixed(1)}px)` : "";
+        });
+        if (explode) {
+          plate.style.transform = `translate3d(${(shift - mx * 10).toFixed(1)}px, ${(-my * 8).toFixed(1)}px, 0) scale(${(1 - ex * 0.18).toFixed(3)})`;
+          dish.style.transform = `rotate(${(cur * 10).toFixed(2)}deg)`;
+        } else {
+          plate.style.transform = `translate3d(${(shift - mx * 10).toFixed(1)}px, ${(-my * 8).toFixed(1)}px, 0) scale(${lerp(0.7, 1, a).toFixed(3)})`;
+          dish.style.transform = `rotate(${(lerp(-28, 0, a) + cur * 14).toFixed(2)}deg)`;
+        }
         if (copy) { const f = clamp01((cur - 0.04) / 0.22); copy.style.opacity = String(1 - f); copy.style.transform = `translateY(${(-f * 60).toFixed(1)}px)`; copy.style.pointerEvents = f > 0.5 ? "none" : ""; }
         if (hint) hint.style.opacity = String(1 - clamp01(cur / 0.03));
-        const d = cur > 0.6; if (d !== done) { done = d; sec.classList.toggle("is-done", d); }
+        const d = cur > (explode ? 0.8 : 0.6); if (d !== done) { done = d; sec.classList.toggle("is-done", d); }
       }
       requestAnimationFrame(tick);
     };
@@ -853,14 +872,21 @@
       if (visibleNow(sec)) {
         const target = sectionProgress(sec);
         cur += (target - cur) * 0.12; if (Math.abs(target - cur) < 0.0004) cur = target;
-        const H = view.clientHeight;
+        const H = view.clientHeight, box = sec.querySelector(".stk-box");
         const open = cur < 0.5 ? ease(clamp01((cur - 0.1) / 0.4)) : 1 - ease(clamp01((cur - 0.82) / 0.18));
         const thick = layers.map((l) => (parseFloat(l.dataset.t) || 10) / 100 * H);
         const top = layers[n - 1].clientHeight || H * 0.3;
         const sumT = thick.slice(0, n - 1).reduce((x, y) => x + y, 0);
         const gap = Math.max(18, (H * 0.92 - top - sumT) / Math.max(1, n - 1));
+        if (box) {  // exact mode: layers start where they sat in the photo, then spread apart
+          const g = Math.max(18, (H * 0.94 - box.clientHeight) / Math.max(1, n - 1));
+          layers.forEach((l, i) => {
+            const dx = (parseFloat(l.dataset.dx) || 0) * open, rot = (parseFloat(l.dataset.rot) || 0) * open;
+            l.style.transform = `translate3d(${dx}px, ${(-i * g * open).toFixed(1)}px, 0) rotate(${rot}deg)`;
+          });
+        }
         let y = 0;
-        layers.forEach((l, i) => {
+        if (!box) layers.forEach((l, i) => {
           const yy = y + i * gap * open, dx = (parseFloat(l.dataset.dx) || 0) * open, rot = (parseFloat(l.dataset.rot) || 0) * open;
           l.style.transform = `translate3d(calc(-50% + ${dx}px), ${(-yy).toFixed(1)}px, 0) rotate(${rot}deg)`;
           y += thick[i];

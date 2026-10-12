@@ -19,6 +19,30 @@ from pathlib import Path
 from PIL import Image
 
 
+def drop_islands(alpha, keep=0.06):
+    """Remove stray specks (a fork at the edge, crumbs of the plate): keep connected blobs of
+    at least `keep` x the largest blob's area."""
+    try:
+        import numpy as np
+        from scipy import ndimage
+    except ImportError:
+        return alpha
+    a = np.array(alpha)
+    lab, n = ndimage.label(a > 40)
+    if n < 2:
+        return alpha
+    sizes = ndimage.sum(np.ones_like(a), lab, range(1, n + 1))
+    ok = [i + 1 for i, v in enumerate(sizes) if v >= sizes.max() * keep]
+    mask = ndimage.binary_dilation(np.isin(lab, ok), iterations=3)
+    return Image.fromarray(np.where(mask, a, 0).astype("uint8"))
+
+
+def tidy(cut):
+    alpha = drop_islands(cut.getchannel("A").point(lambda v: 0 if v < 12 else v))  # drop faint halo and specks
+    cut.putalpha(alpha)
+    return cut, alpha
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("images", nargs="+")
@@ -26,10 +50,16 @@ def main():
     ap.add_argument("--model", default="birefnet-general-lite")
     ap.add_argument("--size", type=int, default=1400)
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--tidy", action="store_true", help="only re-tidy existing cut-outs in --out (no model)")
     a = ap.parse_args()
+    out = Path(a.out)
+    if a.tidy:
+        for f in map(Path, a.images):
+            cut, alpha = tidy(Image.open(f).convert("RGBA"))
+            cut.crop(alpha.getbbox()).save(f, "WEBP", quality=82, method=6)
+        return
     from rembg import new_session, remove  # imported late so --help works without rembg
 
-    out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     session = new_session(a.model)
     for src in map(Path, a.images):
@@ -38,8 +68,7 @@ def main():
             continue
         im = Image.open(src).convert("RGB")
         cut = remove(im, session=session, post_process_mask=True)
-        alpha = cut.getchannel("A").point(lambda v: 0 if v < 12 else v)  # drop faint halo
-        cut.putalpha(alpha)
+        cut, alpha = tidy(cut)
         box = alpha.getbbox()
         if not box:
             print("empty cutout:", src, file=sys.stderr)
