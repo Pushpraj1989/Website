@@ -3,6 +3,7 @@
 
     python3 tools/qa.py demo-coffee                 # every page, desktop + phone
     python3 tools/qa.py badr-al-samaa --pages 20    # first 20 pages
+    python3 tools/qa.py starcare --only index.html care.html   # recheck single pages
     python3 tools/qa.py demo-coffee --shots         # also save screenshots to qa-shots/
 
 For each page, at 1440x900 and 390x844, it fails on:
@@ -78,6 +79,7 @@ def main():
     ap.add_argument("slugs", nargs="+")
     ap.add_argument("--pages", type=int, default=0, help="limit pages per site (0 = all)")
     ap.add_argument("--shots", action="store_true")
+    ap.add_argument("--only", nargs="*", default=[], help="check only these page files, e.g. index.html care.html")
     a = ap.parse_args()
 
     httpd, port = serve(ROOT)
@@ -90,6 +92,8 @@ def main():
             if not site.exists():
                 print(f"no build for {slug}: run python3 build/build.py first"); failures += 1; continue
             pages = sorted(site.glob("*.html"), key=lambda f: (f.name != "index.html", f.name))
+            if a.only:
+                pages = [f for f in pages if f.name in a.only]
             if a.pages:
                 pages = pages[: a.pages]
             report[slug] = []

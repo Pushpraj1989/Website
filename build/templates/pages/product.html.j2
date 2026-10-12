@@ -55,7 +55,7 @@
       {%- endif %}
     </div>
     {%- if it.nutrition %}
-    <aside class="nutri" data-anim="up">
+    <aside class="nutri">
       <p class="side-h">{{ C.nutrition_title or 'Nutrition' }}{% if it.serving %} · {{ it.serving }}{% endif %}</p>
       {%- for n in it.nutrition %}
       <div class="nutri-row"><span>{{ n.label }}</span><b>{{ n.value }}</b>{% if n.pct %}<i style="--p: {{ n.pct }}"></i>{% endif %}</div>

@@ -29,7 +29,7 @@
       {%- if d.src %}<p class="src-note">Source: <a href="{{ d.src }}" rel="noopener">{{ d.src }}</a></p>{% endif %}
     </article>
     <aside class="detail-side">
-      <div class="side-card" data-anim="up">
+      <div class="side-card">
         <span class="side-ico">{{ icon(it.icon) }}</span>
         <p class="side-t">{{ s.detail_cta.title if s.detail_cta else 'Talk to our team' }}</p>
         <p class="side-p">{{ s.detail_cta.text if s.detail_cta else s.contact.intro }}</p>
