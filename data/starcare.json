@@ -242,6 +242,11 @@
    "src": "br-calicut.jpg",
    "alt": "Starcare Calicut building",
    "cap": "Photo: starcarehospital.com"
+  },
+  "hero": {
+   "src": "fac-lobby.jpg",
+   "alt": "Hospital lobby with green armchairs and the teal Starcare reception",
+   "cap": "Render: Starcare facilities gallery"
   }
  },
  "ticker": {
