@@ -103,7 +103,7 @@ def load_ui(lang):
 _SKIP_BLOCK = re.compile(r"(<script\b.*?</script>|<style\b.*?</style>|<svg\b.*?</svg>)", re.S | re.I)
 _ATTR = re.compile(r'\b(aria-label|placeholder|title|alt|content|data-label|value)="([^"]*[A-Za-z][^"]*)"')
 _TEXT = re.compile(r">([^<>]*[A-Za-z][^<>]*)<")
-_ASSET = re.compile(r'\b(src|href|data-src|poster|srcset|data-poster|data-video)="(assets/[^"]*)"')
+_ASSET = re.compile(r'(?<=\s)([\w:-]+)="(assets/[^"]*)"')  # any attribute pointing into assets/
 
 
 def localize_html(html, ui, up="../"):

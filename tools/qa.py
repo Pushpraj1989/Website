@@ -50,6 +50,9 @@ PROBE = """async () => {
       if (cs.visibility === 'hidden' || +cs.opacity < 0.05) stuck.set(el, key); else stuck.delete(el);
     });
   };
+  // wait for the opening loader: visitors cannot scroll until it lifts and the hero intro plays
+  for (let i = 0; i < 60 && document.querySelector('.loader:not([hidden])'); i++) await sleep(100);
+  await sleep(900);
   for (let y = 0; y < H(); y += innerHeight * 0.5) { go(y); await sleep(650); check(); }
   const broken = [...document.images].filter((i) => i.complete && i.naturalWidth === 0 && i.getAttribute('src')).map((i) => i.getAttribute('src'));
   return {

@@ -16,8 +16,8 @@
     <div class="hero-copy">
       <p class="eyebrow" data-anim="up" {{ '' if s.promos else 'data-intro' }}>{{ s.hero.eyebrow }}</p>
       {% if s.promos %}<h2 class="hero-title" data-anim="lines">{{ s.theme_data.hero_html | safe }}</h2>{% else %}<h1 class="hero-title" data-anim="lines" {{ '' if s.promos else 'data-intro' }}>{{ s.theme_data.hero_html | safe }}</h1>{% endif %}
-      <p class="hero-lede" data-anim="up" {{ '' if s.promos else 'data-intro' }} data-delay=".45">{{ s.hero.lede }}</p>
-      <div class="cta-row" data-anim="up" {{ '' if s.promos else 'data-intro' }} data-delay=".6">
+      <p class="hero-lede" data-anim="up" {{ '' if s.promos else 'data-intro data-delay=".45"' }}>{{ s.hero.lede }}</p>
+      <div class="cta-row" data-anim="up" {{ '' if s.promos else 'data-intro data-delay=".6"' }}>
         <a class="btn btn-primary" href="{{ s.hero.primary.href }}" data-magnetic>{{ s.hero.primary.label }} {{ icon('arrow') }}</a>
         <a class="btn btn-ghost" href="{{ s.hero.secondary.href }}" data-magnetic>{{ s.hero.secondary.label }}</a>
       </div>
@@ -34,7 +34,7 @@
       </div>
       <p class="giant giant-front" aria-hidden="true" data-drift="30">{{ s.theme_data.giant }}</p>
       {%- for b in s.theme_data.badges %}
-      <div class="badge badge-{{ loop.index }}" data-anim="scale" {{ '' if s.promos else 'data-intro' }} data-delay="{{ 0.8 + loop.index0 * 0.15 }}">
+      <div class="badge badge-{{ loop.index }}" data-anim="scale" {{ '' if s.promos else 'data-intro' }} data-delay="{{ ((0 if s.promos else 0.8) + loop.index0 * 0.12) | round(2) }}">
         <strong>{{ m.count(b) }}</strong><span>{{ b.label }}</span>
       </div>
       {%- endfor %}
