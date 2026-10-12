@@ -5683,5 +5683,29 @@
     "license_url": "",
     "landing": "https://macroboost.com",
     "owner": true
+  },
+  "macroboost/meal-1": {
+    "title": "One meal box from the Macro Boost Healthy Meal Subscription listing",
+    "creator": "Macro Boost",
+    "license": "Owner's photo",
+    "license_url": "",
+    "landing": "https://macroboost.com",
+    "owner": true
+  },
+  "macroboost/meal-2": {
+    "title": "Two meal boxes from the Macro Boost Healthy Meal Subscription listing",
+    "creator": "Macro Boost",
+    "license": "Owner's photo",
+    "license_url": "",
+    "landing": "https://macroboost.com",
+    "owner": true
+  },
+  "macroboost/meal-3": {
+    "title": "Three meal boxes from the Macro Boost Healthy Meal Subscription listing",
+    "creator": "Macro Boost",
+    "license": "Owner's photo",
+    "license_url": "",
+    "landing": "https://macroboost.com",
+    "owner": true
   }
 }

@@ -315,6 +315,16 @@ def prepare(site):
                                                   "cat": it.get("category", ""), "opts": [o["label"] for o in it.get("options") or []],
                                                   **{k[0]: float(re.sub(r"[^\d.]", "", x["value"]) or 0) for x in it.get("macros") or []
                                                      for k in [x["label"].lower()] if k in ("kcal", "protein")}}
+        # a priced subscription (period x meals a day): each option is a cart item at its listed price
+        sub = shop.get("plans") or {}
+        if sub.get("mode") == "subscription":
+            for p in sub["periods"]:
+                for ml in sub["meals"]:
+                    key = f"{p['key']}{ml['n']}"
+                    if key in sub["tiers"]:
+                        items["meal-sub-" + key] = {"t": f"{sub.get('product', 'Meal subscription')} · {p['label']} ({p['sub']}) · {ml['n']} meal{'s' if ml['n'] > 1 else ''} a day",
+                                                    "a": sub["tiers"][key], "img": img_src.get("cut:" + ml["image"]) or img_src.get(ml["image"]) or "",
+                                                    "url": "plans.html", "cat": sub.get("nav", "Meal plans"), "opts": []}
         wa = shop.get("whatsapp") or ""
         site["_shop"] = {"slug": site["slug"], "currency": cur, "items": items, "api": shop.get("api", "/api"),
                          "wa": digits(wa) if wa else "", "name": site["short"],

@@ -28,6 +28,7 @@ Open-licence stock for single ingredients is scarce and often share-alike; prefe
 | stats | Count-up figures on an accent band | real numbers exist |
 | services | Card grid; hover reveals photo; links to detail pages | services, departments, divisions |
 | catalogue | Draggable strip of product cards (photo or drawn art) | products, menu, plans |
+| mealsub | Dark band: the real 1/2/3-meal boxes floating, weekly/monthly price toggle, per-meal price (needs `shop.plans.mode = "subscription"`) | meal subscriptions, memberships |
 | film | Pinned product film from real packshots: the pack rises into a spotlight, turns in 3D with a light sheen, a powder burst in its flavour colour while real figures pop around it, turns to its real back label or nutrition panel, then its flavours line up with price and add-to-cart. Reversible on scroll | supplements, drinks, cosmetics, any packaged product. Record it to MP4 with `tools/record_film.py` for slider video slides and social reels |
 | converge | Pinned hero: real ingredient cut-outs float around the frame (depth, blur, pointer lean) and fly into the real dish as you scroll; numbers pop around it; add-to-order bar | food, drinks, cosmetics: any product with visible ingredients. **First choice for food heroes** |
 | stack | Pinned: a product made of real photographed layers (burger, sandwich, cake, device) opens into an exploded view with named layers, then closes | layered products with real layer photos |

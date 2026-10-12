@@ -58,6 +58,24 @@ Never put card fields on the site itself: always redirect to the gateway's hoste
 - `macros` show as chips on cards and feed the plan builder's kcal and protein totals.
 - The build writes `assets/shop.json` (price list for the server) and `assets/shop-data.js`.
 
+**Priced subscriptions** (a meal subscription, a coaching block, a membership): when the company
+publishes a fixed price per option, set `"mode": "subscription"` on `shop.plans` instead of the
+menu builder. Each period × meals option becomes a real cart item (`meal-sub-<period><meals>`) at
+its listed price, so checkout, the server and Thawani all treat it like a product; the start date,
+add-ons and a short note ride on the cart line. Add the `mealsub` home module for the teaser band.
+```json
+"plans": {"mode": "subscription", "product": "Healthy Meal Subscription", "nav": "Meal plans", "image": "meal-2", "src": "https://…",
+          "periods": [{"key": "w", "label": "Weekly", "sub": "5 days", "days": 5}, {"key": "m", "label": "Monthly", "sub": "20 days", "days": 20}],
+          "meals": [{"n": 1, "image": "meal-1"}, {"n": 2, "image": "meal-2"}, {"n": 3, "image": "meal-3"}],
+          "tiers": {"w1": 21.0, "w2": 36.75, "m1": 73.5},
+          "includes": ["…"], "addons": [{"label": "+50 g extra protein", "price": "OMR 0.500"}], "addon_note": "…",
+          "menu_text": "…", "excluded": ["…"], "rules": ["…"], "note": "Prices as listed on … on <date>."}
+```
+Take every tier from the company's own listing (its variants). Add-ons whose basis is unclear
+(per meal or per plan) are shown with their listed price but not charged; say so in `addon_note`
+and in `confirm`. Check the whole store for subscriptions and services, not only the main
+product departments: they are easy to miss and often matter most to the client.
+
 ## The order service
 
 ```

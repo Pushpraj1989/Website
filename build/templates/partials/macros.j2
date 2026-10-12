@@ -426,6 +426,33 @@
 {%- endif %}
 {%- endmacro -%}
 
+{%- macro mealsub(m) -%}
+{#- Priced subscription teaser: the real meal boxes (1, 2, 3 a day) with a weekly / monthly price toggle -#}
+{%- set PL = s.shop.plans %}
+<section class="msub" id="{{ m.id or 'meal-plans' }}" data-msub>
+  <div class="wrap msub-in">
+    <div class="msub-copy">
+      <p class="eyebrow">{{ m.kicker or PL.product }}</p>
+      <h2 class="msub-title" data-anim="lines">{{ m.title | safe }}</h2>
+      <p class="msub-text" data-anim="up">{{ m.text }}</p>
+      {%- if m.points %}<ul class="check-list">{% for pt in m.points %}<li data-anim="up">{{ icon('check') }}<span>{{ pt }}</span></li>{% endfor %}</ul>{% endif %}
+      <div class="msub-toggle" role="group" aria-label="Period">{% for p in PL.periods %}<button type="button" class="msub-tg{% if loop.first %} is-on{% endif %}" data-msub-p="{{ p.key }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ p.label }} <small>{{ p.sub }}</small></button>{% endfor %}</div>
+      <a class="btn btn-primary" href="plans.html" data-magnetic>{{ m.cta or 'Build my subscription' }} {{ icon('arrow') }}</a>
+    </div>
+    <div class="msub-cards">
+      {%- for ml in PL.meals %}
+      <a class="msub-card" href="plans.html" data-anim="up" data-delay="{{ loop.index0 * 0.12 }}" style="--i: {{ loop.index0 }}">
+        <span class="msub-card-img"><img src="{{ src('cut:' ~ ml.image) }}" alt="{{ ml.n }} meal box{{ 'es' if ml.n > 1 else '' }} from the Macro Boost listing" loading="lazy"></span>
+        <span class="msub-card-n">{{ ml.n }}<small>meal{{ '' if ml.n == 1 else 's' }} a day</small></span>
+        <span class="msub-card-p">{% for p in PL.periods %}{% set a = PL.tiers[p.key ~ ml.n] %}<b data-msub-v="{{ p.key }}"{% if not loop.first %} hidden{% endif %}>{{ s.shop.currency }} {{ '%.3f' % a }}<small>{{ s.shop.currency }} {{ '%.3f' % (a / (p.days * ml.n)) }} a meal</small></b>{% endfor %}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+  {%- if m.cap %}<p class="wrap cv-cap">{{ m.cap }}</p>{% endif %}
+</section>
+{%- endmacro -%}
+
 {%- macro split(m) -%}
 <section class="splitf{% if m.flip %} flip{% endif %}">
   <div class="wrap splitf-grid">
@@ -505,6 +532,7 @@
 {%- elif t == 'stack' %}{{ stack(m) }}
 {%- elif t == 'lineup' %}{{ lineup(m) }}
 {%- elif t == 'film' %}{{ film(m) }}
+{%- elif t == 'mealsub' %}{% if s.shop and s.shop.plans %}{{ mealsub(m) }}{% endif %}
 {%- elif t == 'split' %}{% if m is mapping and m.title %}{{ split(m) }}{% endif %}
 {%- elif t == 'news' %}{{ home_news() }}
 {%- elif t == 'testimonials' %}{{ testimonials() }}

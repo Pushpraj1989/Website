@@ -197,7 +197,40 @@
 
   /* ---------- meal plans ---------- */
   const plan = $("[data-plan]");
-  if (plan) {
+  if (plan && plan.hasAttribute("data-sub")) {
+    // priced subscription: period x meals a day, each option a cart item at its listed price
+    const form = $("[data-plan-form]", plan), err = $("[data-co-error]", plan);
+    const tiers = JSON.parse($("[data-sub-tiers]", plan).textContent);
+    const start = $("[data-sub-start]", form);
+    const d = new Date(); d.setDate(d.getDate() + 1);
+    start.min = start.value = d.toISOString().slice(0, 10);
+    const pick = () => { const p = $("input[name=period]:checked", form), n = +$("input[name=meals]:checked", form).value; return { p, n, key: p.value + n, days: +p.dataset.days }; };
+    const calc = () => {
+      const { p, n, key, days } = pick(), a = tiers[key];
+      $("[data-sub-price]").textContent = money(a);
+      $("[data-sub-meals]").textContent = `${days * n} (${days} days × ${n})`;
+      $("[data-sub-per]").textContent = money(a / (days * n));
+      // the same meals bought as weekly plans
+      const wk = $$("input[name=period]", form).find((i) => +i.dataset.days < days);
+      const row = $("[data-sub-save-row]");
+      if (wk && tiers[wk.value + n]) { const save = tiers[wk.value + n] * (days / +wk.dataset.days) - a; row.hidden = save <= 0; $("[data-sub-save]").textContent = money(save); } else row.hidden = true;
+      $$("[data-sub-from]", form).forEach((el) => { const v = tiers[p.value + el.dataset.subFrom]; el.textContent = v ? money(v) : ""; });
+      $$("[data-sub-img]", plan).forEach((im) => im.classList.toggle("is-on", +im.dataset.subImg === n));
+      $("[data-sub-n]", plan).textContent = n;
+      $("[data-sub-n]", plan).nextElementSibling.textContent = n === 1 ? "meal a day" : "meals a day";
+    };
+    form.addEventListener("change", calc); calc();
+    form.addEventListener("submit", (e) => {
+      e.preventDefault(); err.hidden = true;
+      const { key } = pick();
+      if (!start.value || start.value < start.min) { err.textContent = "Please choose a start date from tomorrow."; err.hidden = false; return; }
+      const fd = new FormData(form);
+      const opt = [`Start ${start.value}`, ...fd.getAll("addon"), String(fd.get("notes") || "").trim()].filter(Boolean).join(" · ").slice(0, 80);
+      add("meal-sub-" + key, 1, opt);
+      toast("Subscription added to your cart");
+      open();
+    });
+  } else if (plan) {
     const form = $("[data-plan-form]", plan), err = $("[data-co-error]", plan);
     const val = (n) => +(($(`input[name=${n}]:checked`, form) || {}).value || 0);
     const calc = () => {
@@ -228,6 +261,14 @@
         .catch(() => { if (S.wa) viaWa(); else { err.textContent = "The request service is not reachable right now. Please call us."; err.hidden = false; } });
     });
   }
+
+  // subscription teaser: weekly / monthly price toggle
+  $$("[data-msub]").forEach((sec) => sec.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-msub-p]");
+    if (!b) return;
+    $$("[data-msub-p]", sec).forEach((x) => { x.classList.toggle("is-on", x === b); x.setAttribute("aria-pressed", String(x === b)); });
+    $$("[data-msub-v]", sec).forEach((v) => (v.hidden = v.dataset.msubV !== b.dataset.msubP));
+  }));
 
   paint();
 })();

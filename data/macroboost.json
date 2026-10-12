@@ -1212,6 +1212,21 @@
    "src": "blog-2.jpg",
    "alt": "Training photo from the Macro Boost blog",
    "cap": "Photo used on the Macro Boost blog (Pexels)"
+  },
+  "meal-1": {
+   "src": "meal-1.jpg",
+   "alt": "One meal box from the Macro Boost Healthy Meal Subscription listing",
+   "cap": "Image from the Macro Boost meal subscription listing"
+  },
+  "meal-2": {
+   "src": "meal-2.jpg",
+   "alt": "Two meal boxes from the Macro Boost Healthy Meal Subscription listing",
+   "cap": "Image from the Macro Boost meal subscription listing"
+  },
+  "meal-3": {
+   "src": "meal-3.jpg",
+   "alt": "Three meal boxes from the Macro Boost Healthy Meal Subscription listing",
+   "cap": "Image from the Macro Boost meal subscription listing"
   }
  },
  "ticker": {
@@ -1423,6 +1438,18 @@
    "type": "statement",
    "kicker": "Since 2019",
    "text": "Premium sports nutrition from trusted global brands, for every goal, in three Muscat stores and online."
+  },
+  {
+   "type": "mealsub",
+   "kicker": "Healthy Meal Subscription",
+   "title": "Meals, <em>prepped.</em>",
+   "text": "Fresh, balanced meals prepared daily and delivered, with up to 200 g of protein per meal. Weekly or monthly, one to three meals a day.",
+   "points": [
+    "One complimentary snack with every subscription",
+    "Free delivery on the restaurant's schedule",
+    "Add extra protein or carbs"
+   ],
+   "cap": "Meal images from the Macro Boost subscription listing. Prices as listed on macroboost.com, 12 Oct 2026."
   },
   {
    "type": "film",
@@ -8650,6 +8677,10 @@
    "a": "Yes. Macro Boost offers special B2B rates and offers for businesses across the GCC."
   },
   {
+   "q": "Do you offer meal plans?",
+   "a": "Yes. The Healthy Meal Subscription runs weekly (5 days) or monthly (20 days) with one to three meals a day, from OMR 21.000 a week. Open the meal plans page to build yours."
+  },
+  {
    "q": "Where are your stores?",
    "a": "Al Khuwair, Al Hail and Azaiba in Muscat. Open the stores page for directions and phone numbers."
   }
@@ -8722,7 +8753,90 @@
    "address": "Choose your store when we call to confirm",
    "map": "https://maps.app.goo.gl/SAdfjnqAvjnNcimD9"
   },
-  "fine": "Prices are checked again on our side before you pay. Card payments open the gateway's secure page."
+  "fine": "Prices are checked again on our side before you pay. Card payments open the gateway's secure page.",
+  "plans": {
+   "mode": "subscription",
+   "title": "Meal subscription",
+   "nav": "Meal plans",
+   "kicker": "Healthy Meal Subscription",
+   "image": "meal-2",
+   "product": "Healthy Meal Subscription",
+   "src": "https://macroboost.com/products/healthy-meal-subscriptions",
+   "intro": "Fresh, healthy, balanced meals prepared daily. Weekly or monthly, one to three meals a day, customised to your needs.",
+   "periods": [
+    {
+     "key": "w",
+     "label": "Weekly",
+     "sub": "5 days",
+     "days": 5
+    },
+    {
+     "key": "m",
+     "label": "Monthly",
+     "sub": "20 days",
+     "days": 20
+    }
+   ],
+   "meals": [
+    {
+     "n": 1,
+     "image": "meal-1"
+    },
+    {
+     "n": 2,
+     "image": "meal-2"
+    },
+    {
+     "n": 3,
+     "image": "meal-3"
+    }
+   ],
+   "tiers": {
+    "w1": 21.0,
+    "w2": 36.75,
+    "w3": 52.5,
+    "m1": 73.5,
+    "m2": 126.0,
+    "m3": 178.5
+   },
+   "includes": [
+    "Up to 200 g of protein per meal (pre-cooking weight)",
+    "Carbohydrates selected according to your chosen meal",
+    "One complimentary snack with every subscription",
+    "Free delivery according to the restaurant's delivery schedule",
+    "Flexible meal customisation with optional add-ons"
+   ],
+   "addons": [
+    {
+     "label": "+50 g extra protein",
+     "price": "OMR 0.500"
+    },
+    {
+     "label": "+50 g extra carbs",
+     "price": "OMR 0.300"
+    },
+    {
+     "label": "Hammour to salmon",
+     "price": "OMR 1.800 more"
+    }
+   ],
+   "addon_note": "Add-ons are priced as listed by Macro Boost and confirmed with you before delivery starts; they are not charged in the cart.",
+   "menu_text": "Choose your meals from the restaurant menu; Macro Boost confirms your picks after you order.",
+   "excluded": [
+    "Salmon",
+    "Dumplings",
+    "Lobster",
+    "Sushi"
+   ],
+   "rules": [
+    "Store meals in the refrigerator if they are not eaten straight after delivery.",
+    "Changes to meals or the delivery schedule must be requested before 7:00 PM the day before delivery.",
+    "Meals are prepared to the restaurant's quality, taste and portion standards.",
+    "Your subscription stays valid for 40 days from the plan start date."
+   ],
+   "note": "Prices as listed on macroboost.com on 12 October 2026. Per-meal prices are the plan price divided by its meals.",
+   "submit": "Add to cart"
+  }
  },
  "confirm": [
   "Delivery fee under OMR 25 and delivery areas (the store says free over OMR 25).",
@@ -8730,11 +8844,14 @@
   "Store opening hours (not published on the homepage).",
   "Nutrition figures are parsed from product descriptions. Critical Whey uses the 24 g protein printed on every pack, because some of its online descriptions say 21 g; worth correcting on macroboost.com.",
   "Payment gateway for this concept (Thawani Pay) versus the store's current Shopify checkout.",
+  "Meal subscription: the listing names no restaurant and links no menu; the product type says prices include VAT while the page's search summary says they exclude 5% VAT and lists different exclusions (shrimp, prawns, tuna, What's New items). The meal images are AI-generated (file names start with ChatGPT); real photos of the meals would be stronger.",
+  "Meal subscription add-ons: whether +50 g protein, +50 g carbs and the salmon upgrade are charged per meal or per subscription.",
   "Product list is the best-selling 188 products of 788 on 12 Oct 2026; stock and prices change daily."
  ],
  "sources": [
   "https://macroboost.com (homepage, products.json, collections.json, best-selling order; read 12 Oct 2026)",
   "https://macroboost.com/pages/about-us, /pages/b2b-inquiries, /pages/product-certificates (read 12 Oct 2026)",
-  "https://macroboost.com/blogs/articles (3 articles, 18 Apr 2026)"
+  "https://macroboost.com/blogs/articles (3 articles, 18 Apr 2026)",
+  "https://macroboost.com/products/healthy-meal-subscriptions (prices, inclusions, add-ons and rules; read 12 Oct 2026)"
  ]
 }

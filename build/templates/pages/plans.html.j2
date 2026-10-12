@@ -5,6 +5,77 @@
 {%- set hero_img = PL.image or ('hero' if 'hero' in s.images else none) %}
 {%- set kicker = PL.kicker or PL.nav or 'Meal plans' %}{% set intro = PL.intro %}{% set crumb = PL.nav or 'Meal plans' %}
 {% include "partials/pagehero.html.j2" %}
+{%- if PL.mode == 'subscription' %}
+{%- macro money(a) %}{{ s.shop.currency }} {{ '%.3f' % a }}{% endmacro %}
+<section class="pg-section alt msub-builder" data-plan data-sub>
+  <div class="wrap msub-grid">
+    <div class="msub-stage" aria-hidden="true">
+      <div class="msub-glow"></div>
+      {%- for ml in PL.meals %}<img class="msub-box{% if loop.first %} is-on{% endif %}" data-sub-img="{{ ml.n }}" src="{{ m.src('cut:' ~ ml.image) }}" alt="" loading="{{ 'eager' if loop.first else 'lazy' }}">{% endfor %}
+      <p class="msub-count"><b data-sub-n>{{ PL.meals[0].n }}</b><span>meal{{ '' if PL.meals[0].n == 1 else 's' }} a day</span></p>
+    </div>
+    <form class="plan-form msub-form" data-plan-form novalidate>
+      <p class="eyebrow">{{ PL.product }}</p>
+      <h2 class="pg-h2" data-anim="lines">{{ PL.builder_title or 'Build your subscription' }}</h2>
+      <fieldset class="co-step"><legend><span class="co-n">1</span>How long</legend>
+        <div class="seg">{% for p in PL.periods %}<label class="seg-opt"><input type="radio" name="period" value="{{ p.key }}" data-days="{{ p.days }}" data-label="{{ p.label }} ({{ p.sub }})"{% if loop.first %} checked{% endif %}><span><b>{{ p.label }}</b><small>{{ p.sub }}</small></span></label>{% endfor %}</div>
+      </fieldset>
+      <fieldset class="co-step"><legend><span class="co-n">2</span>Meals a day</legend>
+        <div class="seg">{% for ml in PL.meals %}<label class="seg-opt"><input type="radio" name="meals" value="{{ ml.n }}"{% if loop.first %} checked{% endif %}><span><b>{{ ml.n }} meal{{ '' if ml.n == 1 else 's' }}</b><small data-sub-from="{{ ml.n }}"></small></span></label>{% endfor %}</div>
+      </fieldset>
+      {%- if PL.addons %}
+      <fieldset class="co-step"><legend><span class="co-n">3</span>Add-ons <i>(optional)</i></legend>
+        <div class="msub-addons">{% for a in PL.addons %}<label class="plan-pick msub-addon"><input type="checkbox" name="addon" value="{{ a.label }}"><span class="pp-t"><b>{{ a.label }}</b><small>{{ a.price }}</small></span></label>{% endfor %}</div>
+        <p class="co-hint">{{ PL.addon_note }}</p>
+      </fieldset>
+      {%- endif %}
+      <fieldset class="co-step"><legend><span class="co-n">{{ 4 if PL.addons else 3 }}</span>Start</legend>
+        <div class="co-fields">
+          <label class="fld"><span>Start date</span><input type="date" name="start" data-sub-start required></label>
+          <label class="fld"><span>Notes <i>(optional)</i></span><input name="notes" maxlength="40" placeholder="Allergies, dislikes"></label>
+        </div>
+      </fieldset>
+      <p class="co-error" data-co-error role="alert" hidden></p>
+      <div class="msub-actions">
+        <button class="btn btn-primary" type="submit" data-magnetic>{{ PL.submit or 'Add to cart' }} {{ icon('arrow') }}</button>
+        {%- if PL.src %}<a class="btn btn-ghost" href="{{ PL.src }}" rel="noopener">See it on macroboost.com</a>{% endif %}
+      </div>
+    </form>
+    <aside class="plan-sum msub-sum" data-plan-sum>
+      <p class="side-h">Your subscription</p>
+      <p class="plan-big"><b data-sub-price>–</b></p>
+      <dl class="co-totals">
+        <div><dt>Meals</dt><dd data-sub-meals>–</dd></div>
+        <div><dt>Per meal</dt><dd data-sub-per>–</dd></div>
+        <div data-sub-save-row hidden><dt>Saved vs weekly</dt><dd data-sub-save>–</dd></div>
+      </dl>
+      <p class="co-hint">{{ PL.note }}</p>
+    </aside>
+  </div>
+  <script type="application/json" data-sub-tiers>{{ PL.tiers | tojson }}</script>
+</section>
+<section class="pg-section">
+  <div class="wrap">
+    <p class="eyebrow">Prices</p>
+    <h2 class="pg-h2" data-anim="lines">Every option, every price</h2>
+    <div class="msub-table" data-anim="up">
+      <div class="msub-row msub-head"><span></span>{% for p in PL.periods %}<span>{{ p.label }} <small>{{ p.sub }}</small></span>{% endfor %}</div>
+      {%- for ml in PL.meals %}
+      <div class="msub-row"><span><img src="{{ m.src('cut:' ~ ml.image) }}" alt="" loading="lazy">{{ ml.n }} meal{{ '' if ml.n == 1 else 's' }} a day</span>{% for p in PL.periods %}{% set k = p.key ~ ml.n %}<span><b>{{ money(PL.tiers[k]) }}</b><small>{{ money(PL.tiers[k] / (p.days * ml.n)) }} a meal</small></span>{% endfor %}</div>
+      {%- endfor %}
+    </div>
+    <p class="co-hint">{{ PL.note }}</p>
+  </div>
+</section>
+<section class="pg-section alt">
+  <div class="wrap msub-info">
+    <div><p class="eyebrow">Included</p><h3 class="pg-h3">What's in every subscription</h3><ul class="check-list">{% for t in PL.includes %}<li data-anim="up">{{ icon('check') }}<span>{{ t }}</span></li>{% endfor %}</ul></div>
+    <div><p class="eyebrow">Choosing meals</p><h3 class="pg-h3">From the restaurant menu</h3><p class="muted">{{ PL.menu_text }}</p>
+      {%- if PL.excluded %}<p class="msub-ex-h">Not included</p><ul class="spec-chips pd-tags">{% for t in PL.excluded %}<li><span>{{ t }}</span></li>{% endfor %}</ul>{% endif %}</div>
+    <div><p class="eyebrow">Good to know</p><h3 class="pg-h3">The rules</h3><ul class="check-list">{% for t in PL.rules %}<li data-anim="up">{{ icon('check') }}<span>{{ t }}</span></li>{% endfor %}</ul></div>
+  </div>
+</section>
+{%- else %}
 {%- if PL.steps %}
 <section class="pg-section">
   <div class="wrap">
@@ -58,4 +129,5 @@
     </aside>
   </div>
 </section>
+{%- endif %}
 {% endblock %}
