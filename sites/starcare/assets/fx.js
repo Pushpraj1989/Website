@@ -5,6 +5,8 @@
   const TAU = Math.PI * 2;
   const rand = (a, b) => a + Math.random() * (b - a);
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const L = (t) => (window.T1L && window.T1L[t]) || t;
+  const RTL = document.documentElement.dir === "rtl" ? -1 : 1;  // mirror sideways offsets on right-to-left pages
 
   /* ---------- canvas helper: DPR-aware, pauses offscreen and in hidden tabs ---------- */
   function stage(canvas, draw, { onResize } = {}) {
@@ -669,7 +671,7 @@
     root.querySelector("[data-pprev]").addEventListener("click", () => go(cur - 1, -1));
     if (pauseBtn) pauseBtn.addEventListener("click", () => {
       paused = !paused; pauseBtn.setAttribute("aria-pressed", String(paused));
-      pauseBtn.setAttribute("aria-label", paused ? "Play slideshow" : "Pause slideshow");
+      pauseBtn.setAttribute("aria-label", paused ? L("Play slideshow") : L("Pause slideshow"));
     });
     root.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") hover = true; });
     root.addEventListener("pointerleave", () => (hover = false));
@@ -809,9 +811,9 @@
       const z = parseFloat(el.dataset.z) || 0.5;
       if (z > 0.8) el.style.filter = `blur(${((z - 0.8) * 14).toFixed(1)}px)`;
       const ang = i * 2.39996, rad = 0.06 + (i % 4) * 0.045; // golden-angle landing spots inside the dish
-      return { el, x: +el.dataset.x / 100, y: +el.dataset.y / 100, r: +el.dataset.r, z, tx: Math.cos(ang) * rad, ty: Math.sin(ang) * rad * 0.7, spin: (i % 2 ? 1 : -1) * (90 + (i % 3) * 60), ph: i * 1.7 };
+      return { el, x: +el.dataset.x / 100 * RTL, y: +el.dataset.y / 100, r: +el.dataset.r, z, tx: Math.cos(ang) * rad, ty: Math.sin(ang) * rad * 0.7, spin: (i % 2 ? 1 : -1) * (90 + (i % 3) * 60), ph: i * 1.7 };
     });
-    const parts = Array.from(sec.querySelectorAll(".cv-part:not(.is-base)")).map((el, i) => ({ el, x: +el.dataset.x / 100, y: +el.dataset.y / 100, r: +el.dataset.r, z: parseFloat(el.dataset.z) || 0.5, i, ph: i * 2.1 }));
+    const parts = Array.from(sec.querySelectorAll(".cv-part:not(.is-base)")).map((el, i) => ({ el, x: +el.dataset.x / 100 * RTL, y: +el.dataset.y / 100, r: +el.dataset.r, z: parseFloat(el.dataset.z) || 0.5, i, ph: i * 2.1 }));
     const explode = parts.length > 0 && sec.dataset.mode !== "in";
     let mx = 0, my = 0, tx = 0, ty = 0, cur = 0, done = false;
     if (T1.fine) sec.addEventListener("pointermove", (e) => { tx = (e.clientX / innerWidth - 0.5) * 2; ty = (e.clientY / innerHeight - 0.5) * 2; });
@@ -1094,9 +1096,9 @@
       B("addr").textContent = b.addr || "";
       B("er").hidden = !b.er;
       B("opened").hidden = !b.opened; if (b.opened) B("opened").textContent = `Since ${b.opened}`;
-      B("hours").innerHTML = (b.hours.length ? b.hours : [{ label: "Hours", value: "Call to confirm" }]).map((h) =>
+      B("hours").innerHTML = (b.hours.length ? b.hours : [{ label: L("Hours"), value: L("Call to confirm") }]).map((h) =>
         `<li><span>${esc(h.label)}</span><b class="${/24\/7|open/i.test(h.value) ? "is-open" : ""}">${esc(h.value)}</b></li>`).join("");
-      B("phones").innerHTML = b.phones.length ? b.phones.map((p) => `<li><span>${esc(p.label)}</span><a href="tel:${esc(p.tel)}">${esc(p.number)}</a></li>`).join("") : "<li><span>Phone</span><b>Use the helpline</b></li>";
+      B("phones").innerHTML = b.phones.length ? b.phones.map((p) => `<li><span>${esc(p.label)}</span><a href="tel:${esc(p.tel)}">${esc(p.number)}</a></li>`).join("") : `<li><span>${L("Phone")}</span><b>${L("Use the helpline")}</b></li>`;
       B("docs").textContent = b.docs || "–";
       B("nspec").textContent = b.specs.length || "–";
       // counts only make sense where the data has them (hospitals: doctors, specialities)

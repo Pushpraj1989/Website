@@ -1,19 +1,22 @@
 {%- import "partials/macros.j2" as m with context -%}
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="{{ s.lang or 'en' }}"{% if s.lang == 'ar' %} dir="rtl"{% endif %} class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% if page and page.kind != 'home' %}{{ page.title }} · {% endif %}{{ s.name }} · Concept redesign</title>
+<title>{% if page and page.kind != 'home' %}{{ page.title }} · {% endif %}{{ s.name }} · {{ 'تصميم مقترح' if s.lang == 'ar' else 'Concept redesign' }}</title>
 <meta name="description" content="{{ s.meta }}">
 <meta name="theme-color" content="{{ s._theme.theme_color }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{{ s._theme.fonts }}">
+{%- if s.lang == 'ar' %}<link rel="stylesheet" href="{{ s._ar_fonts }}">{% endif %}
+{%- if s._alt %}<link rel="alternate" hreflang="{{ s._alt.lang }}" href="{{ s._alt.prefix }}{{ page.file if page else 'index.html' }}">{% endif %}
 {%- if s.brand and s.brand.logo %}<link rel="icon" href="{{ m.src(s.brand.logo) }}">{% endif %}
 <link rel="stylesheet" href="assets/core.css">
 <link rel="stylesheet" href="assets/{{ s.theme }}.css">
 {%- if s.brand and s.brand.style %}<link rel="stylesheet" href="assets/styles.css">{% endif %}
+{%- if s.lang == 'ar' %}<link rel="stylesheet" href="assets/rtl.css"><style>:root{--font-ar-display:{{ s._ar_display | safe }};--font-ar-body:{{ s._ar_body | safe }}}</style>{% endif %}
 {%- if s.theme == 'studio' %}
 {%- set B = s.brand %}
 <style>body[data-theme="studio"]{--bg:{{ (B.bg or '#0f0e0d') | safe }};--fg:{{ (B.fg or '#f5efe6') | safe }};--accent:{{ (B.accent or s.accent) | safe }};--accent-ink:{{ (B.accent_ink or '#ffffff') | safe }};--surface:{{ (B.surface or 'color-mix(in srgb, var(--fg) 5%, transparent)') | safe }};--line:color-mix(in srgb, var(--fg) 14%, transparent);--muted:color-mix(in srgb, var(--fg) 64%, transparent);--font-display:{{ (B.font_display or '"Fraunces", Georgia, serif') | safe }};--font-body:{{ (B.font_body or '"Inter", system-ui, sans-serif') | safe }};--loader-bg:{{ (B.accent or s.accent) | safe }};--alt:{{ (B.alt or 'color-mix(in srgb, var(--fg) 4%, var(--bg))') | safe }}{% if B.accent2 %};--accent-2:{{ B.accent2 | safe }}{% endif %}}</style>
@@ -31,7 +34,7 @@
 {%- if not page or page.kind == 'home' %}
 <div class="loader" aria-hidden="true">
   <div class="loader-inner">
-    <p class="loader-name">{% for ch in s.short %}<span>{{ ' ' if ch == ' ' else ch }}</span>{% endfor %}</p>
+    <p class="loader-name">{% if s.lang == 'ar' %}<span>{{ s.short }}</span>{% else %}{% for ch in s.short %}<span>{{ ' ' if ch == ' ' else ch }}</span>{% endfor %}{% endif %}</p>
     <div class="loader-bar"><i></i></div>
     <p class="loader-count">000</p>
   </div>
@@ -57,6 +60,7 @@
 {% include "partials/cart.html.j2" %}
 {%- endif %}
 
+{%- if s._ui_json %}<script>window.T1L={{ s._ui_json | safe }};</script>{% endif %}
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>

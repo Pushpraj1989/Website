@@ -2424,3 +2424,9 @@ body[data-page="checkout"] .action-bar, body[data-page="checkout"] .dock, body[d
 .msub .check-list li { margin: 0; padding: 0; }
 .msub-form .seg { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 0.6rem; }
 @media (max-width: 900px) { .msub-sum .plan-big b { font-size: 1.8rem; } .msub-sum { padding: 0.8rem 1.1rem; } }
+
+/* ---------- language switch (sites with an Arabic version) ---------- */
+.lang-sw { display: inline-grid; place-items: center; min-width: 44px; height: 40px; padding: 0 0.9rem; border: 1px solid var(--line, rgba(0, 0, 0, 0.15)); border-radius: 99px; color: inherit; font-weight: 600; font-size: 0.92rem; text-decoration: none; transition: background 0.3s, color 0.3s; }
+.lang-sw:hover { background: var(--fg, #111); color: var(--bg, #fff); }
+.lang-sw:lang(ar) { font-family: "Noto Kufi Arabic", "IBM Plex Sans Arabic", sans-serif; }
+@media (max-width: 760px) { .lang-sw { height: 36px; padding: 0 0.7rem; font-size: 0.82rem; } }

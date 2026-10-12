@@ -37,8 +37,13 @@
   T1.scrollTo = scrollToEl;
 
   /* ---------- split text (keeps one level of inline markup such as <em>) ---------- */
+  // second-language interface strings (window.T1L on /ar/ pages); {0} {1} fill values
+  const L = (t, ...v) => v.reduce((x, y, i) => x.replace("{" + i + "}", y), (window.T1L && window.T1L[t]) || t);
+  T1.L = L;
+  const joined = /^(ar|fa|ur|he)/.test(document.documentElement.lang);  // scripts whose letters join: never split into characters
   T1.split = (el, type = "words") => {
     if (el._split) return el._split;
+    if (joined && type === "chars") type = "words";
     const label = el.textContent.replace(/\s+/g, " ").trim();
     const makeWord = (text) => {
       const w = document.createElement("span");
@@ -277,8 +282,12 @@
   const offer = $("[data-offer]");
   let offerShown = false;
   const offerKey = offer ? "t1-offer-" + offer.dataset.offer : "";
+  // full-screen product showcases: the offer never covers them, it waits or steps aside
+  const showcases = $$(".film, .cv, .stk, .lu");
+  const inShowcase = () => showcases.some((el) => { const r = el.getBoundingClientRect(); return r.top < innerHeight * 0.6 && r.bottom > innerHeight * 0.4; });
   const maybeOffer = (y, max) => {
-    if (!offer || offerShown || max <= 0 || y / max < 0.35) return;
+    if (offer && offerShown && !offer.hidden) offer.classList.toggle("is-tucked", inShowcase());
+    if (!offer || offerShown || max <= 0 || y / max < 0.35 || inShowcase()) return;
     offerShown = true;
     try { if (localStorage.getItem(offerKey)) return; } catch {}
     offer.hidden = false;
@@ -363,7 +372,7 @@
         if (vis) shown++;
         c.hidden = !vis;
       });
-      count.textContent = `${n} doctor${n === 1 ? "" : "s"}${n > shown ? `, showing ${shown}` : ""}`;
+      count.textContent = (n === 1 ? L("1 doctor") : L("{0} doctors", n)) + (n > shown ? L(", showing {0}", shown) : "");
       more.hidden = n <= limit; empty.hidden = n !== 0;
       if (motion) ST.refresh();
     };
@@ -453,9 +462,9 @@
     const calc = () => {
       const v = w.value / Math.pow(h.value / 100, 2);
       $("[data-o=h]", f).textContent = h.value + " cm";
-      $("[data-o=w]", f).textContent = w.value + " kg";
+      $("[data-o=w]", f).textContent = w.value + " " + L("kg");
       $("[data-bmi-v]", f).textContent = v.toFixed(1);
-      const band = v < 18.5 ? "Underweight" : v < 25 ? "Healthy range" : v < 30 ? "Overweight" : "Obese";
+      const band = L(v < 18.5 ? "Underweight" : v < 25 ? "Healthy range" : v < 30 ? "Overweight" : "Obese");
       $("[data-bmi-band]", f).textContent = band;
       const arc = $("[data-arc]", f);
       arc.style.strokeDashoffset = String(100 - Math.max(4, Math.min(100, ((v - 12) / 28) * 100)));
@@ -497,7 +506,7 @@
     if (!header || !toggle) return;
     header.classList.toggle("is-open", open);
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    toggle.setAttribute("aria-label", open ? L("Close menu") : L("Open menu"));
     if (T1.lenis) open ? T1.lenis.stop() : T1.lenis.start();
   };
   if (toggle) toggle.addEventListener("click", () => setOpen(!header.classList.contains("is-open")));
@@ -557,11 +566,11 @@
     const status = $("[data-status]", form);
     const endpoint = form.dataset.endpoint || "";
     const rules = {
-      name: (v) => v.trim().length >= 2 || "Please enter your name.",
+      name: (v) => v.trim().length >= 2 || L("Please enter your name."),
       contact: (v) => {
         const s = v.trim();
-        if (s.includes("@")) return /^\S+@\S+\.\S+$/.test(s) || "Enter a valid email address.";
-        return /^\+?[\d\s-]{7,}$/.test(s) || "Enter an email address or phone number.";
+        if (s.includes("@")) return /^\S+@\S+\.\S+$/.test(s) || L("Enter a valid email address.");
+        return /^\+?[\d\s-]{7,}$/.test(s) || L("Enter an email address or phone number.");
       },
     };
     form.addEventListener("submit", async (e) => {
@@ -580,15 +589,15 @@
         if (bad && motion) gsap.fromTo(input, { x: -6 }, { x: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
       });
       if (firstBad) { status.textContent = ""; firstBad.focus(); return; }
-      if (!endpoint) { status.textContent = "Preview only: this form is not connected to a backend yet."; return; }
+      if (!endpoint) { status.textContent = L("Preview only: this form is not connected to a backend yet."); return; }
       try {
-        status.textContent = "Sending…";
+        status.textContent = L("Sending…");
         const res = await fetch(endpoint, { method: "POST", body: new FormData(form) });
         if (!res.ok) throw new Error(res.status);
         form.reset();
-        status.textContent = "Thank you. We will be in touch.";
+        status.textContent = L("Thank you. We will be in touch.");
       } catch {
-        status.textContent = "Something went wrong. Please try again or call us directly.";
+        status.textContent = L("Something went wrong. Please try again or call us directly.");
       }
     });
   }

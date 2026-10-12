@@ -38,7 +38,7 @@
         <p class="hub-sector">{{ s.sector }}</p>
         <h2>{{ s.name }}</h2>
         <p class="hub-motion">{{ s.hub_line or s.meta | truncate(120) }}</p>
-        <p class="hub-url">/sites/{{ s.slug }}/</p>
+        <p class="hub-url">/sites/{{ s.slug }}/{% if s._alt %} · <span lang="ar">العربية</span> /sites/{{ s.slug }}/ar/{% endif %}</p>
         <p class="hub-foot"><span>{{ s.confirm|length }} to verify</span><span class="hub-open">Open concept →</span></p>
       </div>
     </a>

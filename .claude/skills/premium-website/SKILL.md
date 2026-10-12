@@ -93,6 +93,10 @@ Show the person a short sitemap and home section list. Continue unless they obje
    with alt text and a caption; add licence info to `data/credits.json` (company-owned:
    `"owner": true`; stock: CC0 / CC BY with creator). Caption non-literal photos "Illustrative".
    Rules: [references/content-rules.md](references/content-rules.md).
+6. Arabic (default for Gulf clients): `python3 tools/i18n.py extract <slug> --chunks 14000`,
+   translate the chunks into `data/i18n/<slug>.ar.json` following `data/i18n/GUIDE.md`, then
+   build: pages appear in `sites/<slug>/ar/`, right to left, with a language switch.
+   Steps and checks: [references/i18n.md](references/i18n.md).
 
 ### 5. Build, test, look
 

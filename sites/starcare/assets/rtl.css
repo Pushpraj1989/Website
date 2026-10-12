@@ -1,0 +1,43 @@
+/* Right-to-left pages (sites/<slug>/ar/, html[dir="rtl"]).
+   Flex, grid and text alignment follow dir="rtl" on their own. This file sets Arabic type
+   and fixes what is placed with left/right or points a direction. Loaded after the theme. */
+
+/* ---------- type: Arabic fonts, no tracking, no capitals or italics, room for the letters ---------- */
+html[dir="rtl"] body {
+  --font-display: var(--font-ar-display) !important;
+  --font-body: var(--font-ar-body) !important;
+  font-family: var(--font-ar-body);
+}
+html[dir="rtl"] body :is(h1, h2, h3, h4, blockquote, [class*="title"], [class*="-t"], .display) { font-family: var(--font-ar-display); }
+html[dir="rtl"] body * { letter-spacing: 0 !important; text-transform: none !important; }
+html[dir="rtl"] em, html[dir="rtl"] i, html[dir="rtl"] [class*="title"] em { font-style: normal; }
+html[dir="rtl"] body :is(h1, h2, h3, [class*="title"], .lead, blockquote) { line-height: 1.3 !important; }
+html[dir="rtl"] body :is(p, li, dd, .muted, [class*="text"], [class*="intro"]) { line-height: 1.85; }
+html[dir="rtl"] .eyebrow, html[dir="rtl"] [class*="kicker"] { font-size: 0.92em; font-weight: 600; }
+/* Latin runs (brands, codes, prices) keep their own direction inside Arabic lines */
+html[dir="rtl"] :is(.price, [class*="price"], .cart-n, output, .cl-q, .tel, a[href^="tel:"], a[href^="mailto:"]) { unicode-bidi: plaintext; }
+html[dir="rtl"] a[href^="tel:"] span, html[dir="rtl"] a[href^="tel:"] b { direction: ltr; unicode-bidi: isolate; }
+
+/* ---------- things that point: arrows, chevrons, carousels ---------- */
+html[dir="rtl"] .ico-arrow, html[dir="rtl"] .promo-arrow.next .ico, html[dir="rtl"] [class*="next"] > .ico { transform: scaleX(-1); }
+html[dir="rtl"] .promo-arrow.prev .ico { transform: none; }
+html[dir="rtl"] .btn:hover .ico-arrow { transform: scaleX(-1) translateX(4px); }
+
+/* ---------- header, nav, language switch ---------- */
+html[dir="rtl"] .lang-sw { font-family: var(--font-ar-body); }
+html[dir="rtl"] .lang-sw:lang(en) { font-family: "Inter", system-ui, sans-serif; }
+
+/* ---------- fixed and floating pieces placed on one side ---------- */
+html[dir="rtl"] .offer { right: auto; left: max(1rem, env(safe-area-inset-left)); }
+html[dir="rtl"] .cart-drawer, html[dir="rtl"] [data-cart-drawer] { right: auto; left: 0; }
+html[dir="rtl"] .breadcrumbs .sep, html[dir="rtl"] .crumbs span[aria-hidden] { transform: scaleX(-1); }
+
+/* ---------- forms ---------- */
+html[dir="rtl"] input[type="tel"], html[dir="rtl"] input[type="email"], html[dir="rtl"] input[type="date"] { direction: ltr; text-align: right; }
+html[dir="rtl"] select { background-position: left 0.9rem center; padding-left: 2.4rem; padding-right: 1rem; }
+
+/* Arabic display faces read light at the weights Latin display faces use */
+html[dir="rtl"] body :is(h1, h2, h3, [class*="title"], .lead, .pg-h2, .pg-h3) { font-weight: 700; }
+
+/* converge scene: the dish sits on the side opposite the copy */
+@media (min-width: 761px) { html[dir="rtl"] .cv-stage { --cx: 36%; } }

@@ -24,6 +24,8 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup
 
 import art
+import i18n
+from i18n import en
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -74,7 +76,7 @@ ICONS = {
 def icon(name):
     body = ICONS.get(name, ICONS["layers"])
     return Markup(
-        '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+        f'<svg class="ico ico-{name}" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
         f"{body}</svg>"
     )
@@ -110,9 +112,9 @@ def build_pages(site):
         if not items or block.get("page") is False:
             return
         label = block.get("nav") or block.get("title") or key.title()
-        file = slugify(label) + ".html"
+        file = slugify(en(block, "nav") or en(block, "title") or key.title()) + ".html"
         for it in items:
-            it["_file"] = f"{prefix}-{slugify(it['title'])}.html"
+            it["_file"] = f"{prefix}-{slugify(en(it, 'title'))}.html"
             it["_img"] = item_image(site, it)
             it.setdefault("detail", {})
         pages.append({"file": file, "kind": "listing", "title": block.get("title") or label, "key": key, "label": label})
@@ -140,10 +142,10 @@ def build_pages(site):
     cat = site.get("catalogue")
     if cat and cat.get("items"):
         label = cat.get("nav", "Products")
-        file = slugify(label) + ".html"
+        file = slugify(en(cat, "nav") or "Products") + ".html"
         cat["_file"] = file
         for it in cat["items"]:
-            it["_file"] = "p-" + slugify(it["title"]) + ".html"
+            it["_file"] = "p-" + slugify(en(it, "title")) + ".html"
             it["_img"] = item_image(site, it)
             it["_cut"] = ("cut:" + it["_img"]) if it["_img"] and ("cut:" + it["_img"]) in site["images"] and cat.get("cutouts") else None
         cats = []
@@ -172,19 +174,19 @@ def build_pages(site):
     locations = (site.get("locations") or {}).get("items", [])
     if locations:
         label = site["locations"].get("nav", "Locations")
-        file = slugify(label) + ".html"
+        file = slugify(en(site["locations"], "nav") or "Locations") + ".html"
         site["locations"]["_file"] = file
         pages.append({"file": file, "kind": "locations", "title": site["locations"].get("title") or label, "label": label})
         nav.append({"file": file, "label": label})
         if any(l.get("about") or l.get("address") for l in locations):
             for i, l in enumerate(locations):
-                l["_file"] = "branch-" + slugify(l["name"]) + ".html"
+                l["_file"] = "branch-" + slugify(en(l, "name")) + ".html"
             for i, l in enumerate(locations):
                 pages.append({"file": l["_file"], "kind": "branch", "title": l.get("full_name") or l["name"], "label": label, "listing": file,
                               "item": l, "prev": locations[i - 1], "next": locations[(i + 1) % len(locations)]})
     if site.get("news"):
         for n in site["news"]:
-            n["_file"] = "news-" + slugify(n["title"])[:60] + ".html"
+            n["_file"] = "news-" + slugify(en(n, "title"))[:60] + ".html"
             n["_img"] = n.get("image") if n.get("image") in site.get("images", {}) else None
         pages.append({"file": "news.html", "kind": "news", "title": "News and updates", "label": "News"})
         for i, n in enumerate(site["news"]):
@@ -201,7 +203,7 @@ def build_pages(site):
                 "sp": (site.get("specialities") or {}).get("items", []),
                 "cat": (site.get("catalogue") or {}).get("items", [])}[kind]
         for it in pool:
-            if it["title"].startswith(text):
+            if en(it, "title").startswith(text):
                 return it["_file"]
         raise SystemExit(f"{site['slug']}: no page for link {href}")
     for pr in site.get("promos") or []:
@@ -298,7 +300,7 @@ def prepare(site):
         a["_parts"] = [l for l in a["layers"] if l.get("shape") != "glass"] + [l for l in a["layers"] if l.get("shape") == "glass"]
     for it in (site.get("catalogue") or {}).get("items", []):
         if it.get("layers"):
-            it["_art"], it["_art_h"], _ = art.stack("p-" + slugify(it["title"]), it["layers"], img_src, explode=False)
+            it["_art"], it["_art_h"], _ = art.stack("p-" + slugify(en(it, "title")), it["layers"], img_src, explode=False)
 
     # shop: items with a numeric "amount" can be added to the cart; the same price list is
     # written to assets/shop.json, which server/shop_api.py uses to re-price every order
@@ -308,9 +310,9 @@ def prepare(site):
         items = {}
         for it in (site.get("catalogue") or {}).get("items", []):
             if isinstance(it.get("amount"), (int, float)) and it["amount"] > 0:
-                it["_sku"] = slugify(it["title"])[:48]
+                it["_sku"] = slugify(en(it, "title"))[:48]
                 it.setdefault("price", f"{cur} {it['amount']:.3f}")
-            items[slugify(it["title"])[:48]] = {"t": it["title"], "a": it.get("amount") if it.get("_sku") else None,
+            items[slugify(en(it, "title"))[:48]] = {"t": it["title"], "a": it.get("amount") if it.get("_sku") else None,
                                                   "img": img_src.get(it.get("_cut") or it.get("_img")) or "", "url": it["_file"],
                                                   "cat": it.get("category", ""), "opts": [o["label"] for o in it.get("options") or []],
                                                   **{k[0]: float(re.sub(r"[^\d.]", "", x["value"]) or 0) for x in it.get("macros") or []
@@ -350,6 +352,47 @@ def prepare(site):
         elif c:
             site["_credits"].append(c)
     return site
+
+
+AR_FONTS = {  # display, body (Google Fonts); a site can set brand.ar_display / brand.ar_body
+    "default": ("Noto Kufi Arabic", "IBM Plex Sans Arabic"),
+}
+AR_WEIGHTS = {"IBM Plex Sans Arabic": "400;500;600;700", "Noto Kufi Arabic": "400;500;600;700;800", "Cairo": "400;600;700;800;900",
+              "Amiri": "400;700", "El Messiri": "400;500;600;700", "Tajawal": "400;500;700;800", "Almarai": "400;700;800",
+              "Noto Naskh Arabic": "400;500;600;700", "Readex Pro": "400;500;600;700", "Lalezar": "400", "Reem Kufi": "400;500;600;700"}
+
+
+def ar_fonts(site):
+    b = site.get("brand") or {}
+    disp, body = b.get("ar_display") or AR_FONTS["default"][0], b.get("ar_body") or AR_FONTS["default"][1]
+    fam = lambda f: f.replace(" ", "+") + ":wght@" + AR_WEIGHTS.get(f, "400;700")  # only weights the font has, or Google refuses the request
+    site["_ar_fonts"] = GF + fam(disp) + ("&family=" + fam(body) if body != disp else "")
+    site["_ar_display"] = f'"{disp}", "Noto Kufi Arabic", sans-serif'
+    site["_ar_body"] = f'"{body}", "IBM Plex Sans Arabic", sans-serif'
+
+
+def render_lang(env, site, lang):
+    """sites/<slug>/<lang>/*.html: same pages and file names, assets shared one folder up."""
+    out_dir = SITES / site["slug"] / lang
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for old in out_dir.glob("*.html"):
+        old.unlink()
+    ui = i18n.load_ui(lang)
+    site["_ui_json"] = json.dumps(ui.get("exact", {}), ensure_ascii=False).replace("</", "<\\/")
+    if site.get("_shop"):
+        sh = dict(site["_shop"], cur_label=ui.get("currency", {}).get(site["_shop"]["currency"], ""),
+                  items={k: dict(v, img=("../" + v["img"]) if v.get("img") else "") for k, v in site["_shop"]["items"].items()})
+        (SITES / site["slug"] / "assets" / f"shop-data.{lang}.js").write_text(
+            "window.T1SHOP=" + json.dumps(sh, ensure_ascii=False).replace("</", "<\\/") + ";\n", encoding="utf-8")
+    shutil.copy(SHARED / "css" / "rtl.css", SITES / site["slug"] / "assets" / "rtl.css")
+    for page in site["_pages"]:
+        tpl = f"themes/{site['theme']}.html.j2" if page["kind"] == "home" else f"pages/{page['kind']}.html.j2"
+        html = env.get_template(tpl).render(s=site, page=page, year=YEAR)
+        if page["kind"] not in ("home", "contact"):
+            for anchor, target in site["_anchors"].items():
+                html = html.replace(f'href="{anchor}"', f'href="{target}"')
+        html = html.replace('src="assets/shop-data.js"', f'src="assets/shop-data.{lang}.js"')
+        (out_dir / page["file"]).write_text(i18n.localize_html(html, ui), encoding="utf-8")
 
 
 def render_site(env, site):
@@ -467,10 +510,24 @@ def main():
     for path in sorted(DATA.glob("*.json")):
         if path.name == "credits.json" or (only and path.stem != only):
             continue
-        site = prepare(json.loads(path.read_text(encoding="utf-8")))
+        raw = json.loads(path.read_text(encoding="utf-8"))
+        table_p = DATA / "i18n" / f"{path.stem}.ar.json"
+        site = prepare(json.loads(json.dumps(raw)))
+        if table_p.exists():
+            site["_alt"] = {"lang": "ar", "prefix": "ar/", "label": "العربية"}
         sites.append(site)
         render_site(env, site)
         print(f"built sites/{site['slug']}/  ({len(site['_pages'])} pages)")
+        if table_p.exists():  # Arabic: translated copy of the data, right to left, in sites/<slug>/ar/
+            data_ar, missing = i18n.translate(raw, json.loads(table_p.read_text(encoding="utf-8")))
+            site_ar = prepare(data_ar)
+            site_ar["lang"] = "ar"
+            site_ar["_alt"] = {"lang": "en", "prefix": "../", "label": "English"}
+            ar_fonts(site_ar)
+            render_lang(env, site_ar, "ar")
+            print(f"built sites/{site['slug']}/ar/  ({len(site_ar['_pages'])} pages, {len(missing)} strings untranslated)")
+        elif (SITES / site["slug"] / "ar").exists():
+            shutil.rmtree(SITES / site["slug"] / "ar")
 
     if only:
         return

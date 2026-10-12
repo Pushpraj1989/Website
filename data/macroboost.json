@@ -14,6 +14,8 @@
   "style": "minimal",
   "logo": "logo",
   "logo_wide": true,
+  "ar_display": "Cairo",
+  "ar_body": "IBM Plex Sans Arabic",
   "bg": "#f4eee7",
   "fg": "#2a1111",
   "accent": "#d7261e",

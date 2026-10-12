@@ -60,6 +60,7 @@
       {%- endfor %}
     </nav>
     <div class="nav-actions">
+      {%- if s._alt %}<a class="lang-sw" href="{{ s._alt.prefix }}{{ here }}" hreflang="{{ s._alt.lang }}" lang="{{ s._alt.lang }}" data-lang-sw>{{ s._alt.label }}</a>{% endif %}
       {%- if s.shop %}<button class="cart-btn" type="button" data-cart-open aria-label="Open your order"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 7Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 7a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="cart-n" data-cart-count hidden>0</span></button>{% endif %}
       <a class="btn btn-primary btn-sm" href="{{ s.cta.href if not s.cta.href.startswith('#') else 'contact.html' }}" data-magnetic>{{ s.cta.label }}</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>

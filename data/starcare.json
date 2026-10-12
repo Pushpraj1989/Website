@@ -21,7 +21,9 @@
   "alt": "#e6f1ef",
   "font_display": "\"Marcellus\", Georgia, serif",
   "font_body": "\"Figtree\", system-ui, sans-serif",
-  "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Marcellus&family=Figtree:wght@400;500;600;700"
+  "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Marcellus&family=Figtree:wght@400;500;600;700",
+  "ar_display": "El Messiri",
+  "ar_body": "IBM Plex Sans Arabic"
  },
  "cta": {
   "label": "Book an appointment",

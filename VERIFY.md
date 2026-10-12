@@ -182,12 +182,15 @@ Sources:
 - Store opening hours (not published on the homepage).
 - Nutrition figures are parsed from product descriptions. Critical Whey uses the 24 g protein printed on every pack, because some of its online descriptions say 21 g; worth correcting on macroboost.com.
 - Payment gateway for this concept (Thawani Pay) versus the store's current Shopify checkout.
+- Meal subscription: the listing names no restaurant and links no menu; the product type says prices include VAT while the page's search summary says they exclude 5% VAT and lists different exclusions (shrimp, prawns, tuna, What's New items). The meal images are AI-generated (file names start with ChatGPT); real photos of the meals would be stronger.
+- Meal subscription add-ons: whether +50 g protein, +50 g carbs and the salmon upgrade are charged per meal or per subscription.
 - Product list is the best-selling 188 products of 788 on 12 Oct 2026; stock and prices change daily.
 
 Sources:
 - https://macroboost.com (homepage, products.json, collections.json, best-selling order; read 12 Oct 2026)
 - https://macroboost.com/pages/about-us, /pages/b2b-inquiries, /pages/product-certificates (read 12 Oct 2026)
 - https://macroboost.com/blogs/articles (3 articles, 18 Apr 2026)
+- https://macroboost.com/products/healthy-meal-subscriptions (prices, inclusions, add-ons and rules; read 12 Oct 2026)
 
 ## National Gas Company SAOG
 

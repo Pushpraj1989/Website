@@ -7,8 +7,10 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const KEY = "t1cart-" + S.slug;
-  const money = (n) => S.currency + " " + (Math.round(n * 1000) / 1000).toFixed(3);
-  const api = (path, opts) => fetch(S.api + path, opts).then((r) => r.json().then((j) => (r.ok ? j : Promise.reject(new Error(j.error || "Something went wrong")))));
+  // second-language pages set window.T1L (the kit's interface dictionary); {0} {1} fill values
+  const L = (t, ...v) => v.reduce((x, y, i) => x.replace("{" + i + "}", y), (window.T1L && window.T1L[t]) || t);
+  const money = (n) => { const v = (Math.round(n * 1000) / 1000).toFixed(3); return S.cur_label ? v + " " + S.cur_label : S.currency + " " + v; };
+  const api = (path, opts) => fetch(S.api + path, opts).then((r) => r.json().then((j) => (r.ok ? j : Promise.reject(new Error(j.error || L("Something went wrong"))))));
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   let cart = [];
@@ -66,7 +68,7 @@
     return `<div class="cl">
       <a class="cl-img" href="${it.url}">${it.img ? `<img src="${it.img}" alt="" loading="lazy">` : ""}</a>
       <div class="cl-t"><a href="${it.url}">${it.t}</a>${l.opt ? `<small>${l.opt}</small>` : ""}<span>${money(it.a)}</span></div>
-      ${small ? `<b class="cl-q">× ${l.qty}</b>` : `<div class="qty qty-sm"><button type="button" data-line="${i}" data-d="-1" aria-label="One less">&minus;</button><output>${l.qty}</output><button type="button" data-line="${i}" data-d="1" aria-label="One more">+</button></div>`}
+      ${small ? `<b class="cl-q">× ${l.qty}</b>` : `<div class="qty qty-sm"><button type="button" data-line="${i}" data-d="-1" aria-label="${L("One less")}">&minus;</button><output>${l.qty}</output><button type="button" data-line="${i}" data-d="1" aria-label="${L("One more")}">+</button></div>`}
     </div>`;
   }
 
@@ -101,7 +103,7 @@
     }
     add(b.dataset.add, qty, opt); fly(b);
     b.classList.remove("is-added"); void b.offsetWidth; b.classList.add("is-added");
-    toast(`Added ${qty > 1 ? qty + " × " : ""}${S.items[b.dataset.add].t}`);
+    toast(L("Added {0}", (qty > 1 ? qty + " × " : "") + S.items[b.dataset.add].t));
   });
   $$("[data-qty]").forEach((q) => q.addEventListener("click", (e) => {
     const b = e.target.closest("[data-step]"); if (!b) return;
@@ -149,12 +151,12 @@
         customer: { name: fd.get("name"), phone: fd.get("phone"), email: fd.get("email") },
         area: fd.get("area") || "", address: fd.get("address") || "", when: fd.get("when"), notes: fd.get("notes") };
       if (!String(body.customer.name || "").trim() || String(body.customer.phone || "").replace(/\D/g, "").length < 8) {
-        err.textContent = "Please add your name and a mobile number."; err.hidden = false; return;
+        err.textContent = L("Please add your name and a mobile number."); err.hidden = false; return;
       }
-      if (fulfil() === "delivery" && !String(body.address || "").trim()) { err.textContent = "Please add the delivery address."; err.hidden = false; return; }
+      if (fulfil() === "delivery" && !String(body.address || "").trim()) { err.textContent = L("Please add the delivery address."); err.hidden = false; return; }
       if (pay === "whatsapp") {
         const text = [`Hello ${S.name}, I would like to order:`, ...cart.map((l) => `${l.qty} × ${S.items[l.sku].t}${l.opt ? " (" + l.opt + ")" : ""}`),
-          `Subtotal: ${money(subtotal())}`, fulfil() === "delivery" ? `Delivery to: ${body.area}, ${body.address}` : "Pickup",
+          `Subtotal: ${money(subtotal())}`, fulfil() === "delivery" ? `Delivery to: ${body.area}, ${body.address}` : L("Pickup"),
           `When: ${body.when}`, body.notes ? `Notes: ${body.notes}` : "", `Name: ${body.customer.name} · ${body.customer.phone}`].filter(Boolean).join("\n");
         window.open(`https://wa.me/${S.wa.replace("+", "")}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
         cart = []; save(); location.href = "order.html?status=whatsapp"; return;
@@ -166,7 +168,7 @@
           cart = []; save(); location.href = `order.html?status=placed&order=${encodeURIComponent(r.order)}`;
         })
         .catch((x) => {
-          err.textContent = x.message === "Failed to fetch" || x instanceof SyntaxError ? "The order service is not reachable right now. Please call us or try again." : x.message;
+          err.textContent = x.message === "Failed to fetch" || x instanceof SyntaxError ? L("The order service is not reachable right now. Please call us or try again.") : x.message;
           err.hidden = false; btn.disabled = false; btn.classList.remove("is-busy");
         });
     });
@@ -178,21 +180,21 @@
     const q = new URLSearchParams(location.search), st = q.get("status"), id = q.get("order");
     const set = (k, t, x, ok) => { $("[data-o-kicker]").textContent = k; $("[data-o-title]").textContent = t; $("[data-o-text]").textContent = x; op.classList.toggle("is-bad", !ok); $("[data-o-retry]").hidden = ok; };
     const facts = (o) => { const f = $("[data-o-facts]"); f.hidden = false;
-      f.innerHTML = [["Order", o.order], ["Total", money(o.total)], ["How", o.fulfilment], ["Items", o.lines.map((l) => l.qty + " × " + l.name).join(", ")]]
+      f.innerHTML = [[L("Order"), o.order], [L("Total"), money(o.total)], [L("How"), o.fulfilment], [L("Items"), o.lines.map((l) => l.qty + " × " + l.name).join(", ")]]
         .map(([a, b]) => `<div><dt>${a}</dt><dd>${String(b).replace(/</g, "&lt;")}</dd></div>`).join(""); };
-    if (st === "whatsapp") set("Sent to WhatsApp", "Send the message to confirm", "Your order is written out in WhatsApp. Press send and we reply to confirm the time.", true);
-    else if (st === "cancel") set("Payment cancelled", "No payment was taken", "Your card was not charged. Try again or choose cash.", false);
+    if (st === "whatsapp") set(L("Sent to WhatsApp"), L("Send the message to confirm"), L("Your order is written out in WhatsApp. Press send and we reply to confirm the time."), true);
+    else if (st === "cancel") set(L("Payment cancelled"), L("No payment was taken"), L("Your card was not charged. Try again or choose cash."), false);
     else if (id) {
       let tries = 0;
       const check = () => api(`/order/${encodeURIComponent(id)}?site=${S.slug}`).then((o) => {
         facts(o);
-        if (o.status === "paid") { cart = []; save(); set("Paid", "Thank you, your order is in", "Payment received. The kitchen has your order and we will call if anything changes.", true); }
-        else if (o.status === "awaiting_payment" && tries++ < 6) { set("Checking payment", "One moment…", "Confirming your payment with the bank.", true); setTimeout(check, 2500); }
-        else if (o.status === "awaiting_payment" || o.status === "payment_cancelled") set("Payment not completed", "Your order is not paid yet", "If money left your account, call us with your order number.", false);
-        else set(o.status === "plan_request" ? "Plan request" : "Order placed", "Thank you, your order is in", "We will call you to confirm. Keep your order number.", true);
-      }).catch(() => set("Order", "We could not check this order", "Please call us with your order number: " + id, false));
+        if (o.status === "paid") { cart = []; save(); set(L("Paid"), L("Thank you, your order is in"), L("Payment received. The kitchen has your order and we will call if anything changes."), true); }
+        else if (o.status === "awaiting_payment" && tries++ < 6) { set(L("Checking payment"), L("One moment…"), L("Confirming your payment with the bank."), true); setTimeout(check, 2500); }
+        else if (o.status === "awaiting_payment" || o.status === "payment_cancelled") set(L("Payment not completed"), L("Your order is not paid yet"), L("If money left your account, call us with your order number."), false);
+        else set(o.status === "plan_request" ? L("Plan request") : L("Order placed"), L("Thank you, your order is in"), L("We will call you to confirm. Keep your order number."), true);
+      }).catch(() => set(L("Order"), L("We could not check this order"), L("Please call us with your order number: ") + id, false));
       check();
-    } else set("Your order", "Nothing to show yet", "Add something from the menu to start an order.", false);
+    } else set(L("Your order"), L("Nothing to show yet"), L("Add something from the menu to start an order."), false);
   }
 
   /* ---------- meal plans ---------- */
@@ -208,7 +210,7 @@
     const calc = () => {
       const { p, n, key, days } = pick(), a = tiers[key];
       $("[data-sub-price]").textContent = money(a);
-      $("[data-sub-meals]").textContent = `${days * n} (${days} days × ${n})`;
+      $("[data-sub-meals]").textContent = L("{0} ({1} days × {2})", days * n, days, n);
       $("[data-sub-per]").textContent = money(a / (days * n));
       // the same meals bought as weekly plans
       const wk = $$("input[name=period]", form).find((i) => +i.dataset.days < days);
@@ -217,17 +219,17 @@
       $$("[data-sub-from]", form).forEach((el) => { const v = tiers[p.value + el.dataset.subFrom]; el.textContent = v ? money(v) : ""; });
       $$("[data-sub-img]", plan).forEach((im) => im.classList.toggle("is-on", +im.dataset.subImg === n));
       $("[data-sub-n]", plan).textContent = n;
-      $("[data-sub-n]", plan).nextElementSibling.textContent = n === 1 ? "meal a day" : "meals a day";
+      $("[data-sub-n]", plan).nextElementSibling.textContent = n === 1 ? L("meal a day") : L("meals a day");
     };
     form.addEventListener("change", calc); calc();
     form.addEventListener("submit", (e) => {
       e.preventDefault(); err.hidden = true;
       const { key } = pick();
-      if (!start.value || start.value < start.min) { err.textContent = "Please choose a start date from tomorrow."; err.hidden = false; return; }
+      if (!start.value || start.value < start.min) { err.textContent = L("Please choose a start date from tomorrow."); err.hidden = false; return; }
       const fd = new FormData(form);
-      const opt = [`Start ${start.value}`, ...fd.getAll("addon"), String(fd.get("notes") || "").trim()].filter(Boolean).join(" · ").slice(0, 80);
+      const opt = [L("Start {0}", start.value), ...fd.getAll("addon"), String(fd.get("notes") || "").trim()].filter(Boolean).join(" · ").slice(0, 80);
       add("meal-sub-" + key, 1, opt);
-      toast("Subscription added to your cart");
+      toast(L("Subscription added to your cart"));
       open();
     });
   } else if (plan) {
@@ -237,7 +239,7 @@
       const picks = $$("input[name=pick]:checked", form).map((i) => S.items[i.value]).filter(Boolean);
       const m = val("meals"), meals = m * val("days") * val("weeks");
       $("[data-plan-meals]").textContent = meals;
-      $("[data-plan-n]").textContent = picks.length ? `${picks.length} chosen` : "";
+      $("[data-plan-n]").textContent = picks.length ? L("{0} chosen", picks.length) : "";
       if (!picks.length) { ["kcal", "protein", "est"].forEach((k) => { $(`[data-plan-${k}]`).textContent = "–"; }); return; }
       const avg = (k) => picks.reduce((t, p) => t + (p[k] || 0), 0) / picks.length;
       $("[data-plan-kcal]").textContent = Math.round(avg("k") * m) + " kcal";
@@ -250,7 +252,7 @@
       const fd = new FormData(form);
       const body = { site: S.slug, kind: "plan", customer: { name: fd.get("name"), phone: fd.get("phone") }, notes: fd.get("notes"),
         plan: { goal: fd.get("goal"), meals: fd.get("meals"), days: fd.get("days"), weeks: fd.get("weeks"), picks: fd.getAll("pick") } };
-      if (!String(body.customer.name || "").trim() || String(body.customer.phone || "").replace(/\D/g, "").length < 8) { err.textContent = "Please add your name and a mobile number."; err.hidden = false; return; }
+      if (!String(body.customer.name || "").trim() || String(body.customer.phone || "").replace(/\D/g, "").length < 8) { err.textContent = L("Please add your name and a mobile number."); err.hidden = false; return; }
       const viaWa = () => {
         const text = [`Hello ${S.name}, I would like a meal plan:`, `Goal: ${body.plan.goal}`, `${body.plan.meals} meals a day, ${body.plan.days} days a week, ${body.plan.weeks} week(s)`,
           "Meals I like: " + body.plan.picks.map((k) => S.items[k].t).join(", "), body.notes ? "Notes: " + body.notes : "", `Name: ${body.customer.name} · ${body.customer.phone}`].filter(Boolean).join("\n");
@@ -258,7 +260,7 @@
       };
       api("/order", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
         .then((r) => { location.href = `order.html?status=placed&order=${encodeURIComponent(r.order)}`; })
-        .catch(() => { if (S.wa) viaWa(); else { err.textContent = "The request service is not reachable right now. Please call us."; err.hidden = false; } });
+        .catch(() => { if (S.wa) viaWa(); else { err.textContent = L("The request service is not reachable right now. Please call us."); err.hidden = false; } });
     });
   }
 

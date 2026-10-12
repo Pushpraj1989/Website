@@ -24,13 +24,13 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <p>© {{ year }} {{ s.name }}. {{ s.footer_note or "Concept redesign, not the company's official website. Facts to be verified before use." }}</p>
+      <p>© {{ year }} {{ s.name }}. <span>{{ s.footer_note or "Concept redesign, not the company's official website. Facts to be verified before use." }}</span></p>
       <a href="#top">Back to top</a>
     </div>
     {%- if s._credits %}
     <details class="credits">
       <summary>Image credits</summary>
-      <ul>
+      <ul dir="ltr" lang="en">
         {%- for c in s._credits %}
         <li>“{{ c.title }}”{% if c.creator %} by {{ c.creator }}{% endif %}, {% if c.license_url %}<a href="{{ c.license_url }}" rel="license noopener">{{ c.license }}</a>{% else %}{{ c.license }}{% endif %}{% if c.landing %} · <a href="{{ c.landing }}" rel="noopener">source</a>{% endif %}{% if c.modified %} · cropped and colour-graded{% endif %}</li>
         {%- endfor %}
