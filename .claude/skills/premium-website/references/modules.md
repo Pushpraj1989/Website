@@ -5,6 +5,13 @@ video) the person shares to items here; build new modules only for what is missi
 
 ## Home sections (studio `home` list)
 
+**Realism first.** Show the company's real products as photos: cut them out with
+`python3 tools/cutout.py shared/img/<slug>/*.jpg --out shared/img/<slug>/cut` and set
+`catalogue.cutouts: true`, so dishes and packs float on the page (cards, product pages, lineup,
+converge). Drawn SVG art (`assemble` with shapes) is a last resort for products with no photos;
+never use it for food when photos exist. Supporting ingredients and layers come from open-licence
+photos (Openverse, Wikimedia; CC0 / CC BY), cut out the same way and captioned "illustrative".
+
 | Type | What it is | Use when |
 | --- | --- | --- |
 | promo | Full-screen slider, WebGL transition (`promo_fx`), tabs with progress, swipe, pause | always (top of home) |
@@ -13,6 +20,9 @@ video) the person shares to items here; build new modules only for what is missi
 | stats | Count-up figures on an accent band | real numbers exist |
 | services | Card grid; hover reveals photo; links to detail pages | services, departments, divisions |
 | catalogue | Draggable strip of product cards (photo or drawn art) | products, menu, plans |
+| converge | Pinned hero: real ingredient cut-outs float around the frame (depth, blur, pointer lean) and fly into the real dish as you scroll; numbers pop around it; add-to-order bar | food, drinks, cosmetics: any product with visible ingredients. **First choice for food heroes** |
+| stack | Pinned: a product made of real photographed layers (burger, sandwich, cake, device) opens into an exploded view with named layers, then closes | layered products with real layer photos |
+| lineup | Huge title + real cut-out products in a row that slides sideways while pinned (swipe on phones), price and + on each | best sellers, flavours, ranges |
 | assemble | Pinned section: product explodes and builds layer by layer as you scroll, parts list lights up, price pops in | food, drinks, protein, cards, devices, buildings |
 | split | Big photo + copy + checklist + CTA, parallax | story, place, feature |
 | testimonials | Rotating quotes | published testimonials only |

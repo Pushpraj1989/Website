@@ -4,8 +4,10 @@
 {%- set it = page.item %}{% set C = s.catalogue %}
 <section class="pd-hero" id="top">
   <div class="wrap pd-grid">
-    <div class="pd-media{% if it._art and not it._img %} is-art{% endif %}" data-anim="scale">
-      {%- if it._img %}<img src="{{ m.src(it._img) }}" alt="{{ s.images[it._img].alt }}">
+    <div class="pd-media{% if it._art and not it._img %} is-art{% endif %}{% if it._cut %} is-cut{% endif %}" data-anim="scale">
+      {%- if it._cut %}<span class="pd-halo" aria-hidden="true"></span><img class="pd-cut" src="{{ m.src(it._cut) }}" alt="{{ s.images[it._img].alt }}">
+      {%- if it.macros %}{% for k in it.macros %}<span class="pd-orb" style="--i: {{ loop.index0 }}"><b>{{ k.value }}</b>{{ k.label }}</span>{% endfor %}{% endif %}
+      {%- elif it._img %}<img src="{{ m.src(it._img) }}" alt="{{ s.images[it._img].alt }}">
       {%- elif it._art %}<svg viewBox="0 0 400 {{ it._art_h }}" role="img" aria-label="{{ it.title }}">{{ it._art | safe }}</svg>{% endif %}
       <div class="pd-orbit" aria-hidden="true"></div>
     </div>

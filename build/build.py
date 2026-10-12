@@ -145,6 +145,7 @@ def build_pages(site):
         for it in cat["items"]:
             it["_file"] = "p-" + slugify(it["title"]) + ".html"
             it["_img"] = item_image(site, it)
+            it["_cut"] = ("cut:" + it["_img"]) if it["_img"] and ("cut:" + it["_img"]) in site["images"] and cat.get("cutouts") else None
         cats = []
         for it in cat["items"]:
             if it.get("category") and it["category"] not in cats:
@@ -236,6 +237,14 @@ def prepare(site):
     site.setdefault("stats", []); site.setdefault("confirm", []); site.setdefault("sources", [])
     site.setdefault("images", {}); site.setdefault("img_dir", site["slug"])
     site.setdefault("about", {"title": site.get("meta", ""), "body": []})
+    # cut-outs: shared/img/<dir>/cut/<stem>.webp (tools/cutout.py) become image "cut:<key>",
+    # so real dishes and products can float on the page; catalogue items pick them up as _cut
+    cut_dir = SHARED / "img" / site["img_dir"] / "cut"
+    if cut_dir.exists():
+        for key, im in list(site["images"].items()):
+            stem = im["src"].rsplit(".", 1)[0]
+            if not key.startswith("cut:") and (cut_dir / (stem + ".webp")).exists():
+                site["images"].setdefault("cut:" + key, {"src": f"cut/{stem}.webp", "alt": im.get("alt", ""), "cap": im.get("cap")})
     for stat in site["stats"]:
         if "years_since" in stat:
             stat["value"] = YEAR - stat["years_since"]
@@ -302,7 +311,7 @@ def prepare(site):
                 it["_sku"] = slugify(it["title"])[:48]
                 it.setdefault("price", f"{cur} {it['amount']:.3f}")
             items[slugify(it["title"])[:48]] = {"t": it["title"], "a": it.get("amount") if it.get("_sku") else None,
-                                                  "img": img_src.get(it.get("_img")) or "", "url": it["_file"],
+                                                  "img": img_src.get(it.get("_cut") or it.get("_img")) or "", "url": it["_file"],
                                                   "cat": it.get("category", ""), "opts": [o["label"] for o in it.get("options") or []],
                                                   **{k[0]: float(re.sub(r"[^\d.]", "", x["value"]) or 0) for x in it.get("macros") or []
                                                      for k in [x["label"].lower()] if k in ("kcal", "protein")}}
@@ -352,6 +361,7 @@ def render_site(env, site):
         src = SHARED / "img" / site["img_dir"] / im
         if not src.exists():
             raise SystemExit(f"missing image for {site['slug']}: {src}")
+        (out_dir / "assets" / "img" / im).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(src, out_dir / "assets" / "img" / im)
     # scroll-scrubbed footage: videos and frame folders named in home sections
     media = []

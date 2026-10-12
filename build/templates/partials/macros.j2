@@ -340,8 +340,9 @@
 
 {%- macro product_card(it) -%}
 {%- set inner %}
-  <div class="pc-media{% if it._art %} is-art{% endif %}">
-    {%- if it._img %}<img src="{{ src(it._img) }}" alt="{{ s.images[it._img].alt }}" loading="lazy">
+  <div class="pc-media{% if it._art %} is-art{% endif %}{% if it._cut %} is-cut{% endif %}">
+    {%- if it._cut %}<img src="{{ src(it._cut) }}" alt="{{ s.images[it._img].alt }}" loading="lazy">
+    {%- elif it._img %}<img src="{{ src(it._img) }}" alt="{{ s.images[it._img].alt }}" loading="lazy">
     {%- elif it._art %}<svg viewBox="0 0 400 {{ it._art_h }}" aria-hidden="true">{{ it._art | safe }}</svg>{% endif %}
     {%- if it.badge %}<span class="pc-badge">{{ it.badge }}</span>{% endif %}
   </div>
@@ -500,6 +501,9 @@
 {%- elif t == 'services' %}{{ services_grid() }}
 {%- elif t == 'catalogue' %}{{ catalogue_strip() }}
 {%- elif t == 'assemble' %}{% for a in s.assemble or [] if (m is not mapping or not m.id or a.id == m.id) %}{{ assemble(a) }}{% endfor %}
+{%- elif t == 'converge' %}{{ converge(m) }}
+{%- elif t == 'stack' %}{{ stack(m) }}
+{%- elif t == 'lineup' %}{{ lineup(m) }}
 {%- elif t == 'split' %}{% if m is mapping and m.title %}{{ split(m) }}{% endif %}
 {%- elif t == 'news' %}{{ home_news() }}
 {%- elif t == 'testimonials' %}{{ testimonials() }}
@@ -568,6 +572,100 @@
     {%- endif %}
     {%- endfor %}
     {%- if m.cap %}<span class="depth-cap">{{ m.cap }}</span>{% endif %}
+  </div>
+</section>
+{%- endmacro -%}
+
+
+
+{%- macro converge(m) -%}
+{#- Real ingredients (cut-out photos) float around the frame and fly into the dish as you scroll;
+    the dish settles, then its numbers appear around it. Reduced motion: the finished scene. -#}
+{%- set it = (s.catalogue['items'] | selectattr('title', 'equalto', m.product) | first) if m.product else none %}
+<section class="cv" id="{{ m.id or 'converge' }}" data-converge style="--cv-h: {{ m.height or 240 }}vh">
+  <div class="cv-stage">
+    <div class="cv-bg" aria-hidden="true"><i></i></div>
+    <div class="wrap cv-copy">
+      {%- if m.kicker %}<p class="eyebrow">{{ m.kicker }}</p>{% endif %}
+      <h1 class="cv-title">{{ m.title | safe }}</h1>
+      {%- if m.text %}<p class="cv-text">{{ m.text }}</p>{% endif %}
+      <div class="cta-row">{% if m.cta %}<a class="btn btn-primary" href="{{ m.cta.href }}" data-magnetic>{{ m.cta.label }} {{ icon('arrow') }}</a>{% endif %}{% if m.cta2 %}<a class="btn btn-ghost" href="{{ m.cta2.href }}">{{ m.cta2.label }}</a>{% endif %}</div>
+    </div>
+    <div class="cv-scene">
+      <div class="cv-plate">
+        <span class="cv-shadow" aria-hidden="true"></span>
+        <img class="cv-dish" src="{{ src(m.dish) }}" alt="{{ s.images[m.dish].alt }}">
+        {%- for c in m.chips or [] %}<span class="cv-chip" style="--a: {{ c.angle or (loop.index0 * 90 - 45) }}deg"><b>{{ c.value }}</b>{{ c.label }}</span>{% endfor %}
+      </div>
+      {%- for g in m.ingredients %}
+      <img class="cv-ing" src="{{ src(g.image) }}" alt="" aria-hidden="true" data-x="{{ g.x }}" data-y="{{ g.y }}" data-r="{{ g.rot or 0 }}" data-z="{{ g.z or 0.5 }}" style="--w: {{ g.size or 120 }}px; --sx: {{ g.x }}; --sy: {{ g.y }}">
+      {%- endfor %}
+    </div>
+    {%- if it %}
+    <div class="cv-buy">
+      <a class="cv-buy-t" href="{{ it._file }}"><span>{{ it.category }}</span><b>{{ it.title }}</b></a>
+      {%- if it.price %}<span class="cv-buy-p">{{ it.price }}</span>{% endif %}
+      {%- if it._sku %}<button class="btn btn-primary btn-sm" type="button" data-add="{{ it._sku }}">{{ s.shop.add_label or 'Add to order' }}</button>{% endif %}
+    </div>
+    {%- endif %}
+    {%- if m.cap %}<span class="cv-cap">{{ m.cap }}</span>{% endif %}
+    <span class="cv-hint" aria-hidden="true"><i></i>Scroll</span>
+  </div>
+</section>
+{%- endmacro -%}
+
+{%- macro stack(m) -%}
+{#- Exploded product made of real photographed layers (cut-outs), bottom layer first. It starts
+    assembled, opens as you scroll with each layer named, then closes again. -#}
+{%- set it = (s.catalogue['items'] | selectattr('title', 'equalto', m.product) | first) if m.product else none %}
+<section class="stk" id="{{ m.id or 'stack' }}" data-stack style="--stk-h: {{ m.height or 300 }}vh">
+  <div class="stk-stage">
+    <div class="wrap stk-grid">
+      <div class="stk-copy">
+        {%- if m.kicker %}<p class="eyebrow">{{ m.kicker }}</p>{% endif %}
+        <h2 class="stk-title">{{ m.title | safe }}</h2>
+        {%- if m.intro %}<p class="stk-intro">{{ m.intro }}</p>{% endif %}
+        <ol class="stk-list">
+          {%- for l in m.layers | reverse %}<li data-i="{{ m.layers | length - loop.index }}"><b>{{ l.name }}</b>{% if l.note %}<span>{{ l.note }}</span>{% endif %}</li>{% endfor %}
+        </ol>
+        {%- if it %}<div class="stk-buy">{% if it.price %}<b>{{ it.price }}</b>{% else %}<b class="pc-ask">{{ s.shop.ask_label if s.shop else '' }}</b>{% endif %}<a class="btn btn-primary btn-sm" href="{{ it._file }}">{{ m.cta_label or 'See it' }} {{ icon('arrow') }}</a></div>{% endif %}
+      </div>
+      <div class="stk-view" style="--stk-w: {{ m.width or 78 }}%">
+        <span class="stk-shadow" aria-hidden="true"></span>
+        {%- for l in m.layers %}
+        <figure class="stk-l" data-i="{{ loop.index0 }}" data-t="{{ l.t or 10 }}" data-dx="{{ l.dx or 0 }}" data-rot="{{ l.rot or 0 }}" style="--lw: {{ l.w or 78 }}%; --i: {{ loop.index0 }}; z-index: {{ loop.index }}"><img src="{{ src(l.image) }}" alt="{{ l.name }}"><figcaption>{{ l.name }}</figcaption></figure>
+        {%- endfor %}
+      </div>
+    </div>
+    {%- if m.cap %}<span class="cv-cap">{{ m.cap }}</span>{% endif %}
+  </div>
+</section>
+{%- endmacro -%}
+
+{%- macro lineup(m) -%}
+{#- The lineup: real cut-out products in a row that slides sideways as you scroll (swipe on phones). -#}
+{%- set C = s.catalogue %}
+{%- set picks = [] %}{% for t in m['items'] or [] %}{% for it in C['items'] if it.title == t %}{% set _ = picks.append(it) %}{% endfor %}{% endfor %}
+{%- set picks = picks or (C['items'] | selectattr('featured') | list) %}
+<section class="lu" id="{{ m.id or 'lineup' }}" data-lineup>
+  <div class="lu-stage">
+    <div class="wrap lu-head">
+      <h2 class="lu-title">{{ m.title or 'The lineup.' }}</h2>
+      {%- if m.text %}<p class="lu-text">{{ m.text }}</p>{% endif %}
+    </div>
+    <div class="lu-track" data-lu-track>
+      {%- for it in picks %}
+      <article class="lu-item">
+        <a class="lu-img" href="{{ it._file }}"><img src="{{ src(it._cut or it._img) }}" alt="{{ s.images[it._img].alt }}" loading="lazy" draggable="false"></a>
+        <p class="lu-cat">{{ it.category }}</p>
+        <h3 class="lu-name"><a href="{{ it._file }}">{{ it.title }}</a></h3>
+        {%- if it.macros %}<p class="lu-mac">{% for k in it.macros %}{{ k.value }} {{ k.label }}{% if not loop.last %} · {% endif %}{% endfor %}</p>{% endif %}
+        <div class="lu-foot">{% if it.price %}<b>{{ it.price }}</b>{% else %}<b class="pc-ask">{{ s.shop.ask_label if s.shop else '' }}</b>{% endif %}
+          {%- if it._sku %}<button class="pc-add lu-add" type="button" data-add="{{ it._sku }}" aria-label="Add {{ it.title }}"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>{% endif %}</div>
+      </article>
+      {%- endfor %}
+      <a class="lu-more" href="{{ C._file }}"><span>{{ m.more or 'Full menu' }}</span>{{ icon('arrow') }}</a>
+    </div>
   </div>
 </section>
 {%- endmacro -%}

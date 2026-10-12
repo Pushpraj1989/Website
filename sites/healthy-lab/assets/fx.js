@@ -796,6 +796,107 @@
     requestAnimationFrame(tick);
   }
 
+  /* ---------- converge: real ingredients fly into the dish as you scroll ---------- */
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  function convergeHero(sec, T1) {
+    sec.classList.add("is-live");
+    const stage = sec.querySelector(".cv-stage"), scene = sec.querySelector(".cv-scene");
+    const dish = sec.querySelector(".cv-dish"), plate = sec.querySelector(".cv-plate");
+    const copy = sec.querySelector(".cv-copy"), hint = sec.querySelector(".cv-hint");
+    const ings = Array.from(sec.querySelectorAll(".cv-ing")).map((el, i) => {
+      const z = parseFloat(el.dataset.z) || 0.5;
+      if (z > 0.8) el.style.filter = `blur(${((z - 0.8) * 14).toFixed(1)}px)`;
+      const ang = i * 2.39996, rad = 0.06 + (i % 4) * 0.045; // golden-angle landing spots inside the dish
+      return { el, x: +el.dataset.x / 100, y: +el.dataset.y / 100, r: +el.dataset.r, z, tx: Math.cos(ang) * rad, ty: Math.sin(ang) * rad * 0.7, spin: (i % 2 ? 1 : -1) * (90 + (i % 3) * 60), ph: i * 1.7 };
+    });
+    let mx = 0, my = 0, tx = 0, ty = 0, cur = 0, done = false;
+    if (T1.fine) sec.addEventListener("pointermove", (e) => { tx = (e.clientX / innerWidth - 0.5) * 2; ty = (e.clientY / innerHeight - 0.5) * 2; });
+    const tick = (t) => {
+      if (visibleNow(sec)) {
+        const target = sectionProgress(sec);
+        cur += (target - cur) * 0.12; if (Math.abs(target - cur) < 0.0004) cur = target;
+        mx += (tx - mx) * 0.05; my += (ty - my) * 0.05;
+        const W = scene.clientWidth, H = scene.clientHeight, D = dish.clientWidth || W * 0.4;
+        const a = ease(clamp01((cur - 0.06) / 0.52)), time = t / 1000;
+        // the dish glides from its spot beside the headline to the centre while the headline leaves
+        const pr = plate.offsetLeft + plate.offsetWidth / 2, shift = (W / 2 - pr) * a;
+        ings.forEach((g) => {
+          const fl = (1 - a);
+          const x = lerp(g.x * W, g.tx * D, a) + shift + Math.sin(time * 0.7 + g.ph) * 10 * fl - mx * g.z * 40 * fl;
+          const y = lerp(g.y * H, g.ty * D, a) + Math.cos(time * 0.9 + g.ph) * 14 * fl - my * g.z * 30 * fl;
+          const sc = lerp(0.55 + g.z * 0.8, 0.22, a);
+          g.el.style.transform = `translate3d(calc(${x.toFixed(1)}px - 50%), calc(${y.toFixed(1)}px - 50%), 0) rotate(${(g.r + g.spin * a).toFixed(1)}deg) scale(${sc.toFixed(3)})`;
+          g.el.style.opacity = String(a > 0.8 ? Math.max(0, 1 - (a - 0.8) / 0.2) : 1);
+        });
+        plate.style.transform = `translate3d(${(shift - mx * 10).toFixed(1)}px, ${(-my * 8).toFixed(1)}px, 0) scale(${lerp(0.7, 1, a).toFixed(3)})`;
+        dish.style.transform = `rotate(${(lerp(-28, 0, a) + cur * 14).toFixed(2)}deg)`;
+        if (copy) { const f = clamp01((cur - 0.04) / 0.22); copy.style.opacity = String(1 - f); copy.style.transform = `translateY(${(-f * 60).toFixed(1)}px)`; copy.style.pointerEvents = f > 0.5 ? "none" : ""; }
+        if (hint) hint.style.opacity = String(1 - clamp01(cur / 0.03));
+        const d = cur > 0.6; if (d !== done) { done = d; sec.classList.toggle("is-done", d); }
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- stack: a product made of real photographed layers opens and closes on scroll ---------- */
+  function photoStack(sec) {
+    sec.classList.add("is-live");
+    const view = sec.querySelector(".stk-view");
+    const layers = Array.from(sec.querySelectorAll(".stk-l"));
+    const items = Array.from(sec.querySelectorAll(".stk-list li"));
+    const n = layers.length;
+    let cur = 0, active = -1;
+    const tick = () => {
+      if (visibleNow(sec)) {
+        const target = sectionProgress(sec);
+        cur += (target - cur) * 0.12; if (Math.abs(target - cur) < 0.0004) cur = target;
+        const H = view.clientHeight;
+        const open = cur < 0.5 ? ease(clamp01((cur - 0.1) / 0.4)) : 1 - ease(clamp01((cur - 0.82) / 0.18));
+        const thick = layers.map((l) => (parseFloat(l.dataset.t) || 10) / 100 * H);
+        const top = layers[n - 1].clientHeight || H * 0.3;
+        const sumT = thick.slice(0, n - 1).reduce((x, y) => x + y, 0);
+        const gap = Math.max(18, (H * 0.92 - top - sumT) / Math.max(1, n - 1));
+        let y = 0;
+        layers.forEach((l, i) => {
+          const yy = y + i * gap * open, dx = (parseFloat(l.dataset.dx) || 0) * open, rot = (parseFloat(l.dataset.rot) || 0) * open;
+          l.style.transform = `translate3d(calc(-50% + ${dx}px), ${(-yy).toFixed(1)}px, 0) rotate(${rot}deg)`;
+          y += thick[i];
+        });
+        sec.style.setProperty("--open", open.toFixed(3));
+        const k = open > 0.6 ? Math.min(n - 1, Math.floor(clamp01((cur - 0.42) / 0.4) * n)) : -1;
+        if (k !== active) { active = k; items.forEach((li) => li.classList.toggle("is-on", +li.dataset.i === k)); layers.forEach((l, i) => l.classList.toggle("is-on", i === k)); }
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- lineup: products slide sideways while the section is pinned (desktop) ---------- */
+  function lineupSlide(sec) {
+    const track = sec.querySelector("[data-lu-track]");
+    const size = () => {
+      const live = innerWidth > 900;
+      sec.classList.toggle("is-live", live);
+      const over = Math.max(0, track.scrollWidth - innerWidth + 48);
+      sec.style.height = live ? `${over + innerHeight}px` : "";
+      return over;
+    };
+    let over = size(), cur = 0;
+    addEventListener("resize", () => { over = size(); });
+    const tick = () => {
+      if (sec.classList.contains("is-live") && visibleNow(sec)) {
+        const target = sectionProgress(sec);
+        cur += (target - cur) * 0.12;
+        track.style.transform = `translate3d(${(-cur * over).toFixed(1)}px, 0, 0)`;
+      } else track.style.transform = "";
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
   /* ---------- layered depth hero: planes move at different rates and lean with the pointer ---------- */
   function depthHero(sec, T1) {
     const layers = Array.from(sec.querySelectorAll(".depth-layer"));
@@ -1129,6 +1230,9 @@
       document.querySelectorAll("[data-scrub]").forEach((r) => scrubFilm(r, T1));
       document.querySelectorAll("[data-depth]").forEach((r) => depthHero(r, T1));
       document.querySelectorAll("[data-stages]").forEach((r) => stagesStory(r));
+      document.querySelectorAll("[data-converge]").forEach((r) => convergeHero(r, T1));
+      document.querySelectorAll("[data-stack]").forEach((r) => photoStack(r));
+      document.querySelectorAll("[data-lineup]").forEach((r) => lineupSlide(r));
     } else {
       document.querySelectorAll(".scrub-beat, .stg-text").forEach((b) => b.classList.add("is-on"));
     }

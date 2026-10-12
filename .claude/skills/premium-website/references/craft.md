@@ -67,7 +67,20 @@ maximalism, bento grid, spatial UI. Match the style to the brand:
 - spatial: tech, automotive, launches.
 One style per site; never mix.
 
-## 7. Verify by looking
+## 7. Real over drawn (food, products, places)
+
+People judge a food or product site by whether the food looks edible. Reference reels
+("Websites in 2026": a burger that splits into real layers, spices exploding into a dish,
+a top-down table, cans rotating in a lineup) all use **photographic** subjects that move.
+- Use the company's own photos, cut out (`tools/cutout.py`, BiRefNet) so they float with soft
+  shadows on a calm background. Light cream or bone backgrounds flatter food; dark suits drinks and tech.
+- Motion moves real things: ingredients converge (`converge`), layers separate (`stack`),
+  products slide past (`lineup`), footage scrubs (`scrub`). Drawn shapes only when no photo exists.
+- Editorial type: a big serif or a heavy condensed display with one italic or colour accent word.
+- Fully generated cinematic sequences (the "how it was built" reels) come from AI video tools;
+  offer them as an optional paid step (integrations.md), never use without approval.
+
+## 8. Verify by looking
 
 Screenshot the opening, mid-way and end states of every scroll-driven section (scrub, depth,
 stages, assemble) on desktop and phone. A passing test suite does not prove the effect looks

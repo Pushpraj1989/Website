@@ -35,7 +35,7 @@ other block switches on a feature when present. Working examples:
   {"type": "split", "image": "cafe", "kicker": "The café", "title": "…", "body": ["…"], "points": ["…"], "cta": {"label": "…", "href": "…"}, "flip": false},
   "services", "stats", "testimonials", "partners", "news", "locations", "emi", "bmi", "faq"]
 ```
-Section types: promo, rail, statement, stats, services, catalogue, assemble, split, news,
+Section types: converge, stack, lineup, promo, rail, statement, stats, services, catalogue, assemble, split, news,
 testimonials, partners, locations, faq, bmi, emi, depth, scrub, stages. Order is yours.
 
 ```json
@@ -53,6 +53,17 @@ testimonials, partners, locations, faq, bmi, emi, depth, scrub, stages. Order is
  // or "frames": {"dir": "seq-build", "count": 180, "ext": "webp"}
  "beats": [{"at": 0, "kicker": "01", "title": "Wake the beans", "text": "…"}, {"at": 0.4, "title": "…"}, {"at": 0.7, "title": "…", "cta": {…}}]}
 
+{"type": "converge", "id": "real-food", "product": "Pumpkin Feta Quinoa Salad", "dish": "cut:pumpkin-feta-quinoa-salad", "height": 250,
+ "kicker": "…", "title": "Real food,<br><em>counted.</em>", "text": "…", "cta": {…}, "cta2": {…},
+ "chips": [{"value": "354", "label": "kcal", "angle": -150}],          // pop around the dish at the end
+ "ingredients": [{"image": "ing-feta", "x": 40, "y": -36, "size": 130, "rot": 25, "z": 0.4}],  // x/y: % of the frame from the dish centre; z 0–1 depth (>0.8 blurred foreground)
+ "cap": "Credit line for the photos"}
+
+{"type": "stack", "id": "the-stack", "product": "Lean Beef Burger", "title": "The <em>stack.</em>", "intro": "…", "height": 320,
+ "layers": [{"image": "lay-bun-bottom", "name": "Toasted bun", "note": "…", "w": 66, "t": 7, "dx": 0, "rot": 0}]}  // bottom first; w = width %, t = thickness % of the view
+
+{"type": "lineup", "title": "The lineup.", "text": "…", "items": ["Product title", "…"]}   // default: featured items
+
 {"type": "stages", "id": "progress", "kicker": "Construction", "title": "From plot to keys",
  "stages": [{"image": "plot", "label": "Plot", "title": "…", "text": "…", "date": "Q1 2025"}, …]}
 ```
@@ -64,7 +75,8 @@ Video files and frame folders live in `shared/img/<img_dir>/`; make them with
 ```json
 "images": {"cafe": {"src": "cafe.jpg", "alt": "Café interior with arched windows", "cap": "Illustrative"}}
 ```
-Refer to images by key everywhere else. Credits go in `data/credits.json` under
+Refer to images by key everywhere else. A cut-out `shared/img/<dir>/cut/<stem>.webp` (tools/cutout.py) is
+registered automatically as `cut:<key>`; `catalogue.cutouts: true` makes cards and product pages use them. Credits go in `data/credits.json` under
 `"<img_dir>/<file stem>"` with title, creator, license, license_url, landing, and
 `"owner": true` for the company's own photos.
 

@@ -16,7 +16,7 @@
 {%- if s.brand and s.brand.style %}<link rel="stylesheet" href="assets/styles.css">{% endif %}
 {%- if s.theme == 'studio' %}
 {%- set B = s.brand %}
-<style>body[data-theme="studio"]{--bg:{{ (B.bg or '#0f0e0d') | safe }};--fg:{{ (B.fg or '#f5efe6') | safe }};--accent:{{ (B.accent or s.accent) | safe }};--accent-ink:{{ (B.accent_ink or '#ffffff') | safe }};--surface:{{ (B.surface or 'color-mix(in srgb, var(--fg) 5%, transparent)') | safe }};--line:color-mix(in srgb, var(--fg) 14%, transparent);--muted:color-mix(in srgb, var(--fg) 64%, transparent);--font-display:{{ (B.font_display or '"Fraunces", Georgia, serif') | safe }};--font-body:{{ (B.font_body or '"Inter", system-ui, sans-serif') | safe }};--loader-bg:{{ (B.accent or s.accent) | safe }};--alt:{{ (B.alt or 'color-mix(in srgb, var(--fg) 4%, var(--bg))') | safe }}}</style>
+<style>body[data-theme="studio"]{--bg:{{ (B.bg or '#0f0e0d') | safe }};--fg:{{ (B.fg or '#f5efe6') | safe }};--accent:{{ (B.accent or s.accent) | safe }};--accent-ink:{{ (B.accent_ink or '#ffffff') | safe }};--surface:{{ (B.surface or 'color-mix(in srgb, var(--fg) 5%, transparent)') | safe }};--line:color-mix(in srgb, var(--fg) 14%, transparent);--muted:color-mix(in srgb, var(--fg) 64%, transparent);--font-display:{{ (B.font_display or '"Fraunces", Georgia, serif') | safe }};--font-body:{{ (B.font_body or '"Inter", system-ui, sans-serif') | safe }};--loader-bg:{{ (B.accent or s.accent) | safe }};--alt:{{ (B.alt or 'color-mix(in srgb, var(--fg) 4%, var(--bg))') | safe }}{% if B.accent2 %};--accent-2:{{ B.accent2 | safe }}{% endif %}}</style>
 {%- endif %}
 {%- if s.images.hero %}
 <link rel="preload" as="image" href="{{ m.src('hero') }}">

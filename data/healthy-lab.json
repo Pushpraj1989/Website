@@ -6,21 +6,22 @@
  "meta": "Healthy Lab, the guilt-free food hub in Al Ghubra, Muscat: macro-counted meals, coconut-flour pizza, lean burgers, protein shakes and meal plans. Order for delivery or pickup.",
  "theme": "studio",
  "promo_fx": "ripple",
- "accent": "#8fd14f",
+ "accent": "#3f8f2b",
  "img_dir": "healthy-lab",
  "footer_note": "Concept website for Healthy Lab (مطعم المعمل الصحي), built from its public Talabat menu on 12 October 2026. Not yet reviewed by Healthy Lab. Kitchen footage is free Mixkit stock (Mixkit Stock Video Free License) used as a placeholder.",
  "brand": {
-  "mode": "dark",
-  "style": "glass",
+  "mode": "light",
+  "style": "minimal",
   "logo": "logo",
-  "bg": "#0b1310",
-  "fg": "#eef5e6",
-  "accent": "#8fd14f",
-  "accent_ink": "#0b1310",
-  "alt": "#101b16",
-  "font_display": "\"Bricolage Grotesque\", system-ui, sans-serif",
+  "bg": "#f6f2e9",
+  "fg": "#14231a",
+  "accent": "#3f8f2b",
+  "accent_ink": "#ffffff",
+  "accent2": "#c8235f",
+  "alt": "#ece6d8",
+  "font_display": "\"Instrument Serif\", Georgia, serif",
   "font_body": "\"Inter\", system-ui, sans-serif",
-  "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Inter:wght@400;500;600;700"
+  "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700"
  },
  "cta": {
   "label": "Order now",
@@ -599,14 +600,71 @@
   ]
  },
  "home": [
-  "promo",
+  {
+   "type": "converge",
+   "id": "real-food",
+   "product": "Pumpkin Feta Quinoa Salad",
+   "dish": "cut:pumpkin-feta-quinoa-salad",
+   "height": 250,
+   "kicker": "Healthy Lab · مطعم المعمل الصحي",
+   "title": "Real food,<br><em>counted.</em>",
+   "text": "Our best-selling Pumpkin Feta Quinoa Salad, and 89 more dishes that list their calories, protein, fat and carbs.",
+   "cta": {
+    "label": "Order now",
+    "href": "menu.html"
+   },
+   "cta2": {
+    "label": "Meal plans",
+    "href": "plans.html"
+   },
+   "chips": [
+    {
+     "value": "354",
+     "label": "kcal",
+     "angle": -150
+    },
+    {
+     "value": "11 g",
+     "label": "protein",
+     "angle": -30
+    },
+    {
+     "value": "12 g",
+     "label": "fat",
+     "angle": 30
+    },
+    {
+     "value": "50 g",
+     "label": "carbs",
+     "angle": 150
+    }
+   ],
+   "ingredients": [],
+   "cap": "Dish: Healthy Lab menu photo. Ingredients: illustrative open-licence photos."
+  },
   "rail",
   {
-   "type": "statement",
-   "kicker": "مطعم المعمل الصحي",
-   "text": "Healthy Lab is Muscat's guilt-free food hub: real meals, weighed and counted, so eating well never feels like a diet."
+   "type": "lineup",
+   "title": "The lineup.",
+   "text": "Best sellers and favourites, straight from the Healthy Lab kitchen. Tap + to add.",
+   "items": [
+    "Pumpkin Feta Quinoa Salad",
+    "Chilli Flake Chicken Thin Crust Pizza",
+    "Lean Beef Burger",
+    "Juicy Cherry Tomato Steak Pizza",
+    "Low-Fat Alfredo Chicken Pasta",
+    "Jaggery Light Teriyaki Salmon And Steamed Rice",
+    "Mexican Salad",
+    "Proffee Shake",
+    "Protein Dense Pancakes 4 Pcs",
+    "Walnut Jaggery Choco Brownie"
+   ]
   },
-  "catalogue",
+  {
+   "type": "statement",
+   "kicker": "The guilt-free food hub",
+   "text": "Healthy Lab cooks real meals, weighs them and prints the numbers, so eating well never feels like a diet."
+  },
   {
    "type": "scrub",
    "id": "kitchen",
@@ -641,10 +699,6 @@
     }
    ]
   },
-  {
-   "type": "assemble",
-   "id": "lean-burger"
-  },
   "stats",
   {
    "type": "split",
@@ -664,10 +718,7 @@
     "href": "plans.html"
    }
   },
-  {
-   "type": "assemble",
-   "id": "proffee"
-  },
+  "catalogue",
   "locations",
   "faq"
  ],
@@ -714,7 +765,7 @@
  "catalogue": {
   "title": "The menu",
   "nav": "Menu",
-  "home_title": "Best sellers and favourites",
+  "home_title": "More from the menu",
   "kicker": "Order online",
   "intro": "Every price as listed on Talabat on 12 October 2026. Add to your order, then choose delivery or pickup.",
   "categories": [
@@ -4243,128 +4294,9 @@
     "price_note": "Menu price on Talabat, 12 Oct 2026",
     "src": "https://www.talabat.com/oman/restaurant/669005/healthy-lab"
    }
-  ]
+  ],
+  "cutouts": true
  },
- "assemble": [
-  {
-   "id": "lean-burger",
-   "product": "Lean Beef Burger",
-   "kicker": "Best seller",
-   "title": "How the Lean Beef Burger stacks up",
-   "intro": "399 kcal, 21 g protein, 15 g fat and 45 g carbs, as listed on our menu.",
-   "price_label": "Lean Beef Burger",
-   "cta": {
-    "label": "See the burger",
-    "href": "@cat:Lean Beef Burger"
-   },
-   "layers": [
-    {
-     "name": "Toasted bun",
-     "note": "The base",
-     "shape": "disc",
-     "color": "#7a4a2c",
-     "h": 26,
-     "w": 0.94
-    },
-    {
-     "name": "Lettuce",
-     "note": "Crisp and fresh",
-     "shape": "leaf",
-     "color": "#6fbf4a",
-     "h": 14,
-     "w": 1.0
-    },
-    {
-     "name": "Tomato",
-     "note": "Sliced to order",
-     "shape": "disc",
-     "color": "#e0472f",
-     "h": 12,
-     "w": 0.9
-    },
-    {
-     "name": "Lean beef",
-     "note": "The protein",
-     "shape": "disc",
-     "color": "#5b3423",
-     "h": 30,
-     "w": 0.98
-    },
-    {
-     "name": "Cheddar",
-     "note": "Melted over the beef",
-     "shape": "drip",
-     "color": "#f2b233",
-     "h": 12,
-     "w": 1.0
-    },
-    {
-     "name": "Sesame bun",
-     "note": "Toasted top",
-     "shape": "dome",
-     "color": "#8a5634",
-     "h": 56,
-     "w": 0.96,
-     "dots": true
-    }
-   ]
-  },
-  {
-   "id": "proffee",
-   "product": "Proffee Shake",
-   "kicker": "Protein shake",
-   "title": "What goes into a Proffee Shake",
-   "intro": "Cold brew coffee and protein: 170 kcal and 28 g protein, as listed on our menu.",
-   "price": "OMR 1.300",
-   "price_label": "Proffee Shake",
-   "cta": {
-    "label": "Add to order",
-    "href": "@cat:Proffee Shake"
-   },
-   "layers": [
-    {
-     "name": "Ice",
-     "note": "Served cold",
-     "shape": "ice",
-     "color": "#dfeef0",
-     "h": 30,
-     "w": 0.8
-    },
-    {
-     "name": "Cold brew coffee",
-     "note": "The coffee half",
-     "shape": "liquid",
-     "color": "#4a2c1d",
-     "h": 70,
-     "w": 0.9
-    },
-    {
-     "name": "Protein",
-     "note": "28 g in every shake",
-     "shape": "liquid",
-     "color": "#d9c3a5",
-     "h": 50,
-     "w": 0.94
-    },
-    {
-     "name": "Foam",
-     "note": "A creamy top",
-     "shape": "foam",
-     "color": "#efe2cf",
-     "h": 16,
-     "w": 0.98
-    },
-    {
-     "name": "Glass",
-     "note": "Ready to go",
-     "shape": "glass",
-     "h": 30,
-     "w": 1.06,
-     "wb": 0.84
-    }
-   ]
-  }
- ],
  "locations": {
   "title": "Find us",
   "nav": "Branches",
