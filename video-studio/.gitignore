@@ -3,3 +3,6 @@ frames/
 prev/
 *.mp4
 *.wav
+outputs/
+studio/script.js
+studio/__pycache__/

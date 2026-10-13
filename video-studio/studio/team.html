@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Video studio · SignVerse</title>
+<style>
+:root{--or:#E0622A;--ink:#141824;--mut:#6b7280;--bg:#f4f6fb;--line:#e3e7ef;--red:#c2410c;--green:#2f9e66}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:820px;margin:0 auto;padding:28px 18px 60px}
+h1{font-size:26px;margin:6px 0 4px}
+.sub{color:var(--mut);margin:0 0 22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:18px}
+label{display:block;font-weight:600;margin:12px 0 6px}
+textarea,input{width:100%;font:inherit;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff}
+textarea{min-height:200px;resize:vertical}
+button{font:inherit;font-weight:600;border:0;border-radius:12px;padding:12px 20px;background:var(--or);color:#fff;cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+button.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.msg{color:var(--red);min-height:22px;margin-top:10px;font-size:14px}
+.job{border-top:1px solid var(--line);padding:16px 0}
+.job:first-child{border-top:0}
+.job h3{margin:0 0 6px;font-size:16px}
+.meta{color:var(--mut);font-size:13px}
+.bar{height:8px;background:#eef1f6;border-radius:6px;overflow:hidden;margin:10px 0}
+.bar i{display:block;height:100%;background:var(--or);width:0;transition:width .6s}
+.done{color:var(--green);font-weight:600}
+.fail{color:var(--red)}
+.links a{margin-right:14px;color:var(--ink);font-weight:600}
+video{width:100%;max-width:360px;border-radius:14px;margin-top:10px;display:block}
+.hide{display:none!important}
+</style></head>
+<body><div class="wrap">
+
+<section id="login" class="card hide" style="max-width:420px;margin:60px auto">
+  <h1>Video studio</h1>
+  <p class="sub">SignVerse team only. Enter the team password.</p>
+  <form id="loginForm">
+    <label for="pw">Team password</label>
+    <input id="pw" type="password" autocomplete="current-password" required>
+    <div style="margin-top:14px"><button type="submit">Sign in</button></div>
+    <div id="loginMsg" class="msg"></div>
+  </form>
+</section>
+
+<section id="app" class="hide">
+  <div class="row"><div><h1>Video studio</h1><p class="sub">Paste a LinkedIn post. You get a narrated explainer video in about three minutes.</p></div>
+    <button class="ghost" id="logout">Sign out</button></div>
+
+  <form class="card" id="newForm">
+    <label for="title">Video title <span style="font-weight:400;color:var(--mut)">(optional)</span></label>
+    <input id="title" maxlength="120" placeholder="e.g. Customer Playbooks">
+    <label for="post">LinkedIn post</label>
+    <textarea id="post" maxlength="4000" placeholder="Paste the post text here…" required></textarea>
+    <div class="row" style="margin-top:14px">
+      <span class="meta" id="count">0 / 4000</span>
+      <button type="submit" id="submit">Make the video</button>
+    </div>
+    <div id="newMsg" class="msg"></div>
+  </form>
+
+  <section class="card">
+    <h2 style="margin:0 0 6px;font-size:18px">Your videos</h2>
+    <div id="jobs"><p class="meta">No videos yet.</p></div>
+  </section>
+</section>
+
+</div>
+<script>
+const $ = (s) => document.querySelector(s);
+const show = (id, on) => $(id).classList.toggle("hide", !on);
+async function api(path, opts = {}) {
+  const r = await fetch(path, { credentials: "same-origin", headers: { "Content-Type": "application/json" }, ...opts });
+  const body = await r.json().catch(() => ({}));
+  if (!r.ok) { const e = new Error(body.error || "Something went wrong."); e.status = r.status; throw e; }
+  return body;
+}
+function stageText(j) {
+  if (j.status === "queued") return "Waiting in the queue";
+  if (j.status === "failed") return "Failed";
+  if (j.status === "done") return "Ready";
+  return ({ script: "Writing the script", voice: "Recording the narration", render: "Rendering the frames", encode: "Putting it together" })[j.stage] || "Working";
+}
+function jobHTML(j) {
+  const pct = Math.round((j.pct || 0) * 100);
+  const title = j.title || "Untitled video";
+  let body = "";
+  if (j.status === "done") {
+    body = `<div class="done">✓ Ready</div><video controls preload="metadata" poster="${j.cover}" src="${j.video}"></video>
+      <div class="links" style="margin-top:10px"><a href="${j.video}" download>Download MP4</a><a href="${j.cover}" download>Cover image</a></div>`;
+  } else if (j.status === "failed") {
+    body = `<div class="fail">${j.error || "The video could not be made."}</div>`;
+  } else {
+    body = `<div class="meta">${stageText(j)}${j.status === "running" ? " · " + pct + "%" : ""}</div><div class="bar"><i style="width:${pct}%"></i></div>`;
+  }
+  return `<div class="job"><h3>${title.replace(/[<>&]/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]))}</h3><div class="meta">${new Date(j.created ? j.created * 1000 : Date.now()).toLocaleString()}</div>${body}</div>`;
+}
+let timer = null;
+async function refresh() {
+  try {
+    const { jobs } = await api("/api/jobs");
+    $("#jobs").innerHTML = jobs.length ? jobs.map(jobHTML).join("") : '<p class="meta">No videos yet.</p>';
+    const busy = jobs.some(j => j.status === "queued" || j.status === "running");
+    clearTimeout(timer); if (busy) timer = setTimeout(refresh, 4000);
+  } catch (e) { if (e.status === 401) signedOut(); }
+}
+function signedIn() { show("#login", false); show("#app", true); refresh(); }
+function signedOut() { show("#app", false); show("#login", true); clearTimeout(timer); }
+$("#loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault(); $("#loginMsg").textContent = "";
+  try { await api("/api/login", { method: "POST", body: JSON.stringify({ password: $("#pw").value }) }); $("#pw").value = ""; signedIn(); }
+  catch (err) { $("#loginMsg").textContent = err.message; }
+});
+$("#logout").addEventListener("click", async () => { await api("/api/logout", { method: "POST" }).catch(() => {}); signedOut(); });
+$("#post").addEventListener("input", () => { $("#count").textContent = $("#post").value.length + " / 4000"; });
+$("#newForm").addEventListener("submit", async (e) => {
+  e.preventDefault(); $("#newMsg").textContent = ""; $("#submit").disabled = true;
+  try {
+    await api("/api/jobs", { method: "POST", body: JSON.stringify({ post: $("#post").value, title: $("#title").value }) });
+    $("#post").value = ""; $("#title").value = ""; $("#count").textContent = "0 / 4000";
+    $("#newMsg").textContent = "Added to the queue. It appears below and updates as it works.";
+    refresh();
+  } catch (err) { if (err.status === 401) signedOut(); else $("#newMsg").textContent = err.message; }
+  finally { $("#submit").disabled = false; }
+});
+api("/api/me").then(r => (r.ok ? signedIn() : signedOut())).catch(signedOut);
+</script>
+</body></html>

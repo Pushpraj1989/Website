@@ -1,0 +1,178 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts/poppins.css">
+<style>
+:root{--or:#E0622A;--or2:#f08a4b;--ink:#141824;--mut:#6b7280;--bg:#f4f6fb;--dark:#1b1b1d;--red:#e5484d;--green:#2f9e66;--line:#e3e7ef}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1350px;overflow:hidden;background:var(--bg);font-family:Poppins,sans-serif;color:var(--ink)}
+#stage{position:relative;width:1080px;height:1350px;overflow:hidden;background:radial-gradient(1200px 800px at 80% -10%,#fff4ec 0%,transparent 60%),radial-gradient(900px 700px at -10% 110%,#eef1ff 0%,transparent 60%),var(--bg)}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden}
+.scene.dark{background:radial-gradient(900px 700px at 50% 30%,#2b1a12 0%,#141416 70%)}
+.card{position:absolute;background:#fff;border-radius:34px;box-shadow:0 40px 80px -40px rgba(20,24,36,.35),0 0 0 1px var(--line)}
+.big{font-weight:800;letter-spacing:-.03em}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:99px;font-weight:600;font-size:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:18px 30px;border-radius:16px;font-weight:600;font-size:28px}
+.btn-or{background:var(--or);color:#fff}
+.doc{position:absolute;background:#fff;border-radius:14px;box-shadow:0 18px 40px -18px rgba(0,0,0,.45),0 0 0 1px #e8e8ee;padding:34px 30px}
+.doc .ln{height:12px;border-radius:6px;background:#e6e9f0;margin:0 0 16px}
+.doc .ttl{height:18px;width:70%;border-radius:8px;background:#c9cfdb;margin-bottom:26px}
+.desk{position:absolute;left:0;right:0;bottom:0;height:430px;background:linear-gradient(#c88f5e,#b07a4c);border-top:14px solid #d9a576}
+.char{position:absolute;width:520px;height:546px}
+.laptop{position:absolute;width:420px;height:250px}
+.tbl{border:2px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+.tbl .h,.tbl .r{display:grid;grid-template-columns:150px 150px 1fr;gap:12px;padding:16px 20px;font-size:19px}
+.tbl .h{background:#f1f3f8;color:#5b6170;font-weight:700;letter-spacing:.06em}
+.tbl .r{font-size:21px;border-top:2px solid var(--line);align-items:center}
+.kind{display:inline-block;padding:5px 12px;border-radius:99px;background:#fdece3;color:var(--or);font-weight:700;font-size:17px}
+.side{position:absolute;left:0;top:0;bottom:0;width:250px;background:var(--dark);color:#cfd2d8;padding:30px 0}
+.side .lg{color:#fff;font-weight:700;font-size:30px;padding:0 26px 26px}
+.side .it{display:flex;align-items:center;gap:14px;padding:14px 26px;font-size:21px}
+.side .it i{width:20px;height:20px;border:2px solid #9aa0aa;border-radius:5px}
+.side .it.on{background:#3a2216;color:var(--or2);border-left:5px solid var(--or);padding-left:21px}
+.lbl{font-weight:700;font-size:21px}
+.fld{border:2px solid var(--line);border-radius:16px;padding:16px 20px;font-size:23px;background:#fff;margin:8px 0 20px;min-height:62px}
+.finding{position:absolute;border-radius:24px;background:#fff;box-shadow:0 30px 60px -30px rgba(20,24,36,.4),0 0 0 2px #fbd5c2;padding:28px 30px}
+.quote{border-left:6px solid var(--red);background:#fff4f4;border-radius:12px;padding:16px 20px;font-size:23px;margin:14px 0}
+.rule{border-left:6px solid var(--green);background:#f0faf4;border-radius:12px;padding:16px 20px;font-size:23px;margin:14px 0}
+.toast{position:absolute;padding:16px 26px;border-radius:16px;background:var(--green);color:#fff;font-weight:600;font-size:22px}
+.brandtag{position:absolute;left:56px;top:48px;font-weight:700;font-size:30px;z-index:50}
+.vt{position:absolute;right:56px;top:40px;display:flex;align-items:center;gap:12px;z-index:50;font-family:Raleway,sans-serif}
+.vt img{height:50px}.vt b{display:block;font-weight:800;font-size:26px;line-height:1;color:var(--ink)}
+.vt small{display:block;font-weight:500;font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.vt.dark b{color:#fff}.vt.dark small{color:#b8bcc6}
+#cap{position:absolute;left:60px;right:60px;bottom:64px;z-index:60;display:flex;justify-content:center}
+#cap span{display:inline-block;max-width:960px;padding:22px 34px;border-radius:26px;background:rgba(20,24,36,.92);color:#fff;font-weight:600;font-size:38px;line-height:1.28;text-align:center;box-shadow:0 20px 50px -20px rgba(0,0,0,.5)}
+#cap em{font-style:normal;color:var(--or2)}
+.dark-txt{color:#fff}
+</style></head>
+<body><div id="stage">
+<div class="brandtag" id="brandtag"></div>
+<div class="vt" id="vt"></div>
+<div id="scenes"></div>
+<div id="cap"><span id="capt"></span></div>
+</div>
+<script src="../gsap.min.js"></script>
+<script src="characters.js"></script>
+<script src="script.js"></script>
+<script>
+/* Each scene type is a function that builds its own GSAP timeline from the scene's data.
+   Timelines run in scene-local seconds; the player maps video time onto them. */
+const E = (s) => (s == null ? "" : String(s));
+const T = {};
+T.compare = (el, d) => {
+  el.innerHTML = `
+    <div class="card" data-a style="left:90px;top:300px;width:430px;height:520px;padding:44px">
+      <div class="pill" style="background:#e9f6ef;color:var(--green)">● ${E(d.left.label)}</div>
+      <div style="margin-top:40px;font-size:30px;color:var(--mut);font-weight:500">${E(d.left.sub||"")}</div>
+      <div class="big" data-av style="font-size:200px;line-height:1;color:var(--green)">${E(d.left.value)}</div></div>
+    <div class="card" data-b style="left:560px;top:300px;width:430px;height:520px;padding:44px">
+      <div class="pill" style="background:#fdecec;color:var(--red)">● ${E(d.right.label)}</div>
+      <div style="margin-top:40px;font-size:30px;color:var(--mut);font-weight:500">${E(d.right.sub||"")}</div>
+      <div class="big" data-bv style="font-size:200px;line-height:1;color:var(--red)">${E(d.right.value)}</div></div>
+    <div class="big" data-vs style="position:absolute;left:490px;top:520px;width:100px;height:100px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:36px">${E(d.badge||"≠")}</div>`;
+  const tl = gsap.timeline({ paused: true });
+  tl.from(el.querySelector("[data-a]"), { x: -500, rotate: -8, duration: .8, ease: "back.out(1.4)" }, .1)
+    .from(el.querySelector("[data-b]"), { x: 600, rotate: 8, duration: .8, ease: "back.out(1.4)" }, .9)
+    .from(el.querySelector("[data-vs]"), { scale: 0, duration: .5, ease: "back.out(2)" }, 1.6)
+    .to(el.querySelector("[data-b]"), { x: -12, duration: .06, repeat: 7, yoyo: true }, 2.0);
+  return tl;
+};
+T.problem = (el, d) => {
+  const pages = parseInt(d.pages, 10) || 38;
+  el.innerHTML = `
+    <div class="desk"></div>
+    <div data-sara class="char" style="left:230px;top:430px"></div>
+    <div class="laptop" style="left:280px;top:925px;transform:scale(.9);transform-origin:50% 100%"><svg viewBox="0 0 420 250" width="420" height="250"><rect x="40" y="0" width="340" height="215" rx="18" fill="#2a2d36"/><rect x="54" y="14" width="312" height="187" rx="10" fill="#E0622A"/><circle cx="210" cy="108" r="22" fill="#fff" opacity=".9"/><rect x="0" y="212" width="420" height="30" rx="12" fill="#3a3e4a"/></svg></div>
+    <div data-doc class="doc" style="left:110px;top:640px;width:300px;height:390px">
+      <div class="ttl"></div>${'<div class="ln"></div>'.repeat(8)}
+      <div data-pg style="position:absolute;right:-30px;top:-34px;padding:10px 20px;border-radius:99px;background:var(--ink);color:#fff;font-weight:700;font-size:28px"><span data-pn>1</span> page</div></div>
+    <div data-wait class="pill" style="position:absolute;left:700px;top:600px;background:var(--or);color:#fff;font-size:28px;opacity:0">${E(d.waiting||"")}</div>`;
+  el.querySelector("[data-sara]").innerHTML = lady("sa");
+  const tl = gsap.timeline({ paused: true });
+  tl.from(el.querySelector("[data-doc]"), { y: -900, rotate: -14, duration: .75, ease: "bounce.out" }, .4)
+    .to({ n: 1 }, { n: pages, duration: 2.4, ease: "power1.inOut", onUpdate() { const n = Math.round(this.targets()[0].n); el.querySelector("[data-pn]").textContent = n; el.querySelector("[data-pg]").lastChild.textContent = n === 1 ? " page" : " pages"; } }, 1.2)
+    .to(el.querySelector("[data-wait]"), { opacity: 1, duration: .3 }, 2.6)
+    .fromTo(el.querySelector("[data-sara]"), { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: .7, ease: "power3.out" }, 0);
+  return tl;
+};
+T.app = (el, d) => {
+  const rule = E(d.rule);
+  el.innerHTML = `
+    <div class="card" data-app style="left:60px;top:150px;width:960px;height:900px;border-radius:34px;overflow:hidden;background:#f7f8fb">
+      <div class="side"><div class="lg">SignVerse</div>
+        <div class="it"><i></i>Dashboard</div><div class="it"><i></i>Agreements</div><div class="it"><i></i>Templates</div>
+        <div class="it on"><i></i>Document Intelligence</div><div class="it"><i></i>Audit Log</div></div>
+      <div style="position:absolute;left:250px;right:0;top:0;bottom:0;padding:36px 38px">
+        <div style="font-weight:700;font-size:34px;margin-bottom:24px">${E(d.screen_title||"Playbooks")}</div>
+        <div class="lbl">Name</div><div class="fld">${E(d.playbook_name||"Playbook")}</div>
+        <div class="lbl">Rules</div>
+        <div class="tbl" style="margin-top:10px"><div class="h"><span>CODE</span><span>KIND</span><span>INSTRUCTION</span></div>
+          <div class="r"><b>${E(d.rule_code||"RULE_1")}</b><span><span class="kind">MUST-HAVE</span></span><span data-typed style="min-height:58px"></span></div></div>
+        <div data-toast class="toast" style="right:40px;top:30px;opacity:0">✓ Rules saved</div>
+      </div></div>`;
+  const typed = el.querySelector("[data-typed]");
+  const tl = gsap.timeline({ paused: true });
+  const st = { n: 0 };
+  tl.from(el.querySelector("[data-app]"), { y: 120, opacity: 0, duration: .6, ease: "power3.out" }, 0)
+    .to(st, { n: rule.length, duration: 3.0, ease: "none", onUpdate() { typed.textContent = rule.slice(0, Math.round(st.n)); } }, .8)
+    .to(el.querySelector("[data-toast]"), { opacity: 1, duration: .3 }, 4.2);
+  return tl;
+};
+T.quote = (el, d) => {
+  el.classList.add("dark");
+  el.innerHTML = `<div data-q style="position:absolute;left:90px;right:90px;top:380px;color:#fff;font-weight:800;font-size:76px;line-height:1.12;letter-spacing:-.02em">${E(d.text)}</div>`;
+  const tl = gsap.timeline({ paused: true });
+  tl.from(el.querySelector("[data-q]"), { y: 50, opacity: 0, duration: .8, ease: "power3.out" }, .2);
+  return tl;
+};
+T.end = (el, d) => {
+  el.classList.add("dark");
+  el.innerHTML = `
+    <div data-q1 style="position:absolute;left:90px;right:90px;top:260px;color:#9aa0aa;font-weight:600;font-size:46px;line-height:1.25">${E(d.kicker||"")}</div>
+    <div data-q2 style="position:absolute;left:90px;right:90px;top:420px;color:#fff;font-weight:800;font-size:68px;line-height:1.12;letter-spacing:-.02em">${E(d.text||"")}</div>
+    <div data-q3 style="position:absolute;left:90px;right:90px;top:820px;padding:30px 34px;border-radius:26px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.14);color:#fff;font-weight:600;font-size:40px;line-height:1.3">${E(d.question||"")}</div>
+    <div data-q4 style="position:absolute;left:90px;right:90px;bottom:200px;color:var(--or2);font-weight:600;font-size:30px">${E(d.cta||"")}</div>`;
+  const tl = gsap.timeline({ paused: true });
+  tl.from(el.querySelector("[data-q1]"), { y: 30, opacity: 0, duration: .5 }, .2)
+    .from(el.querySelector("[data-q2]"), { y: 40, opacity: 0, duration: .6, ease: "power3.out" }, 1.2)
+    .from(el.querySelector("[data-q3]"), { y: 40, opacity: 0, duration: .6, ease: "power3.out" }, 2.6)
+    .from(el.querySelector("[data-q4]"), { y: 30, opacity: 0, duration: .5 }, 3.6);
+  return tl;
+};
+
+/* ---------- player: video time -> scene and scene-local time ---------- */
+(function () {
+  const brand = window.BRAND || {};
+  document.getElementById("brandtag").innerHTML = `<span style="color:var(--ink)">${E(brand.product || "SignVerse")}</span>`;
+  document.getElementById("vt").innerHTML = `<img src="../vt-mark.png" alt=""><div><b>${E(brand.company || "Vikashan")}</b><small>${E(brand.company_tag || "Technology")}</small></div>`;
+  const root = document.getElementById("scenes"), cap = document.getElementById("capt");
+  const scenes = window.SCENES.map((s, i) => {
+    const el = document.createElement("div");
+    el.className = "scene"; el.id = "sc" + i; root.appendChild(el);
+    const tl = T[s.type](el, s.data || {});
+    return { s, el, tl };
+  });
+  const end = scenes.length ? scenes[scenes.length - 1].s.start + scenes[scenes.length - 1].s.duration : 1;
+  window.DURATION = end;
+  window.seek = (t) => {
+    let cur = scenes[scenes.length - 1];
+    for (const sc of scenes) { if (t < sc.s.start + sc.s.duration) { cur = sc; break; } }
+    scenes.forEach((sc) => {
+      const local = t - sc.s.start;
+      const on = sc === cur;
+      sc.el.style.opacity = on ? 1 : 0;
+      sc.el.style.visibility = on ? "visible" : "hidden";
+      if (local < 0) sc.tl.seek(0, false);
+      else sc.tl.seek(Math.min(local, sc.s.duration), false);
+    });
+    const dark = !!cur.el.classList.contains("dark");
+    cap.innerHTML = cur.s.caption ? cur.s.caption : "";
+    cap.style.opacity = cur.s.caption ? 1 : 0;
+    document.getElementById("vt").classList.toggle("dark", dark);
+    document.getElementById("vt").style.color = dark ? "#fff" : "";
+    document.getElementById("brandtag").style.color = dark ? "#fff" : "";
+  };
+  window.seek(0);
+})();
+</script>
+</body></html>
