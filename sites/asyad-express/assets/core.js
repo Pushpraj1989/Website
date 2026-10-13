@@ -283,7 +283,7 @@
   let offerShown = false;
   const offerKey = offer ? "t1-offer-" + offer.dataset.offer : "";
   // full-screen product showcases: the offer never covers them, it waits or steps aside
-  const showcases = $$(".film, .cv, .stk, .lu");
+  const showcases = $$(".film, .cv, .stk, .lu, .scrub");
   const inShowcase = () => showcases.some((el) => { const r = el.getBoundingClientRect(); return r.top < innerHeight * 0.6 && r.bottom > innerHeight * 0.4; });
   const maybeOffer = (y, max) => {
     if (offer && offerShown && !offer.hidden) offer.classList.toggle("is-tucked", inShowcase());

@@ -5707,5 +5707,13 @@
     "license_url": "",
     "landing": "https://macroboost.com",
     "owner": true
+  },
+  "macroboost/walkin-poster": {
+    "title": "The Macro Boost store in Al Khuwair",
+    "creator": "Macro Boost",
+    "license": "Owner's photo",
+    "license_url": "",
+    "landing": "https://macroboost.com",
+    "owner": true
   }
 }

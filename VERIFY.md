@@ -1,6 +1,6 @@
 # Verify before pitching
 
-Built 2026-10-12. Facts come from each company's homepage
+Built 2026-10-13. Facts come from each company's homepage
 read on 11 Oct 2026 and from the prospects document. Anything below is unconfirmed
 or conflicting and should be checked against the live site, or with the client, first.
 

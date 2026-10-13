@@ -41,3 +41,6 @@ html[dir="rtl"] body :is(h1, h2, h3, [class*="title"], .lead, .pg-h2, .pg-h3) { 
 
 /* converge scene: the dish sits on the side opposite the copy */
 @media (min-width: 761px) { html[dir="rtl"] .cv-stage { --cx: 36%; } }
+
+/* scroll films whose subject is baked on the right (e.g. a portrait window): copy stays on the left */
+@media (min-width: 761px) { html[dir="rtl"] .scrub-left .scrub-beat { justify-self: end; } }

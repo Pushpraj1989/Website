@@ -1215,6 +1215,11 @@
    "alt": "Training photo from the Macro Boost blog",
    "cap": "Photo used on the Macro Boost blog (Pexels)"
   },
+  "walkin-poster": {
+   "src": "walkin-poster.jpg",
+   "alt": "The Macro Boost store in Al Khuwair",
+   "cap": "Footage from Macro Boost's own store video"
+  },
   "meal-1": {
    "src": "meal-1.jpg",
    "alt": "One meal box from the Macro Boost Healthy Meal Subscription listing",
@@ -1709,6 +1714,47 @@
   "catalogue",
   "testimonials",
   "news",
+  {
+   "type": "scrub",
+   "id": "walk-in",
+   "video": "walkin.mp4",
+   "video_m": "walkin-m.mp4",
+   "poster": "walkin-poster",
+   "height": 340,
+   "align": "left",
+   "label": "Walk into the store",
+   "cap": "Footage from Macro Boost's own video of the Al Khuwair store, cropped.",
+   "beats": [
+    {
+     "at": 0,
+     "kicker": "Al Khuwair, Muscat",
+     "title": "Walk in with us.",
+     "text": "The Macro Boost store on Duhat al Adab Street, filmed by Macro Boost."
+    },
+    {
+     "at": 0.2,
+     "kicker": "Inside",
+     "title": "A café in the store.",
+     "text": "Seats, screens and a counter, a few steps from the shelves."
+    },
+    {
+     "at": 0.42,
+     "kicker": "From the café",
+     "title": "Cooked fresh.",
+     "text": "Hot food and sandwiches from the in-store café."
+    },
+    {
+     "at": 0.65,
+     "kicker": "Then the shelves",
+     "title": "Every tub, in person.",
+     "text": "Protein, creatine and more from the brands on this site, with people who train to advise you.",
+     "cta": {
+      "label": "Find our stores",
+      "href": "stores.html"
+     }
+    }
+   ]
+  },
   "locations",
   "faq"
  ],
