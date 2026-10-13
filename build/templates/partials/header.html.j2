@@ -26,7 +26,7 @@
       <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-text mono">{{ s.theme_data.code }}</span>
       {%- else %}
-      {%- if s.brand and s.brand.logo %}<img class="brand-logo{% if s.brand.logo_wide %} is-wide{% endif %}" src="{{ m.src(s.brand.logo) }}" alt="" width="44" height="44">
+      {%- if s.brand and s.brand.logo %}<img class="brand-logo logo-c{% if s.brand.logo_wide %} is-wide{% endif %}" src="{{ m.src(s.brand.logo) }}" alt="" width="44" height="44">{% if s.brand._logo_light %}<img class="brand-logo logo-l{% if s.brand.logo_wide %} is-wide{% endif %}" src="{{ m.src(s.brand._logo_light) }}" alt="" width="44" height="44">{% endif %}
       {%- else %}<span class="brand-mark" aria-hidden="true">{{ s.short[0] }}</span>{% endif %}
       {% if not (s.brand and s.brand.logo_wide) %}<span class="brand-text">{{ s.short }}</span>{% endif %}
       {%- endif %}

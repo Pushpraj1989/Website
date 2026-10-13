@@ -31,10 +31,10 @@
     <a class="hub-card" href="sites/{{ s.slug }}/index.html" style="--accent: {{ s.accent }}; --i: {{ loop.index0 }}">
       <figure class="hub-shot">
         {%- if s._thumb %}<img src="assets/hub/{{ s.slug }}.jpg" alt="Preview of the {{ s.name }} concept" loading="lazy">{% endif %}
-        {%- if s._logo %}<span class="hub-logo"><img src="{{ s._logo }}" alt="{{ s.name }} logo"></span>{% endif %}
         <span class="hub-theme">{{ s._pages | length }} pages</span>
       </figure>
       <div class="hub-body">
+        {%- if s._logo %}<span class="hub-logo"><img src="{{ s._logo }}" alt="{{ s.name }} logo"></span>{% endif %}
         <p class="hub-sector">{{ s.sector }}</p>
         <h2>{{ s.name }}</h2>
         <p class="hub-motion">{{ s.hub_line or s.meta | truncate(120) }}</p>

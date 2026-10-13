@@ -247,6 +247,18 @@ def prepare(site):
             stem = Path(im["src"]).stem  # cut-outs sit flat in cut/, whatever folder the photo is in
             if not key.startswith("cut:") and (cut_dir / (stem + ".webp")).exists():
                 site["images"].setdefault("cut:" + key, {"src": f"cut/{stem}.webp", "alt": im.get("alt", ""), "cap": im.get("cap")})
+    # logos blend into the page (tools/logo.py): a transparent cut for light bars, a light
+    # version for photos and dark themes; templates show whichever suits the header's state
+    b = site.get("brand") or {}
+    if b.get("logo") in site["images"]:
+        lg = site["images"][b["logo"]]
+        stem = Path(lg["src"]).with_suffix("")
+        d = SHARED / "img" / site["img_dir"]
+        if (d / f"{stem}-t.png").exists():
+            lg["src"] = f"{stem}-t.png"
+        if (d / f"{stem}-light.png").exists():
+            site["images"]["logo-light"] = {"src": f"{stem}-light.png", "alt": lg.get("alt", "")}
+            b["_logo_light"] = "logo-light"
     for stat in site["stats"]:
         if "years_since" in stat:
             stat["value"] = YEAR - stat["years_since"]
@@ -463,7 +475,7 @@ def render_hub(env, sites):
     (ROOT / "assets" / "hub" / "logos").mkdir(parents=True, exist_ok=True)
     for site in sites:
         site["_thumb"] = (SHARED / "hub" / f"{site['slug']}.jpg").exists()
-        logo = (site.get("brand") or {}).get("logo")
+        logo = (site.get("brand") or {}).get("_logo_light") or (site.get("brand") or {}).get("logo")  # light version: it sits on the photo
         site["_logo"] = None
         if logo and logo in site.get("images", {}):  # the client's real logo on its card
             src = SHARED / "img" / site["img_dir"] / site["images"][logo]["src"]
