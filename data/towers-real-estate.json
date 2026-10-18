@@ -1,0 +1,247 @@
+{
+ "slug": "towers-real-estate",
+ "tier": "Concept",
+ "name": "Towers Real Estate",
+ "short": "Towers",
+ "sector": "Developers, brokers, property",
+ "meta": "Towers Real Estate: property, investment and advisory in Muscat, Oman. Wadi Zaha, Sultan Haitham City.",
+ "accent": "#C8A66B",
+ "theme": "studio",
+ "promo_fx": "flow",
+ "img_dir": "towers-real-estate",
+ "brand": {
+  "mode": "dark",
+  "bg": "#081522",
+  "fg": "#F5F1E8",
+  "accent": "#C8A66B",
+  "accent_ink": "#081522",
+  "logo": "logo",
+  "style": "minimal"
+ },
+ "cta": {
+  "label": "Enquire about Wadi Zaha",
+  "short": "Enquire",
+  "href": "contact.html"
+ },
+ "hero": {
+  "eyebrow": "Muscat · Oman",
+  "title": "Architecture in motion.",
+  "lede": "Property and investment advisory in Oman. Starting with Wadi Zaha in Sultan Haitham City.",
+  "primary": {
+   "label": "About Wadi Zaha",
+   "href": "#wadi-zaha"
+  },
+  "secondary": {
+   "label": "Enquire",
+   "href": "contact.html"
+  }
+ },
+ "images": {
+  "logo": {
+   "src": "logo.png",
+   "alt": "Towers Real Estate"
+  },
+  "wadi-zaha-render": {
+   "src": "wadi-zaha-render.jpg",
+   "alt": "Wadi Zaha development render",
+   "cap": "Render: Al Ahly Sabbour, developer website"
+  },
+  "wadi-zaha-front": {
+   "src": "wadi-zaha-front.jpg",
+   "alt": "Wadi Zaha residential buildings render",
+   "cap": "Render: Al Ahly Sabbour, developer website"
+  },
+  "wadi-zaha-back": {
+   "src": "wadi-zaha-back.jpg",
+   "alt": "Wadi Zaha residential buildings render, rear view",
+   "cap": "Render: Al Ahly Sabbour, developer website"
+  }
+ },
+ "home": [
+  "promo",
+  "rail",
+  "split",
+  "statement",
+  "services",
+  "faq"
+ ],
+ "promos": [
+  {
+   "image": "wadi-zaha-render",
+   "tag": "Wadi Zaha",
+   "kicker": "Sultan Haitham City · Muscat",
+   "short": "Wadi Zaha",
+   "title": "A new landmark in Sultan Haitham City.",
+   "text": "Residential and mixed-use development by Al Ahly Sabbour. Render shown; availability and prices come from the developer.",
+   "cta": {
+    "label": "Read more",
+    "href": "#wadi-zaha"
+   },
+   "cta2": {
+    "label": "Enquire",
+    "href": "contact.html"
+   }
+  }
+ ],
+ "rail": {
+  "title": "How can we help?",
+  "items": [
+   {
+    "label": "About Wadi Zaha",
+    "icon": "building",
+    "sub": "",
+    "href": "#wadi-zaha"
+   },
+   {
+    "label": "Invest in Oman",
+    "icon": "layers",
+    "sub": "",
+    "href": "services.html"
+   },
+   {
+    "label": "Enquire",
+    "icon": "phone",
+    "sub": "",
+    "href": "contact.html"
+   }
+  ]
+ },
+ "stats": [],
+ "about": {
+  "title": "About Towers Real Estate",
+  "body": [
+   "Towers Real Estate advises buyers and investors on property in Oman."
+  ]
+ },
+ "assemble": [],
+ "faq": [
+  {
+   "q": "Are the prices and availability on this site?",
+   "a": "Not yet. The developer confirms prices and availability. Ask us and we will pass the question on."
+  },
+  {
+   "q": "Can foreigners buy property in Oman?",
+   "a": "The published rules changed in 2026 (Decision No. 87/2026). Sources differ on which areas are open to foreign buyers. Please check with the Ministry of Housing and Urban Planning and your own adviser before you commit."
+  },
+  {
+   "q": "Does owning property give a residence visa?",
+   "a": "Under the published framework, some owners of registered residential units can apply for a residence permit without a sponsor. Eligibility conditions apply, so please confirm them with an adviser."
+  },
+  {
+   "q": "Is this site an official developer site?",
+   "a": "No. Towers Real Estate is a separate company. The renders are the developer's, credited on each image."
+  }
+ ],
+ "testimonials": [],
+ "nudges": {
+  "dock_label": "Enquire"
+ },
+ "contact": {
+  "title": "Enquire",
+  "intro": "Tell us what you are looking for. We reply with what is confirmed and what is not.",
+  "address": "",
+  "phones": [],
+  "email": null,
+  "note": "Proof of concept: contact details and the enquiry route are to be confirmed before launch.",
+  "form": {
+   "branch": false,
+   "topics": [
+    "Wadi Zaha",
+    "Investment in Oman",
+    "Developer partnership",
+    "General"
+   ],
+   "submit": "Send enquiry"
+  }
+ },
+ "marquee": [],
+ "socials": [],
+ "confirm": [
+  "Towers office address and contact details (the screenshot address is unverified)",
+  "Whether Towers acts as agent or independent adviser, and written approval from Al Ahly Sabbour to use the renders",
+  "Wadi Zaha completion month (sources differ: February or Q1 2028) and unit counts (sources differ: 250, 760 or 950)",
+  "Decision No. 87/2026 and foreign-ownership scope: legal review before publication",
+  "Original Towers logo file (current logo is a crop from a phone screenshot)",
+  "Arabic version: native reviewer"
+ ],
+ "sources": [
+  "Al Ahly Sabbour, Wadi Zaha: https://alahlysabbour-om.com/wadi-zahaa/",
+  "Omnia Capital Group, Wadi Zaha (construction start 9 Feb 2026): https://www.omniacapitalgroup.com/en/developments/wadi-zaha",
+  "Oman Observer, Iconic Tower (first and tallest in Sultan Haitham City): https://www.omanobserver.om/article/1177614/business/economy/new-iconic-tower-for-sultan-haitham-city",
+  "Oman Observer, Decision No. 87/2026 (residency for property owners): https://www.omanobserver.om/ampArticle/1191803",
+  "Muscat Daily, foreign ownership not open in all areas (19 Aug 2026): https://www.muscatdaily.com/2026/08/19/what-foreign-buyers-get-wrong-about-omans-new-property-rules/"
+ ],
+ "_preset_notes": {
+  "note": "Proof of concept built from the real-estate preset. Remove this note before launch."
+ },
+ "split": {
+  "image": "wadi-zaha-front",
+  "kicker": "Wadi Zaha",
+  "title": "Wadi Zaha, Sultan Haitham City",
+  "body": [
+   "Wadi Zaha is a residential and mixed-use development in Sultan Haitham City, Muscat, by Al Ahly Sabbour. The developer describes the Iconic Tower as the first and tallest tower in the city, with a hotel and serviced apartments.",
+   "Construction began on 9 February 2026, according to Omnia Capital Group. Completion is given as early 2028; the sources differ on the month."
+  ],
+  "points": [
+   "Developer: Al Ahly Sabbour",
+   "Location: Sultan Haitham City, Muscat",
+   "Construction start: 9 February 2026 (Omnia Capital Group)",
+   "Completion: early 2028 (sources differ on the month)"
+  ],
+  "cta": {
+   "label": "Enquire about Wadi Zaha",
+   "href": "contact.html"
+  }
+ },
+ "statement": {
+  "kicker": "Our approach",
+  "text": "We help buyers and investors understand a property before they commit: the facts, the sources, and what is still unconfirmed."
+ },
+ "services": {
+  "title": "How we help",
+  "nav": "Services",
+  "intro": "Advisory for buyers and investors in Oman.",
+  "items": [
+   {
+    "title": "Buyer enquiries",
+    "icon": "building",
+    "text": "We answer questions about a development and arrange a viewing, once the developer confirms availability.",
+    "image": "wadi-zaha-back",
+    "detail": {
+     "intro": "We pass your questions to the developer and tell you what they confirm. Prices and availability come from the developer, not from us.",
+     "points": [
+      "Viewing arranged once availability is confirmed",
+      "Clear answers on what is confirmed and what is not"
+     ]
+    }
+   },
+   {
+    "title": "Investment guide for Oman",
+    "icon": "layers",
+    "text": "A plain summary of the published rules on property ownership and residency, with the official source for each point.",
+    "image": "wadi-zaha-render",
+    "detail": {
+     "intro": "The summary covers the published framework, with sources. Eligibility and tax are for your own adviser to confirm.",
+     "points": [
+      "Published framework with sources",
+      "Open questions listed for your adviser"
+     ]
+    }
+   },
+   {
+    "title": "Developer partnerships",
+    "icon": "star",
+    "text": "For developers who want a sales and advisory partner for an Oman project.",
+    "image": "wadi-zaha-render",
+    "detail": {
+     "intro": "We discuss the project, the buyer groups and what the developer needs to approve before a campaign.",
+     "points": [
+      "Project review",
+      "Approvals agreed in writing"
+     ]
+    }
+   }
+  ]
+ },
+ "faq_title": "Questions people ask"
+}

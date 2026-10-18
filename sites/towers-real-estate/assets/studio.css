@@ -1,0 +1,14 @@
+/* Theme: studio. Fully data-driven: colours and fonts come from the site's "brand" block
+   (inlined in base.html.j2). This file only sets the type scale and a few surface rules. */
+body[data-theme="studio"] { letter-spacing: -0.005em; }
+body[data-theme="studio"] h1, body[data-theme="studio"] h2, body[data-theme="studio"] h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; }
+body[data-theme="studio"] .eyebrow { color: var(--accent); }
+body[data-theme="studio"] .site-header.is-scrolled { background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--line); }
+body[data-theme="studio"] .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: var(--accent); color: var(--accent-ink); font: 500 1.1rem/1 var(--font-display); }
+body[data-theme="studio"] .brand-text { font: 500 1.2rem/1 var(--font-display); }
+body[data-theme="studio"] .btn-primary { background: var(--accent); color: var(--accent-ink); }
+body[data-theme="studio"] .btn-ghost { border-color: var(--line); color: inherit; }
+body[data-theme="studio"] .pg-section.alt, body[data-theme="studio"] .tool { background: var(--alt); }
+body[data-theme="studio"] .site-footer { background: color-mix(in srgb, var(--fg) 6%, var(--bg)); padding: 5rem 0 2rem; }
+body[data-theme="studio"] .foot-big { font: 400 clamp(4rem, 14vw, 12rem)/0.9 var(--font-display); opacity: 0.08; margin: 0 0 2rem; white-space: nowrap; }
+body[data-theme="studio"][data-mode="light"] .ins-chip { background: #fff; }
