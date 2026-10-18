@@ -17,7 +17,7 @@
       {%- for it in items %}
       <a class="feature{% if loop.index is even %} flip{% endif %}" href="{{ it._file }}">
         <div class="feature-media" data-anim="wipe">
-          {%- if it._img %}<img src="{{ m.src(it._img) }}" alt="{{ s.images[it._img].alt }}" loading="lazy" data-speed="0.6">{% else %}<span class="feature-ico">{{ icon(it.icon) }}</span>{% endif %}
+          {%- if it._img %}<img src="{{ m.src(it._img) }}" alt="{{ s.images[it._img].alt }}" loading="lazy" data-speed="0.6">{% else %}<span class="feature-ico">{{ icon(it.icon) }}</span>{% if it.badge %}<span class="feature-tag">{{ it.badge }}</span>{% endif %}{% if it.area %}<span class="feature-area">{{ it.area }}</span>{% endif %}{% endif %}
           {%- if it._img and s.images[it._img].cap %}<span class="stage-cap">{{ s.images[it._img].cap }}</span>{% endif %}
         </div>
         <div class="feature-copy">

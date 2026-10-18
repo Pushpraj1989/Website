@@ -34,6 +34,8 @@
         <p class="side-t">{{ s.detail_cta.title if s.detail_cta else 'Talk to our team' }}</p>
         <p class="side-p">{{ s.detail_cta.text if s.detail_cta else s.contact.intro }}</p>
         <a class="btn btn-primary" href="contact.html" data-magnetic>{{ s.cta.label }} {{ icon('arrow') }}</a>
+        {%- set wa = (s.contact.phones | selectattr('whatsapp') | list | first) if s.contact.phones | selectattr('whatsapp') | list else none %}
+        {%- if wa %}<a class="btn btn-ghost" href="https://wa.me/{{ wa.tel[1:] }}?text={{ ('I am interested in ' ~ it.title ~ ' in ' ~ (it.area or s.name) ~ '. Please send me the details.') | urlencode }}" rel="noopener" target="_blank">WhatsApp about {{ it.title }}</a>{% endif %}
         {%- for ph in s.contact.phones[:2] %}<a class="side-line" href="tel:{{ ph.tel }}">{{ icon('phone') }} {{ ph.label }} · {{ ph.number }}</a>{% endfor %}
       </div>
       <nav class="side-list" aria-label="All {{ page.label | lower }}">

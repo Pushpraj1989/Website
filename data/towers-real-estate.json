@@ -19,7 +19,7 @@
   "style": "minimal"
  },
  "cta": {
-  "label": "Enquire about Wadi Zaha",
+  "label": "Enquire",
   "short": "Enquire",
   "href": "contact.html"
  },
@@ -140,15 +140,24 @@
   "title": "Enquire",
   "intro": "Tell us what you are looking for. We reply with what is confirmed and what is not.",
   "address": "",
-  "phones": [],
-  "email": null,
+  "phones": [
+   {
+    "label": "WhatsApp",
+    "number": "+968 0000 0000 (test number)",
+    "tel": "+96800000000",
+    "whatsapp": true
+   }
+  ],
+  "email": "maamoun@towers-re.com",
   "note": "Proof of concept: contact details and the enquiry route are to be confirmed before launch.",
   "form": {
    "branch": false,
    "topics": [
     "Wadi Zaha",
+    "Golf Hills",
+    "Musstir Heights",
+    "AIDA Trump Signature Villas",
     "Investment in Oman",
-    "Developer partnership",
     "General"
    ],
    "submit": "Send enquiry",
@@ -158,19 +167,25 @@
  "marquee": [],
  "socials": [],
  "confirm": [
-  "Towers office address and contact details (the screenshot address is unverified)",
-  "Whether Towers acts as agent or independent adviser, and written approval from Al Ahly Sabbour to use the renders",
-  "Wadi Zaha completion month (sources differ: February or Q1 2028) and unit counts (sources differ: 250, 760 or 950)",
+  "WhatsApp number: test number in place; replace with the real business number",
+  "Photos for Golf Hills, Musstir Heights and AIDA: none usable yet. Ask each developer or the sales team for press photos",
+  "Developer approval to use the Wadi Zaha renders (Al Ahly Sabbour website)",
+  "Unit mix, prices and availability for every project: from each developer only",
+  "Musstir Heights and AIDA: construction and completion dates not confirmed",
   "Decision No. 87/2026 and foreign-ownership scope: legal review before publication",
   "Original Towers logo file (current logo is a crop from a phone screenshot)",
-  "Arabic version: native reviewer"
+  "Arabic version: native reviewer, including the new project text"
  ],
  "sources": [
   "Al Ahly Sabbour, Wadi Zaha: https://alahlysabbour-om.com/wadi-zahaa/",
   "Omnia Capital Group, Wadi Zaha (construction start 9 Feb 2026): https://www.omniacapitalgroup.com/en/developments/wadi-zaha",
   "Oman Observer, Iconic Tower (first and tallest in Sultan Haitham City): https://www.omanobserver.om/article/1177614/business/economy/new-iconic-tower-for-sultan-haitham-city",
   "Oman Observer, Decision No. 87/2026 (residency for property owners): https://www.omanobserver.om/ampArticle/1191803",
-  "Muscat Daily, foreign ownership not open in all areas (19 Aug 2026): https://www.muscatdaily.com/2026/08/19/what-foreign-buyers-get-wrong-about-omans-new-property-rules/"
+  "Muscat Daily, foreign ownership not open in all areas (19 Aug 2026): https://www.muscatdaily.com/2026/08/19/what-foreign-buyers-get-wrong-about-omans-new-property-rules/",
+  "https://alahlysabbour-om.com/wadi-zahaa/",
+  "https://gulfconstructiononline.com/Article/389726/al-osool-unveils-muscat-freehold-residential-project",
+  "https://www.omanobserver.om/article/1189380/business/economy/ro-300-million-musstir-heights-unveiled-at-al-jabal-al-aali",
+  "https://darglobal.co.uk/press/dar-al-arkan-introduces-trump-signature-villas-hotel-and-golf-course-at-its-hilltop-project-aida-in-muscat-oman"
  ],
  "_preset_notes": {
   "note": "Proof of concept built from the real-estate preset. Remove this note before launch."
@@ -199,47 +214,185 @@
   "text": "We help buyers and investors understand a property before they commit: the facts, the sources, and what is still unconfirmed."
  },
  "services": {
-  "title": "How we help",
-  "nav": "Services",
-  "intro": "Advisory for buyers and investors in Oman.",
+  "title": "Projects in Oman",
+  "nav": "Projects",
+  "intro": "Developments we can introduce you to. Prices and availability come from each developer.",
   "items": [
    {
-    "title": "Buyer enquiries",
+    "title": "Wadi Zaha",
     "icon": "building",
-    "text": "We answer questions about a development and arrange a viewing, once the developer confirms availability.",
-    "image": "wadi-zaha-back",
+    "badge": "Launched 2026",
+    "area": "Sultan Haitham City, Muscat",
+    "text": "Studios to four-bedroom homes in a mixed-use development by Al Ahly Sabbour, including a hotel in the Iconic Tower.",
+    "image": "wadi-zaha-render",
     "detail": {
-     "intro": "We pass your questions to the developer and tell you what they confirm. Prices and availability come from the developer, not from us.",
+     "intro": "Wadi Zaha is a residential and mixed-use development in Sultan Haitham City, Muscat, by Al Ahly Sabbour. The developer describes the Iconic Tower as the first and tallest tower in the city.",
+     "points_title": "Amenities and features",
      "points": [
-      "Viewing arranged once availability is confirmed",
-      "Clear answers on what is confirmed and what is not"
-     ]
+      "Swimming pool and gym",
+      "Walking path and landscaped spaces",
+      "Shops, cafés and restaurants",
+      "Luxury hotel and serviced apartments in the Iconic Tower"
+     ],
+     "facts": [
+      {
+       "label": "Developer",
+       "value": "Al Ahly Sabbour"
+      },
+      {
+       "label": "Location",
+       "value": "Sultan Haitham City, Muscat"
+      },
+      {
+       "label": "Construction start",
+       "value": "9 February 2026 (Omnia Capital Group)"
+      },
+      {
+       "label": "Completion",
+       "value": "Early 2028 (sources differ on the month)"
+      },
+      {
+       "label": "Units",
+       "value": "Sources give 760 to 950 units; confirm with the developer"
+      },
+      {
+       "label": "Unit types",
+       "value": "Studios to four-bedroom (RE House)"
+      },
+      {
+       "label": "Prices and availability",
+       "value": "From the developer"
+      }
+     ],
+     "src": "https://alahlysabbour-om.com/wadi-zahaa/"
     }
    },
    {
-    "title": "Investment guide for Oman",
+    "title": "Golf Hills",
     "icon": "layers",
-    "text": "A plain summary of the published rules on property ownership and residency, with the official source for each point.",
-    "image": "wadi-zaha-render",
+    "badge": "Launched 2026",
+    "area": "Al Irfan City, Muscat Hills",
+    "text": "Three residential towers with 366 apartments, overlooking the golf course. Freehold for Omani nationals and expatriates.",
     "detail": {
-     "intro": "The summary covers the published framework, with sources. Eligibility and tax are for your own adviser to confirm.",
+     "intro": "Golf Hills by Al Osool is a freehold residential project in Al Irfan City, Muscat Hills, with three towers and 366 apartments over more than 11,000 sq m.",
+     "points_title": "Amenities and features",
      "points": [
-      "Published framework with sources",
-      "Open questions listed for your adviser"
-     ]
+      "Infinity swimming pool",
+      "Fitness facilities",
+      "Yoga and relaxation areas",
+      "Landscaped walkways and green spaces",
+      "Views over the golf course"
+     ],
+     "facts": [
+      {
+       "label": "Developer",
+       "value": "Al Osool"
+      },
+      {
+       "label": "Location",
+       "value": "Al Irfan City, Muscat Hills"
+      },
+      {
+       "label": "Scale",
+       "value": "Three towers, 366 apartments, over 11,000 sq m"
+      },
+      {
+       "label": "Ownership",
+       "value": "Freehold, open to Omani nationals and expatriates"
+      },
+      {
+       "label": "Unit mix",
+       "value": "To confirm with the developer"
+      },
+      {
+       "label": "Prices and availability",
+       "value": "From the developer"
+      }
+     ],
+     "src": "https://gulfconstructiononline.com/Article/389726/al-osool-unveils-muscat-freehold-residential-project"
     }
    },
    {
-    "title": "Developer partnerships",
+    "title": "Musstir Heights",
     "icon": "star",
-    "text": "For developers who want a sales and advisory partner for an Oman project.",
-    "image": "wadi-zaha-render",
+    "badge": "Announced May 2026",
+    "area": "Al Jabal Al Akhdar, Al Jabal Al Aali masterplan",
+    "text": "More than 750 luxury villas at about 2,400 metres above sea level, with a spa, retail boulevard and restaurants.",
     "detail": {
-     "intro": "We discuss the project, the buyer groups and what the developer needs to approve before a campaign.",
+     "intro": "Musstir Heights is a mountain villa development in Al Jabal Al Akhdar, within the Al Jabal Al Aali masterplan, announced in May 2026 at the Oman Real Estate, Design and Build Exhibition.",
+     "points_title": "Amenities and features",
      "points": [
-      "Project review",
-      "Approvals agreed in writing"
-     ]
+      "Spa",
+      "Retail boulevard",
+      "Restaurants and cafés",
+      "Lifestyle facilities"
+     ],
+     "facts": [
+      {
+       "label": "Developer",
+       "value": "Musstir, real estate arm of Mohammed Al Barwani Group (Muscat Daily names MB Holding Group)"
+      },
+      {
+       "label": "Location",
+       "value": "Al Jabal Al Akhdar, about 2,400 m altitude"
+      },
+      {
+       "label": "Scale",
+       "value": "More than 750 villas on over 1 million sq m"
+      },
+      {
+       "label": "Project value",
+       "value": "About OMR 300 million"
+      },
+      {
+       "label": "Construction and completion",
+       "value": "Not announced"
+      },
+      {
+       "label": "Prices and availability",
+       "value": "From the developer"
+      }
+     ],
+     "src": "https://www.omanobserver.om/article/1189380/business/economy/ro-300-million-musstir-heights-unveiled-at-al-jabal-al-aali"
+    }
+   },
+   {
+    "title": "AIDA Trump Signature Villas",
+    "icon": "check",
+    "badge": "Announced 2024",
+    "area": "AIDA, Muscat",
+    "text": "Villas of three to seven bedrooms in the AIDA hilltop development, beside Trump International Golf Club Oman.",
+    "detail": {
+     "intro": "Trump Signature Villas at AIDA, a hilltop development in Muscat, announced by Dar Global with The Trump Organization. The villas sit within Trump International Golf Club Oman.",
+     "points_title": "Amenities and features",
+     "points": [
+      "Trump International Golf Club Oman",
+      "Hotel and golf course in the AIDA development",
+      "Hilltop setting above Muscat"
+     ],
+     "facts": [
+      {
+       "label": "Developer",
+       "value": "Dar Global (some outlets name the parent Dar Al Arkan)"
+      },
+      {
+       "label": "Location",
+       "value": "AIDA, Muscat"
+      },
+      {
+       "label": "Villa size",
+       "value": "Three to seven bedrooms"
+      },
+      {
+       "label": "First phase value",
+       "value": "US$200 million"
+      },
+      {
+       "label": "Prices and availability",
+       "value": "From the developer"
+      }
+     ],
+     "src": "https://darglobal.co.uk/press/dar-al-arkan-introduces-trump-signature-villas-hotel-and-golf-course-at-its-hilltop-project-aida-in-muscat-oman"
     }
    }
   ]
