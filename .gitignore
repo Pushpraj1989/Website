@@ -4,3 +4,4 @@ research/
 __pycache__/
 *.pyc
 data/i18n/work/
+platform/outputs/

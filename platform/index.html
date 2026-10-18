@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Creative studio · prototype</title>
+<style>
+:root{--ink:#141824;--mut:#6b7280;--bg:#f4f6fb;--line:#e3e7ef;--gold:#C8A66B;--navy:#081522}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:860px;margin:0 auto;padding:28px 18px 60px}
+h1{font-size:26px;margin:4px 0}.sub{color:var(--mut);margin:0 0 20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px}
+label{display:block;font-weight:600;margin:14px 0 6px}
+textarea,input[type=text]{width:100%;font:inherit;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px}
+textarea{min-height:110px;resize:vertical}
+button{font:inherit;font-weight:600;border:0;border-radius:12px;padding:12px 20px;background:var(--navy);color:#fff;cursor:pointer}
+button:disabled{opacity:.5}
+.keys{display:flex;flex-wrap:wrap;gap:8px}.pill{border:1px solid var(--line);border-radius:99px;padding:5px 11px;font-size:13px;background:#fff}
+.on{color:#2f9e66}.off{color:#b45309}
+.job{border-top:1px solid var(--line);padding:14px 0}.job:first-child{border-top:0}
+.bar{height:8px;background:#eef1f6;border-radius:6px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--gold);transition:width .5s}
+.meta{color:var(--mut);font-size:13px}.msg{min-height:20px;color:#c2410c;margin-top:10px;font-size:14px}
+video{width:100%;max-width:640px;border-radius:12px;margin-top:8px;display:block}
+.note{font-size:13px;color:var(--mut);margin-top:10px}
+</style></head><body><div class="wrap">
+<h1>Creative studio</h1>
+<p class="sub">Prototype. Describe the film, add your photos, and get a cinematic film. Generated footage needs a video key; this version renders from your photos only.</p>
+
+<section class="card">
+  <div class="keys" id="keys"></div>
+  <p class="note" id="signin"></p>
+</section>
+
+<form class="card" id="form">
+  <label for="brief">What should the film show?</label>
+  <textarea id="brief" maxlength="2000" placeholder="e.g. A cinematic film for Wadi Zaha: the site, the building rising floor by floor, a gold light and the Towers logo."></textarea>
+  <label for="files">Photos (one, or two: the site photo first, then the finished image)</label>
+  <input id="files" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+  <label style="font-weight:400;display:flex;gap:10px;align-items:flex-start">
+    <input id="rights" type="checkbox" style="margin-top:4px">
+    <span>I have the rights to every photo I upload, and I have permission to show any building, person or developer in it.</span>
+  </label>
+  <div style="margin-top:16px"><button type="submit" id="go">Create film</button></div>
+  <div class="msg" id="msg"></div>
+  <p class="note">Each film is labelled as a visualisation on screen. Single-photo films are labelled as such too.</p>
+</form>
+
+<section class="card"><h2 style="margin:0 0 8px;font-size:18px">Your films</h2><div id="jobs"><p class="meta">None yet.</p></div></section>
+</div>
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (t) => String(t).replace(/[<>&"]/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]));
+async function status() {
+  const s = await (await fetch("/api/status")).json();
+  $("#keys").innerHTML = Object.entries(s.keys).map(([k, v]) => `<span class="pill ${v ? "on" : "off"}">${k}: ${v ? "set" : "not set"}</span>`).join("")
+    + `<span class="pill ${s.logo ? "on" : "off"}">logo: ${s.logo ? "set" : "not set"}</span>`;
+  $("#signin").textContent = "Sign-in: " + s.sign_in + ". Keys are read from the server's environment and never shown here.";
+}
+function jobHTML(j) {
+  const pct = Math.round((j.pct || 0) * 100);
+  let body = "";
+  if (j.status === "done") body = `<video controls preload="metadata" src="${j.video}"></video><div class="meta"><a href="${j.video}" download>Download MP4</a>${j.single_photo ? " · single photo: the second half of the film repeats it" : ""}</div>`;
+  else if (j.status === "failed") body = `<div class="msg">${esc(j.error || "The film could not be made.")}</div>`;
+  else body = `<div class="meta">${j.status === "queued" ? "Waiting in the queue" : "Rendering"} · ${pct}%</div><div class="bar"><i style="width:${pct}%"></i></div>`;
+  return `<div class="job"><strong>${esc((j.brief || "Untitled film").slice(0, 90))}</strong><div class="meta">${new Date(j.created * 1000).toLocaleString()} · ${esc(j.inputs.join(", "))}</div>${body}</div>`;
+}
+async function refresh() {
+  const { jobs } = await (await fetch("/api/jobs")).json();
+  $("#jobs").innerHTML = jobs.length ? jobs.map(jobHTML).join("") : '<p class="meta">None yet.</p>';
+  if (jobs.some(j => j.status === "queued" || j.status === "running")) setTimeout(refresh, 3000);
+}
+function toDataURL(file) { return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(file); }); }
+$("#form").addEventListener("submit", async (e) => {
+  e.preventDefault(); $("#msg").textContent = "";
+  const files = [...$("#files").files].slice(0, 2);
+  if (!$("#rights").checked) { $("#msg").textContent = "Confirm the rights for your photos first."; return; }
+  if (!files.length) { $("#msg").textContent = "Add at least one photo."; return; }
+  $("#go").disabled = true;
+  try {
+    const payload = { brief: $("#brief").value, rights: true, files: await Promise.all(files.map(async f => ({ name: f.name, data: await toDataURL(f) }))) };
+    const r = await fetch("/api/jobs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error || "Upload failed.");
+    $("#brief").value = ""; $("#files").value = ""; $("#rights").checked = false;
+    $("#msg").textContent = "Added to the queue.";
+    refresh();
+  } catch (err) { $("#msg").textContent = err.message; }
+  finally { $("#go").disabled = false; }
+});
+status(); refresh();
+</script></body></html>
