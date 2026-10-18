@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#081522">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Fraunces:opsz,wght@9..144,300..600&amp;family=Inter:wght@400;500;600;700"><link rel="icon" href="assets/img/logo-t.png"><link rel="stylesheet" href="assets/core.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Fraunces:opsz,wght@9..144,300..600&amp;family=Inter:wght@400;500;600;700"><link rel="alternate" hreflang="ar" href="ar/contact.html"><link rel="icon" href="assets/img/logo-t.png"><link rel="stylesheet" href="assets/core.css">
 <link rel="stylesheet" href="assets/studio.css"><link rel="stylesheet" href="assets/styles.css"><style>body[data-theme="studio"]{--bg:#081522;--fg:#F5F1E8;--accent:#C8A66B;--accent-ink:#081522;--surface:color-mix(in srgb, var(--fg) 5%, transparent);--line:color-mix(in srgb, var(--fg) 14%, transparent);--muted:color-mix(in srgb, var(--fg) 64%, transparent);--font-display:"Fraunces", Georgia, serif;--font-body:"Inter", system-ui, sans-serif;--loader-bg:#C8A66B;--alt:color-mix(in srgb, var(--fg) 4%, var(--bg))}</style><script>document.documentElement.classList.replace('no-js', 'js');try{if(sessionStorage.getItem('t1-nav')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('is-arriving');setTimeout(function(){document.documentElement.classList.remove('is-arriving')},2500)}sessionStorage.removeItem('t1-nav')}catch(e){}</script>
 </head>
 <body data-theme="studio" data-mode="dark" data-style="minimal" data-page="contact" style="--accent: #C8A66B">
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>      <a href="contact.html" class="is-active" aria-current="page">Contact</a>    </nav>
-    <div class="nav-actions">      <a class="btn btn-primary btn-sm" href="contact.html" data-magnetic>Enquire about Wadi Zaha</a>
+    <div class="nav-actions"><a class="lang-sw" href="ar/contact.html" hreflang="ar" lang="ar" data-lang-sw>العربية</a>      <a class="btn btn-primary btn-sm" href="contact.html" data-magnetic>Enquire about Wadi Zaha</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu" data-menu><span></span><span></span></button>
     </div>
   </div>
@@ -53,8 +53,7 @@
       <ul class="contact-list">      </ul>
 <p class="contact-note">Proof of concept: contact details and the enquiry route are to be confirmed before launch.</p>    </div>
 
-    <form class="form" data-form data-endpoint="" novalidate data-anim="up">
-      <h3>Send enquiry</h3>
+    <form class="form" data-form data-endpoint="/enquiry/" novalidate data-anim="up"><input type="hidden" name="site" value="towers-real-estate"><input type="hidden" name="page" value="" data-page-field><input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" style="position:absolute;left:-9999px">      <h3>Send enquiry</h3>
       <div class="field" data-field>
         <label for="f-name">Full name</label>
         <input id="f-name" name="name" type="text" autocomplete="name" data-rule="name" required>

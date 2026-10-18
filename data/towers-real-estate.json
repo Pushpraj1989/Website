@@ -151,7 +151,8 @@
     "Developer partnership",
     "General"
    ],
-   "submit": "Send enquiry"
+   "submit": "Send enquiry",
+   "enquiry": true
   }
  },
  "marquee": [],

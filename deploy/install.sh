@@ -94,6 +94,60 @@ UNIT
     }"
 fi
 
+# 2c. enquiry service for contact forms (server/enquiry_api.py, standard library only).
+#     Enquiries are saved (mode 600) and emailed when SMTP is set in /etc/tier1-enquiry.env.
+ENQUIRY_BLOCK=""
+if grep -Rqs 'data-endpoint="/enquiry/"' "$DIR"/sites/*/index.html "$DIR"/sites/*/ar/index.html 2>/dev/null; then
+  echo "→ enquiry service"
+  mkdir -p /opt/tier1-enquiry
+  cp "$SRC/server/enquiry_api.py" /opt/tier1-enquiry/enquiry_api.py
+  ENV=/etc/tier1-enquiry.env
+  if [ ! -f "$ENV" ]; then
+    SALT="$(python3 -c 'import secrets; print(secrets.token_hex(16))')"
+    cat > "$ENV" <<ENVF
+# Set these yourself, on the server. Never paste them into a chat.
+# ENQUIRY_TO=sales-inbox@example.com
+# SMTP_HOST=smtp.example.com
+# SMTP_PORT=587
+# SMTP_USER=...
+# SMTP_PASSWORD=...
+# ENQUIRY_FROM=website@example.com
+ENQUIRY_SALT=$SALT
+ENVF
+    chmod 600 "$ENV"
+  fi
+  if command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ]; then
+    cat > /etc/systemd/system/tier1-enquiry.service <<UNIT
+[Unit]
+Description=Tier 1 contact-form enquiries
+After=network.target
+
+[Service]
+EnvironmentFile=$ENV
+Environment=ENQUIRY_DIR=/var/lib/tier1-enquiry ENQUIRY_PORT=8788
+ExecStart=/usr/bin/env python3 /opt/tier1-enquiry/enquiry_api.py
+StateDirectory=tier1-enquiry
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+UNIT
+    systemctl daemon-reload
+    systemctl enable tier1-enquiry >/dev/null 2>&1
+    systemctl restart tier1-enquiry
+  else
+    mkdir -p /var/lib/tier1-enquiry; pkill -f /opt/tier1-enquiry/enquiry_api.py 2>/dev/null || true
+    (set -a; . "$ENV"; set +a; ENQUIRY_DIR=/var/lib/tier1-enquiry nohup python3 /opt/tier1-enquiry/enquiry_api.py >/var/log/tier1-enquiry.log 2>&1 &)
+  fi
+  ENQUIRY_BLOCK="
+    location /enquiry/ {
+        proxy_pass http://127.0.0.1:8788/;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Forwarded-For \$remote_addr;
+        client_max_body_size 32k;
+    }"
+fi
+
 # 3. site config: answers only for http://<ip>/
 CONF=/etc/nginx/conf.d/tier1-concepts.conf
 if grep -Rqs "server_name[^;]*\b${HOST_IP}\b" /etc/nginx --exclude=tier1-concepts.conf; then
@@ -113,6 +167,7 @@ server {
     }
 
 ${API_BLOCK}
+${ENQUIRY_BLOCK}
 
     location ~* \.(?:css|js|jpg|jpeg|png|webp|svg|woff2?|mp4|webm)$ {
         expires 7d;

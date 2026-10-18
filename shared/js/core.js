@@ -588,6 +588,8 @@
   if (form) {
     const status = $("[data-status]", form);
     const endpoint = form.dataset.endpoint || "";
+    const pageField = $("[data-page-field]", form);
+    if (pageField) pageField.value = location.pathname;
     const rules = {
       name: (v) => v.trim().length >= 2 || L("Please enter your name."),
       contact: (v) => {

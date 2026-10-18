@@ -19,7 +19,8 @@
       {% if s.contact.note %}<p class="contact-note">{{ s.contact.note }}</p>{% endif %}
     </div>
 
-    <form class="form" data-form data-endpoint="" novalidate data-anim="up">
+    <form class="form" data-form data-endpoint="{{ '/enquiry/' if s.contact.form.enquiry else '' }}" novalidate data-anim="up">
+      {%- if s.contact.form.enquiry %}<input type="hidden" name="site" value="{{ s.slug }}"><input type="hidden" name="page" value="" data-page-field><input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" style="position:absolute;left:-9999px">{%- endif %}
       <h3>{{ s.contact.form.submit }}</h3>
       <div class="field" data-field>
         <label for="f-name">Full name</label>
