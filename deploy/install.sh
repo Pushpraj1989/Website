@@ -106,7 +106,7 @@ if grep -Rqs 'data-endpoint="/enquiry/"' "$DIR"/sites/*/index.html "$DIR"/sites/
     SALT="$(python3 -c 'import secrets; print(secrets.token_hex(16))')"
     cat > "$ENV" <<ENVF
 # Set these yourself, on the server. Never paste them into a chat.
-# ENQUIRY_TO=sales-inbox@example.com
+ENQUIRY_TO=maamoun@towers-re.com
 # SMTP_HOST=smtp.example.com
 # SMTP_PORT=587
 # SMTP_USER=...
