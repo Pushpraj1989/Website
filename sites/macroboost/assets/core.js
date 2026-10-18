@@ -210,6 +210,29 @@
     });
   };
 
+  /* ---------- sub-page hero: the copy lifts and softens as the page scrolls past it ---------- */
+  const initHeroRecede = () => {
+    const hero = $(".page-hero .ph-inner");
+    if (!hero) return;
+    gsap.to(hero, {
+      yPercent: -14, opacity: 0.25, filter: "blur(3px)", ease: "none",
+      scrollTrigger: { trigger: hero.closest(".page-hero"), start: "top top", end: "bottom top", scrub: true },
+    });
+  };
+
+  /* ---------- pointer spotlight: a soft light follows the cursor across cards (fine pointers only) ---------- */
+  const initSpotlight = () => {
+    if (!fine || reduce) return;
+    $$(".news-card, .stat-tile, .msub-card, .dr-card").forEach((el) => {
+      el.classList.add("spot");
+      el.addEventListener("pointermove", (e) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        el.style.setProperty("--my", `${e.clientY - r.top}px`);
+      });
+    });
+  };
+
   /* ---------- velocity marquee ---------- */
   const initMarquees = () => {
     $$("[data-marquee]").forEach((m) => {
@@ -639,6 +662,8 @@
       initMarquees();
       initCursor();
       initMagnetic();
+      initSpotlight();
+      initHeroRecede();
       ST.sort();
     }
     runLoader();

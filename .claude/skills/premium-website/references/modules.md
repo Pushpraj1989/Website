@@ -80,6 +80,8 @@ reduced-motion and no-JS fallbacks.
 | Multi-plane depth parallax with pointer lean, CSS-generated drifting clouds | depth |
 | Clip-path wipes between stills with a progress rail | stages |
 | Ten surface styles (`brand.style`) | whole site |
+| Scroll-scrubbed hero recede (copy lifts, softens and fades as the hero leaves; GSAP ScrollTrigger) | every sub-page hero (`initHeroRecede`) |
+| Pointer spotlight: a soft accent light follows the cursor on news, stat, membership and directory cards (fine pointers only) | cards (`initSpotlight`, `.spot`) |
 
 ## Building something new
 

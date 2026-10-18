@@ -2437,3 +2437,8 @@ body:has(.page-hero.has-img, .promo) .site-header:not(.is-scrolled):not(.is-open
 body[data-mode="dark"] .logo-l, [data-theme="story"] .site-footer .logo-l { display: block; }
 body:has(.page-hero.has-img, .promo) .site-header:not(.is-scrolled):not(.is-open) .brand-logo.logo-c:has(+ .logo-l),
 body[data-mode="dark"] .brand-logo.logo-c:has(+ .logo-l), [data-theme="story"] .site-footer .brand-logo.logo-c:has(+ .logo-l) { display: none; }
+
+/* ---------- living pages: cards answer the pointer, the hero recedes on scroll (core.js) ---------- */
+.spot { position: relative; isolation: isolate; }
+.spot::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.4s; background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%); }
+@media (hover: hover) and (pointer: fine) { .spot:hover::before { opacity: 1; } }

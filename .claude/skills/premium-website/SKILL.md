@@ -44,7 +44,7 @@ Ask the questions in [references/intake.md](references/intake.md), in four short
 3. Study the references they gave (sites, Figma, videos, Instagram reels). For videos, pull
    frames (`ffmpeg -i clip.mp4 -vf fps=1.5,scale=300:-1 f%02d.jpg`) and look at them. List the
    motion, layout and style ideas you will reuse and map each to a module in
-   [references/modules.md](references/modules.md) or a style in [references/craft.md](references/craft.md).
+   [references/modules.md](references/modules.md) or a style in [references/craft.md](references/craft.md). Living-page rules and 2026 trend notes: [references/motion-2026.md](references/motion-2026.md).
 4. Collect footage: project films, product clips, reels. Encode clips for scrubbing with
    `tools/encode.sh` (MP4 + WebM) or turn them into frames with `tools/frames.sh`.
    Optional paid helpers (Apify for Instagram, generation tools): [references/integrations.md](references/integrations.md).

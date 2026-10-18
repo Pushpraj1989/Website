@@ -23,6 +23,14 @@ Check: text contrast over photos; nothing overlapping (dock vs buttons, rail vs 
 controls); headings not tiny (brand fonts loaded); cards aligned; phone layout has the same
 graphics (3D slider, assembly) and not a bare list; offer pop-up not covering key content.
 
+## Living pages
+
+- On one inner page, scroll 0 to one screen: the sub-page hero copy's opacity must drop below 1
+  (`getComputedStyle(.ph-inner).opacity`). If it stays at 1, the scroll effect is not running.
+- Hover a news or membership card on a fine pointer: the spotlight (`.spot::before`) shows and
+  follows the cursor. Off the card it hides. Reduced motion: no scroll or pointer motion at all.
+- Each inner page has at least two moves beyond the reveal (craft.md section 9).
+
 ## Content check
 
 - No TODO left (`grep -n TODO data/<slug>.json`).

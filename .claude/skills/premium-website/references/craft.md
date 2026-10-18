@@ -85,3 +85,12 @@ a top-down table, cans rotating in a lineup) all use **photographic** subjects t
 Screenshot the opening, mid-way and end states of every scroll-driven section (scrub, depth,
 stages, assemble) on desktop and phone. A passing test suite does not prove the effect looks
 good. If you could not check visually, say so.
+
+## 9. Living pages (every page moves after the first screen)
+
+A page that only fades its elements in once reads as static, whatever the hero does. Each
+inner page needs at least two behaviours beyond a one-time reveal: a scroll-linked move (the hero
+recedes, an image scrubs, a rail sticks) and a pointer response on cards, or a second scroll move.
+The home page keeps its signature moment and adds the same two. Research notes and the list of
+techniques are in [motion-2026.md](motion-2026.md). Choose and write them into the plan; do not
+leave them to the end.
