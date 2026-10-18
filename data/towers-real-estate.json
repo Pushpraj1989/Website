@@ -60,6 +60,41 @@
    "src": "yiti-the-arc.jpg",
    "alt": "The Arc residences render, The Sustainable City – Yiti",
    "cap": "Render: The Sustainable City – Yiti, developer website"
+  },
+  "aida-aerial": {
+   "src": "aida-aerial.jpg",
+   "alt": "AIDA aerial render with golf course and coast",
+   "cap": "Render: DarGlobal, via the AIDA sales site"
+  },
+  "aida-amour-sans-detour": {
+   "src": "aida-amour-sans-detour.jpg",
+   "alt": "AIDA development render",
+   "cap": "Render: DarGlobal, via the AIDA sales site"
+  },
+  "aida-great-escape": {
+   "src": "aida-great-escape.jpg",
+   "alt": "AIDA development render",
+   "cap": "Render: DarGlobal, via the AIDA sales site"
+  },
+  "aida-marriott-residences": {
+   "src": "aida-marriott-residences.jpg",
+   "alt": "AIDA development render",
+   "cap": "Render: DarGlobal, via the AIDA sales site"
+  },
+  "aida-nickelodeon": {
+   "src": "aida-nickelodeon.jpg",
+   "alt": "AIDA development render",
+   "cap": "Render: DarGlobal, via the AIDA sales site"
+  },
+  "aida-trump-cliff-villas": {
+   "src": "aida-trump-cliff-villas.jpg",
+   "alt": "AIDA development render",
+   "cap": "Render: DarGlobal, via the AIDA sales site"
+  },
+  "aida-azure-fendi-casa": {
+   "src": "aida-azure-fendi-casa.jpg",
+   "alt": "AIDA development render",
+   "cap": "Render: DarGlobal, via the AIDA sales site"
   }
  },
  "home": [
@@ -421,7 +456,8 @@
       }
      ],
      "src": "https://darglobal.co.uk/press/dar-al-arkan-introduces-trump-signature-villas-hotel-and-golf-course-at-its-hilltop-project-aida-in-muscat-oman"
-    }
+    },
+    "image": "aida-aerial"
    },
    {
     "title": "The Sustainable City – Yiti",
@@ -624,7 +660,8 @@
        "value": "Not stated. Confirm with DarGlobal"
       }
      ]
-    }
+    },
+    "image": "aida-amour-sans-detour"
    },
    {
     "title": "The Great Escape 1 and 2",
@@ -673,7 +710,8 @@
        "value": "Not stated. Confirm with DarGlobal"
       }
      ]
-    }
+    },
+    "image": "aida-great-escape"
    },
    {
     "title": "Marriott Residences AIDA",
@@ -726,7 +764,8 @@
        "value": "Not stated. Confirm with DarGlobal"
       }
      ]
-    }
+    },
+    "image": "aida-marriott-residences"
    },
    {
     "title": "Nickelodeon Hotels & Resorts AIDA",
@@ -774,7 +813,8 @@
        "value": "Not stated. Confirm with DarGlobal"
       }
      ]
-    }
+    },
+    "image": "aida-nickelodeon"
    },
    {
     "title": "Trump Cliff Villas",
@@ -823,7 +863,8 @@
        "value": "Not stated. Confirm with DarGlobal"
       }
      ]
-    }
+    },
+    "image": "aida-trump-cliff-villas"
    },
    {
     "title": "Azure Oceanfront Villas by Fendi Casa",
@@ -872,7 +913,8 @@
        "value": "Not stated. Confirm with DarGlobal"
       }
      ]
-    }
+    },
+    "image": "aida-azure-fendi-casa"
    }
   ]
  },
