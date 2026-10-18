@@ -165,7 +165,13 @@
     "Yiti",
     "Investment in Oman",
     "General",
-    "VISTAL by Victoria Swarovski"
+    "VISTAL by Victoria Swarovski",
+    "Amour Sans Détour",
+    "The Great Escape 1 and 2",
+    "Marriott Residences AIDA",
+    "Nickelodeon Hotels & Resorts AIDA",
+    "Trump Cliff Villas",
+    "Azure Oceanfront Villas by Fendi Casa"
    ],
    "submit": "Send enquiry",
    "enquiry": true
@@ -184,7 +190,9 @@
   "Photos for Golf Hills, Musstir Heights, AIDA and Azura: none usable yet. Ask each developer or the sales team for press photos",
   "Yiti handover: developer says The Plaza December 2027; launch release says city completion by end of 2026. Confirm in writing",
   "VISTAL: starting prices differ between listings (OMR 133,546 to 140,316 for one bedroom) and need the developer's current price list",
-  "Amour Sans Détour 2 (Towers Instagram): name and project not found online; confirm whether it is the AIDA villa collection and send its details"
+  "Amour Sans Détour 2 (Towers Instagram): name and project not found online; confirm whether it is the AIDA villa collection and send its details",
+  "AIDA sub-projects: all prices, sizes, handover dates and availability come from the agency site (WhiteWill, which says it is not the developer). Confirm each with DarGlobal before publishing",
+  "Amour Sans Détour payment plan: the agency shows it under another project's heading; confirm"
  ],
  "sources": [
   "Al Ahly Sabbour, Wadi Zaha: https://alahlysabbour-om.com/wadi-zahaa/",
@@ -198,7 +206,14 @@
   "https://darglobal.co.uk/press/dar-al-arkan-introduces-trump-signature-villas-hotel-and-golf-course-at-its-hilltop-project-aida-in-muscat-oman",
   "https://thesustainablecity-yiti.com/",
   "https://tradearabia.com/News/389288/Al-Mouj-Muscat-launches-last-two-phases-of-key-coastal-residential-project",
-  "https://whitewill.om/developments/vistal-by-victoria-swarovski"
+  "https://whitewill.om/developments/vistal-by-victoria-swarovski",
+  "https://aida.whitewill.om/",
+  "https://aida.whitewill.om/amour-sans",
+  "https://aida.whitewill.om/tge",
+  "https://aida.whitewill.om/marriott-residences",
+  "https://aida.whitewill.om/nickelodeon",
+  "https://aida.whitewill.om/cliff-villas",
+  "https://aida.whitewill.om/fendi-casa"
  ],
  "_preset_notes": {
   "note": "Proof of concept built from the real-estate preset. Remove this note before launch."
@@ -560,6 +575,303 @@
       }
      ],
      "src": "https://whitewill.om/developments/vistal-by-victoria-swarovski"
+    }
+   },
+   {
+    "title": "Amour Sans Détour",
+    "icon": "building",
+    "badge": "Listed for sale",
+    "area": "AIDA, Muscat (gated golf community)",
+    "text": "Three-bedroom two-level villas in AIDA's gated golf community, from $441,800.",
+    "detail": {
+     "intro": "Amour Sans Détour is a gated golf community of two-level, three-bedroom villas within AIDA, Muscat. Each villa has a private garden, a barbecue area, a jacuzzi and parking for two cars.",
+     "points_title": "Amenities and features",
+     "points": [
+      "World-class golf club",
+      "Panoramic clubhouse",
+      "Swimming pools",
+      "Fine-dining venues",
+      "Private garden, barbecue area and jacuzzi in every villa",
+      "Shaded parking for two cars per villa"
+     ],
+     "facts": [
+      {
+       "label": "Developer",
+       "value": "DarGlobal (per agency)"
+      },
+      {
+       "label": "Type",
+       "value": "Two-level, three-bedroom villas"
+      },
+      {
+       "label": "Size",
+       "value": "From 1,167 sq ft (one layout 1,195 sq ft)"
+      },
+      {
+       "label": "Starting price",
+       "value": "From $441,800 (another layout from $500,000), agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Handover",
+       "value": "Q4 2029 (agency listing), agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Payment plan",
+       "value": "20% on booking, 60% during construction, 20% on handover (shown under another project's heading), agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Availability",
+       "value": "Not stated. Confirm with DarGlobal"
+      }
+     ]
+    }
+   },
+   {
+    "title": "The Great Escape 1 and 2",
+    "icon": "layers",
+    "badge": "Listed for sale",
+    "area": "AIDA, Muscat (gated community)",
+    "text": "One, two and three-bedroom apartments in two nine-storey phases, with sea and mountain views.",
+    "detail": {
+     "intro": "The Great Escape is a gated AIDA community of two phases in nine-storey buildings, with 1, 2 and 3-bedroom apartments, premium finishes and floor-to-ceiling windows facing the sea and mountains. Fully furnished units are offered in phase 1.",
+     "points_title": "Amenities and features",
+     "points": [
+      "Infinity pool",
+      "Modern gym",
+      "Jogging track and mountain bike trail",
+      "Children's pool and playground",
+      "Promenades and viewing platform",
+      "24/7 security"
+     ],
+     "facts": [
+      {
+       "label": "Developer",
+       "value": "DarGlobal (per agency)"
+      },
+      {
+       "label": "Type",
+       "value": "1, 2 and 3-bedroom apartments; phase 1 fully furnished"
+      },
+      {
+       "label": "Size",
+       "value": "Not stated"
+      },
+      {
+       "label": "Starting price",
+       "value": "Not stated for this project; AIDA-wide figure from $243,600 (agency page, confirm with DarGlobal)"
+      },
+      {
+       "label": "Handover",
+       "value": "Phase 2: Q3 2028 (agency listing), agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Payment plan",
+       "value": "20% on booking, 70% during construction, 10% on handover, agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Availability",
+       "value": "Not stated. Confirm with DarGlobal"
+      }
+     ]
+    }
+   },
+   {
+    "title": "Marriott Residences AIDA",
+    "icon": "star",
+    "badge": "Listed for sale",
+    "area": "AIDA, Muscat (hilltop community)",
+    "text": "Fully furnished one, two and three-bedroom apartments in a nine-storey residential building, with sea and hill views.",
+    "detail": {
+     "intro": "Marriott Residences is a nine-storey development of fully furnished 1, 2 and 3-bedroom apartments in AIDA's hilltop community, about an hour from Muscat, within the AIDA masterplan.",
+     "points_title": "Amenities and features",
+     "points": [
+      "Boutique lobby with concierge",
+      "Panoramic pool deck",
+      "Fitness centre",
+      "Outdoor play areas for children",
+      "Landscaped promenades and hilltop viewing platform",
+      "Jogging path, hiking trail and mountain-bike track"
+     ],
+     "facts": [
+      {
+       "label": "Developer",
+       "value": "DarGlobal (per agency)"
+      },
+      {
+       "label": "Type",
+       "value": "Fully furnished 1, 2 and 3-bedroom apartments"
+      },
+      {
+       "label": "Building",
+       "value": "Nine storeys"
+      },
+      {
+       "label": "Size",
+       "value": "Not stated"
+      },
+      {
+       "label": "Starting price",
+       "value": "Not stated for this project"
+      },
+      {
+       "label": "Handover",
+       "value": "Q4 2028 (agency listing), agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Payment plan",
+       "value": "20% on booking, 70% during construction, 10% on handover, agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Availability",
+       "value": "Not stated. Confirm with DarGlobal"
+      }
+     ]
+    }
+   },
+   {
+    "title": "Nickelodeon Hotels & Resorts AIDA",
+    "icon": "check",
+    "badge": "Listed for sale",
+    "area": "AIDA, clifftop, about 130 m above the sea",
+    "text": "Furnished apartments in a family resort development with a water park, from $215,000.",
+    "detail": {
+     "intro": "Nickelodeon Hotels & Resorts AIDA is a family resort development on a clifftop about 130 metres above the sea, with furnished apartments and panoramic sea views. The resort is built around a water park and character experiences.",
+     "points_title": "Amenities and features",
+     "points": [
+      "Aqua Nick water park",
+      "Themed dining",
+      "Live shows",
+      "Character experiences",
+      "Panoramic sea views from the clifftop site"
+     ],
+     "facts": [
+      {
+       "label": "Developer",
+       "value": "DarGlobal (per agency)"
+      },
+      {
+       "label": "Type",
+       "value": "Furnished apartments, some with balconies and city or sea views"
+      },
+      {
+       "label": "Size",
+       "value": "441 to 721 sq ft; 721 to 1,313 sq ft; one unit 1,658 sq ft"
+      },
+      {
+       "label": "Starting price",
+       "value": "From $215,000 (441 to 721 sq ft); from $338,000 (721 to 1,313 sq ft); from $811,000 (1,658 sq ft), agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Handover",
+       "value": "Not stated"
+      },
+      {
+       "label": "Payment plan",
+       "value": "20% on booking, 70% during construction, 10% on handover, agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Availability",
+       "value": "Not stated. Confirm with DarGlobal"
+      }
+     ]
+    }
+   },
+   {
+    "title": "Trump Cliff Villas",
+    "icon": "star",
+    "badge": "Listed for sale",
+    "area": "AIDA, gated coastal community on the cliffs",
+    "text": "Furnished three-bedroom villas on the Gulf of Oman cliffs, with infinity pools and access to the Trump International Golf Club.",
+    "detail": {
+     "intro": "Trump Cliff Villas are furnished three-bedroom villas in a gated coastal community on the cliffs of the Gulf of Oman, about an hour from Muscat. Two layouts are offered, some with balconies and sea or cliff views.",
+     "points_title": "Amenities and features",
+     "points": [
+      "Infinity-edge pool with sea views",
+      "Five-star restaurant",
+      "Gym with yoga, pilates and weight training areas",
+      "Wellness centre with massage rooms and sauna",
+      "Landscaped parks and walking trails",
+      "Access to Trump International Golf Club and golf fairways"
+     ],
+     "facts": [
+      {
+       "label": "Developer",
+       "value": "DarGlobal (per agency)"
+      },
+      {
+       "label": "Type",
+       "value": "Furnished three-bedroom villas"
+      },
+      {
+       "label": "Size",
+       "value": "From 1,300 sq ft (first layout); from 1,700 sq ft (second layout)"
+      },
+      {
+       "label": "Starting price",
+       "value": "From $1,184,000 (first layout); from $1,500,000 (second layout), agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Handover",
+       "value": "Q4 2028 (agency listing), agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Payment plan",
+       "value": "20% on booking, 70% during construction, 10% on handover, agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Availability",
+       "value": "Not stated. Confirm with DarGlobal"
+      }
+     ]
+    }
+   },
+   {
+    "title": "Azure Oceanfront Villas by Fendi Casa",
+    "icon": "layers",
+    "badge": "Listed for sale",
+    "area": "AIDA, near Yiti, Muscat",
+    "text": "Oceanfront villas designed by Fendi Casa, with terraces and sea views, from $3.9 million.",
+    "detail": {
+     "intro": "Azure Oceanfront Villas by Fendi Casa are large oceanfront villas near Yiti, about 20 minutes from Muscat, with two layouts designed by Fendi Casa and options with terraces and sea views.",
+     "points_title": "Amenities and features",
+     "points": [
+      "Walking trails and cliff paths",
+      "Golf",
+      "Wellness spaces",
+      "Open-air leisure and outdoor terraces",
+      "Pools",
+      "Restaurants and social spots within the master plan"
+     ],
+     "facts": [
+      {
+       "label": "Developer",
+       "value": "DarGlobal (per agency); designer Fendi Casa"
+      },
+      {
+       "label": "Type",
+       "value": "Oceanfront villas; bedroom count not stated"
+      },
+      {
+       "label": "Size",
+       "value": "From 4,480 sq ft (layout 1); from 5,245 sq ft (layout 2)"
+      },
+      {
+       "label": "Starting price",
+       "value": "From $3,900,000 (layout 1); from $4,700,000 (layout 2), agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Handover",
+       "value": "Not stated"
+      },
+      {
+       "label": "Payment plan",
+       "value": "20% on booking, 30% during construction, 50% on handover, agency page, confirm with DarGlobal"
+      },
+      {
+       "label": "Availability",
+       "value": "Not stated. Confirm with DarGlobal"
+      }
+     ]
     }
    }
   ]
