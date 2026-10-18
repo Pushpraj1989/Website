@@ -163,9 +163,9 @@
     "Musstir Heights",
     "AIDA Trump Signature Villas",
     "Yiti",
-    "Azura Beach Residences",
     "Investment in Oman",
-    "General"
+    "General",
+    "VISTAL by Victoria Swarovski"
    ],
    "submit": "Send enquiry",
    "enquiry": true
@@ -182,7 +182,9 @@
   "Original Towers logo file (current logo is a crop from a phone screenshot)",
   "Arabic version: native reviewer, including the new project text",
   "Photos for Golf Hills, Musstir Heights, AIDA and Azura: none usable yet. Ask each developer or the sales team for press photos",
-  "Yiti handover: developer says The Plaza December 2027; launch release says city completion by end of 2026. Confirm in writing"
+  "Yiti handover: developer says The Plaza December 2027; launch release says city completion by end of 2026. Confirm in writing",
+  "VISTAL: starting prices differ between listings (OMR 133,546 to 140,316 for one bedroom) and need the developer's current price list",
+  "Amour Sans Détour 2 (Towers Instagram): name and project not found online; confirm whether it is the AIDA villa collection and send its details"
  ],
  "sources": [
   "Al Ahly Sabbour, Wadi Zaha: https://alahlysabbour-om.com/wadi-zahaa/",
@@ -195,7 +197,8 @@
   "https://www.omanobserver.om/article/1189380/business/economy/ro-300-million-musstir-heights-unveiled-at-al-jabal-al-aali",
   "https://darglobal.co.uk/press/dar-al-arkan-introduces-trump-signature-villas-hotel-and-golf-course-at-its-hilltop-project-aida-in-muscat-oman",
   "https://thesustainablecity-yiti.com/",
-  "https://tradearabia.com/News/389288/Al-Mouj-Muscat-launches-last-two-phases-of-key-coastal-residential-project"
+  "https://tradearabia.com/News/389288/Al-Mouj-Muscat-launches-last-two-phases-of-key-coastal-residential-project",
+  "https://whitewill.om/developments/vistal-by-victoria-swarovski"
  ],
  "_preset_notes": {
   "note": "Proof of concept built from the real-estate preset. Remove this note before launch."
@@ -503,6 +506,60 @@
       }
      ],
      "src": "https://tradearabia.com/News/389288/Al-Mouj-Muscat-launches-last-two-phases-of-key-coastal-residential-project"
+    }
+   },
+   {
+    "title": "VISTAL by Victoria Swarovski",
+    "icon": "star",
+    "badge": "Off-plan",
+    "area": "Al Mouj Muscat",
+    "text": "Branded beachfront residences by LEO Developments, from one to four bedrooms, freehold, on the Al Mouj marina.",
+    "detail": {
+     "intro": "VISTAL by Victoria Swarovski is a branded beachfront residential development by LEO Developments in Al Mouj Muscat. It has nine floors and 178 apartments, with layouts from one to four bedrooms.",
+     "points_title": "Amenities and features",
+     "points": [
+      "Swimming pool and fitness club",
+      "Spa complex",
+      "Smart home features",
+      "Meeting room",
+      "Private gardens on selected units",
+      "Parking with electric-vehicle charging stations"
+     ],
+     "facts": [
+      {
+       "label": "Developer",
+       "value": "LEO Developments, with the Victoria Swarovski brand"
+      },
+      {
+       "label": "Location",
+       "value": "Al Mouj Muscat, beachfront"
+      },
+      {
+       "label": "Building",
+       "value": "Nine floors, 178 apartments (listing)"
+      },
+      {
+       "label": "Layouts",
+       "value": "One to four bedrooms, from 67 m² (listing)"
+      },
+      {
+       "label": "Handover",
+       "value": "Q4 2029 (listing). Confirm with the developer"
+      },
+      {
+       "label": "Ownership",
+       "value": "Freehold for all nationalities, as stated by a listing (Al Mouj is a designated Integrated Tourism Complex)"
+      },
+      {
+       "label": "Payment plan (listing)",
+       "value": "10% on booking, 60% during construction, 30% on completion"
+      },
+      {
+       "label": "Starting price",
+       "value": "Reported from OMR 134,000 for one bedroom by a listing agent. Prices differ between sources; confirm with the developer"
+      }
+     ],
+     "src": "https://whitewill.om/developments/vistal-by-victoria-swarovski"
     }
    }
   ]
