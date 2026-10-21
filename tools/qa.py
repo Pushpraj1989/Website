@@ -113,6 +113,10 @@ def main():
                         pg.goto(url, wait_until="load", timeout=45000)
                         pg.wait_for_timeout(1500 if f.name == "index.html" else 700)
                         r = pg.evaluate(PROBE)
+                        if r["hiddenCount"]:
+                            # reveal animations can take a couple of seconds after a fast scroll: settle, then re-check
+                            pg.wait_for_timeout(2500)
+                            r = pg.evaluate(PROBE)
                     except Exception as e:
                         r = {"overflow": 0, "hidden": [], "hiddenCount": 0, "broken": [], "webgl": False}
                         errs.append(f"load failed: {e}"[:160])
