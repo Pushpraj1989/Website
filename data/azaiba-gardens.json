@@ -37,34 +37,14 @@
   },
   "images": {
     "interior-living-1": {
-      "src": "flat-living.jpg",
+      "src": "stock-living-1.jpg",
       "alt": "Bright living room with floor-to-ceiling windows",
-      "cap": "Listing photo, Rezone Property LLC (to replace)"
+      "cap": "Illustrative stock photo (free licence). Replace with building photos."
     },
     "interior-living-2": {
-      "src": "flat-kitchen.jpg",
-      "alt": "Kitchen with dark cabinets and gas hob",
-      "cap": "Listing photo, Rezone Property LLC (to replace)"
-    },
-    "amenity-pool": {
-      "src": "amenity-pool.jpg",
-      "alt": "Rooftop swimming pool",
-      "cap": "Listing photo, Rezone Property LLC (to replace)"
-    },
-    "flat-bedroom": {
-      "src": "flat-bedroom.jpg",
-      "alt": "Bedroom with built-in wardrobe",
-      "cap": "Listing photo, Rezone Property LLC (to replace)"
-    },
-    "flat-bathroom": {
-      "src": "flat-bathroom.jpg",
-      "alt": "Bathroom with shower",
-      "cap": "Listing photo, Rezone Property LLC (to replace)"
-    },
-    "building-exterior": {
-      "src": "building-exterior.jpg",
-      "alt": "Residential and commercial building with a furniture showroom at street level",
-      "cap": "Listing photo, Rezone Property LLC (to replace)"
+      "src": "stock-living-2.jpg",
+      "alt": "Open-plan living room with a staircase",
+      "cap": "Illustrative stock photo (free licence). Replace with building photos."
     }
   },
   "home": [
@@ -414,7 +394,7 @@
     ]
   },
   "split": {
-    "image": "building-exterior",
+    "image": "interior-living-1",
     "kicker": "About Azaiba Gardens",
     "title": "Facility management and leasing",
     "body": [
@@ -446,7 +426,7 @@
         "badge": "Core",
         "area": "All buildings",
         "text": "Cleaning, security, maintenance and repairs.",
-        "image": "amenity-pool",
+        "image": "interior-living-2",
         "detail": {
           "intro": "Day-to-day running of the buildings. Sample content. Replace with the building's real details.",
           "points_title": "Covers",
@@ -465,7 +445,7 @@
         "badge": "Core",
         "area": "All buildings",
         "text": "Finding tenants and handling tenancy.",
-        "image": "flat-bedroom",
+        "image": "interior-living-1",
         "detail": {
           "intro": "Letting 1, 2 and 3 BHK flats. Sample content. Replace with the building's real details.",
           "points_title": "Covers",
@@ -510,7 +490,7 @@
         "full_name": "Azaiba Gardens, Building 1",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "building-exterior",
+        "image": "interior-living-1",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -538,7 +518,7 @@
         "full_name": "Azaiba Gardens, Building 2",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "building-exterior",
+        "image": "interior-living-1",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -566,7 +546,7 @@
         "full_name": "Azaiba Gardens, Building 3",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "building-exterior",
+        "image": "interior-living-1",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -594,7 +574,7 @@
         "full_name": "Azaiba Gardens, Building 4",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "building-exterior",
+        "image": "interior-living-1",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -622,7 +602,7 @@
         "full_name": "Azaiba Gardens, Building 5",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "building-exterior",
+        "image": "interior-living-1",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
