@@ -250,6 +250,23 @@
   "promos": [
     {
       "image": "own-street",
+      "video": "azaiba-building-motion.mp4",
+      "tag": "Video",
+      "kicker": "The building in motion",
+      "short": "Motion",
+      "title": "See Azaiba Gardens move.",
+      "text": "A short film of the building and its surroundings, filmed by the team.",
+      "cta": {
+        "label": "See the flats",
+        "href": "flats.html"
+      },
+      "cta2": {
+        "label": "Book a visit",
+        "href": "contact.html"
+      }
+    },
+    {
+      "image": "own-street",
       "tag": "Azaiba",
       "kicker": "Azaiba, Muscat",
       "short": "Azaiba",
