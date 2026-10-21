@@ -143,6 +143,31 @@
       "src": "concept-dream-family.jpg",
       "alt": "Dream family lounge",
       "cap": "Concept illustration (dream home, not the building)"
+    },
+    "own-street": {
+      "src": "own-street.jpg",
+      "alt": "Azaiba Gardens street view with the building and parking",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-living": {
+      "src": "own-living.jpg",
+      "alt": "Empty living room with tiled floor and a window",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-pool": {
+      "src": "own-pool.jpg",
+      "alt": "Rooftop swimming pool under shade sails",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-kitchen": {
+      "src": "own-kitchen.jpg",
+      "alt": "L-shaped kitchen with dark red cabinets",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-courtyard": {
+      "src": "own-courtyard.jpg",
+      "alt": "Courtyard view of the building balconies",
+      "cap": "Photo: Azaiba Gardens, Muscat"
     }
   },
   "home": [
@@ -158,12 +183,76 @@
   ],
   "promos": [
     {
-      "image": "concept-dream-villa",
-      "tag": "Dream home",
-      "kicker": "Concept",
-      "short": "Dream home",
-      "title": "Imagine your evenings here.",
-      "text": "Penthouse and garden living, shown as a concept for Azaiba Gardens.",
+      "image": "own-street",
+      "tag": "Azaiba",
+      "kicker": "Azaiba, Muscat",
+      "short": "Azaiba",
+      "title": "Home on a busy Azaiba street.",
+      "text": "Azaiba Gardens sits on the main road with shops at street level and parking.",
+      "cta": {
+        "label": "See the flats",
+        "href": "flats.html"
+      },
+      "cta2": {
+        "label": "Book a visit",
+        "href": "contact.html"
+      }
+    },
+    {
+      "image": "own-living",
+      "tag": "Flats",
+      "kicker": "1, 2 and 3 bedrooms",
+      "short": "Flats",
+      "title": "Bright rooms, ready to move in.",
+      "text": "Tiled floors, large windows and air conditioning in every flat.",
+      "cta": {
+        "label": "See the flats",
+        "href": "flats.html"
+      },
+      "cta2": {
+        "label": "Book a visit",
+        "href": "contact.html"
+      }
+    },
+    {
+      "image": "own-pool",
+      "tag": "Amenities",
+      "kicker": "Rooftop living",
+      "short": "Amenities",
+      "title": "Swim above the city.",
+      "text": "A rooftop pool with shade sails, a gym and a children's play area.",
+      "cta": {
+        "label": "See the flats",
+        "href": "flats.html"
+      },
+      "cta2": {
+        "label": "Book a visit",
+        "href": "contact.html"
+      }
+    },
+    {
+      "image": "own-kitchen",
+      "tag": "Kitchen",
+      "kicker": "Fitted and ready",
+      "short": "Kitchen",
+      "title": "A kitchen you will use every day.",
+      "text": "Fitted cabinets, a gas hob and a built-in oven in each flat.",
+      "cta": {
+        "label": "See the flats",
+        "href": "flats.html"
+      },
+      "cta2": {
+        "label": "Book a visit",
+        "href": "contact.html"
+      }
+    },
+    {
+      "image": "own-courtyard",
+      "tag": "Community",
+      "kicker": "Inside the courtyard",
+      "short": "Community",
+      "title": "Balconies that look over the courtyard.",
+      "text": "Quiet, shaded walkways and a view of the community around you.",
       "cta": {
         "label": "See the flats",
         "href": "flats.html"
