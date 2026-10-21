@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 W, H, FPS, SECONDS = 1280, 720, 30, 9
 N = FPS * SECONDS
@@ -101,10 +101,11 @@ def frame(i):
         return np.asarray(pil)
     # building reveal: Ken Burns settle, then the name
     k = ease((t - 0.82) / 0.18)
-    bld = Image.open(BUILDING).convert("RGB").resize((int(W * 1.12), int(H * 1.12)))
+    # cover-fit the photo to the frame (crop, never stretch), then a slow settle
+    bld = ImageOps.fit(Image.open(BUILDING).convert("RGB"), (W, H), Image.LANCZOS)
     scale = 1.12 - 0.12 * k
     w2, h2 = int(W * scale), int(H * scale)
-    bld = bld.resize((w2, h2))
+    bld = bld.resize((w2, h2), Image.LANCZOS)
     canvas = Image.new("RGB", (W, H), (8, 14, 11))
     canvas.paste(bld, ((W - w2) // 2, (H - h2) // 2))
     shade = Image.new("RGBA", (W, H), (0, 0, 0, 0))
