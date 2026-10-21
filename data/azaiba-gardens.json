@@ -85,11 +85,52 @@
       "src": "rezone-play.jpg",
       "alt": "Rooftop children's play area",
       "cap": "Photo: Rezone Property LLC (used with permission)"
+    },
+    "concept-building-1": {
+      "src": "concept-building-1.jpg",
+      "alt": "Tower A · Falaj concept illustration",
+      "cap": "Concept illustration (dummy, not the real building)"
+    },
+    "concept-building-2": {
+      "src": "concept-building-2.jpg",
+      "alt": "Block B · Nakheel concept illustration",
+      "cap": "Concept illustration (dummy, not the real building)"
+    },
+    "concept-building-3": {
+      "src": "concept-building-3.jpg",
+      "alt": "Block C · Sahil concept illustration",
+      "cap": "Concept illustration (dummy, not the real building)"
+    },
+    "concept-building-4": {
+      "src": "concept-building-4.jpg",
+      "alt": "Block D · Wadi concept illustration",
+      "cap": "Concept illustration (dummy, not the real building)"
+    },
+    "concept-building-5": {
+      "src": "concept-building-5.jpg",
+      "alt": "Block E · Bahr concept illustration",
+      "cap": "Concept illustration (dummy, not the real building)"
+    },
+    "concept-flat-1bhk": {
+      "src": "concept-flat-1bhk.jpg",
+      "alt": "1 BHK flat concept illustration",
+      "cap": "Concept illustration (dummy, not a real flat)"
+    },
+    "concept-flat-2bhk": {
+      "src": "concept-flat-2bhk.jpg",
+      "alt": "2 BHK flat concept illustration",
+      "cap": "Concept illustration (dummy, not a real flat)"
+    },
+    "concept-flat-3bhk": {
+      "src": "concept-flat-3bhk.jpg",
+      "alt": "3 BHK flat concept illustration",
+      "cap": "Concept illustration (dummy, not a real flat)"
     }
   },
   "home": [
     "promo",
     "rail",
+    "buildings",
     "catalogue",
     "split",
     "statement",
@@ -571,5 +612,172 @@
       }
     ]
   },
-  "faq_title": "Questions people ask"
+  "faq_title": "Questions people ask",
+  "buildings": {
+    "kicker": "Our buildings",
+    "title": "Five buildings, one community",
+    "intro": "Dummy building names and layouts for the sample. Select a building to see its flats.",
+    "items": [
+      {
+        "name": "Tower A · Falaj",
+        "image": "concept-building-1",
+        "area": "Azaiba, Muscat",
+        "floors": 9,
+        "units": 36,
+        "status": "Available now",
+        "text": "Eight-storey homes on the Falaj side with views over the Mosque and mountains.",
+        "flats": [
+          {
+            "type": "1 BHK",
+            "size": "52 sqm (dummy)",
+            "rent": "OMR 265",
+            "image": "concept-flat-1bhk",
+            "href": "p-1-bhk-flat.html"
+          },
+          {
+            "type": "2 BHK",
+            "size": "88 sqm (dummy)",
+            "rent": "OMR 375",
+            "image": "concept-flat-2bhk",
+            "href": "p-2-bhk-flat.html"
+          },
+          {
+            "type": "3 BHK",
+            "size": "120 sqm (dummy)",
+            "rent": "OMR 425",
+            "image": "concept-flat-3bhk",
+            "href": "p-3-bhk-flat.html"
+          }
+        ]
+      },
+      {
+        "name": "Block B · Nakheel",
+        "image": "concept-building-2",
+        "area": "Azaiba, Muscat",
+        "floors": 12,
+        "units": 48,
+        "status": "Available now",
+        "text": "Twelve floors with the rooftop pool, gym and play area on the top level.",
+        "flats": [
+          {
+            "type": "1 BHK",
+            "size": "52 sqm (dummy)",
+            "rent": "OMR 265",
+            "image": "concept-flat-1bhk",
+            "href": "p-1-bhk-flat.html"
+          },
+          {
+            "type": "2 BHK",
+            "size": "88 sqm (dummy)",
+            "rent": "OMR 375",
+            "image": "concept-flat-2bhk",
+            "href": "p-2-bhk-flat.html"
+          },
+          {
+            "type": "3 BHK",
+            "size": "120 sqm (dummy)",
+            "rent": "OMR 425",
+            "image": "concept-flat-3bhk",
+            "href": "p-3-bhk-flat.html"
+          }
+        ]
+      },
+      {
+        "name": "Block C · Sahil",
+        "image": "concept-building-3",
+        "area": "Azaiba, Muscat",
+        "floors": 7,
+        "units": 28,
+        "status": "Ready in 2 months",
+        "text": "A low-rise block with wide balconies and a shaded walkway to the lobby.",
+        "flats": [
+          {
+            "type": "1 BHK",
+            "size": "52 sqm (dummy)",
+            "rent": "OMR 265",
+            "image": "concept-flat-1bhk",
+            "href": "p-1-bhk-flat.html"
+          },
+          {
+            "type": "2 BHK",
+            "size": "88 sqm (dummy)",
+            "rent": "OMR 375",
+            "image": "concept-flat-2bhk",
+            "href": "p-2-bhk-flat.html"
+          },
+          {
+            "type": "3 BHK",
+            "size": "120 sqm (dummy)",
+            "rent": "OMR 425",
+            "image": "concept-flat-3bhk",
+            "href": "p-3-bhk-flat.html"
+          }
+        ]
+      },
+      {
+        "name": "Block D · Wadi",
+        "image": "concept-building-4",
+        "area": "Azaiba, Muscat",
+        "floors": 11,
+        "units": 44,
+        "status": "Available now",
+        "text": "Corner homes with two aspects and a covered walkway between blocks.",
+        "flats": [
+          {
+            "type": "1 BHK",
+            "size": "52 sqm (dummy)",
+            "rent": "OMR 265",
+            "image": "concept-flat-1bhk",
+            "href": "p-1-bhk-flat.html"
+          },
+          {
+            "type": "2 BHK",
+            "size": "88 sqm (dummy)",
+            "rent": "OMR 375",
+            "image": "concept-flat-2bhk",
+            "href": "p-2-bhk-flat.html"
+          },
+          {
+            "type": "3 BHK",
+            "size": "120 sqm (dummy)",
+            "rent": "OMR 425",
+            "image": "concept-flat-3bhk",
+            "href": "p-3-bhk-flat.html"
+          }
+        ]
+      },
+      {
+        "name": "Block E · Bahr",
+        "image": "concept-building-5",
+        "area": "Azaiba, Muscat",
+        "floors": 10,
+        "units": 40,
+        "status": "New listings",
+        "text": "The newest block, with family three-bedroom flats on the upper floors.",
+        "flats": [
+          {
+            "type": "1 BHK",
+            "size": "52 sqm (dummy)",
+            "rent": "OMR 265",
+            "image": "concept-flat-1bhk",
+            "href": "p-1-bhk-flat.html"
+          },
+          {
+            "type": "2 BHK",
+            "size": "88 sqm (dummy)",
+            "rent": "OMR 375",
+            "image": "concept-flat-2bhk",
+            "href": "p-2-bhk-flat.html"
+          },
+          {
+            "type": "3 BHK",
+            "size": "120 sqm (dummy)",
+            "rent": "OMR 425",
+            "image": "concept-flat-3bhk",
+            "href": "p-3-bhk-flat.html"
+          }
+        ]
+      }
+    ]
+  }
 }

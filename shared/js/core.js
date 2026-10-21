@@ -652,6 +652,48 @@
       .add(fireIntro, dur + 0.55);
   };
 
+  /* ---------- building picker: curved glossy rail, flats slide in ---------- */
+  const initBuildingSlider = () => {
+    $$("[data-bslider]").forEach((root) => {
+      const cards = $$("[data-bs-card]", root);
+      const panels = $$("[data-bs-panel]", root);
+      const rail = $("[data-bs-rail]", root);
+      if (!cards.length || !rail) return;
+      let active = 0;
+      const pick = (i) => {
+        active = (i + cards.length) % cards.length;
+        cards.forEach((c, j) => {
+          const d = j - active;
+          c.style.setProperty("--d", d);
+          c.style.setProperty("--a", Math.abs(d));
+          c.setAttribute("aria-selected", j === active ? "true" : "false");
+          c.tabIndex = j === active ? 0 : -1;
+        });
+        panels.forEach((p, j) => { p.hidden = j !== active; });
+        const panel = panels[active];
+        if (panel) { panel.classList.remove("is-in"); void panel.offsetWidth; panel.classList.add("is-in"); }
+      };
+      cards.forEach((c, j) => c.addEventListener("click", () => pick(j)));
+      const prev = $("[data-bs-prev]", root);
+      const next = $("[data-bs-next]", root);
+      if (prev) prev.addEventListener("click", () => pick(active - 1));
+      if (next) next.addEventListener("click", () => pick(active + 1));
+      root.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") pick(active + 1);
+        if (e.key === "ArrowLeft") pick(active - 1);
+      });
+      let startX = null;
+      rail.addEventListener("pointerdown", (e) => { startX = e.clientX; });
+      rail.addEventListener("pointerup", (e) => {
+        if (startX === null) return;
+        const dx = e.clientX - startX;
+        startX = null;
+        if (Math.abs(dx) > 40) pick(active + (dx < 0 ? 1 : -1));
+      });
+      pick(0);
+    });
+  };
+
   /* ---------- boot ---------- */
   const boot = () => {
     // Theme effects first: they create the pinned sections, and every reveal
@@ -668,6 +710,7 @@
       initHeroRecede();
       ST.sort();
     }
+    initBuildingSlider();
     runLoader();
     if (motion) {
       let t;

@@ -518,6 +518,59 @@
 {%- endif %}
 {%- endmacro -%}
 
+{%- macro buildings_slider(m) -%}
+{#- Building picker: glossy cards on a curved rail. Select a building and its flat types slide in. -#}
+{%- set B = s.buildings or {} %}
+{%- set M = m if m is mapping else {} %}
+{%- set items = B['items'] or [] %}
+<section class="bs" id="{{ M.get('id') or 'buildings' }}" data-bslider>
+  <div class="wrap bs-head">
+    <div>
+      <p class="eyebrow">{{ M.get('kicker') or B.get('kicker') or 'Buildings' }}</p>
+      <h2 class="bs-title">{{ M.get('title') or B.get('title') or 'Our buildings' }}</h2>
+      {%- if B.get('intro') %}<p class="bs-intro">{{ B.get('intro') }}</p>{% endif %}
+    </div>
+    <div class="bs-nav">
+      <button type="button" class="bs-btn" data-bs-prev aria-label="Previous building">{{ icon('arrow') }}</button>
+      <button type="button" class="bs-btn" data-bs-next aria-label="Next building">{{ icon('arrow') }}</button>
+    </div>
+  </div>
+  <div class="bs-rail" data-bs-rail role="tablist" aria-label="Buildings">
+    {%- for b in items %}
+    <button class="bs-card" type="button" role="tab" data-bs-card="{{ loop.index0 }}" aria-selected="{{ 'true' if loop.first else 'false' }}" aria-controls="bs-panel-{{ loop.index0 }}">
+      <span class="bs-img"><img src="{{ src(b.image) }}" alt="{{ s.images[b.image].alt }}" loading="lazy" draggable="false"></span>
+      <span class="bs-meta">
+        <span class="bs-status">{{ b.status }}</span>
+        <b class="bs-name">{{ b.name }}</b>
+        <span class="bs-sub">{{ b.area }} · {{ b.floors }} floors</span>
+      </span>
+    </button>
+    {%- endfor %}
+  </div>
+  {%- for b in items %}
+  <div class="bs-panel" id="bs-panel-{{ loop.index0 }}" data-bs-panel="{{ loop.index0 }}" role="tabpanel"{% if not loop.first %} hidden{% endif %}>
+    <div class="wrap bs-info">
+      <p class="bs-text">{{ b.text }}</p>
+      <p class="bs-count"><b>{{ b.units }}</b> units · {{ b.flats | length }} flat types</p>
+    </div>
+    <div class="wrap bs-flats">
+      {%- for f in b.flats %}
+      <a class="bs-flat" href="{{ f.href }}">
+        <span class="bs-flat-img"><img src="{{ src(f.image) }}" alt="{{ s.images[f.image].alt }}" loading="lazy" draggable="false"></span>
+        <span class="bs-flat-body">
+          <span class="bs-flat-type">{{ f.type }}</span>
+          <span class="bs-flat-size">{{ f.size }}</span>
+          <span class="bs-flat-rent">{{ f.rent }} <small>/ month</small></span>
+          <span class="bs-flat-go">View flat and book a visit {{ icon('arrow') }}</span>
+        </span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+  {%- endfor %}
+</section>
+{%- endmacro -%}
+
 {%- macro module(m) -%}
 {#- Renders one home-page section by type. The studio theme loops over s.home. -#}
 {%- set t = m.type if m is mapping else m %}
@@ -528,6 +581,7 @@
 {%- elif t == 'services' %}{{ services_grid() }}
 {%- elif t == 'catalogue' %}{{ catalogue_strip() }}
 {%- elif t == 'assemble' %}{% for a in s.assemble or [] if (m is not mapping or not m.id or a.id == m.id) %}{{ assemble(a) }}{% endfor %}
+{%- elif t == 'buildings' %}{{ buildings_slider(m) }}
 {%- elif t == 'converge' %}{{ converge(m) }}
 {%- elif t == 'stack' %}{{ stack(m) }}
 {%- elif t == 'lineup' %}{{ lineup(m) }}
