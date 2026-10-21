@@ -2519,4 +2519,5 @@ body[data-mode="dark"] .brand-logo.logo-c:has(+ .logo-l), [data-theme="story"] .
 .intro-reel.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
 .intro-skip { position: absolute; right: 1.2rem; bottom: 1.4rem; padding: 0.55rem 1.1rem; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.5); background: rgba(0, 0, 0, 0.35); color: #fff; font: 500 0.85rem/1 var(--font-body); cursor: pointer; backdrop-filter: blur(8px); }
 .intro-skip:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-
+.intro-tap { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 0.9rem 1.6rem; border-radius: 999px; border: 0; background: var(--accent, #8db580); color: var(--accent-ink, #0f1b15); font: 600 1rem/1 var(--font-body); cursor: pointer; }
+.intro-tap[hidden] { display: none; }

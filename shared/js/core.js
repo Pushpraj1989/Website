@@ -708,11 +708,19 @@
     };
     if (reduce || !video) { reel.remove(); return; }
     video.load();
-    // the poster stays up if the browser refuses to autoplay or the video fails; the timer ends the splash
+    // if the viewer blocks autoplay (or the film fails to load), wait for a tap instead of skipping it
+    const tap = $("[data-intro-tap]", reel);
+    const showTap = () => { if (tap) tap.hidden = false; };
+    const startFilm = () => {
+      if (tap) tap.hidden = true;
+      const p = video.play();
+      if (p && p.catch) p.catch(showTap);
+    };
     video.addEventListener("ended", finish);
-    const play = video.play();
-    if (play && play.catch) play.catch(() => {});
-    setTimeout(finish, 6000);
+    video.addEventListener("error", showTap);
+    if (tap) tap.addEventListener("click", startFilm);
+    startFilm();
+    setTimeout(() => { if (video.paused && video.currentTime === 0) showTap(); }, 1500);
     const skip = $("[data-intro-skip]", reel);
     if (skip) skip.addEventListener("click", finish);
   };
