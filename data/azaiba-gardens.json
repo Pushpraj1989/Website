@@ -7,7 +7,7 @@
   "meta": "Azaiba Gardens: facility management, leasing and building management for five buildings in Oman. Sample website.",
   "accent": "#8DB580",
   "theme": "studio",
-  "promo_fx": "flow",
+  "promo_fx": "pixel",
   "img_dir": "azaiba-gardens",
   "brand": {
     "mode": "dark",
@@ -15,36 +15,76 @@
     "fg": "#F2F0E8",
     "accent": "#8DB580",
     "accent_ink": "#0F1B15",
-    "style": "minimal"
+    "style": "glass"
   },
   "cta": {
-    "label": "See flats",
-    "short": "Enquire",
+    "label": "Book a visit",
+    "short": "Visit",
     "href": "contact.html"
   },
   "hero": {
     "eyebrow": "Azaiba, Muscat · Oman",
-    "title": "Buildings, managed well.",
-    "lede": "Azaiba Gardens looks after facility management, leasing and day-to-day running of its buildings. Sample website, content to be confirmed.",
+    "title": "Your home in Azaiba Gardens.",
+    "lede": "1, 2 and 3 bedroom flats to rent, with a rooftop pool, gym and play area. Book a visit and see them for yourself.",
     "primary": {
-      "label": "See flats",
+      "label": "See the flats",
       "href": "flats.html"
     },
     "secondary": {
-      "label": "Enquire",
+      "label": "Book a visit",
       "href": "contact.html"
     }
   },
   "images": {
-    "interior-living-1": {
-      "src": "stock-living-1.jpg",
-      "alt": "Bright living room with floor-to-ceiling windows",
-      "cap": "Illustrative stock photo (free licence). Replace with building photos."
+    "facade": {
+      "src": "rezone-facade.jpg",
+      "alt": "Azaiba Gardens building facade",
+      "cap": "Photo: Rezone Property LLC (used with permission)"
     },
-    "interior-living-2": {
-      "src": "stock-living-2.jpg",
-      "alt": "Open-plan living room with a staircase",
-      "cap": "Illustrative stock photo (free licence). Replace with building photos."
+    "living": {
+      "src": "rezone-living-corner.jpg",
+      "alt": "Bright corner living room",
+      "cap": "Photo: Rezone Property LLC (used with permission)"
+    },
+    "window": {
+      "src": "rezone-living-window.jpg",
+      "alt": "Living area with a window",
+      "cap": "Photo: Rezone Property LLC (used with permission)"
+    },
+    "kitchen": {
+      "src": "rezone-kitchen.jpg",
+      "alt": "L-shaped kitchen",
+      "cap": "Photo: Rezone Property LLC (used with permission)"
+    },
+    "bedroom": {
+      "src": "rezone-bedroom.jpg",
+      "alt": "Bedroom with air conditioner",
+      "cap": "Photo: Rezone Property LLC (used with permission)"
+    },
+    "bath": {
+      "src": "rezone-bathroom.jpg",
+      "alt": "Bathroom with shower",
+      "cap": "Photo: Rezone Property LLC (used with permission)"
+    },
+    "bath2": {
+      "src": "rezone-bathroom-2.jpg",
+      "alt": "Bathroom with glass partition",
+      "cap": "Photo: Rezone Property LLC (used with permission)"
+    },
+    "pool": {
+      "src": "rezone-pool.jpg",
+      "alt": "Rooftop swimming pool",
+      "cap": "Photo: Rezone Property LLC (used with permission)"
+    },
+    "gym": {
+      "src": "rezone-gym.jpg",
+      "alt": "Gym",
+      "cap": "Photo: Rezone Property LLC (used with permission)"
+    },
+    "play": {
+      "src": "rezone-play.jpg",
+      "alt": "Rooftop children's play area",
+      "cap": "Photo: Rezone Property LLC (used with permission)"
     }
   },
   "home": [
@@ -59,18 +99,18 @@
   ],
   "promos": [
     {
-      "image": "interior-living-1",
-      "tag": "Sample",
-      "kicker": "Five buildings",
-      "short": "Buildings",
-      "title": "One team for every building.",
-      "text": "Facility management, leasing and tenant care under one roof. Sample text.",
+      "image": "pool",
+      "tag": "Amenities",
+      "kicker": "Rooftop living",
+      "short": "Amenities",
+      "title": "Swim above Azaiba.",
+      "text": "A rooftop pool, gym and play area for the whole building.",
       "cta": {
-        "label": "Services",
-        "href": "services.html"
+        "label": "See the flats",
+        "href": "flats.html"
       },
       "cta2": {
-        "label": "Enquire",
+        "label": "Book a visit",
         "href": "contact.html"
       }
     }
@@ -154,239 +194,143 @@
   "marquee": [],
   "socials": [],
   "confirm": [
-    "Company legal name, address, contacts and the five building names (sample names used)",
-    "Real building photos and flat photos. The two interior photos are illustrative stock images.",
-    "Flat types (1, 2 and 3 BHK), sizes, rents and availability for every building",
-    "Services list and wording, confirmed with the client",
-    "Enquiry form: connect to the client's email or CRM before launch (currently disabled)",
-    "Oman location, languages (English only so far; Arabic on request)"
+    "Rents (OMR 265, 375, 425 per month) as given by the client team; confirm before publishing",
+    "Flat sizes, available units and booking process",
+    "Building and contact details: address, phone and email are placeholders",
+    "Photos: Rezone Property LLC permission letter (valid to 31 Dec 2027) covers the Rezone photos only, for sample website and client presentations. Tamkeen Homes photos are not used.",
+    "Rezone photos are small (about 700 px); replace with full-size photos from the client or the building owner",
+    "Enquiry form stays off until the client's email is set"
   ],
-  "sources": [],
+  "sources": [
+    "Rezone Property LLC, permission letter, 15 Oct 2026 (briefs/azaiba-gardens/rezone-permission-letter.jpg)"
+  ],
   "catalogue": {
     "nav": "Flats",
-    "title": "Flats for rent",
-    "intro": "Sample units across the five buildings. Availability, rent and size come from Azaiba Gardens.",
-    "home_title": "Available flats",
+    "title": "Flats to rent",
+    "intro": "Three flat types at Azaiba Gardens. Rents are per month. Book a visit to see them.",
+    "home_title": "Flats to rent",
     "categories": [
       "1 BHK",
       "2 BHK",
       "3 BHK"
     ],
-    "compare": false,
-    "cta": "Enquire",
-    "note": "Rent and availability: to confirm",
+    "compare": true,
+    "cta": "Book a visit",
+    "note": "Rent per month as given by the client team. Confirm before publishing.",
     "items": [
       {
-        "title": "Building 1, 1 BHK",
+        "title": "1 BHK flat",
         "category": "1 BHK",
-        "price": "On request",
-        "price_note": "Sample unit",
-        "badge": "Sample",
+        "price": "OMR 265",
+        "price_note": "per month",
+        "badge": "Available",
         "icon": "building",
-        "area": "Building 1",
-        "text": "1 bedroom flat with living and dining area. Sample photo, illustrative only.",
-        "image": "interior-living-1",
+        "area": "Azaiba Gardens, Muscat",
+        "text": "A compact one-bedroom home with a bright living area and a modern kitchen.",
+        "image": "rezone-living-corner",
         "detail": {
-          "intro": "Sample 1 BHK flat in Building 1. The layout, size and finish will be confirmed from the building's real units. Sample content. Replace with the building's real details.",
-          "points_title": "Features",
+          "intro": "A one-bedroom flat in Azaiba Gardens. Rent per month, as given by the client team on 21 Oct 2026. Confirm before publishing.",
+          "points_title": "In the flat",
           "points": [
             "Air conditioning",
-            "Kitchen with appliances",
-            "Secure access and parking",
-            "Maintenance handled by Azaiba Gardens"
+            "Fitted kitchen",
+            "Tiled bathroom with shower",
+            "Secure building entry"
           ],
           "facts": [
             {
-              "label": "Building",
-              "value": "Building 1"
-            },
-            {
               "label": "Type",
-              "value": "1 BHK"
-            },
-            {
-              "label": "Size",
-              "value": "TBC sqm"
+              "value": "1 bedroom"
             },
             {
               "label": "Rent",
-              "value": "On request"
+              "value": "OMR 265 per month"
+            },
+            {
+              "label": "Size",
+              "value": "To confirm"
             },
             {
               "label": "Available",
-              "value": "To confirm"
+              "value": "Book a visit"
             }
           ]
         }
       },
       {
-        "title": "Building 2, 2 BHK",
+        "title": "2 BHK flat",
         "category": "2 BHK",
-        "price": "On request",
-        "price_note": "Sample unit",
-        "badge": "Sample",
+        "price": "OMR 375",
+        "price_note": "per month",
+        "badge": "Popular",
         "icon": "building",
-        "area": "Building 2",
-        "text": "2 bedroom flat with living and dining area. Sample photo, illustrative only.",
-        "image": "interior-living-1",
+        "area": "Azaiba Gardens, Muscat",
+        "text": "Two bedrooms, a corner living room and a fitted kitchen with bright windows.",
+        "image": "rezone-living-window",
         "detail": {
-          "intro": "Sample 2 BHK flat in Building 2. The layout, size and finish will be confirmed from the building's real units. Sample content. Replace with the building's real details.",
-          "points_title": "Features",
+          "intro": "A two-bedroom flat in Azaiba Gardens. Rent per month, as given by the client team on 21 Oct 2026. Confirm before publishing.",
+          "points_title": "In the flat",
           "points": [
-            "Air conditioning",
-            "Kitchen with appliances",
-            "Secure access and parking",
-            "Maintenance handled by Azaiba Gardens"
+            "Corner living room with wide windows",
+            "Fitted kitchen",
+            "Two bathrooms",
+            "Rooftop pool, gym and play area"
           ],
           "facts": [
             {
-              "label": "Building",
-              "value": "Building 2"
-            },
-            {
               "label": "Type",
-              "value": "2 BHK"
-            },
-            {
-              "label": "Size",
-              "value": "TBC sqm"
+              "value": "2 bedrooms"
             },
             {
               "label": "Rent",
-              "value": "On request"
+              "value": "OMR 375 per month"
+            },
+            {
+              "label": "Size",
+              "value": "To confirm"
             },
             {
               "label": "Available",
-              "value": "To confirm"
+              "value": "Book a visit"
             }
           ]
         }
       },
       {
-        "title": "Building 3, 2 BHK",
-        "category": "2 BHK",
-        "price": "On request",
-        "price_note": "Sample unit",
-        "badge": "Sample",
-        "icon": "building",
-        "area": "Building 3",
-        "text": "2 bedroom flat with living and dining area. Sample photo, illustrative only.",
-        "image": "interior-living-1",
-        "detail": {
-          "intro": "Sample 2 BHK flat in Building 3. The layout, size and finish will be confirmed from the building's real units. Sample content. Replace with the building's real details.",
-          "points_title": "Features",
-          "points": [
-            "Air conditioning",
-            "Kitchen with appliances",
-            "Secure access and parking",
-            "Maintenance handled by Azaiba Gardens"
-          ],
-          "facts": [
-            {
-              "label": "Building",
-              "value": "Building 3"
-            },
-            {
-              "label": "Type",
-              "value": "2 BHK"
-            },
-            {
-              "label": "Size",
-              "value": "TBC sqm"
-            },
-            {
-              "label": "Rent",
-              "value": "On request"
-            },
-            {
-              "label": "Available",
-              "value": "To confirm"
-            }
-          ]
-        }
-      },
-      {
-        "title": "Building 4, 3 BHK",
+        "title": "3 BHK flat",
         "category": "3 BHK",
-        "price": "On request",
-        "price_note": "Sample unit",
-        "badge": "Sample",
+        "price": "OMR 425",
+        "price_note": "per month",
+        "badge": "Family",
         "icon": "building",
-        "area": "Building 4",
-        "text": "3 bedroom flat with living and dining area. Sample photo, illustrative only.",
-        "image": "interior-living-1",
+        "area": "Azaiba Gardens, Muscat",
+        "text": "Three bedrooms for families, with a large living area and city views.",
+        "image": "rezone-bedroom",
         "detail": {
-          "intro": "Sample 3 BHK flat in Building 4. The layout, size and finish will be confirmed from the building's real units. Sample content. Replace with the building's real details.",
-          "points_title": "Features",
+          "intro": "A three-bedroom flat in Azaiba Gardens. Rent per month, as given by the client team on 21 Oct 2026. Confirm before publishing.",
+          "points_title": "In the flat",
           "points": [
-            "Air conditioning",
-            "Kitchen with appliances",
-            "Secure access and parking",
-            "Maintenance handled by Azaiba Gardens"
+            "Three bedrooms with built-in wardrobes",
+            "Large living and dining area",
+            "Fitted kitchen",
+            "Rooftop pool, gym and play area"
           ],
           "facts": [
             {
-              "label": "Building",
-              "value": "Building 4"
-            },
-            {
               "label": "Type",
-              "value": "3 BHK"
-            },
-            {
-              "label": "Size",
-              "value": "TBC sqm"
+              "value": "3 bedrooms"
             },
             {
               "label": "Rent",
-              "value": "On request"
-            },
-            {
-              "label": "Available",
-              "value": "To confirm"
-            }
-          ]
-        }
-      },
-      {
-        "title": "Building 5, 3 BHK",
-        "category": "3 BHK",
-        "price": "On request",
-        "price_note": "Sample unit",
-        "badge": "Sample",
-        "icon": "building",
-        "area": "Building 5",
-        "text": "3 bedroom flat with living and dining area. Sample photo, illustrative only.",
-        "image": "interior-living-1",
-        "detail": {
-          "intro": "Sample 3 BHK flat in Building 5. The layout, size and finish will be confirmed from the building's real units. Sample content. Replace with the building's real details.",
-          "points_title": "Features",
-          "points": [
-            "Air conditioning",
-            "Kitchen with appliances",
-            "Secure access and parking",
-            "Maintenance handled by Azaiba Gardens"
-          ],
-          "facts": [
-            {
-              "label": "Building",
-              "value": "Building 5"
-            },
-            {
-              "label": "Type",
-              "value": "3 BHK"
+              "value": "OMR 425 per month"
             },
             {
               "label": "Size",
-              "value": "TBC sqm"
-            },
-            {
-              "label": "Rent",
-              "value": "On request"
+              "value": "To confirm"
             },
             {
               "label": "Available",
-              "value": "To confirm"
+              "value": "Book a visit"
             }
           ]
         }
@@ -394,20 +338,20 @@
     ]
   },
   "split": {
-    "image": "interior-living-1",
-    "kicker": "About Azaiba Gardens",
-    "title": "Facility management and leasing",
+    "image": "facade",
+    "kicker": "Azaiba Gardens",
+    "title": "Living in the heart of Azaiba",
     "body": [
-      "Azaiba Gardens manages buildings from day-to-day upkeep to letting the flats. Sample content. Replace with the building's real details."
+      "Azaiba Gardens offers 1, 2 and 3 bedroom flats in Azaiba, Muscat, with a rooftop swimming pool, gym and play area."
     ],
     "points": [
-      "Facility management",
-      "Leasing and tenant relations",
-      "Maintenance and repairs",
-      "Reporting to owners"
+      "Rooftop swimming pool",
+      "Gym",
+      "Children's play area",
+      "Covered walkway and secure lift lobby"
     ],
     "cta": {
-      "label": "Enquire",
+      "label": "Book a visit",
       "href": "contact.html"
     }
   },
@@ -426,7 +370,7 @@
         "badge": "Core",
         "area": "All buildings",
         "text": "Cleaning, security, maintenance and repairs.",
-        "image": "interior-living-2",
+        "image": "gym",
         "detail": {
           "intro": "Day-to-day running of the buildings. Sample content. Replace with the building's real details.",
           "points_title": "Covers",
@@ -445,7 +389,7 @@
         "badge": "Core",
         "area": "All buildings",
         "text": "Finding tenants and handling tenancy.",
-        "image": "interior-living-1",
+        "image": "bedroom",
         "detail": {
           "intro": "Letting 1, 2 and 3 BHK flats. Sample content. Replace with the building's real details.",
           "points_title": "Covers",
@@ -464,7 +408,7 @@
         "badge": "Owners",
         "area": "All buildings",
         "text": "Rent collection and reporting for owners.",
-        "image": "interior-living-2",
+        "image": "facade",
         "detail": {
           "intro": "Reporting and rent for owners. Sample content. Replace with the building's real details.",
           "points_title": "Covers",
@@ -490,7 +434,7 @@
         "full_name": "Azaiba Gardens, Building 1",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "interior-living-1",
+        "image": "facade",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -518,7 +462,7 @@
         "full_name": "Azaiba Gardens, Building 2",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "interior-living-1",
+        "image": "facade",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -546,7 +490,7 @@
         "full_name": "Azaiba Gardens, Building 3",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "interior-living-1",
+        "image": "facade",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -574,7 +518,7 @@
         "full_name": "Azaiba Gardens, Building 4",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "interior-living-1",
+        "image": "facade",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -602,7 +546,7 @@
         "full_name": "Azaiba Gardens, Building 5",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "interior-living-1",
+        "image": "facade",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
