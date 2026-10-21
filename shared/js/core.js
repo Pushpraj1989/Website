@@ -694,13 +694,11 @@
     });
   };
 
-  /* ---------- intro reel: once per session, then the home page ---------- */
+  /* ---------- intro reel: plays on the home page, then the site ---------- */
   const initIntroReel = () => {
     const reel = $("[data-intro-reel]");
     if (!reel) return;
-    const key = "t1-intro-" + location.pathname.replace(/[^/]*$/, "");
-    let seen = false;
-    try { seen = sessionStorage.getItem(key) === "1"; sessionStorage.setItem(key, "1"); } catch {}
+    // plays on every visit to the home page (demo); the Skip button ends it early
     const video = $("video", reel);
     const finish = () => {
       if (reel.classList.contains("is-done")) return;
@@ -708,7 +706,7 @@
       if (video) video.pause();
       setTimeout(() => reel.remove(), 800);
     };
-    if (seen || reduce || !video) { reel.remove(); return; }
+    if (reduce || !video) { reel.remove(); return; }
     video.load();
     video.addEventListener("ended", finish);
     video.addEventListener("error", finish);
