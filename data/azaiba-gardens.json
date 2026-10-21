@@ -129,17 +129,17 @@
     "concept-dream-villa": {
       "src": "concept-dream-villa.jpg",
       "alt": "Dream villa with a pool at sunset",
-      "cap": "Concept illustration (dummy, not dream home)"
+      "cap": "Concept illustration (dream home, not the building)"
     },
     "concept-dream-terrace": {
       "src": "concept-dream-terrace.jpg",
       "alt": "Dream penthouse terrace at dusk",
-      "cap": "Concept illustration (dummy, not dream home)"
+      "cap": "Concept illustration (dream home, not the building)"
     },
     "concept-dream-family": {
       "src": "concept-dream-family.jpg",
       "alt": "Dream family lounge",
-      "cap": "Concept illustration (dummy, not dream home)"
+      "cap": "Concept illustration (dream home, not the building)"
     }
   },
   "home": [
@@ -155,12 +155,12 @@
   ],
   "promos": [
     {
-      "image": "concept-dream-terrace",
-      "tag": "Dream home (concept)",
-      "kicker": "Concept, not the building",
+      "image": "concept-dream-villa",
+      "tag": "Dream home",
+      "kicker": "Concept",
       "short": "Dream home",
       "title": "Imagine your evenings here.",
-      "text": "A concept of the penthouse life at Azaiba Gardens. Replace with the building's real photos before launch.",
+      "text": "Penthouse and garden living, shown as a concept for Azaiba Gardens.",
       "cta": {
         "label": "See the flats",
         "href": "flats.html"
@@ -394,7 +394,7 @@
     ]
   },
   "split": {
-    "image": "concept-dream-villa",
+    "image": "concept-dream-family",
     "kicker": "Azaiba Gardens",
     "title": "Living in the heart of Azaiba",
     "body": [
