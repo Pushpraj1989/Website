@@ -1,0 +1,631 @@
+{
+  "slug": "cyber-garden",
+  "tier": "Concept",
+  "name": "Cyber Garden",
+  "short": "Cyber Garden",
+  "sector": "Developers, brokers, property",
+  "meta": "Cyber Garden: facility management, leasing and building management for five buildings in Qatar. Sample website.",
+  "accent": "#8DB580",
+  "theme": "studio",
+  "promo_fx": "flow",
+  "img_dir": "cyber-garden",
+  "brand": {
+    "mode": "dark",
+    "bg": "#0F1B15",
+    "fg": "#F2F0E8",
+    "accent": "#8DB580",
+    "accent_ink": "#0F1B15",
+    "style": "minimal"
+  },
+  "cta": {
+    "label": "See flats",
+    "short": "Enquire",
+    "href": "contact.html"
+  },
+  "hero": {
+    "eyebrow": "Qatar · Five buildings",
+    "title": "Buildings, managed well.",
+    "lede": "Cyber Garden looks after facility management, leasing and day-to-day running of its buildings. Sample website, content to be confirmed.",
+    "primary": {
+      "label": "See flats",
+      "href": "flats.html"
+    },
+    "secondary": {
+      "label": "Enquire",
+      "href": "contact.html"
+    }
+  },
+  "images": {
+    "interior-living-1": {
+      "src": "interior-living-1.jpg",
+      "alt": "Furnished living room with windows and a dining area",
+      "cap": "Illustrative stock photo"
+    },
+    "interior-living-2": {
+      "src": "interior-living-2.jpg",
+      "alt": "Open-plan living room with a staircase",
+      "cap": "Illustrative stock photo"
+    }
+  },
+  "home": [
+    "promo",
+    "rail",
+    "catalogue",
+    "split",
+    "statement",
+    "services",
+    "locations",
+    "faq"
+  ],
+  "promos": [
+    {
+      "image": "interior-living-1",
+      "tag": "Sample",
+      "kicker": "Five buildings",
+      "short": "Buildings",
+      "title": "One team for every building.",
+      "text": "Facility management, leasing and tenant care under one roof. Sample text.",
+      "cta": {
+        "label": "Services",
+        "href": "services.html"
+      },
+      "cta2": {
+        "label": "Enquire",
+        "href": "contact.html"
+      }
+    }
+  ],
+  "rail": {
+    "title": "How can we help?",
+    "items": [
+      {
+        "label": "See flats",
+        "icon": "building",
+        "sub": "1, 2 and 3 BHK",
+        "href": "flats.html"
+      },
+      {
+        "label": "Book a viewing",
+        "icon": "check",
+        "sub": "We reply within one working day",
+        "href": "contact.html"
+      },
+      {
+        "label": "Facility request",
+        "icon": "layers",
+        "sub": "For tenants",
+        "href": "contact.html"
+      },
+      {
+        "label": "Call us",
+        "icon": "phone",
+        "sub": "Office",
+        "href": "contact.html"
+      }
+    ]
+  },
+  "stats": [],
+  "about": {
+    "title": "TODO: one-line story",
+    "body": [
+      "TODO"
+    ]
+  },
+  "assemble": [],
+  "faq": [
+    {
+      "q": "How do I rent a flat?",
+      "a": "Choose a flat, send an enquiry, and we arrange a viewing. Sample answer."
+    },
+    {
+      "q": "Who do I call for a repair?",
+      "a": "Use the building's phone number or the facility request form. Sample answer."
+    }
+  ],
+  "testimonials": [],
+  "nudges": {
+    "dock_label": "Enquire"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Tell us what you need: a flat, a building service, or a repair.",
+    "address": "Address to confirm",
+    "phones": [
+      {
+        "label": "Call us",
+        "number": "+974 0000 0000 (sample)",
+        "tel": "+97400000000"
+      }
+    ],
+    "email": "info@cybergarden.example",
+    "note": "Sample: contact details and the enquiry form are not connected yet.",
+    "form": {
+      "branch": false,
+      "topics": [
+        "Renting a flat",
+        "Facility request",
+        "Owners",
+        "General"
+      ],
+      "submit": "Send",
+      "enquiry": false
+    }
+  },
+  "marquee": [],
+  "socials": [],
+  "confirm": [
+    "Company legal name, address, contacts and the five building names (sample names used)",
+    "Real building photos and flat photos. The two interior photos are illustrative stock images.",
+    "Flat types (1, 2 and 3 BHK), sizes, rents and availability for every building",
+    "Services list and wording, confirmed with the client",
+    "Enquiry form: connect to the client's email or CRM before launch (currently disabled)",
+    "Qatar location, languages (English only so far; Arabic on request)"
+  ],
+  "sources": [],
+  "catalogue": {
+    "nav": "Flats",
+    "title": "Flats for rent",
+    "intro": "Sample units across the five buildings. Availability, rent and size come from Cyber Garden.",
+    "home_title": "Available flats",
+    "categories": [
+      "1 BHK",
+      "2 BHK",
+      "3 BHK"
+    ],
+    "compare": false,
+    "cta": "Enquire",
+    "note": "Rent and availability: to confirm",
+    "items": [
+      {
+        "title": "Building 1, 1 BHK",
+        "category": "1 BHK",
+        "price": "On request",
+        "price_note": "Sample unit",
+        "badge": "Sample",
+        "icon": "building",
+        "area": "Building 1",
+        "text": "1 bedroom flat with living and dining area. Sample photo, illustrative only.",
+        "image": "interior-living-1",
+        "detail": {
+          "intro": "Sample 1 BHK flat in Building 1. The layout, size and finish will be confirmed from the building's real units. Sample content. Replace with the building's real details.",
+          "points_title": "Features",
+          "points": [
+            "Air conditioning",
+            "Kitchen with appliances",
+            "Secure access and parking",
+            "Maintenance handled by Cyber Garden"
+          ],
+          "facts": [
+            {
+              "label": "Building",
+              "value": "Building 1"
+            },
+            {
+              "label": "Type",
+              "value": "1 BHK"
+            },
+            {
+              "label": "Size",
+              "value": "TBC sqm"
+            },
+            {
+              "label": "Rent",
+              "value": "On request"
+            },
+            {
+              "label": "Available",
+              "value": "To confirm"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Building 2, 2 BHK",
+        "category": "2 BHK",
+        "price": "On request",
+        "price_note": "Sample unit",
+        "badge": "Sample",
+        "icon": "building",
+        "area": "Building 2",
+        "text": "2 bedroom flat with living and dining area. Sample photo, illustrative only.",
+        "image": "interior-living-2",
+        "detail": {
+          "intro": "Sample 2 BHK flat in Building 2. The layout, size and finish will be confirmed from the building's real units. Sample content. Replace with the building's real details.",
+          "points_title": "Features",
+          "points": [
+            "Air conditioning",
+            "Kitchen with appliances",
+            "Secure access and parking",
+            "Maintenance handled by Cyber Garden"
+          ],
+          "facts": [
+            {
+              "label": "Building",
+              "value": "Building 2"
+            },
+            {
+              "label": "Type",
+              "value": "2 BHK"
+            },
+            {
+              "label": "Size",
+              "value": "TBC sqm"
+            },
+            {
+              "label": "Rent",
+              "value": "On request"
+            },
+            {
+              "label": "Available",
+              "value": "To confirm"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Building 3, 2 BHK",
+        "category": "2 BHK",
+        "price": "On request",
+        "price_note": "Sample unit",
+        "badge": "Sample",
+        "icon": "building",
+        "area": "Building 3",
+        "text": "2 bedroom flat with living and dining area. Sample photo, illustrative only.",
+        "image": "interior-living-1",
+        "detail": {
+          "intro": "Sample 2 BHK flat in Building 3. The layout, size and finish will be confirmed from the building's real units. Sample content. Replace with the building's real details.",
+          "points_title": "Features",
+          "points": [
+            "Air conditioning",
+            "Kitchen with appliances",
+            "Secure access and parking",
+            "Maintenance handled by Cyber Garden"
+          ],
+          "facts": [
+            {
+              "label": "Building",
+              "value": "Building 3"
+            },
+            {
+              "label": "Type",
+              "value": "2 BHK"
+            },
+            {
+              "label": "Size",
+              "value": "TBC sqm"
+            },
+            {
+              "label": "Rent",
+              "value": "On request"
+            },
+            {
+              "label": "Available",
+              "value": "To confirm"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Building 4, 3 BHK",
+        "category": "3 BHK",
+        "price": "On request",
+        "price_note": "Sample unit",
+        "badge": "Sample",
+        "icon": "building",
+        "area": "Building 4",
+        "text": "3 bedroom flat with living and dining area. Sample photo, illustrative only.",
+        "image": "interior-living-2",
+        "detail": {
+          "intro": "Sample 3 BHK flat in Building 4. The layout, size and finish will be confirmed from the building's real units. Sample content. Replace with the building's real details.",
+          "points_title": "Features",
+          "points": [
+            "Air conditioning",
+            "Kitchen with appliances",
+            "Secure access and parking",
+            "Maintenance handled by Cyber Garden"
+          ],
+          "facts": [
+            {
+              "label": "Building",
+              "value": "Building 4"
+            },
+            {
+              "label": "Type",
+              "value": "3 BHK"
+            },
+            {
+              "label": "Size",
+              "value": "TBC sqm"
+            },
+            {
+              "label": "Rent",
+              "value": "On request"
+            },
+            {
+              "label": "Available",
+              "value": "To confirm"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Building 5, 3 BHK",
+        "category": "3 BHK",
+        "price": "On request",
+        "price_note": "Sample unit",
+        "badge": "Sample",
+        "icon": "building",
+        "area": "Building 5",
+        "text": "3 bedroom flat with living and dining area. Sample photo, illustrative only.",
+        "image": "interior-living-1",
+        "detail": {
+          "intro": "Sample 3 BHK flat in Building 5. The layout, size and finish will be confirmed from the building's real units. Sample content. Replace with the building's real details.",
+          "points_title": "Features",
+          "points": [
+            "Air conditioning",
+            "Kitchen with appliances",
+            "Secure access and parking",
+            "Maintenance handled by Cyber Garden"
+          ],
+          "facts": [
+            {
+              "label": "Building",
+              "value": "Building 5"
+            },
+            {
+              "label": "Type",
+              "value": "3 BHK"
+            },
+            {
+              "label": "Size",
+              "value": "TBC sqm"
+            },
+            {
+              "label": "Rent",
+              "value": "On request"
+            },
+            {
+              "label": "Available",
+              "value": "To confirm"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "split": {
+    "image": "interior-living-1",
+    "kicker": "About Cyber Garden",
+    "title": "Facility management and leasing",
+    "body": [
+      "Cyber Garden manages buildings from day-to-day upkeep to letting the flats. Sample content. Replace with the building's real details."
+    ],
+    "points": [
+      "Facility management",
+      "Leasing and tenant relations",
+      "Maintenance and repairs",
+      "Reporting to owners"
+    ],
+    "cta": {
+      "label": "Enquire",
+      "href": "contact.html"
+    }
+  },
+  "statement": {
+    "kicker": "Our approach",
+    "text": "A building runs well when maintenance, letting and tenants are handled by one team."
+  },
+  "services": {
+    "nav": "Services",
+    "title": "What we do",
+    "intro": "Services across the five buildings. Sample list, confirm with the client.",
+    "items": [
+      {
+        "title": "Facility management",
+        "icon": "building",
+        "badge": "Core",
+        "area": "All buildings",
+        "text": "Cleaning, security, maintenance and repairs.",
+        "image": "interior-living-1",
+        "detail": {
+          "intro": "Day-to-day running of the buildings. Sample content. Replace with the building's real details.",
+          "points_title": "Covers",
+          "points": [
+            "Cleaning",
+            "Security",
+            "MEP maintenance",
+            "Repairs"
+          ],
+          "facts": []
+        }
+      },
+      {
+        "title": "Leasing",
+        "icon": "check",
+        "badge": "Core",
+        "area": "All buildings",
+        "text": "Finding tenants and handling tenancy.",
+        "image": "interior-living-2",
+        "detail": {
+          "intro": "Letting 1, 2 and 3 BHK flats. Sample content. Replace with the building's real details.",
+          "points_title": "Covers",
+          "points": [
+            "Marketing units",
+            "Viewings",
+            "Contracts",
+            "Move-in"
+          ],
+          "facts": []
+        }
+      },
+      {
+        "title": "Building management",
+        "icon": "chart",
+        "badge": "Owners",
+        "area": "All buildings",
+        "text": "Rent collection and reporting for owners.",
+        "image": "interior-living-1",
+        "detail": {
+          "intro": "Reporting and rent for owners. Sample content. Replace with the building's real details.",
+          "points_title": "Covers",
+          "points": [
+            "Rent collection",
+            "Monthly report",
+            "Budgets",
+            "Inspections"
+          ],
+          "facts": []
+        }
+      }
+    ]
+  },
+  "locations": {
+    "title": "The five buildings",
+    "nav": "Buildings",
+    "intro": "Each building has its own page. Addresses and contacts to confirm.",
+    "book_label": "View building",
+    "items": [
+      {
+        "name": "Building 1",
+        "full_name": "Cyber Garden, Building 1",
+        "type": "Residential and commercial",
+        "country": "Qatar",
+        "image": "interior-living-1",
+        "address": "Address to confirm",
+        "phone": "+974 0000 0000",
+        "email": null,
+        "about": "Building 1 is one of the five Cyber Garden buildings managed by Cyber Garden. Sample content. Replace with the building's real details.",
+        "phones": [
+          {
+            "label": "Building office",
+            "number": "+974 0000 0000"
+          }
+        ],
+        "hours": [
+          {
+            "label": "Building office",
+            "value": "To confirm"
+          }
+        ],
+        "emergency": false,
+        "specs": [
+          "Facility management",
+          "Leasing"
+        ]
+      },
+      {
+        "name": "Building 2",
+        "full_name": "Cyber Garden, Building 2",
+        "type": "Residential and commercial",
+        "country": "Qatar",
+        "image": "interior-living-2",
+        "address": "Address to confirm",
+        "phone": "+974 0000 0000",
+        "email": null,
+        "about": "Building 2 is one of the five Cyber Garden buildings managed by Cyber Garden. Sample content. Replace with the building's real details.",
+        "phones": [
+          {
+            "label": "Building office",
+            "number": "+974 0000 0000"
+          }
+        ],
+        "hours": [
+          {
+            "label": "Building office",
+            "value": "To confirm"
+          }
+        ],
+        "emergency": false,
+        "specs": [
+          "Facility management",
+          "Leasing"
+        ]
+      },
+      {
+        "name": "Building 3",
+        "full_name": "Cyber Garden, Building 3",
+        "type": "Residential and commercial",
+        "country": "Qatar",
+        "image": "interior-living-1",
+        "address": "Address to confirm",
+        "phone": "+974 0000 0000",
+        "email": null,
+        "about": "Building 3 is one of the five Cyber Garden buildings managed by Cyber Garden. Sample content. Replace with the building's real details.",
+        "phones": [
+          {
+            "label": "Building office",
+            "number": "+974 0000 0000"
+          }
+        ],
+        "hours": [
+          {
+            "label": "Building office",
+            "value": "To confirm"
+          }
+        ],
+        "emergency": false,
+        "specs": [
+          "Facility management",
+          "Leasing"
+        ]
+      },
+      {
+        "name": "Building 4",
+        "full_name": "Cyber Garden, Building 4",
+        "type": "Residential and commercial",
+        "country": "Qatar",
+        "image": "interior-living-2",
+        "address": "Address to confirm",
+        "phone": "+974 0000 0000",
+        "email": null,
+        "about": "Building 4 is one of the five Cyber Garden buildings managed by Cyber Garden. Sample content. Replace with the building's real details.",
+        "phones": [
+          {
+            "label": "Building office",
+            "number": "+974 0000 0000"
+          }
+        ],
+        "hours": [
+          {
+            "label": "Building office",
+            "value": "To confirm"
+          }
+        ],
+        "emergency": false,
+        "specs": [
+          "Facility management",
+          "Leasing"
+        ]
+      },
+      {
+        "name": "Building 5",
+        "full_name": "Cyber Garden, Building 5",
+        "type": "Residential and commercial",
+        "country": "Qatar",
+        "image": "interior-living-1",
+        "address": "Address to confirm",
+        "phone": "+974 0000 0000",
+        "email": null,
+        "about": "Building 5 is one of the five Cyber Garden buildings managed by Cyber Garden. Sample content. Replace with the building's real details.",
+        "phones": [
+          {
+            "label": "Building office",
+            "number": "+974 0000 0000"
+          }
+        ],
+        "hours": [
+          {
+            "label": "Building office",
+            "value": "To confirm"
+          }
+        ],
+        "emergency": false,
+        "specs": [
+          "Facility management",
+          "Leasing"
+        ]
+      }
+    ]
+  },
+  "faq_title": "Questions people ask"
+}
