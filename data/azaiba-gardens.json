@@ -125,6 +125,21 @@
       "src": "concept-flat-3bhk.jpg",
       "alt": "3 BHK flat concept illustration",
       "cap": "Concept illustration (dummy, not a real flat)"
+    },
+    "concept-dream-villa": {
+      "src": "concept-dream-villa.jpg",
+      "alt": "Dream villa with a pool at sunset",
+      "cap": "Concept illustration (dummy, not dream home)"
+    },
+    "concept-dream-terrace": {
+      "src": "concept-dream-terrace.jpg",
+      "alt": "Dream penthouse terrace at dusk",
+      "cap": "Concept illustration (dummy, not dream home)"
+    },
+    "concept-dream-family": {
+      "src": "concept-dream-family.jpg",
+      "alt": "Dream family lounge",
+      "cap": "Concept illustration (dummy, not dream home)"
     }
   },
   "home": [
@@ -140,12 +155,12 @@
   ],
   "promos": [
     {
-      "image": "pool",
-      "tag": "Amenities",
-      "kicker": "Rooftop living",
-      "short": "Amenities",
-      "title": "Swim above Azaiba.",
-      "text": "A rooftop pool, gym and play area for the whole building.",
+      "image": "concept-dream-terrace",
+      "tag": "Dream home (concept)",
+      "kicker": "Concept, not the building",
+      "short": "Dream home",
+      "title": "Imagine your evenings here.",
+      "text": "A concept of the penthouse life at Azaiba Gardens. Replace with the building's real photos before launch.",
       "cta": {
         "label": "See the flats",
         "href": "flats.html"
@@ -268,7 +283,7 @@
         "icon": "building",
         "area": "Azaiba Gardens, Muscat",
         "text": "A compact one-bedroom home with a bright living area and a modern kitchen.",
-        "image": "rezone-living-corner",
+        "image": "living",
         "detail": {
           "intro": "A one-bedroom flat in Azaiba Gardens. Rent per month, as given by the client team on 21 Oct 2026. Confirm before publishing.",
           "points_title": "In the flat",
@@ -307,7 +322,7 @@
         "icon": "building",
         "area": "Azaiba Gardens, Muscat",
         "text": "Two bedrooms, a corner living room and a fitted kitchen with bright windows.",
-        "image": "rezone-living-window",
+        "image": "window",
         "detail": {
           "intro": "A two-bedroom flat in Azaiba Gardens. Rent per month, as given by the client team on 21 Oct 2026. Confirm before publishing.",
           "points_title": "In the flat",
@@ -346,7 +361,7 @@
         "icon": "building",
         "area": "Azaiba Gardens, Muscat",
         "text": "Three bedrooms for families, with a large living area and city views.",
-        "image": "rezone-bedroom",
+        "image": "bedroom",
         "detail": {
           "intro": "A three-bedroom flat in Azaiba Gardens. Rent per month, as given by the client team on 21 Oct 2026. Confirm before publishing.",
           "points_title": "In the flat",
@@ -379,7 +394,7 @@
     ]
   },
   "split": {
-    "image": "facade",
+    "image": "concept-dream-villa",
     "kicker": "Azaiba Gardens",
     "title": "Living in the heart of Azaiba",
     "body": [
@@ -475,7 +490,7 @@
         "full_name": "Azaiba Gardens, Building 1",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "facade",
+        "image": "concept-building-1",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -503,7 +518,7 @@
         "full_name": "Azaiba Gardens, Building 2",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "facade",
+        "image": "concept-building-2",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -531,7 +546,7 @@
         "full_name": "Azaiba Gardens, Building 3",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "facade",
+        "image": "concept-building-3",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -559,7 +574,7 @@
         "full_name": "Azaiba Gardens, Building 4",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "facade",
+        "image": "concept-building-4",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -587,7 +602,7 @@
         "full_name": "Azaiba Gardens, Building 5",
         "type": "Residential and commercial",
         "country": "Oman",
-        "image": "facade",
+        "image": "concept-building-5",
         "address": "Address to confirm",
         "phone": "+968 0000 0000",
         "email": null,
@@ -620,7 +635,7 @@
     "items": [
       {
         "name": "Tower A · Falaj",
-        "image": "concept-building-1",
+        "image": "facade",
         "area": "Azaiba, Muscat",
         "floors": 9,
         "units": 36,
@@ -631,21 +646,21 @@
             "type": "1 BHK",
             "size": "52 sqm (dummy)",
             "rent": "OMR 265",
-            "image": "concept-flat-1bhk",
+            "image": "living",
             "href": "p-1-bhk-flat.html"
           },
           {
             "type": "2 BHK",
             "size": "88 sqm (dummy)",
             "rent": "OMR 375",
-            "image": "concept-flat-2bhk",
+            "image": "window",
             "href": "p-2-bhk-flat.html"
           },
           {
             "type": "3 BHK",
             "size": "120 sqm (dummy)",
             "rent": "OMR 425",
-            "image": "concept-flat-3bhk",
+            "image": "bedroom",
             "href": "p-3-bhk-flat.html"
           }
         ]
@@ -773,7 +788,7 @@
             "type": "3 BHK",
             "size": "120 sqm (dummy)",
             "rent": "OMR 425",
-            "image": "concept-flat-3bhk",
+            "image": "concept-dream-family",
             "href": "p-3-bhk-flat.html"
           }
         ]

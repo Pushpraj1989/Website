@@ -83,6 +83,51 @@ def flat(kind):
 </svg>'''
 
 
+def dream(kind):
+    """Dusk-lit dream homes: a villa with a pool, a terrace penthouse, a family lounge."""
+    if kind == "villa":
+        sky = ("#2b3a55", "#d98b6b", "#f6c89b")
+        body = ('<rect x="0" y="700" width="1600" height="300" fill="#7d9a6c"/>'
+                '<rect x="0" y="700" width="1600" height="16" fill="#66845a"/>'
+                '<rect x="300" y="440" width="1000" height="260" rx="14" fill="#f4efe6"/>'
+                '<rect x="250" y="400" width="1100" height="56" rx="10" fill="#e6dccb"/>'
+                '<rect x="360" y="490" width="260" height="160" fill="url(#glow)"/>'
+                '<rect x="700" y="490" width="260" height="160" fill="url(#glow)"/>'
+                '<rect x="1000" y="490" width="200" height="210" fill="#2a3b4a"/>'
+                '<rect x="1000" y="490" width="200" height="210" fill="url(#glow)" opacity="0.45"/>'
+                '<rect x="420" y="790" width="760" height="120" rx="40" fill="#3f8c9b"/>'
+                '<rect x="450" y="805" width="700" height="18" rx="9" fill="#a8e1e8" opacity="0.8"/>')
+        palms = ''.join(f'<g transform="translate({x},720) scale({sc})"><path d="M0,0 Q-10,-130 4,-260" stroke="#3d2f22" stroke-width="13" fill="none"/><path d="M4,-260 Q-80,-300 -130,-240 Q-70,-268 4,-260 Q70,-300 130,-236 Q70,-262 4,-260 Q40,-330 0,-360 Q-20,-318 4,-260" fill="#244c3a"/></g>' for x, sc in [(150, 1.1), (1450, 1.0)])
+    elif kind == "terrace":
+        sky = ("#1d2b44", "#c77d86", "#f2c48d")
+        body = ('<rect x="0" y="640" width="1600" height="360" fill="#3b3a44"/>'
+                '<rect x="0" y="560" width="1600" height="90" fill="#d9ccb8"/>'
+                '<rect x="120" y="260" width="1360" height="310" rx="6" fill="url(#glow)" opacity="0.9"/>'
+                '<rect x="120" y="260" width="1360" height="310" fill="none" stroke="#2c2b33" stroke-width="18"/>'
+                '<rect x="700" y="260" width="10" height="310" fill="#2c2b33"/>')
+        palms = ''.join(f'<g transform="translate({x},650) scale({sc})"><path d="M0,0 Q-10,-120 4,-230" stroke="#3d2f22" stroke-width="11" fill="none"/><path d="M4,-230 Q-70,-270 -120,-220 Q-60,-245 4,-230 Q60,-270 120,-215 Q60,-240 4,-230 Q40,-300 0,-330 Q-20,-290 4,-230" fill="#2f5d46"/></g>' for x, sc in [(80, 1.0), (1520, 0.9)])
+    else:
+        sky = ("#e7c9a9", "#f3dcc0", "#fbf1e4")
+        body = ('<rect x="0" y="0" width="1600" height="1000" fill="url(#glow)" opacity="0.55"/>'
+                '<rect x="0" y="700" width="1600" height="300" fill="#c9ab86"/>'
+                '<rect x="260" y="560" width="620" height="170" rx="60" fill="#b8704f"/>'
+                '<rect x="230" y="520" width="680" height="70" rx="35" fill="#d4896a"/>'
+                '<ellipse cx="1080" cy="800" rx="360" ry="70" fill="#efe2cc"/>'
+                '<rect x="1050" y="470" width="260" height="30" rx="8" fill="#7a5a3c"/>'
+                '<circle cx="1180" cy="330" r="46" fill="#fff4da"/>'
+                '<rect x="1060" y="300" width="18" height="170" fill="#6b4a33"/>')
+        palms = ''
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}">
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{sky[0]}"/><stop offset="0.7" stop-color="{sky[1]}"/><stop offset="1" stop-color="{sky[2]}"/></linearGradient>
+ <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1d6"/><stop offset="1" stop-color="#f0a867"/></linearGradient>
+</defs>
+<rect width="{W}" height="{H}" fill="url(#sky)"/>
+{body}
+{palms}
+</svg>'''
+
+
 SCENES = {
     "concept-building-1": building(("#f6d7b0", "#e8b98a", "#b57e5b"), "#e6d6bd", 0, 9, 7, 860, 1),
     "concept-building-2": building(("#cfe0e8", "#e9eef0", "#f6e8d6"), "#d9e3e6", 0, 12, 6, 860, 2),
@@ -92,6 +137,9 @@ SCENES = {
     "concept-flat-1bhk": flat(1),
     "concept-flat-2bhk": flat(2),
     "concept-flat-3bhk": flat(3),
+    "concept-dream-villa": dream("villa"),
+    "concept-dream-terrace": dream("terrace"),
+    "concept-dream-family": dream("family"),
 }
 
 
