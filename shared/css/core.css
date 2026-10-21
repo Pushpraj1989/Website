@@ -415,16 +415,20 @@ button {
     padding: calc(var(--header-h) + 1rem) 1.5rem 2rem;
     background: var(--menu-bg, var(--bg));
     color: var(--menu-fg, var(--fg));
-    clip-path: circle(0% at calc(100% - 2.5rem) 2.4rem);
+    opacity: 0;
     visibility: hidden;
-    transition: clip-path 0.8s var(--ease-out), visibility 0s linear 0.8s;
+    transition: opacity 0.5s var(--ease-out), visibility 0s linear 0.5s;
   }
 
   .site-header.is-open .nav {
-    clip-path: circle(150% at calc(100% - 2.5rem) 2.4rem);
+    opacity: 1;
     visibility: visible;
-    transition: clip-path 0.8s var(--ease-out), visibility 0s;
+    transition: opacity 0.5s var(--ease-out), visibility 0s;
   }
+
+  /* keep the header (logo and close button) on screen while the menu is open */
+  /* a backdrop blur on the header would make it the box the full-screen menu is sized to */
+  .site-header.is-open { transform: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
 
   .nav a {
     padding: 0.6rem 0;
