@@ -15,7 +15,10 @@
     "fg": "#F2F0E8",
     "accent": "#8DB580",
     "accent_ink": "#0F1B15",
-    "style": "glass"
+    "style": "glass",
+    "fonts_url": "https://fonts.googleapis.com/css2?display=swap&family=Poppins:wght@300;400;500;600;700",
+    "font_display": "\"Poppins\", system-ui, sans-serif",
+    "font_body": "\"Poppins\", system-ui, sans-serif"
   },
   "cta": {
     "label": "Book a visit",

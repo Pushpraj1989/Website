@@ -432,7 +432,7 @@ button {
 
   .nav a {
     padding: 0.6rem 0;
-    font: 400 clamp(2rem, 9vw, 3rem)/1.1 var(--font-display);
+    font: 400 clamp(1.6rem, 6.2vw, 2.2rem)/1.15 var(--font-display);
     border-bottom: 1px solid var(--line);
   }
 
