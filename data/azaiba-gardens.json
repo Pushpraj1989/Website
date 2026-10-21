@@ -1,14 +1,14 @@
 {
-  "slug": "cyber-garden",
+  "slug": "azaiba-gardens",
   "tier": "Concept",
-  "name": "Cyber Garden",
-  "short": "Cyber Garden",
+  "name": "Azaiba Gardens",
+  "short": "Azaiba Gardens",
   "sector": "Developers, brokers, property",
-  "meta": "Cyber Garden: facility management, leasing and building management for five buildings in Qatar. Sample website.",
+  "meta": "Azaiba Gardens: facility management, leasing and building management for five buildings in Oman. Sample website.",
   "accent": "#8DB580",
   "theme": "studio",
   "promo_fx": "flow",
-  "img_dir": "cyber-garden",
+  "img_dir": "azaiba-gardens",
   "brand": {
     "mode": "dark",
     "bg": "#0F1B15",
@@ -23,9 +23,9 @@
     "href": "contact.html"
   },
   "hero": {
-    "eyebrow": "Qatar · Five buildings",
+    "eyebrow": "Azaiba, Muscat · Oman",
     "title": "Buildings, managed well.",
-    "lede": "Cyber Garden looks after facility management, leasing and day-to-day running of its buildings. Sample website, content to be confirmed.",
+    "lede": "Azaiba Gardens looks after facility management, leasing and day-to-day running of its buildings. Sample website, content to be confirmed.",
     "primary": {
       "label": "See flats",
       "href": "flats.html"
@@ -153,11 +153,11 @@
     "phones": [
       {
         "label": "Call us",
-        "number": "+974 0000 0000 (sample)",
-        "tel": "+97400000000"
+        "number": "+968 0000 0000 (sample)",
+        "tel": "+96800000000"
       }
     ],
-    "email": "info@cybergarden.example",
+    "email": "info@azaibagardens.example",
     "note": "Sample: contact details and the enquiry form are not connected yet.",
     "form": {
       "branch": false,
@@ -179,13 +179,13 @@
     "Flat types (1, 2 and 3 BHK), sizes, rents and availability for every building",
     "Services list and wording, confirmed with the client",
     "Enquiry form: connect to the client's email or CRM before launch (currently disabled)",
-    "Qatar location, languages (English only so far; Arabic on request)"
+    "Oman location, languages (English only so far; Arabic on request)"
   ],
   "sources": [],
   "catalogue": {
     "nav": "Flats",
     "title": "Flats for rent",
-    "intro": "Sample units across the five buildings. Availability, rent and size come from Cyber Garden.",
+    "intro": "Sample units across the five buildings. Availability, rent and size come from Azaiba Gardens.",
     "home_title": "Available flats",
     "categories": [
       "1 BHK",
@@ -213,7 +213,7 @@
             "Air conditioning",
             "Kitchen with appliances",
             "Secure access and parking",
-            "Maintenance handled by Cyber Garden"
+            "Maintenance handled by Azaiba Gardens"
           ],
           "facts": [
             {
@@ -256,7 +256,7 @@
             "Air conditioning",
             "Kitchen with appliances",
             "Secure access and parking",
-            "Maintenance handled by Cyber Garden"
+            "Maintenance handled by Azaiba Gardens"
           ],
           "facts": [
             {
@@ -299,7 +299,7 @@
             "Air conditioning",
             "Kitchen with appliances",
             "Secure access and parking",
-            "Maintenance handled by Cyber Garden"
+            "Maintenance handled by Azaiba Gardens"
           ],
           "facts": [
             {
@@ -342,7 +342,7 @@
             "Air conditioning",
             "Kitchen with appliances",
             "Secure access and parking",
-            "Maintenance handled by Cyber Garden"
+            "Maintenance handled by Azaiba Gardens"
           ],
           "facts": [
             {
@@ -385,7 +385,7 @@
             "Air conditioning",
             "Kitchen with appliances",
             "Secure access and parking",
-            "Maintenance handled by Cyber Garden"
+            "Maintenance handled by Azaiba Gardens"
           ],
           "facts": [
             {
@@ -415,10 +415,10 @@
   },
   "split": {
     "image": "building-exterior",
-    "kicker": "About Cyber Garden",
+    "kicker": "About Azaiba Gardens",
     "title": "Facility management and leasing",
     "body": [
-      "Cyber Garden manages buildings from day-to-day upkeep to letting the flats. Sample content. Replace with the building's real details."
+      "Azaiba Gardens manages buildings from day-to-day upkeep to letting the flats. Sample content. Replace with the building's real details."
     ],
     "points": [
       "Facility management",
@@ -507,18 +507,18 @@
     "items": [
       {
         "name": "Building 1",
-        "full_name": "Cyber Garden, Building 1",
+        "full_name": "Azaiba Gardens, Building 1",
         "type": "Residential and commercial",
-        "country": "Qatar",
+        "country": "Oman",
         "image": "building-exterior",
         "address": "Address to confirm",
-        "phone": "+974 0000 0000",
+        "phone": "+968 0000 0000",
         "email": null,
-        "about": "Building 1 is one of the five Cyber Garden buildings managed by Cyber Garden. Sample content. Replace with the building's real details.",
+        "about": "Building 1 is one of the five Azaiba Gardens buildings managed by Azaiba Gardens. Sample content. Replace with the building's real details.",
         "phones": [
           {
             "label": "Building office",
-            "number": "+974 0000 0000"
+            "number": "+968 0000 0000"
           }
         ],
         "hours": [
@@ -535,18 +535,18 @@
       },
       {
         "name": "Building 2",
-        "full_name": "Cyber Garden, Building 2",
+        "full_name": "Azaiba Gardens, Building 2",
         "type": "Residential and commercial",
-        "country": "Qatar",
+        "country": "Oman",
         "image": "building-exterior",
         "address": "Address to confirm",
-        "phone": "+974 0000 0000",
+        "phone": "+968 0000 0000",
         "email": null,
-        "about": "Building 2 is one of the five Cyber Garden buildings managed by Cyber Garden. Sample content. Replace with the building's real details.",
+        "about": "Building 2 is one of the five Azaiba Gardens buildings managed by Azaiba Gardens. Sample content. Replace with the building's real details.",
         "phones": [
           {
             "label": "Building office",
-            "number": "+974 0000 0000"
+            "number": "+968 0000 0000"
           }
         ],
         "hours": [
@@ -563,18 +563,18 @@
       },
       {
         "name": "Building 3",
-        "full_name": "Cyber Garden, Building 3",
+        "full_name": "Azaiba Gardens, Building 3",
         "type": "Residential and commercial",
-        "country": "Qatar",
+        "country": "Oman",
         "image": "building-exterior",
         "address": "Address to confirm",
-        "phone": "+974 0000 0000",
+        "phone": "+968 0000 0000",
         "email": null,
-        "about": "Building 3 is one of the five Cyber Garden buildings managed by Cyber Garden. Sample content. Replace with the building's real details.",
+        "about": "Building 3 is one of the five Azaiba Gardens buildings managed by Azaiba Gardens. Sample content. Replace with the building's real details.",
         "phones": [
           {
             "label": "Building office",
-            "number": "+974 0000 0000"
+            "number": "+968 0000 0000"
           }
         ],
         "hours": [
@@ -591,18 +591,18 @@
       },
       {
         "name": "Building 4",
-        "full_name": "Cyber Garden, Building 4",
+        "full_name": "Azaiba Gardens, Building 4",
         "type": "Residential and commercial",
-        "country": "Qatar",
+        "country": "Oman",
         "image": "building-exterior",
         "address": "Address to confirm",
-        "phone": "+974 0000 0000",
+        "phone": "+968 0000 0000",
         "email": null,
-        "about": "Building 4 is one of the five Cyber Garden buildings managed by Cyber Garden. Sample content. Replace with the building's real details.",
+        "about": "Building 4 is one of the five Azaiba Gardens buildings managed by Azaiba Gardens. Sample content. Replace with the building's real details.",
         "phones": [
           {
             "label": "Building office",
-            "number": "+974 0000 0000"
+            "number": "+968 0000 0000"
           }
         ],
         "hours": [
@@ -619,18 +619,18 @@
       },
       {
         "name": "Building 5",
-        "full_name": "Cyber Garden, Building 5",
+        "full_name": "Azaiba Gardens, Building 5",
         "type": "Residential and commercial",
-        "country": "Qatar",
+        "country": "Oman",
         "image": "building-exterior",
         "address": "Address to confirm",
-        "phone": "+974 0000 0000",
+        "phone": "+968 0000 0000",
         "email": null,
-        "about": "Building 5 is one of the five Cyber Garden buildings managed by Cyber Garden. Sample content. Replace with the building's real details.",
+        "about": "Building 5 is one of the five Azaiba Gardens buildings managed by Azaiba Gardens. Sample content. Replace with the building's real details.",
         "phones": [
           {
             "label": "Building office",
-            "number": "+974 0000 0000"
+            "number": "+968 0000 0000"
           }
         ],
         "hours": [
