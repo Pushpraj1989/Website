@@ -178,12 +178,68 @@
       "src": "own-play-day.jpg",
       "alt": "Rooftop children's play area with green turf",
       "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-party-hall": {
+      "src": "own-party-hall.jpg",
+      "alt": "Party hall for big occasions",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-courtyard-aerial": {
+      "src": "own-courtyard-aerial.jpg",
+      "alt": "Courtyard, seen from above",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-view-day": {
+      "src": "own-view-day.jpg",
+      "alt": "Views over Muscat by day",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-balcony": {
+      "src": "own-balcony.jpg",
+      "alt": "Covered balcony",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-flat-living-10": {
+      "src": "own-flat-living-10.jpg",
+      "alt": "Living room",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-flat-bedroom-9": {
+      "src": "own-flat-bedroom-9.jpg",
+      "alt": "Bedroom",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-flat-hall-6": {
+      "src": "own-flat-hall-6.jpg",
+      "alt": "Hallway to the living room",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-flat-store-8": {
+      "src": "own-flat-store-8.jpg",
+      "alt": "Utility room",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-flat-bath-7": {
+      "src": "own-flat-bath-7.jpg",
+      "alt": "Bathroom",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-flat-bath-5": {
+      "src": "own-flat-bath-5.jpg",
+      "alt": "Bathroom with shower",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-street-2": {
+      "src": "own-street-2.jpg",
+      "alt": "The building from the street",
+      "cap": "Photo: Azaiba Gardens, Muscat"
     }
   },
   "home": [
     "promo",
     "rail",
     "buildings",
+    "gallery",
     "catalogue",
     "split",
     "statement",
@@ -926,6 +982,57 @@
             "href": "p-3-bhk-flat.html"
           }
         ]
+      }
+    ]
+  },
+  "gallery": {
+    "kicker": "Inside the building",
+    "title": "The building, room by room",
+    "intro": "Photos of the building's facilities and flats.",
+    "items": [
+      {
+        "image": "own-party-hall",
+        "caption": "Party hall for big occasions"
+      },
+      {
+        "image": "own-courtyard-aerial",
+        "caption": "Courtyard, seen from above"
+      },
+      {
+        "image": "own-view-day",
+        "caption": "Views over Muscat by day"
+      },
+      {
+        "image": "own-balcony",
+        "caption": "Covered balcony"
+      },
+      {
+        "image": "own-flat-living-10",
+        "caption": "Living room"
+      },
+      {
+        "image": "own-flat-bedroom-9",
+        "caption": "Bedroom"
+      },
+      {
+        "image": "own-flat-hall-6",
+        "caption": "Hallway to the living room"
+      },
+      {
+        "image": "own-flat-store-8",
+        "caption": "Utility room"
+      },
+      {
+        "image": "own-flat-bath-7",
+        "caption": "Bathroom"
+      },
+      {
+        "image": "own-flat-bath-5",
+        "caption": "Bathroom with shower"
+      },
+      {
+        "image": "own-street-2",
+        "caption": "The building from the street"
       }
     ]
   }

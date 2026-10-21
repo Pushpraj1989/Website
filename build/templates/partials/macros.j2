@@ -571,6 +571,26 @@
 </section>
 {%- endmacro -%}
 
+{%- macro photo_gallery(m) -%}
+{#- Photo gallery: a varied grid of real photos, each one reveals as it scrolls into view. -#}
+{%- set G = s.gallery or {} %}
+<section class="pg" id="{{ (m.id if m is mapping and m.id) or 'gallery' }}">
+  <div class="wrap pg-head">
+    <p class="eyebrow">{{ G.get('kicker') or 'Gallery' }}</p>
+    <h2 class="pg-title">{{ G.get('title') or 'Gallery' }}</h2>
+    {%- if G.get('intro') %}<p class="pg-intro">{{ G.get('intro') }}</p>{% endif %}
+  </div>
+  <div class="wrap pg-grid">
+    {%- for g in G.get('items') or [] %}
+    <figure class="pg-item pg-item-{{ loop.index0 % 5 }}" data-anim="up" data-delay="{{ (loop.index0 % 4) * 0.06 }}">
+      <img src="{{ src(g.image) }}" alt="{{ g.caption }}" loading="lazy" decoding="async">
+      <figcaption>{{ g.caption }}</figcaption>
+    </figure>
+    {%- endfor %}
+  </div>
+</section>
+{%- endmacro -%}
+
 {%- macro module(m) -%}
 {#- Renders one home-page section by type. The studio theme loops over s.home. -#}
 {%- set t = m.type if m is mapping else m %}
@@ -582,6 +602,7 @@
 {%- elif t == 'catalogue' %}{{ catalogue_strip() }}
 {%- elif t == 'assemble' %}{% for a in s.assemble or [] if (m is not mapping or not m.id or a.id == m.id) %}{{ assemble(a) }}{% endfor %}
 {%- elif t == 'buildings' %}{{ buildings_slider(m) }}
+{%- elif t == 'gallery' %}{{ photo_gallery(m) }}
 {%- elif t == 'converge' %}{{ converge(m) }}
 {%- elif t == 'stack' %}{{ stack(m) }}
 {%- elif t == 'lineup' %}{{ lineup(m) }}
