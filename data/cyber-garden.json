@@ -60,6 +60,11 @@
       "src": "flat-bathroom.jpg",
       "alt": "Bathroom with shower",
       "cap": "Listing photo, Rezone Property LLC (to replace)"
+    },
+    "building-exterior": {
+      "src": "building-exterior.jpg",
+      "alt": "Residential and commercial building with a furniture showroom at street level",
+      "cap": "Listing photo, Rezone Property LLC (to replace)"
     }
   },
   "home": [
@@ -409,7 +414,7 @@
     ]
   },
   "split": {
-    "image": "interior-living-1",
+    "image": "building-exterior",
     "kicker": "About Cyber Garden",
     "title": "Facility management and leasing",
     "body": [
@@ -505,7 +510,7 @@
         "full_name": "Cyber Garden, Building 1",
         "type": "Residential and commercial",
         "country": "Qatar",
-        "image": "interior-living-1",
+        "image": "building-exterior",
         "address": "Address to confirm",
         "phone": "+974 0000 0000",
         "email": null,
@@ -533,7 +538,7 @@
         "full_name": "Cyber Garden, Building 2",
         "type": "Residential and commercial",
         "country": "Qatar",
-        "image": "interior-living-1",
+        "image": "building-exterior",
         "address": "Address to confirm",
         "phone": "+974 0000 0000",
         "email": null,
@@ -561,7 +566,7 @@
         "full_name": "Cyber Garden, Building 3",
         "type": "Residential and commercial",
         "country": "Qatar",
-        "image": "interior-living-1",
+        "image": "building-exterior",
         "address": "Address to confirm",
         "phone": "+974 0000 0000",
         "email": null,
@@ -589,7 +594,7 @@
         "full_name": "Cyber Garden, Building 4",
         "type": "Residential and commercial",
         "country": "Qatar",
-        "image": "interior-living-1",
+        "image": "building-exterior",
         "address": "Address to confirm",
         "phone": "+974 0000 0000",
         "email": null,
@@ -617,7 +622,7 @@
         "full_name": "Cyber Garden, Building 5",
         "type": "Residential and commercial",
         "country": "Qatar",
-        "image": "interior-living-1",
+        "image": "building-exterior",
         "address": "Address to confirm",
         "phone": "+974 0000 0000",
         "email": null,
