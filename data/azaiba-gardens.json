@@ -168,6 +168,16 @@
       "src": "own-courtyard.jpg",
       "alt": "Courtyard view of the building balconies",
       "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-night": {
+      "src": "own-night.jpg",
+      "alt": "Muscat city lights at night from the building",
+      "cap": "Photo: Azaiba Gardens, Muscat"
+    },
+    "own-play-day": {
+      "src": "own-play-day.jpg",
+      "alt": "Rooftop children's play area with green turf",
+      "cap": "Photo: Azaiba Gardens, Muscat"
     }
   },
   "home": [
@@ -253,6 +263,38 @@
       "short": "Community",
       "title": "Balconies that look over the courtyard.",
       "text": "Quiet, shaded walkways and a view of the community around you.",
+      "cta": {
+        "label": "See the flats",
+        "href": "flats.html"
+      },
+      "cta2": {
+        "label": "Book a visit",
+        "href": "contact.html"
+      }
+    },
+    {
+      "image": "own-night",
+      "tag": "Views",
+      "kicker": "Muscat at night",
+      "short": "Views",
+      "title": "The city lights from your window.",
+      "text": "Views over Muscat, from the upper floors of Azaiba Gardens.",
+      "cta": {
+        "label": "See the flats",
+        "href": "flats.html"
+      },
+      "cta2": {
+        "label": "Book a visit",
+        "href": "contact.html"
+      }
+    },
+    {
+      "image": "own-play-day",
+      "tag": "Play area",
+      "kicker": "Rooftop play area",
+      "short": "Play area",
+      "title": "Space to play, above the street.",
+      "text": "A rooftop play area with a slide and a green lawn for children.",
       "cta": {
         "label": "See the flats",
         "href": "flats.html"
