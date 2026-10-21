@@ -86,17 +86,20 @@ def flat(kind):
 def dream(kind):
     """Dusk-lit dream homes: a villa with a pool, a terrace penthouse, a family lounge."""
     if kind == "villa":
-        sky = ("#2b3a55", "#d98b6b", "#f6c89b")
-        body = ('<rect x="0" y="700" width="1600" height="300" fill="#7d9a6c"/>'
+        sky = ("#3a5078", "#e5997a", "#fbd9a6")
+        body = ('<circle cx="800" cy="250" r="105" fill="#fff0c9" opacity="0.85"/>'
+                '<rect x="0" y="700" width="1600" height="300" fill="#7d9a6c"/>'
                 '<rect x="0" y="700" width="1600" height="16" fill="#66845a"/>'
+                '<g transform="translate(0,90)">'
                 '<rect x="300" y="440" width="1000" height="260" rx="14" fill="#f4efe6"/>'
                 '<rect x="250" y="400" width="1100" height="56" rx="10" fill="#e6dccb"/>'
                 '<rect x="360" y="490" width="260" height="160" fill="url(#glow)"/>'
                 '<rect x="700" y="490" width="260" height="160" fill="url(#glow)"/>'
                 '<rect x="1000" y="490" width="200" height="210" fill="#2a3b4a"/>'
                 '<rect x="1000" y="490" width="200" height="210" fill="url(#glow)" opacity="0.45"/>'
-                '<rect x="420" y="790" width="760" height="120" rx="40" fill="#3f8c9b"/>'
-                '<rect x="450" y="805" width="700" height="18" rx="9" fill="#a8e1e8" opacity="0.8"/>')
+                '</g>'
+                '<rect x="420" y="800" width="760" height="110" rx="40" fill="#3f8c9b"/>'
+                '<rect x="450" y="815" width="700" height="18" rx="9" fill="#a8e1e8" opacity="0.8"/>')
         palms = ''.join(f'<g transform="translate({x},720) scale({sc})"><path d="M0,0 Q-10,-130 4,-260" stroke="#3d2f22" stroke-width="13" fill="none"/><path d="M4,-260 Q-80,-300 -130,-240 Q-70,-268 4,-260 Q70,-300 130,-236 Q70,-262 4,-260 Q40,-330 0,-360 Q-20,-318 4,-260" fill="#244c3a"/></g>' for x, sc in [(150, 1.1), (1450, 1.0)])
     elif kind == "terrace":
         sky = ("#1d2b44", "#c77d86", "#f2c48d")
