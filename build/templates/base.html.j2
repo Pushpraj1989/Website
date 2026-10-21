@@ -32,6 +32,15 @@
 
 <div class="page-wipe" aria-hidden="true"><span>{{ s.short }}</span></div>
 {%- if not page or page.kind == 'home' %}
+{%- if s.intro and (not page or page.kind == 'home') %}
+<div class="intro-reel" data-intro-reel aria-label="Introduction film">
+  <video muted playsinline preload="auto" poster="{{ ('assets/img/' ~ s.images[s.intro.poster].src) if s.intro.poster and s.intro.poster in s.images else '' }}" data-src="assets/media/{{ s.intro.video }}">
+    <source src="assets/media/{{ s.intro.video | replace('.mp4', '.webm') }}" type="video/webm">
+    <source src="assets/media/{{ s.intro.video }}" type="video/mp4">
+  </video>
+  <button class="intro-skip" type="button" data-intro-skip>Skip</button>
+</div>
+{%- endif %}
 <div class="loader" aria-hidden="true">
   <div class="loader-inner">
     <p class="loader-name">{% if s.lang == 'ar' %}<span>{{ s.short }}</span>{% else %}{% for ch in s.short %}<span>{{ ' ' if ch == ' ' else ch }}</span>{% endfor %}{% endif %}</p>

@@ -1052,5 +1052,10 @@
         "caption": "The building from the street"
       }
     ]
+  },
+  "intro": {
+    "video": "intro-reel.mp4",
+    "poster": "own-street",
+    "seconds": 4.6
   }
 }

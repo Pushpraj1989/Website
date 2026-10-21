@@ -694,6 +694,31 @@
     });
   };
 
+  /* ---------- intro reel: once per session, then the home page ---------- */
+  const initIntroReel = () => {
+    const reel = $("[data-intro-reel]");
+    if (!reel) return;
+    const key = "t1-intro-" + location.pathname.replace(/[^/]*$/, "");
+    let seen = false;
+    try { seen = sessionStorage.getItem(key) === "1"; sessionStorage.setItem(key, "1"); } catch {}
+    const video = $("video", reel);
+    const finish = () => {
+      if (reel.classList.contains("is-done")) return;
+      reel.classList.add("is-done");
+      if (video) video.pause();
+      setTimeout(() => reel.remove(), 800);
+    };
+    if (seen || reduce || !video) { reel.remove(); return; }
+    video.load();
+    video.addEventListener("ended", finish);
+    video.addEventListener("error", finish);
+    const play = video.play();
+    if (play && play.catch) play.catch(finish);
+    setTimeout(finish, 6000);
+    const skip = $("[data-intro-skip]", reel);
+    if (skip) skip.addEventListener("click", finish);
+  };
+
   /* ---------- boot ---------- */
   const boot = () => {
     // Theme effects first: they create the pinned sections, and every reveal
@@ -711,6 +736,7 @@
       ST.sort();
     }
     initBuildingSlider();
+    initIntroReel();
     runLoader();
     if (motion) {
       let t;

@@ -446,6 +446,9 @@ def render_site(env, site):
             webm = pr["video"].rsplit(".", 1)[0] + ".webm"
             if (SHARED / "img" / site["img_dir"] / webm).exists():
                 media.append(webm)
+    if (site.get("intro") or {}).get("video"):
+        media.append(site["intro"]["video"])
+        media.append(site["intro"]["video"].rsplit(".", 1)[0] + ".webm")
     for name in dict.fromkeys(media):
         src = SHARED / "img" / site["img_dir"] / name
         if not src.exists():
