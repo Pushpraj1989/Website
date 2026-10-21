@@ -708,10 +708,10 @@
     };
     if (reduce || !video) { reel.remove(); return; }
     video.load();
+    // the poster stays up if the browser refuses to autoplay or the video fails; the timer ends the splash
     video.addEventListener("ended", finish);
-    video.addEventListener("error", finish);
     const play = video.play();
-    if (play && play.catch) play.catch(finish);
+    if (play && play.catch) play.catch(() => {});
     setTimeout(finish, 6000);
     const skip = $("[data-intro-skip]", reel);
     if (skip) skip.addEventListener("click", finish);
