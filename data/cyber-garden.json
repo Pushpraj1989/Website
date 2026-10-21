@@ -37,14 +37,29 @@
   },
   "images": {
     "interior-living-1": {
-      "src": "interior-living-1.jpg",
-      "alt": "Furnished living room with windows and a dining area",
-      "cap": "Illustrative stock photo"
+      "src": "flat-living.jpg",
+      "alt": "Bright living room with floor-to-ceiling windows",
+      "cap": "Listing photo, Rezone Property LLC (to replace)"
     },
     "interior-living-2": {
-      "src": "interior-living-2.jpg",
-      "alt": "Open-plan living room with a staircase",
-      "cap": "Illustrative stock photo"
+      "src": "flat-kitchen.jpg",
+      "alt": "Kitchen with dark cabinets and gas hob",
+      "cap": "Listing photo, Rezone Property LLC (to replace)"
+    },
+    "amenity-pool": {
+      "src": "amenity-pool.jpg",
+      "alt": "Rooftop swimming pool",
+      "cap": "Listing photo, Rezone Property LLC (to replace)"
+    },
+    "flat-bedroom": {
+      "src": "flat-bedroom.jpg",
+      "alt": "Bedroom with built-in wardrobe",
+      "cap": "Listing photo, Rezone Property LLC (to replace)"
+    },
+    "flat-bathroom": {
+      "src": "flat-bathroom.jpg",
+      "alt": "Bathroom with shower",
+      "cap": "Listing photo, Rezone Property LLC (to replace)"
     }
   },
   "home": [
@@ -228,7 +243,7 @@
         "icon": "building",
         "area": "Building 2",
         "text": "2 bedroom flat with living and dining area. Sample photo, illustrative only.",
-        "image": "interior-living-2",
+        "image": "interior-living-1",
         "detail": {
           "intro": "Sample 2 BHK flat in Building 2. The layout, size and finish will be confirmed from the building's real units. Sample content. Replace with the building's real details.",
           "points_title": "Features",
@@ -314,7 +329,7 @@
         "icon": "building",
         "area": "Building 4",
         "text": "3 bedroom flat with living and dining area. Sample photo, illustrative only.",
-        "image": "interior-living-2",
+        "image": "interior-living-1",
         "detail": {
           "intro": "Sample 3 BHK flat in Building 4. The layout, size and finish will be confirmed from the building's real units. Sample content. Replace with the building's real details.",
           "points_title": "Features",
@@ -426,7 +441,7 @@
         "badge": "Core",
         "area": "All buildings",
         "text": "Cleaning, security, maintenance and repairs.",
-        "image": "interior-living-1",
+        "image": "amenity-pool",
         "detail": {
           "intro": "Day-to-day running of the buildings. Sample content. Replace with the building's real details.",
           "points_title": "Covers",
@@ -445,7 +460,7 @@
         "badge": "Core",
         "area": "All buildings",
         "text": "Finding tenants and handling tenancy.",
-        "image": "interior-living-2",
+        "image": "flat-bedroom",
         "detail": {
           "intro": "Letting 1, 2 and 3 BHK flats. Sample content. Replace with the building's real details.",
           "points_title": "Covers",
@@ -464,7 +479,7 @@
         "badge": "Owners",
         "area": "All buildings",
         "text": "Rent collection and reporting for owners.",
-        "image": "interior-living-1",
+        "image": "interior-living-2",
         "detail": {
           "intro": "Reporting and rent for owners. Sample content. Replace with the building's real details.",
           "points_title": "Covers",
@@ -518,7 +533,7 @@
         "full_name": "Cyber Garden, Building 2",
         "type": "Residential and commercial",
         "country": "Qatar",
-        "image": "interior-living-2",
+        "image": "interior-living-1",
         "address": "Address to confirm",
         "phone": "+974 0000 0000",
         "email": null,
@@ -574,7 +589,7 @@
         "full_name": "Cyber Garden, Building 4",
         "type": "Residential and commercial",
         "country": "Qatar",
-        "image": "interior-living-2",
+        "image": "interior-living-1",
         "address": "Address to confirm",
         "phone": "+974 0000 0000",
         "email": null,
