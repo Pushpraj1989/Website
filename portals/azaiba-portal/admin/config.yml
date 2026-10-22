@@ -1,0 +1,75 @@
+# Decap CMS configuration for the Azaiba Gardens portal.
+# Editors sign in with GitHub (backend below). Saving commits the JSON under content/;
+# run `python3 build.py` (or let the rebuild workflow do it) to publish the changes.
+backend:
+  name: github
+  repo: pushpraj1989/website
+  branch: claude/festive-fermat-mvjq25
+  base_url: https://YOUR-OAUTH-PROXY.example.com   # TODO: deploy a GitHub OAuth proxy for the CMS login
+  auth_endpoint: auth
+
+media_folder: portals/azaiba-portal/content/media
+public_folder: ""
+publish_mode: simple
+
+collections:
+  - name: site
+    label: Site settings
+    files:
+      - name: site
+        label: Company and contact
+        file: portals/azaiba-portal/content/site.json
+        fields:
+          - { label: Group name, name: group, widget: string }
+          - { label: Site name, name: name, widget: string }
+          - { label: Location, name: location, widget: string }
+          - { label: Tagline, name: tagline, widget: string }
+          - { label: Home title, name: hero_title, widget: string }
+          - { label: Home lead text, name: hero_lede, widget: text }
+          - { label: About title, name: about_title, widget: string }
+          - { label: About text, name: about_text, widget: text }
+          - { label: Phone, name: phone, widget: string }
+          - { label: WhatsApp (international, no +), name: whatsapp, widget: string }
+          - { label: Enquiries email, name: email, widget: string }
+          - { label: Office address, name: address, widget: string }
+          - { label: Home film (video file in media), name: video, widget: file, required: false }
+          - { label: Currency, name: currency, widget: select, options: [OMR] }
+
+  - name: buildings
+    label: Buildings
+    folder: portals/azaiba-portal/content/buildings
+    create: true
+    slug: "{{fields.id}}"
+    summary: "{{name}} · {{area}}"
+    fields:
+      - { label: ID (lowercase, dashes, unique), name: id, widget: string, hint: "e.g. tower-a-falaj" }
+      - { label: Name, name: name, widget: string }
+      - { label: Area, name: area, widget: string }
+      - { label: Floors, name: floors, widget: number, value_type: int, min: 1 }
+      - { label: Units, name: units, widget: number, value_type: int, min: 0 }
+      - { label: Status, name: status, widget: select, options: ["Available now", "Coming soon", "Fully let"] }
+      - { label: Description, name: description, widget: text }
+      - { label: Cover photo, name: cover, widget: image }
+      - { label: Gallery photos, name: gallery, widget: list, field: { label: Photo, name: photo, widget: image } }
+      - { label: Film (video), name: video, widget: file, required: false }
+
+  - name: listings
+    label: Flats to rent
+    folder: portals/azaiba-portal/content/listings
+    create: true
+    slug: "{{fields.id}}"
+    summary: "{{title}} · OMR {{rent_omr}}"
+    fields:
+      - { label: ID (lowercase, dashes, unique), name: id, widget: string }
+      - { label: Title, name: title, widget: string }
+      - { label: Building, name: building, widget: relation, collection: buildings, search_fields: [name], value_field: id, display_fields: [name] }
+      - { label: Bedrooms, name: bhk, widget: select, options: ["1 BHK", "2 BHK", "3 BHK"] }
+      - { label: Size (sqm), name: size_sqm, widget: number, value_type: int, min: 1 }
+      - { label: Rent per month (OMR), name: rent_omr, widget: number, value_type: int, min: 0, hint: "Change the price here; the site updates on the next build." }
+      - { label: Status, name: status, widget: select, options: [Available, Reserved, Rented] }
+      - { label: Available from, name: available_from, widget: string, required: false, hint: "Optional, e.g. 1 Jan 2027" }
+      - { label: Cover photo, name: cover, widget: image }
+      - { label: Gallery photos, name: gallery, widget: list, field: { label: Photo, name: photo, widget: image } }
+      - { label: Film (video), name: video, widget: file, required: false }
+      - { label: Description, name: description, widget: text }
+      - { label: Show on home page, name: featured, widget: boolean, default: false }

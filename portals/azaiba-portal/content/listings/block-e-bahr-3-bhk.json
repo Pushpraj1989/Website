@@ -1,0 +1,19 @@
+{
+  "id": "block-e-bahr-3-bhk",
+  "title": "3 BHK flat, Block E · Bahr",
+  "building": "block-e-bahr",
+  "bhk": "3 BHK",
+  "size_sqm": 120,
+  "rent_omr": 425,
+  "status": "Available",
+  "available_from": "",
+  "cover": "concept-flat-3bhk.jpg",
+  "gallery": [
+    "own-bedroom.jpg",
+    "own-kitchen.jpg",
+    "own-bathroom.jpg"
+  ],
+  "video": "",
+  "description": "A 3 BHK flat in Block E · Bahr, Azaiba. Sample listing: confirm size and rent before publishing.",
+  "featured": false
+}

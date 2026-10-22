@@ -1,0 +1,16 @@
+{
+  "id": "block-d-wadi",
+  "name": "Block D · Wadi",
+  "area": "Azaiba, Muscat",
+  "floors": 11,
+  "units": 44,
+  "status": "Available now",
+  "description": "Corner homes with two aspects and a covered walkway between blocks.",
+  "cover": "own-street.jpg",
+  "gallery": [
+    "own-pool.jpg",
+    "own-play.jpg",
+    "own-night.jpg"
+  ],
+  "video": "azaiba-building-motion.mp4"
+}

@@ -1,0 +1,23 @@
+{% extends "base.html.j2" %}
+{% block title %}Flats to rent · {{ site.name }}{% endblock %}
+{% block content %}
+<section class="wrap page-head">
+  <h1>Flats to rent</h1>
+  <p class="muted" id="count">{{ listings|length }} flats</p>
+</section>
+<section class="wrap filters" data-results>
+  <form class="search search-compact" role="search" onsubmit="return false">
+    <label class="field"><span>Building</span>
+      <select name="building"><option value="">All buildings</option>
+        {% for b in buildings %}<option value="{{ b.id }}">{{ b.name }}</option>{% endfor %}
+      </select></label>
+    <label class="field"><span>Bedrooms</span>
+      <select name="bhk"><option value="">Any</option><option>1 BHK</option><option>2 BHK</option><option>3 BHK</option></select></label>
+    <label class="field"><span>Max rent (OMR)</span>
+      <input type="number" name="max" min="0" step="5" placeholder="Any"></label>
+  </form>
+  <div class="cards" id="results"></div>
+  <p class="muted empty" id="empty" hidden>No flats match. Try another building or rent.</p>
+</section>
+<script id="listings-data" type="application/json">{{ data|tojson }}</script>
+{% endblock %}

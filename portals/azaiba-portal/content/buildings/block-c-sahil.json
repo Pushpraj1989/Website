@@ -1,0 +1,16 @@
+{
+  "id": "block-c-sahil",
+  "name": "Block C · Sahil",
+  "area": "Azaiba, Muscat",
+  "floors": 7,
+  "units": 28,
+  "status": "Ready in 2 months",
+  "description": "A low-rise block with wide balconies and a shaded walkway to the lobby.",
+  "cover": "own-street.jpg",
+  "gallery": [
+    "own-pool.jpg",
+    "own-play.jpg",
+    "own-night.jpg"
+  ],
+  "video": "azaiba-building-motion.mp4"
+}

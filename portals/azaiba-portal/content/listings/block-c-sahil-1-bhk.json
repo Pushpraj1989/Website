@@ -1,0 +1,19 @@
+{
+  "id": "block-c-sahil-1-bhk",
+  "title": "1 BHK flat, Block C · Sahil",
+  "building": "block-c-sahil",
+  "bhk": "1 BHK",
+  "size_sqm": 52,
+  "rent_omr": 265,
+  "status": "Available",
+  "available_from": "",
+  "cover": "concept-flat-1bhk.jpg",
+  "gallery": [
+    "own-bedroom.jpg",
+    "own-kitchen.jpg",
+    "own-bathroom.jpg"
+  ],
+  "video": "",
+  "description": "A 1 BHK flat in Block C · Sahil, Azaiba. Sample listing: confirm size and rent before publishing.",
+  "featured": false
+}

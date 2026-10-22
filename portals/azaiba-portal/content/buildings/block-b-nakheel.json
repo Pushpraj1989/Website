@@ -1,0 +1,16 @@
+{
+  "id": "block-b-nakheel",
+  "name": "Block B · Nakheel",
+  "area": "Azaiba, Muscat",
+  "floors": 12,
+  "units": 48,
+  "status": "Available now",
+  "description": "Twelve floors with the rooftop pool, gym and play area on the top level.",
+  "cover": "own-street.jpg",
+  "gallery": [
+    "own-pool.jpg",
+    "own-play.jpg",
+    "own-night.jpg"
+  ],
+  "video": "azaiba-building-motion.mp4"
+}

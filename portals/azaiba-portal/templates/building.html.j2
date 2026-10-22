@@ -1,0 +1,30 @@
+{% extends "base.html.j2" %}
+{% block title %}{{ building.name }} · {{ site.name }}{% endblock %}
+{% block content %}
+<section class="wrap detail">
+  <nav class="crumbs"><a href="{{ root }}index.html">Home</a> / <a href="{{ root }}search.html">Flats to rent</a> / <span>{{ building.name }}</span></nav>
+  <h1>{{ building.name }}</h1>
+  <p class="muted">{{ building.area }} · {{ building.floors }} floors · {{ building.units }} units · {{ building.status }}</p>
+  <img class="hero-img" src="{{ root }}media/{{ building.cover }}" alt="{{ building.name }}">
+  <p class="lede">{{ building.description }}</p>
+  <div class="thumbs">
+    {% for img in building.gallery %}<img src="{{ root }}media/{{ img }}" alt="{{ building.name }} photo {{ loop.index }}" loading="lazy">{% endfor %}
+  </div>
+  {% if building.video %}
+  <video controls playsinline preload="metadata" class="detail-video"><source src="{{ root }}media/{{ building.video }}" type="video/mp4"></video>
+  {% endif %}
+  <div class="section-head"><h2>Flats in {{ building.name }}</h2></div>
+  <div class="cards">
+    {% for item in building.listings %}
+    <a class="card" href="{{ root }}listing/{{ item.id }}.html">
+      <img src="{{ root }}media/{{ item.cover }}" alt="{{ item.title }}" loading="lazy">
+      <div class="card-body">
+        <p class="price">{{ site.currency }} {{ item.rent_omr }} <small>/ month</small></p>
+        <h3>{{ item.bhk }} flat</h3>
+        <p class="muted">{{ item.size_sqm }} sqm · {{ item.status }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

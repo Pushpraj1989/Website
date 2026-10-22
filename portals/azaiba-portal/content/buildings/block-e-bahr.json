@@ -1,0 +1,16 @@
+{
+  "id": "block-e-bahr",
+  "name": "Block E · Bahr",
+  "area": "Azaiba, Muscat",
+  "floors": 10,
+  "units": 40,
+  "status": "New listings",
+  "description": "The newest block, with family three-bedroom flats on the upper floors.",
+  "cover": "own-street.jpg",
+  "gallery": [
+    "own-pool.jpg",
+    "own-play.jpg",
+    "own-night.jpg"
+  ],
+  "video": "azaiba-building-motion.mp4"
+}

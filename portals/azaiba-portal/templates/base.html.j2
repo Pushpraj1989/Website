@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site.name }}, {{ site.location }}{% endblock %} · {{ site.group }}</title>
+  <meta name="description" content="{{ site.tagline }}">
+  <link rel="stylesheet" href="{{ root }}static/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap bar">
+      <a class="brand" href="{{ root }}index.html"><span class="brand-mark">{{ site.group }}</span><span>{{ site.name }}</span></a>
+      <nav class="nav" aria-label="Main">
+        <a href="{{ root }}index.html" {% if active == 'home' %}aria-current="page"{% endif %}>Home</a>
+        <a href="{{ root }}search.html" {% if active == 'search' %}aria-current="page"{% endif %}>Flats to rent</a>
+        <a href="{{ root }}about.html" {% if active == 'about' %}aria-current="page"{% endif %}>About</a>
+        <a href="{{ root }}contact.html" {% if active == 'contact' %}aria-current="page"{% endif %}>Contact</a>
+      </nav>
+      <a class="btn btn-light" href="{{ root }}contact.html">Book a visit</a>
+    </div>
+  </header>
+  <main>{% block content %}{% endblock %}</main>
+  <footer class="foot">
+    <div class="wrap foot-grid">
+      <div><strong>{{ site.group }}</strong><p>{{ site.name }}, {{ site.location }}</p></div>
+      <div><a href="{{ root }}search.html">Flats to rent</a><a href="{{ root }}contact.html">Contact</a></div>
+      <div class="muted">Rents are per month. Sample content until the client confirms details.</div>
+    </div>
+  </footer>
+  <script src="{{ root }}static/app.js" defer></script>
+</body>
+</html>

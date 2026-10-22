@@ -1,0 +1,16 @@
+{
+  "group": "S&S",
+  "name": "Azaiba Gardens",
+  "location": "Azaiba, Muscat, Oman",
+  "tagline": "Homes to rent in Azaiba, Muscat.",
+  "hero_title": "Find your flat in Azaiba Gardens.",
+  "hero_lede": "1, 2 and 3 bedroom flats to rent across five buildings. Compare rents, see the photos and video, and book a visit.",
+  "about_title": "Managed by S&S",
+  "about_text": "Azaiba Gardens is managed by S&S. Sample text: replace with the group's own description once the client sends it.",
+  "phone": "TODO: phone number",
+  "whatsapp": "TODO: WhatsApp number, international format without +",
+  "email": "TODO: enquiries email",
+  "address": "TODO: office address",
+  "video": "azaiba-building-motion.mp4",
+  "currency": "OMR"
+}
