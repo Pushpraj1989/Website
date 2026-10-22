@@ -124,3 +124,34 @@ Not included yet: WhatsApp Business Cloud API (sending messages from the site or
 - One server process: the login rate limiter and sessions are in memory and in SQLite. Run one instance.
 - Films are stored as uploaded. Compress them before upload (for example to 720p) to keep the site fast.
 - The public site is static HTML built from `data/azaiba-gardens.json`. Each publish rebuilds it (a few seconds).
+
+## Automatic deploy with GitHub Actions
+
+The workflow `.github/workflows/deploy-cms.yml` runs the CMS tests and then deploys to the VPS on every
+push to the deploy branch. The code goes to `/srv/website`. The live content does not: the data file,
+the built site and uploads stay on the server, so changes made in the CMS are never overwritten by a
+push. After each deploy the server rebuilds the site and restarts the CMS.
+
+**One-time setup**
+
+1. On the VPS, as root (replace the key with the public key from step 2):
+   ```
+   DEPLOY_PUBLIC_KEY="ssh-ed25519 AAAA...your-key... deploy-azaiba" bash /srv/website/cms/deploy/bootstrap-server.sh
+   ```
+   The repo must already be in `/srv/website` (or copy `cms/deploy/bootstrap-server.sh` over and run it).
+2. On your own computer, create the deploy key. Leave the passphrase empty, because Actions cannot type one:
+   ```
+   ssh-keygen -t ed25519 -C deploy-azaiba -f ~/deploy_key -N ""
+   ```
+   The public key is `~/deploy_key.pub`. Its contents go in step 1.
+3. Fill in `/etc/azaiba-cms.env` on the server (`CMS_PUBLIC_URL`, the Gmail SMTP values, `SMTP_PASS` is the app password).
+4. Put the nginx config in place with your domains, then `certbot --nginx ...` as in the guide above, and `systemctl start azaiba-cms`.
+5. In GitHub: Settings > Environments > create `production` (optionally add yourself as a required reviewer).
+   Then Settings > Secrets and variables > Actions, add:
+   - `DEPLOY_HOST`: the server IP address
+   - `DEPLOY_USER`: `deploy`
+   - `DEPLOY_SSH_KEY`: the full contents of `~/deploy_key` (the private key, including the BEGIN and END lines)
+   - `DEPLOY_KNOWN_HOSTS`: the output of `ssh-keyscan -H <server IP>` run on your computer
+6. Push to the deploy branch, or run the workflow from the Actions tab. The `test` job must pass before `deploy` runs.
+
+Delete `~/deploy_key` from your computer once the secret is saved, or keep it somewhere safe.

@@ -1,0 +1,101 @@
+# Tests the content manager, then deploys the repo to the Hostinger VPS over SSH.
+# Runs on every push to the deploy branch, or by hand from the Actions tab.
+#
+# Secrets (Settings > Secrets and variables > Actions), see cms/README.md:
+#   DEPLOY_HOST         the VPS IP address or host name
+#   DEPLOY_USER         the SSH user that owns the deploy (not root)
+#   DEPLOY_SSH_KEY      the private key for that user (ed25519)
+#   DEPLOY_KNOWN_HOSTS  output of: ssh-keyscan -H <DEPLOY_HOST>
+name: Deploy content manager
+
+on:
+  push:
+    branches: [claude/festive-fermat-mvjq25]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-cms
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cms
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.13"
+          cache: npm
+          cache-dependency-path: cms/package-lock.json
+      - run: npm ci
+      - run: npm test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Copy the repo to the server
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          set -euo pipefail
+          # Content saved in the CMS lives on the server. Do not copy it over from git, or edits made
+          # in the CMS would be lost on the next push: the live data file, the built site and uploads
+          # stay on the server (the site is rebuilt there after each deploy).
+          rsync -az \
+            --exclude '.git/' \
+            --exclude 'data/azaiba-gardens.json' \
+            --exclude 'sites/' \
+            --exclude 'shared/img/azaiba-gardens/up-*' \
+            --exclude '.github/' \
+            --exclude 'cms/data/' \
+            --exclude 'cms/node_modules/' \
+            --exclude '**/__pycache__/' \
+            --exclude 'portals/azaiba-portal/dist/' \
+            --exclude 'portals/azaiba-portal/react/node_modules/' \
+            -e "ssh -i ~/.ssh/deploy_key -o UserKnownHostsFile=~/.ssh/known_hosts" \
+            ./ "$DEPLOY_USER@$DEPLOY_HOST:/srv/website/"
+
+      - name: Install and restart the CMS
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          set -euo pipefail
+          ssh -i ~/.ssh/deploy_key -o UserKnownHostsFile=~/.ssh/known_hosts "$DEPLOY_USER@$DEPLOY_HOST" bash -s <<'REMOTE'
+          set -euo pipefail
+          cd /srv/website/cms
+          npm ci --omit=dev --no-audit --no-fund
+          cd /srv/website
+          ONLY=azaiba-gardens /srv/venv/bin/python build/build.py
+          sudo systemctl restart azaiba-cms
+          sleep 2
+          curl -fsS -o /dev/null http://127.0.0.1:8800/admin/
+          echo "CMS restarted and answering"
+          REMOTE
+
+      - name: Remove the key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
