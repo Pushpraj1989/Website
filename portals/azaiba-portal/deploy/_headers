@@ -9,6 +9,3 @@
   X-Robots-Tag: noai, noimageai
   Content-Security-Policy: default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'
 
-/admin/*
-  X-Robots-Tag: noindex, nofollow, noarchive
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self' https://api.github.com https://github.com https://auth.example.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'

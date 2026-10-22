@@ -1,0 +1,16 @@
+{
+  "name": "azaiba-cms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Content manager for the Azaiba Gardens site: email and password accounts, 2FA, validated editing, uploads and publishing.",
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "test": "node --test test/",
+    "invite": "node src/cli.mjs invite"
+  },
+  "dependencies": {
+    "nodemailer": "6.9.16"
+  }
+}

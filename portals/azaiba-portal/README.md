@@ -12,13 +12,10 @@ Python (Jinja2). The CMS is Decap CMS, MIT licence, vendored under `admin/` from
 | `content/buildings/*.json` | one file per building: photos, film, status |
 | `content/listings/*.json` | one file per flat: bedrooms, size, **rent per month**, photos, film |
 | `content/media/` | uploaded photos and films (the CMS saves uploads here) |
-| `admin/` | Decap CMS (`index.html`, `config.yml`, bundle) |
 | `templates/`, `static/` | page templates, styles, the flats filter |
 | `tools/seed_from_azaiba.py` | one-off: seeds content from `data/azaiba-gardens.json` (already run) |
 | `react/` | the React build of the same site (Vite, React 18, React Router); output in `dist/app/` |
-| `auth/server.mjs` | GitHub sign-in proxy for the CMS (Node built-ins only) |
 | `deploy/` | nginx config, `_headers`, `robots.txt`: HTTPS, security headers, rate limits |
-| `docs/CMS-ACCESS.md` | who can sign in to the CMS, how to add or remove editors, what each control protects |
 | `build.py` | writes `dist/`, and builds the React app when `react/node_modules` exists |
 
 ## Use
@@ -31,21 +28,13 @@ python3 -m http.server -d dist 8000    # http://localhost:8000  (static)  ·  /a
 
 Two front ends read the same content: the static pages (`/`) and the React app (`/app/`).
 
-Editors open `/admin/`, enter the CMS password, sign in with GitHub, and edit buildings, flats, rents,
-photos and films. Only GitHub collaborators with write access can save. See `docs/CMS-ACCESS.md`.
+The site content is managed in the Azaiba Gardens content manager, `cms/` in the repo root, at `/admin/` with email and password
+accounts. See `cms/README.md`. This portal's `content/` JSON is edited by hand or by a separate import for now.
 Each save commits the JSON to the repo; run `build.py` to publish it.
 
 ## Before going live
 
-- **CMS login:** deploy `auth/server.mjs` with a GitHub OAuth App, then set `backend.base_url` in
-  `admin/config.yml`. Decap's GitHub login cannot run without it. Editors also need write access to the repo.
-- **Server:** fill in the TODO lines in `deploy/nginx.conf` (domain, certificate, htpasswd). Nginx has
-  not been run in this environment, so its syntax and headers are unverified until it is.
+- **Server:** fill in the TODO lines in `deploy/nginx.conf` (domain, certificate). Nginx has not been run here, so its syntax and headers are unverified until it is.
 - **Contacts:** `content/site.json` has TODO placeholders for phone, WhatsApp, email and address.
-- **Photos:** the flat photos are the client team's own photos; the 1, 2 and 3 BHK covers are
-  illustrations. Replace them with real photos through the CMS.
-- **Rents and sizes:** the sample rents (OMR 265, 375, 425) and sizes come from the sample in
-  `data/azaiba-gardens.json`. Confirm them with the client before publishing.
-- **Building names:** Tower A · Falaj, Block B · Nakheel and the rest are the sample names. Replace them.
-- **Rebuild on save:** the CMS commits the content, but the site needs `build.py` to run. Add a
-  workflow that runs the build on changes under `portals/azaiba-portal/content/`.
+- **Photos:** the flat photos are the client team's own photos; the 1, 2 and 3 BHK covers are illustrations.
+- **Rents and sizes:** the sample rents (OMR 265, 375, 425) and sizes come from the sample in `data/azaiba-gardens.json`.

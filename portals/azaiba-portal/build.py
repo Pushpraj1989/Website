@@ -76,9 +76,6 @@ def main():
     shutil.copytree(CONTENT / "media", DIST / "media")
     for name in ("robots.txt", "_headers"):
         shutil.copy(ROOT / "deploy" / name, DIST / name)
-    admin = ROOT / "admin"
-    if admin.exists():
-        shutil.copytree(admin, DIST / "admin")
     build_react()
     print(f"done: {len(buildings)} buildings, {len(listings)} listings")
 

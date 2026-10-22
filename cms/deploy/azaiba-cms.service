@@ -1,0 +1,22 @@
+[Unit]
+Description=Azaiba Gardens content manager
+After=network.target
+
+[Service]
+Type=simple
+User=cms
+Group=cms
+WorkingDirectory=/srv/website/cms
+EnvironmentFile=/etc/azaiba-cms.env
+ExecStart=/usr/bin/node src/server.mjs
+Restart=on-failure
+RestartSec=3
+# Hardening: read-only system, writes only where the CMS needs them
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/srv/website/cms/data /srv/website/data /srv/website/shared/img /srv/website/sites/azaiba-gardens
+
+[Install]
+WantedBy=multi-user.target

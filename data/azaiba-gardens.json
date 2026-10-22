@@ -437,7 +437,8 @@
       {
         "label": "Call us",
         "number": "+968 0000 0000 (sample)",
-        "tel": "+96800000000"
+        "tel": "+96800000000",
+        "whatsapp": true
       }
     ],
     "email": "info@azaibagardens.example",
