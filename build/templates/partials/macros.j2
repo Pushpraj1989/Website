@@ -560,7 +560,7 @@
         <span class="bs-flat-body">
           <span class="bs-flat-type">{{ f.type }}</span>
           <span class="bs-flat-size">{{ f.size }}</span>
-          <span class="bs-flat-rent">{{ f.rent }} <small>/ month</small></span>
+          <span class="bs-flat-rent">{{ f.rent }} <small>{{ f.period_text or '/ month' }}</small></span>
           <span class="bs-flat-go">View flat and book a visit {{ icon('arrow') }}</span>
         </span>
       </a>

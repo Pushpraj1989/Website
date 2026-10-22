@@ -8,12 +8,15 @@ import { audit, openDb } from "./db.mjs";
 import { mailLinkText } from "./links.mjs";
 import { sendMail } from "./mail.mjs";
 import { MEDIA_NAME, checkUpload, listMedia, maxUploadBytes, readBody, registerImage, storeUpload } from "./media.mjs";
-import { SECTIONS, publishNow, readData, registerUploadedImage, saveSection } from "./content.mjs";
+import { SECTIONS, migratedBuildings, publishNow, readData, registerUploadedImage, saveSection } from "./content.mjs";
+import { KINDS, addMaster, importFromData, listMasters, masterContext, seedMasters, updateMaster } from "./masters.mjs";
 import {
   DUMMY_HASH, checkPassword, hashPassword, newTotpSecret, randomToken, rateLimiter, sha256, verifyPassword, verifyTotp,
 } from "./security.mjs";
 
 const db = openDb(config.dbFile);
+seedMasters(db);
+importFromData(db, readData());
 const PUBLIC = path.join(CMS_DIR, "public");
 const ORIGIN = new URL(config.publicUrl).origin;
 const LOGIN_LOCK_MS = 15 * 60_000;
@@ -323,7 +326,7 @@ function contentView() {
     hero: data.hero,
     promos: data.promos,
     contacts: data.contact?.phones || [],
-    buildings: data.buildings?.items || [],
+    buildings: migratedBuildings(data),
     images: Object.fromEntries(Object.entries(data.images || {}).map(([k, v]) => [k, { src: v.src, alt: v.alt || "" }])),
     site: data.name,
     publicUrl: config.publicUrl,
@@ -333,7 +336,7 @@ function contentView() {
 async function putSection(req, res, session, section) {
   if (!SECTIONS.includes(section)) return fail(res, 404, "Unknown section.");
   const body = await readJson(req, 256 * 1024);
-  const result = await saveSection(section, body.value, session.user.email);
+  const result = await saveSection(section, body.value, session.user.email, masterContext(db));
   if (!result.ok) return json(res, 422, { ok: false, errors: result.errors });
   audit(db, session.user.email, "content_saved", section);
   return json(res, 200, { ok: true, published: true });
@@ -441,6 +444,24 @@ async function route(req, res) {
   if (userAction && m === "POST") {
     if (session.user.role !== "admin") return fail(res, 403, "Only an administrator can do that.");
     return changeUser(req, res, session, Number(userAction[1]), userAction[2]);
+  }
+  if (p === "/api/masters" && m === "GET") return json(res, 200, { ok: true, kinds: KINDS, values: listMasters(db) });
+  const masterRoute = p.match(/^\/api\/masters\/([a-z_]+)(?:\/(.+))?$/);
+  if (masterRoute && (m === "POST" || m === "PUT")) {
+    if (session.user.role !== "admin") return fail(res, 403, "Only an administrator can change the lists.");
+    const body = await readJson(req);
+    const kind = masterRoute[1];
+    if (!KINDS[kind]) return fail(res, 404, "Unknown list.");
+    try {
+      if (m === "POST" && !masterRoute[2]) addMaster(db, kind, body);
+      else if (m === "PUT" && masterRoute[2]) updateMaster(db, kind, decodeURIComponent(masterRoute[2]), body);
+      else return fail(res, 404, "Not found.");
+    } catch (err) {
+      if (err.status) return fail(res, err.status, err.message);
+      throw err;
+    }
+    audit(db, session.user.email, "master_changed", `${kind} ${masterRoute[2] || body.code || ""}`);
+    return json(res, 200, { ok: true });
   }
   if (p === "/api/audit" && m === "GET") {
     if (session.user.role !== "admin") return fail(res, 403, "Only an administrator can do that.");

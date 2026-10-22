@@ -9,7 +9,8 @@ Azaiba Gardens website. No GitHub account is needed. Runs on a Hostinger VPS wit
 | Screen | What |
 | --- | --- |
 | Home heading and slides | the small label, title, lead text, two buttons, and the hero slides (photo or film, tag, title, text, button) |
-| Buildings and rents | buildings (name, area, floors, units, status, description, photo) and flats per building (type, size, **rent per month**, photo, link) |
+| Buildings and rents | buildings (name, area, floors, units, status from a list, description, photo) and flats per building: type from a list; **build area** and **carpet area**, each a number with its own unit (sq m, sq yd or sq ft); **rent amount** with a currency and a rent period from lists; photo; link |
+| Lists | admins maintain the dropdown values: area units, currencies with their decimal places, rent periods, flat types and building status. Editors can read them |
 | Phone and WhatsApp | phone numbers; one number is marked WhatsApp and drives the WhatsApp chat button on every page |
 | Media | upload photos (JPEG, PNG, WebP, up to 10 MB) and films (MP4, WebM, up to 200 MB); files are checked by their contents |
 | People | administrators invite editors and administrators, reset passwords, disable or remove people |
@@ -18,6 +19,13 @@ Azaiba Gardens website. No GitHub account is needed. Runs on a Hostinger VPS wit
 
 Sections not on this list (wording on other pages, colours, the rest of the design) stay as the
 builder has them. The CMS never rewrites them.
+
+## How numbers and money are stored
+
+- Area is stored as a number and a unit code: `{ "build": { "value": 88.5, "unit": "sqm" }, "carpet": { "value": 75, "unit": "sqm" } }`. Either area can be left out, but not both.
+- Rent is stored as an amount, a currency code and a period: `{ "amount": 375.25, "currency": "OMR", "period": "month" }`. Decimal places follow the currency (OMR allows 3, USD 2).
+- Every save also writes the display text the site prints (for example "Build 88.5 sq m · Carpet 75 sq m" and "OMR 375.25"), so the public pages need no change.
+- Values saved before this version are converted when the CMS reads them.
 
 ## Security
 

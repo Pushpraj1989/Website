@@ -39,6 +39,15 @@ export function openDb(file) {
       expires_at INTEGER NOT NULL,
       used_at INTEGER
     );
+    CREATE TABLE IF NOT EXISTS masters (
+      kind TEXT NOT NULL,
+      code TEXT NOT NULL,
+      label TEXT NOT NULL,
+      sort INTEGER NOT NULL DEFAULT 0,
+      active INTEGER NOT NULL DEFAULT 1,
+      decimals INTEGER,
+      PRIMARY KEY (kind, code)
+    );
     CREATE TABLE IF NOT EXISTS audit (
       id INTEGER PRIMARY KEY,
       at INTEGER NOT NULL,

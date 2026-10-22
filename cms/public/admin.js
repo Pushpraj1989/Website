@@ -1,7 +1,7 @@
 // Content manager. Builds every element with createElement, so text from the site is never parsed as HTML.
 "use strict";
 
-const state = { user: null, csrf: "", tab: "hero", content: null, media: [], users: [], message: null, errors: [] };
+const state = { user: null, csrf: "", tab: "hero", content: null, media: [], users: [], masters: [], kinds: {}, message: null, errors: [] };
 const app = document.getElementById("app");
 
 function h(tag, attrs = {}, ...children) {
@@ -63,9 +63,9 @@ function select(options, value, attrs = {}) {
   return h("select", attrs, options.map(([v, t]) => h("option", { value: v, selected: v === value ? "selected" : null }, t)));
 }
 
-function imageOptions(current) {
+function imageOptions(current, dataK) {
   const keys = Object.keys(state.content.images || {});
-  return select([["", "No photo"], ...keys.map((k) => [k, `${k} (${state.content.images[k].src})`])], current || "");
+  return select([["", "No photo"], ...keys.map((k) => [k, `${k} (${state.content.images[k].src})`])], current || "", dataK ? { "data-k": dataK } : {});
 }
 
 // The slide's current film is always listed, even if it is not in Media, so saving never drops it.
@@ -275,30 +275,41 @@ function saveSlides() {
   save("promos", slides, "Slides saved and published.", () => { slides = null; });
 }
 
-// Buildings and flats: each building lists its flats with the rent per month.
+// Lists come from the master tables. Only active values are offered, plus the value already saved.
+function masterOptions(kind, current) {
+  return state.masters
+    .filter((r) => r.kind === kind && (r.active || r.code === current))
+    .sort((a, b) => a.sort - b.sort || a.label.localeCompare(b.label))
+    .map((r) => [r.code, r.active ? r.label : `${r.label} (not in use)`]);
+}
+
+function masterSelect(kind, current, attrs = {}) {
+  return select(masterOptions(kind, current), current ?? "", attrs);
+}
+
+function numberInput(value, attrs = {}) {
+  return h("input", { type: "number", inputmode: "decimal", step: "any", min: 0, value: value ?? "", ...attrs });
+}
+
+// Buildings and flats. Every flat has a type from the list, a build area and/or carpet area each with
+// its own unit, and a rent amount with its currency and period. Values are read back by data-k name.
 let buildings = null;
 function buildingsEditor() {
   if (!buildings) buildings = JSON.parse(JSON.stringify(state.content.buildings || []));
   const blocks = buildings.map((b, i) => h("div", { class: "item", "data-building": i },
     h("h3", null, b.name || `Building ${i + 1}`),
     h("div", { class: "row" },
-      field("Name", textInput(b.name, { maxlength: 80, required: true })),
-      field("Area", textInput(b.area, { maxlength: 80 })),
-      field("Floors", textInput(b.floors, { type: "number", min: 1, max: 60 })),
-      field("Units", textInput(b.units, { type: "number", min: 0, max: 5000 })),
-      field("Status", textInput(b.status, { maxlength: 40 })),
-      field("Photo", imageOptions(b.image)),
+      field("Name", textInput(b.name, { maxlength: 80, required: true, "data-k": "name" })),
+      field("Area (location)", textInput(b.area, { maxlength: 80, "data-k": "area" })),
+      field("Floors", numberInput(b.floors, { min: 1, max: 60, step: 1, "data-k": "floors" })),
+      field("Units", numberInput(b.units, { min: 0, max: 5000, step: 1, "data-k": "units" })),
+      field("Status", masterSelect("building_status", b.status, { "data-k": "status" })),
+      field("Photo", imageOptions(b.image, "bimage")),
     ),
-    field("Description", h("textarea", { maxlength: 400 }, b.text || "")),
+    field("Description", h("textarea", { maxlength: 400, "data-k": "text" }, b.text || "")),
     h("div", { class: "sub" },
-      h("h3", null, "Flats and rent per month"),
-      (b.flats || []).map((f, j) => h("div", { class: "row", "data-flat": j },
-        field("Type", select([["1 BHK", "1 BHK"], ["2 BHK", "2 BHK"], ["3 BHK", "3 BHK"], ["Studio", "Studio"]], f.type)),
-        field("Size (sqm)", textInput(parseInt(f.size, 10) || "", { type: "number", min: 1, max: 2000 })),
-        field("Rent (OMR / month)", textInput(parseInt(String(f.rent).replace(/\D/g, ""), 10) || "", { type: "number", min: 0, max: 10000 })),
-        field("Photo", imageOptions(f.image)),
-        field("Link", textInput(f.href || "contact.html")),
-      )),
+      h("h3", null, "Flats"),
+      (b.flats || []).map((f) => flatRow(f)),
       h("div", { class: "btn-row" },
         h("button", { class: "btn ghost", type: "button", on: { click: () => addFlat(i) } }, "Add flat"),
         h("button", { class: "btn danger", type: "button", on: { click: () => { readBuildings(); buildings.splice(i, 1); render(); } } }, "Remove building"),
@@ -316,30 +327,121 @@ function buildingsEditor() {
   },
     blocks,
     h("div", { class: "btn-row" },
-      h("button", { class: "btn ghost", type: "button", on: { click: () => { readBuildings(); buildings.push({ name: "", area: "", floors: 1, units: 0, status: "Available now", text: "", image: "", flats: [] }); render(); } } }, "Add building"),
+      h("button", { class: "btn ghost", type: "button", on: { click: () => { readBuildings(); buildings.push({ name: "", area: "", floors: 1, units: 0, status: masterOptions("building_status")[0]?.[0] || "", text: "", image: "", flats: [] }); render(); } } }, "Add building"),
       h("button", { class: "btn", type: "submit" }, "Save buildings and rents")));
+}
+
+function flatRow(f) {
+  const build = f.measures?.build || {};
+  const carpet = f.measures?.carpet || {};
+  const price = f.price || {};
+  return h("div", { class: "item", "data-flat": "" },
+    h("div", { class: "row" },
+      field("Flat type", masterSelect("bedroom_type", f.type, { "data-k": "type" })),
+      field("Build area", numberInput(build.value, { "data-k": "build-value" })),
+      field("Build area unit", masterSelect("area_unit", build.unit || "sqm", { "data-k": "build-unit" })),
+      field("Carpet area", numberInput(carpet.value, { "data-k": "carpet-value" })),
+      field("Carpet area unit", masterSelect("area_unit", carpet.unit || "sqm", { "data-k": "carpet-unit" })),
+    ),
+    h("div", { class: "row" },
+      field("Rent amount", numberInput(price.amount, { "data-k": "amount" })),
+      field("Currency", masterSelect("currency", price.currency || "OMR", { "data-k": "currency" })),
+      field("Rent period", masterSelect("rent_period", price.period || "month", { "data-k": "period" })),
+      field("Photo", imageOptions(f.image, "fimage")),
+      field("Link", textInput(f.href || "contact.html", { "data-k": "href" })),
+    ),
+  );
 }
 
 function addFlat(i) {
   readBuildings();
-  buildings[i].flats = [...(buildings[i].flats || []), { type: "1 BHK", size: "", rent: "", image: "", href: "contact.html" }];
+  const type = masterOptions("bedroom_type")[0]?.[0] || "";
+  const currency = masterOptions("currency").find(([c]) => c === "OMR")?.[0] || masterOptions("currency")[0]?.[0] || "";
+  buildings[i].flats = [...(buildings[i].flats || []), {
+    type, measures: { build: { value: "", unit: "sqm" }, carpet: { value: "", unit: "sqm" } },
+    price: { amount: "", currency, period: "month" }, image: "", href: "contact.html",
+  }];
   render();
 }
 
 function readBuildings() {
   const blocks = [...document.querySelectorAll("[data-building]")];
   if (!blocks.length) return;
-  buildings = blocks.map((block, i) => {
-    const top = [...block.querySelectorAll(":scope > .row:first-of-type input, :scope > .row:first-of-type select")].map((el) => el.value);
-    const desc = block.querySelector(":scope > label textarea").value;
-    const flats = [...block.querySelectorAll("[data-flat]")].map((row) => {
-      const v = [...row.querySelectorAll("input, select")].map((el) => el.value);
-      return { type: v[0], size: v[1], rent: v[2], image: v[3], href: v[4] };
-    });
-    return {
-      ...(buildings[i] || {}), name: top[0], area: top[1], floors: top[2], units: top[3], status: top[4], image: top[5], text: desc, flats,
-    };
-  });
+  const val = (root, k) => {
+    const el = root.querySelector(`[data-k="${k}"]`);
+    return el ? el.value : "";
+  };
+  buildings = blocks.map((block, i) => ({
+    ...(buildings[i] || {}),
+    name: val(block, "name"), area: val(block, "area"), floors: val(block, "floors"), units: val(block, "units"),
+    status: val(block, "status"), image: val(block, "bimage"), text: val(block, "text"),
+    flats: [...block.querySelectorAll("[data-flat]")].map((row) => ({
+      type: val(row, "type"),
+      measures: {
+        build: { value: val(row, "build-value"), unit: val(row, "build-unit") },
+        carpet: { value: val(row, "carpet-value"), unit: val(row, "carpet-unit") },
+      },
+      price: { amount: val(row, "amount"), currency: val(row, "currency"), period: val(row, "period") },
+      image: val(row, "fimage"), href: val(row, "href"),
+    })),
+  }));
+}
+
+// Lists tab: admins maintain the values; editors can see them.
+function listsView() {
+  const admin = state.user.role === "admin";
+  return h("div", null,
+    h("div", { class: "card" },
+      h("h2", null, "Lists"),
+      h("p", { class: "muted" }, "These lists feed every dropdown in the CMS. Codes are fixed once created, because the site data refers to them. Hide a value you no longer use rather than deleting it."),
+    ),
+    Object.entries(state.kinds).map(([kind, meta]) => listCard(kind, meta, admin)));
+}
+
+function listCard(kind, meta, admin) {
+  const rows = state.masters.filter((r) => r.kind === kind).sort((a, b) => a.sort - b.sort);
+  const addCode = textInput("", { maxlength: 20, placeholder: kind === "currency" ? "e.g. CNY" : "code" });
+  const addLabel = textInput("", { maxlength: 60, placeholder: "Shown in the dropdown" });
+  const addDec = numberInput("", { min: 0, max: 4, step: 1, placeholder: "Decimals" });
+  return h("div", { class: "card" },
+    h("h3", null, meta.label),
+    h("table", null,
+      h("thead", null, h("tr", null, h("th", null, "Code"), h("th", null, "Label"), h("th", null, "Order"), h("th", null, "Decimals"), h("th", null, "Offered in dropdowns"), admin ? h("th", null, "") : null)),
+      h("tbody", null, rows.map((r) => {
+        const label = textInput(r.label, { maxlength: 60, disabled: admin ? null : "disabled" });
+        const sort = numberInput(r.sort, { min: 0, max: 9999, step: 1, disabled: admin ? null : "disabled" });
+        const active = h("input", { type: "checkbox", checked: r.active ? "checked" : null, disabled: admin ? null : "disabled" });
+        return h("tr", null,
+          h("td", null, h("code", null, r.code)),
+          h("td", null, label),
+          h("td", null, sort),
+          h("td", null, r.decimals ?? "—"),
+          h("td", null, active, " ", h("span", { class: "muted" }, r.active ? "shown" : "hidden")),
+          admin ? h("td", null, h("button", { class: "btn ghost", type: "button", on: { click: () => saveMaster(kind, r.code, { label: label.value, sort: sort.value, active: active.checked }) } }, "Save")) : null,
+        );
+      })),
+    ),
+    admin ? h("form", { class: "sub", on: { submit: (e) => { e.preventDefault(); addMasterValue(kind, meta, { code: addCode.value, label: addLabel.value, decimals: addDec.value }); } } },
+      h("div", { class: "row" },
+        field("New code", addCode),
+        field("Label", addLabel),
+        meta.decimalsRequired ? field("Decimal places", addDec) : null),
+      h("button", { class: "btn", type: "submit" }, "Add value")) : null,
+  );
+}
+
+async function saveMaster(kind, code, body) {
+  const r = await api("PUT", `/api/masters/${kind}/${encodeURIComponent(code)}`, body);
+  if (!r.ok) return flash("error", r.error);
+  await loadContent();
+  flash("ok", "List value saved.");
+}
+
+async function addMasterValue(kind, meta, body) {
+  const r = await api("POST", `/api/masters/${kind}`, body);
+  if (!r.ok) return flash("error", r.error);
+  await loadContent();
+  flash("ok", "List value added.");
 }
 
 function contactsEditor() {
@@ -507,6 +609,7 @@ const TABS = [
   ["hero", "Home heading and slides"],
   ["buildings", "Buildings and rents"],
   ["contacts", "Phone and WhatsApp"],
+  ["lists", "Lists"],
   ["media", "Media"],
   ["users", "People"],
   ["account", "My account"],
@@ -545,6 +648,8 @@ async function logout() {
 async function loadContent() {
   const r = await api("GET", "/api/content");
   if (r.ok) state.content = r;
+  const mv = await api("GET", "/api/masters");
+  if (mv.ok) { state.masters = mv.values; state.kinds = mv.kinds; }
   const m = await api("GET", "/api/media");
   if (m.ok) state.media = m.files;
 }
@@ -573,6 +678,7 @@ async function loadTab() {
 function tabBody() {
   if (state.tab === "buildings") return buildingsEditor();
   if (state.tab === "contacts") return contactsEditor();
+  if (state.tab === "lists") return listsView();
   if (state.tab === "media") return mediaView();
   if (state.tab === "users") return usersView();
   if (state.tab === "account") return accountView();

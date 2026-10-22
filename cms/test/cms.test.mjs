@@ -143,17 +143,71 @@ test("a valid edit is saved, keeps the other sections, and leaves a backup", asy
   assert.ok(fs.readdirSync(path.join(CMS_DIR, "data", "history")).some((f) => f.endsWith("-contacts.json")));
 });
 
-test("building rents are saved in the site's format and an invalid rent is refused", async () => {
+function flatFrom(current, patch) {
+  const copy = JSON.parse(JSON.stringify(current));
+  Object.assign(copy[0].flats[0], patch);
+  return copy;
+}
+
+test("flats store area and price as structured values and the site gets matching text", async () => {
   const current = (await call("GET", "/api/content")).data.buildings;
-  const edited = JSON.parse(JSON.stringify(current));
-  edited[0].flats[0].rent = "310";
+  assert.equal(current[0].flats[0].measures.build.value, 52, "older text values are read as numbers");
+  const edited = flatFrom(current, {
+    measures: { build: { value: "88.5", unit: "sqm" }, carpet: { value: "75", unit: "sqm" } },
+    price: { amount: "375.250", currency: "OMR", period: "month" },
+  });
   const ok = await call("PUT", "/api/content/buildings", { value: edited });
   assert.equal(ok.status, 200, JSON.stringify(ok.data));
-  const saved = JSON.parse(fs.readFileSync(env.CMS_DATA, "utf-8"));
-  assert.equal(saved.buildings.items[0].flats[0].rent, "OMR 310");
-  edited[0].flats[0].rent = "-5";
-  const bad = await call("PUT", "/api/content/buildings", { value: edited });
-  assert.equal(bad.status, 422);
+  const saved = JSON.parse(fs.readFileSync(env.CMS_DATA, "utf-8")).buildings.items[0].flats[0];
+  assert.equal(saved.measures.build.value, 88.5);
+  assert.equal(saved.size, "Build 88.5 sq m · Carpet 75 sq m");
+  assert.equal(saved.rent, "OMR 375.25");
+  assert.equal(saved.period_text, "/ month");
+});
+
+test("a yearly rent and square yards are shown with their own labels", async () => {
+  const current = (await call("GET", "/api/content")).data.buildings;
+  const edited = flatFrom(current, {
+    measures: { build: { value: "1000", unit: "sqyd" }, carpet: null },
+    price: { amount: "4500", currency: "OMR", period: "year" },
+  });
+  assert.equal((await call("PUT", "/api/content/buildings", { value: edited })).status, 200);
+  const saved = JSON.parse(fs.readFileSync(env.CMS_DATA, "utf-8")).buildings.items[0].flats[0];
+  assert.equal(saved.size, "Build 1,000 sq yd");
+  assert.equal(saved.rent, "OMR 4,500");
+  assert.equal(saved.period_text, "/ year");
+});
+
+test("invalid numbers, units, currencies and periods are refused with a clear message", async () => {
+  const current = (await call("GET", "/api/content")).data.buildings;
+  const cases = [
+    { measures: { build: { value: "88", unit: "sqm" }, carpet: null }, price: { amount: "12.3456", currency: "OMR", period: "month" }, why: "too many decimals for OMR" },
+    { measures: { build: { value: "88", unit: "sqm" }, carpet: null }, price: { amount: "12.345", currency: "USD", period: "month" }, why: "USD allows 2 decimals" },
+    { measures: { build: { value: "88", unit: "acre" }, carpet: null }, price: { amount: "100", currency: "OMR", period: "month" }, why: "unit not in the list" },
+    { measures: { build: null, carpet: null }, price: { amount: "100", currency: "OMR", period: "month" }, why: "no area" },
+    { measures: { build: { value: "88", unit: "sqm" }, carpet: null }, price: { amount: "100", currency: "ZZZ", period: "month" }, why: "unknown currency" },
+    { measures: { build: { value: "88", unit: "sqm" }, carpet: null }, price: { amount: "-5", currency: "OMR", period: "month" }, why: "negative rent" },
+    { measures: { build: { value: "8x", unit: "sqm" }, carpet: null }, price: { amount: "100", currency: "OMR", period: "month" }, why: "letters in a number" },
+    { measures: { build: { value: "88", unit: "sqm" }, carpet: null }, price: { amount: "100", currency: "OMR", period: "week" }, why: "period not in the list" },
+  ];
+  for (const c of cases) {
+    const r = await call("PUT", "/api/content/buildings", { value: flatFrom(current, c) });
+    assert.equal(r.status, 422, c.why);
+  }
+});
+
+test("administrators maintain the lists; a value hidden from new entries still displays on old ones", async () => {
+  const add = await call("POST", "/api/masters/bedroom_type", { code: "Duplex", label: "Duplex" });
+  assert.equal(add.status, 200, JSON.stringify(add.data));
+  const badCurrency = await call("POST", "/api/masters/currency", { code: "usd", label: "Dollar", decimals: 2 });
+  assert.equal(badCurrency.status, 400, "currency codes are three capital letters");
+  const hide = await call("PUT", "/api/masters/bedroom_type/Duplex", { active: false });
+  assert.equal(hide.status, 200);
+  const current = (await call("GET", "/api/content")).data.buildings;
+  const useHidden = await call("PUT", "/api/content/buildings", { value: flatFrom(current, { type: "Duplex" }) });
+  assert.equal(useHidden.status, 422, "a hidden value cannot be chosen for a new entry");
+  const lists = (await call("GET", "/api/masters")).data.values;
+  assert.ok(lists.some((r) => r.kind === "currency" && r.code === "OMR" && r.decimals === 3));
 });
 
 test("uploads are checked by content: a renamed text file is refused", async () => {
@@ -185,6 +239,10 @@ test("only administrators can manage people; an editor gets 403", async () => {
   await call("POST", "/api/auth/login", { email: editorEmail, password: "harbour-lantern-quartz-7" }).then((r) => (csrf = r.data.csrf));
   const list = await call("GET", "/api/users");
   assert.equal(list.status, 403);
+  const readLists = await call("GET", "/api/masters");
+  assert.equal(readLists.status, 200, "editors can read the lists");
+  const changeLists = await call("POST", "/api/masters/currency", { code: "CNY", label: "Yuan", decimals: 2 });
+  assert.equal(changeLists.status, 403, "editors cannot change the lists");
   const invite = await call("POST", "/api/users/invite", { email: "x@example.com", role: "admin" });
   assert.equal(invite.status, 403);
   const content = await call("GET", "/api/content");

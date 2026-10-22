@@ -2,6 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawn } from "node:child_process";
 import { config, REPO_ROOT } from "./config.mjs";
+import { PERIOD_TEXT, areaText, parseDecimal, priceText, migrateFlat } from "./measures.mjs";
+
+const AREA_MAX = 100000;
+const AMOUNT_MAX = 1_000_000_000;
 
 // Only these parts of data/azaiba-gardens.json are editable from the CMS. Everything else in the
 // file (sections, copy, colours, the builder's own settings) is left exactly as it is.
@@ -66,8 +70,47 @@ function videoName(value, label, errors) {
   return value;
 }
 
+// Used by tests and tools that do not hold a database: every master value is accepted.
+const ALL_OPEN = { allowed: () => true, decimals: () => 2, label: (kind, code) => code, labels: () => ({}) };
+
+function flatOf(f, label, data, ctx, errors, prev) {
+  const type = str(f.type, 20, `${label} type`, errors, { required: true });
+  if (type && !ctx.allowed("bedroom_type", type, prev.type)) errors.push(`${label}: pick a flat type from the list.`);
+  const measures = {};
+  for (const key of ["build", "carpet"]) {
+    const m = f.measures?.[key];
+    if (!m || (m.value === "" && !m.unit)) { measures[key] = null; continue; }
+    const unit = String(m.unit || "");
+    if (!ctx.allowed("area_unit", unit, prev.measures?.[key]?.unit)) errors.push(`${label}: pick a unit for the ${key} area.`);
+    const decimals = ctx.decimals("area_unit", unit);
+    measures[key] = { value: parseDecimal(m.value, { label: `${label} ${key} area`, min: 1, max: AREA_MAX, decimals, errors, required: true }), unit };
+  }
+  if (!measures.build && !measures.carpet) errors.push(`${label}: enter the build area, the carpet area, or both.`);
+  const currency = String(f.price?.currency || "");
+  const period = String(f.price?.period || "");
+  if (!ctx.allowed("currency", currency, prev.price?.currency)) errors.push(`${label}: pick a currency from the list.`);
+  if (!ctx.allowed("rent_period", period, prev.price?.period)) errors.push(`${label}: pick a rent period from the list.`);
+  const amount = parseDecimal(f.price?.amount, { label: `${label} rent`, min: 0.001, max: AMOUNT_MAX, decimals: ctx.decimals("currency", currency), errors });
+  const cleanMeasures = {
+    build: measures.build ? { value: measures.build.value, unit: measures.build.unit } : null,
+    carpet: measures.carpet ? { value: measures.carpet.value, unit: measures.carpet.unit } : null,
+  };
+  const price = { amount, currency, period };
+  const flat = {
+    type,
+    measures: cleanMeasures,
+    price,
+    size: areaText(cleanMeasures, ctx.labels("area_unit")),
+    rent: priceText(price, ctx.decimals("currency", currency)),
+    period_text: PERIOD_TEXT[period] || "/ month",
+    image: imageKey(f.image, `${label} photo`, data.images || {}, errors),
+    href: href(f.href || "contact.html", `${label} link`, errors),
+  };
+  return flat;
+}
+
 // Each validator returns { value, errors }. The value is the cleaned section, ready to write.
-export function validateSection(name, input, data) {
+export function validateSection(name, input, data, ctx = ALL_OPEN) {
   const errors = [];
   const images = data.images || {};
   if (name === "hero") {
@@ -116,26 +159,18 @@ export function validateSection(name, input, data) {
   if (name === "buildings") {
     const items = list(input, "Buildings", errors, 1, 20).map((b, i) => {
       const label = b.name ? `Building "${b.name}"` : `Building ${i + 1}`;
+      const status = str(b.status, 40, `${label} status`, errors);
+      if (status && !ctx.allowed("building_status", status, data.buildings?.items?.[i]?.status)) errors.push(`${label}: pick a status from the list.`);
       return {
         ...(data.buildings?.items?.[i] || {}),
         name: str(b.name, 80, `${label} name`, errors, { required: true }),
         area: str(b.area, 80, `${label} area`, errors),
         floors: int(b.floors, `${label} floors`, errors, 1, 60),
         units: int(b.units, `${label} units`, errors, 0, 5000),
-        status: str(b.status, 40, `${label} status`, errors),
+        status,
         text: str(b.text, 400, `${label} description`, errors),
         image: imageKey(b.image, `${label} photo`, images, errors),
-        flats: list(b.flats || [], `${label} flats`, errors, 0, 12).map((f) => {
-          const flatLabel = `${label}, ${f.type || "flat"}`;
-          const rent = int(f.rent, `${flatLabel} rent (OMR per month)`, errors, 0, 10000);
-          return {
-            type: str(f.type, 20, `${flatLabel} type`, errors, { required: true }),
-            size: `${int(f.size, `${flatLabel} size (sqm)`, errors, 1, 2000)} sqm`,
-            rent: `OMR ${rent}`,
-            image: imageKey(f.image, `${flatLabel} photo`, images, errors),
-            href: href(f.href || "contact.html", `${flatLabel} link`, errors),
-          };
-        }),
+        flats: list(b.flats || [], `${label} flats`, errors, 0, 12).map((f, j) => flatOf(f, `${label}, flat ${j + 1}`, data, ctx, errors, data.buildings?.items?.[i]?.flats?.[j] || {})),
       };
     });
     return { value: { ...(data.buildings || {}), items }, errors };
@@ -145,6 +180,14 @@ export function validateSection(name, input, data) {
 
 export function readData() {
   return JSON.parse(fs.readFileSync(config.dataFile, "utf-8"));
+}
+
+// Flats saved before the structured fields existed are converted when the CMS reads them.
+export function migratedBuildings(data, unitCodes = ["sqm", "sqyd", "sqft"]) {
+  return (data.buildings?.items || []).map((b) => ({
+    ...b,
+    flats: (b.flats || []).map((f) => migrateFlat(f, unitCodes)),
+  }));
 }
 
 function applySection(data, name, value) {
@@ -158,15 +201,15 @@ function applySection(data, name, value) {
 // Writes the new file atomically, keeps the previous version in data/history/, and rebuilds the site.
 // If the build fails, the previous file is put back and the editor sees the build error.
 let queue = Promise.resolve();
-export function saveSection(name, input, actor) {
-  const run = queue.then(() => doSave(name, input, actor));
+export function saveSection(name, input, actor, ctx) {
+  const run = queue.then(() => doSave(name, input, actor, ctx));
   queue = run.catch(() => {});
   return run;
 }
 
-async function doSave(name, input, actor) {
+async function doSave(name, input, actor, ctx) {
   const current = readData();
-  const { value, errors } = validateSection(name, input, current);
+  const { value, errors } = validateSection(name, input, current, ctx);
   if (errors.length) return { ok: false, errors };
 
   const previousText = fs.readFileSync(config.dataFile, "utf-8");
