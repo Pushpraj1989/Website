@@ -13,6 +13,7 @@
 {%- if s.lang == 'ar' %}<link rel="stylesheet" href="{{ s._ar_fonts }}">{% endif %}
 {%- if s._alt %}<link rel="alternate" hreflang="{{ s._alt.lang }}" href="{{ s._alt.prefix }}{{ page.file if page else 'index.html' }}">{% endif %}
 {%- if s.brand and s.brand.logo %}<link rel="icon" href="{{ m.src(s.brand.logo) }}">{% endif %}
+{%- if not (s.brand and s.brand.logo) %}<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='{{ (s.brand.accent if s.brand and s.brand.accent else '#8DB580') | replace('#', '%23') }}'/%3E%3Ctext x='16' y='22' font-size='18' font-family='Arial' font-weight='700' text-anchor='middle' fill='%230F1B15'%3E{{ s.name[:1] | upper }}%3C/text%3E%3C/svg%3E">{% endif %}
 <link rel="stylesheet" href="assets/core.css">
 <link rel="stylesheet" href="assets/{{ s.theme }}.css">
 {%- if s.brand and s.brand.style %}<link rel="stylesheet" href="assets/styles.css">{% endif %}
