@@ -1,0 +1,29 @@
+{
+  "id": "block-b-nakheel-2-bhk",
+  "title": "2 BHK flat, Block B · Nakheel",
+  "building": "block-b-nakheel",
+  "bhk": "2 BHK",
+  "measures": {
+    "build": {
+      "value": 88,
+      "unit": "sqm"
+    },
+    "carpet": null
+  },
+  "price": {
+    "amount": 375,
+    "currency": "OMR",
+    "period": "month"
+  },
+  "status": "Available",
+  "available_from": "",
+  "cover": "concept-flat-2bhk.jpg",
+  "gallery": [
+    "own-bedroom.jpg",
+    "own-kitchen.jpg",
+    "own-bathroom.jpg"
+  ],
+  "video": "",
+  "description": "A 2 BHK flat in Block B · Nakheel, Azaiba. Sample listing: confirm size and rent before publishing.",
+  "featured": true
+}

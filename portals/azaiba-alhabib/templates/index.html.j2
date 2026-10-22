@@ -1,0 +1,71 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<section class="hero">
+  {% if site.hero_video %}
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="{{ root }}media/{{ buildings[0].cover }}" aria-hidden="true" tabindex="-1">
+    {%- if site.hero_webm %}<source src="{{ root }}media/{{ site.hero_webm }}" type="video/webm">{% endif %}
+    <source src="{{ root }}media/{{ site.hero_video }}" type="{{ 'video/webm' if site.hero_video.endswith('.webm') else 'video/mp4' }}">
+  </video>
+  {% endif %}
+  <div class="wrap">
+    <p class="eyebrow">{{ site.location }}</p>
+    <h1>{{ site.hero_title }}</h1>
+    <p class="lede">{{ site.hero_lede }}</p>
+    <form class="search" action="{{ root }}search.html" method="get" role="search">
+      <label class="field"><span>Building</span>
+        <select name="building"><option value="">All buildings</option>
+          {% for b in buildings %}<option value="{{ b.id }}">{{ b.name }}</option>{% endfor %}
+        </select></label>
+      <label class="field"><span>Bedrooms</span>
+        <select name="bhk"><option value="">Any</option><option>1 BHK</option><option>2 BHK</option><option>3 BHK</option></select></label>
+      <label class="field"><span>Max rent (OMR)</span>
+        <select name="max"><option value="">Any</option><option value="300">300</option><option value="400">400</option><option value="500">500</option></select></label>
+      <button class="btn btn-gold" type="submit">Search flats</button>
+    </form>
+  </div>
+</section>
+
+{% if site.video %}
+<section class="wrap video-band">
+  <video controls playsinline preload="metadata" poster="{{ root }}media/{{ buildings[0].cover }}">
+    <source src="{{ root }}media/{{ site.video }}" type="video/mp4">
+  </video>
+  <div>
+    <h2>The building in motion</h2>
+    <p>A short film of the buildings and their surroundings.</p>
+  </div>
+</section>
+{% endif %}
+
+<section class="wrap">
+  <div class="section-head"><h2>Featured flats</h2><div class="view-toggle" role="group" aria-label="Show as"><button type="button" data-view-set="cards" aria-pressed="true">Cards</button><button type="button" data-view-set="list" aria-pressed="false">List</button></div><a href="{{ root }}search.html">All flats →</a></div>
+  <div class="cards view-target">
+    {% for item in featured %}
+    <a class="card" href="{{ root }}listing/{{ item.id }}.html">
+      <img src="{{ root }}media/{{ item.cover }}" alt="{{ item.title }}" loading="lazy">
+      <div class="card-body">
+        <p class="price">{{ item.rent_text }} <small>{{ item.period_text }}</small></p>
+        <h3>{{ item.bhk }} flat</h3>
+        <p class="muted">{{ item.building_record.name }} · {{ item.size_text }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head"><h2>Our buildings</h2><div class="view-toggle" role="group" aria-label="Show as"><button type="button" data-view-set="cards" aria-pressed="true">Cards</button><button type="button" data-view-set="list" aria-pressed="false">List</button></div></div>
+  <div class="cards view-target">
+    {% for b in buildings %}
+    <a class="card" href="{{ root }}building/{{ b.id }}.html">
+      <img src="{{ root }}media/{{ b.cover }}" alt="{{ b.name }}" loading="lazy">
+      <div class="card-body">
+        <h3>{{ b.name }}</h3>
+        <p class="muted">{{ b.area }} · {{ b.floors }} floors · {{ b.units }} units</p>
+        <p class="price">From {{ site.currency }} {{ b.from_rent }} <small>/ month</small></p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

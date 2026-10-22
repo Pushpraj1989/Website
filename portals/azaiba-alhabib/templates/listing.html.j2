@@ -1,0 +1,33 @@
+{% extends "base.html.j2" %}
+{% block title %}{{ listing.title }} · {{ site.name }}{% endblock %}
+{% block content %}
+<section class="wrap detail">
+  <nav class="crumbs"><a href="{{ root }}index.html">Home</a> / <a href="{{ root }}search.html">Flats to rent</a> / <span>{{ listing.bhk }}</span></nav>
+  <div class="detail-grid">
+    <div>
+      <img class="hero-img" src="{{ root }}media/{{ listing.cover }}" alt="{{ listing.title }}">
+      <div class="thumbs">
+        {% for img in listing.gallery %}<img src="{{ root }}media/{{ img }}" alt="{{ listing.title }} photo {{ loop.index }}" loading="lazy">{% endfor %}
+      </div>
+      {% if listing.video %}
+      <video controls playsinline preload="metadata" class="detail-video"><source src="{{ root }}media/{{ listing.video }}" type="video/mp4"></video>
+      {% endif %}
+    </div>
+    <aside class="panel">
+      <h1>{{ listing.title }}</h1>
+      <p class="price">{{ listing.rent_text }} <small>{{ listing.period_text }}</small></p>
+      <dl class="facts">
+        <dt>Bedrooms</dt><dd>{{ listing.bhk }}</dd>
+        <dt>Size</dt><dd>{{ listing.size_text }}</dd>
+        <dt>Building</dt><dd><a href="{{ root }}building/{{ listing.building }}.html">{{ listing.building_record.name }}</a></dd>
+        <dt>Status</dt><dd>{{ listing.status }}{% if listing.available_from %}, from {{ listing.available_from }}{% endif %}</dd>
+      </dl>
+      <p>{{ listing.description }}</p>
+      <div class="btn-row">
+        <a class="btn btn-gold" href="{{ root }}contact.html?flat={{ listing.id }}">Book a visit</a>
+        <button class="btn ghost" type="button" data-save="{{ listing.id }}" aria-pressed="false">Save</button>
+      </div>
+    </aside>
+  </div>
+</section>
+{% endblock %}

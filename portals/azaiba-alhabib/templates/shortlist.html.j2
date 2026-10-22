@@ -1,0 +1,13 @@
+{% extends "base.html.j2" %}
+{% block title %}Shortlist · {{ site.name }}{% endblock %}
+{% block content %}
+<section class="wrap page-head">
+  <h1>Your shortlist</h1>
+  <p class="muted">Save flats on the search page or on a flat's page. Your list stays on this device.</p>
+</section>
+<section class="wrap">
+  <div id="compare"></div>
+  <p class="muted empty" id="short-empty" hidden>Nothing saved yet. <a href="{{ root }}search.html">Browse flats to rent</a>.</p>
+</section>
+<script id="listings-data" type="application/json">{{ data|tojson }}</script>
+{% endblock %}

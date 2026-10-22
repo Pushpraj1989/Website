@@ -1,0 +1,29 @@
+{% extends "base.html.j2" %}
+{% block title %}Contact · {{ site.name }}{% endblock %}
+{% block content %}
+<section class="wrap page-head"><h1>Book a visit</h1><p class="muted">Tell us which flat you want to see.</p></section>
+<section class="wrap contact-grid">
+  <form class="panel form" action="mailto:{{ site.email }}" method="post" enctype="text/plain" id="enquiry">
+    <label class="field"><span>Name</span><input name="name" required></label>
+    <label class="field"><span>Phone</span><input name="phone" type="tel" required></label>
+    <label class="field"><span>I am interested in</span>
+      <select name="interest" required>
+        <option value="">Choose one</option>
+        <option>Renting a flat</option>
+        <option>Booking a visit</option>
+        <option>A general question</option>
+      </select></label>
+    <label class="field"><span>Flat</span><input name="flat" id="flat-field" placeholder="Any flat"></label>
+    <label class="field"><span>Message (optional)</span><textarea name="message" rows="4" maxlength="2000"></textarea></label>
+    <label class="consent"><input type="checkbox" name="consent" value="yes" required> I agree that {{ site.group }} may contact me about this enquiry. I can ask for my details to be removed at any time.</label>
+    <button class="btn btn-gold" type="submit">Send enquiry</button>
+  </form>
+  <aside class="panel">
+    <h2>{{ site.group }} leasing office</h2>
+    <p>{{ site.address }}</p>
+    <p>Phone: {{ site.phone }}</p>
+    <p>WhatsApp: {{ site.whatsapp }}</p>
+    <p>Email: {{ site.email }}</p>
+  </aside>
+</section>
+{% endblock %}

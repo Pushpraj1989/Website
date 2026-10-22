@@ -1,0 +1,16 @@
+{
+  "id": "tower-a-falaj",
+  "name": "Tower A · Falaj",
+  "area": "Azaiba, Muscat",
+  "floors": 9,
+  "units": 36,
+  "status": "Available now",
+  "description": "Eight-storey homes on the Falaj side with views over the Mosque and mountains.",
+  "cover": "own-street.jpg",
+  "gallery": [
+    "own-pool.jpg",
+    "own-play.jpg",
+    "own-night.jpg"
+  ],
+  "video": "azaiba-building-motion.mp4"
+}

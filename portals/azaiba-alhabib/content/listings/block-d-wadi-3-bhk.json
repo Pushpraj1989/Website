@@ -1,0 +1,29 @@
+{
+  "id": "block-d-wadi-3-bhk",
+  "title": "3 BHK flat, Block D · Wadi",
+  "building": "block-d-wadi",
+  "bhk": "3 BHK",
+  "measures": {
+    "build": {
+      "value": 120,
+      "unit": "sqm"
+    },
+    "carpet": null
+  },
+  "price": {
+    "amount": 425,
+    "currency": "OMR",
+    "period": "month"
+  },
+  "status": "Available",
+  "available_from": "",
+  "cover": "concept-flat-3bhk.jpg",
+  "gallery": [
+    "own-bedroom.jpg",
+    "own-kitchen.jpg",
+    "own-bathroom.jpg"
+  ],
+  "video": "",
+  "description": "A 3 BHK flat in Block D · Wadi, Azaiba. Sample listing: confirm size and rent before publishing.",
+  "featured": false
+}

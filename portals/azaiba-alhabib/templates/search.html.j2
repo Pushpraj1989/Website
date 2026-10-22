@@ -1,0 +1,42 @@
+{% extends "base.html.j2" %}
+{% block title %}Flats to rent · {{ site.name }}{% endblock %}
+{% block content %}
+<section class="wrap page-head">
+  <h1>Flats to rent</h1>
+  <p class="muted" id="count">{{ listings|length }} flats</p>
+  <div class="head-tools">
+    <div class="view-toggle" role="group" aria-label="Show as"><button type="button" data-view-set="cards" aria-pressed="true">Cards</button><button type="button" data-view-set="list" aria-pressed="false">List</button></div>
+    <a class="shortlist-link" href="{{ root }}shortlist.html">Shortlist <span data-shortcount>0</span></a>
+  </div>
+</section>
+<section class="wrap filters" data-results>
+  <form class="search search-compact" id="filters" role="search" onsubmit="return false">
+    <fieldset class="seg">
+      <legend>Looking to</legend>
+      <label><input type="radio" name="transaction" value="rent" checked> Rent</label>
+      <label><input type="radio" name="transaction" value="sale"> Buy</label>
+    </fieldset>
+    <label class="field"><span>Building</span>
+      <select name="building"><option value="">All buildings</option>
+        {% for b in buildings %}<option value="{{ b.id }}">{{ b.name }}</option>{% endfor %}
+      </select></label>
+    <label class="field"><span>Bedrooms</span>
+      <select name="bhk"><option value="">Any</option><option>Studio</option><option>1 BHK</option><option>2 BHK</option><option>3 BHK</option></select></label>
+    <label class="field"><span>Rent from (OMR)</span><input type="number" name="min" min="0" step="5" placeholder="Any"></label>
+    <label class="field"><span>Rent up to (OMR)</span><input type="number" name="max" min="0" step="5" placeholder="Any"></label>
+    <label class="field"><span>Area from (sq m)</span><input type="number" name="amin" min="0" step="1" placeholder="Any"></label>
+    <label class="field"><span>Area up to (sq m)</span><input type="number" name="amax" min="0" step="1" placeholder="Any"></label>
+    <label class="field"><span>Sort by</span>
+      <select name="sort">
+        <option value="rent-asc">Rent: low to high</option>
+        <option value="rent-desc">Rent: high to low</option>
+        <option value="area-asc">Area: small to large</option>
+        <option value="area-desc">Area: large to small</option>
+      </select></label>
+    <button class="btn ghost" type="reset" id="clear-filters">Clear filters</button>
+  </form>
+  <div class="cards view-target" id="results"></div>
+  <p class="muted empty" id="empty" hidden></p>
+</section>
+<script id="listings-data" type="application/json">{{ data|tojson }}</script>
+{% endblock %}

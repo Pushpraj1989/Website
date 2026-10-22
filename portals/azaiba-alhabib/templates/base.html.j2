@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site.name }}, {{ site.location }}{% endblock %} · {{ site.group }}</title>
+  <meta name="description" content="{{ site.tagline }}">
+  <link rel="stylesheet" href="{{ root }}static/app.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23C9A227'/%3E%3Ctext x='16' y='22' font-size='13' font-family='Arial' font-weight='700' text-anchor='middle' fill='%2313294B'%3ES%26S%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap bar">
+      <a class="brand" href="{{ root }}index.html"><span class="brand-mark">{{ site.group }}</span><span>{{ site.name }}</span></a>
+      <nav class="nav" aria-label="Main">
+        <a href="{{ root }}index.html" {% if active == 'home' %}aria-current="page"{% endif %}>Home</a>
+        <a href="{{ root }}search.html" {% if active == 'search' %}aria-current="page"{% endif %}>Flats to rent</a>
+        <a href="{{ root }}shortlist.html" {% if active == 'shortlist' %}aria-current="page"{% endif %}>Shortlist <span data-shortcount>0</span></a>
+        <a href="{{ root }}about.html" {% if active == 'about' %}aria-current="page"{% endif %}>About</a>
+        <a href="{{ root }}contact.html" {% if active == 'contact' %}aria-current="page"{% endif %}>Contact</a>
+      </nav>
+      <a class="btn btn-light" href="{{ root }}contact.html">Book a visit</a>
+    </div>
+  </header>
+  <main>{% block content %}{% endblock %}</main>
+  <footer class="foot">
+    <div class="wrap foot-grid">
+      <div><strong>{{ site.group }}</strong><p>{{ site.name }}, {{ site.location }}</p></div>
+      <div><a href="{{ root }}search.html">Flats to rent</a><a href="{{ root }}contact.html">Contact</a></div>
+      <div class="muted">Rents are per month. Sample content until the client confirms details.</div>
+    </div>
+  </footer>
+  <script src="{{ root }}static/app.js" defer></script>
+</body>
+</html>
