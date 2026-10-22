@@ -7,6 +7,7 @@ Content lives in content/ (JSON, edited through the CMS at admin/). Run:
 """
 import json
 import shutil
+import subprocess
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -19,6 +20,16 @@ DIST = ROOT / "dist"
 def load_folder(name):
     records = [json.loads(p.read_text(encoding="utf-8")) for p in sorted((CONTENT / name).glob("*.json"))]
     return records
+
+
+def export_data(site, buildings, listings):
+    """Public JSON for the React build: no internal fields, nothing a visitor should not see."""
+    data = DIST / "data"
+    data.mkdir(parents=True, exist_ok=True)
+    rows = [{k: v for k, v in b.items() if k != "listings"} for b in buildings]
+    flats = [{k: v for k, v in l.items() if k != "building_record"} for l in listings]
+    for name, payload in (("site", site), ("buildings", rows), ("listings", flats)):
+        (data / f"{name}.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def main():
@@ -39,6 +50,7 @@ def main():
     if DIST.exists():
         shutil.rmtree(DIST)
     DIST.mkdir(parents=True)
+    export_data(site, buildings, listings)
 
     def render(template, target, **context):
         path = DIST / target
@@ -62,10 +74,22 @@ def main():
 
     shutil.copytree(ROOT / "static", DIST / "static")
     shutil.copytree(CONTENT / "media", DIST / "media")
+    for name in ("robots.txt", "_headers"):
+        shutil.copy(ROOT / "deploy" / name, DIST / name)
     admin = ROOT / "admin"
     if admin.exists():
         shutil.copytree(admin, DIST / "admin")
+    build_react()
     print(f"done: {len(buildings)} buildings, {len(listings)} listings")
+
+
+def build_react():
+    """The React app (react/) builds into dist/app/. Skipped with a warning if Node is not installed."""
+    react = ROOT / "react"
+    if not (react / "node_modules").exists():
+        print("react: run `npm ci` in react/ once, then build.py builds it")
+        return
+    subprocess.run(["npx", "vite", "build"], cwd=react, check=True)
 
 
 if __name__ == "__main__":

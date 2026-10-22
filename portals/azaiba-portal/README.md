@@ -15,22 +15,32 @@ Python (Jinja2). The CMS is Decap CMS, MIT licence, vendored under `admin/` from
 | `admin/` | Decap CMS (`index.html`, `config.yml`, bundle) |
 | `templates/`, `static/` | page templates, styles, the flats filter |
 | `tools/seed_from_azaiba.py` | one-off: seeds content from `data/azaiba-gardens.json` (already run) |
-| `build.py` | writes `dist/` |
+| `react/` | the React build of the same site (Vite, React 18, React Router); output in `dist/app/` |
+| `auth/server.mjs` | GitHub sign-in proxy for the CMS (Node built-ins only) |
+| `deploy/` | nginx config, `_headers`, `robots.txt`: HTTPS, security headers, rate limits |
+| `docs/CMS-ACCESS.md` | who can sign in to the CMS, how to add or remove editors, what each control protects |
+| `build.py` | writes `dist/`, and builds the React app when `react/node_modules` exists |
 
 ## Use
 
 ```
-python3 build.py                       # writes dist/
-python3 -m http.server -d dist 8000    # http://localhost:8000
+cd react && npm ci && cd ..            # once: React dependencies
+python3 build.py                       # writes dist/ (static pages, /data/, /app/, /admin/)
+python3 -m http.server -d dist 8000    # http://localhost:8000  (static)  ·  /app/ (React)
 ```
 
-Editors open `/admin/`, sign in with GitHub, and edit buildings, flats, rents, photos and films.
+Two front ends read the same content: the static pages (`/`) and the React app (`/app/`).
+
+Editors open `/admin/`, enter the CMS password, sign in with GitHub, and edit buildings, flats, rents,
+photos and films. Only GitHub collaborators with write access can save. See `docs/CMS-ACCESS.md`.
 Each save commits the JSON to the repo; run `build.py` to publish it.
 
 ## Before going live
 
-- **CMS login:** `admin/config.yml` needs a GitHub OAuth proxy in `backend.base_url` (TODO placeholder).
-  Decap's GitHub login cannot run without it. Editors also need write access to the repo.
+- **CMS login:** deploy `auth/server.mjs` with a GitHub OAuth App, then set `backend.base_url` in
+  `admin/config.yml`. Decap's GitHub login cannot run without it. Editors also need write access to the repo.
+- **Server:** fill in the TODO lines in `deploy/nginx.conf` (domain, certificate, htpasswd). Nginx has
+  not been run in this environment, so its syntax and headers are unverified until it is.
 - **Contacts:** `content/site.json` has TODO placeholders for phone, WhatsApp, email and address.
 - **Photos:** the flat photos are the client team's own photos; the 1, 2 and 3 BHK covers are
   illustrations. Replace them with real photos through the CMS.

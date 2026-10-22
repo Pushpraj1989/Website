@@ -5,7 +5,7 @@ backend:
   name: github
   repo: pushpraj1989/website
   branch: claude/festive-fermat-mvjq25
-  base_url: https://YOUR-OAUTH-PROXY.example.com   # TODO: deploy a GitHub OAuth proxy for the CMS login
+  base_url: https://auth.example.com   # TODO: public address of auth/server.mjs (PUBLIC_URL)
   auth_endpoint: auth
 
 media_folder: portals/azaiba-portal/content/media
