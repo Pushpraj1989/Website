@@ -1,6 +1,12 @@
 {% extends "base.html.j2" %}
 {% block content %}
 <section class="hero">
+  {% if site.hero_video %}
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="{{ root }}media/{{ buildings[0].cover }}" aria-hidden="true" tabindex="-1">
+    {%- if site.hero_webm %}<source src="{{ root }}media/{{ site.hero_webm }}" type="video/webm">{% endif %}
+    <source src="{{ root }}media/{{ site.hero_video }}" type="{{ 'video/webm' if site.hero_video.endswith('.webm') else 'video/mp4' }}">
+  </video>
+  {% endif %}
   <div class="wrap">
     <p class="eyebrow">{{ site.location }}</p>
     <h1>{{ site.hero_title }}</h1>

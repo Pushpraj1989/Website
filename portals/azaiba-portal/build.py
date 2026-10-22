@@ -70,6 +70,13 @@ def main():
     listings.sort(key=lambda item: (item["rent_omr"], item["id"]))
     featured = [item for item in listings if item.get("featured")] or listings[:4]
 
+    # The hero film plays as WebM where a WebM copy exists (every browser plays it), MP4 otherwise.
+    site["hero_webm"] = ""
+    if site.get("hero_video"):
+        sibling = site["hero_video"].rsplit(".", 1)[0] + ".webm"
+        if (CONTENT / "media" / sibling).exists():
+            site["hero_webm"] = sibling
+
     env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=select_autoescape(["html"]))
     if DIST.exists():
         shutil.rmtree(DIST)

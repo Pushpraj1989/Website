@@ -63,6 +63,9 @@ function Home({ site, buildings, listings }) {
   return (
     <>
       <section className="hero">
+        {site.hero_video && (
+          <video className="hero-video" autoPlay muted loop playsInline preload="auto" poster={mediaUrl(buildings[0].cover)} aria-hidden="true" tabIndex={-1} src={mediaUrl(site.hero_webm || site.hero_video)} />
+        )}
         <div className="wrap">
           <p className="eyebrow">{site.location}</p>
           <h1>{site.hero_title}</h1>

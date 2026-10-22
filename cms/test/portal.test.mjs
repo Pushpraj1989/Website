@@ -88,6 +88,16 @@ test("site settings save and the rest of site.json is kept", async () => {
   assert.equal(saved.currency, "OMR");
 });
 
+test("the hero background film is set from Media and can be cleared", async () => {
+  const current = (await call("GET", "/api/content")).data.site;
+  const ok = await call("PUT", "/api/content/site", { value: { ...current, hero_video: "azaiba-building-motion.mp4" } });
+  assert.equal(ok.status, 200, JSON.stringify(ok.data));
+  assert.equal(readJson("site.json").hero_video, "azaiba-building-motion.mp4");
+  assert.equal((await call("PUT", "/api/content/site", { value: { ...current, hero_video: "not-in-media.mp4" } })).status, 422);
+  const cleared = await call("PUT", "/api/content/site", { value: { ...current, hero_video: "" } });
+  assert.equal(cleared.status, 200);
+});
+
 test("site settings refuse a missing home title and a bad email", async () => {
   const current = (await call("GET", "/api/content")).data.site;
   assert.equal((await call("PUT", "/api/content/site", { value: { ...current, hero_title: "" } })).status, 422);

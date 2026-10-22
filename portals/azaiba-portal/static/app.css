@@ -60,3 +60,10 @@ section.wrap { margin-top:48px; }
   .video-band, .detail-grid, .contact-grid, .foot-grid { grid-template-columns:1fr; }
   .nav { margin-right:0; }
 }
+
+/* Hero background film: runs behind the text, with a dark wash so the text stays readable */
+.hero { position: relative; overflow: hidden; isolation: isolate; }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(110deg, rgba(19,41,75,.92) 0%, rgba(19,41,75,.72) 55%, rgba(19,41,75,.55) 100%); }
+.hero .wrap { position: relative; z-index: 1; }
+@media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }

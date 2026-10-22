@@ -100,6 +100,7 @@ export function validateSite(input, current, ctx) {
     email: str(i.email, 120, "Enquiries email", errors),
     address: str(i.address, 200, "Office address", errors),
     video: media(i.video, "Home film", errors, { kind: "video" }) || "",
+    hero_video: media(i.hero_video, "Hero background film", errors, { kind: "video" }) || "",
     currency: String(i.currency || ""),
   };
   // Placeholders that start with TODO stay as they are until the client sends the real value.

@@ -657,6 +657,7 @@ function portalSiteView() {
         v.hero_lede = readVal(e.target, "hero_lede");
         v.about_text = readVal(e.target, "about_text");
         v.video = readVal(e.target, "video");
+        v.hero_video = readVal(e.target, "hero_video");
         v.currency = readVal(e.target, "currency");
         save("site", v, "Site settings saved and published.", () => { pSite = null; });
       },
@@ -668,7 +669,8 @@ function portalSiteView() {
     h("div", { class: "card" }, h("h2", null, "Home page"),
       t("hero_title", "Home title"),
       field("Home lead text", h("textarea", { "data-k": "hero_lede", maxlength: 400 }, s.hero_lede || "")),
-      h("div", { class: "row" }, field("Home film", mediaSelect("video", s.video, { "data-k": "video" })), field("Currency", masterSelect("currency", s.currency, { "data-k": "currency" })))),
+      h("div", { class: "row" }, field("Home film (below the hero)", mediaSelect("video", s.video, { "data-k": "video" })), field("Hero background film (plays behind the heading)", mediaSelect("video", s.hero_video, { "data-k": "hero_video" }))),
+      field("Currency", masterSelect("currency", s.currency, { "data-k": "currency" }))),
     h("div", { class: "card" }, h("h2", null, "About page"),
       t("about_title", "About title"),
       field("About text", h("textarea", { "data-k": "about_text", maxlength: 2000 }, s.about_text || ""))),
