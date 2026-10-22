@@ -409,9 +409,10 @@
   },
   "stats": [],
   "about": {
-    "title": "TODO: one-line story",
+    "title": "Azaiba Gardens, a company of S&S Group",
     "body": [
-      "TODO"
+      "Azaiba Gardens is a company of S&S Group. We offer flats to rent in Azaiba, Muscat, across five buildings.",
+      "Details of the group and the team will be added once the client confirms them."
     ]
   },
   "assemble": [],
@@ -466,7 +467,8 @@
     "Enquiry form stays off until the client's email is set"
   ],
   "sources": [
-    "Rezone Property LLC, permission letter, 15 Oct 2026 (briefs/azaiba-gardens/rezone-permission-letter.jpg)"
+    "Rezone Property LLC, permission letter, 15 Oct 2026 (briefs/azaiba-gardens/rezone-permission-letter.jpg). The client has confirmed in writing that the photos may be used for this site (owner statement, S&S Group).",
+    "Company: Azaiba Gardens is a company of S&S Group (owner statement)."
   ],
   "catalogue": {
     "nav": "Flats",
