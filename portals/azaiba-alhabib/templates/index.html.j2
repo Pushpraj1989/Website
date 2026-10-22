@@ -11,16 +11,18 @@
     <p class="eyebrow">{{ site.location }}</p>
     <h1>{{ site.hero_title }}</h1>
     <p class="lede">{{ site.hero_lede }}</p>
-    <form class="search" action="{{ root }}search.html" method="get" role="search">
-      <label class="field"><span>Building</span>
-        <select name="building"><option value="">All buildings</option>
-          {% for b in buildings %}<option value="{{ b.id }}">{{ b.name }}</option>{% endfor %}
-        </select></label>
+    <div class="hero-tabs" role="tablist" aria-label="Looking to">
+      <a role="tab" aria-selected="true" href="{{ root }}search.html?transaction=rent">For Rent</a>
+      <a role="tab" aria-selected="false" href="{{ root }}search.html?transaction=sale">For Sale</a>
+    </div>
+    <form class="search hero-search" action="{{ root }}search.html" method="get" role="search">
+      <label class="field"><span>Cities</span><select name="city"><option>Muscat</option></select></label>
+      <label class="field"><span>Areas</span><select name="area"><option>Azaiba</option></select></label>
       <label class="field"><span>Bedrooms</span>
-        <select name="bhk"><option value="">Any</option><option>1 BHK</option><option>2 BHK</option><option>3 BHK</option></select></label>
-      <label class="field"><span>Max rent (OMR)</span>
-        <select name="max"><option value="">Any</option><option value="300">300</option><option value="400">400</option><option value="500">500</option></select></label>
-      <button class="btn btn-gold" type="submit">Search flats</button>
+        <select name="bhk"><option value="">All</option><option>1 BHK</option><option>2 BHK</option><option>3 BHK</option></select></label>
+      <label class="field range"><span>Price range <output id="price-out">OMR 0 - OMR 1000</output></span>
+        <input type="range" name="max" min="0" max="1000" step="5" value="1000" aria-describedby="price-out" data-range-out="price-out"></label>
+      <button class="btn btn-blue" type="submit">Search</button>
     </form>
   </div>
 </section>
@@ -42,6 +44,7 @@
   <div class="cards view-target">
     {% for item in featured %}
     <a class="card" href="{{ root }}listing/{{ item.id }}.html">
+      <span class="badge b-feat">Featured</span><span class="badge b-rent">For rent</span>
       <img src="{{ root }}media/{{ item.cover }}" alt="{{ item.title }}" loading="lazy">
       <div class="card-body">
         <p class="price">{{ item.rent_text }} <small>{{ item.period_text }}</small></p>

@@ -19,6 +19,24 @@
   function setSaved(list) { write(SAVE_KEY, JSON.stringify(list)); }
   function num(v) { var n = parseFloat(v); return isNaN(n) ? null : n; }
 
+  // ---- menu panel and price range ----
+  var menu = document.getElementById("menu");
+  var burger = document.querySelector(".hamburger");
+  function setMenu(open) {
+    if (!menu || !burger) return;
+    menu.hidden = !open;
+    burger.setAttribute("aria-expanded", String(open));
+    document.body.classList.toggle("menu-open", open);
+  }
+  if (burger) burger.addEventListener("click", function () { setMenu(menu.hidden); });
+  document.querySelectorAll(".menu-close").forEach(function (b) { b.addEventListener("click", function () { setMenu(false); }); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+  document.querySelectorAll("input[data-range-out]").forEach(function (r) {
+    var out = document.getElementById(r.dataset.rangeOut);
+    function show() { if (out) out.textContent = "OMR 0 - OMR " + r.value; }
+    r.addEventListener("input", show); show();
+  });
+
   // ---- card or list view ----
   function applyView(view) {
     document.querySelectorAll(".view-target").forEach(function (el) { el.classList.toggle("as-list", view === "list"); });
@@ -111,7 +129,7 @@
       results.innerHTML = rows.map(function (item) {
         var on = list.indexOf(item.id) >= 0;
         return '<div class="fcard">' +
-          '<a class="card" href="' + esc(item.href) + '"><img src="' + esc(item.cover) + '" alt="" loading="lazy">' +
+          '<a class="card" href="' + esc(item.href) + '"><span class="badge b-rent">' + (item.transaction === "sale" ? "For sale" : "For rent") + '</span><img src="' + esc(item.cover) + '" alt="" loading="lazy">' +
           '<div class="card-body"><p class="price">' + esc(item.rent_text) + ' <small>' + esc(item.period_text) + '</small></p>' +
           '<h3>' + esc(item.bhk) + ' flat</h3><p class="muted">' + esc(item.building_name) + ' · ' + esc(item.size) + ' · ' + esc(item.status) + '</p></div></a>' +
           '<button type="button" class="save" data-save="' + esc(item.id) + '" aria-pressed="' + on + '">' + (on ? "Saved" : "Save") + '</button></div>';

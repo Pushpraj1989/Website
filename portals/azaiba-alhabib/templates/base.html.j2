@@ -12,21 +12,36 @@
   <header class="topbar">
     <div class="wrap bar">
       <a class="brand" href="{{ root }}index.html"><span class="brand-mark">{{ site.group }}</span><span>{{ site.name }}</span></a>
-      <nav class="nav" aria-label="Main">
-        <a href="{{ root }}index.html" {% if active == 'home' %}aria-current="page"{% endif %}>Home</a>
-        <a href="{{ root }}search.html" {% if active == 'search' %}aria-current="page"{% endif %}>Flats to rent</a>
-        <a href="{{ root }}shortlist.html" {% if active == 'shortlist' %}aria-current="page"{% endif %}>Shortlist <span data-shortcount>0</span></a>
-        <a href="{{ root }}about.html" {% if active == 'about' %}aria-current="page"{% endif %}>About</a>
-        <a href="{{ root }}contact.html" {% if active == 'contact' %}aria-current="page"{% endif %}>Contact</a>
-      </nav>
-      <a class="btn btn-light" href="{{ root }}contact.html">Book a visit</a>
+      <div class="bar-actions">
+        <a class="btn btn-gold" href="{{ root }}contact.html">Book a visit</a>
+        <button class="hamburger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
     </div>
   </header>
+  <nav class="menu-panel" id="menu" aria-label="Main" hidden>
+    <div class="wrap menu-inner">
+      <button class="menu-close" type="button" aria-label="Close menu">×</button>
+      <ul class="menu-list">
+        <li><a href="{{ root }}index.html" {% if active == 'home' %}aria-current="page"{% endif %}>Home</a></li>
+        <li><a href="{{ root }}about.html" {% if active == 'about' %}aria-current="page"{% endif %}>Who we are</a></li>
+        <li><a href="{{ root }}search.html" {% if active == 'search' %}aria-current="page"{% endif %}>Flats to rent</a></li>
+        <li><a href="{{ root }}shortlist.html" {% if active == 'shortlist' %}aria-current="page"{% endif %}>Shortlist <span data-shortcount>0</span></a></li>
+        <li><a href="{{ root }}contact.html" {% if active == 'contact' %}aria-current="page"{% endif %}>Contact</a></li>
+      </ul>
+      <div class="menu-contact">
+        {% if site.phone and not site.phone.startswith('TODO') %}<a class="chip" href="tel:{{ site.phone | replace(' ', '') }}">{{ site.phone }}</a>{% endif %}
+        {% if site.email and not site.email.startswith('TODO') %}<a class="chip" href="mailto:{{ site.email }}">{{ site.email }}</a>{% endif %}
+      </div>
+    </div>
+  </nav>
   <main>{% block content %}{% endblock %}</main>
+  <a class="wa-help" href="{{ root }}contact.html">
+    <span class="wa-dot" aria-hidden="true">✆</span><span class="wa-text">Need Help? Chat with us</span>
+  </a>
   <footer class="foot">
     <div class="wrap foot-grid">
-      <div><strong>{{ site.group }}</strong><p>{{ site.name }}, {{ site.location }}</p></div>
-      <div><a href="{{ root }}search.html">Flats to rent</a><a href="{{ root }}contact.html">Contact</a></div>
+      <div><strong>{{ site.group }}</strong><p>{{ site.name }}, {{ site.location }}</p><p>{{ site.address }}</p></div>
+      <div><a href="{{ root }}search.html">Flats to rent</a><a href="{{ root }}about.html">Who we are</a><a href="{{ root }}contact.html">Contact</a></div>
       <div class="muted">Rents are per month. Sample content until the client confirms details.</div>
     </div>
   </footer>
