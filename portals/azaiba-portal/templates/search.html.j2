@@ -3,7 +3,7 @@
 {% block content %}
 <section class="wrap page-head">
   <h1>Flats to rent</h1>
-  <p class="muted" id="count">{{ listings|length }} flats</p>
+  <p class="muted" id="count">{{ listings|length }} flats</p><div class="view-toggle" role="group" aria-label="Show as"><button type="button" data-view-set="cards" aria-pressed="true">Cards</button><button type="button" data-view-set="list" aria-pressed="false">List</button></div>
 </section>
 <section class="wrap filters" data-results>
   <form class="search search-compact" role="search" onsubmit="return false">
@@ -16,7 +16,7 @@
     <label class="field"><span>Max rent (OMR)</span>
       <input type="number" name="max" min="0" step="5" placeholder="Any"></label>
   </form>
-  <div class="cards" id="results"></div>
+  <div class="cards view-target" id="results"></div>
   <p class="muted empty" id="empty" hidden>No flats match. Try another building or rent.</p>
 </section>
 <script id="listings-data" type="application/json">{{ data|tojson }}</script>

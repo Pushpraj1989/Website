@@ -41,3 +41,22 @@
   form.addEventListener("change", draw);
   draw();
 })();
+
+// Card or list view: one choice for the whole site, remembered on this device.
+(function () {
+  var KEY = "portal-view";
+  function read() {
+    try { return localStorage.getItem(KEY) === "list" ? "list" : "cards"; } catch (e) { return "cards"; }
+  }
+  function write(view) {
+    try { localStorage.setItem(KEY, view); } catch (e) { /* private window: the choice simply is not kept */ }
+  }
+  function apply(view) {
+    document.querySelectorAll(".view-target").forEach(function (el) { el.classList.toggle("as-list", view === "list"); });
+    document.querySelectorAll("[data-view-set]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.viewSet === view)); });
+  }
+  document.querySelectorAll("[data-view-set]").forEach(function (b) {
+    b.addEventListener("click", function () { write(b.dataset.viewSet); apply(b.dataset.viewSet); });
+  });
+  apply(read());
+})();

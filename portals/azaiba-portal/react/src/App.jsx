@@ -10,11 +10,35 @@ export default function App() {
   );
 }
 
+// Card or list view: one choice for the whole site, remembered on this device.
+function useViewPref() {
+  const [view, setView] = useState(() => {
+    try { return localStorage.getItem("portal-view") === "list" ? "list" : "cards"; } catch (e) { return "cards"; }
+  });
+  const choose = (next) => {
+    setView(next);
+    try { localStorage.setItem("portal-view", next); } catch (e) { /* private window: not kept */ }
+  };
+  return [view, choose];
+}
+
+function ViewToggle({ view, setView }) {
+  return (
+    <div className="view-toggle" role="group" aria-label="Show as">
+      <button type="button" aria-pressed={view === "cards"} onClick={() => setView("cards")}>Cards</button>
+      <button type="button" aria-pressed={view === "list"} onClick={() => setView("list")}>List</button>
+    </div>
+  );
+}
+
+const cardsClass = (view) => (view === "list" ? "cards as-list" : "cards");
+
 function Shell() {
+  const [view, setView] = useViewPref();
   const { site, buildings, listings, error } = useContent();
   if (error) return <p className="wrap page-head">Content could not be loaded. Please try again later.</p>;
   if (!site) return <p className="wrap page-head">Loading…</p>;
-  const ctx = { site, buildings, listings };
+  const ctx = { site, buildings, listings, view, setView };
   return (
     <>
       <header className="topbar">
@@ -55,7 +79,7 @@ function buildingName(buildings, id) {
   return buildings.find((b) => b.id === id)?.name ?? "";
 }
 
-function Home({ site, buildings, listings }) {
+function Home({ site, buildings, listings, view, setView }) {
   const navigate = useNavigate();
   const [q, setQ] = useState({ building: "", bhk: "", max: "" });
   const featured = listings.filter((l) => l.featured).slice(0, 4);
@@ -101,15 +125,15 @@ function Home({ site, buildings, listings }) {
       )}
 
       <section className="wrap">
-        <div className="section-head"><h2>Featured flats</h2><Link to="/flats">All flats →</Link></div>
-        <div className="cards">
+        <div className="section-head"><h2>Featured flats</h2><ViewToggle view={view} setView={setView} /><Link to="/flats">All flats →</Link></div>
+        <div className={cardsClass(view)}>
           {shown.map((l) => <FlatCard key={l.id} flat={l} buildingName={buildingName(buildings, l.building)} />)}
         </div>
       </section>
 
       <section className="wrap">
-        <div className="section-head"><h2>Our buildings</h2></div>
-        <div className="cards">
+        <div className="section-head"><h2>Our buildings</h2><ViewToggle view={view} setView={setView} /></div>
+        <div className={cardsClass(view)}>
           {buildings.map((b) => (
             <Link className="card" key={b.id} to={`/building/${b.id}`}>
               <img src={mediaUrl(b.cover)} alt={b.name} loading="lazy" />
@@ -150,7 +174,7 @@ function FlatCard({ flat, buildingName: name }) {
   );
 }
 
-function Flats({ buildings, listings }) {
+function Flats({ buildings, listings, view, setView }) {
   const [params, setParams] = useSearchParams();
   const building = params.get("building") ?? "";
   const bhk = params.get("bhk") ?? "";
@@ -168,6 +192,7 @@ function Flats({ buildings, listings }) {
       <section className="wrap page-head">
         <h1>Flats to rent</h1>
         <p className="muted">{rows.length} {rows.length === 1 ? "flat" : "flats"}</p>
+        <ViewToggle view={view} setView={setView} />
       </section>
       <section className="wrap">
         <div className="search search-compact">
@@ -179,7 +204,7 @@ function Flats({ buildings, listings }) {
             <input type="number" min="0" step="5" value={params.get("max") ?? ""} placeholder="Any" onChange={(e) => set("max")(e.target.value)} />
           </label>
         </div>
-        <div className="cards">
+        <div className={cardsClass(view)}>
           {rows.map((l) => <FlatCard key={l.id} flat={l} buildingName={buildingName(buildings, l.building)} />)}
         </div>
         {rows.length === 0 && <p className="muted empty">No flats match. Try another building or rent.</p>}
@@ -220,7 +245,7 @@ function FlatPage({ site, buildings, listings }) {
   );
 }
 
-function BuildingPage({ buildings, listings }) {
+function BuildingPage({ buildings, listings, view, setView }) {
   const { id } = useParams();
   const b = buildings.find((x) => x.id === id);
   if (!b) return <p className="wrap page-head">Building not found. <Link to="/">Home</Link></p>;
@@ -236,8 +261,8 @@ function BuildingPage({ buildings, listings }) {
         {b.gallery.map((img, i) => <img key={img} src={mediaUrl(img)} alt={`${b.name} photo ${i + 1}`} loading="lazy" />)}
       </div>
       {b.video && <video controls playsinline preload="metadata" className="detail-video" src={mediaUrl(b.video)} />}
-      <div className="section-head"><h2>Flats in {b.name}</h2></div>
-      <div className="cards">
+      <div className="section-head"><h2>Flats in {b.name}</h2><ViewToggle view={view} setView={setView} /></div>
+      <div className={cardsClass(view)}>
         {own.map((l) => <FlatCard key={l.id} flat={l} buildingName={b.name} />)}
       </div>
     </section>

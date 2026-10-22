@@ -13,8 +13,8 @@
   {% if building.video %}
   <video controls playsinline preload="metadata" class="detail-video"><source src="{{ root }}media/{{ building.video }}" type="video/mp4"></video>
   {% endif %}
-  <div class="section-head"><h2>Flats in {{ building.name }}</h2></div>
-  <div class="cards">
+  <div class="section-head"><h2>Flats in {{ building.name }}</h2><div class="view-toggle" role="group" aria-label="Show as"><button type="button" data-view-set="cards" aria-pressed="true">Cards</button><button type="button" data-view-set="list" aria-pressed="false">List</button></div></div>
+  <div class="cards view-target">
     {% for item in building.listings %}
     <a class="card" href="{{ root }}listing/{{ item.id }}.html">
       <img src="{{ root }}media/{{ item.cover }}" alt="{{ item.title }}" loading="lazy">

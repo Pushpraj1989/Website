@@ -67,3 +67,20 @@ section.wrap { margin-top:48px; }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(110deg, rgba(19,41,75,.92) 0%, rgba(19,41,75,.72) 55%, rgba(19,41,75,.55) 100%); }
 .hero .wrap { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
+
+/* Card or list view. The choice is the visitor's own (remembered on this device). */
+.view-toggle { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); }
+.view-toggle button { border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 14px; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+.view-toggle button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+.view-toggle button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.section-head { flex-wrap: wrap; gap: 12px; }
+.cards.as-list { grid-template-columns: 1fr; gap: 12px; }
+.cards.as-list .card { display: grid; grid-template-columns: 240px minmax(0, 1fr); align-items: stretch; }
+.cards.as-list .card img { aspect-ratio: auto; height: 100%; min-height: 150px; }
+.cards.as-list .card-body { display: flex; flex-direction: column; justify-content: center; padding: 16px 20px; }
+@media (max-width: 640px) {
+  .cards.as-list .card { grid-template-columns: 112px minmax(0, 1fr); }
+  .cards.as-list .card img { aspect-ratio: 1 / 1; height: 100%; min-height: 112px; }
+  .cards.as-list .card-body { padding: 12px 14px; }
+  .cards.as-list .card-body h3 { font-size: 16px; }
+}

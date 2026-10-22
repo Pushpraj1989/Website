@@ -38,8 +38,8 @@
 {% endif %}
 
 <section class="wrap">
-  <div class="section-head"><h2>Featured flats</h2><a href="{{ root }}search.html">All flats →</a></div>
-  <div class="cards">
+  <div class="section-head"><h2>Featured flats</h2><div class="view-toggle" role="group" aria-label="Show as"><button type="button" data-view-set="cards" aria-pressed="true">Cards</button><button type="button" data-view-set="list" aria-pressed="false">List</button></div><a href="{{ root }}search.html">All flats →</a></div>
+  <div class="cards view-target">
     {% for item in featured %}
     <a class="card" href="{{ root }}listing/{{ item.id }}.html">
       <img src="{{ root }}media/{{ item.cover }}" alt="{{ item.title }}" loading="lazy">
@@ -54,8 +54,8 @@
 </section>
 
 <section class="wrap">
-  <div class="section-head"><h2>Our buildings</h2></div>
-  <div class="cards">
+  <div class="section-head"><h2>Our buildings</h2><div class="view-toggle" role="group" aria-label="Show as"><button type="button" data-view-set="cards" aria-pressed="true">Cards</button><button type="button" data-view-set="list" aria-pressed="false">List</button></div></div>
+  <div class="cards view-target">
     {% for b in buildings %}
     <a class="card" href="{{ root }}building/{{ b.id }}.html">
       <img src="{{ root }}media/{{ b.cover }}" alt="{{ b.name }}" loading="lazy">

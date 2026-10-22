@@ -17,7 +17,7 @@ CONTENT = ROOT / "content"
 DIST = ROOT / "dist"
 
 
-UNIT_LABELS = {"sqm": "sq m", "sqyd": "sq yd", "sqft": "sq ft"}
+UNIT_LABELS = {"sqm": "sq\u00a0m", "sqyd": "sq\u00a0yd", "sqft": "sq\u00a0ft"}  # no break inside a unit
 CURRENCY_DECIMALS = {"OMR": 3, "KWD": 3, "BHD": 3}
 
 
