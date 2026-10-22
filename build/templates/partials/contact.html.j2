@@ -4,6 +4,11 @@
       <p class="eyebrow">Contact</p>
       <h2 class="contact-title" data-anim="lines">{{ s.contact.title }}</h2>
       <p class="contact-intro" data-anim="up">{{ s.contact.intro }}</p>
+      {%- set wa_line = (s.contact.phones | selectattr('whatsapp') | list | first) if (s.contact.phones | selectattr('whatsapp') | list) else none %}
+      <div class="contact-actions" data-anim="up">
+        {%- if wa_line %}<a class="btn btn-primary" href="https://wa.me/{{ wa_line.tel | replace('+', '') }}?text={{ ('Hello, I would like to ask about ' ~ s.name) | urlencode }}" rel="noopener" target="_blank">WhatsApp us</a>{% endif %}
+        {%- if s.contact.email %}<a class="btn btn-ghost" href="mailto:{{ s.contact.email }}?subject={{ ('Enquiry: ' ~ s.name) | urlencode }}">Email us</a>{% endif %}
+      </div>
       <ul class="contact-list">
         {%- if s.contact.address %}
         <li data-anim="up">{{ icon('pin') }}<span><small>Address</small>{{ s.contact.address }}</span></li>

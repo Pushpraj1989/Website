@@ -39,7 +39,7 @@
         <p class="side-t">{{ l.full_name or l.name }}</p>
         {%- if l.address %}<p class="side-p">{{ l.address }}</p>{% endif %}
         <a class="btn btn-primary" href="contact.html" data-magnetic>{{ s.cta.label }} {{ icon('arrow') }}</a>
-        {%- if l.phone %}<a class="side-line" href="tel:{{ l.phone }}">{{ icon('phone') }} {{ l.phone }}</a>{% endif %}
+        {%- if l.phone %}<a class="side-line" href="tel:{{ digits(l.phone) }}">{{ icon('phone') }} {{ l.phone }}</a>{% endif %}
         {%- if l.email %}<a class="side-line" href="mailto:{{ l.email }}">{{ icon('mail') }} {{ l.email }}</a>{% endif %}
         {%- for ph in (l.phones or [])[1:] %}<a class="side-line" href="tel:{{ digits(ph.number) }}">{{ icon('phone') }} {{ ph.label }} · {{ ph.number }}</a>{% endfor %}
         <a class="side-line" href="{{ l.links.directions if l.links and l.links.directions else l._map }}" target="_blank" rel="noopener">{{ icon('pin') }} Directions in Google Maps</a>
