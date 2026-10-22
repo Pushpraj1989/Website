@@ -3,8 +3,18 @@
   "title": "1 BHK flat, Block B · Nakheel",
   "building": "block-b-nakheel",
   "bhk": "1 BHK",
-  "size_sqm": 52,
-  "rent_omr": 265,
+  "measures": {
+    "build": {
+      "value": 52,
+      "unit": "sqm"
+    },
+    "carpet": null
+  },
+  "price": {
+    "amount": 265,
+    "currency": "OMR",
+    "period": "month"
+  },
   "status": "Available",
   "available_from": "",
   "cover": "concept-flat-1bhk.jpg",

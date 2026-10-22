@@ -139,9 +139,9 @@ function FlatCard({ flat, buildingName: name }) {
     <Link className="card" to={`/flat/${flat.id}`}>
       <img src={mediaUrl(flat.cover)} alt={flat.title} loading="lazy" />
       <div className="card-body">
-        <p className="price">OMR {flat.rent_omr} <small>/ month</small></p>
+        <p className="price">{flat.rent_text} <small>{flat.period_text}</small></p>
         <h3>{flat.bhk} flat</h3>
-        <p className="muted">{name} · {flat.size_sqm} sqm · {flat.status}</p>
+        <p className="muted">{name} · {flat.size_text} · {flat.status}</p>
       </div>
     </Link>
   );
@@ -202,10 +202,10 @@ function FlatPage({ site, buildings, listings }) {
         </div>
         <aside className="panel">
           <h1>{flat.title}</h1>
-          <p className="price">{site.currency} {flat.rent_omr} <small>/ month</small></p>
+          <p className="price">{flat.rent_text} <small>{flat.period_text}</small></p>
           <dl className="facts">
             <dt>Bedrooms</dt><dd>{flat.bhk}</dd>
-            <dt>Size</dt><dd>{flat.size_sqm} sqm</dd>
+            <dt>Size</dt><dd>{flat.size_text}</dd>
             <dt>Building</dt><dd><Link to={`/building/${flat.building}`}>{buildingName(buildings, flat.building)}</Link></dd>
             <dt>Status</dt><dd>{flat.status}{flat.available_from ? `, from ${flat.available_from}` : ""}</dd>
           </dl>

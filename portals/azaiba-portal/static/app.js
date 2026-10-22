@@ -29,8 +29,8 @@
     });
     results.innerHTML = rows.map(function (item) {
       return '<a class="card" href="' + item.href + '"><img src="' + item.cover + '" alt="" loading="lazy">' +
-        '<div class="card-body"><p class="price">' + currency + " " + item.rent + ' <small>/ month</small></p>' +
-        "<h3>" + item.bhk + " flat</h3><p class=\"muted\">" + item.size + " sqm · " + item.status + "</p></div></a>";
+        '<div class="card-body"><p class="price">' + item.rent_text + ' <small>' + item.period_text + '</small></p>' +
+        "<h3>" + item.bhk + " flat</h3><p class=\"muted\">" + item.size + " · " + item.status + "</p></div></a>";
     }).join("");
     count.textContent = rows.length + (rows.length === 1 ? " flat" : " flats");
     empty.hidden = rows.length > 0;

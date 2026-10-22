@@ -3,8 +3,18 @@
   "title": "2 BHK flat, Block C · Sahil",
   "building": "block-c-sahil",
   "bhk": "2 BHK",
-  "size_sqm": 88,
-  "rent_omr": 375,
+  "measures": {
+    "build": {
+      "value": 88,
+      "unit": "sqm"
+    },
+    "carpet": null
+  },
+  "price": {
+    "amount": 375,
+    "currency": "OMR",
+    "period": "month"
+  },
   "status": "Available",
   "available_from": "",
   "cover": "concept-flat-2bhk.jpg",

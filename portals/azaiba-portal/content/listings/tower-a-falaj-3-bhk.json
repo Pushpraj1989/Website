@@ -3,8 +3,18 @@
   "title": "3 BHK flat, Tower A · Falaj",
   "building": "tower-a-falaj",
   "bhk": "3 BHK",
-  "size_sqm": 120,
-  "rent_omr": 425,
+  "measures": {
+    "build": {
+      "value": 120,
+      "unit": "sqm"
+    },
+    "carpet": null
+  },
+  "price": {
+    "amount": 425,
+    "currency": "OMR",
+    "period": "month"
+  },
   "status": "Available",
   "available_from": "",
   "cover": "concept-flat-3bhk.jpg",

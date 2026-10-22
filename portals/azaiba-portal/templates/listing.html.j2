@@ -15,10 +15,10 @@
     </div>
     <aside class="panel">
       <h1>{{ listing.title }}</h1>
-      <p class="price">{{ site.currency }} {{ listing.rent_omr }} <small>/ month</small></p>
+      <p class="price">{{ listing.rent_text }} <small>{{ listing.period_text }}</small></p>
       <dl class="facts">
         <dt>Bedrooms</dt><dd>{{ listing.bhk }}</dd>
-        <dt>Size</dt><dd>{{ listing.size_sqm }} sqm</dd>
+        <dt>Size</dt><dd>{{ listing.size_text }}</dd>
         <dt>Building</dt><dd><a href="{{ root }}building/{{ listing.building }}.html">{{ listing.building_record.name }}</a></dd>
         <dt>Status</dt><dd>{{ listing.status }}{% if listing.available_from %}, from {{ listing.available_from }}{% endif %}</dd>
       </dl>

@@ -38,9 +38,9 @@
     <a class="card" href="{{ root }}listing/{{ item.id }}.html">
       <img src="{{ root }}media/{{ item.cover }}" alt="{{ item.title }}" loading="lazy">
       <div class="card-body">
-        <p class="price">{{ site.currency }} {{ item.rent_omr }} <small>/ month</small></p>
+        <p class="price">{{ item.rent_text }} <small>{{ item.period_text }}</small></p>
         <h3>{{ item.bhk }} flat</h3>
-        <p class="muted">{{ item.building_record.name }} · {{ item.size_sqm }} sqm</p>
+        <p class="muted">{{ item.building_record.name }} · {{ item.size_text }}</p>
       </div>
     </a>
     {% endfor %}
