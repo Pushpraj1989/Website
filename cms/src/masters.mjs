@@ -8,6 +8,7 @@ export const KINDS = {
   rent_period: { label: "Rent periods", codePattern: /^[a-z]{3,10}$/ },
   bedroom_type: { label: "Flat types", codePattern: /^[0-9A-Za-z ]{1,20}$/ },
   building_status: { label: "Building status", codePattern: /^[A-Za-z ]{1,40}$/ },
+  flat_status: { label: "Flat status", codePattern: /^[A-Za-z ]{1,40}$/ },
 };
 
 // Seeds include every unit and currency a Muscat property site is likely to need. Admins add more.
@@ -39,6 +40,11 @@ const DEFAULTS = {
     ["2 BHK", "2 BHK", 3, null],
     ["3 BHK", "3 BHK", 4, null],
     ["4 BHK", "4 BHK", 5, null],
+  ],
+  flat_status: [
+    ["Available", "Available", 1, null],
+    ["Reserved", "Reserved", 2, null],
+    ["Rented", "Rented", 3, null],
   ],
   building_status: [
     ["Available now", "Available now", 1, null],

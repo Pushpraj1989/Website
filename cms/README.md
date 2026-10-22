@@ -1,10 +1,25 @@
 # Azaiba Gardens content manager
 
 Email-and-password accounts, invitation-only sign-up, password reset, optional two-step sign-in
-(authenticator app), roles, validated editing, uploads, and one-click publishing of the
-Azaiba Gardens website. No GitHub account is needed. Runs on a Hostinger VPS with Node.js.
+(authenticator app), roles, validated editing, uploads, and one-click publishing. No GitHub account
+is needed. Runs on a Hostinger VPS with Node.js.
+
+**What it manages:** by default the listing portal (`portals/azaiba-portal`, the magicbricks-style site).
+Set `CMS_TARGET=azaiba` to manage the animated Azaiba concept site instead (`data/azaiba-gardens.json`).
 
 ## What editors can change
+
+**Portal (default) screens**
+
+| Screen | What |
+| --- | --- |
+| Site and contacts | company name, home title and lead text, home film, currency, about page, phone, WhatsApp number, enquiries email, office address |
+| Buildings | ID, name, area, floors, units, status (from a list), description, cover photo, film, gallery |
+| Flats to rent | ID, title, building, flat type (list), status (list), build and carpet area with units (list), rent amount with currency and period (lists), available-from text, cover photo, film, gallery, description, home-page tick |
+| Media | photos and films for the portal; upload checks the file contents |
+| Lists, People, My account, Activity | as below |
+
+**Azaiba concept site screens** (when `CMS_TARGET=azaiba`)
 
 | Screen | What |
 | --- | --- |

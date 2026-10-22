@@ -500,7 +500,7 @@ function mediaView() {
         if (!r.ok) return flash("error", r.error || "Upload failed.", r.errors || []);
         await loadContent();
         await loadMedia();
-        flash("ok", r.kind === "video" ? `Film ${r.name} uploaded. Pick it in Hero slides.` : `Photo uploaded and published. Pick it in a building or a slide.`);
+        flash("ok", r.kind === "video" ? `Film ${r.name} uploaded. Pick it in its building, flat or home page.` : (r.published ? "Photo uploaded and published. Pick it in a building, flat or slide." : "Photo uploaded. Pick it in a building or flat."));
       },
     },
   }, "Upload");
@@ -603,6 +603,171 @@ function auditView() {
       h("tbody", null, (state.audit || []).map((r) => h("tr", null, h("td", null, new Date(r.at).toLocaleString()), h("td", null, r.actor), h("td", null, r.action), h("td", null, r.detail))))));
 }
 
+// ---- listing portal (target "portal") ----------------------------------------------------------
+
+let pSite = null, pBuildings = null, pListings = null;
+const SITE_TEXT = ["group", "name", "location", "tagline", "hero_title", "about_title", "phone", "whatsapp", "email", "address"];
+
+function readVal(root, k) {
+  const el = root.querySelector(`[data-k="${k}"]`);
+  return el ? el.value : "";
+}
+
+function mediaSelect(kind, current, attrs = {}) {
+  const files = state.media.filter((f) => f.kind === kind).map((f) => f.name);
+  if (current && !files.includes(current)) files.unshift(current);
+  return select([["", kind === "video" ? "No film" : "No photo"], ...files.map((n) => [n, n])], current || "", attrs);
+}
+
+// Gallery: tick the photos to show. Read back with readGallery.
+function galleryBoxes(selected, dataK) {
+  const chosen = selected || [];
+  const files = state.media.filter((f) => f.kind === "image").map((f) => f.name);
+  for (const c of chosen) if (!files.includes(c)) files.push(c);
+  return h("div", { class: "thumbs", "data-k": dataK },
+    files.map((name) => h("label", { class: "thumb" },
+      h("input", { type: "checkbox", value: name, checked: chosen.includes(name) ? "checked" : null }), " ", name)));
+}
+
+function readGallery(root, dataK) {
+  return [...root.querySelectorAll(`[data-k="${dataK}"] input:checked`)].map((i) => i.value);
+}
+
+function portalBody() {
+  if (state.tab === "site") return portalSiteView();
+  if (state.tab === "buildings") return portalBuildingsView();
+  if (state.tab === "listings") return portalListingsView();
+  if (state.tab === "media") return mediaView();
+  if (state.tab === "lists") return listsView();
+  if (state.tab === "users") return usersView();
+  if (state.tab === "account") return accountView();
+  if (state.tab === "audit") return auditView();
+  return portalSiteView();
+}
+
+function portalSiteView() {
+  const s = pSite || (pSite = JSON.parse(JSON.stringify(state.content.site)));
+  const t = (k, label, attrs = {}) => field(label, textInput(s[k], { maxlength: 200, "data-k": k, ...attrs }));
+  return h("form", {
+    on: {
+      submit: (e) => {
+        e.preventDefault();
+        const v = { ...s };
+        for (const k of SITE_TEXT) v[k] = readVal(e.target, k);
+        v.hero_lede = readVal(e.target, "hero_lede");
+        v.about_text = readVal(e.target, "about_text");
+        v.video = readVal(e.target, "video");
+        v.currency = readVal(e.target, "currency");
+        save("site", v, "Site settings saved and published.", () => { pSite = null; });
+      },
+    },
+  },
+    h("div", { class: "card" }, h("h2", null, "Company and contact"),
+      h("div", { class: "row" }, t("group", "Group name"), t("name", "Site name"), t("location", "Location"), t("tagline", "Tagline")),
+      h("div", { class: "row" }, t("phone", "Phone"), t("whatsapp", "WhatsApp (digits, with country code)"), t("email", "Enquiries email"), t("address", "Office address"))),
+    h("div", { class: "card" }, h("h2", null, "Home page"),
+      t("hero_title", "Home title"),
+      field("Home lead text", h("textarea", { "data-k": "hero_lede", maxlength: 400 }, s.hero_lede || "")),
+      h("div", { class: "row" }, field("Home film", mediaSelect("video", s.video, { "data-k": "video" })), field("Currency", masterSelect("currency", s.currency, { "data-k": "currency" })))),
+    h("div", { class: "card" }, h("h2", null, "About page"),
+      t("about_title", "About title"),
+      field("About text", h("textarea", { "data-k": "about_text", maxlength: 2000 }, s.about_text || ""))),
+    h("div", { class: "btn-row" }, h("button", { class: "btn", type: "submit" }, "Save site settings")));
+}
+
+function portalBuildingsView() {
+  const list = pBuildings || (pBuildings = JSON.parse(JSON.stringify(state.content.buildings)));
+  const blocks = list.map((b, i) => h("div", { class: "item", "data-pbuilding": i },
+    h("h3", null, b.name || `Building ${i + 1}`),
+    h("div", { class: "row" },
+      field("ID (lowercase, dashes)", textInput(b.id, { maxlength: 60, "data-k": "id" })),
+      field("Name", textInput(b.name, { maxlength: 80, "data-k": "name" })),
+      field("Area (location)", textInput(b.area, { maxlength: 80, "data-k": "area" })),
+      field("Floors", numberInput(b.floors, { min: 1, max: 60, step: 1, "data-k": "floors" })),
+      field("Units", numberInput(b.units, { min: 0, max: 5000, step: 1, "data-k": "units" })),
+      field("Status", masterSelect("building_status", b.status, { "data-k": "status" }))),
+    field("Description", h("textarea", { maxlength: 400, "data-k": "description" }, b.description || "")),
+    h("div", { class: "row" },
+      field("Cover photo", mediaSelect("image", b.cover, { "data-k": "cover" })),
+      field("Film", mediaSelect("video", b.video, { "data-k": "video" }))),
+    field("Gallery (tick the photos to show)", galleryBoxes(b.gallery, "gallery")),
+    h("div", { class: "btn-row" }, h("button", { class: "btn danger", type: "button", on: { click: () => { readPortalBuildings(); pBuildings.splice(i, 1); render(); } } }, "Remove building"))));
+  return h("form", {
+    on: { submit: (e) => { e.preventDefault(); readPortalBuildings(); save("buildings", pBuildings, "Buildings saved and published.", () => { pBuildings = null; }); } },
+  },
+    blocks,
+    h("div", { class: "btn-row" },
+      h("button", { class: "btn ghost", type: "button", on: { click: () => { readPortalBuildings(); pBuildings.push({ id: "", name: "", area: "", floors: 1, units: 0, status: masterOptions("building_status")[0]?.[0] || "", description: "", cover: "", gallery: [], video: "" }); render(); } } }, "Add building"),
+      h("button", { class: "btn", type: "submit" }, "Save buildings")));
+}
+
+function readPortalBuildings() {
+  const blocks = [...document.querySelectorAll("[data-pbuilding]")];
+  if (!blocks.length) return;
+  pBuildings = blocks.map((b) => ({
+    id: readVal(b, "id"), name: readVal(b, "name"), area: readVal(b, "area"), floors: readVal(b, "floors"), units: readVal(b, "units"),
+    status: readVal(b, "status"), description: readVal(b, "description"), cover: readVal(b, "cover"), video: readVal(b, "video"),
+    gallery: readGallery(b, "gallery"),
+  }));
+}
+
+function portalListingsView() {
+  const list = pListings || (pListings = JSON.parse(JSON.stringify(state.content.listings)));
+  const buildings = state.content.buildings;
+  const blocks = list.map((l, i) => h("div", { class: "item", "data-plisting": i },
+    h("h3", null, l.title || `Flat ${i + 1}`),
+    h("div", { class: "row" },
+      field("ID (lowercase, dashes)", textInput(l.id, { maxlength: 60, "data-k": "id" })),
+      field("Title", textInput(l.title, { maxlength: 120, "data-k": "title" })),
+      field("Building", select(buildings.map((b) => [b.id, b.name]), l.building, { "data-k": "building" })),
+      field("Flat type", masterSelect("bedroom_type", l.bhk, { "data-k": "bhk" })),
+      field("Status", masterSelect("flat_status", l.status, { "data-k": "status" }))),
+    h("div", { class: "row" },
+      field("Build area", numberInput(l.measures?.build?.value, { "data-k": "build-value" })),
+      field("Build area unit", masterSelect("area_unit", l.measures?.build?.unit || "sqm", { "data-k": "build-unit" })),
+      field("Carpet area", numberInput(l.measures?.carpet?.value, { "data-k": "carpet-value" })),
+      field("Carpet area unit", masterSelect("area_unit", l.measures?.carpet?.unit || "sqm", { "data-k": "carpet-unit" }))),
+    h("div", { class: "row" },
+      field("Rent amount", numberInput(l.price?.amount, { "data-k": "amount" })),
+      field("Currency", masterSelect("currency", l.price?.currency || "OMR", { "data-k": "currency" })),
+      field("Rent period", masterSelect("rent_period", l.price?.period || "month", { "data-k": "period" })),
+      field("Available from", textInput(l.available_from, { maxlength: 40, "data-k": "available_from", placeholder: "e.g. 1 Jan 2027" }))),
+    h("div", { class: "row" },
+      field("Cover photo", mediaSelect("image", l.cover, { "data-k": "cover" })),
+      field("Film", mediaSelect("video", l.video, { "data-k": "video" }))),
+    field("Gallery (tick the photos to show)", galleryBoxes(l.gallery, "gallery")),
+    field("Description", h("textarea", { maxlength: 400, "data-k": "description" }, l.description || "")),
+    h("label", { class: "row" }, h("span", null, "Show on the home page"), h("input", { type: "checkbox", "data-k": "featured", checked: l.featured ? "checked" : null })),
+    h("div", { class: "btn-row" }, h("button", { class: "btn danger", type: "button", on: { click: () => { readPortalListings(); pListings.splice(i, 1); render(); } } }, "Remove flat"))));
+  return h("form", {
+    on: { submit: (e) => { e.preventDefault(); readPortalListings(); save("listings", pListings, "Flats saved and published.", () => { pListings = null; }); } },
+  },
+    blocks,
+    h("div", { class: "btn-row" },
+      h("button", { class: "btn ghost", type: "button", on: { click: () => {
+        readPortalListings();
+        pListings.push({ id: "", title: "", building: buildings[0]?.id || "", bhk: masterOptions("bedroom_type")[0]?.[0] || "", measures: { build: { value: "", unit: "sqm" }, carpet: { value: "", unit: "sqm" } }, price: { amount: "", currency: "OMR", period: "month" }, status: masterOptions("flat_status")[0]?.[0] || "", available_from: "", cover: "", gallery: [], video: "", description: "", featured: false });
+        render();
+      } } }, "Add flat"),
+      h("button", { class: "btn", type: "submit" }, "Save flats")));
+}
+
+function readPortalListings() {
+  const blocks = [...document.querySelectorAll("[data-plisting]")];
+  if (!blocks.length) return;
+  pListings = blocks.map((b) => ({
+    id: readVal(b, "id"), title: readVal(b, "title"), building: readVal(b, "building"), bhk: readVal(b, "bhk"), status: readVal(b, "status"),
+    measures: {
+      build: { value: readVal(b, "build-value"), unit: readVal(b, "build-unit") },
+      carpet: { value: readVal(b, "carpet-value"), unit: readVal(b, "carpet-unit") },
+    },
+    price: { amount: readVal(b, "amount"), currency: readVal(b, "currency"), period: readVal(b, "period") },
+    available_from: readVal(b, "available_from"), cover: readVal(b, "cover"), video: readVal(b, "video"),
+    gallery: readGallery(b, "gallery"), description: readVal(b, "description"),
+    featured: !!b.querySelector('[data-k="featured"]')?.checked,
+  }));
+}
+
 // ---- layout ----------------------------------------------------------------------------------
 
 const TABS = [
@@ -616,9 +781,21 @@ const TABS = [
   ["audit", "Activity"],
 ];
 
+const PORTAL_TABS = [
+  ["site", "Site and contacts"],
+  ["buildings", "Buildings"],
+  ["listings", "Flats to rent"],
+  ["media", "Media"],
+  ["lists", "Lists"],
+  ["users", "People"],
+  ["account", "My account"],
+  ["audit", "Activity"],
+];
+
 function shell(body) {
   const adminOnly = state.user.role === "admin";
-  const tabs = TABS.filter(([id]) => adminOnly || !["users", "audit"].includes(id));
+  const list = state.content?.target === "portal" ? PORTAL_TABS : TABS;
+  const tabs = list.filter(([id]) => adminOnly || !["users", "audit"].includes(id));
   return h("div", { class: "wrap" },
     h("div", { class: "top" },
       h("div", null, h("strong", null, "Azaiba Gardens · content"), h("div", { class: "muted" }, `${state.user.name || state.user.email} · ${adminOnly ? "Administrator" : "Editor"}`)),
@@ -626,7 +803,7 @@ function shell(body) {
         h("button", { class: "btn", type: "button", on: { click: publishSite } }, "Publish site"),
         h("a", { class: "btn ghost", href: "/", target: "_blank", rel: "noopener" }, "View site"),
         h("button", { class: "btn ghost", type: "button", on: { click: logout } }, "Sign out"))),
-    h("nav", { class: "tabs" }, tabs.map(([id, label]) => h("button", { type: "button", "aria-current": state.tab === id ? "page" : null, on: { click: () => { state.tab = id; slides = null; buildings = null; state.message = null; loadTab(); } } }, label))),
+    h("nav", { class: "tabs" }, tabs.map(([id, label]) => h("button", { type: "button", "aria-current": state.tab === id ? "page" : null, on: { click: () => { state.tab = id; slides = null; buildings = null; pSite = pBuildings = pListings = null; state.message = null; loadTab(); } } }, label))),
     messageBox(),
     body);
 }
@@ -648,6 +825,7 @@ async function logout() {
 async function loadContent() {
   const r = await api("GET", "/api/content");
   if (r.ok) state.content = r;
+  if (r.ok && r.target === "portal" && state.tab === "hero") state.tab = "site";
   const mv = await api("GET", "/api/masters");
   if (mv.ok) { state.masters = mv.values; state.kinds = mv.kinds; }
   const m = await api("GET", "/api/media");
@@ -676,6 +854,7 @@ async function loadTab() {
 }
 
 function tabBody() {
+  if (state.content?.target === "portal") return portalBody();
   if (state.tab === "buildings") return buildingsEditor();
   if (state.tab === "contacts") return contactsEditor();
   if (state.tab === "lists") return listsView();

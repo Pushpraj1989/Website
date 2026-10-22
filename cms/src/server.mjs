@@ -9,6 +9,8 @@ import { mailLinkText } from "./links.mjs";
 import { sendMail } from "./mail.mjs";
 import { MEDIA_NAME, checkUpload, listMedia, maxUploadBytes, readBody, registerImage, storeUpload } from "./media.mjs";
 import { SECTIONS, migratedBuildings, publishNow, readData, registerUploadedImage, saveSection } from "./content.mjs";
+import { PORTAL_SECTIONS, portalMedia, publishPortal, readPortal, savePortalSection } from "./portal.mjs";
+const PORTAL = config.target === "portal";
 import { KINDS, addMaster, importFromData, listMasters, masterContext, seedMasters, updateMaster } from "./masters.mjs";
 import {
   DUMMY_HASH, checkPassword, hashPassword, newTotpSecret, randomToken, rateLimiter, sha256, verifyPassword, verifyTotp,
@@ -16,7 +18,7 @@ import {
 
 const db = openDb(config.dbFile);
 seedMasters(db);
-importFromData(db, readData());
+if (!PORTAL) importFromData(db, readData());
 const PUBLIC = path.join(CMS_DIR, "public");
 const ORIGIN = new URL(config.publicUrl).origin;
 const LOGIN_LOCK_MS = 15 * 60_000;
@@ -320,6 +322,10 @@ async function changeUser(req, res, session, id, action) {
 // ---- content ------------------------------------------------------------------------------------
 
 function contentView() {
+  if (PORTAL) {
+    const { site, buildings, listings } = readPortal();
+    return { ok: true, target: "portal", site, buildings, listings, images: {}, publicUrl: config.publicUrl, media: portalMedia() };
+  }
   const data = readData();
   return {
     ok: true,
@@ -334,16 +340,18 @@ function contentView() {
 }
 
 async function putSection(req, res, session, section) {
-  if (!SECTIONS.includes(section)) return fail(res, 404, "Unknown section.");
+  if (!(PORTAL ? PORTAL_SECTIONS : SECTIONS).includes(section)) return fail(res, 404, "Unknown section.");
   const body = await readJson(req, 256 * 1024);
-  const result = await saveSection(section, body.value, session.user.email, masterContext(db));
+  const result = PORTAL
+    ? await savePortalSection(section, body.value, session.user.email, masterContext(db))
+    : await saveSection(section, body.value, session.user.email, masterContext(db));
   if (!result.ok) return json(res, 422, { ok: false, errors: result.errors });
   audit(db, session.user.email, "content_saved", section);
   return json(res, 200, { ok: true, published: true });
 }
 
 async function publish(res, session) {
-  const result = await publishNow();
+  const result = PORTAL ? await publishPortal() : await publishNow();
   audit(db, session.user.email, result.ok ? "published" : "publish_failed", "");
   return result.ok ? json(res, 200, { ok: true }) : fail(res, 500, "The site did not build.", { log: result.log.slice(-600) });
 }
@@ -354,7 +362,7 @@ async function uploadMedia(req, res, session) {
   const kind = checkUpload(type, bytes);
   const stored = storeUpload(bytes, kind);
   let published = false;
-  if (stored.kind === "image") {
+  if (stored.kind === "image" && !PORTAL) {
     const result = await registerUploadedImage(stored, session.user.email);
     if (!result.ok) return json(res, 422, { ok: false, errors: result.errors });
     published = true;
@@ -429,7 +437,7 @@ async function route(req, res) {
   if (section && m === "PUT") return putSection(req, res, session, section[1]);
   if (p === "/api/publish" && m === "POST") return publish(res, session);
 
-  if (p === "/api/media" && m === "GET") return json(res, 200, { ok: true, files: listMedia(readData()) });
+  if (p === "/api/media" && m === "GET") return json(res, 200, { ok: true, files: PORTAL ? portalMedia() : listMedia(readData()) });
   if (p === "/api/media" && m === "POST") return uploadMedia(req, res, session);
 
   if (p === "/api/users" && m === "GET") {

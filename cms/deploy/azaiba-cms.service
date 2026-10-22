@@ -16,7 +16,7 @@ NoNewPrivileges=true
 ProtectSystem=strict
 ProtectHome=true
 PrivateTmp=true
-ReadWritePaths=/srv/website/cms/data /srv/website/data /srv/website/shared/img /srv/website/sites/azaiba-gardens
+ReadWritePaths=/srv/website/cms/data /srv/website/portals/azaiba-portal /srv/website/data /srv/website/shared/img /srv/website/sites/azaiba-gardens
 
 [Install]
 WantedBy=multi-user.target

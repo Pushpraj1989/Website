@@ -26,13 +26,14 @@ chown deploy:deploy /home/deploy/.ssh/authorized_keys && chmod 600 /home/deploy/
 
 # Folders: group cms can write where the CMS saves; setgid keeps new files in the cms group
 install -d -o deploy -g cms "$REPO"
-for d in "$REPO/cms/data" "$REPO/data" "$REPO/shared/img" "$REPO/sites"; do
+for d in "$REPO/cms/data" "$REPO/portals/azaiba-portal" "$REPO/portals/azaiba-portal/content" "$REPO/portals/azaiba-portal/content/media" "$REPO/data" "$REPO/shared/img" "$REPO/sites"; do
   install -d -o deploy -g cms "$d"
   chmod 2775 "$d"
 done
 
 # Python for the site builder
 if [ ! -x /srv/venv/bin/python ]; then python3 -m venv /srv/venv; fi
+# The portal's React build needs Node packages; the deploy job installs them on each deploy.
 /srv/venv/bin/pip install --quiet --upgrade jinja2 pillow
 
 # Environment file for the CMS: root owns it, the cms user can read it, nobody else can

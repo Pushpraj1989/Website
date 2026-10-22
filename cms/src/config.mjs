@@ -7,7 +7,14 @@ export const REPO_ROOT = path.resolve(CMS_DIR, "..");
 
 const env = process.env;
 
+// Which site the CMS manages: "portal" (the magicbricks-style listing portal, default) or
+// "azaiba" (the animated concept site). Each target has its own content files and media folder.
+const target = env.CMS_TARGET === "azaiba" ? "azaiba" : "portal";
+const portalDir = env.CMS_PORTAL_DIR || path.join(REPO_ROOT, "portals", "azaiba-portal");
+
 export const config = {
+  target,
+  portalDir,
   host: env.CMS_HOST || "127.0.0.1",
   port: Number(env.CMS_PORT || 8800),
   publicUrl: (env.CMS_PUBLIC_URL || "http://localhost:8800").replace(/\/$/, ""),
@@ -15,7 +22,9 @@ export const config = {
   siteSlug: env.CMS_SITE || "azaiba-gardens",
   dataFile: env.CMS_DATA || path.join(REPO_ROOT, "data", "azaiba-gardens.json"),
   historyDir: path.join(CMS_DIR, "data", "history"),
-  mediaDir: path.join(REPO_ROOT, "shared", "img", env.CMS_IMG_DIR || "azaiba-gardens"),
+  mediaDir: target === "portal"
+    ? path.join(portalDir, "content", "media")
+    : path.join(REPO_ROOT, "shared", "img", env.CMS_IMG_DIR || "azaiba-gardens"),
   python: env.CMS_PYTHON || "python3",
   // Secure cookies are the default. Set CMS_COOKIE_SECURE=false only for plain-http local testing.
   cookieSecure: env.CMS_COOKIE_SECURE !== "false",

@@ -24,6 +24,7 @@ const env = {
   CMS_DATA: path.join(tmp, "azaiba-gardens.json"),
   CMS_IMG_DIR: "cms-test-media",
   CMS_PYTHON: "true",
+  CMS_TARGET: "azaiba",
 };
 const mediaDir = path.join(REPO, "shared", "img", "cms-test-media");
 fs.cpSync(path.join(REPO, "data", "azaiba-gardens.json"), env.CMS_DATA);
