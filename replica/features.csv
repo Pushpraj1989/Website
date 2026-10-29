@@ -85,3 +85,10 @@ Saved addresses and notification toggle,account,must,yes,no,S35
 Language and country settings,account,must,yes,no,S35; country pack and locale
 "Orders filtered by category, reorder from the orders screen",account,must,yes,no,S36; F19
 Flash sale banner with per-item savings,offers,should,yes,no,S27 (Talabat); offer type per item
+Pay by Apple Pay (Stripe),payments,must,yes,no,Stripe Payment Element or Payment Request; domain registration with Apple
+Pay by Google Pay on Android (Stripe),payments,must,yes,no,Stripe; Android and Chrome
+Pay by Samsung Pay on Android,payments,must,yes,no,NOT a Stripe method; separate integration to confirm before build; off until then
+Pay by local and international debit and credit cards (Stripe),payments,must,yes,no,3-D Secure where required; no card numbers in the app
+Saved cards as Stripe PaymentMethods on a Stripe Customer,account,should,yes,no,customers.stripe_customer_id
+"Stripe webhooks: signature check, stored once, idempotent processing",payments,must,yes,no,payment_events; Idempotency-Key on PaymentIntents
+Refunds and cancellations through Stripe,payments,must,yes,no,refunds table; Stripe refunds API

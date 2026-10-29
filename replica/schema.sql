@@ -68,7 +68,10 @@ create table restaurant (
   min_order_minor int not null default 0 check (min_order_minor >= 0),
   cash_limit_minor int not null default 0 check (cash_limit_minor >= 0),
   service_fee_minor int not null default 0 check (service_fee_minor >= 0),
-  accepts_card boolean not null default true,
+  accepts_card boolean not null default true,               -- debit and credit cards, local and international (via Stripe)
+  accepts_apple_pay boolean not null default false,        -- Stripe; needs the domain registered with Apple
+  accepts_google_pay boolean not null default false,       -- Stripe; Android and web
+  accepts_samsung_pay boolean not null default false,      -- NOT a Stripe method; off until a separate integration is confirmed
   accepts_cod boolean not null default true,
   accepts_pay_on_arrival boolean not null default true,
   updated_at timestamptz not null default now()
@@ -221,6 +224,7 @@ create index on offer_redemptions (offer_id, guest_key);
 
 create table customers (
   id uuid primary key references auth.users(id) on delete cascade,  -- Supabase Auth (phone OTP)
+  stripe_customer_id text unique,                                    -- Stripe Customer; saved cards are Stripe PaymentMethods, never card numbers
   name text not null default '',
   email text,
   locale text not null default 'en' check (locale in ('en','ar')),
@@ -290,7 +294,8 @@ create table orders (
   vat_minor int not null default 0 check (vat_minor >= 0),
   total_minor int not null check (total_minor >= 0),
   currency char(3) not null references currencies(code),
-  payment_method text not null check (payment_method in ('card','wallet','cod','pay_on_arrival')),
+  payment_method text not null check (payment_method in (
+    'card','apple_pay','google_pay','samsung_pay','cod','pay_on_arrival')),
   payment_status text not null default 'pending' check (payment_status in (
     'pending','authorised','captured','failed','refunded','partly_refunded','not_required')),
   note text not null default '',
@@ -342,8 +347,8 @@ create index on order_status_events (order_id, at);
 create table payments (
   id uuid primary key default gen_random_uuid(),
   order_id uuid not null references orders(id) on delete restrict,
-  provider text not null,
-  provider_ref text not null,
+  provider text not null default 'stripe' check (provider in ('stripe')),
+  provider_ref text not null,                       -- Stripe PaymentIntent id (pi_...)
   amount_minor int not null check (amount_minor > 0),
   currency char(3) not null references currencies(code),
   status text not null check (status in ('pending','authorised','captured','failed','cancelled')),
@@ -363,7 +368,8 @@ create table refunds (
   created_at timestamptz not null default now()
 );
 
--- Every webhook is stored once, before it is processed. The unique key makes a repeat harmless.
+-- Every Stripe webhook is stored once, before it is processed. The unique key makes a repeat harmless.
+-- Signature checked with the Stripe webhook secret. Processing follows the payment's state, not arrival order.
 create table payment_events (
   id uuid primary key default gen_random_uuid(),
   provider text not null,

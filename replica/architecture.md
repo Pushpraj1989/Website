@@ -11,7 +11,7 @@ Reads: `recon.md`, `features.csv`. Schema: `schema.sql` (23 tables, unverified u
 | database | Postgres 15 on Supabase, in the region nearest the restaurant's country (for the UAE, the nearest available region; confirm) | one managed database; row level security for customers and staff; PostGIS for delivery zones |
 | auth | Supabase Auth, phone one-time code for customers, email and password plus two-factor for staff | guests get a token instead of an account; staff get stronger login |
 | realtime | Supabase Realtime on `orders` for the kitchen board and the customer's tracking screen | no polling; the same table drives both screens |
-| payments | a gateway that supports the card schemes and national networks of each country (for the UAE: Visa, Mastercard; confirm with the client) behind one adapter | the gateway is a swappable adapter; webhooks are stored before processing |
+| payments | **Stripe** (Payment Element for cards, Apple Pay and Google Pay). Stripe does not offer Samsung Pay: it needs a separate integration, decided before build. Cards are local and international debit and credit (Visa, Mastercard; 3-D Secure where the bank requires it). Stripe is the only gateway; payment calls live in one adapter module | the gateway is a swappable adapter; webhooks are stored before processing |
 | SMS | an SMS provider that reaches the country's numbers for one-time codes (confirm for the UAE) | the default SMS path of the auth service may not cover every country; test with real numbers before launch |
 | push | Firebase Cloud Messaging (Android and iOS) | order status while the app is closed |
 | email | Resend | receipts and staff alerts |
@@ -174,8 +174,31 @@ Jobs:
 
 ## Summary (for the user)
 
-- Stack in one line: Flutter mobile, Next.js web and admin, Supabase Postgres with Realtime, a gateway adapter for the card networks of each country.
+- Stack in one line: Flutter mobile, Next.js web and admin, Supabase Postgres with Realtime, Stripe for cards, Apple Pay and Google Pay.
 - Tables: 23. Routes: 36. Jobs: 6.
 - Riskiest parts: payment and webhooks with refunds; the offer engine under concurrent use; the Arabic and
   right-to-left content and layout.
 - Next step: `/replica-design`.
+
+
+## Payments with Stripe (payment methods decision)
+
+Methods at checkout, each switched on per restaurant:
+- Apple Pay (iOS and Safari): Stripe Payment Element or Payment Request. Needs the domain registered with Apple.
+- Google Pay (Android and Chrome): through Stripe. This is the Android wallet route.
+- Samsung Pay (Android): not a Stripe method. Separate integration, confirmed with Samsung and the acquirer before any
+  promise. Until then the setting stays off and the app does not show the button.
+- Debit and credit cards, local and international: Stripe card payments, 3-D Secure where the bank requires it.
+  Saved cards are Stripe PaymentMethods on a Stripe Customer (customers.stripe_customer_id). The app never sees a card number.
+- Cash on delivery and pay on arrival stay outside Stripe; the restaurant turns them on or off.
+
+Rules for the Stripe path:
+- Amounts are sent in the currency's smallest unit (AED: fils), the same integer as orders.total_minor.
+- Each PaymentIntent is created with an Idempotency-Key from the order, so a retry never charges twice.
+- The order starts as awaiting_payment. It is confirmed only on the payment_intent.succeeded webhook, or a server
+  retrieve of the intent. The app never marks an order paid on its own.
+- Refunds and cancellations use the Stripe refunds API and are recorded in the refunds table.
+- The webhook endpoint verifies the Stripe signature; each event is stored once in payment_events before processing.
+- Before launch, confirm Stripe's availability for the UAE merchant account, the card types, Apple Pay and Google Pay
+  domains, and the currencies enabled for the account.
+- Test with Stripe test cards for every method before any live charge.

@@ -360,3 +360,9 @@ Architecture effects (applied to schema.sql):
 - The restaurant gets a service fee setting.
 - Points are a ledger (earned by orders, spent on vouchers), not a balance column.
 - The savings bar and the "add X to maximise savings" message come from the quote endpoint, never from the app.
+
+## Payment decision (2026-10-29)
+
+Gateway: Stripe, the only gateway for this app. Methods: Apple Pay, Google Pay (Android), local and international
+debit and credit cards. Samsung Pay is requested, but Stripe does not offer it: it needs a separate integration,
+confirmed before build. Cash on delivery and pay on arrival remain restaurant choices.
