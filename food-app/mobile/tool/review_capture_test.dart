@@ -183,6 +183,9 @@ Future<void> _loadFonts() async {
   final icons = FontLoader('MaterialIcons')
     ..addFont(Future.value(ByteData.sublistView(File('/opt/flutter/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf').readAsBytesSync())));
   await icons.load();
+  // The heading face is bundled with the app (assets/fonts). The test runner does not load app fonts, so it is registered here.
+  final fraunces = FontLoader('Fraunces')..addFont(Future.value(ByteData.sublistView(File('assets/fonts/Fraunces-Variable.ttf').readAsBytesSync())));
+  await fraunces.load();
   // The Lucide icons (the bottom bar and the home screen) are package fonts. Flutter names a package font
   // 'packages/<package>/<family>', so each family the package declares is loaded under that name.
   final config = File('.dart_tool/package_config.json').absolute;

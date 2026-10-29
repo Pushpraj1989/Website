@@ -33,14 +33,24 @@ class Tokens {
 
   // Touch targets: at least 48 px, per the button tokens.
   static const minHit = 48.0;
+  static const headingFont = 'Fraunces';
 }
 
 ThemeData buildTheme() {
   final scheme = ColorScheme.fromSeed(seedColor: Tokens.accent, primary: Tokens.accent, onPrimary: Tokens.onAccent, surface: Tokens.bg, onSurface: Tokens.text, error: Tokens.danger);
+  // Headings use Fraunces, a free serif (SIL Open Font License). Body text stays on the system font.
+  final base = Typography.material2021().black;
+  final headingFont = base.headlineSmall?.copyWith(fontFamily: Tokens.headingFont);
   return ThemeData(
     useMaterial3: true,
     colorScheme: scheme,
     scaffoldBackgroundColor: Tokens.bg,
+    textTheme: base.copyWith(
+      headlineSmall: headingFont,
+      headlineMedium: base.headlineMedium?.copyWith(fontFamily: Tokens.headingFont),
+      titleLarge: base.titleLarge?.copyWith(fontFamily: Tokens.headingFont),
+      titleMedium: base.titleMedium?.copyWith(fontFamily: Tokens.headingFont),
+    ),
     appBarTheme: const AppBarTheme(backgroundColor: Tokens.bg, foregroundColor: Tokens.text, elevation: 0, surfaceTintColor: Colors.transparent),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(

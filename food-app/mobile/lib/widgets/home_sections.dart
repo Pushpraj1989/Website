@@ -176,7 +176,7 @@ class _HeroSlide extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(Tokens.space4),
           child: Column(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(title, style: TextStyle(color: ink, fontSize: 22, fontWeight: FontWeight.w700)),
+            Text(title, style: TextStyle(color: ink, fontFamily: Tokens.headingFont, fontSize: 26, fontWeight: FontWeight.w600)),
             const SizedBox(height: Tokens.space1),
             SizedBox(width: picture == null ? double.infinity : 200, child: Text(body, style: TextStyle(color: dark ? const Color(0xFFF5F5F4) : Tokens.textMuted, fontSize: 15))),
             const SizedBox(height: Tokens.space3),
