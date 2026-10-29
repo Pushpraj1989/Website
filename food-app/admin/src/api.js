@@ -55,6 +55,19 @@ export const api = {
   pool: (id) => request('GET', `/v1/admin/voucher-pools/${id}`),
   addManualCode: (poolId, body) => request('POST', `/v1/admin/voucher-pools/${poolId}/codes`, body),
   createBatch: (poolId, body, idempotencyKey) => request('POST', `/v1/admin/voucher-pools/${poolId}/batches`, body, { 'Idempotency-Key': idempotencyKey }),
+  templates: () => request('GET', '/v1/admin/voucher-templates'),
+  template: (id) => request('GET', `/v1/admin/voucher-templates/${id}`),
+  createTemplate: (body) => request('POST', '/v1/admin/voucher-templates', body),
+  saveTemplate: (id, body) => request('PATCH', `/v1/admin/voucher-templates/${id}`, body),
+  templateBackground: (id, file) => {
+    const form = new FormData();
+    form.append('file', file);
+    return request('POST', `/v1/admin/voucher-templates/${id}/background`, form);
+  },
+  publishTemplate: (id) => request('POST', `/v1/admin/voucher-templates/${id}/publish`),
+  archiveTemplate: (id) => request('POST', `/v1/admin/voucher-templates/${id}/archive`),
+  duplicateTemplate: (id) => request('POST', `/v1/admin/voucher-templates/${id}/duplicate`),
+  templatePreview: (id, which = 'draft') => request('GET', `/v1/admin/voucher-templates/${id}/preview?which=${which}`),
   promotions: () => request('GET', '/v1/admin/promotions'),
   createPromotion: (body) => request('POST', '/v1/admin/promotions', body),
   updatePromotion: (id, body) => request('PUT', `/v1/admin/promotions/${id}`, body),

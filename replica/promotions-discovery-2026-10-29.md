@@ -155,3 +155,26 @@ Deviations from the brief, deliberately deferred:
 
 Production needs two new secrets: `VOUCHER_CODE_SECRET` (keys the code hashes) and `APP_ENCRYPTION_KEY` (encrypts the
 stored codes). The server refuses to start the code routes without them, as it does for other secrets.
+
+## 9. Phase 3 status (voucher template studio)
+
+Done, without PDF or QR output (see below).
+
+- **Designs:** a draft that staff edit, and immutable numbered versions created on publish. Archived designs cannot change.
+  Duplicate copies the draft. A published design must show the code, or a QR code, before it can be published.
+- **Fields:** text and QR only. Text may show only the placeholders in the list (code, QR, discount, expiry, campaign,
+  restaurant, customer, terms, serial number). Nothing is printed closer than 3 mm to the edge. Colours are hex values.
+- **Backgrounds:** pictures only, checked by their bytes and size, stored like product pictures.
+- **Previews:** sample values only. The server fills them, so the editor and any later print use the same rules.
+- **Pools and vouchers:** a pool can print with a published design. Each voucher records the version it was issued
+  with, so a later design change does not change vouchers already made.
+- **Admin:** a "Voucher designs" section with fields you can drag or move with the arrow keys, a properties panel,
+  background upload, preview, publish, duplicate and archive. The field panel warns when text is likely to be too large
+  for its box.
+
+Not done, and why: a real QR image and a PDF need a QR library and a PDF library. Neither is approved (decision 4). The
+editor shows a QR placeholder box, and printing waits for the libraries. Text that is too large for its box wraps and can
+still spill past the box; the print step must shrink or wrap it too.
+
+Tests: `test/templates.test.ts` (11 tests). `npm run test:vouchers` now runs all three database suites one after another
+(vouchers 12, campaigns 13, templates 11). Checked in a browser: the editor loads with no page overflow.

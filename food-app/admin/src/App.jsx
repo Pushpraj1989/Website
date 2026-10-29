@@ -5,6 +5,7 @@ import Products from './pages/Products.jsx';
 import Categories from './pages/Categories.jsx';
 import Offers from './pages/Offers.jsx';
 import Campaigns from './pages/Campaigns.jsx';
+import Templates from './pages/Templates.jsx';
 import Promotions from './pages/Promotions.jsx';
 import Zones from './pages/Zones.jsx';
 import Orders from './pages/Orders.jsx';
@@ -16,6 +17,7 @@ const SECTIONS = [
   { id: 'categories', label: 'Categories' },
   { id: 'offers', label: 'Offers' },
   { id: 'campaigns', label: 'Campaigns' },
+  { id: 'designs', label: 'Voucher designs' },
   { id: 'promotions', label: 'Promotions' },
   { id: 'zones', label: 'Delivery areas' },
   { id: 'assistant', label: 'Assistant' },
@@ -80,6 +82,7 @@ export default function App() {
         {catalog && section === 'categories' ? <Categories catalog={catalog} onChanged={reload} /> : null}
         {catalog && section === 'offers' ? <Offers catalog={catalog} onChanged={reload} /> : null}
         {catalog && section === 'campaigns' ? <Campaigns /> : null}
+        {catalog && section === 'designs' ? <Templates /> : null}
         {catalog && section === 'promotions' ? <Promotions catalog={catalog} /> : null}
         {section === 'zones' ? <Zones /> : null}
         {section === 'orders' ? <Orders /> : null}

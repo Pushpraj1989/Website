@@ -8,6 +8,7 @@ import { RESTAURANT_ID, validateOffer, offerView } from './catalog.ts';
 import { encryptSecret } from './crypto.ts';
 import { RuleError } from './orders.ts';
 import type { PoolClient } from 'pg';
+import { currentVersionId } from './templates.ts';
 
 /** Largest batch created in one request. Bigger batches need the background worker (Phase 4 of the brief). */
 export const BULK_SYNC_LIMIT = 1000;
@@ -218,6 +219,7 @@ export function poolView(row: Record<string, any>) {
     quantityLimit: row.quantity_limit as number | null,
     issuedCount: row.issued_count as number,
     status: row.status as string,
+    templateId: (row.template_id ?? null) as string | null,
   };
 }
 
@@ -226,14 +228,20 @@ export async function createPool(campaignId: string, body: Record<string, unknow
   const pattern = text(body.codePattern, 'Code pattern', 40).toUpperCase();
   if (!/^[A-Z0-9#@*-]{4,40}$/.test(pattern)) throw new RuleError('A pattern uses letters, digits, dashes, and # (digit), @ (letter), * (either).', 'bad_input', 400);
   const limit = optionalInt(body.quantityLimit, 'Quantity limit', 1, 100_000_000);
+  const templateId = body.templateId ? String(body.templateId) : null;
   return withTx(async (c) => {
     const campaign = await lockCampaign(c, campaignId);
+    if (templateId) {
+      const t = await c.query(`select status, current_version from voucher_templates where id = $1 and restaurant_id = $2`, [templateId, RESTAURANT_ID]);
+      if (!t.rows[0]) throw new RuleError('Template not found.', 'not_found', 404);
+      if (t.rows[0].status !== 'published') throw new RuleError('Publish the template before using it on a pool.', 'not_published', 409);
+    }
     if (['completed', 'cancelled'].includes(campaign.status)) throw new RuleError('This campaign has ended.', 'not_editable', 409);
     const offer = await c.query(`select id from offers where id = $1 and campaign_id = $2`, [offerId, campaignId]);
     if (!offer.rows[0]) throw new RuleError('Choose a rule that belongs to this campaign.', 'bad_input', 400);
     const { rows } = await c.query(
-      `insert into voucher_pools (campaign_id, offer_id, code_pattern, quantity_limit) values ($1,$2,$3,$4) returning *`,
-      [campaignId, offerId, pattern, limit],
+      `insert into voucher_pools (campaign_id, offer_id, code_pattern, quantity_limit, template_id) values ($1,$2,$3,$4,$5) returning *`,
+      [campaignId, offerId, pattern, limit, templateId],
     );
     return poolView(rows[0]);
   });
@@ -297,9 +305,10 @@ export async function addManualCode(poolId: string, body: Record<string, unknown
     const p = await assertCanIssue(c, poolId, 1, expiresAt);
     const taken = await c.query(`select 1 from vouchers where code_hash = $1`, [codeHash(code)]);
     if (taken.rows[0]) throw new RuleError('That code is already in use.', 'duplicate', 409);
+    const templateVersion = await currentVersionId(c, p.template_id ?? null);
     const { rows } = await c.query(
-      `insert into vouchers (pool_id, offer_id, code_hash, code_ciphertext, expires_at) values ($1,$2,$3,$4,$5) returning id`,
-      [poolId, p.offer_id, codeHash(code), encryptSecret(code), expiresAt],
+      `insert into vouchers (pool_id, offer_id, code_hash, code_ciphertext, expires_at, template_version_id) values ($1,$2,$3,$4,$5,$6) returning id`,
+      [poolId, p.offer_id, codeHash(code), encryptSecret(code), expiresAt, templateVersion],
     );
     await c.query(`insert into voucher_ledger (voucher_id, event, detail) values ($1, 'issued', '{"source":"manual"}')`, [rows[0].id]);
     await c.query(`update voucher_pools set issued_count = issued_count + 1 where id = $1`, [poolId]);
@@ -345,6 +354,7 @@ export async function createBatch(poolId: string, body: Record<string, unknown>,
       [poolId, quantity, idempotencyKey],
     );
     const hash = codeHash;
+    const templateVersion = await currentVersionId(c, p.template_id ?? null);
     const made = new Map<string, string>(); // code hash -> voucher id
     const hashToCode = new Map<string, string>();
     for (let attempt = 0; attempt < MAX_ATTEMPTS && made.size < quantity; attempt++) {
@@ -361,10 +371,10 @@ export async function createBatch(poolId: string, body: Record<string, unknown>,
       }
       if (hashes.length === 0) continue;
       const { rows } = await c.query(
-        `insert into vouchers (pool_id, offer_id, code_hash, code_ciphertext, expires_at)
-         select $1, $2, h, cipher, $3 from unnest($4::text[], $5::text[]) as t(h, cipher)
+        `insert into vouchers (pool_id, offer_id, code_hash, code_ciphertext, expires_at, template_version_id)
+         select $1, $2, h, cipher, $3, $6 from unnest($4::text[], $5::text[]) as t(h, cipher)
          on conflict (code_hash) do nothing returning id, code_hash`,
-        [poolId, p.offer_id, expiresAt, hashes, ciphers],
+        [poolId, p.offer_id, expiresAt, hashes, ciphers, templateVersion],
       );
       for (const r of rows) made.set(r.code_hash, r.id);
     }
