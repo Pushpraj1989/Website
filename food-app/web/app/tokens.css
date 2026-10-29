@@ -1,0 +1,41 @@
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #f5f5f4;
+  --color-border: #e7e5e4;
+  --color-border-input: #78716c;
+  --color-text: #1c1917;
+  --color-text-muted: #57534e;
+  --color-accent: #b45309;
+  --color-on-accent: #ffffff;
+  --color-danger: #b91c1c;
+  --color-success: #15803d;
+  --color-warning: #92400e;
+  --font-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-arabic: Noto Sans Arabic, IBM Plex Sans Arabic, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --text-xs: 12px; --leading-xs: 16px; --weight-xs: 500;
+  --text-sm: 14px; --leading-sm: 20px; --weight-sm: 400;
+  --text-base: 16px; --leading-base: 24px; --weight-base: 400;
+  --text-lg: 20px; --leading-lg: 28px; --weight-lg: 600;
+  --text-xl: 28px; --leading-xl: 34px; --weight-xl: 700;
+  --text-display: 36px; --leading-display: 42px; --weight-display: 700;
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(28,25,23,.06), 0 1px 3px rgba(28,25,23,.10);
+  --shadow-pop: 0 12px 32px rgba(28,25,23,.16);
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --motion-ease: cubic-bezier(.2,.8,.2,1);
+}
+:root[dir='rtl'] { --font-body: var(--font-arabic); }
