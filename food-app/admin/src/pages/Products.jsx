@@ -35,7 +35,7 @@ export default function Products({ catalog, onChanged }) {
       {error ? <p role="alert" className="error">{error}</p> : null}
 
       <div className={editing ? 'split' : undefined}>
-      <div className="card table-wrap">
+      <div className="card table-wrap" tabIndex={0} role="region" aria-label="Products">
         <table>
           <thead>
             <tr>

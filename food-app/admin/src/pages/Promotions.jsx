@@ -53,7 +53,7 @@ export default function Promotions({ catalog }) {
       {message ? <p role="status" className="ok">{message}</p> : null}
       {error ? <p role="alert" className="error">{error}</p> : null}
       <div className={editing ? 'split' : undefined}>
-        <div className="card table-wrap">
+        <div className="card table-wrap" tabIndex={0} role="region" aria-label="Promotions">
           <table>
             <thead><tr><th scope="col">Shows</th><th scope="col">Media</th><th scope="col">Title</th><th scope="col">Runs</th><th scope="col">Status</th><th scope="col"><span className="sr">Actions</span></th></tr></thead>
             <tbody>

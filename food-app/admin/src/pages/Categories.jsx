@@ -41,7 +41,7 @@ export default function Categories({ catalog, onChanged }) {
       {message ? <p role="status" className="ok">{message}</p> : null}
       {error ? <p role="alert" className="error">{error}</p> : null}
 
-      <div className="card">
+      <div className="card table-wrap" tabIndex={0} role="region" aria-label="Categories">
         <table>
           <thead>
             <tr>

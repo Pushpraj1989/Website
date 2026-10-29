@@ -123,7 +123,7 @@ export default function Orders() {
         <div className="card"><p>No orders yet. New orders appear here as soon as they are placed.</p></div>
       ) : null}
       {orders && orders.length > 0 ? (
-        <div className="card">
+        <div className="card table-wrap" tabIndex={0} role="region" aria-label="Orders">
           <table>
             <thead>
               <tr><th scope="col">Order</th><th scope="col">Channel</th><th scope="col">Status</th><th scope="col">Items</th><th scope="col">Address</th><th scope="col">Total</th><th scope="col">Next</th></tr>

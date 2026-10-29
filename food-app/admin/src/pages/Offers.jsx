@@ -42,7 +42,7 @@ export default function Offers({ catalog, onChanged }) {
       {error ? <p role="alert" className="error">{error}</p> : null}
 
       <div className={editing ? 'split' : undefined}>
-      <div className="card table-wrap">
+      <div className="card table-wrap" tabIndex={0} role="region" aria-label="Offers">
         <table>
           <thead>
             <tr><th scope="col">Offer</th><th scope="col">Type</th><th scope="col">Value</th><th scope="col">Runs</th><th scope="col">Status</th><th scope="col"><span className="sr">Actions</span></th></tr>

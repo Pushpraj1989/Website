@@ -159,7 +159,7 @@ export default function Zones() {
   return (
     <section>
       <header className="toolbar">
-        <h2>Delivery areas</h2>
+        <h1>Delivery areas</h1>
         {!editing ? <button type="button" onClick={startNew}>Add an area</button> : null}
       </header>
       {message ? <p role="status">{message}</p> : null}
@@ -190,9 +190,10 @@ export default function Zones() {
       ) : (
         <>
           {zones.length === 0 ? <p>No delivery areas yet. Add one so customers can order to an address.</p> : (
+            <div className="card table-wrap" tabIndex={0} role="region" aria-label="Delivery areas">
             <table>
               <thead>
-                <tr><th>Name</th><th>Fee</th><th>Minimum order</th><th>Status</th><th /></tr>
+                <tr><th scope="col">Name</th><th scope="col">Fee</th><th scope="col">Minimum order</th><th scope="col">Status</th><th scope="col"><span className="sr-only">Actions</span></th></tr>
               </thead>
               <tbody>
                 {zones.map((z) => (
@@ -206,6 +207,7 @@ export default function Zones() {
                 ))}
               </tbody>
             </table>
+            </div>
           )}
         </>
       )}
