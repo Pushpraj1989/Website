@@ -95,7 +95,7 @@ Staff (admin panel):
 | POST /v1/admin/staff | invite staff with a role | owner | A01 |
 | POST /v1/admin/orders/:id/refund | manual refund (audited) | owner, manager | F08 |
 
-Route count: 37 (customer 19, webhooks 1, staff 17).
+Route count: 36 (customer 19, webhooks 1, staff 16).
 
 Jobs:
 - order-timeout: every minute. Auto-cancels orders not accepted within the timeout, and refunds captured payments.
@@ -165,7 +165,7 @@ Jobs:
 ## Summary (for the user)
 
 - Stack in one line: Flutter mobile, Next.js web and admin, Supabase Postgres with Realtime, a gateway adapter for Omannet and cards.
-- Tables: 23. Routes: 37. Jobs: 6.
+- Tables: 23. Routes: 36. Jobs: 6.
 - Riskiest parts: payment and webhooks with refunds; the offer engine under concurrent use; the Arabic and
   right-to-left content and layout.
 - Next step: `/replica-design`.
