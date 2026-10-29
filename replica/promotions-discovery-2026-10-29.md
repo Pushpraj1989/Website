@@ -32,8 +32,9 @@ No application code was changed.
 5. **No customer wallet.** Nothing stores a saved voucher per customer.
 6. **No template designer, print or PDF.** No rendering or QR library exists.
 7. **No partner API.** There are no partner clients, scopes, quotas or partner audit log.
-8. **Schema drift.** `offers` is defined in `replica/schema.sql` but no food-app migration creates it. A fresh database
-   built from `web/db` would not have the table. This must be resolved before adding columns.
+8. **Schema source.** `offers` is defined in `replica/schema.sql`, which `web/db/migrate.mjs` applies first, so the
+   migration path does create it. The file is not idempotent, so the runner needs `--reset` on an existing database.
+   (An earlier version of this report said no migration creates the table; that was wrong.)
 
 ## 3. Reuse, create, modify
 
@@ -87,3 +88,37 @@ Deferred: the template designer and PDFs, the partner API, stored-value vouchers
 6. **Refund and cancellation policy:** should a cancelled order restore the voucher, and if so, within what time?
 7. **Partner API:** is there a partner who needs it now, or can it wait?
 8. **Member vouchers:** should a voucher be restricted to members, using the existing `audience` field?
+
+## 7. Phase 1 status (database layer, added after approval)
+
+Done in `food-app/web/db/vouchers.sql`, applied by `db/migrate.mjs`, tested in `test/vouchers.test.mjs` (12 of 12 pass on
+the test database):
+
+- `campaigns` (status, dates, timezone, budget, funding source, limits) and `offers.campaign_id`.
+- `voucher_pools` (code pattern, quantity limit, issued count), `vouchers` (keyed code hash, status, expiry, optional
+  single-customer binding, template version, optimistic version).
+- `voucher_batches` (requested and generated counts, idempotency key, 1 to 10,000 per batch).
+- `voucher_wallet` (save and remove without consuming; removed rows are kept).
+- `voucher_reservations` (one hold per voucher, a consumed hold must name an order).
+- Redemptions are recorded in the existing `offer_redemptions` (new `voucher_id`, unique per voucher), not a new table.
+- `voucher_ledger`, append-only (update and delete are blocked by trigger).
+- Row-level security is enabled on the new tables, as on the rest of the platform.
+
+Not done in Phase 1, by design: the price is not changed yet (offers are still not applied in `computeQuote`), no API
+routes, no admin screens, no code generation, no encryption of codes (the HMAC key and the ciphertext column come with
+the code generator).
+
+### Defaults used for the open decisions
+
+- Currency: AED. Timezone default: Asia/Dubai.
+- Stored-value vouchers: not built; the discount-only model is used.
+- Bulk limit: 10,000 per batch, a placeholder until confirmed.
+- No PDF or QR library added.
+
+### New decision found during Phase 1
+
+**Two customer identity tables.** Orders reference `customers` (linked to Supabase auth in `replica/schema.sql`), while
+sign-in uses `accounts` (`web/db/auth.sql`, `web/lib/accounts.ts`). The running app places orders against guest sessions.
+The voucher wallet references `accounts`, so a signed-in customer's orders will not link to the wallet until this is
+decided. Options: make `accounts` the single customer table, or have the wallet reference `customers`. This needs a
+decision before the wallet is built.

@@ -10,6 +10,7 @@ const schemaFile = fileURLToPath(new URL('../../../replica/schema.sql', import.m
 const seedFile = fileURLToPath(new URL('./seed.sql', import.meta.url));
 const authFile = fileURLToPath(new URL('./auth.sql', import.meta.url));
 const platformFile = fileURLToPath(new URL('./platform.sql', import.meta.url));
+const vouchersFile = fileURLToPath(new URL('./vouchers.sql', import.meta.url));
 const AUTH_STUB = `
 create schema if not exists auth;
 create table if not exists auth.users (id uuid primary key default gen_random_uuid(), email text);
@@ -31,6 +32,7 @@ try {
   await client.query(readFileSync(schemaFile, 'utf8'));
   await client.query(readFileSync(authFile, 'utf8'));
   await client.query(readFileSync(platformFile, 'utf8'));
+  await client.query(readFileSync(vouchersFile, 'utf8'));
   await client.query(readFileSync(seedFile, 'utf8'));
   console.log(`schema and seed applied${reset ? ' (after reset)' : ''}`);
 } finally {
