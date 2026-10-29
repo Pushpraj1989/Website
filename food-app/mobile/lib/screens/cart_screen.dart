@@ -300,7 +300,7 @@ class _OffersSection extends StatelessWidget {
         if (o != null && o.applied) ...[
           const SizedBox(height: Tokens.space3),
           Row(children: [
-            Icon(LucideIcons.tag, color: Tokens.success),
+            const Icon(LucideIcons.tag, color: Tokens.success),
             const SizedBox(width: Tokens.space2),
             Expanded(child: Text(s.offerApplied(o.label ?? ''), style: const TextStyle(fontWeight: FontWeight.w600))),
             TextButton(onPressed: onRemove, child: Text(s.removeCode)),

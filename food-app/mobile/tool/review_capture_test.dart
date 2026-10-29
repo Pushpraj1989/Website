@@ -238,6 +238,7 @@ void main() {
     addTearDown(tester.view.resetPhysicalSize);
     // ignore: invalid_use_of_visible_for_testing_member
     // No saved layout: the captures show the default home a new customer gets.
+    // ignore: invalid_use_of_visible_for_testing_member
     SharedPreferences.setMockInitialValues({});
     final prefs = await SharedPreferences.getInstance();
     final api = ApiClient(baseUrl: 'http://api.test', client: _server(), prefs: prefs);

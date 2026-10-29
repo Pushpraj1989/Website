@@ -42,10 +42,12 @@ class _VouchersScreenState extends State<VouchersScreen> {
   Future<void> _load() async {
     try {
       final wallet = await widget.api.wallet();
-      if (mounted) setState(() {
-        _wallet = wallet;
-        _failed = false;
-      });
+      if (mounted) {
+        setState(() {
+          _wallet = wallet;
+          _failed = false;
+        });
+      }
     } catch (_) {
       if (mounted) setState(() => _failed = true);
     }
