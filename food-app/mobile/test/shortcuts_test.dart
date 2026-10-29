@@ -82,17 +82,17 @@ void main() {
     for (final id in ['last_order', 'frequent', 'favourites']) {
       expect(defFor(id), isNotNull, reason: id);
     }
-    expect(defaultDashboard, ['quick_actions', 'cart_summary', 'popular']);
+    expect(defaultDashboard, ['quick_actions', 'last_order', 'cart_summary', 'frequent', 'popular']);
   });
 
-  testWidgets('the last order shows its dishes, and Order again adds them and says what was added', (tester) async {
+  testWidgets('the last order shows its dishes, and Add to cart adds them and says what was added', (tester) async {
     final server = _Server();
     server.reorderMessageSkipped = 'Beef kebab';
     await _pumpHome(tester, server, layout: ['last_order']);
 
     await expectOnHome(tester, '2 × Grilled chicken, 1 × Mint lemonade');
-    await tester.ensureVisible(find.widgetWithText(FilledButton, 'Order again'));
-    await tester.tap(find.widgetWithText(FilledButton, 'Order again'));
+    await tester.ensureVisible(find.widgetWithText(FilledButton, 'Add to cart'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Add to cart'));
     await tester.pumpAndSettle();
     expect(server.requests, contains('POST /v1/orders/o1/reorder'));
     expect(find.text('Added 1 to your cart. Not available right now: Beef kebab.'), findsOneWidget);
@@ -119,6 +119,6 @@ void main() {
 
     expect(find.text('R-0001'), findsOneWidget);
     expect(find.text('2 × Grilled chicken, 1 × Mint lemonade'), findsOneWidget);
-    expect(find.widgetWithText(FilledButton, 'Order again'), findsOneWidget);
+    expect(find.widgetWithText(FilledButton, 'Add to cart'), findsOneWidget);
   });
 }

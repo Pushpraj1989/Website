@@ -225,17 +225,19 @@ Widget _app(Widget home, {String lang = 'en'}) {
 void main() {
   setUpAll(_loadFonts);
 
-  Future<void> shoot(WidgetTester tester, String name, Widget Function(ApiClient api, ValueNotifier<String> language, SharedPreferences prefs) build, {String lang = 'en'}) async {
+  Future<void> shoot(WidgetTester tester, String name, Widget Function(ApiClient api, ValueNotifier<String> language, SharedPreferences prefs) build, {String lang = 'en', Future<void> Function(WidgetTester tester)? after}) async {
     tester.view.physicalSize = const Size(390, 844) * 2;
     tester.view.devicePixelRatio = 2;
     addTearDown(tester.view.resetPhysicalSize);
     // ignore: invalid_use_of_visible_for_testing_member
-    SharedPreferences.setMockInitialValues({'dashboard_layout': jsonEncode(['quick_actions', 'cart_summary', 'popular', 'last_order', 'frequent', 'favourites'])});
+    // No saved layout: the captures show the default home a new customer gets.
+    SharedPreferences.setMockInitialValues({});
     final prefs = await SharedPreferences.getInstance();
     final api = ApiClient(baseUrl: 'http://api.test', client: _server(), prefs: prefs);
     final language = ValueNotifier(lang);
     await tester.pumpWidget(_app(build(api, language, prefs), lang: lang));
     await tester.pumpAndSettle(const Duration(milliseconds: 300));
+    if (after != null) await after(tester);
     // Pictures decode outside the fake clock, so give them real time to load before the frame is captured.
     await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 400)));
     await tester.pump(const Duration(milliseconds: 100));
@@ -272,6 +274,22 @@ void main() {
   testWidgets('shell-home', (tester) async {
     await shoot(tester, 'customer-shell-home', (api, lang, prefs) => MainShell(api: api, language: lang, auth: AuthApi(baseUrl: 'http://api.test', client: _server()), sessions: signedInStore()));
   });
+  testWidgets('shell-home-scrolled', (tester) async {
+    await shoot(tester, 'customer-shell-home-scrolled', (api, lang, prefs) => MainShell(api: api, language: lang, auth: AuthApi(baseUrl: 'http://api.test', client: _server()), sessions: signedInStore()), after: (tester) async {
+      await tester.drag(find.byType(ListView).first, const Offset(0, -700));
+      await tester.pumpAndSettle(const Duration(milliseconds: 300));
+    });
+  });
+
+  for (final (name, label) in [('shell-menu', 'Menu'), ('shell-orders', 'My orders'), ('shell-membership', 'Membership')]) {
+    testWidgets(name, (tester) async {
+      await shoot(tester, 'customer-$name', (api, lang, prefs) => MainShell(api: api, language: lang, auth: AuthApi(baseUrl: 'http://api.test', client: _server()), sessions: signedInStore()), after: (tester) async {
+        await tester.tap(find.descendant(of: find.byType(NavigationBar), matching: find.text(label)));
+        await tester.pumpAndSettle(const Duration(milliseconds: 300));
+      });
+    });
+  }
+
   testWidgets('home-arabic', (tester) async {
     await shoot(tester, 'customer-home-ar', (api, lang, prefs) => HomeScreen(api: api, language: lang, sessions: signedInStore(), auth: AuthApi(baseUrl: 'http://api.test', client: _server())), lang: 'ar');
   });

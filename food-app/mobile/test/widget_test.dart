@@ -69,6 +69,10 @@ void main() {
   });
 
   testWidgets('customise: remove a widget, add another, confirm, and the change is kept', (tester) async {
+    // The customise sheet with every row needs more height than the default test window.
+    tester.view.physicalSize = const Size(800, 2000);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
     final prefs = await SharedPreferences.getInstance();
     final api = _api(_router(), prefs);
     await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
@@ -80,7 +84,8 @@ void main() {
     // Shown list: quick actions, cart, popular. Remove the last one, then add the active order widget.
     await tester.tap(find.widgetWithText(AppButton, 'Remove').last);
     await tester.pumpAndSettle();
-    await tester.tap(find.widgetWithText(AppButton, 'Add').first);
+    // Only the buttons in the sheet: the dish cards behind it also say Add, and tapping one would close the sheet.
+    await tester.tap(find.descendant(of: find.byType(BottomSheet), matching: find.widgetWithText(AppButton, 'Add')).first);
     await tester.pumpAndSettle();
     await tester.tap(find.widgetWithText(AppButton, 'Confirm'));
     await tester.pumpAndSettle();

@@ -24,7 +24,7 @@ class Strings {
   String get payArrival => isArabic ? 'الدفع عند الوصول' : 'Pay on arrival';
   String get placeOrder => isArabic ? 'تأكيد الطلب' : 'Place order';
   String get placing => isArabic ? 'جارٍ تأكيد الطلب…' : 'Placing order…';
-  String get orderAgain => isArabic ? 'اطلب مرة أخرى' : 'Order again';
+  String get orderAgain => isArabic ? 'أضف إلى السلة' : 'Add to cart';
   String get orderedMost => isArabic ? 'الأكثر طلبك' : 'Ordered most';
   String get favourites => isArabic ? 'المفضلة' : 'Favourites';
   String get noFavourites => isArabic ? 'اضغط على القلب بجانب طبق تحبه ليظهر هنا.' : 'Tap the heart on a dish you like to see it here.';
