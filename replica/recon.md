@@ -323,3 +323,40 @@ Architecture effects:
   (setting: charge percent), recorded in the order's cancel reason.
 - Pay on delivery and pay on arrival share the same order path with payment_status = not_required until collected.
 - Coupons are offers (code and audience) applied by the quote endpoint; the coupon sheet reads the eligible list from it.
+
+
+## GCC reference: Talabat (12 screenshots, 2026-10-29, Oman account)
+
+Reference only (frames in `replica/screens/talabat-2026-10-29/`, git-ignored). Used for patterns. Its logo,
+copy, imagery and brand colours are not used. Order below follows the screenshot numbers.
+
+| ID | screen | frames | purpose | key components | states seen |
+| --- | --- | --- | --- | --- | --- |
+| S27 | Home | 10, 11 | location chooser, one search for food and groceries, category grid (food, mart, groceries, pharmacy, stores, pickup, beauty, give back), points and vouchers, promotion carousels, "big brands near you", flash sale banner | location selector, search bar, category tiles, points and voucher tiles, promotion carousel, brand cards, sticky sale banner | loaded, sale banner collapsed |
+| S28 | Voucher sheet | 12 | show a voucher and its terms | full-screen sheet, voucher value, countdown ("8 days left"), valid on (category), minimum spend, maximum saving, valid until, shop button | shown |
+| S29 | Restaurant page | 6 | menu entry: photo, rating, delivery fee and time, delivery partner, offers strip, category tabs, item carousels, sticky cart bar | hero photo, rating badge, fee with strikethrough, offer cards (first order, stamp card), tabs, item card with photo and add button, sticky view-cart bar with strikethrough totals | open, with items in cart |
+| S30 | Cart | 4, 5 | review and change items, see upsell, special requests, savings progress | line item with quantity stepper and edit, "you might also like" carousel with saving badges, cutlery toggle, free-text request, savings progress bar with the amount still needed, checkout and add items buttons | filled, savings threshold reached |
+| S31 | Checkout: delivery | 3 | choose address, timing, tip, instructions | map with pin, address with change link, timing options (standard or direct to you with fee), tip presets and custom, delivery instruction chips | default, tip chosen |
+| S32 | Checkout: payment and summary | 2, 9 | choose a method and see the bill | payment choices (Apple Pay, saved card, add card, cash), summary lines (subtotal, discount, free delivery, service fee, total), savings banner, pay button | method chosen |
+| S33 | Wallet confirmation | 1 | confirm the payment in the wallet sheet | wallet sheet with card, change method, amount, confirm with side button | shown |
+| S34 | Account | 8 | profile, lifetime savings by service, perks, menu of links | savings tiles, perks cards, menu rows (membership, help, rewards points, orders, challenges, credit, vouchers, about), bottom tabs | signed in |
+| S35 | Settings | 7 | account info, saved addresses, notifications, language, country | list rows with current values | signed in |
+| S36 | Orders | 9 | past orders, reorder, rate | category filter chips, reorder-from-home banner, order card with status and total, view details, reorder, star rating | delivered, rated, unrated |
+
+New flows (inferred from the screens):
+- F17 Order from a restaurant with a wallet payment: S27 -> S29 -> add items -> S30 (upsell, requests, savings) -> S31 (timing, tip) -> S32 -> S33 -> confirmed.
+- F18 Use a voucher: S27 (voucher tile) -> S28 (terms) -> shop -> apply in S30/S32.
+- F19 Reorder: S36 -> reorder -> S30.
+- F20 Change language or country: S34 -> S35 -> language or country.
+
+Features to add (features.csv): wallet payment (Apple Pay); service fee line; delivery timing choice with a fee for direct
+delivery; tip presets and custom; delivery instruction chips; cutlery request toggle; savings progress bar; item upsell in
+cart; vouchers with minimum spend, maximum saving and valid category; points and lifetime savings; saved addresses;
+notifications toggle; language and country settings; orders filtered by category; reorder from home.
+
+Architecture effects (applied to schema.sql):
+- Offers gain a maximum saving (max_discount_minor) and keep applies_to for the valid category.
+- Orders gain a service fee line, a tip, a delivery option (standard or direct) and the wallet payment method.
+- The restaurant gets a service fee setting.
+- Points are a ledger (earned by orders, spent on vouchers), not a balance column.
+- The savings bar and the "add X to maximise savings" message come from the quote endpoint, never from the app.

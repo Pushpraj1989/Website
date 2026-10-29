@@ -71,3 +71,17 @@ Processing screen with auto redirect back,payments,must,yes,no,S25 (video); webh
 Cancel during processing with confirmation,payments,must,yes,no,"S26 (video); void or refund, state machine"
 Pay on delivery (cash or card on delivery),payments,must,yes,no,S24 (video); F15
 "Bill breakdown: items, discounts, taxes, charges, total",checkout,must,yes,no,S23 (video); price summary component
+Wallet payment (Apple Pay) with confirmation sheet,payments,must,yes,no,"S32, S33 (Talabat screenshots); gateway wallet token"
+Service fee shown as its own line,checkout,must,yes,no,S32; restaurant.service_fee_minor
+Delivery timing: standard or direct with a fee,checkout,should,yes,no,S31; orders.delivery_option
+Tip presets and custom amount,checkout,should,yes,no,S31; orders.tip_minor
+Delivery instruction chips,checkout,should,yes,no,S31
+Cutlery request toggle and free-text request,checkout,should,yes,no,S30; orders.note and flags
+Savings progress bar with amount still needed,offers,should,yes,no,S30; quote endpoint
+Item upsell in the cart,menu,could,yes,no,S30
+"Vouchers with minimum spend, maximum saving, valid category and expiry",offers,must,yes,no,S28; offers.max_discount_minor
+Points ledger and lifetime savings,account,could,yes,no,S34; points_ledger
+Saved addresses and notification toggle,account,must,yes,no,S35
+Language and country settings,account,must,yes,no,S35; country pack and locale
+"Orders filtered by category, reorder from the orders screen",account,must,yes,no,S36; F19
+Flash sale banner with per-item savings,offers,should,yes,no,S27 (Talabat); offer type per item

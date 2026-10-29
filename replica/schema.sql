@@ -67,6 +67,7 @@ create table restaurant (
   prices_include_tax boolean not null default true,
   min_order_minor int not null default 0 check (min_order_minor >= 0),
   cash_limit_minor int not null default 0 check (cash_limit_minor >= 0),
+  service_fee_minor int not null default 0 check (service_fee_minor >= 0),
   accepts_card boolean not null default true,
   accepts_cod boolean not null default true,
   accepts_pay_on_arrival boolean not null default true,
@@ -188,6 +189,7 @@ create table offers (
   usage_limit int check (usage_limit is null or usage_limit >= 0),
   used_count int not null default 0,
   per_customer_limit int check (per_customer_limit is null or per_customer_limit >= 1),
+  max_discount_minor int check (max_discount_minor is null or max_discount_minor >= 0),  -- voucher cap, e.g. 3 OMR off at most
   stackable boolean not null default false,
   priority int not null default 100,
   active boolean not null default true,
@@ -282,10 +284,13 @@ create table orders (
   subtotal_minor int not null check (subtotal_minor >= 0),
   discount_minor int not null default 0 check (discount_minor >= 0),
   delivery_fee_minor int not null default 0 check (delivery_fee_minor >= 0),
+  delivery_option text not null default 'standard' check (delivery_option in ('standard','direct')),
+  service_fee_minor int not null default 0 check (service_fee_minor >= 0),
+  tip_minor int not null default 0 check (tip_minor >= 0),
   vat_minor int not null default 0 check (vat_minor >= 0),
   total_minor int not null check (total_minor >= 0),
   currency char(3) not null references currencies(code),
-  payment_method text not null check (payment_method in ('card','cod','pay_on_arrival')),
+  payment_method text not null check (payment_method in ('card','wallet','cod','pay_on_arrival')),
   payment_status text not null default 'pending' check (payment_status in (
     'pending','authorised','captured','failed','refunded','partly_refunded','not_required')),
   note text not null default '',
@@ -297,7 +302,7 @@ create table orders (
   unique (customer_id, idempotency_key),
   unique (guest_session_id, idempotency_key),
   check (customer_id is not null or guest_session_id is not null),
-  check (total_minor = subtotal_minor - discount_minor + delivery_fee_minor),
+  check (total_minor = subtotal_minor - discount_minor + delivery_fee_minor + service_fee_minor + tip_minor),
   check (channel = 'pickup' or address_id is not null)
 );
 create index on orders (restaurant_id, status, placed_at);
@@ -368,6 +373,17 @@ create table payment_events (
   processed_at timestamptz,
   unique (provider, event_id)
 );
+
+-- Points are a ledger: earned by orders, spent on vouchers. The balance is a sum, never a stored value.
+create table points_ledger (
+  id uuid primary key default gen_random_uuid(),
+  customer_id uuid not null references customers(id) on delete cascade,
+  order_id uuid references orders(id) on delete set null,
+  points int not null check (points <> 0),
+  reason text not null check (reason in ('order','voucher','adjustment','expiry')),
+  created_at timestamptz not null default now()
+);
+create index on points_ledger (customer_id, created_at);
 
 -- ---------- staff and audit ----------
 
