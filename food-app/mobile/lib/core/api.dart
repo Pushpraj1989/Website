@@ -85,8 +85,13 @@ class ApiClient {
           headers: _headers(json: true),
           body: jsonEncode({'channel': channel, 'method': method, 'address': address, 'idempotencyKey': idempotencyKey}),
         ));
-    return PlacedOrder.fromJson(body['order'] as Map<String, dynamic>);
+    final placed = PlacedOrder.fromJson(body['order'] as Map<String, dynamic>);
+    await prefs?.setString('last_order_id', placed.id);
+    return placed;
   }
+
+  /// The most recent order placed from this device, for the dashboard's tracking widget.
+  String? get lastOrderId => prefs?.getString('last_order_id');
 
   Future<PlacedOrder> order(String id) async {
     final body = await _send(() => _client.get(_uri('/v1/orders/$id'), headers: _headers()));

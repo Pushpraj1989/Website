@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/api.dart';
 import 'core/strings.dart';
 import 'core/theme.dart';
-import 'screens/menu_screen.dart';
+import 'screens/home_screen.dart';
 
 class SampleKitchenApp extends StatefulWidget {
   const SampleKitchenApp({super.key, required this.apiBase, this.api});
@@ -47,7 +47,7 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          home: MenuScreen(api: _api, language: _language),
+          home: HomeScreen(api: _api, language: _language),
         );
       },
     );

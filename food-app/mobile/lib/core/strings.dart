@@ -33,6 +33,25 @@ class Strings {
   String get retry => isArabic ? 'إعادة المحاولة' : 'Try again';
   String get language => isArabic ? 'English' : 'العربية';
   String get restaurantFallback => isArabic ? 'مطبخ تجريبي' : 'Sample Kitchen';
+  String get home => isArabic ? 'الرئيسية' : 'Home';
+  String get customise => isArabic ? 'تخصيص' : 'Customise';
+  String get customiseTitle => isArabic ? 'خصص لوحتك' : 'Customise your home';
+  String customiseHint(int min, int max) => isArabic
+      ? 'اختر من $min إلى $max عناصر، ورتبها كما تحب.'
+      : 'Choose between $min and $max widgets, and put them in your order.';
+  String get active => isArabic ? 'المعروضة' : 'Shown';
+  String get available => isArabic ? 'المتاحة' : 'Available';
+  String get moveUp => isArabic ? 'نقل لأعلى' : 'Move up';
+  String get moveDown => isArabic ? 'نقل لأسفل' : 'Move down';
+  String get addWidget => isArabic ? 'إضافة' : 'Add';
+  String get confirm => isArabic ? 'تأكيد' : 'Confirm';
+  String get cancel => isArabic ? 'إلغاء' : 'Cancel';
+  String get trackOrder => isArabic ? 'تتبع الطلب' : 'Track order';
+  String get noActiveOrder => isArabic ? 'لا يوجد طلب جارٍ.' : 'No order in progress.';
+  String get viewCart => isArabic ? 'عرض السلة' : 'View cart';
+  String get cartEmptyShort => isArabic ? 'السلة فارغة.' : 'Nothing in your cart yet.';
+  String itemCount(int n) => isArabic ? '$n صنف' : (n == 1 ? '1 item' : '$n items');
+  String get added => isArabic ? 'تمت الإضافة' : 'Added';
   String get card => isArabic ? 'بطاقة (قريباً)' : 'Card (coming soon)';
 
   String statusLabel(String status) => switch (status) {

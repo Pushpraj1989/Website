@@ -21,6 +21,9 @@ class Tokens {
   static const radiusSm = 6.0;
   static const radiusMd = 10.0;
   static const radiusLg = 16.0;
+
+  // Touch targets: at least 48 px, per the button tokens.
+  static const minHit = 48.0;
 }
 
 ThemeData buildTheme() {
@@ -42,5 +45,7 @@ ThemeData buildTheme() {
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(Tokens.radiusMd), borderSide: const BorderSide(color: Tokens.borderInput)),
     ),
     dividerColor: Tokens.border,
+    // Material 3 tints sheets with the seed colour; the design keeps them on the plain background.
+    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Tokens.bg, surfaceTintColor: Colors.transparent, modalBackgroundColor: Tokens.bg),
   );
 }

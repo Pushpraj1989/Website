@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sample_kitchen/core/api.dart';
@@ -73,7 +72,7 @@ void main() {
       client: MockClient((request) async => respond(jsonEncode({'error': {'code': 'sold_out', 'message': 'Garden salad is sold out.'}}), 422)),
     );
     expect(
-      () => client.saveCart([CartLine(itemId: 'itm1', qty: 1, note: '', name: null, unitMinor: null, soldOut: false)]),
+      () => client.saveCart([const CartLine(itemId: 'itm1', qty: 1, note: '', name: null, unitMinor: null, soldOut: false)]),
       throwsA(isA<ApiException>().having((e) => e.message, 'message', 'Garden salad is sold out.')),
     );
   });
