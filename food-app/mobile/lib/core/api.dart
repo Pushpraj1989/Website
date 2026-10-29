@@ -98,6 +98,12 @@ class ApiClient {
     return PlacedOrder.fromJson(body['order'] as Map<String, dynamic>);
   }
 
+  /// Asks the restaurant assistant. Sends the question only; the reply's cards are data the server checked.
+  Future<AssistantReply> ask(String message, {String locale = 'en'}) async {
+    final body = await _send(() => _client.post(_uri('/v1/ai/ask'), headers: _headers(json: true), body: jsonEncode({'message': message, 'locale': locale})));
+    return AssistantReply.fromJson(body);
+  }
+
   /// Adds one of an item, the same way the web app does: read the cart, change it, write it back.
   Future<void> addOne(String itemId) async {
     final lines = await cartLines();

@@ -154,3 +154,53 @@ class ApiException implements Exception {
   @override
   String toString() => message;
 }
+
+/// An item the assistant points to. The app shows it from its own data; the assistant only chose the id.
+class ItemRef {
+  const ItemRef({required this.id, required this.name, required this.priceMinor, required this.soldOut});
+  final String id;
+  final Localised name;
+  final int priceMinor;
+  final bool soldOut;
+
+  factory ItemRef.fromJson(Map<String, dynamic> json) => ItemRef(
+        id: json['id'] as String,
+        name: Localised.fromJson(json['name'] as Map<String, dynamic>),
+        priceMinor: json['priceMinor'] as int,
+        soldOut: json['soldOut'] as bool? ?? false,
+      );
+}
+
+class OrderRef {
+  const OrderRef({required this.id, required this.number, required this.status, required this.etaMinutes, required this.totalMinor, required this.currency});
+  final String id;
+  final String number;
+  final String status;
+  final int? etaMinutes;
+  final int totalMinor;
+  final String currency;
+
+  factory OrderRef.fromJson(Map<String, dynamic> json) => OrderRef(
+        id: json['id'] as String,
+        number: json['number'] as String,
+        status: json['status'] as String,
+        etaMinutes: json['etaMinutes'] as int?,
+        totalMinor: json['totalMinor'] as int,
+        currency: json['currency'] as String,
+      );
+}
+
+class AssistantReply {
+  const AssistantReply({required this.intent, required this.answer, required this.items, required this.orders});
+  final String intent;
+  final String answer;
+  final List<ItemRef> items;
+  final List<OrderRef> orders;
+
+  factory AssistantReply.fromJson(Map<String, dynamic> json) => AssistantReply(
+        intent: json['intent'] as String,
+        answer: json['answer'] as String,
+        items: ((json['items'] as List<dynamic>?) ?? []).map((i) => ItemRef.fromJson(i as Map<String, dynamic>)).toList(),
+        orders: ((json['orders'] as List<dynamic>?) ?? []).map((o) => OrderRef.fromJson(o as Map<String, dynamic>)).toList(),
+      );
+}

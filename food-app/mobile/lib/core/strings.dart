@@ -79,6 +79,12 @@ class Strings {
   String get unlockReason => isArabic ? 'افتح تطبيق مطبخ تجريبي' : 'Unlock Sample Kitchen';
   String get signOut => isArabic ? 'تسجيل الخروج' : 'Sign out';
   String get skipEmail => isArabic ? 'لاحقاً' : 'Later';
+  String get askTitle => isArabic ? 'اسأل المطعم' : 'Ask the restaurant';
+  String get askHint => isArabic ? 'اسأل عن الأطباق والأسعار وطلبك.' : 'Ask about dishes, prices or your order.';
+  String get askPlaceholder => isArabic ? 'اكتب سؤالك' : 'Type your question';
+  String get send => isArabic ? 'إرسال' : 'Send';
+  String get assistantOff => isArabic ? 'المساعد غير مفعّل الآن.' : 'The assistant is not switched on right now.';
+  String get orderTrackingLabel => isArabic ? 'تتبع الطلب' : 'Track order';
   String get card => isArabic ? 'بطاقة (قريباً)' : 'Card (coming soon)';
 
   String statusLabel(String status) => switch (status) {
