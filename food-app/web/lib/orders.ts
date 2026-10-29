@@ -240,6 +240,10 @@ export async function placeOrder(input: {
       quote: { ...quote, taxIncludedMinor: quote.taxIncludedMinor },
       lines: priced,
     });
+    if (!id && orderAddressId) {
+      // A concurrent request with the same key won. Drop the copy this attempt made, so nothing is left behind.
+      await c.query('delete from addresses where id = $1', [orderAddressId]);
+    }
     if (id) await c.query('update carts set items = $2, updated_at = now() where guest_session_id = $1', [input.guestId, '[]']);
     return id;
   });
