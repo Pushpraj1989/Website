@@ -62,3 +62,12 @@ alter table app_settings enable row level security;
 alter table product_media enable row level security;
 alter table promotions enable row level security;
 alter table ai_usage enable row level security;
+
+-- ---------- saved addresses ----------
+-- A customer's saved addresses are saved = true. Each order keeps its own copy with saved = false, so editing or
+-- deleting a saved address never changes an earlier order. At most one saved address is the default per owner.
+alter table addresses add column if not exists is_default boolean not null default false;
+alter table addresses add column if not exists saved boolean not null default true;
+create unique index if not exists addresses_default_per_guest on addresses (guest_session_id) where is_default;
+create unique index if not exists addresses_default_per_customer on addresses (customer_id) where is_default;
+create index if not exists addresses_saved_per_guest on addresses (guest_session_id) where saved;

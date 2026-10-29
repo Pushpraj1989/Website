@@ -9,7 +9,8 @@ export async function POST(request: NextRequest) {
     const guestId = await currentGuestId();
     if (!guestId) throw new RuleError('Your cart is empty.', 'empty_cart');
     const channel = body.channel === 'pickup' ? 'pickup' : 'delivery';
-    return NextResponse.json({ quote: await quoteFor(guestId, channel) });
+    const addressId = typeof body.addressId === 'string' ? body.addressId : null;
+    return NextResponse.json(await quoteFor(guestId, channel, addressId));
   } catch (error) {
     return errorResponse(error);
   }

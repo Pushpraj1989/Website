@@ -18,7 +18,7 @@ async function viewFor(guestId: string, channel: Channel) {
   if (lines.length) {
     try {
       await pricedLines(lines);
-      quote = await quoteFor(guestId, channel);
+      quote = (await quoteFor(guestId, channel)).quote;
     } catch (error) {
       if (!(error instanceof RuleError)) throw error;
       problem = error.message;
@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
   try {
     const channel = channelFrom(request.nextUrl.searchParams.get('channel'));
     const guestId = await currentGuestId();
-    if (!guestId) return NextResponse.json({ currency: 'AED', lines: [], quote: null, problem: null });
+    if (!guestId) return NextResponse.json({ currency: (await data.getRestaurant()).currency, lines: [], quote: null, problem: null });
     return NextResponse.json(await viewFor(guestId, channel));
   } catch (error) {
     return errorResponse(error);

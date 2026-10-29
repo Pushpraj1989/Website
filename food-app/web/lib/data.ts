@@ -63,7 +63,7 @@ export type OrderRow = {
   paymentIntentId: string | null;
 };
 
-const restaurantId = '00000000-0000-4000-8000-000000000001';
+export const restaurantId = '00000000-0000-4000-8000-000000000001';
 
 const restaurantSql = `
   select id, name_en, name_ar, currency_code, tax_label, tax_basis_points, service_fee_minor,
@@ -84,14 +84,155 @@ export async function getRestaurant(c: PoolClient | typeof pool = pool): Promise
   };
 }
 
-/** The delivery fee for an address. Until addresses are placed on the map, the first active zone applies. */
-export async function deliveryFeeMinor(c: PoolClient | typeof pool = pool): Promise<number> {
+export type SavedAddress = {
+  id: string;
+  label: string;
+  line1: string;
+  line2: string;
+  notes: string;
+  isDefault: boolean;
+  lat: number | null;
+  lng: number | null;
+  zone: { id: string; name: Localised; feeMinor: number; minOrderMinor: number; active: boolean } | null;
+};
+
+const addressColumns = `a.id, a.label, a.line_1, a.line_2, a.notes, a.is_default,
+  ST_Y(a.location::geometry) as lat, ST_X(a.location::geometry) as lng,
+  z.id as zone_id, z.name_en as zone_en, z.name_ar as zone_ar, z.fee_minor, z.min_order_minor, z.active as zone_active`;
+
+function toAddress(r: Record<string, any>): SavedAddress {
+  return {
+    id: r.id,
+    label: r.label,
+    line1: r.line_1,
+    line2: r.line_2,
+    notes: r.notes,
+    isDefault: r.is_default,
+    lat: r.lat,
+    lng: r.lng,
+    zone: r.zone_id
+      ? { id: r.zone_id, name: { en: r.zone_en, ar: r.zone_ar }, feeMinor: r.fee_minor, minOrderMinor: r.min_order_minor, active: r.zone_active }
+      : null,
+  };
+}
+
+export type Zone = { id: string; name: Localised; feeMinor: number; minOrderMinor: number };
+
+export async function listSavedAddresses(guestId: string): Promise<SavedAddress[]> {
+  const { rows } = await pool.query(
+    `select ${addressColumns} from addresses a left join delivery_zones z on z.id = a.zone_id
+     where a.guest_session_id = $1 and a.saved order by a.is_default desc, a.created_at desc`,
+    [guestId],
+  );
+  return rows.map(toAddress);
+}
+
+export async function findSavedAddress(c: PoolClient | typeof pool, guestId: string, id: string): Promise<SavedAddress | null> {
   const { rows } = await c.query(
-    'select fee_minor from delivery_zones where restaurant_id = $1 and active order by fee_minor limit 1',
+    `select ${addressColumns} from addresses a left join delivery_zones z on z.id = a.zone_id
+     where a.id = $1 and a.guest_session_id = $2 and a.saved`,
+    [id, guestId],
+  );
+  return rows[0] ? toAddress(rows[0]) : null;
+}
+
+export async function countSavedAddresses(c: PoolClient | typeof pool, guestId: string): Promise<number> {
+  const { rows } = await c.query('select count(*)::int as n from addresses where guest_session_id = $1 and saved', [guestId]);
+  return rows[0].n;
+}
+
+export async function clearDefaultAddress(c: PoolClient, guestId: string): Promise<void> {
+  await c.query('update addresses set is_default = false where guest_session_id = $1 and is_default', [guestId]);
+}
+
+export type AddressFields = {
+  label: string;
+  line1: string;
+  line2: string;
+  notes: string;
+  zoneId: string;
+  lat: number | null;
+  lng: number | null;
+  isDefault: boolean;
+};
+
+const locationSql = `case when $8::float8 is null then null
+  else ST_SetSRID(ST_MakePoint($9::float8, $8::float8), 4326)::geography end`;
+
+export async function insertSavedAddress(c: PoolClient, guestId: string, f: AddressFields): Promise<string> {
+  const { rows } = await c.query(
+    `insert into addresses (guest_session_id, label, line_1, line_2, notes, zone_id, is_default, saved, location)
+     values ($1, $2, $3, $4, $5, $6, $7, true, ${locationSql}) returning id`,
+    [guestId, f.label, f.line1, f.line2, f.notes, f.zoneId, f.isDefault, f.lat, f.lng],
+  );
+  return rows[0].id;
+}
+
+export async function updateSavedAddress(c: PoolClient, guestId: string, id: string, f: AddressFields): Promise<boolean> {
+  const { rowCount } = await c.query(
+    `update addresses set label = $3, line_1 = $4, line_2 = $5, notes = $6, zone_id = $7, is_default = $10,
+       location = ${locationSql}
+     where id = $1 and guest_session_id = $2 and saved`,
+    [id, guestId, f.label, f.line1, f.line2, f.notes, f.zoneId, f.lat, f.lng, f.isDefault],
+  );
+  return (rowCount ?? 0) > 0;
+}
+
+/** Deletes a saved address and reports whether it was the default. Earlier orders keep their own copy. */
+export async function deleteSavedAddress(c: PoolClient, guestId: string, id: string): Promise<{ removed: boolean; wasDefault: boolean }> {
+  const { rows } = await c.query('delete from addresses where id = $1 and guest_session_id = $2 and saved returning is_default', [id, guestId]);
+  return { removed: rows.length > 0, wasDefault: rows[0]?.is_default === true };
+}
+
+export async function promoteNewestAddress(c: PoolClient, guestId: string): Promise<void> {
+  await c.query(
+    `update addresses set is_default = true where id = (
+       select id from addresses where guest_session_id = $1 and saved order by created_at desc limit 1)`,
+    [guestId],
+  );
+}
+
+function toZone(r: Record<string, any>): Zone {
+  return { id: r.id, name: { en: r.name_en, ar: r.name_ar }, feeMinor: r.fee_minor, minOrderMinor: r.min_order_minor };
+}
+
+/** The active zone whose polygon contains the point, or null when the point is outside every zone. */
+export async function zoneAt(c: PoolClient | typeof pool, lat: number, lng: number): Promise<Zone | null> {
+  const { rows } = await c.query(
+    `select id, name_en, name_ar, fee_minor, min_order_minor from delivery_zones
+     where restaurant_id = $1 and active
+       and ST_Covers(polygon, ST_SetSRID(ST_MakePoint($3::float8, $2::float8), 4326)::geography)
+     limit 1`,
+    [restaurantId, lat, lng],
+  );
+  return rows[0] ? toZone(rows[0]) : null;
+}
+
+export async function activeZone(c: PoolClient | typeof pool, zoneId: string): Promise<Zone | null> {
+  const { rows } = await c.query(
+    'select id, name_en, name_ar, fee_minor, min_order_minor from delivery_zones where id = $1 and restaurant_id = $2 and active',
+    [zoneId, restaurantId],
+  );
+  return rows[0] ? toZone(rows[0]) : null;
+}
+
+export async function listActiveZones(): Promise<Zone[]> {
+  const { rows } = await pool.query(
+    'select id, name_en, name_ar, fee_minor, min_order_minor from delivery_zones where restaurant_id = $1 and active order by name_en',
     [restaurantId],
   );
-  if (rows.length === 0) throw new Error('No active delivery zone is set up.');
-  return rows[0].fee_minor;
+  return rows.map(toZone);
+}
+
+/** Copies a saved address for one order. The copy is not listed as a saved address. */
+export async function copyAddressForOrder(c: PoolClient, guestId: string, id: string): Promise<string> {
+  const { rows } = await c.query(
+    `insert into addresses (guest_session_id, label, line_1, line_2, notes, zone_id, location, is_default, saved)
+     select guest_session_id, label, line_1, line_2, notes, zone_id, location, false, false
+     from addresses where id = $1 and guest_session_id = $2 and saved returning id`,
+    [id, guestId],
+  );
+  return rows[0].id;
 }
 
 export async function getMenu() {
@@ -279,21 +420,12 @@ export async function insertOrder(
     channel: Channel;
     method: 'card' | 'cod' | 'pay_on_arrival';
     status: OrderStatus;
-    address: string | null;
+    addressId: string | null;
     locale: 'en' | 'ar';
     quote: { currency: string; subtotalMinor: number; deliveryFeeMinor: number; serviceFeeMinor: number; discountMinor: number; tipMinor: number; totalMinor: number; taxIncludedMinor: number };
     lines: { itemId: string; name: Localised; unitMinor: number; qty: number; note: string }[];
   },
 ): Promise<string | null> {
-  // A delivery address is a row owned by the guest session, the same table customers use.
-  let addressId: string | null = null;
-  if (input.address) {
-    const address = await c.query(
-      'insert into addresses (guest_session_id, line_1) values ($1, $2) returning id',
-      [input.guestId, input.address],
-    );
-    addressId = address.rows[0].id;
-  }
   const { rows } = await c.query(
     `insert into orders (number, restaurant_id, guest_session_id, channel, status, locale, payment_method, payment_status,
        address_id, currency, subtotal_minor, delivery_fee_minor, service_fee_minor, discount_minor, tip_minor,
@@ -309,7 +441,7 @@ export async function insertOrder(
       input.locale,
       input.method,
       input.method === 'card' ? 'pending' : 'not_required',
-      addressId,
+      input.addressId,
       input.quote.currency,
       input.quote.subtotalMinor,
       input.quote.deliveryFeeMinor,

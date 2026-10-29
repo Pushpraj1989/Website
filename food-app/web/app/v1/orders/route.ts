@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
       idempotencyKey,
       channel: body.channel === 'pickup' ? 'pickup' : 'delivery',
       method,
-      address: typeof body.address === 'string' ? body.address : null,
+      addressId: typeof body.addressId === 'string' ? body.addressId : null,
       locale: await currentLocale(),
     });
     return NextResponse.json({ order: customerView(order) }, { status: 201 });

@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import type { PoolClient } from 'pg';
 import * as data from './data.ts';
 import type { CartLine, OrderRow } from './data.ts';
-import { withTx } from './db.ts';
+import { pool, withTx } from './db.ts';
 import { computeQuote, type Channel, type PricedLine, type Quote } from './pricing.ts';
 import { canTransition, ORDER_STATUSES, type OrderStatus } from './status.ts';
 import { paymentIntentFor } from './payments/stripe.ts';
@@ -33,7 +33,7 @@ export async function pricedLines(cart: CartLine[]): Promise<PricedLine[]> {
   });
 }
 
-async function settingsFor(channel: Channel) {
+async function settingsFor(channel: Channel, zone: data.Zone | null) {
   const restaurant = await data.getRestaurant();
   return {
     restaurant,
@@ -41,17 +41,123 @@ async function settingsFor(channel: Channel) {
       currency: restaurant.currency,
       taxLabel: restaurant.taxLabel,
       taxBasisPoints: restaurant.taxBasisPoints,
-      deliveryFeeMinor: channel === 'delivery' ? await data.deliveryFeeMinor() : 0,
+      deliveryFeeMinor: channel === 'delivery' ? zone?.feeMinor ?? 0 : 0,
       serviceFeeMinor: restaurant.serviceFeeMinor,
       pricesIncludeTax: true as const,
     },
   };
 }
 
-export async function quoteFor(guestId: string, channel: Channel): Promise<Quote> {
+export type DeliveryQuote = { zoneId: string; zoneName: data.Localised; minOrderMinor: number; deliverable: boolean } | null;
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const MAX_SAVED_ADDRESSES = 10;
+
+/** The zone of a saved address, or a rule error when the address is not the customer's or is outside every zone. */
+async function zoneForOrder(c: PoolClient, guestId: string, addressId: string | null): Promise<data.Zone> {
+  if (!addressId || !UUID.test(addressId)) throw new RuleError('Choose a delivery address.', 'address_missing', 400);
+  const address = await data.findSavedAddress(c, guestId, addressId);
+  if (!address) throw new RuleError('That address is not on your account.', 'address_missing', 422);
+  if (!address.zone || !address.zone.active) throw new RuleError('We do not deliver to that address.', 'outside_zone');
+  return { id: address.zone.id, name: address.zone.name, feeMinor: address.zone.feeMinor, minOrderMinor: address.zone.minOrderMinor };
+}
+
+/** Prices the cart. With an address, the delivery fee and the zone minimum come from that address's zone. */
+export async function quoteFor(guestId: string, channel: Channel, addressId: string | null = null): Promise<{ quote: Quote; delivery: DeliveryQuote }> {
   const lines = await pricedLines(await data.getCart(guestId));
-  const { settings } = await settingsFor(channel);
-  return computeQuote(lines, channel, settings);
+  let zone: data.Zone | null = null;
+  let delivery: DeliveryQuote = null;
+  if (channel === 'delivery' && addressId && UUID.test(addressId)) {
+    const address = await data.findSavedAddress(pool, guestId, addressId);
+    if (address?.zone && address.zone.active) {
+      zone = { id: address.zone.id, name: address.zone.name, feeMinor: address.zone.feeMinor, minOrderMinor: address.zone.minOrderMinor };
+    }
+  }
+  const { settings } = await settingsFor(channel, zone);
+  const quote = computeQuote(lines, channel, settings);
+  if (zone) delivery = { zoneId: zone.id, zoneName: zone.name, minOrderMinor: zone.minOrderMinor, deliverable: quote.subtotalMinor >= zone.minOrderMinor };
+  return { quote, delivery };
+}
+
+export function validateAddress(raw: unknown): data.AddressFields & { zoneId: string } {
+  const body = (raw ?? {}) as Record<string, unknown>;
+  const text = (key: string, max: number) => (typeof body[key] === 'string' ? (body[key] as string).trim().slice(0, max) : '');
+  const line1 = text('line1', 200);
+  if (line1.length < 3) throw new RuleError('Enter the street, building and area.', 'bad_input', 400);
+  const hasLat = body.lat !== undefined && body.lat !== null;
+  const hasLng = body.lng !== undefined && body.lng !== null;
+  if (hasLat !== hasLng) throw new RuleError('Send both latitude and longitude, or neither.', 'bad_input', 400);
+  const lat = hasLat ? Number(body.lat) : null;
+  const lng = hasLng ? Number(body.lng) : null;
+  if (lat !== null && (!Number.isFinite(lat) || Math.abs(lat) > 90)) throw new RuleError('The latitude is not valid.', 'bad_input', 400);
+  if (lng !== null && (!Number.isFinite(lng) || Math.abs(lng) > 180)) throw new RuleError('The longitude is not valid.', 'bad_input', 400);
+  const zoneId = text('zoneId', 40);
+  if (zoneId && !UUID.test(zoneId)) throw new RuleError('Choose one of the delivery areas.', 'bad_input', 400);
+  return {
+    label: text('label', 30) || 'Home',
+    line1,
+    line2: text('line2', 200),
+    notes: text('notes', 200),
+    zoneId,
+    lat,
+    lng,
+    isDefault: body.isDefault === true,
+  };
+}
+
+/** The zone an address belongs to: from its coordinates when it has them, otherwise the zone the customer picked. */
+async function resolveZone(c: PoolClient, f: { zoneId: string; lat: number | null; lng: number | null }): Promise<data.Zone> {
+  if (f.lat !== null && f.lng !== null) {
+    const zone = await data.zoneAt(c, f.lat, f.lng);
+    if (!zone) throw new RuleError('We do not deliver to this address yet.', 'outside_zone');
+    return zone;
+  }
+  if (!f.zoneId) throw new RuleError('Choose a delivery area for this address.', 'zone_required', 422);
+  const zone = await data.activeZone(c, f.zoneId);
+  if (!zone) throw new RuleError('Choose one of the delivery areas.', 'zone_missing', 422);
+  return zone;
+}
+
+export function listAddresses(guestId: string) {
+  return data.listSavedAddresses(guestId);
+}
+
+export async function saveAddress(guestId: string, raw: unknown): Promise<data.SavedAddress> {
+  const f = validateAddress(raw);
+  return withTx(async (c: PoolClient) => {
+    const count = await data.countSavedAddresses(c, guestId);
+    if (count >= MAX_SAVED_ADDRESSES) throw new RuleError(`You can save up to ${MAX_SAVED_ADDRESSES} addresses. Delete one to add another.`, 'address_limit', 422);
+    const zone = await resolveZone(c, f);
+    // The first address is the default. Making one the default moves the default away from the others.
+    const isDefault = f.isDefault || count === 0;
+    if (isDefault) await data.clearDefaultAddress(c, guestId);
+    const id = await data.insertSavedAddress(c, guestId, { ...f, zoneId: zone.id, isDefault });
+    return (await data.findSavedAddress(c, guestId, id))!;
+  });
+}
+
+export async function updateAddress(guestId: string, id: string, raw: unknown): Promise<data.SavedAddress> {
+  if (!UUID.test(id)) throw new RuleError('Address not found.', 'not_found', 404);
+  const f = validateAddress(raw);
+  return withTx(async (c: PoolClient) => {
+    const existing = await data.findSavedAddress(c, guestId, id);
+    if (!existing) throw new RuleError('Address not found.', 'not_found', 404);
+    const zone = await resolveZone(c, f);
+    // The default stays the default until another address is made the default.
+    const isDefault = existing.isDefault || f.isDefault;
+    if (!existing.isDefault && f.isDefault) await data.clearDefaultAddress(c, guestId);
+    await data.updateSavedAddress(c, guestId, id, { ...f, zoneId: zone.id, isDefault });
+    return (await data.findSavedAddress(c, guestId, id))!;
+  });
+}
+
+export async function removeAddress(guestId: string, id: string): Promise<void> {
+  if (!UUID.test(id)) throw new RuleError('Address not found.', 'not_found', 404);
+  await withTx(async (c: PoolClient) => {
+    const { removed, wasDefault } = await data.deleteSavedAddress(c, guestId, id);
+    if (!removed) throw new RuleError('Address not found.', 'not_found', 404);
+    if (wasDefault) await data.promoteNewestAddress(c, guestId);
+  });
 }
 
 export function validateCart(cart: unknown): CartLine[] {
@@ -74,7 +180,7 @@ export async function placeOrder(input: {
   idempotencyKey: string;
   channel: Channel;
   method: 'card' | 'cod' | 'pay_on_arrival';
-  address: string | null;
+  addressId: string | null;
   locale: 'en' | 'ar';
 }): Promise<OrderRow> {
   // A repeat with the same key returns the same order (idempotency from the architecture).
@@ -107,27 +213,29 @@ export async function placeOrder(input: {
       (input.method === 'cod' && restaurant.payments.cod && input.channel === 'delivery') ||
       (input.method === 'pay_on_arrival' && restaurant.payments.payOnArrival && input.channel === 'pickup');
     if (!methodOk) throw new RuleError('That payment method is not available for this order.', 'method_unavailable');
-    if (input.channel === 'delivery' && !input.address?.trim()) {
-      throw new RuleError('A delivery address is needed.', 'address_missing', 400);
-    }
+    const zone = input.channel === 'delivery' ? await zoneForOrder(c, input.guestId, input.addressId) : null;
 
     const settings = {
       currency: restaurant.currency,
       taxLabel: restaurant.taxLabel,
       taxBasisPoints: restaurant.taxBasisPoints,
-      deliveryFeeMinor: input.channel === 'delivery' ? await data.deliveryFeeMinor(c) : 0,
+      deliveryFeeMinor: zone?.feeMinor ?? 0,
       serviceFeeMinor: restaurant.serviceFeeMinor,
       pricesIncludeTax: true as const,
     };
     const quote = computeQuote(priced.map((p) => ({ itemId: p.itemId, name: p.name.en, unitMinor: p.unitMinor, qty: p.qty })), input.channel, settings);
+    if (zone && quote.subtotalMinor < zone.minOrderMinor) {
+      throw new RuleError('This area needs a larger order before delivery.', 'below_minimum');
+    }
     const status: OrderStatus = input.method === 'card' ? 'awaiting_payment' : 'placed';
+    const orderAddressId = zone ? await data.copyAddressForOrder(c, input.guestId, input.addressId!) : null;
     const id = await data.insertOrder(c, {
       guestId: input.guestId,
       idempotencyKey: input.idempotencyKey,
       channel: input.channel,
       method: input.method,
       status,
-      address: input.channel === 'delivery' ? input.address!.trim().slice(0, 300) : null,
+      addressId: orderAddressId,
       locale: input.locale,
       quote: { ...quote, taxIncludedMinor: quote.taxIncludedMinor },
       lines: priced,
