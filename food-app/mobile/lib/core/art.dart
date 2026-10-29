@@ -2,7 +2,7 @@
 // empty-state pictures. The server chooses which illustration a category shows; this file only maps the key to a file.
 class Art {
   const Art._();
-  static const hero = 'assets/images/hero-kitchen.png';
+  static const hero = 'assets/images/photo/hero-kitchen.webp';
   static const cartEmpty = 'assets/images/empty-cart.png';
   static const ordersEmpty = 'assets/images/empty-orders.png';
   static const membership = 'assets/images/membership-hero.png';
@@ -11,9 +11,9 @@ class Art {
 
   /// The picture for a category's illustration key from the server. An unknown key shows the plate.
   static String forCategory(String key) => switch (key) {
-        'starters' => 'assets/images/dish-starters.png',
-        'drinks' => 'assets/images/dish-drinks.png',
-        'desserts' => 'assets/images/dish-desserts.png',
-        _ => 'assets/images/dish-mains.png',
+        'starters' => 'assets/images/photo/dish-starters.webp',
+        'drinks' => 'assets/images/photo/dish-drinks.webp',
+        'desserts' => 'assets/images/photo/dish-desserts.webp',
+        _ => 'assets/images/photo/dish-mains.webp',
       };
 }

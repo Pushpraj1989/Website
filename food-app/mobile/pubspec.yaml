@@ -32,3 +32,4 @@ flutter:
         - asset: assets/fonts/Fraunces-Variable.ttf
   assets:
     - assets/images/
+    - assets/images/photo/
