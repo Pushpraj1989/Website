@@ -197,6 +197,9 @@ try {
     const body = await r.json();
     assert.equal(r.status, 200);
     assert.ok(body.zones.some((z) => z.id === ZONE && z.feeMinor === 1000));
+    const central = body.zones.find((z) => z.id === ZONE);
+    assert.equal(typeof central.centre.lat, 'number', 'the map opens on the zone centre');
+    assert.ok(central.centre.lat > 24.8 && central.centre.lat < 25.4);
   });
 
   check('an order to an address that is not the customer\'s is refused', async () => {

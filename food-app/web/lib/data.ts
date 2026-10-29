@@ -216,12 +216,14 @@ export async function activeZone(c: PoolClient | typeof pool, zoneId: string): P
   return rows[0] ? toZone(rows[0]) : null;
 }
 
-export async function listActiveZones(): Promise<Zone[]> {
+export async function listActiveZones(): Promise<(Zone & { centre: { lat: number; lng: number } })[]> {
   const { rows } = await pool.query(
-    'select id, name_en, name_ar, fee_minor, min_order_minor from delivery_zones where restaurant_id = $1 and active order by name_en',
+    `select id, name_en, name_ar, fee_minor, min_order_minor,
+       ST_Y(ST_Centroid(polygon::geometry)) as centre_lat, ST_X(ST_Centroid(polygon::geometry)) as centre_lng
+     from delivery_zones where restaurant_id = $1 and active order by name_en`,
     [restaurantId],
   );
-  return rows.map(toZone);
+  return rows.map((r) => ({ ...toZone(r), centre: { lat: r.centre_lat, lng: r.centre_lng } }));
 }
 
 /** Copies a saved address for one order. The copy is not listed as a saved address. */

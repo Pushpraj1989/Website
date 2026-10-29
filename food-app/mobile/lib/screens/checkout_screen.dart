@@ -108,7 +108,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       context: context,
       isScrollControlled: true,
       showDragHandle: true,
-      builder: (_) => AddressSheet(api: widget.api, s: s, currency: _currency, isFirst: _addresses.isEmpty),
+      builder: (_) => AddressSheet(api: widget.api, language: widget.language, s: s, currency: _currency, isFirst: _addresses.isEmpty),
     );
     if (saved == null || !mounted) return;
     setState(() => _addressId = saved.id);

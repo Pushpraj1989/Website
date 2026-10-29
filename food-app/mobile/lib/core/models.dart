@@ -1,3 +1,4 @@
+import 'geo.dart';
 // Shapes returned by the /v1 API (food-app/web/app/v1). Parsed defensively: a missing field is a bug on the server.
 
 class Localised {
@@ -243,17 +244,38 @@ class SavedAddress {
 
 /// A delivery area the restaurant serves, with its fee and the smallest order it accepts.
 class DeliveryZone {
-  const DeliveryZone({required this.id, required this.name, required this.feeMinor, required this.minOrderMinor});
+  const DeliveryZone({required this.id, required this.name, required this.feeMinor, required this.minOrderMinor, this.centre});
   final String id;
   final Localised name;
   final int feeMinor;
   final int minOrderMinor;
+  final GeoPoint? centre;
 
-  factory DeliveryZone.fromJson(Map<String, dynamic> json) => DeliveryZone(
-        id: json['id'] as String,
-        name: Localised.fromJson(json['name'] as Map<String, dynamic>),
-        feeMinor: json['feeMinor'] as int,
-        minOrderMinor: json['minOrderMinor'] as int,
+  factory DeliveryZone.fromJson(Map<String, dynamic> json) {
+    final c = json['centre'] as Map<String, dynamic>?;
+    return DeliveryZone(
+      id: json['id'] as String,
+      name: Localised.fromJson(json['name'] as Map<String, dynamic>),
+      feeMinor: json['feeMinor'] as int,
+      minOrderMinor: json['minOrderMinor'] as int,
+      centre: c == null ? null : GeoPoint((c['lat'] as num).toDouble(), (c['lng'] as num).toDouble()),
+    );
+  }
+}
+
+/// A place from search or from a pin: a label and its coordinates.
+class Place {
+  const Place({required this.label, required this.lat, required this.lng});
+  final String label;
+  final double lat;
+  final double lng;
+
+  GeoPoint get point => GeoPoint(lat, lng);
+
+  factory Place.fromJson(Map<String, dynamic> json) => Place(
+        label: json['label'] as String,
+        lat: (json['lat'] as num).toDouble(),
+        lng: (json['lng'] as num).toDouble(),
       );
 }
 

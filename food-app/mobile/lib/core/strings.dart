@@ -36,6 +36,15 @@ class Strings {
   String reorderAdded(int n) => isArabic ? 'أُضيف $n إلى السلة.' : 'Added $n to your cart.';
   String reorderSkipped(String names) => isArabic ? 'غير متوفر الآن: $names.' : 'Not available right now: $names.';
   String timesOrdered(int n) => isArabic ? 'طلبته $n مرة' : 'Ordered $n times';
+  String get pinOnMap => isArabic ? 'تحديد على الخريطة' : 'Pin on map';
+  String get pinConfirm => isArabic ? 'تأكيد الموقع' : 'Confirm location';
+  String get pinSearchHint => isArabic ? 'ابحث عن منطقة أو شارع' : 'Search for an area or street';
+  String get useMyLocation => isArabic ? 'استخدم موقعي الحالي' : 'Use my current location';
+  String get pinHint => isArabic ? 'حرّك الخريطة حتى تقع العلامة على بابك.' : 'Move the map so the pin sits on your door.';
+  String get pinLoading => isArabic ? 'جارٍ تحديد العنوان…' : 'Finding the address…';
+  String get pinnedAt => isArabic ? 'تم تحديد الموقع على الخريطة' : 'Location pinned on the map';
+  String get locationOff => isArabic ? 'فعّل خدمة الموقع أو حرّك الخريطة يدوياً.' : 'Turn on location services, or move the map by hand.';
+  String get searchFailed => isArabic ? 'البحث غير متاح الآن. حرّك الخريطة يدوياً.' : 'Search is not available right now. Move the map by hand.';
   String get chooseAddress => isArabic ? 'اختر عنوان التوصيل.' : 'Choose a delivery address.';
   String get deliverTo => isArabic ? 'التوصيل إلى' : 'Deliver to';
   String get noAddressYet => isArabic ? 'ليس لديك عناوين محفوظة بعد. أضف عنواناً للمتابعة.' : 'You have no saved addresses yet. Add one to continue.';

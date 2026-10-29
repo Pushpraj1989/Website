@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'geo.dart';
 import 'models.dart';
 
 /// Talks to the same /v1 API as the web app. The guest cookie is kept on the device and sent back on every call,
@@ -99,6 +100,18 @@ class ApiClient {
 
   /// The most recent order placed from this device, for the dashboard's tracking widget.
   String? get lastOrderId => prefs?.getString('last_order_id');
+
+  /// Address search through the server. Results are labels with coordinates; the provider is not called from the app.
+  Future<List<Place>> placeSearch(String query, {String locale = 'en'}) async {
+    final body = await _send(() => _client.get(_uri('/v1/places/search', {'q': query}), headers: _headers()));
+    return (body['places'] as List<dynamic>).map((p) => Place.fromJson(p as Map<String, dynamic>)).toList();
+  }
+
+  /// The label for a pinned point, or null when the map has no name for it.
+  Future<Place?> placeAt(GeoPoint point) async {
+    final body = await _send(() => _client.get(_uri('/v1/places/reverse', {'lat': '${point.lat}', 'lng': '${point.lng}'}), headers: _headers()));
+    return body['place'] == null ? null : Place.fromJson(body['place'] as Map<String, dynamic>);
+  }
 
   Future<List<SavedAddress>> addresses() async {
     final body = await _send(() => _client.get(_uri('/v1/addresses'), headers: _headers()));
