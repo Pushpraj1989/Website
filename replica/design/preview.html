@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Food app design system preview</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+body { margin:0; font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); }
+:root[dir=rtl] body { font-family: var(--font-arabic); }
+main { max-width: 1120px; margin: 0 auto; padding: 24px 16px 64px; }
+h2 { font-size: 20px; margin: 40px 0 12px; }
+.row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+.sw { width: 128px; font-size: 12px; } .chip { height: 48px; border-radius: 8px; border: 1px solid var(--color-border); }
+.btn { font: inherit; font-size: 14px; font-weight: 600; border-radius: var(--radius-md); padding: 0 16px; min-height: 40px; border: 1px solid transparent; cursor: pointer; }
+.btn-primary { background: var(--color-accent); color: var(--color-on-accent); }
+.btn-secondary { background: var(--color-bg); color: var(--color-text); border-color: var(--color-border-input); }
+.btn-ghost { background: transparent; color: var(--color-accent); }
+.btn-danger { background: transparent; color: var(--color-danger); border-color: var(--color-danger); }
+.btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+.card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 12px; width: 240px; }
+.card .photo { height: 120px; background: var(--color-surface); border-radius: var(--radius-md); display:grid; place-items:center; color: var(--color-text-muted); font-size: 12px; }
+.badge { font-size: 12px; font-weight: 500; border-radius: var(--radius-pill); padding: 2px 10px; display: inline-block; }
+.b-offer { background: var(--color-accent); color: var(--color-on-accent); }
+.b-member { background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border-input); }
+.b-new { background: var(--color-success); color: #fff; }
+.field { display:flex; flex-direction: column; gap: 6px; width: 260px; font-size: 14px; }
+.field input { font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--color-border-input); border-radius: var(--radius-md); }
+.field input:focus { outline: 2px solid var(--color-accent); outline-offset: 1px; }
+.field .err { color: var(--color-danger); font-size: 13px; }
+.tabbar { display:flex; justify-content: space-around; border-top: 1px solid var(--color-border); background: var(--color-bg); width: 360px; height: 64px; align-items:center; font-size: 12px; }
+.tabbar [aria-current] { color: var(--color-accent); font-weight: 600; }
+.total { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.muted { color: var(--color-text-muted); }
+.surface { background: var(--color-surface); padding: 16px; border-radius: var(--radius-lg); }
+</style>
+</head>
+<body>
+<main>
+<div class="row" style="justify-content:space-between">
+  <h1 style="font-size:28px;margin:0">Design system preview</h1>
+  <div class="row" role="group" aria-label="Language">
+    <button class="btn btn-secondary" type="button" onclick="document.documentElement.lang='en';document.documentElement.dir='ltr'">English</button>
+    <button class="btn btn-secondary" type="button" onclick="document.documentElement.lang='ar';document.documentElement.dir='rtl'">العربية</button>
+  </div>
+</div>
+<p class="muted">Roles and components from tokens.json. Accent is a placeholder until the brand is set. The layout mirrors when Arabic is selected.</p>
+
+<h2>Colour roles</h2>
+<div class="row"><div class="sw"><div class="chip" style="background:#ffffff"></div><code>bg</code><span>#ffffff</span></div><div class="sw"><div class="chip" style="background:#f5f5f4"></div><code>surface</code><span>#f5f5f4</span></div><div class="sw"><div class="chip" style="background:#e7e5e4"></div><code>border</code><span>#e7e5e4</span></div><div class="sw"><div class="chip" style="background:#78716c"></div><code>border-input</code><span>#78716c</span></div><div class="sw"><div class="chip" style="background:#1c1917"></div><code>text</code><span>#1c1917</span></div><div class="sw"><div class="chip" style="background:#57534e"></div><code>text-muted</code><span>#57534e</span></div><div class="sw"><div class="chip" style="background:#b45309"></div><code>accent</code><span>#b45309</span></div><div class="sw"><div class="chip" style="background:#ffffff"></div><code>on-accent</code><span>#ffffff</span></div><div class="sw"><div class="chip" style="background:#b91c1c"></div><code>danger</code><span>#b91c1c</span></div><div class="sw"><div class="chip" style="background:#15803d"></div><code>success</code><span>#15803d</span></div><div class="sw"><div class="chip" style="background:#92400e"></div><code>warning</code><span>#92400e</span></div></div>
+
+<h2>Type scale</h2>
+<p style="font-size:12px;line-height:16px;font-weight:500">xs: الطلب السريع · Quick order</p><p style="font-size:14px;line-height:20px;font-weight:400">sm: الطلب السريع · Quick order</p><p style="font-size:16px;line-height:24px;font-weight:400">base: الطلب السريع · Quick order</p><p style="font-size:20px;line-height:28px;font-weight:600">lg: الطلب السريع · Quick order</p><p style="font-size:28px;line-height:34px;font-weight:700">xl: الطلب السريع · Quick order</p><p style="font-size:36px;line-height:42px;font-weight:700">display: الطلب السريع · Quick order</p>
+
+<h2>Buttons</h2>
+<div class="row">
+  <button class="btn btn-primary" type="button">Add to cart</button>
+  <button class="btn btn-secondary" type="button">Edit</button>
+  <button class="btn btn-ghost" type="button">View menu</button>
+  <button class="btn btn-danger" type="button">Remove</button>
+  <button class="btn btn-primary" type="button" disabled>Pay now</button>
+</div>
+
+<h2>Item and offer cards</h2>
+<div class="row">
+  <article class="card"><div class="photo">photo (client)</div>
+    <p style="margin:8px 0 2px;font-weight:600">Chicken shawarma</p>
+    <div class="row"><span class="badge b-offer">20% off</span><span class="badge b-member">Members</span></div>
+    <p class="total" style="margin:8px 0 0">OMR 2.500</p></article>
+  <article class="card"><div class="photo">sold out</div>
+    <p style="margin:8px 0 2px;font-weight:600">Lamb kabsa</p>
+    <div class="row"><span class="badge b-new">New</span></div>
+    <p class="muted" style="margin:8px 0 0">Sold out today</p></article>
+</div>
+
+<h2>Input and promo field</h2>
+<div class="row" style="align-items:flex-start">
+  <label class="field">Phone number
+    <input type="tel" value="+968 9000 0000" inputmode="tel" autocomplete="tel"></label>
+  <label class="field">Promo code
+    <input type="text" aria-describedby="promo-err" value="WELCOME10">
+    <span id="promo-err" class="err">Only for members. Sign in to use this code.</span></label>
+</div>
+
+<h2>Price summary</h2>
+<div class="surface" style="width:300px">
+  <div class="row" style="justify-content:space-between"><span>Subtotal</span><span>OMR 5.000</span></div>
+  <div class="row" style="justify-content:space-between;color:var(--color-success)"><span>Discount</span><span>− OMR 0.500</span></div>
+  <div class="row" style="justify-content:space-between"><span>Delivery</span><span>Free</span></div>
+  <div class="row" style="justify-content:space-between;border-top:1px solid var(--color-border);padding-top:8px"><span>Total</span><span class="total">OMR 4.500</span></div>
+</div>
+
+<h2>Status timeline</h2>
+<ol class="muted" style="padding-inline-start:20px">
+  <li style="color:var(--color-text)">Placed</li><li style="color:var(--color-text)">Accepted</li>
+  <li aria-current="step" style="color:var(--color-accent);font-weight:600">Preparing</li><li>Out for delivery</li><li>Delivered</li>
+</ol>
+
+<h2>Bottom tab bar (customer app)</h2>
+<nav class="tabbar" aria-label="Main">
+  <a href="#" aria-current="page">Menu</a><a href="#">Offers</a><a href="#">Cart</a><a href="#">Orders</a><a href="#">Account</a>
+</nav>
+</main>
+</body>
+</html>
