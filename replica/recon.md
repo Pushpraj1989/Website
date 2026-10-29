@@ -287,3 +287,39 @@ a search route (GET /v1/search?q=) returns items with the same filters; recent s
 packaging fee and free-delivery threshold become settings; collections are computed from order history.
 Design effects: the video app uses a dark theme with a strong red accent. Our tokens stay light with our own accent;
 a dark token set can be added later. No colours, icons or copy from the video are used.
+
+## Checkout and payment reference (added 2026-10-29): 26-second recording plus two screenshots
+
+Reference only (frames in `replica/screens/video-2026-10-29-checkout/`, git-ignored). A multi-restaurant
+app with rupee pricing, so used for patterns: coupons, bill breakdown, payment method groups, processing state.
+
+| ID | screen | seen at | purpose | key components | states seen |
+| --- | --- | --- | --- | --- | --- |
+| S21 | Cart review | 0-5 s | review items and offers before paying | line items with quantity stepper, edit link, add-more link, special offer card (voucher claimed after placing), special prices unlocked (pick any of these items), coupon strip, place-order bar with total | offer added, coupon applied |
+| S22 | Coupon sheet | 10 s | apply a coupon | full-screen sheet: "exclusively for you" coupon with amount saved, apply button, dismiss | shown, applied |
+| S23 | Checkout details and bill | 13-20 s | delivery options, tip, bill | delivery speed (fastest, 15-20 minutes, schedule), delivery address with change, receiver for someone else, tip picker (fixed amounts and other), cancellation policy text, total with taxes and charges | default, tip chosen |
+| S24 | Payment method sheet | 22-26 s | choose how to pay | groups: recommended, Apple Pay (new), cards (add), UPI apps, wallets (some marked unavailable with the reason), pay later, netbanking, pay on delivery (cash or card on delivery) | groups, unavailable option with reason |
+| S25 | Processing payment | 31-36 s | wait while payment is verified | "please wait while your payment is verified; you will be redirected automatically", back arrow disabled, cancel action | processing |
+| S26 | Cancel confirmation and transaction cancelled | 37-40 s | stop a payment in progress | dialog "are you sure you want to cancel the transaction?" with no and yes, then a "transaction cancelled" banner | confirm, cancelled |
+
+New flows (inferred from the recording):
+- F13 Apply a coupon and tip: S21 -> coupon sheet (S22) -> apply -> S23 (tip) -> place order.
+- F14 Pay by UPI or wallet with redirect: S23 -> S24 -> choose method -> S25 (processing, auto-redirect back) -> confirmed.
+- F15 Pay on delivery: S24 -> pay on delivery (cash or card on delivery) -> order placed without an online charge.
+- F16 Cancel during processing: S25 -> cancel -> S26 confirm -> transaction cancelled, order not placed, no charge kept.
+
+Features to add (features.csv): coupon sheet with auto-suggested coupon; applied-offer strip; special-prices upsell
+("add any one of these items"); delivery speed options; scheduled delivery; receiver details for someone else;
+tip for the delivery partner (fixed amounts and other); cancellation policy shown before paying; payment method groups
+with unavailable reasons; processing screen with cancel and confirmation; pay on delivery option; restaurant receipt
+per order.
+
+Architecture effects:
+- Payment states must handle cancel during processing: a cancel request moves the order to cancelled, the gateway
+  intent is voided or refunded, and the webhook that arrives later is ignored for that order (state machine, checked
+  in the transaction). The app never shows "paid" until the webhook or a server check confirms it.
+- The tip is an order field (tip_minor), not a line item; it is included in the total and passed to the rider payout.
+- Cancellation policy is a restaurant setting shown at checkout, and a cancellation after acceptance can be charged
+  (setting: charge percent), recorded in the order's cancel reason.
+- Pay on delivery and pay on arrival share the same order path with payment_status = not_required until collected.
+- Coupons are offers (code and audience) applied by the quote endpoint; the coupon sheet reads the eligible list from it.

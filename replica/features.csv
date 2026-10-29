@@ -60,3 +60,14 @@ Delivery time shown on item cards,menu,should,yes,no,S17 (video); estimate from 
 Search with suggestions and recent queries,menu,must,yes,no,S19 (video); GET /v1/search?q=
 Voice search,menu,could,yes,no,S19 (video); needs speech input
 Free delivery above a threshold (banner),offers,should,yes,no,S17 (video); offer type free_delivery
+Coupon sheet with eligible coupon and amount saved,offers,must,yes,no,S22 (video); quote endpoint returns eligible offers
+Special prices upsell: add any one of these items,offers,should,yes,no,S21 (video); a bundle offer type
+"Delivery speed: fastest, standard, scheduled",checkout,should,yes,no,S23 (video); scheduled_for on orders
+Receiver details for someone else,checkout,could,yes,no,S23 (video); order.receiver fields
+Tip for the delivery partner (fixed amounts or other),checkout,should,yes,no,S23 (video); order.tip_minor
+Cancellation policy shown before payment,checkout,must,yes,no,S23 (video); restaurant setting
+Payment method groups with unavailable reasons,payments,must,yes,no,"S24 (video); wallets, UPI and cards depend on the gateway"
+Processing screen with auto redirect back,payments,must,yes,no,S25 (video); webhook or server check
+Cancel during processing with confirmation,payments,must,yes,no,"S26 (video); void or refund, state machine"
+Pay on delivery (cash or card on delivery),payments,must,yes,no,S24 (video); F15
+"Bill breakdown: items, discounts, taxes, charges, total",checkout,must,yes,no,S23 (video); price summary component
