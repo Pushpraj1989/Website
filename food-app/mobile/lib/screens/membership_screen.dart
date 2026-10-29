@@ -4,6 +4,7 @@ import '../app.dart';
 import '../core/api.dart';
 import '../core/models.dart';
 import '../core/money.dart';
+import '../core/art.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
 
@@ -62,6 +63,7 @@ class _MembershipScreenState extends State<MembershipScreen> {
     return ListView(
       padding: const EdgeInsets.only(bottom: Tokens.space5),
       children: [
+        Image.asset(Art.membership, height: 180, width: double.infinity, fit: BoxFit.cover, semanticLabel: ''),
         _Hero(s: s, plan: plan, member: member, startedAt: state.startedAt),
         Padding(
           padding: const EdgeInsets.fromLTRB(Tokens.space4, Tokens.space5, Tokens.space4, Tokens.space2),
@@ -89,7 +91,10 @@ class _MembershipScreenState extends State<MembershipScreen> {
             child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
               Text(plan.name.of(s.lang), style: const TextStyle(fontWeight: FontWeight.w600)),
               const SizedBox(height: Tokens.space1),
-              Text('${formatMoney(plan.amountMinor, plan.currency)} ${s.perPeriod(plan.period)}', style: const TextStyle(color: Tokens.textMuted)),
+              Text(
+                plan.active && plan.amountMinor > 0 ? '${formatMoney(plan.amountMinor, plan.currency)} ${s.perPeriod(plan.period)}' : s.priceToBeAnnounced,
+                style: const TextStyle(color: Tokens.textMuted),
+              ),
               const SizedBox(height: Tokens.space3),
               // A plan is for sale only once its price is confirmed and the server marks it active.
               FilledButton(
@@ -143,7 +148,7 @@ class _BenefitTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(Tokens.radiusLg),
         onTap: () => showBenefitSheet(context, benefit, s),
         child: Container(
-          width: 168,
+          width: 176,
           padding: const EdgeInsets.all(Tokens.space4),
           decoration: BoxDecoration(color: tone.background, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -152,7 +157,7 @@ class _BenefitTile extends StatelessWidget {
             Text(benefit.title.of(s.lang), style: TextStyle(color: tone.ink, fontWeight: FontWeight.w700, fontSize: 16)),
             const SizedBox(height: Tokens.space1),
             Row(children: [
-              Expanded(child: Text(benefit.summary.of(s.lang), maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: tone.ink, fontSize: 13))),
+              Expanded(child: Text(benefit.summary.of(s.lang), maxLines: 3, overflow: TextOverflow.ellipsis, style: TextStyle(color: tone.ink, fontSize: 13))),
               Icon(Icons.chevron_right, color: tone.ink),
             ]),
           ]),

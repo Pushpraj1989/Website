@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { api } from '../api.js';
+import { illustrationSrc } from '../art.js';
 import { formatMoney, parseMoney } from '../money.js';
 import Gallery from '../components/Gallery.jsx';
 
@@ -53,7 +54,10 @@ export default function Products({ catalog, onChanged }) {
             {catalog.products.map((p) => (
               <tr key={p.id}>
                 <td>
-                  {p.imageUrl ? <img className="thumb" src={p.imageUrl} alt={`Picture of ${p.name.en}`} /> : <span className="thumb empty" aria-label="No picture">No picture</span>}
+                  {p.imageUrl
+                    ? <img className="thumb" src={p.imageUrl} alt={`Picture of ${p.name.en}`} />
+                    // No photo yet: the category's illustration stands in, so the list never looks blank.
+                    : <img className="thumb" src={illustrationSrc(catalog.categories.find((c) => c.id === p.categoryId)?.illustration)} alt="" title="No photo yet. The category picture is shown." />}
                 </td>
                 <td>
                   <strong>{p.name.en}</strong>

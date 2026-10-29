@@ -4,6 +4,7 @@ import '../app.dart';
 import '../core/api.dart';
 import '../core/models.dart';
 import '../core/money.dart';
+import '../core/art.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
 import 'cart_screen.dart';
@@ -51,7 +52,18 @@ class _OrdersScreenState extends State<OrdersScreen> {
               : orders == null
                   ? const Center(child: CircularProgressIndicator())
                   : orders.isEmpty
-                      ? Center(child: Padding(padding: const EdgeInsets.all(Tokens.space4), child: Text(s.noOrdersYet)))
+                      ? Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(Tokens.space4),
+                            child: Column(mainAxisSize: MainAxisSize.min, children: [
+                              Image.asset(Art.ordersEmpty, width: 200, semanticLabel: ''),
+                              const SizedBox(height: Tokens.space3),
+                              Text(s.noOrdersYet, style: Theme.of(context).textTheme.titleMedium),
+                              const SizedBox(height: Tokens.space1),
+                              Text(s.ordersEmptyBody, textAlign: TextAlign.center, style: const TextStyle(color: Tokens.textMuted)),
+                            ]),
+                          ),
+                        )
                       : ListView.separated(
                           padding: const EdgeInsets.all(Tokens.space4),
                           itemCount: orders.length,
@@ -94,7 +106,8 @@ class _OrderTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final lang = s.lang;
     final summary = order.items.map((i) => '${i.qty} × ${i.name.of(lang)}').join(', ');
-    return Card(
+    return DecoratedBox(
+      decoration: BoxDecoration(color: Tokens.bg, border: Border.all(color: Tokens.border), borderRadius: BorderRadius.circular(Tokens.radiusLg)),
       child: Padding(
         padding: const EdgeInsets.all(Tokens.space4),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

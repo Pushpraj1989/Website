@@ -55,6 +55,13 @@ class Strings {
   String get comingSoon => isArabic ? 'قريباً' : 'Coming soon';
   String get benefitDetails => isArabic ? 'تفاصيل الميزة' : 'Benefit details';
   String perPeriod(String period) => isArabic ? (period == 'month' ? 'شهرياً' : 'سنوياً') : (period == 'month' ? 'per month' : 'per year');
+  String get heroTitle => isArabic ? 'جوع؟ اطلب الآن' : 'Hungry? Order now';
+  String get heroBody => isArabic ? 'تصفح القائمة واطلب في خطوات قليلة.' : 'Browse the menu and order in a few taps.';
+  String get more => isArabic ? 'المزيد' : 'More';
+  String get priceToBeAnnounced => isArabic ? 'السعر يُعلن لاحقاً' : 'Price to be announced';
+  String get cartEmptyBody => isArabic ? 'أضف طبقاً من القائمة ليظهر هنا.' : 'Add a dish from the menu and it will show here.';
+  String get ordersEmptyBody => isArabic ? 'ستظهر طلباتك هنا بعد أول طلب.' : 'Your orders will show here after your first order.';
+  String addDish(String name) => isArabic ? 'إضافة $name' : 'Add $name';
   String get chooseAddress => isArabic ? 'اختر عنوان التوصيل.' : 'Choose a delivery address.';
   String get deliverTo => isArabic ? 'التوصيل إلى' : 'Deliver to';
   String get noAddressYet => isArabic ? 'ليس لديك عناوين محفوظة بعد. أضف عنواناً للمتابعة.' : 'You have no saved addresses yet. Add one to continue.';

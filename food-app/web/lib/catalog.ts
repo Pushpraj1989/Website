@@ -28,7 +28,7 @@ export function imageUrl(storageKey: string | null): string | null {
 
 export async function adminCatalog() {
   const [categories, items, offers] = await Promise.all([
-    pool.query('select id, name_en, name_ar, sort_order, active from categories where restaurant_id = $1 order by sort_order, name_en', [RESTAURANT_ID]),
+    pool.query('select id, name_en, name_ar, sort_order, active, illustration from categories where restaurant_id = $1 order by sort_order, name_en', [RESTAURANT_ID]),
     pool.query(
       `select i.*, cover.storage_key from menu_items i
        join categories c on c.id = i.category_id
@@ -40,7 +40,7 @@ export async function adminCatalog() {
     pool.query('select * from offers where restaurant_id = $1 order by active desc, starts_at desc', [RESTAURANT_ID]),
   ]);
   return {
-    categories: categories.rows.map((c) => ({ id: c.id, name: { en: c.name_en, ar: c.name_ar }, sortOrder: c.sort_order, active: c.active })),
+    categories: categories.rows.map((c) => ({ id: c.id, name: { en: c.name_en, ar: c.name_ar }, sortOrder: c.sort_order, active: c.active, illustration: c.illustration })),
     products: items.rows.map((i) => ({
       id: i.id,
       categoryId: i.category_id,
@@ -74,11 +74,21 @@ export function offerView(o: Record<string, any>) {
   };
 }
 
+// The bundled illustrations a category can show. The admin chooses one; the app only maps the key to its picture.
+const ILLUSTRATIONS = ['dish', 'starters', 'mains', 'drinks', 'desserts'];
+
+function illustrationKey(value: unknown): string {
+  if (typeof value !== 'string' || !ILLUSTRATIONS.includes(value)) {
+    throw new RuleError('Choose one of the category pictures.', 'bad_input', 400);
+  }
+  return value;
+}
+
 export async function createCategory(body: Record<string, unknown>) {
   const { rows } = await pool.query(
-    `insert into categories (restaurant_id, name_en, name_ar, sort_order, active) values ($1,$2,$3,$4,$5)
-     returning id, name_en, name_ar, sort_order, active`,
-    [RESTAURANT_ID, text(body.nameEn, 'English name', 60), text(body.nameAr, 'Arabic name', 60), int(body.sortOrder ?? 0, 'Sort order', 0, 999), bool(body.active, true)],
+    `insert into categories (restaurant_id, name_en, name_ar, sort_order, active, illustration) values ($1,$2,$3,$4,$5,$6)
+     returning id, name_en, name_ar, sort_order, active, illustration`,
+    [RESTAURANT_ID, text(body.nameEn, 'English name', 60), text(body.nameAr, 'Arabic name', 60), int(body.sortOrder ?? 0, 'Sort order', 0, 999), bool(body.active, true), body.illustration === undefined ? 'dish' : illustrationKey(body.illustration)],
   );
   return rows[0];
 }
@@ -86,7 +96,7 @@ export async function createCategory(body: Record<string, unknown>) {
 export async function updateCategory(id: string, body: Record<string, unknown>) {
   const { rows } = await pool.query(
     `update categories set name_en = coalesce($2, name_en), name_ar = coalesce($3, name_ar),
-       sort_order = coalesce($4, sort_order), active = coalesce($5, active)
+       sort_order = coalesce($4, sort_order), active = coalesce($5, active), illustration = coalesce($7, illustration)
      where id = $1 and restaurant_id = $6 returning id`,
     [
       id,
@@ -95,6 +105,7 @@ export async function updateCategory(id: string, body: Record<string, unknown>) 
       body.sortOrder === undefined ? null : int(body.sortOrder, 'Sort order', 0, 999),
       typeof body.active === 'boolean' ? body.active : null,
       RESTAURANT_ID,
+      body.illustration === undefined ? null : illustrationKey(body.illustration),
     ],
   );
   if (!rows[0]) throw new RuleError('Category not found.', 'not_found', 404);

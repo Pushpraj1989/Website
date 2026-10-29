@@ -135,3 +135,12 @@ insert into membership_benefits (id, plan_id, title_en, title_ar, summary_en, su
    'Member days', 'أيام الأعضاء', 'Bigger savings on selected days.', 'وفورات أكبر في أيام مختارة.', 'calendar', 'mint',
    '[{"en":"Bigger discounts on the days we announce","ar":"خصومات أكبر في الأيام التي نعلن عنها"},{"en":"New member offers each time a day is announced","ar":"عروض جديدة للأعضاء مع كل إعلان"}]', 3)
 on conflict (id) do nothing;
+
+-- ---------- category illustrations ----------
+-- Each category shows one of the app's bundled illustrations when it has no photo of its own. The key is data, set
+-- in the admin; the app only maps the key to its picture.
+alter table categories add column if not exists illustration text not null default 'dish'
+  check (illustration in ('dish', 'starters', 'mains', 'drinks', 'desserts'));
+update categories set illustration = 'starters' where name_en = 'Starters' and illustration = 'dish';
+update categories set illustration = 'mains' where name_en = 'Mains' and illustration = 'dish';
+update categories set illustration = 'drinks' where name_en = 'Drinks' and illustration = 'dish';

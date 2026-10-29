@@ -239,7 +239,7 @@ export async function copyAddressForOrder(c: PoolClient, guestId: string, id: st
 
 export async function getMenu() {
   const { rows } = await pool.query(
-    `select c.id as category_id, c.name_en as cat_en, c.name_ar as cat_ar,
+    `select c.id as category_id, c.name_en as cat_en, c.name_ar as cat_ar, c.illustration as cat_art,
             i.id, i.name_en, i.name_ar, i.description_en, i.description_ar, i.base_price_minor, i.available,
             m.storage_key
      from categories c
@@ -250,10 +250,10 @@ export async function getMenu() {
      order by c.sort_order, i.sort_order`,
     [restaurantId],
   );
-  const categories = new Map<string, { id: string; name: Localised; items: MenuItem[] }>();
+  const categories = new Map<string, { id: string; name: Localised; illustration: string; items: MenuItem[] }>();
   for (const r of rows) {
     if (!categories.has(r.category_id)) {
-      categories.set(r.category_id, { id: r.category_id, name: { en: r.cat_en, ar: r.cat_ar }, items: [] });
+      categories.set(r.category_id, { id: r.category_id, name: { en: r.cat_en, ar: r.cat_ar }, illustration: r.cat_art, items: [] });
     }
     categories.get(r.category_id)!.items.push({
       id: r.id,

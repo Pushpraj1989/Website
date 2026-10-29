@@ -17,6 +17,7 @@ class Tokens {
   static const text = Color(0xFF1C1917);
   static const textMuted = Color(0xFF57534E);
   static const accent = Color(0xFFB45309);
+  static const accentSoft = Color(0xFFFDF0E0);
   static const onAccent = Color(0xFFFFFFFF);
   static const danger = Color(0xFFB91C1C);
   static const success = Color(0xFF15803D);

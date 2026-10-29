@@ -4,6 +4,7 @@ import '../app.dart';
 import '../core/api.dart';
 import '../core/models.dart';
 import '../core/money.dart';
+import '../core/art.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
 import 'checkout_screen.dart';
@@ -93,7 +94,20 @@ class _CartScreenState extends State<CartScreen> {
     }
     final lines = _lines;
     if (lines == null) return const Center(child: CircularProgressIndicator());
-    if (lines.isEmpty) return Center(child: Text(s.emptyCart));
+    if (lines.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(Tokens.space4),
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            Image.asset(Art.cartEmpty, width: 200, semanticLabel: ''),
+            const SizedBox(height: Tokens.space3),
+            Text(s.emptyCart, style: Theme.of(context).textTheme.titleMedium),
+            const SizedBox(height: Tokens.space1),
+            Text(s.cartEmptyBody, textAlign: TextAlign.center, style: const TextStyle(color: Tokens.textMuted)),
+          ]),
+        ),
+      );
+    }
 
     return ListView(
       padding: const EdgeInsets.all(Tokens.space4),

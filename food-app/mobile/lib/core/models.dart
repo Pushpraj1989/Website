@@ -29,15 +29,17 @@ class MenuItem {
 }
 
 class MenuCategory {
-  const MenuCategory({required this.id, required this.name, required this.items});
+  const MenuCategory({required this.id, required this.name, required this.items, this.illustration = 'dish'});
   final String id;
   final Localised name;
   final List<MenuItem> items;
+  final String illustration;
 
   factory MenuCategory.fromJson(Map<String, dynamic> json) => MenuCategory(
         id: json['id'] as String,
         name: Localised.fromJson(json['name'] as Map<String, dynamic>),
         items: (json['items'] as List<dynamic>).map((i) => MenuItem.fromJson(i as Map<String, dynamic>)).toList(),
+        illustration: json['illustration'] as String? ?? 'dish',
       );
 }
 

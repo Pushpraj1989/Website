@@ -12,6 +12,8 @@ import '../core/strings.dart';
 import '../core/theme.dart';
 import '../auth/biometrics.dart';
 import '../widgets/app_button.dart';
+import '../core/art.dart';
+import '../widgets/dish_thumb.dart';
 import 'cart_screen.dart';
 import 'menu_screen.dart';
 import 'assistant_screen.dart';
@@ -181,11 +183,24 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: Text(_menu?.restaurant.of(s.lang) ?? s.restaurantFallback),
           actions: [
-            IconButton(tooltip: s.membership, icon: const Icon(Icons.workspace_premium_outlined), onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => MembershipScreen(api: widget.api, language: widget.language)))),
-            IconButton(tooltip: s.orderHistory, icon: const Icon(Icons.receipt_long_outlined), onPressed: _openOrders),
-            IconButton(tooltip: s.askTitle, icon: const Icon(Icons.chat_bubble_outline), onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => AssistantScreen(api: widget.api, language: widget.language)))),
             TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language)),
-            if (widget.auth != null) IconButton(tooltip: s.signOut, icon: const Icon(Icons.logout), onPressed: () => _signOut(s)),
+            PopupMenuButton<String>(
+              tooltip: s.more,
+              icon: const Icon(Icons.more_vert),
+              onSelected: (choice) => switch (choice) {
+                'membership' => Navigator.of(context).push(MaterialPageRoute(builder: (_) => MembershipScreen(api: widget.api, language: widget.language))),
+                'orders' => _openOrders(),
+                'assistant' => Navigator.of(context).push(MaterialPageRoute(builder: (_) => AssistantScreen(api: widget.api, language: widget.language))),
+                'signout' => _signOut(s),
+                _ => null,
+              },
+              itemBuilder: (_) => [
+                PopupMenuItem(value: 'membership', child: ListTile(leading: const Icon(Icons.workspace_premium_outlined), title: Text(s.membership))),
+                PopupMenuItem(value: 'orders', child: ListTile(leading: const Icon(Icons.receipt_long_outlined), title: Text(s.orderHistory))),
+                PopupMenuItem(value: 'assistant', child: ListTile(leading: const Icon(Icons.chat_bubble_outline), title: Text(s.askTitle))),
+                if (widget.auth != null) PopupMenuItem(value: 'signout', child: ListTile(leading: const Icon(Icons.logout), title: Text(s.signOut))),
+              ],
+            ),
           ],
         ),
         body: ListView(
@@ -195,6 +210,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(child: Text(s.home, style: Theme.of(context).textTheme.headlineSmall)),
               AppButton(label: s.customise, icon: Icons.dashboard_customize_outlined, variant: ButtonVariant.ghost, size: ButtonSize.sm, onPressed: () => _openCustomise(s)),
             ]),
+            const SizedBox(height: Tokens.space3),
+            _Hero(s: s),
             const SizedBox(height: Tokens.space3),
             for (final id in _layout.ids) ...[
               _widgetFor(id, s),
@@ -252,6 +269,37 @@ class _WidgetCard extends StatelessWidget {
   }
 }
 
+/// The top of the home screen: a picture and one line that says what to do.
+class _Hero extends StatelessWidget {
+  const _Hero({required this.s});
+  final Strings s;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(Tokens.radiusLg),
+      child: Stack(
+        children: [
+          Image.asset(Art.hero, height: 180, width: double.infinity, fit: BoxFit.cover, semanticLabel: ''),
+          const Positioned.fill(
+            child: DecoratedBox(decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [Color(0xCC1C1917), Color(0x001C1917)]))),
+          ),
+          Positioned(
+            left: Tokens.space4,
+            right: Tokens.space4,
+            bottom: Tokens.space4,
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(s.heroTitle, style: const TextStyle(color: Tokens.onAccent, fontSize: 22, fontWeight: FontWeight.w700)),
+              const SizedBox(height: Tokens.space1),
+              Text(s.heroBody, style: const TextStyle(color: Color(0xFFF5F5F4), fontSize: 15)),
+            ]),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _QuickActions extends StatelessWidget {
   const _QuickActions({required this.s, required this.canTrack, required this.onMenu, required this.onCart, required this.onTrack});
   final Strings s;
@@ -263,12 +311,41 @@ class _QuickActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      Expanded(child: AppButton(label: s.menu, icon: Icons.restaurant_menu, variant: ButtonVariant.secondary, expand: true, onPressed: onMenu)),
+      Expanded(child: _QuickTile(icon: Icons.restaurant_menu, label: s.menu, onPressed: onMenu)),
       const SizedBox(width: Tokens.space2),
-      Expanded(child: AppButton(label: s.cart, icon: Icons.shopping_bag_outlined, variant: ButtonVariant.secondary, expand: true, onPressed: onCart)),
+      Expanded(child: _QuickTile(icon: Icons.shopping_bag_outlined, label: s.cart, onPressed: onCart)),
       const SizedBox(width: Tokens.space2),
-      Expanded(child: AppButton(label: s.trackOrder, icon: Icons.local_shipping_outlined, variant: ButtonVariant.secondary, expand: true, onPressed: canTrack ? onTrack : null)),
+      Expanded(child: _QuickTile(icon: Icons.local_shipping_outlined, label: s.trackOrder, onPressed: canTrack ? onTrack : null)),
     ]);
+  }
+}
+
+/// One quick action: an icon above a label that may wrap to two lines, never cut off.
+class _QuickTile extends StatelessWidget {
+  const _QuickTile({required this.icon, required this.label, required this.onPressed});
+  final IconData icon;
+  final String label;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final enabled = onPressed != null;
+    return Material(
+      color: enabled ? Tokens.bg : Tokens.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Tokens.radiusMd), side: const BorderSide(color: Tokens.border)),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(Tokens.radiusMd),
+        onTap: onPressed,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: Tokens.space3, horizontal: Tokens.space2),
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            Icon(icon, color: enabled ? Tokens.accent : Tokens.textMuted),
+            const SizedBox(height: Tokens.space1),
+            Text(label, textAlign: TextAlign.center, maxLines: 2, style: TextStyle(fontWeight: FontWeight.w600, color: enabled ? Tokens.text : Tokens.textMuted)),
+          ]),
+        ),
+      ),
+    );
   }
 }
 
@@ -335,15 +412,28 @@ class _Popular extends StatelessWidget {
   Widget build(BuildContext context) {
     if (menu == null) return Text(s.genericError, style: const TextStyle(color: Tokens.danger));
     final items = [for (final c in menu!.categories) ...c.items].where((i) => !i.soldOut).take(3).toList();
+    // Each dish shows its own category's picture, the same as on the menu.
+    final pictureByDish = {for (final c in menu!.categories) for (final i in c.items) i.id: c.illustration};
+    String illustrationFor(String dishId) => pictureByDish[dishId] ?? 'dish';
     return Column(children: [
       for (final item in items)
         Padding(
           padding: const EdgeInsets.symmetric(vertical: Tokens.space1),
           child: Row(children: [
-            Expanded(child: Text(item.name.of(s.lang))),
+            DishThumb(illustration: illustrationFor(item.id), size: 48),
+            const SizedBox(width: Tokens.space3),
+            Expanded(child: Text(item.name.of(s.lang), maxLines: 2, overflow: TextOverflow.ellipsis)),
             Text(formatMoney(item.priceMinor, menu!.currency), style: const TextStyle(fontWeight: FontWeight.w600)),
             const SizedBox(width: Tokens.space2),
-            AppButton(label: '${s.addWidget}: ${item.name.of(s.lang)}', variant: ButtonVariant.primary, size: ButtonSize.sm, onPressed: () => onAdd(item)),
+            Tooltip(
+              message: s.addDish(item.name.of(s.lang)),
+              child: IconButton.filledTonal(
+                onPressed: () => onAdd(item),
+                style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: Tokens.accentSoft, foregroundColor: Tokens.accent),
+                icon: const Icon(Icons.add),
+                tooltip: s.addDish(item.name.of(s.lang)),
+              ),
+            ),
           ]),
         ),
     ]);

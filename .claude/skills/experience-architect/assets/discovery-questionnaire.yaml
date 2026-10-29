@@ -1,0 +1,19 @@
+version: "1.0"
+question_groups:
+  product:
+    - "What are we building and what must users accomplish?"
+  users:
+    - "Who performs the primary task?"
+    - "How experienced are they with this task?"
+  market:
+    - "Which countries, locales, and languages are supported?"
+  context:
+    - "Which devices and usage environments matter?"
+    - "How frequently is the task performed?"
+  risk:
+    - "What happens if the user makes a mistake?"
+  accessibility:
+    - "Are there known accessibility or assistive-technology requirements?"
+  system:
+    - "Is there an existing design system or product UI to preserve?"
+stopping_rule: "Stop asking when critical journeys can be defined and remaining unknowns can be tracked safely as assumptions."

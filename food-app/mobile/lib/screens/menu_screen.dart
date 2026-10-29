@@ -6,6 +6,7 @@ import '../core/models.dart';
 import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../widgets/dish_thumb.dart';
 import 'cart_screen.dart';
 
 // S02: menu by category. Add puts one of the item in the cart on the server.
@@ -91,7 +92,7 @@ class _MenuScreenState extends State<MenuScreen> {
             padding: const EdgeInsets.only(top: Tokens.space4, bottom: Tokens.space2),
             child: Text(category.name.of(s.lang), style: Theme.of(context).textTheme.titleLarge),
           ),
-          for (final item in category.items) _ItemRow(item: item, s: s, currency: menu.currency, onAdd: () => _add(item)),
+          for (final item in category.items) _ItemRow(item: item, illustration: category.illustration, s: s, currency: menu.currency, onAdd: () => _add(item)),
         ],
       ],
     );
@@ -99,8 +100,9 @@ class _MenuScreenState extends State<MenuScreen> {
 }
 
 class _ItemRow extends StatelessWidget {
-  const _ItemRow({required this.item, required this.s, required this.currency, required this.onAdd});
+  const _ItemRow({required this.item, required this.illustration, required this.s, required this.currency, required this.onAdd});
   final MenuItem item;
+  final String illustration;
   final Strings s;
   final String currency;
   final VoidCallback onAdd;
@@ -108,35 +110,43 @@ class _ItemRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final name = item.name.of(s.lang);
-    return Container(
-        padding: const EdgeInsets.symmetric(vertical: Tokens.space3),
-        decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Tokens.border))),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(name, style: const TextStyle(fontWeight: FontWeight.w600)),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: Tokens.space3),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          DishThumb(illustration: illustration),
+          const SizedBox(width: Tokens.space3),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(name, style: const TextStyle(fontWeight: FontWeight.w600)),
+                if (item.description.of(s.lang).isNotEmpty) ...[
                   const SizedBox(height: Tokens.space1),
-                  Text(item.description.of(s.lang), style: const TextStyle(color: Tokens.textMuted, fontSize: 14)),
-                  const SizedBox(height: Tokens.space1),
-                  Text(formatMoney(item.priceMinor, currency), style: const TextStyle(fontFeatures: [FontFeature.tabularFigures()], fontWeight: FontWeight.w600)),
+                  Text(item.description.of(s.lang), maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Tokens.textMuted, fontSize: 14)),
                 ],
+                const SizedBox(height: Tokens.space1),
+                Text(formatMoney(item.priceMinor, currency), style: const TextStyle(fontFeatures: [FontFeature.tabularFigures()], fontWeight: FontWeight.w600)),
+              ],
+            ),
+          ),
+          const SizedBox(width: Tokens.space2),
+          if (item.soldOut)
+            Chip(label: Text(s.soldOut, style: const TextStyle(color: Tokens.danger)), backgroundColor: Tokens.surface)
+          else
+            // A round button with the dish named for screen readers. The tap target is 48 px.
+            Tooltip(
+              message: s.addDish(name),
+              child: IconButton.filledTonal(
+                onPressed: onAdd,
+                style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: Tokens.accentSoft, foregroundColor: Tokens.accent),
+                icon: const Icon(Icons.add),
+                tooltip: s.addDish(name),
               ),
             ),
-            const SizedBox(width: Tokens.space3),
-            if (item.soldOut)
-              Chip(label: Text(s.soldOut, style: const TextStyle(color: Tokens.danger)), backgroundColor: Tokens.surface)
-            else
-              OutlinedButton(
-                onPressed: onAdd,
-                style: OutlinedButton.styleFrom(minimumSize: const Size(72, 44)),
-                child: Text('${s.add}: $name', semanticsLabel: '${s.add}: $name'),
-              ),
-          ],
-        ),
-      );
+        ],
+      ),
+    );
   }
 }

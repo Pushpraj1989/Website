@@ -1,0 +1,17 @@
+audit_level: RELEASE_AUDIT
+product: ""
+build: ""
+date: ""
+critical_journeys:
+  - id: J1
+    name: ""
+    evidence_level: E3
+    implementation_inspected: true
+    keyboard_tested: false
+    assistive_technology_tested: []
+    status: UNKNOWN
+coverage:
+  unique_critical_journeys_total: 0
+  unique_critical_journeys_reviewed: 0
+mandatory_unknowns: []
+excluded_scope: []

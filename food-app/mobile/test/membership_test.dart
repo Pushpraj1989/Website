@@ -78,6 +78,8 @@ void main() {
     expect(find.text('Free delivery'), findsOneWidget);
     expect(find.text('Member deals'), findsOneWidget);
     expect(find.text('You are not a member yet'), findsOneWidget);
+    // The page scrolls vertically; the first ListView on the screen is that page (the benefits row is the second).
+    await tester.dragUntilVisible(find.text('Coming soon'), find.byType(ListView).first, const Offset(0, -200));
     final button = tester.widget<FilledButton>(find.widgetWithText(FilledButton, 'Coming soon'));
     expect(button.onPressed, isNull, reason: 'an inactive plan cannot be bought');
   });

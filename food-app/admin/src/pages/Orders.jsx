@@ -95,46 +95,68 @@ export default function Orders() {
     }
   }
 
-  if (!orders && !error) return <p>Loading orders…</p>;
+  if (!orders && !error) return <p className="muted">Loading orders…</p>;
+
+  // Waiting orders first, then the rest by time. Each row says what the kitchen does next.
+  const sorted = orders ? [...orders].sort((a, b) => (a.status === 'placed' ? 0 : 1) - (b.status === 'placed' ? 0 : 1) || new Date(b.createdAt) - new Date(a.createdAt)) : [];
+  const waiting = sorted.filter((o) => o.status === 'placed').length;
 
   return (
-    <section>
+    <section className="stack">
       <header className="toolbar">
-        <h2>Orders</h2>
-        <button type="button" aria-pressed={sound} onClick={toggleSound}>{sound ? 'Sound on' : 'Sound off'}</button>
+        <div>
+          <h1>Orders</h1>
+          <p className="muted">{waiting === 0 ? 'No orders waiting for you.' : `${waiting} waiting to be accepted.`}</p>
+        </div>
+        <button type="button" className={`pill ${sound ? 'on' : 'off'}`} aria-pressed={sound} onClick={toggleSound}>
+          {sound ? 'Sound on' : 'Sound off'}
+        </button>
       </header>
-      {banner ? <p role="status" onClick={() => setBanner('')}>{banner}</p> : null}
+      {banner ? (
+        <div className="card" role="status" style={{ borderColor: 'var(--accent)' }}>
+          <strong>{banner}</strong>
+          <button type="button" className="btn ghost sm" onClick={() => setBanner('')}>Dismiss</button>
+        </div>
+      ) : null}
       {error ? <p role="alert" className="error">{error}</p> : null}
-      {orders && orders.length === 0 ? <p>No orders yet today.</p> : null}
+      {orders && orders.length === 0 ? (
+        <div className="card"><p>No orders yet. New orders appear here as soon as they are placed.</p></div>
+      ) : null}
       {orders && orders.length > 0 ? (
-        <table>
-          <thead>
-            <tr><th>Order</th><th>Channel</th><th>Status</th><th>Items</th><th>Address</th><th>Total</th><th>Action</th></tr>
-          </thead>
-          <tbody>
-            {orders.map((o) => {
-              const next = nextStatus(o);
-              return (
-                <tr key={o.id}>
-                  <td>{o.number}</td>
-                  <td>{o.channel === 'delivery' ? 'Delivery' : 'Pickup'}</td>
-                  <td>{STATUS_TEXT[o.status] ?? o.status}{o.etaMinutes ? ` · ${o.etaMinutes} min` : ''}</td>
-                  <td>{o.lines.map((l) => `${l.qty} × ${l.nameEn ?? l.name?.en ?? ''}`).join(', ')}</td>
-                  <td>{o.address ?? '—'}</td>
-                  <td className="num">{formatMoney(o.total, DIGITS, o.currency)}</td>
-                  <td>
-                    {o.status === 'placed' ? (
-                      <span className="actions">
-                        <label>Minutes <input type="number" min={5} max={180} value={etas[o.id] ?? 25} onChange={(e) => setEtas({ ...etas, [o.id]: e.target.value })} style={{ width: 64 }} /></label>
-                        <button type="button" onClick={() => act(o, 'accept')}>Accept</button>
-                      </span>
-                    ) : next ? <button type="button" onClick={() => act(o, next.to)}>{next.label}</button> : null}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="card">
+          <table>
+            <thead>
+              <tr><th scope="col">Order</th><th scope="col">Channel</th><th scope="col">Status</th><th scope="col">Items</th><th scope="col">Address</th><th scope="col">Total</th><th scope="col">Next</th></tr>
+            </thead>
+            <tbody>
+              {sorted.map((o) => {
+                const next = nextStatus(o);
+                return (
+                  <tr key={o.id}>
+                    <td><strong>{o.number}</strong></td>
+                    <td>{o.channel === 'delivery' ? 'Delivery' : 'Pickup'}</td>
+                    <td><span className={`status ${o.status === 'placed' ? 'scheduled' : o.status === 'delivered' || o.status === 'collected' ? 'ended' : 'live'}`}>{STATUS_TEXT[o.status] ?? o.status}</span>{o.etaMinutes ? <span className="muted"> · {o.etaMinutes} min</span> : null}</td>
+                    <td>{o.lines.map((l) => `${l.qty} × ${l.name?.en ?? ''}`).join(', ')}</td>
+                    <td>{o.address ?? '—'}</td>
+                    <td className="num">{formatMoney(o.total, DIGITS, o.currency)}</td>
+                    <td>
+                      {o.status === 'placed' ? (
+                        <div className="actions">
+                          <label>Minutes
+                            <input type="number" min={5} max={180} value={etas[o.id] ?? 25} onChange={(e) => setEtas({ ...etas, [o.id]: e.target.value })} style={{ width: 72 }} />
+                          </label>
+                          <button type="button" className="btn primary sm" onClick={() => act(o, 'accept')}>Accept order {o.number}</button>
+                        </div>
+                      ) : next ? (
+                        <button type="button" className="btn sm" onClick={() => act(o, next.to)}>{next.label}</button>
+                      ) : null}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       ) : null}
     </section>
   );

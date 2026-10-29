@@ -30,3 +30,8 @@ insert into delivery_zones (id, restaurant_id, name_en, name_ar, polygon, fee_mi
 values ('00000000-0000-4000-8000-000000000501', '00000000-0000-4000-8000-000000000001', 'Central (sample)', 'الوسط (تجريبي)',
   ST_GeogFromText('SRID=4326;POLYGON((55.0 24.8, 55.6 24.8, 55.6 25.4, 55.0 25.4, 55.0 24.8))'), 1000, 0, true)
 on conflict (id) do nothing;
+
+-- Sample category pictures (the admin changes these): starters, mains and drinks show their own illustration.
+update categories set illustration = 'starters' where name_en = 'Starters';
+update categories set illustration = 'mains' where name_en = 'Mains';
+update categories set illustration = 'drinks' where name_en = 'Drinks';
