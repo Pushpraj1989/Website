@@ -259,3 +259,31 @@ fees on a map. Size: L (a quarter for a solid first release with admin, payments
 3. Offers: which combinations must stack? Is a guest allowed any offer?
 4. Cash on delivery: maximum order amount? Who collects change?
 5. Brand: the client's own name, logo, colours and photos (the replica does not use any brand's assets).
+
+## Video reference (added 2026-10-29): 30-second phone recording of a multi-restaurant delivery app
+
+Source: the user's screen recording (portrait 1284x2778, 30 s). Used as a design and flow reference only.
+Frames are kept in `replica/screens/video-2026-10-29/` and are never shipped or committed.
+This app is an aggregator with rupee pricing, so the screens below are used for patterns, not brand.
+
+| ID | screen | seen at | purpose | key components | states seen |
+| --- | --- | --- | --- | --- | --- |
+| S17 | Home feed | 0-10 s | promotions and discovery | promo banner carousel with dots, category rail with icons, quick filter chips (filters, near and fast, no packaging charges), "recommended with deals" cards with rating and delivery time, bottom tabs | loaded, banner rotating |
+| S18 | Filters and sorting sheet | 10-30 s | narrow results | sort by (relevance), time (schedule, near and fast), restaurant rating (three thresholds), offers, dish price ranges, trust markers (pure veg, no packaging charges, low plastic packaging), collections (previously ordered, new to you), clear all, show results | open, selections, showing results count |
+| S19 | Search | 12-22 s | find a dish or restaurant | search field with voice icon, recent and suggested queries in the field placeholder, veg toggle in the header | typed query, empty, no result (inferred) |
+| S20 | Results after filter | 25-30 s | results with the active filters | result count, filter chips, cards | filtered, empty (inferred) |
+
+New flows (from the video, inferred at the level of taps):
+- F10 Filter and sort: S17 -> filters chip -> S18 (choose sort, price, veg, offers) -> show results -> S20. Clear all resets.
+- F11 Search a dish: S17 -> search field -> S19 (type) -> results -> dish.
+- F12 Veg only: S17 -> veg toggle in the header -> the feed and results show only pure veg items.
+
+New features to add to features.csv (for the single-restaurant app, the same ideas apply to our menu):
+banner carousel of promotions; category rail; quick filter chips; sort options; filter sheet with price ranges and dietary flags;
+veg-only toggle; packaging charge shown as a setting; collections "previously ordered" and "new to you"; delivery time shown on cards.
+
+Architecture effects: menu queries take sort, dietary, price range and collection parameters (GET /v1/menu);
+a search route (GET /v1/search?q=) returns items with the same filters; recent searches stay on the device;
+packaging fee and free-delivery threshold become settings; collections are computed from order history.
+Design effects: the video app uses a dark theme with a strong red accent. Our tokens stay light with our own accent;
+a dark token set can be added later. No colours, icons or copy from the video are used.

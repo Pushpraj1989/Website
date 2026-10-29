@@ -48,3 +48,15 @@ Bank card partnerships and promotions,other,skip,yes,skip,"Partner deals, not pr
 Wallet and super-app services,other,skip,yes,skip,Not part of a single-restaurant app
 "Competitor logos, photos, menus, copy, icons",other,skip,yes,skip,Clean-room rule: client content only
 Direct integration with a national card network,other,skip,yes,skip,Use a gateway that supports the network; needs merchant approval
+Promo banner carousel on the home screen,menu,should,yes,no,S17 (video); admin banners from offers
+Category rail with icons,menu,must,yes,no,S17 (video); categories table
+"Quick filter chips (sort, time, rating, offers, price)",menu,should,yes,no,"S17, S18 (video)"
+"Sort: relevance, price low to high, high to low, rating",menu,must,yes,no,S18 (video); GET /v1/menu?sort=
+"Filter sheet: price ranges, dietary flags, offers, rating",menu,must,yes,no,S18 (video); clear all and show results
+Veg-only toggle (pure veg items),menu,must,yes,no,S19 (video); menu_items.dietary_flags
+Packaging charge shown and configurable,checkout,should,yes,no,S18 trust markers (video); setting
+"Collections: previously ordered, new to you",menu,should,yes,no,S18 (video); computed from orders
+Delivery time shown on item cards,menu,should,yes,no,S17 (video); estimate from prep time and zone
+Search with suggestions and recent queries,menu,must,yes,no,S19 (video); GET /v1/search?q=
+Voice search,menu,could,yes,no,S19 (video); needs speech input
+Free delivery above a threshold (banner),offers,should,yes,no,S17 (video); offer type free_delivery
