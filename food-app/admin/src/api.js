@@ -87,6 +87,21 @@ export const api = {
   archiveTemplate: (id) => request('POST', `/v1/admin/voucher-templates/${id}/archive`),
   duplicateTemplate: (id) => request('POST', `/v1/admin/voucher-templates/${id}/duplicate`),
   templatePreview: (id, which = 'draft') => request('GET', `/v1/admin/voucher-templates/${id}/preview?which=${which}`),
+  promotionReport: () => request('GET', '/v1/admin/reports/promotions'),
+  downloadPromotionCsv: async () => {
+    const response = await fetch('/v1/admin/reports/promotions.csv', { credentials: 'same-origin' });
+    if (!response.ok) throw new ApiError('The report could not be made.', response.status);
+    const url = URL.createObjectURL(await response.blob());
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'promotion-campaigns.csv';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  },
+  revokeVoucher: (id, reason) => request('POST', `/v1/admin/vouchers/${id}/revoke`, { reason }),
+  campaignAudit: (id) => request('GET', `/v1/admin/campaigns/${id}/audit`),
   partners: () => request('GET', '/v1/admin/partner-clients'),
   createPartner: (body) => request('POST', '/v1/admin/partner-clients', body),
   rotatePartnerKey: (id) => request('POST', `/v1/admin/partner-clients/${id}/rotate`),

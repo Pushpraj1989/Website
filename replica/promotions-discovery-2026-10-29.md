@@ -339,3 +339,48 @@ Not built, and why:
 
 Operational note: `PARTNER_KEY_SECRET` keys the hashes of partner secrets. Changing it invalidates every partner key, so it
 belongs in the secrets store next to `VOUCHER_CODE_SECRET` and `APP_ENCRYPTION_KEY`.
+
+## 14. Phase 8 status (reporting and operations)
+
+Done on the server, with a Promotion reports page in the admin console.
+
+- **Campaign report:** per campaign, what was issued, what is still usable, what was used, what expired and what was
+  revoked, the redemption rate, and the discount given. Each figure is counted from the vouchers and redemption records,
+  not kept as a separate total.
+- **Funding:** the discount given, split by who paid (restaurant, platform or shared).
+- **Issuance:** codes issued per day for the last 30 days.
+- **Partners:** codes requested, requests, refusals, validations and the last request, for the last 30 days. Refused calls
+  from an unknown key are not counted against any partner.
+- **Failed batches:** batches that stopped, with the codes made and the reason.
+- **Reconciliation:** four checks that the records agree (redeemed vouchers without a record, records for vouchers that are
+  not redeemed, confirmed orders without a record, and holds still open on cancelled orders). Any count above zero is
+  shown and marks the report as not reconciled. The page does not hide it.
+- **CSV:** the campaign table for finance.
+- **Controlled revocation:** `POST /v1/admin/vouchers/{id}/revoke` needs a reason. It is refused for a used voucher (reverse
+  the order instead) and for a voucher a checkout is holding. Nothing is deleted: the voucher stays in the records as
+  revoked, and the revocation is in the ledger and the audit log.
+- **Audit log:** an append-only table (`promotion_audit_log`). It records campaign transitions (with a reason when given),
+  revocations, and partner creation, key rotation and revocation. `GET /v1/admin/campaigns/{id}/audit` reads a campaign's
+  trail.
+
+Tests: `test/reporting.test.ts` (10 tests): the campaign figures after a real checkout, the reconciliation catching a
+deliberately broken record, revocation with a reason, the refusals for used and held vouchers, the audit trail for
+cancellations, the funding split, partner figures, failed batches, the CSV, and the combined report. All eight database
+suites pass in sequence, the end-to-end API test passes (42 of 42), and the app suite passes (69 tests).
+
+Live run over HTTP: a campaign was created and cancelled with a reason; its audit trail showed the reason; the report
+returned its summary and reconciled; the CSV had its header and row; revoking an unknown voucher returned 404; the report
+without a sign-in returned 401.
+
+Known limits:
+
+- **Who did it.** Every staff action is recorded as "staff", because the admin console has one shared password and no
+  individual accounts. The audit trail is only as good as the sign-in behind it. Individual staff accounts should come
+  before the audit trail is relied on.
+- **Revoking from the admin console.** The endpoint exists, but the console has no page to find a voucher and revoke it.
+  Finding a voucher by its code needs a search screen.
+- **The liability figure.** Outstanding value is only counted in full for fixed-amount rules. A percentage rule's value
+  depends on the order it is used on, so it is shown as a count, not an amount.
+- **Stored value.** Not built (Phase 0 decision), so there is no stored-value balance to report.
+- **Scheduled reports.** Reports are produced on request. A scheduled export needs the background runner noted in earlier
+  phases.

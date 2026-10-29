@@ -7,6 +7,7 @@ import { RESTAURANT_ID } from './catalog.ts';
 import { createBatch, codeHash, normaliseCode, runBatch, batchView } from './campaigns.ts';
 import { codeOf } from './print.ts';
 import { RuleError } from './orders.ts';
+import { recordAudit } from './audit.ts';
 
 export const SCOPES = ['vouchers:issue', 'vouchers:read', 'vouchers:validate', 'campaigns:read', 'codes:export'] as const;
 export type Scope = (typeof SCOPES)[number];
@@ -33,7 +34,7 @@ export type PartnerClient = {
 };
 
 /** Creates a partner client. The key is returned once; only a keyed hash of its secret is kept. */
-export async function createPartnerClient(body: Record<string, unknown>) {
+export async function createPartnerClient(body: Record<string, unknown>, actor = 'staff') {
   const name = String(body.name ?? '').trim();
   if (name.length < 1 || name.length > 120) throw new RuleError('Name the partner (1 to 120 characters).', 'bad_input', 400);
   const scopes = Array.isArray(body.scopes) ? body.scopes.map(String) : [];
@@ -57,6 +58,7 @@ export async function createPartnerClient(body: Record<string, unknown>) {
       for (const campaignId of campaignIds) {
         await c.query(`insert into partner_client_campaigns (client_id, campaign_id) values ($1,$2)`, [id, campaignId]);
       }
+      await recordAudit(c, actor, 'create', 'partner', id, { scopes, campaignIds, dailyIssueLimit: daily, requestsPerMinute: perMinute });
       await c.query('commit');
     } catch (err) {
       await c.query('rollback');
@@ -93,19 +95,21 @@ export async function listPartnerClients() {
 }
 
 /** Gives the partner a new key. The old key stops working at once. */
-export async function rotatePartnerKey(id: string) {
+export async function rotatePartnerKey(id: string, actor = 'staff') {
   const secret = randomBytes(32).toString('base64url');
   const { rows } = await pool.query(`update partner_clients set secret_hash = $2 where id = $1 and restaurant_id = $3 and status = 'active' returning id`, [id, hashSecret(secret), RESTAURANT_ID]);
   if (!rows[0]) throw new RuleError('Partner not found, or revoked.', 'not_found', 404);
+  await recordAudit(pool, actor, 'rotate_key', 'partner', id);
   return { client: await clientView(id), apiKey: `pk_${id}_${secret}` };
 }
 
-export async function revokePartnerClient(id: string) {
+export async function revokePartnerClient(id: string, actor = 'staff') {
   const { rows } = await pool.query(
     `update partner_clients set status = 'revoked', revoked_at = now() where id = $1 and restaurant_id = $2 and status = 'active' returning id`,
     [id, RESTAURANT_ID],
   );
   if (!rows[0]) throw new RuleError('Partner not found, or already revoked.', 'not_found', 404);
+  await recordAudit(pool, actor, 'revoke', 'partner', id);
   return clientView(id);
 }
 

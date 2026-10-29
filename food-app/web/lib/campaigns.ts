@@ -9,6 +9,7 @@ import { encryptSecret } from './crypto.ts';
 import { RuleError } from './orders.ts';
 import type { PoolClient } from 'pg';
 import { currentVersionId } from './templates.ts';
+import { recordAudit } from './audit.ts';
 
 /** Largest batch created in one request. Bigger batches need the background worker (Phase 4 of the brief). */
 export const BULK_SYNC_LIMIT = 1000;
@@ -164,7 +165,7 @@ const TRANSITIONS: Record<CampaignAction, { from: string[]; to: (startsAt: Date)
 };
 
 /** Moves a campaign through its states. Pausing, completing or cancelling switches its offers off; resuming switches them on. */
-export async function transitionCampaign(id: string, action: string) {
+export async function transitionCampaign(id: string, action: string, actor = 'staff', reason: string | null = null) {
   const rule = TRANSITIONS[action as CampaignAction];
   if (!rule) throw new RuleError('Unknown campaign action.', 'bad_input', 400);
   await withTx(async (c) => {
@@ -179,6 +180,7 @@ export async function transitionCampaign(id: string, action: string) {
     const next = rule.to(new Date(current.starts_at));
     await c.query(`update campaigns set status = $2, updated_at = now() where id = $1`, [id, next]);
     await c.query(`update offers set active = $2 where campaign_id = $1`, [id, rule.offersOn]);
+    await recordAudit(c, actor, action, 'campaign', id, { from: current.status, to: next, reason });
   });
   // Read after the commit: the read uses its own connection, which cannot see changes still inside the transaction.
   return getCampaign(id);
