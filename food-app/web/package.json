@@ -19,7 +19,8 @@
     "db:migrate": "node db/migrate.mjs",
     "db:reset": "node db/migrate.mjs --reset",
     "test:access": "node test/rls.test.mjs",
-    "test:accounts": "node --test test/accounts-admin.test.mjs"
+    "test:accounts": "node --test test/accounts-admin.test.mjs",
+    "test:vouchers": "node --test test/vouchers.test.mjs && node --test test/campaigns.test.ts"
   },
   "dependencies": {
     "next": "15.5.28",

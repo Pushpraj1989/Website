@@ -122,3 +122,36 @@ sign-in uses `accounts` (`web/db/auth.sql`, `web/lib/accounts.ts`). The running 
 The voucher wallet references `accounts`, so a signed-in customer's orders will not link to the wallet until this is
 decided. Options: make `accounts` the single customer table, or have the wallet reference `customers`. This needs a
 decision before the wallet is built.
+
+## 8. Phase 2 status (campaign and coupon administration)
+
+Done. Staff can manage campaigns, their rules, code pools, manual codes and bulk batches, from the API and the admin
+console (new "Campaigns" section).
+
+- **Lifecycle:** draft → scheduled or active → paused → completed, or cancelled. Starting needs at least one rule. A
+  scheduled campaign becomes active on its start time, and any campaign completes at its end. Pausing, ending or
+  cancelling switches its rules off; resuming switches them on. Only a draft can be edited.
+- **Rules:** a rule is an `offers` row linked to its campaign, so the same types, audiences and limits apply. A rule
+  must sit inside the campaign's dates. Shared codes stay unique.
+- **Pools:** a pattern (# digit, @ letter, * either) and an optional limit. A pool is tied to one rule.
+- **Manual codes:** one code, normalised, checked for uniqueness, stored as a keyed hash plus an encrypted copy.
+- **Bulk batches:** up to 1,000 codes per request, unique, from a cryptographic random source. The same
+  `Idempotency-Key` returns the same batch and creates no codes. A batch is all-or-nothing, and two batches racing on
+  one pool cannot exceed its limit.
+- **Endpoints:** `/v1/admin/campaigns` (list, create), `/[id]` (read, edit draft), `/[id]/transition`, `/[id]/offers`,
+  `/[id]/pools`, `/v1/admin/voucher-pools/[id]` (summary), `/[id]/codes`, `/[id]/batches`. All require the staff session.
+
+Tests: `test/campaigns.test.ts` (13 tests against the database) and `test/vouchers.test.mjs` (12). Both reset the test
+database, so run them one after the other: `npm run test:vouchers`. The existing end-to-end API test passes (42 of 42),
+and a live HTTP round trip through the new routes passed (create, rule, activate, pool, batch, replay).
+
+Deviations from the brief, deliberately deferred:
+
+- Batches above 1,000 are refused. The background worker that handles larger batches belongs to Phase 4.
+- Codes are generated during the request, inside one transaction. The brief's asynchronous job model comes with the
+  worker.
+- The admin console does not yet show a code list or export; codes are stored encrypted for printing in Phase 4.
+- Prices still do not use these rules. Applying offers to the cart is Phase 6.
+
+Production needs two new secrets: `VOUCHER_CODE_SECRET` (keys the code hashes) and `APP_ENCRYPTION_KEY` (encrypts the
+stored codes). The server refuses to start the code routes without them, as it does for other secrets.

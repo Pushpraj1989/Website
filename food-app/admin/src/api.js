@@ -6,8 +6,8 @@ export class ApiError extends Error {
   }
 }
 
-async function request(method, path, body) {
-  const options = { method, credentials: 'same-origin', headers: {} };
+async function request(method, path, body, headers = {}) {
+  const options = { method, credentials: 'same-origin', headers: { ...headers } };
   if (body instanceof FormData) {
     options.body = body;
   } else if (body !== undefined) {
@@ -45,6 +45,16 @@ export const api = {
   zones: () => request('GET', '/v1/admin/zones'),
   createZone: (body) => request('POST', '/v1/admin/zones', body),
   updateZone: (id, body) => request('PATCH', `/v1/admin/zones/${id}`, body),
+  campaigns: () => request('GET', '/v1/admin/campaigns'),
+  campaign: (id) => request('GET', `/v1/admin/campaigns/${id}`),
+  createCampaign: (body) => request('POST', '/v1/admin/campaigns', body),
+  updateCampaign: (id, body) => request('PATCH', `/v1/admin/campaigns/${id}`, body),
+  campaignAction: (id, action) => request('POST', `/v1/admin/campaigns/${id}/transition`, { action }),
+  addCampaignRule: (id, body) => request('POST', `/v1/admin/campaigns/${id}/offers`, body),
+  createPool: (campaignId, body) => request('POST', `/v1/admin/campaigns/${campaignId}/pools`, body),
+  pool: (id) => request('GET', `/v1/admin/voucher-pools/${id}`),
+  addManualCode: (poolId, body) => request('POST', `/v1/admin/voucher-pools/${poolId}/codes`, body),
+  createBatch: (poolId, body, idempotencyKey) => request('POST', `/v1/admin/voucher-pools/${poolId}/batches`, body, { 'Idempotency-Key': idempotencyKey }),
   promotions: () => request('GET', '/v1/admin/promotions'),
   createPromotion: (body) => request('POST', '/v1/admin/promotions', body),
   updatePromotion: (id, body) => request('PUT', `/v1/admin/promotions/${id}`, body),
