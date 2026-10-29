@@ -162,10 +162,10 @@ test('a batch that does not fit the pool is refused whole, with nothing partly m
   assert.equal(rows[0].n, 0);
 });
 
-test('large batches and patterns with too few codes are refused', async () => {
+test('a pattern with too few codes is refused, and a request above the table cap is refused', async () => {
   const campaign = await runningCampaign('Caps');
   const p = await pool(campaign.id, { codePattern: 'ONLY#' });
-  await expectRule(c.createBatch(p.id, { quantity: 1500, expiresAt: new Date(Date.now() + 10 * day) }, 'cap-key-0001'), 'batch_too_large');
+  await expectRule(c.createBatch(p.id, { quantity: 10001, expiresAt: new Date(Date.now() + 10 * day) }, 'cap-key-0001'), 'bad_input');
   await expectRule(c.createBatch(p.id, { quantity: 100, expiresAt: new Date(Date.now() + 10 * day) }, 'small-key-01'), 'pattern_too_small');
 });
 
@@ -188,4 +188,34 @@ test('a batch cannot outlive its campaign', async () => {
   const campaign = await runningCampaign('Ends soon', { endsAt: new Date(now + 2 * day) });
   const p = await pool(campaign.id);
   await expectRule(c.createBatch(p.id, { quantity: 5, expiresAt: new Date(now + 3 * day) }, 'late-key-0001'), 'bad_input');
+});
+
+test('a large batch is queued, finishes in chunks, and every code is unique', async () => {
+  const campaign = await runningCampaign('Large');
+  const p = await pool(campaign.id, { codePattern: 'BIG####@@' });
+  const queued = await c.createBatch(p.id, { quantity: 1300, expiresAt: new Date(Date.now() + 10 * day) }, 'large-key-0001');
+  assert.equal(queued.status, 'queued');
+  assert.equal(queued.requestedQuantity, 1300);
+  const mid = await c.runBatch(queued.id, 1);
+  assert.equal(mid.status, 'running');
+  assert.equal(mid.generatedQuantity, 500);
+  const done = await c.runBatch(queued.id, 5);
+  assert.equal(done.status, 'completed');
+  const { rows } = await db.query(`select count(*)::int as n, count(distinct code_hash)::int as d from vouchers where batch_id = $1`, [queued.id]);
+  assert.equal(rows[0].n, 1300);
+  assert.equal(rows[0].d, 1300);
+  const pool2 = await c.getPool(p.id);
+  assert.equal(pool2.pool.issuedCount, 1300, 'reserved once, not twice');
+});
+
+test('a queued batch fails and keeps its codes if the campaign stops before it finishes', async () => {
+  const campaign = await runningCampaign('Stopping');
+  const p = await pool(campaign.id, { codePattern: 'STOP####@@' });
+  const queued = await c.createBatch(p.id, { quantity: 1100, expiresAt: new Date(Date.now() + 10 * day) }, 'stop-key-00001');
+  await c.runBatch(queued.id, 1);
+  await c.transitionCampaign(campaign.id, 'cancel');
+  await expectRule(c.runBatch(queued.id, 1), 'batch_failed');
+  const { rows } = await db.query(`select status, generated_quantity from voucher_batches where id = $1`, [queued.id]);
+  assert.equal(rows[0].status, 'failed');
+  assert.equal(rows[0].generated_quantity, 500);
 });

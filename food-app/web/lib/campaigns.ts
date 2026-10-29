@@ -323,76 +323,132 @@ export function batchView(row: Record<string, any>) {
     requestedQuantity: row.requested_quantity as number,
     generatedQuantity: row.generated_quantity as number,
     status: row.status as string,
+    errorDetails: (row.error_details ?? null) as string | null,
     completedAt: row.completed_at ? new Date(row.completed_at).toISOString() : null,
   };
 }
 
+/** Codes made per transaction when a large batch runs. Each chunk commits on its own, so a stop loses no finished work. */
+export const CHUNK = 500;
+
 /**
- * Generates a batch of unique codes. The same idempotency key returns the batch it made before, and never a second
- * one. Collisions are retried with new codes; the whole batch commits or none of it does.
+ * Starts a batch of unique codes. The whole quantity is reserved on the pool now, so no other batch can take it.
+ * Up to BULK_SYNC_LIMIT codes are made in this request. Larger batches are queued and finished by runBatch.
+ * The same idempotency key returns the batch it made before, and never a second one.
  */
 export async function createBatch(poolId: string, body: Record<string, unknown>, idempotencyKey: string) {
   if (!/^[A-Za-z0-9_-]{8,80}$/.test(idempotencyKey)) throw new RuleError('Send an Idempotency-Key header of 8 to 80 characters.', 'bad_input', 400);
   const quantity = int(body.quantity, 'Quantity', 1, 10_000);
-  if (quantity > BULK_SYNC_LIMIT) {
-    throw new RuleError(`Create at most ${BULK_SYNC_LIMIT} codes at once. Larger batches need the batch worker.`, 'batch_too_large', 422);
-  }
   const expiresAt = date(body.expiresAt, 'Expiry');
-  return withTx(async (c) => {
+  const immediate = quantity <= BULK_SYNC_LIMIT;
+  const created = await withTx(async (c) => {
     const earlier = await c.query(`select * from voucher_batches where idempotency_key = $1`, [idempotencyKey]);
     if (earlier.rows[0]) {
       if (earlier.rows[0].pool_id !== poolId) throw new RuleError('That key was used for another pool.', 'idempotency_conflict', 409);
-      return batchView(earlier.rows[0]);
+      return { view: batchView(earlier.rows[0]), fresh: false };
     }
     const p = await assertCanIssue(c, poolId, quantity, expiresAt);
     const combinations = patternCombinations(p.code_pattern);
     if (combinations < BigInt(quantity) * 10n) {
       throw new RuleError('This pattern has too few codes for that many. Use more # or @ characters.', 'pattern_too_small', 422);
     }
-    const batch = await c.query(
-      `insert into voucher_batches (pool_id, requested_quantity, status, idempotency_key) values ($1,$2,'running',$3) returning *`,
-      [poolId, quantity, idempotencyKey],
-    );
-    const hash = codeHash;
-    const templateVersion = await currentVersionId(c, p.template_id ?? null);
-    const made = new Map<string, string>(); // code hash -> voucher id
-    const hashToCode = new Map<string, string>();
-    for (let attempt = 0; attempt < MAX_ATTEMPTS && made.size < quantity; attempt++) {
-      const need = quantity - made.size;
-      const hashes: string[] = [];
-      const ciphers: string[] = [];
-      for (let i = 0; i < need; i++) {
-        const code = generateCode(p.code_pattern);
-        const h = hash(code);
-        if (made.has(h) || hashToCode.has(h)) continue;
-        hashToCode.set(h, code);
-        hashes.push(h);
-        ciphers.push(encryptSecret(code));
-      }
-      if (hashes.length === 0) continue;
-      const { rows } = await c.query(
-        `insert into vouchers (pool_id, offer_id, code_hash, code_ciphertext, expires_at, template_version_id)
-         select $1, $2, h, cipher, $3, $6 from unnest($4::text[], $5::text[]) as t(h, cipher)
-         on conflict (code_hash) do nothing returning id, code_hash`,
-        [poolId, p.offer_id, expiresAt, hashes, ciphers, templateVersion],
-      );
-      for (const r of rows) made.set(r.code_hash, r.id);
-    }
-    if (made.size < quantity) {
-      throw new RuleError('Could not make enough unique codes. Try again.', 'collision', 500);
-    }
-    const ids = [...made.values()];
-    await c.query(
-      `insert into voucher_ledger (voucher_id, event, detail) select v, 'issued', jsonb_build_object('batch', $2::text) from unnest($1::uuid[]) as t(v)`,
-      [ids, batch.rows[0].id],
-    );
     await c.query(`update voucher_pools set issued_count = issued_count + $2 where id = $1`, [poolId, quantity]);
-    const done = await c.query(
-      `update voucher_batches set generated_quantity = $2, status = 'completed', completed_at = now() where id = $1 returning *`,
-      [batch.rows[0].id, quantity],
+    const batch = await c.query(
+      `insert into voucher_batches (pool_id, requested_quantity, status, idempotency_key, expires_at) values ($1,$2,$3,$4,$5) returning *`,
+      [poolId, quantity, immediate ? 'running' : 'queued', idempotencyKey, expiresAt],
     );
-    return batchView(done.rows[0]);
+    if (immediate) {
+      await makeCodes(c, batch.rows[0].id, quantity);
+      const done = await c.query(`update voucher_batches set generated_quantity = $2, status = 'completed', completed_at = now() where id = $1 returning *`, [batch.rows[0].id, quantity]);
+      return { view: batchView(done.rows[0]), fresh: true };
+    }
+    return { view: batchView(batch.rows[0]), fresh: true };
   });
+  return created.view;
+}
+
+/**
+ * Makes `count` unique codes for a batch, inside the caller's transaction. Collisions are retried with new codes.
+ * The pool's issued count is not changed here: createBatch reserved the whole quantity already.
+ */
+async function makeCodes(c: PoolClient, batchId: string, count: number) {
+  const b = await c.query(`select b.pool_id, p.* from voucher_batches b join voucher_pools p on p.id = b.pool_id where b.id = $1`, [batchId]);
+  const p = b.rows[0];
+  const expiresAt = (await c.query(`select expires_at from voucher_batches where id = $1`, [batchId])).rows[0].expires_at;
+  const templateVersion = await currentVersionId(c, p.template_id ?? null);
+  const made = new Map<string, string>(); // code hash -> voucher id
+  const hashToCode = new Map<string, string>();
+  for (let attempt = 0; attempt < MAX_ATTEMPTS && made.size < count; attempt++) {
+    const need = count - made.size;
+    const hashes: string[] = [];
+    const ciphers: string[] = [];
+    for (let i = 0; i < need; i++) {
+      const code = generateCode(p.code_pattern);
+      const h = codeHash(code);
+      if (made.has(h) || hashToCode.has(h)) continue;
+      hashToCode.set(h, code);
+      hashes.push(h);
+      ciphers.push(encryptSecret(code));
+    }
+    if (hashes.length === 0) continue;
+    const { rows } = await c.query(
+      `insert into vouchers (pool_id, offer_id, batch_id, code_hash, code_ciphertext, expires_at, template_version_id)
+       select $1, $2, $3, h, cipher, $4, $7 from unnest($5::text[], $6::text[]) as t(h, cipher)
+       on conflict (code_hash) do nothing returning id, code_hash`,
+      [p.id, p.offer_id, batchId, expiresAt, hashes, ciphers, templateVersion],
+    );
+    for (const r of rows) made.set(r.code_hash, r.id);
+  }
+  if (made.size < count) throw new RuleError('Could not make enough unique codes. Try again.', 'collision', 500);
+  const ids = [...made.values()];
+  await c.query(
+    `insert into voucher_ledger (voucher_id, event, detail) select v, 'issued', jsonb_build_object('batch', $2::text) from unnest($1::uuid[]) as t(v)`,
+    [ids, batchId],
+  );
+  return made.size;
+}
+
+/**
+ * Finishes a queued batch, a few chunks per call, so the admin can drive it to the end. Each chunk is its own
+ * transaction. A campaign that stops or a voucher date that passes fails the batch and keeps the codes already made.
+ */
+export async function runBatch(batchId: string, maxChunks = 4) {
+  for (let i = 0; i < maxChunks; i++) {
+    // The outcome is returned from the transaction and thrown after it, so a failure is saved before it is reported.
+    const outcome = await withTx(async (c): Promise<{ done: boolean; failed?: string }> => {
+      const { rows } = await c.query(
+        `select b.* from voucher_batches b join voucher_pools p on p.id = b.pool_id join campaigns cm on cm.id = p.campaign_id
+         where b.id = $1 and cm.restaurant_id = $2 for update of b`,
+        [batchId, RESTAURANT_ID],
+      );
+      const batch = rows[0];
+      if (!batch) throw new RuleError('Batch not found.', 'not_found', 404);
+      if (batch.status === 'completed') return { done: true };
+      if (batch.status === 'failed') return { done: true, failed: batch.error_details ?? 'This batch failed.' };
+      const pool = await c.query(`select p.*, cm.status as campaign_status, cm.ends_at as campaign_ends from voucher_pools p join campaigns cm on cm.id = p.campaign_id where p.id = $1 for update of p`, [batch.pool_id]);
+      const campaignOk = ['active', 'scheduled'].includes(pool.rows[0].campaign_status);
+      if (!campaignOk || new Date(batch.expires_at) > new Date(pool.rows[0].campaign_ends) || new Date(batch.expires_at) <= new Date()) {
+        const reason = !campaignOk ? 'The campaign stopped before the batch finished.' : 'A voucher date passed before the batch finished.';
+        await c.query(`update voucher_batches set status = 'failed', error_details = $2 where id = $1`, [batchId, reason]);
+        return { done: true, failed: reason };
+      }
+      await c.query(`update voucher_batches set status = 'running' where id = $1`, [batchId]);
+      const have = (await c.query(`select count(*)::int as n from vouchers where batch_id = $1`, [batchId])).rows[0].n;
+      const count = Math.min(CHUNK, batch.requested_quantity - have);
+      if (count > 0) await makeCodes(c, batchId, count);
+      const total = have + Math.max(count, 0);
+      if (total >= batch.requested_quantity) {
+        await c.query(`update voucher_batches set generated_quantity = $2, status = 'completed', completed_at = now() where id = $1`, [batchId, total]);
+        return { done: true };
+      }
+      await c.query(`update voucher_batches set generated_quantity = $2 where id = $1`, [batchId, total]);
+      return { done: false };
+    });
+    if (outcome.failed) throw new RuleError(outcome.failed, 'batch_failed', 409);
+    if (outcome.done) break;
+  }
+  const { rows } = await pool.query(`select * from voucher_batches where id = $1`, [batchId]);
+  return batchView(rows[0]);
 }
 
 export async function getPool(poolId: string) {

@@ -53,6 +53,25 @@ export const api = {
   addCampaignRule: (id, body) => request('POST', `/v1/admin/campaigns/${id}/offers`, body),
   createPool: (campaignId, body) => request('POST', `/v1/admin/campaigns/${campaignId}/pools`, body),
   pool: (id) => request('GET', `/v1/admin/voucher-pools/${id}`),
+  runBatch: (id) => request('POST', `/v1/admin/voucher-batches/${id}/run`),
+  // Printed sheets and code exports are files: fetched with the staff session, then saved by the browser.
+  downloadPool: async (poolId, path, fallbackName) => {
+    const response = await fetch(`/v1/admin/voucher-pools/${poolId}/${path}`, { credentials: 'same-origin' });
+    if (!response.ok) {
+      const json = await response.json().catch(() => ({}));
+      throw new ApiError(json.error?.message ?? 'The file could not be made.', response.status);
+    }
+    const disposition = response.headers.get('content-disposition') ?? '';
+    const name = /filename="([^"]+)"/.exec(disposition)?.[1] ?? fallbackName;
+    const url = URL.createObjectURL(await response.blob());
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = name;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  },
   addManualCode: (poolId, body) => request('POST', `/v1/admin/voucher-pools/${poolId}/codes`, body),
   createBatch: (poolId, body, idempotencyKey) => request('POST', `/v1/admin/voucher-pools/${poolId}/batches`, body, { 'Idempotency-Key': idempotencyKey }),
   templates: () => request('GET', '/v1/admin/voucher-templates'),

@@ -258,6 +258,7 @@ function PoolPanel({ pool, offers, onChanged, onError }) {
   const [summary, setSummary] = useState(null);
   const [key, setKey] = useState(null);
   const [lastBatch, setLastBatch] = useState(null);
+  const [working, setWorking] = useState(false);
 
   const load = useCallback(async () => {
     try {
@@ -283,7 +284,36 @@ function PoolPanel({ pool, offers, onChanged, onError }) {
       setKey(null);
       event.currentTarget.reset();
       load();
-      onChanged(`Made ${batch.generatedQuantity} codes.`);
+      if (batch.status === 'completed') onChanged(`Made ${batch.generatedQuantity} codes.`);
+      else finish(batch);
+    } catch (err) {
+      onError(err.message);
+    }
+  }
+
+  // A queued batch is finished a few chunks at a time. This keeps asking until it is completed, or it fails.
+  async function finish(batch) {
+    setWorking(true);
+    try {
+      let current = batch;
+      for (let i = 0; i < 500 && current.status !== 'completed' && current.status !== 'failed'; i++) {
+        current = (await api.runBatch(current.id)).batch;
+        onChanged(`Made ${current.generatedQuantity} of ${current.requestedQuantity} codes.`);
+      }
+      await load();
+      if (current.status === 'completed') onChanged(`Batch complete: ${current.requestedQuantity} codes.`);
+    } catch (err) {
+      onError(err.message);
+      await load();
+    } finally {
+      setWorking(false);
+    }
+  }
+
+  async function download(path, name, label) {
+    try {
+      await api.downloadPool(pool.id, path, name);
+      onChanged(`${label} downloaded. The download is recorded.`);
     } catch (err) {
       onError(err.message);
     }
@@ -310,10 +340,30 @@ function PoolPanel({ pool, offers, onChanged, onError }) {
       </div>
       {summary ? <p className="muted">{Object.entries(summary.vouchersByStatus).map(([s, n]) => `${n} ${s}`).join(' · ') || 'No codes yet'}</p> : null}
       {lastBatch ? <p role="status" className="ok">Last batch: {lastBatch.generatedQuantity} of {lastBatch.requestedQuantity} codes, {lastBatch.status}.</p> : null}
+      {summary && summary.batches.some((b) => b.status === 'queued' || b.status === 'running') ? (
+        <div className="stack">
+          <h5>Batches in progress</h5>
+          {summary.batches.filter((b) => b.status === 'queued' || b.status === 'running').map((b) => (
+            <div key={b.id} className="row between">
+              <span>{b.generatedQuantity} of {b.requestedQuantity} codes made</span>
+              <button type="button" className="btn primary" disabled={working} onClick={() => finish(b)}>{working ? 'Making codes…' : 'Continue making codes'}</button>
+            </div>
+          ))}
+        </div>
+      ) : null}
+      {summary && summary.batches.some((b) => b.status === 'failed') ? (
+        <p role="alert" className="error">A batch stopped: {summary.batches.find((b) => b.status === 'failed').errorDetails}. The codes already made are kept.</p>
+      ) : null}
+      <div className="row">
+        <button type="button" className="btn" onClick={() => download('print?format=a4', 'vouchers-a4.pdf', 'A4 sheets')}>Print A4 sheets</button>
+        <button type="button" className="btn" onClick={() => download('print?format=card', 'vouchers-cards.pdf', 'Single cards')}>Print single cards</button>
+        <button type="button" className="btn ghost" onClick={() => download('export', 'voucher-codes.csv', 'Code export')}>Export codes (CSV)</button>
+      </div>
+      <p className="muted">Printing and exporting codes are recorded with the time and the staff session. Print only usable vouchers: revoked and expired ones are left out.</p>
 
       <form className="stack" onSubmit={generate} aria-label="Generate codes">
         <h5>Generate codes</h5>
-        <label>How many (up to 1,000 at once)<input name="quantity" type="number" min="1" max="1000" required /></label>
+        <label>How many (up to 10,000; large batches are made in the background)<input name="quantity" type="number" min="1" max="10000" required /></label>
         <label>Expires<input name="expiresAt" type="datetime-local" required /></label>
         <button type="submit" className="btn primary">Generate codes</button>
       </form>

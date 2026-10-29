@@ -178,3 +178,37 @@ still spill past the box; the print step must shrink or wrap it too.
 
 Tests: `test/templates.test.ts` (11 tests). `npm run test:vouchers` now runs all three database suites one after another
 (vouchers 12, campaigns 13, templates 11). Checked in a browser: the editor loads with no page overflow.
+
+## 10. Phase 4 status (bulk generation and printing)
+
+Done. Printing and exports are built in-house, with no new dependency.
+
+- **QR codes (`lib/qr.ts`):** our own encoder: byte mode, error correction level M, versions 1 to 8 (up to 152 bytes).
+  Checked against an independent decoder: 300 random strings across every version decoded exactly, and the matrix matches
+  a reference encoder cell for cell in the data area.
+- **PDF (`lib/pdf.ts`):** our own writer: pages in millimetres, filled shapes, text in Helvetica, JPEG and PNG pictures
+  (8-bit RGB, RGBA, grey, grey with alpha, and palette). Other formats are refused with a clear message. Text that needs
+  letters outside Latin cannot be drawn yet and is refused.
+- **Printing (`lib/print.ts`):** single cards (one voucher per page at the design's size), or A4 and A5 sheets. Each
+  voucher shows its real code, QR code, discount, expiry, restaurant and campaign name. Only usable vouchers are printed:
+  not revoked, not redeemed, not expired. A stored code that fails its hash check stops the print.
+- **Export:** CSV of codes with serial, status, expiry and batch.
+- **Audit:** every print and export is written to `voucher_print_jobs`.
+- **Large batches:** the full quantity is reserved when a batch starts. Batches above 1,000 are queued, and the admin
+  "Continue making codes" button finishes them in chunks of 500, each committed on its own. A campaign that stops
+  mid-batch fails the batch and keeps the codes already made.
+
+Verified end to end: 30 vouchers printed on A4 (4 pages) and as 30 cards; all 30 codes were read back from the rendered
+PDFs and match the export exactly. A browser download of single cards gave a 30-page PDF.
+
+Tests: `test/print.test.ts` (11 tests), and the batch tests cover queued and stopped batches. `npm run test:vouchers`
+runs all four database suites one after another.
+
+Risks and limits:
+
+- **Losing `APP_ENCRYPTION_KEY` makes stored codes unreadable.** Printing and export then fail with a clear message, and
+  the codes must be issued again. Keep the key in the secrets store, and back it up with the database.
+- The admin drives large batches; there is no always-on worker yet. A scheduled runner should call the run endpoint in
+  production.
+- Crop marks and bleed are not drawn. Backgrounds must be JPEG or PNG.
+- Print uses the standard Helvetica font. Arabic voucher text needs an embedded font, which is a later step.
