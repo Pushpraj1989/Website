@@ -1,0 +1,58 @@
+{
+ "1280/orders": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "1280/products": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "1280/categories": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "1280/offers": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "1280/promotions": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "1280/zones": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "1280/assistant": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "390/orders": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "390/products": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "390/categories": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "390/offers": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "390/promotions": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "390/zones": {
+  "violations": [],
+  "pageOverflowPx": 0
+ },
+ "390/assistant": {
+  "violations": [],
+  "pageOverflowPx": 0
+ }
+}
