@@ -74,16 +74,23 @@ class ApiClient {
     return (body['lines'] as List<dynamic>).map((l) => CartLine.fromJson(l as Map<String, dynamic>)).toList();
   }
 
-  Future<Quote> quote(String channel) async {
-    final body = await _send(() => _client.post(_uri('/v1/checkout/quote'), headers: _headers(json: true), body: jsonEncode({'channel': channel})));
-    return Quote.fromJson(body['quote'] as Map<String, dynamic>);
+  Future<QuoteResult> quote(String channel, {String? addressId}) async {
+    final body = await _send(() => _client.post(
+          _uri('/v1/checkout/quote'),
+          headers: _headers(json: true),
+          body: jsonEncode({'channel': channel, 'addressId': addressId}),
+        ));
+    return QuoteResult(
+      quote: Quote.fromJson(body['quote'] as Map<String, dynamic>),
+      delivery: body['delivery'] == null ? null : DeliveryQuote.fromJson(body['delivery'] as Map<String, dynamic>),
+    );
   }
 
-  Future<PlacedOrder> placeOrder({required String channel, required String method, String? address, required String idempotencyKey}) async {
+  Future<PlacedOrder> placeOrder({required String channel, required String method, String? addressId, required String idempotencyKey}) async {
     final body = await _send(() => _client.post(
           _uri('/v1/orders'),
           headers: _headers(json: true),
-          body: jsonEncode({'channel': channel, 'method': method, 'address': address, 'idempotencyKey': idempotencyKey}),
+          body: jsonEncode({'channel': channel, 'method': method, 'addressId': addressId, 'idempotencyKey': idempotencyKey}),
         ));
     final placed = PlacedOrder.fromJson(body['order'] as Map<String, dynamic>);
     await prefs?.setString('last_order_id', placed.id);
@@ -92,6 +99,23 @@ class ApiClient {
 
   /// The most recent order placed from this device, for the dashboard's tracking widget.
   String? get lastOrderId => prefs?.getString('last_order_id');
+
+  Future<List<SavedAddress>> addresses() async {
+    final body = await _send(() => _client.get(_uri('/v1/addresses'), headers: _headers()));
+    return (body['addresses'] as List<dynamic>).map((a) => SavedAddress.fromJson(a as Map<String, dynamic>)).toList();
+  }
+
+  Future<SavedAddress> saveAddress(Map<String, dynamic> fields) async {
+    final body = await _send(() => _client.post(_uri('/v1/addresses'), headers: _headers(json: true), body: jsonEncode(fields)));
+    return SavedAddress.fromJson(body['address'] as Map<String, dynamic>);
+  }
+
+  Future<void> deleteAddress(String id) => _send(() => _client.delete(_uri('/v1/addresses/$id'), headers: _headers()));
+
+  Future<List<DeliveryZone>> deliveryZones() async {
+    final body = await _send(() => _client.get(_uri('/v1/delivery-zones'), headers: _headers()));
+    return (body['zones'] as List<dynamic>).map((z) => DeliveryZone.fromJson(z as Map<String, dynamic>)).toList();
+  }
 
   Future<PlacedOrder> order(String id) async {
     final body = await _send(() => _client.get(_uri('/v1/orders/$id'), headers: _headers()));

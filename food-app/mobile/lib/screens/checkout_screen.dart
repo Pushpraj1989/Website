@@ -6,10 +6,12 @@ import '../core/models.dart';
 import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import 'address_sheet.dart';
 import 'order_screen.dart';
 
-// S06: delivery or pickup, cash on delivery or pay on arrival. Card is shown but not offered until the Stripe
-// payment sheet is wired into the app (see README).
+// S06: delivery to a saved address, or pickup; cash on delivery or pay on arrival. Card is shown but not offered
+// until the Stripe payment sheet is wired into the app (see README). The fee and the minimum order come from the
+// zone of the chosen address, as the server computes them.
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key, required this.api, required this.language});
   final ApiClient api;
@@ -22,8 +24,11 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   String _channel = 'delivery';
   String _method = 'cod';
-  final _address = TextEditingController();
+  List<SavedAddress> _addresses = [];
+  String? _addressId;
+  bool _loadingAddresses = true;
   Quote? _quote;
+  DeliveryQuote? _delivery;
   String _currency = 'AED';
   String? _error;
   bool _busy = false;
@@ -33,22 +38,42 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   void initState() {
     super.initState();
-    _loadQuote();
+    _loadAddresses();
   }
 
-  @override
-  void dispose() {
-    _address.dispose();
-    super.dispose();
+  /// Keeps the chosen address when it still exists, otherwise the default, otherwise the first saved one.
+  String? _choose(List<SavedAddress> addresses) {
+    if (addresses.any((a) => a.id == _addressId)) return _addressId;
+    for (final a in addresses) {
+      if (a.isDefault) return a.id;
+    }
+    return addresses.isEmpty ? null : addresses.first.id;
+  }
+
+  Future<void> _loadAddresses() async {
+    try {
+      final addresses = await widget.api.addresses();
+      if (!mounted) return;
+      setState(() {
+        _addresses = addresses;
+        _addressId = _choose(addresses);
+      });
+    } catch (_) {
+      if (mounted) setState(() => _error = 'addresses');
+    } finally {
+      if (mounted) setState(() => _loadingAddresses = false);
+    }
+    await _loadQuote();
   }
 
   Future<void> _loadQuote() async {
     try {
-      final quote = await widget.api.quote(_channel);
+      final result = await widget.api.quote(_channel, addressId: _channel == 'delivery' ? _addressId : null);
       if (!mounted) return;
       setState(() {
-        _quote = quote;
-        _currency = quote.currency;
+        _quote = result.quote;
+        _delivery = result.delivery;
+        _currency = result.quote.currency;
         _error = null;
         _method = _channel == 'delivery' ? 'cod' : 'pay_on_arrival';
       });
@@ -63,13 +88,38 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     setState(() {
       _channel = channel;
       _quote = null;
+      _delivery = null;
     });
     _loadQuote();
   }
 
+  void _selectAddress(String? id) {
+    if (id == null) return;
+    setState(() {
+      _addressId = id;
+      _quote = null;
+      _delivery = null;
+    });
+    _loadQuote();
+  }
+
+  Future<void> _addAddress(Strings s) async {
+    final saved = await showModalBottomSheet<SavedAddress>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (_) => AddressSheet(api: widget.api, s: s, currency: _currency, isFirst: _addresses.isEmpty),
+    );
+    if (saved == null || !mounted) return;
+    setState(() => _addressId = saved.id);
+    await _loadAddresses();
+  }
+
+  bool get _deliveryBlocked => _channel == 'delivery' && (_addressId == null || (_delivery != null && !_delivery!.deliverable));
+
   Future<void> _place(Strings s) async {
-    if (_channel == 'delivery' && _address.text.trim().isEmpty) {
-      setState(() => _error = s.addressNeeded);
+    if (_channel == 'delivery' && _addressId == null) {
+      setState(() => _error = s.chooseAddress);
       return;
     }
     setState(() {
@@ -80,7 +130,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       final order = await widget.api.placeOrder(
         channel: _channel,
         method: _method,
-        address: _channel == 'delivery' ? _address.text.trim() : null,
+        addressId: _channel == 'delivery' ? _addressId : null,
         idempotencyKey: _idempotencyKey,
       );
       if (!mounted) return;
@@ -92,6 +142,38 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     } finally {
       if (mounted) setState(() => _busy = false);
     }
+  }
+
+  Widget _deliveryAddresses(BuildContext context, Strings s) {
+    final lang = s.lang;
+    if (_loadingAddresses) return const Padding(padding: EdgeInsets.all(Tokens.space3), child: Center(child: CircularProgressIndicator()));
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      Text(s.deliverTo, style: Theme.of(context).textTheme.titleMedium),
+      if (_addresses.isEmpty) Padding(padding: const EdgeInsets.symmetric(vertical: Tokens.space2), child: Text(s.noAddressYet)),
+      RadioGroup<String>(
+        groupValue: _addressId,
+        onChanged: _selectAddress,
+        child: Column(children: [
+          for (final a in _addresses)
+            RadioListTile<String>(
+              value: a.id,
+              title: Text(a.isDefault ? '${a.label} · ${s.defaultAddress}' : a.label),
+              subtitle: Text([a.line1, a.line2, a.zoneName?.of(lang) ?? ''].where((part) => part.isNotEmpty).join(', ')),
+            ),
+        ]),
+      ),
+      Align(
+        alignment: AlignmentDirectional.centerStart,
+        child: TextButton.icon(onPressed: () => _addAddress(s), icon: const Icon(Icons.add_location_alt_outlined), label: Text(s.addNewAddress)),
+      ),
+      if (_addressId != null && _delivery == null && _quote != null)
+        Padding(padding: const EdgeInsets.only(bottom: Tokens.space2), child: Text(s.feeAfterAddress)),
+      if (_delivery != null && !_delivery!.deliverable)
+        Padding(
+          padding: const EdgeInsets.only(bottom: Tokens.space2),
+          child: Semantics(liveRegion: true, child: Text(s.belowMinimum(formatMoney(_delivery!.minOrderMinor, _currency)), style: const TextStyle(color: Tokens.danger))),
+        ),
+    ]);
   }
 
   @override
@@ -115,17 +197,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   RadioListTile<String>(value: 'pickup', title: Text(s.pickup)),
                 ]),
               ),
-              if (_channel == 'delivery')
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: Tokens.space2),
-                  child: TextField(
-                    controller: _address,
-                    maxLength: 300,
-                    maxLines: 3,
-                    keyboardType: TextInputType.streetAddress,
-                    decoration: InputDecoration(labelText: s.address),
-                  ),
-                ),
+              if (_channel == 'delivery') Padding(padding: const EdgeInsets.symmetric(vertical: Tokens.space2), child: _deliveryAddresses(context, s)),
               const SizedBox(height: Tokens.space2),
               Text(s.paymentMethod, style: Theme.of(context).textTheme.titleMedium),
               RadioGroup<String>(
@@ -144,7 +216,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               const SizedBox(height: Tokens.space4),
               FilledButton(
                 style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(48)),
-                onPressed: _busy || _quote == null ? null : () => _place(s),
+                onPressed: _busy || _quote == null || _deliveryBlocked ? null : () => _place(s),
                 child: Text(_busy ? s.placing : s.placeOrder),
               ),
             ],

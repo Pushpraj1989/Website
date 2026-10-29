@@ -204,3 +204,77 @@ class AssistantReply {
         orders: ((json['orders'] as List<dynamic>?) ?? []).map((o) => OrderRef.fromJson(o as Map<String, dynamic>)).toList(),
       );
 }
+
+/// A delivery address saved on the customer's account (the server's `addresses` rows that are saved).
+class SavedAddress {
+  const SavedAddress({
+    required this.id,
+    required this.label,
+    required this.line1,
+    required this.line2,
+    required this.notes,
+    required this.isDefault,
+    required this.zoneId,
+    required this.zoneName,
+  });
+  final String id;
+  final String label;
+  final String line1;
+  final String line2;
+  final String notes;
+  final bool isDefault;
+  final String? zoneId;
+  final Localised? zoneName;
+
+  factory SavedAddress.fromJson(Map<String, dynamic> json) {
+    final zone = json['zone'] as Map<String, dynamic>?;
+    return SavedAddress(
+      id: json['id'] as String,
+      label: json['label'] as String,
+      line1: json['line1'] as String,
+      line2: json['line2'] as String? ?? '',
+      notes: json['notes'] as String? ?? '',
+      isDefault: json['isDefault'] as bool? ?? false,
+      zoneId: zone?['id'] as String?,
+      zoneName: zone == null ? null : Localised.fromJson(zone['name'] as Map<String, dynamic>),
+    );
+  }
+}
+
+/// A delivery area the restaurant serves, with its fee and the smallest order it accepts.
+class DeliveryZone {
+  const DeliveryZone({required this.id, required this.name, required this.feeMinor, required this.minOrderMinor});
+  final String id;
+  final Localised name;
+  final int feeMinor;
+  final int minOrderMinor;
+
+  factory DeliveryZone.fromJson(Map<String, dynamic> json) => DeliveryZone(
+        id: json['id'] as String,
+        name: Localised.fromJson(json['name'] as Map<String, dynamic>),
+        feeMinor: json['feeMinor'] as int,
+        minOrderMinor: json['minOrderMinor'] as int,
+      );
+}
+
+/// The zone of the chosen address and whether the cart meets its minimum. Null until an address is chosen.
+class DeliveryQuote {
+  const DeliveryQuote({required this.zoneId, required this.zoneName, required this.minOrderMinor, required this.deliverable});
+  final String zoneId;
+  final Localised zoneName;
+  final int minOrderMinor;
+  final bool deliverable;
+
+  factory DeliveryQuote.fromJson(Map<String, dynamic> json) => DeliveryQuote(
+        zoneId: json['zoneId'] as String,
+        zoneName: Localised.fromJson(json['zoneName'] as Map<String, dynamic>),
+        minOrderMinor: json['minOrderMinor'] as int,
+        deliverable: json['deliverable'] as bool,
+      );
+}
+
+class QuoteResult {
+  const QuoteResult({required this.quote, required this.delivery});
+  final Quote quote;
+  final DeliveryQuote? delivery;
+}
