@@ -100,3 +100,5 @@ code { background: var(--surface); padding: 2px 6px; border-radius: 6px; font-si
 .gallery-thumb { width: 112px; height: 84px; object-fit: cover; border-radius: var(--radius-md); background: var(--surface); }
 .gallery-meta { gap: 8px; }
 .btn.file { position: relative; overflow: hidden; }
+
+.zone-map { height: 360px; width: 100%; border-radius: 10px; border: 1px solid #e7e5e4; margin: 12px 0; }
