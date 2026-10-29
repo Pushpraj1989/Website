@@ -5,3 +5,5 @@ data/store.json
 *.tsbuildinfo
 test-results/
 playwright-report/
+data/outbox.jsonl
+storage/

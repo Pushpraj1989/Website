@@ -25,6 +25,7 @@ export type MenuItem = {
   description: Localised;
   priceMinor: number;
   soldOut: boolean;
+  imageUrl: string | null;
 };
 
 export type CartLine = { itemId: string; qty: number; note: string };
@@ -96,9 +97,11 @@ export async function deliveryFeeMinor(c: PoolClient | typeof pool = pool): Prom
 export async function getMenu() {
   const { rows } = await pool.query(
     `select c.id as category_id, c.name_en as cat_en, c.name_ar as cat_ar,
-            i.id, i.name_en, i.name_ar, i.description_en, i.description_ar, i.base_price_minor, i.available
+            i.id, i.name_en, i.name_ar, i.description_en, i.description_ar, i.base_price_minor, i.available,
+            m.storage_key
      from categories c
      join menu_items i on i.category_id = c.id
+     left join media m on m.id = i.image_id
      where c.restaurant_id = $1 and c.active
      order by c.sort_order, i.sort_order`,
     [restaurantId],
@@ -115,9 +118,28 @@ export async function getMenu() {
       description: { en: r.description_en, ar: r.description_ar },
       priceMinor: r.base_price_minor,
       soldOut: !r.available,
+      imageUrl: r.storage_key ? `/media/${r.storage_key}` : null,
     });
   }
   return [...categories.values()];
+}
+
+/** Offers that are switched on and inside their dates, for the customer's offers widget. */
+export async function activeOffers() {
+  const { rows } = await pool.query(
+    `select id, name_en, name_ar, offer_type, value_int, code, ends_at from offers
+     where restaurant_id = $1 and active and now() between starts_at and ends_at and audience in ('any','member','guest')
+     order by priority, ends_at`,
+    [restaurantId],
+  );
+  return rows.map((o) => ({
+    id: o.id,
+    name: { en: o.name_en, ar: o.name_ar },
+    type: o.offer_type,
+    value: o.value_int,
+    code: o.code,
+    endsAt: new Date(o.ends_at).toISOString(),
+  }));
 }
 
 export async function getItems(ids: string[]): Promise<Map<string, MenuItem>> {
@@ -137,6 +159,7 @@ export async function getItems(ids: string[]): Promise<Map<string, MenuItem>> {
         description: { en: r.description_en, ar: r.description_ar },
         priceMinor: r.base_price_minor,
         soldOut: !r.available,
+        imageUrl: null,
       } satisfies MenuItem,
     ]),
   );

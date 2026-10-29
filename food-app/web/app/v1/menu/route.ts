@@ -6,11 +6,12 @@ import { stripeConfigured } from '@/lib/payments/stripe.ts';
 // Public. Both languages in one payload, so the app switches language without a round trip.
 export async function GET() {
   try {
-    const [restaurant, categories] = await Promise.all([data.getRestaurant(), data.getMenu()]);
+    const [restaurant, categories, offers] = await Promise.all([data.getRestaurant(), data.getMenu(), data.activeOffers()]);
     return NextResponse.json({
       restaurant: restaurant.name,
       currency: restaurant.currency,
       categories,
+      offers,
       payments: {
         cod: restaurant.payments.cod,
         payOnArrival: restaurant.payments.payOnArrival,

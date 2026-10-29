@@ -73,3 +73,9 @@ export function errorResponse(error: unknown) {
   console.error(error);
   return NextResponse.json({ error: { code: 'internal', message: 'Something went wrong.' } }, { status: 500 });
 }
+
+/** The bearer token from `Authorization: Bearer ...`, used by the mobile app. */
+export function bearerToken(request: NextRequest): string | null {
+  const header = request.headers.get('authorization') ?? '';
+  return header.startsWith('Bearer ') ? header.slice(7).trim() || null : null;
+}

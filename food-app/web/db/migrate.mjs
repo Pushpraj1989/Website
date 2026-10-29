@@ -8,6 +8,7 @@ import pg from 'pg';
 
 const schemaFile = fileURLToPath(new URL('../../../replica/schema.sql', import.meta.url));
 const seedFile = fileURLToPath(new URL('./seed.sql', import.meta.url));
+const authFile = fileURLToPath(new URL('./auth.sql', import.meta.url));
 const AUTH_STUB = `
 create schema if not exists auth;
 create table if not exists auth.users (id uuid primary key default gen_random_uuid(), email text);
@@ -27,6 +28,7 @@ try {
   if (reset) await client.query('drop schema public cascade; create schema public;');
   await client.query(AUTH_STUB);
   await client.query(readFileSync(schemaFile, 'utf8'));
+  await client.query(readFileSync(authFile, 'utf8'));
   await client.query(readFileSync(seedFile, 'utf8'));
   console.log(`schema and seed applied${reset ? ' (after reset)' : ''}`);
 } finally {
