@@ -163,6 +163,15 @@ class ApiClient {
     await _send(() => _client.delete(_uri('/v1/me/vouchers/$voucherId'), headers: _headers()));
   }
 
+  /// Puts a voucher or offer code on the cart. The server says why it cannot apply, and the message is shown as is.
+  Future<Map<String, dynamic>> applyCartCode(String code, {String channel = 'delivery'}) async {
+    return _send(() => _client.put(_uri('/v1/cart/offer'), headers: _headers(json: true), body: jsonEncode({'code': code, 'channel': channel})));
+  }
+
+  Future<void> removeCartCode() async {
+    await _send(() => _client.delete(_uri('/v1/cart/offer'), headers: _headers()));
+  }
+
   Future<HomeShortcuts> homeShortcuts() async {
     final body = await _send(() => _client.get(_uri('/v1/customer/home'), headers: _headers()));
     return HomeShortcuts.fromJson(body);

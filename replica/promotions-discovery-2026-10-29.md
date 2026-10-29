@@ -244,3 +244,50 @@ Not built, and why:
   applied at checkout in Phase 6, because they have no per-customer record to save against.
 - **Orders linked to the wallet.** A saved voucher is applied to an order only when Phase 6 is done.
 - **On a device.** The app tests run in the test environment. Checking the screen on a phone is still to do.
+
+## 12. Phase 6 status (cart and checkout)
+
+Done on the server and in the customer app. The discount is always worked out on the server from the current cart.
+
+- **Applying a code:** a voucher code or a shared offer code is checked against the cart and stored on it. Each quote
+  checks it again. If it no longer applies (the cart dropped below the minimum, the offer ended, the voucher was used),
+  the cart says why and checkout refuses with the same reason.
+- **Checkout:** a voucher is **held** by the order and checked under the cart lock. A cash or pay-on-arrival order
+  **redeems** it when placed. A card order keeps the hold until the payment is confirmed by the webhook, and then
+  redeems it. A shared offer's usage is counted when the order is placed, and its redemption is recorded at confirmation.
+- **Release:** cancelling or rejecting an order releases a held voucher, or makes a redeemed voucher usable again
+  (recorded in the ledger), and gives back a shared offer's count. A card order unpaid after 30 minutes is cancelled at the
+  start of the next checkout, and its hold is released.
+- **Two checkouts at once:** a single-use voucher can be held by one checkout only. A shared offer with one use left goes
+  to one order only. Both are tested with simultaneous orders.
+- **Customer app:** the cart has an "Offers and vouchers" section (code field, applied offer with Remove, or the reason
+  it does not apply), and a Discount line in the totals.
+
+**Decisions I took, to confirm:**
+
+1. **One code per order.** A second code replaces the first.
+2. **Reversal happens on cancellation or rejection, not after delivery.** A refund after delivery does not give the
+   voucher back. Confirm this, because it decides whether a delivered order's voucher can be reused.
+3. **Offer types supported at checkout:** percentage, fixed amount and free delivery. Free items and bundles are shown as
+   "not available yet" and are refused. Minimum spend, the item and category scope, the audience, the usage limit and the
+   per-customer limit are all checked.
+4. **Free delivery** is shown as a discount equal to the delivery fee, so the total is unchanged in form.
+5. **Members** are checked by the active membership of the guest session, because memberships are kept per guest session
+   today.
+6. **The customer's account** comes from the sign-in token on the cart and checkout requests. Orders are still tied to the
+   guest session, so an order does not show on the account yet. The redemption records the account.
+
+Tests: `test/checkout-offers.test.ts` (14 database tests, covering each rule above and the concurrent cases). The database
+suites all pass in sequence (six suites), and the end-to-end API test passes (42 of 42). The app suite passes (69 tests),
+including 4 cart-offer tests. A live HTTP run: put two salads in the cart, applied SMOKE10, the quote showed a 360 discount
+and a 3,240 total, and the cash pickup order was placed with the discount, its hold made final, and one redemption.
+
+Known gaps and risks:
+
+- **A card payment that arrives after its order was cancelled** (the 30-minute timeout) is not handled yet. The payment
+  is captured, but the order stays cancelled. This needs a refund path, and it is the most important gap to close before
+  card payments go live.
+- **Payment failures** are not reported by the webhook today, so unpaid card orders are released only by the timeout.
+- **The timeout runs at the start of each checkout**, not on a schedule. A background runner should be added in production.
+- **Orders are not linked to accounts** (see decision 6), so "Your orders" does not yet show orders placed while signed in.
+- **Item and category offers** (free items, bundles) are not built.

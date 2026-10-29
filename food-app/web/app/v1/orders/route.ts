@@ -3,6 +3,8 @@ import { currentGuestId, currentLocale, errorResponse, readJson } from '@/lib/ht
 import { customerView, placeOrder, RuleError } from '@/lib/orders.ts';
 import { ordersFor } from '@/lib/customer.ts';
 import { stripeConfigured } from '@/lib/payments/stripe.ts';
+import { accountForToken } from '@/lib/accounts.ts';
+import { bearerToken } from '@/lib/http.ts';
 
 export async function GET() {
   try {
@@ -30,8 +32,10 @@ export async function POST(request: NextRequest) {
     if (method === 'card' && !stripeConfigured()) {
       throw new RuleError('Card payment is not available yet.', 'method_unavailable');
     }
+    const accountId = (await accountForToken(bearerToken(request)))?.id ?? null;
     const order = await placeOrder({
       guestId,
+      accountId,
       idempotencyKey,
       channel: body.channel === 'pickup' ? 'pickup' : 'delivery',
       method,

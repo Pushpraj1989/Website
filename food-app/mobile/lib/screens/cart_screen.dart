@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../app.dart';
 import '../core/api.dart';
@@ -7,6 +8,7 @@ import '../core/money.dart';
 import '../core/art.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../widgets/app_button.dart';
 import 'checkout_screen.dart';
 
 // S05: cart with quantities and notes. Every change is saved on the server, which prices it.
@@ -22,6 +24,9 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   List<CartLine>? _lines;
   Quote? _quote;
+  CartOffer? _offer;
+  final _code = TextEditingController();
+  String? _offerMessage;
   String? _problem;
   String? _error;
   String _currency = 'AED';
@@ -44,6 +49,7 @@ class _CartScreenState extends State<CartScreen> {
   void _apply(Map<String, dynamic> body) {
     if (!mounted) return;
     setState(() {
+      _offer = body['offer'] == null ? null : CartOffer.fromJson(body['offer'] as Map<String, dynamic>);
       _currency = body['currency'] as String? ?? _currency;
       _lines = (body['lines'] as List<dynamic>).map((l) => CartLine.fromJson(l as Map<String, dynamic>)).toList();
       _quote = body['quote'] == null ? null : Quote.fromJson(body['quote'] as Map<String, dynamic>);
@@ -60,6 +66,36 @@ class _CartScreenState extends State<CartScreen> {
     } catch (_) {
       setState(() => _error = 'save');
     }
+  }
+
+  Future<void> _applyCode(Strings s) async {
+    final code = _code.text.trim();
+    if (code.isEmpty) return;
+    setState(() => _offerMessage = null);
+    try {
+      await widget.api.applyCartCode(code);
+      _code.clear();
+      _apply(await widget.api.cart());
+    } on ApiException catch (e) {
+      if (mounted) setState(() => _offerMessage = e.message);
+    } catch (_) {
+      if (mounted) setState(() => _offerMessage = s.genericError);
+    }
+  }
+
+  Future<void> _removeCode(Strings s) async {
+    try {
+      await widget.api.removeCartCode();
+      _apply(await widget.api.cart());
+    } catch (_) {
+      if (mounted) setState(() => _offerMessage = s.genericError);
+    }
+  }
+
+  @override
+  void dispose() {
+    _code.dispose();
+    super.dispose();
   }
 
   void _change(int index, {int? qty, String? note}) {
@@ -115,6 +151,8 @@ class _CartScreenState extends State<CartScreen> {
         for (var i = 0; i < lines.length; i++) _LineCard(line: lines[i], s: s, currency: _currency, onQty: (q) => _change(i, qty: q), onNote: (n) => _change(i, note: n), onSave: () => _save(_lines!), onRemove: () => _save(_lines!.where((l) => l.itemId != lines[i].itemId).toList())),
         if (_problem != null)
           Semantics(liveRegion: true, child: Padding(padding: const EdgeInsets.only(top: Tokens.space3), child: Text(_problem!, style: const TextStyle(color: Tokens.danger)))),
+        const SizedBox(height: Tokens.space4),
+        _OffersSection(code: _code, offer: _offer, message: _offerMessage, s: s, currency: _currency, onApply: () => _applyCode(s), onRemove: () => _removeCode(s)),
         if (_quote != null) ...[
           const SizedBox(height: Tokens.space4),
           _TotalsCard(quote: _quote!, s: s, currency: _currency),
@@ -208,6 +246,7 @@ class _TotalsCard extends StatelessWidget {
       child: Column(children: [
         _row(s.subtotal, formatMoney(quote.subtotalMinor, currency)),
         if (quote.deliveryFeeMinor > 0) _row(s.deliveryFee, formatMoney(quote.deliveryFeeMinor, currency)),
+        if (quote.discountMinor > 0) _row(s.discount, '− ${formatMoney(quote.discountMinor, currency)}'),
         const Divider(),
         _row(s.total, formatMoney(quote.totalMinor, currency), bold: true),
         const SizedBox(height: Tokens.space1),
@@ -223,4 +262,59 @@ class _TotalsCard extends StatelessWidget {
           Text(value, style: TextStyle(fontWeight: bold ? FontWeight.w600 : FontWeight.w400, fontSize: bold ? 18 : 16)),
         ]),
       );
+}
+
+/// The offers and vouchers section: a code field, the applied code, and the reason when it does not apply.
+class _OffersSection extends StatelessWidget {
+  const _OffersSection({required this.code, required this.offer, required this.message, required this.s, required this.currency, required this.onApply, required this.onRemove});
+  final TextEditingController code;
+  final CartOffer? offer;
+  final String? message;
+  final Strings s;
+  final String currency;
+  final VoidCallback onApply;
+  final VoidCallback onRemove;
+
+  @override
+  Widget build(BuildContext context) {
+    final o = offer;
+    return Container(
+      padding: const EdgeInsets.all(Tokens.space4),
+      decoration: BoxDecoration(color: Tokens.surface, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(s.offersAndVouchers, style: const TextStyle(fontWeight: FontWeight.w600)),
+        const SizedBox(height: Tokens.space2),
+        Row(children: [
+          Expanded(
+            child: TextField(
+              controller: code,
+              textCapitalization: TextCapitalization.characters,
+              textInputAction: TextInputAction.done,
+              onSubmitted: (_) => onApply(),
+              decoration: InputDecoration(labelText: s.enterVoucherCode, border: const OutlineInputBorder(), isDense: true),
+            ),
+          ),
+          const SizedBox(width: Tokens.space2),
+          AppButton(label: s.applyCode, size: ButtonSize.md, onPressed: onApply),
+        ]),
+        if (o != null && o.applied) ...[
+          const SizedBox(height: Tokens.space3),
+          Row(children: [
+            Icon(LucideIcons.tag, color: Tokens.success),
+            const SizedBox(width: Tokens.space2),
+            Expanded(child: Text(s.offerApplied(o.label ?? ''), style: const TextStyle(fontWeight: FontWeight.w600))),
+            TextButton(onPressed: onRemove, child: Text(s.removeCode)),
+          ]),
+        ] else if (o != null && o.reason != null) ...[
+          const SizedBox(height: Tokens.space3),
+          Semantics(liveRegion: true, child: Text(o.reason!, style: const TextStyle(color: Tokens.textMuted))),
+          TextButton(onPressed: onRemove, child: Text(s.removeCode)),
+        ],
+        if (message != null) ...[
+          const SizedBox(height: Tokens.space2),
+          Semantics(liveRegion: true, child: Text(message!, style: const TextStyle(color: Tokens.danger))),
+        ],
+      ]),
+    );
+  }
 }

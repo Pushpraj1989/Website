@@ -7,6 +7,8 @@ import { pool, withTx } from './db.ts';
 import { computeQuote, type Channel, type PricedLine, type Quote } from './pricing.ts';
 import { canTransition, ORDER_STATUSES, type OrderStatus } from './status.ts';
 import { paymentIntentFor } from './payments/stripe.ts';
+import { applyCode, cartOffer, finalizeOrderOffer, releaseOrderOffer, removeCode, reserveForOrder, CARD_PAYMENT_MINUTES, type Held } from './offers-checkout.ts';
+import type { CartLineFacts } from './discounts.ts';
 
 export class RuleError extends Error {
   code: string;
@@ -63,8 +65,9 @@ async function zoneForOrder(c: PoolClient, guestId: string, addressId: string | 
 }
 
 /** Prices the cart. With an address, the delivery fee and the zone minimum come from that address's zone. */
-export async function quoteFor(guestId: string, channel: Channel, addressId: string | null = null): Promise<{ quote: Quote; delivery: DeliveryQuote }> {
-  const lines = await pricedLines(await data.getCart(guestId));
+export async function quoteFor(guestId: string, channel: Channel, addressId: string | null = null, accountId: string | null = null): Promise<{ quote: Quote; delivery: DeliveryQuote; offer: OfferView | null }> {
+  const cartLines = await data.getCart(guestId);
+  const lines = await pricedLines(cartLines);
   let zone: data.Zone | null = null;
   let delivery: DeliveryQuote = null;
   if (channel === 'delivery' && addressId && UUID.test(addressId)) {
@@ -74,9 +77,35 @@ export async function quoteFor(guestId: string, channel: Channel, addressId: str
     }
   }
   const { settings } = await settingsFor(channel, zone);
-  const quote = computeQuote(lines, channel, settings);
+  const plain = computeQuote(lines, channel, settings);
+  // The cart's code, checked against this cart now. It only takes effect when it still applies.
+  const held = await cartOffer(pool, guestId, accountId, await linesFacts(cartLines), plain.subtotalMinor, plain.deliveryFeeMinor, channel);
+  const discount = held && held.outcome.applies ? held.outcome.discountMinor : 0;
+  const quote = discount ? computeQuote(lines, channel, settings, discount) : plain;
   if (zone) delivery = { zoneId: zone.id, zoneName: zone.name, minOrderMinor: zone.minOrderMinor, deliverable: quote.subtotalMinor >= zone.minOrderMinor };
-  return { quote, delivery };
+  return { quote, delivery, offer: held ? offerView(held) : null };
+}
+
+export type OfferView = { applied: boolean; label: string | null; reason: string | null; discountMinor: number; kind: 'voucher' | 'offer' };
+
+export function offerView(held: Held): OfferView {
+  const label = held.outcome.applies ? held.outcome.label : null;
+  return {
+    applied: held.outcome.applies,
+    label,
+    reason: held.outcome.applies ? null : held.reason ?? null,
+    discountMinor: held.outcome.applies ? held.outcome.discountMinor : 0,
+    kind: held.applied?.kind ?? 'offer',
+  };
+}
+
+/** The cart lines with each item's category, which the offer rules need. */
+async function linesFacts(cart: CartLine[]): Promise<CartLineFacts[]> {
+  const items = await data.getItems(cart.map((l) => l.itemId));
+  return cart.map((l) => {
+    const item = items.get(l.itemId)!;
+    return { itemId: l.itemId, categoryId: item.categoryId, unitMinor: item.priceMinor, qty: l.qty };
+  });
 }
 
 export function validateAddress(raw: unknown): data.AddressFields & { zoneId: string } {
@@ -177,6 +206,7 @@ export function validateCart(cart: unknown): CartLine[] {
 
 export async function placeOrder(input: {
   guestId: string;
+  accountId?: string | null;
   idempotencyKey: string;
   channel: Channel;
   method: 'card' | 'cod' | 'pay_on_arrival';
@@ -186,6 +216,7 @@ export async function placeOrder(input: {
   // A repeat with the same key returns the same order (idempotency from the architecture).
   const existing = await data.findOrderByKey(input.guestId, input.idempotencyKey);
   if (existing) return existing;
+  await cancelStaleCardOrders();
 
   const orderId = await withTx(async (c: PoolClient) => {
     // Lock the cart's items for the length of the transaction, then re-check availability and price here.
@@ -223,10 +254,19 @@ export async function placeOrder(input: {
       serviceFeeMinor: restaurant.serviceFeeMinor,
       pricesIncludeTax: true as const,
     };
-    const quote = computeQuote(priced.map((p) => ({ itemId: p.itemId, name: p.name.en, unitMinor: p.unitMinor, qty: p.qty })), input.channel, settings);
-    if (zone && quote.subtotalMinor < zone.minOrderMinor) {
+    const pricedPlain = priced.map((p) => ({ itemId: p.itemId, name: p.name.en, unitMinor: p.unitMinor, qty: p.qty }));
+    const plain = computeQuote(pricedPlain, input.channel, settings);
+    if (zone && plain.subtotalMinor < zone.minOrderMinor) {
       throw new RuleError('This area needs a larger order before delivery.', 'below_minimum');
     }
+    // The cart's code is checked again here, under the cart lock, so the price is the one the customer was shown.
+    const categories = await data.getItems(lines.map((l) => l.itemId));
+    const facts: CartLineFacts[] = lines.map((l) => ({ itemId: l.itemId, categoryId: categories.get(l.itemId)!.categoryId, unitMinor: byId.get(l.itemId)!.price, qty: l.qty }));
+    const held = await cartOffer(c, input.guestId, input.accountId ?? null, facts, plain.subtotalMinor, plain.deliveryFeeMinor, input.channel);
+    if (held && !held.outcome.applies) {
+      throw new RuleError(`Your code no longer applies: ${held.reason ?? 'please remove it'}`, 'offer_not_applicable', 409);
+    }
+    const quote = held && held.outcome.applies ? computeQuote(pricedPlain, input.channel, settings, held.outcome.discountMinor) : plain;
     const status: OrderStatus = input.method === 'card' ? 'awaiting_payment' : 'placed';
     const orderAddressId = zone ? await data.copyAddressForOrder(c, input.guestId, input.addressId!) : null;
     const id = await data.insertOrder(c, {
@@ -244,7 +284,12 @@ export async function placeOrder(input: {
       // A concurrent request with the same key won. Drop the copy this attempt made, so nothing is left behind.
       await c.query('delete from addresses where id = $1', [orderAddressId]);
     }
-    if (id) await c.query('update carts set items = $2, updated_at = now() where guest_session_id = $1', [input.guestId, '[]']);
+    if (id) {
+      if (held) await reserveForOrder(c, id, held, input.accountId ?? null, input.guestId);
+      // Cash and pay-on-arrival orders are confirmed by being placed. Card orders wait for the payment.
+      if (id && input.method !== 'card') await finalizeOrderOffer(c, id);
+      await c.query('update carts set items = $2, applied_voucher_id = null, applied_offer_id = null, updated_at = now() where guest_session_id = $1', [input.guestId, '[]']);
+    }
     return id;
   });
   if (!orderId) {
@@ -277,7 +322,12 @@ export async function cardIntentFor(order: OrderRow) {
 /** Moves an order to `to` if the state machine allows it from its current state, in one conditional update. */
 async function moveOrder(id: string, to: OrderStatus, actor: { kind: 'staff' | 'gateway' | 'system' }, extra: { etaMinutes?: number } = {}) {
   const from = ORDER_STATUSES.filter((s) => canTransition(s, to));
-  const moved = await withTx((c) => data.transitionOrder(c, id, from, to, actor, extra));
+  const moved = await withTx(async (c) => {
+    const done = await data.transitionOrder(c, id, from, to, actor, extra);
+    // A cancelled or rejected order gives back what it held: the voucher is released or made usable again.
+    if (done && (to === 'cancelled' || to === 'rejected')) await releaseOrderOffer(c, id);
+    return done;
+  });
   if (!moved) {
     const current = await data.getOrder(id);
     if (!current) throw new RuleError('Order not found.', 'not_found', 404);
@@ -314,6 +364,7 @@ export async function confirmCardPayment(
   return withTx(async (c) => {
     const moved = await data.transitionOrder(c, order.id, ['awaiting_payment'], 'placed', { kind: 'gateway' });
     if (!moved) return 'duplicate';
+    await finalizeOrderOffer(c, order.id);
     await data.markPaymentCaptured(c, intentId, order.id);
     return 'paid';
   });
@@ -340,4 +391,40 @@ export function customerView(order: OrderRow) {
     address: order.address,
     history: order.history,
   };
+}
+
+/** Cancels card orders that were not paid in time, and gives back what they held. Run at the start of each checkout. */
+export async function cancelStaleCardOrders(): Promise<number> {
+  const { rows } = await pool.query(
+    `select id from orders where status = 'awaiting_payment' and placed_at < now() - ($1 || ' minutes')::interval limit 50`,
+    [String(CARD_PAYMENT_MINUTES)],
+  );
+  let cancelled = 0;
+  for (const row of rows) {
+    try {
+      await moveOrder(row.id, 'cancelled', { kind: 'system' });
+      cancelled++;
+    } catch {
+      // Another request moved it first, which is fine.
+    }
+  }
+  return cancelled;
+}
+
+/** Puts a code on the cart. Refused with the reason when it cannot apply to the cart as it is now. */
+export async function applyCartCode(guestId: string, accountId: string | null, raw: unknown, channel: Channel, addressId: string | null) {
+  const cart = await data.getCart(guestId);
+  if (cart.length === 0) throw new RuleError('Add something to your cart first.', 'empty_cart');
+  await pricedLines(cart);
+  const facts = await linesFacts(cart);
+  const { quote } = await quoteFor(guestId, channel, addressId, accountId);
+  return withTx(async (c) => {
+    await c.query('select 1 from carts where guest_session_id = $1 for update', [guestId]);
+    return applyCode(c, guestId, accountId, raw, facts, quote.subtotalMinor, quote.deliveryFeeMinor, channel);
+  });
+}
+
+/** Takes the code off the cart. */
+export async function removeCartCode(guestId: string) {
+  await withTx((c) => removeCode(c, guestId));
 }

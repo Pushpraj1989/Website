@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import * as data from '@/lib/data.ts';
 import { currentGuestId, ensureGuest, withGuestCookie, errorResponse, readJson } from '@/lib/http.ts';
 import { pricedLines, quoteFor, validateCart, RuleError } from '@/lib/orders.ts';
+import { accountForToken } from '@/lib/accounts.ts';
+import { bearerToken } from '@/lib/http.ts';
+
+// The signed-in customer, when the request carries a sign-in token. Offers and vouchers are checked against it.
+async function accountOf(request: NextRequest) {
+  return (await accountForToken(bearerToken(request)))?.id ?? null;
+}
 
 type Channel = 'delivery' | 'pickup';
 
@@ -10,15 +17,18 @@ function channelFrom(value: unknown): Channel {
 }
 
 // The cart shows what is in it, with server prices. A quote is only given when every line can be sold.
-async function viewFor(guestId: string, channel: Channel) {
+async function viewFor(guestId: string, channel: Channel, accountId: string | null = null) {
   const lines = await data.getCart(guestId);
   const items = await data.getItems(lines.map((l) => l.itemId));
   let quote = null;
+  let offer = null;
   let problem: string | null = null;
   if (lines.length) {
     try {
       await pricedLines(lines);
-      quote = (await quoteFor(guestId, channel)).quote;
+      const priced = await quoteFor(guestId, channel, null, accountId);
+      quote = priced.quote;
+      offer = priced.offer;
     } catch (error) {
       if (!(error instanceof RuleError)) throw error;
       problem = error.message;
@@ -39,6 +49,7 @@ async function viewFor(guestId: string, channel: Channel) {
       };
     }),
     quote,
+    offer,
     problem,
   };
 }
@@ -48,7 +59,7 @@ export async function GET(request: NextRequest) {
     const channel = channelFrom(request.nextUrl.searchParams.get('channel'));
     const guestId = await currentGuestId();
     if (!guestId) return NextResponse.json({ currency: (await data.getRestaurant()).currency, lines: [], quote: null, problem: null });
-    return NextResponse.json(await viewFor(guestId, channel));
+    return NextResponse.json(await viewFor(guestId, channel, await accountOf(request)));
   } catch (error) {
     return errorResponse(error);
   }
@@ -66,7 +77,7 @@ export async function PUT(request: NextRequest) {
     }
     const { id, newToken } = await ensureGuest(await currentGuestId());
     await data.setCart(id, lines);
-    return withGuestCookie(NextResponse.json(await viewFor(id, channelFrom(body.channel))), newToken);
+    return withGuestCookie(NextResponse.json(await viewFor(id, channelFrom(body.channel), await accountOf(request))), newToken);
   } catch (error) {
     return errorResponse(error);
   }

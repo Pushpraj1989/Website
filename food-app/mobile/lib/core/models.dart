@@ -99,9 +99,12 @@ class Quote {
     required this.totalMinor,
     required this.taxLabel,
     required this.taxIncludedMinor,
+    this.discountMinor = 0,
   });
   final String currency;
   final int subtotalMinor;
+  /// What the offer or voucher takes off the order. Zero when none applies.
+  final int discountMinor;
   final int deliveryFeeMinor;
   final int serviceFeeMinor;
   final int totalMinor;
@@ -116,6 +119,23 @@ class Quote {
         totalMinor: json['totalMinor'] as int,
         taxLabel: json['taxLabel'] as String,
         taxIncludedMinor: json['taxIncludedMinor'] as int,
+        discountMinor: json['discountMinor'] as int? ?? 0,
+      );
+}
+
+/// The code on the cart. [applied] is false when the code no longer applies; [reason] says why.
+class CartOffer {
+  const CartOffer({required this.applied, this.label, this.reason, this.discountMinor = 0});
+  final bool applied;
+  final String? label;
+  final String? reason;
+  final int discountMinor;
+
+  factory CartOffer.fromJson(Map<String, dynamic> json) => CartOffer(
+        applied: json['applied'] as bool,
+        label: json['label'] as String?,
+        reason: json['reason'] as String?,
+        discountMinor: json['discountMinor'] as int? ?? 0,
       );
 }
 

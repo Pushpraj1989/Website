@@ -141,6 +141,11 @@ class Strings {
   String get recommendedFromHistory => isArabic ? 'من الأطباق التي تطلبها غالباً' : 'From the dishes you order most';
   String get recommendedStarter => isArabic ? 'ابدأ بهذه الأطباق' : 'Start with these dishes';
   String get fromTheKitchen => isArabic ? 'من المطبخ' : 'From the kitchen';
+  String get offersAndVouchers => isArabic ? 'العروض والقسائم' : 'Offers and vouchers';
+  String get applyCode => isArabic ? 'تطبيق' : 'Apply';
+  String get removeCode => isArabic ? 'إزالة' : 'Remove';
+  String offerApplied(String label) => isArabic ? 'مطبّق: $label' : 'Applied: $label';
+  String get discount => isArabic ? 'الخصم' : 'Discount';
   String get myVouchers => isArabic ? 'قسائمي' : 'My vouchers';
   String get enterVoucherCode => isArabic ? 'رمز القسيمة' : 'Voucher code';
   String get saveToWallet => isArabic ? 'حفظ في المحفظة' : 'Save to wallet';
