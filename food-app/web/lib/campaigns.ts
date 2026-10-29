@@ -336,7 +336,7 @@ export const CHUNK = 500;
  * Up to BULK_SYNC_LIMIT codes are made in this request. Larger batches are queued and finished by runBatch.
  * The same idempotency key returns the batch it made before, and never a second one.
  */
-export async function createBatch(poolId: string, body: Record<string, unknown>, idempotencyKey: string) {
+export async function createBatch(poolId: string, body: Record<string, unknown>, idempotencyKey: string, partnerClientId: string | null = null) {
   if (!/^[A-Za-z0-9_-]{8,80}$/.test(idempotencyKey)) throw new RuleError('Send an Idempotency-Key header of 8 to 80 characters.', 'bad_input', 400);
   const quantity = int(body.quantity, 'Quantity', 1, 10_000);
   const expiresAt = date(body.expiresAt, 'Expiry');
@@ -354,8 +354,8 @@ export async function createBatch(poolId: string, body: Record<string, unknown>,
     }
     await c.query(`update voucher_pools set issued_count = issued_count + $2 where id = $1`, [poolId, quantity]);
     const batch = await c.query(
-      `insert into voucher_batches (pool_id, requested_quantity, status, idempotency_key, expires_at) values ($1,$2,$3,$4,$5) returning *`,
-      [poolId, quantity, immediate ? 'running' : 'queued', idempotencyKey, expiresAt],
+      `insert into voucher_batches (pool_id, requested_quantity, status, idempotency_key, expires_at, partner_client_id) values ($1,$2,$3,$4,$5,$6) returning *`,
+      [poolId, quantity, immediate ? 'running' : 'queued', idempotencyKey, expiresAt, partnerClientId],
     );
     if (immediate) {
       await makeCodes(c, batch.rows[0].id, quantity);

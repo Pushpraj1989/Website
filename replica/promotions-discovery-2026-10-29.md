@@ -291,3 +291,51 @@ Known gaps and risks:
 - **The timeout runs at the start of each checkout**, not on a schedule. A background runner should be added in production.
 - **Orders are not linked to accounts** (see decision 6), so "Your orders" does not yet show orders placed while signed in.
 - **Item and category offers** (free items, bundles) are not built.
+
+## 13. Phase 7 status (partner API)
+
+Done on the server, with an admin page to create and manage partners.
+
+- **Keys:** a partner key is `pk_<client id>_<secret>`. The secret is shown once, when the partner is created or the key
+  is rotated. Only a keyed hash of the secret is stored, so a leaked database cannot be used to call the API. Rotating
+  makes the old key stop working at once. Revoking stops every key.
+- **Permissions:** each partner has scopes (issue, read batch status, read codes, check a code, read campaigns) and a
+  list of campaigns it may issue from. Anything outside that list is refused.
+- **Benefits come from the campaign.** A partner request that sets a value, a discount, an offer or a pool is refused
+  with `unknown_field`. The partner receives the benefit in the answer; it cannot choose it.
+- **Endpoints** (all under `/v1/partner`):
+  - `POST /vouchers/issue` issues 1 to 100 vouchers. The codes are in the answer, once.
+  - `POST /voucher-batches` requests up to 10,000 codes. Batches over 1,000 are queued (202), and polling the status
+    finishes them a few chunks at a time.
+  - `GET /voucher-batches/{id}` reads status (and makes progress on queued batches).
+  - `GET /voucher-batches/{id}/codes?after=` lists codes 500 at a time, with `nextAfter` for the next page.
+  - `POST /vouchers/validate` says whether a code is usable, without using it. A code from another campaign and an
+    unknown code get the same answer.
+  - `GET /campaigns` lists the campaigns the partner may issue from, with their rules. Budgets and usage are not shown.
+- **Idempotency:** `Idempotency-Key` is required on issuing. The same key and the same request return the first answer
+  (`Idempotent-Replayed: true`). The same key with a different request is refused.
+- **Quota:** the daily limit counts the codes a partner has requested in the last 24 hours, single and bulk alike.
+- **Rate limit:** requests per minute, counted from the audit log, so it holds across servers.
+- **Audit:** every request is logged with the partner, the path, and the answer, including refused ones. Each page of codes
+  read is recorded as an export.
+- **Admin:** a Partners section to create a partner (choosing its permissions, campaigns and limits), rotate a key, and
+  revoke a partner. The key is shown once, with a copy button.
+
+Tests: `test/partners.test.ts` (12 tests): keys, scopes, campaign limits, the answer for a bad key, issuing and replay,
+conflicting keys, a smuggled discount, quota, rate limit, bulk batches and paging, isolation between partners, validation,
+campaign metadata, revoke and rotate, and the audit log. All database suites pass in sequence (seven suites), the
+end-to-end API test passes (42 of 42), and the app suite is unchanged.
+
+Live run over HTTP: the admin created a partner; the partner issued two vouchers with the campaign's benefit; the replay
+was flagged; a validation said the voucher was available; a request with a value set was refused with 400; a request
+without a key got 401.
+
+Not built, and why:
+
+- **Webhooks.** Optional in the brief, and they need a delivery queue with retries. The partner polls for status instead.
+- **Background worker.** Queued batches move when they are polled (or driven by the admin). Production needs a scheduled
+  runner, the same gap as Phase 4 and 6.
+- **A key rotation schedule and per-key IP allowlists.** Rotation is manual for now.
+
+Operational note: `PARTNER_KEY_SECRET` keys the hashes of partner secrets. Changing it invalidates every partner key, so it
+belongs in the secrets store next to `VOUCHER_CODE_SECRET` and `APP_ENCRYPTION_KEY`.
