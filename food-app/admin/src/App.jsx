@@ -6,9 +6,11 @@ import Categories from './pages/Categories.jsx';
 import Offers from './pages/Offers.jsx';
 import Promotions from './pages/Promotions.jsx';
 import Zones from './pages/Zones.jsx';
+import Orders from './pages/Orders.jsx';
 import AiSettings from './pages/AiSettings.jsx';
 
 const SECTIONS = [
+  { id: 'orders', label: 'Orders' },
   { id: 'products', label: 'Products' },
   { id: 'categories', label: 'Categories' },
   { id: 'offers', label: 'Offers' },
@@ -77,6 +79,7 @@ export default function App() {
         {catalog && section === 'offers' ? <Offers catalog={catalog} onChanged={reload} /> : null}
         {catalog && section === 'promotions' ? <Promotions catalog={catalog} /> : null}
         {section === 'zones' ? <Zones /> : null}
+        {section === 'orders' ? <Orders /> : null}
         {catalog && section === 'assistant' ? <AiSettings /> : null}
       </main>
     </div>

@@ -494,6 +494,44 @@ try {
     assert.equal(r.json.membership, null);
   });
 
+  // Kitchen alerts: a new order reaches the staff stream within seconds; a visitor cannot open the stream.
+  check('the kitchen stream refuses a visitor and reports a new order to staff within seconds', async () => {
+    const refused = await stranger.call('GET', '/v1/admin/orders/stream');
+    assert.equal(refused.status, 401);
+    const cookie = Object.entries(staff.jar).map(([k, v]) => `${k}=${v}`).join('; ');
+    const controller = new AbortController();
+    try {
+      const response = await fetch(`${BASE}/v1/admin/orders/stream`, { headers: { cookie }, signal: controller.signal });
+      assert.equal(response.status, 200);
+      assert.match(response.headers.get('content-type'), /text\/event-stream/);
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let text = '';
+      // Reads until the text matches, or the time runs out. One read stays pending across checks, so no chunk is lost.
+      let pending = null;
+      const readUntil = async (pattern, ms) => {
+        const end = Date.now() + ms;
+        while (Date.now() < end && !pattern.test(text)) {
+          pending = pending || reader.read();
+          const chunk = await Promise.race([pending, new Promise((r) => setTimeout(() => r('wait'), 1000))]);
+          if (chunk === 'wait') continue;
+          pending = null;
+          if (chunk.done) break;
+          text += decoder.decode(chunk.value, { stream: true });
+        }
+        return pattern.test(text);
+      };
+      assert.ok(await readUntil(/event: ready/, 5000), 'the stream says it is open');
+      const addr = await guest.post('/v1/addresses', { label: 'Kitchen check', line1: '3 Stream Street', lat: 25.1, lng: 55.3 });
+      await guest.put('/v1/cart', { channel: 'delivery', items: [{ itemId: ITEM, qty: 1, note: '' }] });
+      const placed = await guest.post('/v1/orders', { channel: 'delivery', method: 'cod', addressId: addr.json.address.id, idempotencyKey: 'key-stream-0001' });
+      assert.equal(placed.status, 201);
+      assert.ok(await readUntil(new RegExp(`event: order[\\s\\S]*${placed.json.order.number}`), 10000), 'the order reached the kitchen');
+    } finally {
+      controller.abort();
+    }
+  });
+
   check('a JSON-only endpoint refuses form posts', async () => {
     const r = await fetch(`${BASE}/v1/cart`, { method: 'PUT', headers: { 'content-type': 'text/plain', cookie: `guest=${guest.jar.guest}` }, body: '{"items":[]}' });
     assert.equal(r.status, 415);
