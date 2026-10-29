@@ -52,6 +52,33 @@ class Strings {
   String get cartEmptyShort => isArabic ? 'السلة فارغة.' : 'Nothing in your cart yet.';
   String itemCount(int n) => isArabic ? '$n صنف' : (n == 1 ? '1 item' : '$n items');
   String get added => isArabic ? 'تمت الإضافة' : 'Added';
+  // Sign-in and sign-up
+  String get signInTitle => isArabic ? 'تسجيل الدخول' : 'Sign in';
+  String get signInHint => isArabic ? 'أدخل رقم جوالك. سنرسل رمزاً للتأكيد.' : 'Enter your mobile number. We will send you a code.';
+  String get mobileLabel => isArabic ? 'رقم الجوال' : 'Mobile number';
+  String get mobileHint => isArabic ? '+971 50 123 4567' : '+971 50 123 4567';
+  String get nameLabel => isArabic ? 'الاسم' : 'Full name';
+  String get continueLabel => isArabic ? 'متابعة' : 'Continue';
+  String get sendCode => isArabic ? 'إرسال الرمز' : 'Send code';
+  String get newHere => isArabic ? 'ليس لديك حساب؟' : 'New here?';
+  String get createAccount => isArabic ? 'إنشاء حساب' : 'Create an account';
+  String get haveAccount => isArabic ? 'لديك حساب؟ سجّل الدخول' : 'Already have an account? Sign in';
+  String get signUpTitle => isArabic ? 'إنشاء حساب' : 'Create your account';
+  String get signUpHint => isArabic ? 'الاسم ورقم الجوال. سنرسل رمزاً إلى جوالك.' : 'Your name and mobile number. We will text you a code.';
+  String get phoneCodeTitle => isArabic ? 'رمز الجوال' : 'Mobile code';
+  String get emailTitle => isArabic ? 'أضف بريدك الإلكتروني' : 'Add your email';
+  String get emailHint => isArabic ? 'سنرسل رمزاً إلى بريدك للتأكد منه.' : 'We will email you a code to confirm it is yours.';
+  String get emailLabel => isArabic ? 'البريد الإلكتروني' : 'Email address';
+  String get verifyEmail => isArabic ? 'تأكيد البريد' : 'Verify email';
+  String get emailCodeTitle => isArabic ? 'رمز البريد' : 'Email code';
+  String get allSet => isArabic ? 'تم إنشاء الحساب' : 'Your account is ready';
+  String get faceIdTitle => isArabic ? 'فتح بـ Face ID؟' : 'Use Face ID next time?';
+  String get faceIdBody => isArabic ? 'يمكنك فتح التطبيق بوجهك بدلاً من الرمز.' : 'Open the app with your face instead of a code.';
+  String get notNow => isArabic ? 'ليس الآن' : 'Not now';
+  String get turnOn => isArabic ? 'تفعيل' : 'Turn on';
+  String get unlockReason => isArabic ? 'افتح تطبيق مطبخ تجريبي' : 'Unlock Sample Kitchen';
+  String get signOut => isArabic ? 'تسجيل الخروج' : 'Sign out';
+  String get skipEmail => isArabic ? 'لاحقاً' : 'Later';
   String get card => isArabic ? 'بطاقة (قريباً)' : 'Card (coming soon)';
 
   String statusLabel(String status) => switch (status) {

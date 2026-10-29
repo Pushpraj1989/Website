@@ -2,22 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../app.dart';
+import '../auth/auth_api.dart';
+import '../auth/session_store.dart';
 import '../core/api.dart';
 import '../core/dashboard.dart';
 import '../core/models.dart';
 import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../auth/biometrics.dart';
 import '../widgets/app_button.dart';
 import 'cart_screen.dart';
 import 'menu_screen.dart';
 import 'order_screen.dart';
+import 'sign_in_screen.dart';
 
 // The customisable home. The user chooses which widgets show, and in what order, from the Customise sheet.
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.api, required this.language});
+  const HomeScreen({super.key, required this.api, required this.language, this.auth, this.sessions});
   final ApiClient api;
   final ValueNotifier<String> language;
+  final AuthApi? auth;
+  final SessionStore? sessions;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -45,6 +51,20 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     if (!mounted) return;
     setState(() => _layout = _store!.load());
+  }
+
+  Future<void> _signOut(Strings s) async {
+    try {
+      await widget.auth?.logout();
+    } catch (_) {
+      // Signing out must work even when the network does not; the local session is removed either way.
+    }
+    await widget.sessions?.clear();
+    if (!mounted) return;
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => SignInScreen(auth: widget.auth ?? AuthApi(baseUrl: ''), sessions: widget.sessions ?? defaultSessionStore(), biometrics: LocalAuthGate(), api: widget.api, language: widget.language)),
+      (_) => false,
+    );
   }
 
   Future<void> _saveLayout(DashboardLayout layout) async {
@@ -104,6 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(_menu?.restaurant.of(s.lang) ?? s.restaurantFallback),
           actions: [
             TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language)),
+            if (widget.auth != null) IconButton(tooltip: s.signOut, icon: const Icon(Icons.logout), onPressed: () => _signOut(s)),
           ],
         ),
         body: ListView(
@@ -200,7 +221,7 @@ class _CartSummary extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasError) return Text(s.genericError, style: const TextStyle(color: Tokens.danger));
         if (!snapshot.hasData) return const SizedBox(height: 24, child: LinearProgressIndicator());
-        final lines = snapshot.data!['lines'] as List<dynamic>;
+        final lines = (snapshot.data!['lines'] as List<dynamic>?) ?? const [];
         final quote = snapshot.data!['quote'] == null ? null : Quote.fromJson(snapshot.data!['quote'] as Map<String, dynamic>);
         final count = lines.fold<int>(0, (sum, l) => sum + ((l as Map<String, dynamic>)['qty'] as int));
         if (count == 0) return Text(s.cartEmptyShort, style: const TextStyle(color: Tokens.textMuted));

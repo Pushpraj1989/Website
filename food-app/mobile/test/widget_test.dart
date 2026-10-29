@@ -5,29 +5,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sample_kitchen/app.dart';
+import 'auth_fakes.dart';
 import 'helpers.dart';
+import 'package:sample_kitchen/auth/auth_api.dart';
+import 'package:sample_kitchen/auth/biometrics.dart';
 import 'package:sample_kitchen/core/api.dart';
 import 'package:sample_kitchen/widgets/app_button.dart';
 
-Map<String, dynamic> _menu() => {
-      'restaurant': {'en': 'Sample Kitchen', 'ar': 'مطبخ تجريبي'},
-      'currency': 'AED',
-      'payments': {'cod': true, 'payOnArrival': true, 'card': false},
-      'categories': [
-        {
-          'id': 'cat1',
-          'name': {'en': 'Mains', 'ar': 'الأطباق الرئيسية'},
-          'items': [
-            {'id': 'a', 'name': {'en': 'Grilled chicken plate', 'ar': 'طبق دجاج'}, 'description': {'en': 'Chicken and rice', 'ar': 'دجاج'}, 'priceMinor': 4500, 'soldOut': false},
-            {'id': 'b', 'name': {'en': 'Beef kebab', 'ar': 'كباب'}, 'description': {'en': 'Grilled', 'ar': 'مشوي'}, 'priceMinor': 5200, 'soldOut': true},
-          ],
-        },
-      ],
-    };
-
 MockClient _router({int menuStatus = 200}) => MockClient((request) async {
       if (request.url.path == '/v1/cart') return respond(jsonEncode({'currency': 'AED', 'lines': [], 'quote': null, 'problem': null}), 200);
-      return respond(jsonEncode(_menu()), menuStatus);
+      if (request.url.path == '/v1/auth/me') return respond(jsonEncode({'account': {'id': 'a', 'name': 'Sara', 'phone': '+971501234567', 'email': 'sara@example.com', 'emailVerified': true}}), 200);
+      return respond(jsonEncode(menuPayload()), menuStatus);
     });
 
 ApiClient _api(MockClient client, SharedPreferences prefs) => ApiClient(baseUrl: 'http://api.test', client: client, prefs: prefs);
@@ -38,7 +26,7 @@ void main() {
   testWidgets('the menu shows items with prices, a sold-out item has no Add button', (tester) async {
     final prefs = await SharedPreferences.getInstance();
     final api = _api(_router(), prefs);
-    await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api));
+    await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
     await tester.pumpAndSettle();
 
     await tester.tap(find.widgetWithText(AppButton, 'Menu'));
@@ -53,7 +41,7 @@ void main() {
   testWidgets('switching to Arabic flips the layout to right-to-left and shows Arabic labels', (tester) async {
     final prefs = await SharedPreferences.getInstance();
     final api = _api(_router(), prefs);
-    await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api));
+    await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('العربية'));
@@ -71,7 +59,7 @@ void main() {
   testWidgets('a failed menu load shows a message and a retry button', (tester) async {
     final prefs = await SharedPreferences.getInstance();
     final api = _api(_router(menuStatus: 500), prefs);
-    await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api));
+    await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
     await tester.pumpAndSettle();
 
     await tester.tap(find.widgetWithText(AppButton, 'Menu'));
@@ -83,7 +71,7 @@ void main() {
   testWidgets('customise: remove a widget, add another, confirm, and the change is kept', (tester) async {
     final prefs = await SharedPreferences.getInstance();
     final api = _api(_router(), prefs);
-    await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api));
+    await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
     await tester.pumpAndSettle();
 
     expect(find.text('Popular on the menu'), findsOneWidget);

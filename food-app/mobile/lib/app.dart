@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'auth/auth_api.dart';
+import 'auth/biometrics.dart';
+import 'auth/session_store.dart';
 import 'core/api.dart';
 import 'core/strings.dart';
 import 'core/theme.dart';
-import 'screens/home_screen.dart';
+import 'screens/auth_gate.dart';
 
 class SampleKitchenApp extends StatefulWidget {
-  const SampleKitchenApp({super.key, required this.apiBase, this.api});
+  const SampleKitchenApp({super.key, required this.apiBase, this.api, this.auth, this.sessions, this.biometrics});
   final String apiBase;
   final ApiClient? api;
+  final AuthApi? auth;
+  final SessionStore? sessions;
+  final BiometricGate? biometrics;
 
   @override
   State<SampleKitchenApp> createState() => _SampleKitchenAppState();
@@ -17,6 +23,9 @@ class SampleKitchenApp extends StatefulWidget {
 
 class _SampleKitchenAppState extends State<SampleKitchenApp> {
   late final ApiClient _api = widget.api ?? ApiClient(baseUrl: widget.apiBase);
+  late final AuthApi _auth = widget.auth ?? AuthApi(baseUrl: widget.apiBase);
+  late final SessionStore _sessions = widget.sessions ?? defaultSessionStore();
+  late final BiometricGate _biometrics = widget.biometrics ?? LocalAuthGate();
   final ValueNotifier<String> _language = ValueNotifier('en');
 
   @override
@@ -47,7 +56,7 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          home: HomeScreen(api: _api, language: _language),
+          home: AuthGate(api: _api, auth: _auth, sessions: _sessions, biometrics: _biometrics, language: _language),
         );
       },
     );
