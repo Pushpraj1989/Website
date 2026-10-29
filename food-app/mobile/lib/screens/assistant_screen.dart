@@ -4,6 +4,7 @@ import '../app.dart';
 import '../core/api.dart';
 import '../core/models.dart';
 import '../core/money.dart';
+import '../core/art.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
 import '../widgets/app_button.dart';
@@ -70,7 +71,7 @@ class _AssistantScreenState extends State<AssistantScreen> {
         body: Column(children: [
           Expanded(
             child: _turns.isEmpty
-                ? Center(child: Padding(padding: const EdgeInsets.all(Tokens.space5), child: Text(s.askHint, textAlign: TextAlign.center, style: const TextStyle(color: Tokens.textMuted))))
+                ? _EmptyAsk(s: s, onPick: (text) => _controller.text = text)
                 : ListView(
                     padding: const EdgeInsets.all(Tokens.space4),
                     children: [for (final t in _turns) _bubble(context, s, t)],
@@ -177,6 +178,42 @@ class _Card extends StatelessWidget {
         ),
         trailing,
       ]),
+    );
+  }
+}
+
+/// What to do before the first question: a picture, what the assistant can answer, and three questions to tap.
+class _EmptyAsk extends StatelessWidget {
+  const _EmptyAsk({required this.s, required this.onPick});
+  final Strings s;
+  final ValueChanged<String> onPick;
+
+  @override
+  Widget build(BuildContext context) {
+    final questions = [s.askSuggestionDish, s.askSuggestionOrder, s.askSuggestionPrice];
+    return ListView(
+      padding: const EdgeInsets.all(Tokens.space4),
+      children: [
+        Center(child: Image.asset(Art.assistant, width: 180, semanticLabel: '')),
+        const SizedBox(height: Tokens.space3),
+        Text(s.askHint, textAlign: TextAlign.center, style: Theme.of(context).textTheme.titleMedium),
+        const SizedBox(height: Tokens.space5),
+        Text(s.askSuggestionsTitle, style: const TextStyle(color: Tokens.textMuted, fontWeight: FontWeight.w600)),
+        const SizedBox(height: Tokens.space2),
+        for (final question in questions)
+          Padding(
+            padding: const EdgeInsets.only(bottom: Tokens.space2),
+            child: Semantics(
+              button: true,
+              label: question,
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(48), alignment: AlignmentDirectional.centerStart, foregroundColor: Tokens.text),
+                onPressed: () => onPick(question),
+                child: Text(question, textAlign: TextAlign.start),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

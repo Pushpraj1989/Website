@@ -11,7 +11,7 @@ import '../auth/face_id_prompt.dart';
 import '../core/theme.dart';
 import '../widgets/app_button.dart';
 import '../widgets/otp_sheet.dart';
-import 'home_screen.dart';
+import 'main_shell.dart';
 import 'sign_up_screen.dart';
 
 // Sign-in by mobile number and a code. A new user is sent to create an account.
@@ -77,7 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
     }
     if (!mounted) return;
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => HomeScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions)),
+      MaterialPageRoute(builder: (_) => MainShell(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions)),
       (_) => false,
     );
   }

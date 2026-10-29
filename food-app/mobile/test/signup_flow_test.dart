@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sample_kitchen/auth/session_store.dart';
 import 'package:sample_kitchen/widgets/otp_input.dart';
 import 'auth_fakes.dart';
+import 'helpers.dart';
 
 /// The code field inside the open sheet (the form behind it has its own fields).
 Finder otpField() => find.descendant(of: find.byType(OtpInput), matching: find.byType(TextField));
@@ -57,7 +58,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Sample Kitchen'), findsWidgets, reason: 'arrives at the home screen');
-    expect(find.text('Popular on the menu'), findsOneWidget);
+    await expectOnHome(tester, 'Popular on the menu');
   });
 
   testWidgets('sign-in: an unknown number is told so and offered an account', (tester) async {
@@ -77,7 +78,7 @@ void main() {
     expect(find.text('Mobile code'), findsOneWidget);
     await tester.enterText(otpField(), '123456');
     await tester.pumpAndSettle();
-    expect(find.text('Popular on the menu'), findsOneWidget);
+    await expectOnHome(tester, 'Popular on the menu');
   });
 
   testWidgets('a returning user with Face ID on is asked to unlock, and a failed unlock goes to sign-in', (tester) async {
@@ -93,7 +94,7 @@ void main() {
     final server = AuthServer(emailVerified: true);
     final gate = FakeBiometricGate(available: true, passes: true);
     await pumpApp(tester, server, signedIn: true, faceId: true, gate: gate);
-    expect(find.text('Popular on the menu'), findsOneWidget);
+    await expectOnHome(tester, 'Popular on the menu');
   });
 
   testWidgets('a user who stopped before verifying email is taken back to the email step', (tester) async {

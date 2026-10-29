@@ -16,19 +16,19 @@ import '../core/art.dart';
 import '../widgets/dish_thumb.dart';
 import 'cart_screen.dart';
 import 'menu_screen.dart';
-import 'assistant_screen.dart';
 import 'order_screen.dart';
-import 'membership_screen.dart';
-import 'orders_screen.dart';
+import '../widgets/ask_button.dart';
 import 'sign_in_screen.dart';
 
 // The customisable home. The user chooses which widgets show, and in what order, from the Customise sheet.
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.api, required this.language, this.auth, this.sessions});
+  const HomeScreen({super.key, required this.api, required this.language, this.auth, this.sessions, this.onSelectTab});
   final ApiClient api;
   final ValueNotifier<String> language;
   final AuthApi? auth;
   final SessionStore? sessions;
+  /// Set inside the signed-in shell: switches tabs instead of opening a new screen. Null when shown on its own.
+  final void Function(int index)? onSelectTab;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -97,10 +97,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void _openOrders() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => OrdersScreen(api: widget.api, language: widget.language)));
-  }
-
   Future<void> _signOut(Strings s) async {
     try {
       await widget.auth?.logout();
@@ -140,6 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _openMenu() {
+    if (widget.onSelectTab != null) return widget.onSelectTab!(1);
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => MenuScreen(api: widget.api, language: widget.language)));
   }
 
@@ -183,21 +180,16 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: Text(_menu?.restaurant.of(s.lang) ?? s.restaurantFallback),
           actions: [
+            AskButton(api: widget.api, language: widget.language, s: s),
             TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language)),
             PopupMenuButton<String>(
               tooltip: s.more,
               icon: const Icon(Icons.more_vert),
               onSelected: (choice) => switch (choice) {
-                'membership' => Navigator.of(context).push(MaterialPageRoute(builder: (_) => MembershipScreen(api: widget.api, language: widget.language))),
-                'orders' => _openOrders(),
-                'assistant' => Navigator.of(context).push(MaterialPageRoute(builder: (_) => AssistantScreen(api: widget.api, language: widget.language))),
                 'signout' => _signOut(s),
                 _ => null,
               },
               itemBuilder: (_) => [
-                PopupMenuItem(value: 'membership', child: ListTile(leading: const Icon(Icons.workspace_premium_outlined), title: Text(s.membership))),
-                PopupMenuItem(value: 'orders', child: ListTile(leading: const Icon(Icons.receipt_long_outlined), title: Text(s.orderHistory))),
-                PopupMenuItem(value: 'assistant', child: ListTile(leading: const Icon(Icons.chat_bubble_outline), title: Text(s.askTitle))),
                 if (widget.auth != null) PopupMenuItem(value: 'signout', child: ListTile(leading: const Icon(Icons.logout), title: Text(s.signOut))),
               ],
             ),

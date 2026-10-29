@@ -11,7 +11,7 @@ import '../core/strings.dart';
 import '../core/theme.dart';
 import '../widgets/app_button.dart';
 import '../widgets/otp_sheet.dart';
-import 'home_screen.dart';
+import 'main_shell.dart';
 
 // Sign-up in three steps: name and mobile (code by SMS), then email (code by email), then done.
 // A user who stopped after the mobile step comes back to the email step.
@@ -114,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
     if (!mounted) return;
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => HomeScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions)),
+      MaterialPageRoute(builder: (_) => MainShell(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions)),
       (_) => false,
     );
   }

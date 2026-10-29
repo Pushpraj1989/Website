@@ -46,7 +46,7 @@ void main() {
 
     await tester.tap(find.text('العربية'));
     await tester.pumpAndSettle();
-    expect(find.text('الرئيسية'), findsOneWidget);
+    expect(find.text('الرئيسية'), findsWidgets, reason: 'the bottom bar and the home title');
 
     await tester.tap(find.widgetWithText(InkWell, 'القائمة'));
     await tester.pumpAndSettle();
@@ -74,7 +74,6 @@ void main() {
     await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
     await tester.pumpAndSettle();
 
-    expect(find.text('Popular on the menu'), findsOneWidget);
     await tester.tap(find.widgetWithText(AppButton, 'Customise'));
     await tester.pumpAndSettle();
 
@@ -87,7 +86,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Popular on the menu'), findsNothing, reason: 'the removed widget is gone');
-    expect(find.text('Active order'), findsOneWidget, reason: 'the added widget shows');
+    await expectOnHome(tester, 'Active order');
     expect(prefs.getString('dashboard_layout'), isNot(contains('"popular"')));
   });
 

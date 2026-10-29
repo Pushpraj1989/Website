@@ -131,6 +131,10 @@ class Strings {
   String get signOut => isArabic ? 'تسجيل الخروج' : 'Sign out';
   String get skipEmail => isArabic ? 'لاحقاً' : 'Later';
   String get askTitle => isArabic ? 'اسأل المطعم' : 'Ask the restaurant';
+  String get askSuggestionsTitle => isArabic ? 'جرّب أحد هذه الأسئلة' : 'Try one of these';
+  String get askSuggestionDish => isArabic ? 'ما مكونات طبق الدجاج المشوي؟' : 'What comes with the grilled chicken plate?';
+  String get askSuggestionOrder => isArabic ? 'أين وصل طلبي؟' : 'Where is my order?';
+  String get askSuggestionPrice => isArabic ? 'ما الأطباق المتوفرة الآن؟' : 'What is available right now?';
   String get askHint => isArabic ? 'اسأل عن الأطباق والأسعار وطلبك.' : 'Ask about dishes, prices or your order.';
   String get askPlaceholder => isArabic ? 'اكتب سؤالك' : 'Type your question';
   String get send => isArabic ? 'إرسال' : 'Send';

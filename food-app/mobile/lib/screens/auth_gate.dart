@@ -7,7 +7,7 @@ import '../core/api.dart';
 import '../core/models.dart';
 import '../core/theme.dart';
 import '../widgets/app_button.dart';
-import 'home_screen.dart';
+import 'main_shell.dart';
 import 'sign_in_screen.dart';
 import 'sign_up_screen.dart';
 
@@ -60,7 +60,7 @@ class _AuthGateState extends State<AuthGate> {
         final unlocked = await widget.biometrics.authenticate('Unlock Sample Kitchen');
         if (!unlocked) return _go(_signIn());
       }
-      return _go(HomeScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions));
+      return _go(MainShell(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions));
     } on ApiException catch (e) {
       // The session was refused (expired or signed out elsewhere): start again from sign-in.
       if (e.code == 'unauthorised') {

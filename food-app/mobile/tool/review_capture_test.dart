@@ -19,6 +19,7 @@ import 'package:sample_kitchen/screens/cart_screen.dart';
 import 'package:sample_kitchen/screens/checkout_screen.dart';
 import 'package:sample_kitchen/screens/home_screen.dart';
 import 'package:sample_kitchen/screens/membership_screen.dart';
+import 'package:sample_kitchen/screens/main_shell.dart';
 import 'package:sample_kitchen/screens/menu_screen.dart';
 import 'package:sample_kitchen/screens/order_screen.dart';
 import 'package:sample_kitchen/screens/orders_screen.dart';
@@ -182,16 +183,20 @@ Future<void> _loadFonts() async {
   final icons = FontLoader('MaterialIcons')
     ..addFont(Future.value(ByteData.sublistView(File('/opt/flutter/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf').readAsBytesSync())));
   await icons.load();
+  // Arabic letters are not in Roboto. A device uses its system Arabic font; the capture uses FreeSerif, which has them.
+  final arabic = FontLoader('ArabicFallback')..addFont(Future.value(ByteData.sublistView(File('/usr/share/fonts/truetype/freefont/FreeSerif.ttf').readAsBytesSync())));
+  await arabic.load();
 }
 
 Widget _app(Widget home, {String lang = 'en'}) {
   return MaterialApp(
     debugShowCheckedModeBanner: false,
-    theme: buildTheme(),
+    theme: buildTheme().copyWith(textTheme: buildTheme().textTheme.apply(fontFamilyFallback: const ['ArabicFallback'])),
     locale: Locale(lang),
     supportedLocales: const [Locale('en'), Locale('ar')],
     localizationsDelegates: const [GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate, GlobalCupertinoLocalizations.delegate],
     home: home,
+    builder: (context, child) => DefaultTextStyle.merge(style: const TextStyle(fontFamilyFallback: ['ArabicFallback']), child: child!),
   );
 }
 
@@ -241,6 +246,9 @@ void main() {
   });
   testWidgets('sign-in', (tester) async {
     await shoot(tester, 'customer-signin', (api, lang, prefs) => SignInScreen(auth: AuthApi(baseUrl: 'http://api.test', client: AuthServer().client()), sessions: MemorySessionStore(), biometrics: FakeBiometricGate(available: false), api: api, language: lang));
+  });
+  testWidgets('shell-home', (tester) async {
+    await shoot(tester, 'customer-shell-home', (api, lang, prefs) => MainShell(api: api, language: lang, auth: AuthApi(baseUrl: 'http://api.test', client: _server()), sessions: signedInStore()));
   });
   testWidgets('home-arabic', (tester) async {
     await shoot(tester, 'customer-home-ar', (api, lang, prefs) => HomeScreen(api: api, language: lang, sessions: signedInStore(), auth: AuthApi(baseUrl: 'http://api.test', client: _server())), lang: 'ar');

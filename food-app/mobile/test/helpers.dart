@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -26,3 +28,10 @@ Map<String, dynamic> menuPayload() => {
         },
       ],
     };
+
+/// Scrolls the home screen (its first scroll view) until [text] is built, then checks it. The popular section sits
+/// below the fold once the bottom bar and the Ask button are on screen.
+Future<void> expectOnHome(WidgetTester tester, String text) async {
+  await tester.scrollUntilVisible(find.text(text), 200, scrollable: find.byType(Scrollable).first);
+  expect(find.text(text), findsOneWidget);
+}

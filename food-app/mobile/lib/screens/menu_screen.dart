@@ -6,6 +6,7 @@ import '../core/models.dart';
 import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../widgets/ask_button.dart';
 import '../widgets/dish_thumb.dart';
 import 'cart_screen.dart';
 
@@ -52,6 +53,7 @@ class _MenuScreenState extends State<MenuScreen> {
               appBar: AppBar(
                 title: Text(menu?.restaurant.of(s.lang) ?? s.restaurantFallback),
                 actions: [
+                  AskButton(api: widget.api, language: widget.language, s: s),
                   TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language)),
                   IconButton(tooltip: s.cart, icon: const Icon(Icons.shopping_bag_outlined), onPressed: _openCart),
                 ],
@@ -77,7 +79,7 @@ class _MenuScreenState extends State<MenuScreen> {
     if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
     final menu = snapshot.data!;
     return ListView(
-      padding: const EdgeInsets.fromLTRB(Tokens.space4, Tokens.space2, Tokens.space4, Tokens.space5),
+      padding: const EdgeInsets.fromLTRB(Tokens.space4, Tokens.space2, Tokens.space4, Tokens.space4),
       children: [
         if (_message != null)
           Semantics(
