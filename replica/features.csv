@@ -1,18 +1,18 @@
 feature,area,priority,original,clone,notes
-Browse menu by category,menu,must,yes,no,S02; category rail
+Browse menu by category,menu,must,yes,yes,"S02; category rail | slice: S02 web menu by category, EN/AR"
 Search dishes in English and Arabic,menu,must,yes,no,S15
 Item detail with photo and description in EN and AR,menu,must,yes,no,S04; source 1
 Options and add-ons with min and max choices,menu,must,yes,no,S04; guess
-Item sold out or hidden from the menu,menu,must,yes,no,A03 availability
-Cart with quantities and notes,ordering,must,yes,no,S05
-Delivery or pickup choice,checkout,must,yes,no,S06; source 2
-"Delivery address on a map, outside-zone check",checkout,must,yes,no,"S06, S14; guess"
+Item sold out or hidden from the menu,menu,must,yes,yes,A03 availability | slice: sold-out badge and server refusal in cart
+Cart with quantities and notes,ordering,must,yes,partial,"S05 | slice: S05 web cart, quantity and note; no item detail page"
+Delivery or pickup choice,checkout,must,yes,yes,S06; source 2 | slice: S06 checkout
+"Delivery address on a map, outside-zone check",checkout,must,yes,partial,"S06, S14; guess | slice: free-text address only; no map, no zone check"
 Order now or schedule for later,checkout,should,yes,no,S06; scheduled delivery in source 7
-"Sign in with phone and one-time code, or continue as guest",account,must,yes,no,S07; guest path required by the brief
-Pay online by card (3-D Secure),payments,must,yes,no,"S08; sources 3, 8"
-Pay by cash on delivery,payments,must,yes,no,S06; source 8 (evidence from Oman; confirm for the UAE)
-Pay on arrival for pickup,payments,must,yes,no,S06; brief
-Restaurant can switch each payment method on or off,payments,must,no,no,A07
+"Sign in with phone and one-time code, or continue as guest",account,must,yes,partial,"S07; guest path required by the brief | slice: guest only (token cookie, hash stored); no phone sign-in"
+Pay online by card (3-D Secure),payments,must,yes,partial,"S08; sources 3, 8 | slice: Stripe PaymentIntent and Payment Element wired; not run with live keys; 3-D Secure left to Stripe"
+Pay by cash on delivery,payments,must,yes,yes,"S06; source 8 (evidence from Oman; confirm for the UAE) | slice: S06 checkout, delivery only"
+Pay on arrival for pickup,payments,must,yes,yes,"S06; brief | slice: S06 checkout, pickup only"
+Restaurant can switch each payment method on or off,payments,must,no,partial,A07 | slice: switches in code (seed.ts); no admin screen A07
 Refund when an order is cancelled after payment,payments,must,reported,no,"S12, F08"
 "Offers that apply to guests, members, or both",offers,must,reported,no,"A04; sources 3, 4"
 Member-only offer shows a sign-in prompt to guests,offers,must,reported,no,F03; source 4 pattern
@@ -21,8 +21,8 @@ Offers scheduled with start and end dates,offers,must,no,no,A04
 "Stacking rules and priority, with a dry-run test",offers,should,no,no,A05
 Minimum order for an offer,offers,must,reported,no,A04
 Free delivery as an offer type,offers,should,reported,no,A04
-Server-side price and discount calculation,payments,must,no,no,Business rules; never trust the app
-Live order status timeline,tracking,must,yes,no,"S10; sources 1, 2"
+Server-side price and discount calculation,payments,must,no,partial,Business rules; never trust the app | slice: server prices and totals; discounts not built
+Live order status timeline,tracking,must,yes,partial,"S10; sources 1, 2 | slice: S10 timeline, polls every 5 s; no realtime channel"
 Push notifications for status changes,tracking,must,yes,no,S10; source 1
 Map with the rider position,tracking,could,reported,no,S10; needs a rider app
 Order history,account,must,yes,no,S11
@@ -30,14 +30,14 @@ Reorder a past order (changed or sold-out items flagged),account,should,reported
 Saved addresses with labels,account,must,yes,no,S14
 Saved cards by gateway token (no card numbers stored),account,should,yes,no,S13; source 1
 Rate the order and leave feedback,account,could,no,no,S12
-"Language switch EN and AR, whole layout flips to RTL",i18n,must,yes,no,F09; brief
-"Numbers, dates and currency formatted for each language",i18n,must,no,no,"Any ISO currency; decimal places from the currency table; AED first"
+"Language switch EN and AR, whole layout flips to RTL",i18n,must,yes,partial,F09; brief | slice: switch and RTL on web pages; placeholder Arabic copy to review
+"Numbers, dates and currency formatted for each language",i18n,must,no,partial,"Any ISO currency; decimal places from the currency table; AED first | slice: currency formatting from table (AED, OMR tested); no dates"
 Admin: menu manager with images and bilingual text,admin,must,no,no,"A03, F06"
 Admin: media library with alt text in EN and AR,admin,must,no,no,A06
 Admin: offers manager with audience and limits,admin,must,no,no,"A04, F07"
-Admin: live orders board with sound alert,admin,must,no,no,"A02, F08"
+Admin: live orders board with sound alert,admin,must,no,partial,"A02, F08 | slice: A02 board, accept, status steps; no sound"
 "Admin: restaurant settings (hours, zones, fees, payments)",admin,must,no,no,A07
-Admin: staff roles and two-factor sign-in,admin,must,no,no,A01; AdminUser
+Admin: staff roles and two-factor sign-in,admin,must,no,partial,"A01; AdminUser | slice: one shared staff password; no roles, no two-factor"
 Admin: audit log for price and offer changes,admin,should,no,no,AuditLog
 "Admin: reports (sales, offers used, cash versus card)",admin,should,no,no,A08
 Customer list with guest or member flag,admin,could,no,no,A09
@@ -70,9 +70,9 @@ Payment method groups with unavailable reasons,payments,must,yes,no,"S24 (video)
 Processing screen with auto redirect back,payments,must,yes,no,S25 (video); webhook or server check
 Cancel during processing with confirmation,payments,must,yes,no,"S26 (video); void or refund, state machine"
 Pay on delivery (cash or card on delivery),payments,must,yes,no,S24 (video); F15
-"Bill breakdown: items, discounts, taxes, charges, total",checkout,must,yes,no,S23 (video); price summary component
+"Bill breakdown: items, discounts, taxes, charges, total",checkout,must,yes,partial,"S23 (video); price summary component | slice: items, delivery, VAT, total; no discounts"
 Wallet payment (Apple Pay) with confirmation sheet,payments,must,yes,no,"S32, S33 (Talabat screenshots); gateway wallet token"
-Service fee shown as its own line,checkout,must,yes,no,S32; restaurant.service_fee_minor
+Service fee shown as its own line,checkout,must,yes,partial,S32; restaurant.service_fee_minor | slice: line shown when non-zero; fee is 0 until the client decides
 Delivery timing: standard or direct with a fee,checkout,should,yes,no,S31; orders.delivery_option
 Tip presets and custom amount,checkout,should,yes,no,S31; orders.tip_minor
 Delivery instruction chips,checkout,should,yes,no,S31
@@ -85,10 +85,10 @@ Saved addresses and notification toggle,account,must,yes,no,S35
 Language and country settings,account,must,yes,no,S35; country pack and locale
 "Orders filtered by category, reorder from the orders screen",account,must,yes,no,S36; F19
 Flash sale banner with per-item savings,offers,should,yes,no,S27 (Talabat); offer type per item
-Pay by Apple Pay (Stripe),payments,must,yes,no,Stripe Payment Element or Payment Request; domain registration with Apple
-Pay by Google Pay on Android (Stripe),payments,must,yes,no,Stripe; Android and Chrome
-Pay by Samsung Pay on Android,payments,must,yes,no,NOT a Stripe method; separate integration to confirm before build; off until then
-Pay by local and international debit and credit cards (Stripe),payments,must,yes,no,3-D Secure where required; no card numbers in the app
+Pay by Apple Pay (Stripe),payments,must,yes,partial,Stripe Payment Element or Payment Request; domain registration with Apple | slice: Payment Element enabled; Apple Pay depends on domain registration (not done)
+Pay by Google Pay on Android (Stripe),payments,must,yes,partial,Stripe; Android and Chrome | slice: Payment Element enabled; Google Pay depends on the Stripe account (not done)
+Pay by Samsung Pay on Android,payments,must,yes,no,"NOT a Stripe method; separate integration to confirm before build; off until then | not built: separate integration, decision still open"
+Pay by local and international debit and credit cards (Stripe),payments,must,yes,partial,3-D Secure where required; no card numbers in the app | slice: card path wired; not run with live keys
 Saved cards as Stripe PaymentMethods on a Stripe Customer,account,should,yes,no,customers.stripe_customer_id
-"Stripe webhooks: signature check, stored once, idempotent processing",payments,must,yes,no,payment_events; Idempotency-Key on PaymentIntents
-Refunds and cancellations through Stripe,payments,must,yes,no,refunds table; Stripe refunds API
+"Stripe webhooks: signature check, stored once, idempotent processing",payments,must,yes,yes,"payment_events; Idempotency-Key on PaymentIntents | slice: HMAC check, timestamp window, event stored once, amount and currency checked; tested"
+Refunds and cancellations through Stripe,payments,must,yes,no,refunds table; Stripe refunds API | not built: refund path on reject-after-payment still to do
