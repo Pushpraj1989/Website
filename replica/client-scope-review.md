@@ -17,8 +17,8 @@ Estimates are ours and depend on the answers in section 6.
 | Payment: card through a gateway, or cash on delivery | Partial | Cash on delivery and pay on arrival are built. Card code (Stripe intent and signed webhook) is written but switched off until keys and the app's payment sheet are in place |
 | Order confirmation, status updates, notifications | Partial | Confirmation and status history are built. The app refreshes every 5 seconds. No push notifications |
 | Saved addresses and the address picker (new in this phase) | Built | Add, edit, delete, default; checkout picker; zone fee and minimum order; each order keeps its own copy of the address |
-| Favourites, last order, frequent items on the home page | Missing | Next phase. Needs order history and item counts per customer |
-| Reorder and order history | Missing | Next phase |
+| Favourites, last order, frequent items on the home page | Built | Last order with Order again; dishes ordered most (counted from this customer's own orders); saved favourites. Customisable widgets |
+| Reorder and order history | Built | Order history screen; reorder puts the dishes back in the cart and names any sold-out dish that was left out |
 
 ### 1.2 Restaurant admin panel
 

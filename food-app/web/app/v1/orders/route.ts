@@ -1,7 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { currentGuestId, currentLocale, errorResponse, readJson } from '@/lib/http.ts';
 import { customerView, placeOrder, RuleError } from '@/lib/orders.ts';
+import { ordersFor } from '@/lib/customer.ts';
 import { stripeConfigured } from '@/lib/payments/stripe.ts';
+
+export async function GET() {
+  try {
+    const guestId = await currentGuestId();
+    return NextResponse.json({ orders: guestId ? await ordersFor(guestId) : [] });
+  } catch (error) {
+    return errorResponse(error);
+  }
+}
 
 const METHODS = ['card', 'cod', 'pay_on_arrival'] as const;
 type Method = (typeof METHODS)[number];

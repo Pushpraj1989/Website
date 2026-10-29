@@ -71,3 +71,13 @@ alter table addresses add column if not exists saved boolean not null default tr
 create unique index if not exists addresses_default_per_guest on addresses (guest_session_id) where is_default;
 create unique index if not exists addresses_default_per_customer on addresses (customer_id) where is_default;
 create index if not exists addresses_saved_per_guest on addresses (guest_session_id) where saved;
+
+-- ---------- favourites ----------
+-- Dishes a guest saved from the home screen. Server-only access, like the other platform tables.
+create table if not exists favourites (
+  guest_session_id uuid not null references guest_sessions(id) on delete cascade,
+  menu_item_id uuid not null references menu_items(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  primary key (guest_session_id, menu_item_id)
+);
+alter table favourites enable row level security;

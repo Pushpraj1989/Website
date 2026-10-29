@@ -16,6 +16,7 @@ import 'cart_screen.dart';
 import 'menu_screen.dart';
 import 'assistant_screen.dart';
 import 'order_screen.dart';
+import 'orders_screen.dart';
 import 'sign_in_screen.dart';
 
 // The customisable home. The user chooses which widgets show, and in what order, from the Customise sheet.
@@ -34,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   DashboardStore? _store;
   DashboardLayout _layout = const DashboardLayout(defaultDashboard);
   Menu? _menu;
+  HomeShortcuts? _shortcuts;
   String? _message;
 
   @override
@@ -50,8 +52,50 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (_) {
       // The popular widget shows its own error; the rest of the dashboard still works.
     }
+    await _refreshShortcuts();
     if (!mounted) return;
     setState(() => _layout = _store!.load());
+  }
+
+  /// The personal shortcuts. A failure only hides them; the rest of the home screen still works.
+  Future<void> _refreshShortcuts() async {
+    try {
+      final shortcuts = await widget.api.homeShortcuts();
+      if (mounted) setState(() => _shortcuts = shortcuts);
+    } catch (_) {
+      if (mounted) setState(() => _shortcuts = null);
+    }
+  }
+
+  Future<void> _toggleFavourite(DishCard dish, bool on, Strings s) async {
+    try {
+      await widget.api.setFavourite(dish.id, on);
+      await _refreshShortcuts();
+    } on ApiException catch (e) {
+      if (mounted) setState(() => _message = e.message);
+    } catch (_) {
+      if (mounted) setState(() => _message = s.genericError);
+    }
+  }
+
+  Future<void> _reorder(String orderId, Strings s) async {
+    setState(() => _message = null);
+    try {
+      final result = await widget.api.reorder(orderId);
+      if (!mounted) return;
+      setState(() => _message = [
+            if (result.added.isNotEmpty) s.reorderAdded(result.added.length),
+            if (result.skipped.isNotEmpty) s.reorderSkipped(result.skipped.join(', ')),
+          ].join(' '));
+    } on ApiException catch (e) {
+      if (mounted) setState(() => _message = e.message);
+    } catch (_) {
+      if (mounted) setState(() => _message = s.genericError);
+    }
+  }
+
+  void _openOrders() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => OrdersScreen(api: widget.api, language: widget.language)));
   }
 
   Future<void> _signOut(Strings s) async {
@@ -104,6 +148,18 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => OrderScreen(api: widget.api, language: widget.language, orderId: orderId)));
   }
 
+  Future<void> _addDish(DishCard dish, Strings s) async {
+    setState(() => _message = null);
+    try {
+      await widget.api.addOne(dish.id);
+      if (mounted) setState(() => _message = '✓ ${dish.name.of(s.lang)}');
+    } on ApiException catch (e) {
+      if (mounted) setState(() => _message = e.message);
+    } catch (_) {
+      if (mounted) setState(() => _message = s.genericError);
+    }
+  }
+
   Future<void> _add(MenuItem item, Strings s) async {
     setState(() => _message = null);
     try {
@@ -124,6 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: Text(_menu?.restaurant.of(s.lang) ?? s.restaurantFallback),
           actions: [
+            IconButton(tooltip: s.orderHistory, icon: const Icon(Icons.receipt_long_outlined), onPressed: _openOrders),
             IconButton(tooltip: s.askTitle, icon: const Icon(Icons.chat_bubble_outline), onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => AssistantScreen(api: widget.api, language: widget.language)))),
             TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language)),
             if (widget.auth != null) IconButton(tooltip: s.signOut, icon: const Icon(Icons.logout), onPressed: () => _signOut(s)),
@@ -157,6 +214,9 @@ class _HomeScreenState extends State<HomeScreen> {
       'cart_summary' => _CartSummary(api: widget.api, s: s, onView: _openCart),
       'active_order' => _ActiveOrder(api: widget.api, s: s, orderId: widget.api.lastOrderId, onTrack: _openTracking),
       'popular' => _Popular(menu: _menu, s: s, onAdd: (item) => _add(item, s)),
+      'last_order' => _LastOrder(s: s, order: _shortcuts?.lastOrder, onReorder: (id) => _reorder(id, s), onOpen: _openTracking),
+      'frequent' => _DishList(s: s, currency: _menu?.currency ?? '', dishes: _shortcuts?.frequent ?? [], showTimes: true, favourites: _shortcuts?.favourites.map((d) => d.id).toSet() ?? {}, onAdd: (d) => _addDish(d, s), onFavourite: (d, on) => _toggleFavourite(d, on, s)),
+      'favourites' => _DishList(s: s, currency: _menu?.currency ?? '', dishes: _shortcuts?.favourites ?? [], showTimes: false, favourites: _shortcuts?.favourites.map((d) => d.id).toSet() ?? {}, onAdd: (d) => _addDish(d, s), onFavourite: (d, on) => _toggleFavourite(d, on, s), emptyText: s.noFavourites),
       _ => const SizedBox.shrink(),
     };
     return _WidgetCard(title: def.title(s.lang), child: body);
@@ -360,5 +420,81 @@ class _Row extends StatelessWidget {
         ...trailing,
       ]),
     );
+  }
+}
+
+/// The last order with a single button to put it back in the cart. Dishes that are gone are named in the message.
+class _LastOrder extends StatelessWidget {
+  const _LastOrder({required this.s, required this.order, required this.onReorder, required this.onOpen});
+  final Strings s;
+  final OrderHistory? order;
+  final void Function(String orderId) onReorder;
+  final void Function(String orderId) onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    final last = order;
+    if (last == null) return Text(s.noOrdersYet);
+    final lang = s.lang;
+    final summary = last.items.map((i) => '${i.qty} × ${i.name.of(lang)}').join(', ');
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(summary, maxLines: 2, overflow: TextOverflow.ellipsis),
+      const SizedBox(height: Tokens.space2),
+      Row(children: [
+        TextButton(onPressed: () => onOpen(last.id), child: Text(s.viewOrder)),
+        const Spacer(),
+        FilledButton(onPressed: () => onReorder(last.id), child: Text(s.orderAgain)),
+      ]),
+    ]);
+  }
+}
+
+/// A list of dishes with add and save-to-favourites buttons. Used for both the frequent and favourite widgets.
+class _DishList extends StatelessWidget {
+  const _DishList({
+    required this.s,
+    required this.currency,
+    required this.dishes,
+    required this.showTimes,
+    required this.favourites,
+    required this.onAdd,
+    required this.onFavourite,
+    this.emptyText,
+  });
+  final Strings s;
+  final String currency;
+  final List<DishCard> dishes;
+  final bool showTimes;
+  final Set<String> favourites;
+  final void Function(DishCard dish) onAdd;
+  final void Function(DishCard dish, bool on) onFavourite;
+  final String? emptyText;
+
+  @override
+  Widget build(BuildContext context) {
+    if (dishes.isEmpty) return Text(emptyText ?? s.noOrdersYet);
+    final lang = s.lang;
+    return Column(children: [
+      for (final dish in dishes)
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(dish.name.of(lang)),
+          subtitle: Text(
+            [
+              formatMoney(dish.priceMinor, currency),
+              if (showTimes && dish.timesOrdered > 0) s.timesOrdered(dish.timesOrdered),
+              if (dish.soldOut) s.soldOut,
+            ].join(' · '),
+          ),
+          trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+            IconButton(
+              tooltip: favourites.contains(dish.id) ? s.removeFavourite : s.saveFavourite,
+              icon: Icon(favourites.contains(dish.id) ? Icons.favorite : Icons.favorite_border),
+              onPressed: () => onFavourite(dish, !favourites.contains(dish.id)),
+            ),
+            if (!dish.soldOut) AppButton(label: s.add, size: ButtonSize.sm, onPressed: () => onAdd(dish)),
+          ]),
+        ),
+    ]);
   }
 }

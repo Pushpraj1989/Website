@@ -278,3 +278,91 @@ class QuoteResult {
   final Quote quote;
   final DeliveryQuote? delivery;
 }
+
+/// One past order in the history list, with its dish names and quantities.
+class OrderHistory {
+  const OrderHistory({
+    required this.id,
+    required this.number,
+    required this.status,
+    required this.channel,
+    required this.placedAt,
+    required this.totalMinor,
+    required this.currency,
+    required this.items,
+  });
+  final String id;
+  final String number;
+  final String status;
+  final String channel;
+  final DateTime placedAt;
+  final int totalMinor;
+  final String currency;
+  final List<HistoryItem> items;
+
+  factory OrderHistory.fromJson(Map<String, dynamic> json) => OrderHistory(
+        id: json['id'] as String,
+        number: json['number'] as String,
+        status: json['status'] as String,
+        channel: json['channel'] as String,
+        placedAt: DateTime.parse(json['placedAt'] as String),
+        totalMinor: json['totalMinor'] as int,
+        currency: json['currency'] as String,
+        items: ((json['items'] as List<dynamic>?) ?? [])
+            .map((i) => HistoryItem.fromJson(i as Map<String, dynamic>))
+            .toList(),
+      );
+}
+
+class HistoryItem {
+  const HistoryItem({required this.name, required this.qty});
+  final Localised name;
+  final int qty;
+
+  factory HistoryItem.fromJson(Map<String, dynamic> json) => HistoryItem(
+        name: Localised.fromJson(json['name'] as Map<String, dynamic>),
+        qty: json['qty'] as int,
+      );
+}
+
+/// A dish shown on the home screen: frequent, favourite or in the menu, with the server's price and availability.
+class DishCard {
+  const DishCard({required this.id, required this.name, required this.priceMinor, required this.soldOut, required this.timesOrdered});
+  final String id;
+  final Localised name;
+  final int priceMinor;
+  final bool soldOut;
+  final int timesOrdered;
+
+  factory DishCard.fromJson(Map<String, dynamic> json) => DishCard(
+        id: json['id'] as String,
+        name: Localised.fromJson(json['name'] as Map<String, dynamic>),
+        priceMinor: json['priceMinor'] as int,
+        soldOut: json['soldOut'] as bool? ?? false,
+        timesOrdered: json['timesOrdered'] as int? ?? 0,
+      );
+}
+
+class HomeShortcuts {
+  const HomeShortcuts({required this.lastOrder, required this.frequent, required this.favourites});
+  final OrderHistory? lastOrder;
+  final List<DishCard> frequent;
+  final List<DishCard> favourites;
+
+  factory HomeShortcuts.fromJson(Map<String, dynamic> json) => HomeShortcuts(
+        lastOrder: json['lastOrder'] == null ? null : OrderHistory.fromJson(json['lastOrder'] as Map<String, dynamic>),
+        frequent: ((json['frequent'] as List<dynamic>?) ?? []).map((d) => DishCard.fromJson(d as Map<String, dynamic>)).toList(),
+        favourites: ((json['favourites'] as List<dynamic>?) ?? []).map((d) => DishCard.fromJson(d as Map<String, dynamic>)).toList(),
+      );
+}
+
+class ReorderResult {
+  const ReorderResult({required this.added, required this.skipped});
+  final List<String> added;
+  final List<String> skipped;
+
+  factory ReorderResult.fromJson(Map<String, dynamic> json) => ReorderResult(
+        added: (json['added'] as List<dynamic>).cast<String>(),
+        skipped: (json['skipped'] as List<dynamic>).cast<String>(),
+      );
+}

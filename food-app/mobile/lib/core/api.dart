@@ -117,6 +117,25 @@ class ApiClient {
     return (body['zones'] as List<dynamic>).map((z) => DeliveryZone.fromJson(z as Map<String, dynamic>)).toList();
   }
 
+  Future<List<OrderHistory>> orderHistory() async {
+    final body = await _send(() => _client.get(_uri('/v1/orders'), headers: _headers()));
+    return (body['orders'] as List<dynamic>).map((o) => OrderHistory.fromJson(o as Map<String, dynamic>)).toList();
+  }
+
+  Future<HomeShortcuts> homeShortcuts() async {
+    final body = await _send(() => _client.get(_uri('/v1/customer/home'), headers: _headers()));
+    return HomeShortcuts.fromJson(body);
+  }
+
+  Future<void> setFavourite(String itemId, bool on) => _send(() => on
+      ? _client.put(_uri('/v1/favourites/$itemId'), headers: _headers())
+      : _client.delete(_uri('/v1/favourites/$itemId'), headers: _headers()));
+
+  Future<ReorderResult> reorder(String orderId) async {
+    final body = await _send(() => _client.post(_uri('/v1/orders/$orderId/reorder'), headers: _headers()));
+    return ReorderResult.fromJson(body);
+  }
+
   Future<PlacedOrder> order(String id) async {
     final body = await _send(() => _client.get(_uri('/v1/orders/$id'), headers: _headers()));
     return PlacedOrder.fromJson(body['order'] as Map<String, dynamic>);

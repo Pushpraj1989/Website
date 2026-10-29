@@ -422,6 +422,65 @@ try {
     assert.equal(address.json.error.code, 'outside_zone');
   });
 
+  // History, shortcuts and reordering. The guest has placed orders above; a stranger has none.
+  const ITEM_B = '00000000-0000-4000-8000-000000000201';
+  check('order history lists only the customer\'s own orders, with their dishes', async () => {
+    const mine = await guest.get('/v1/orders');
+    assert.equal(mine.status, 200);
+    assert.ok(mine.json.orders.length >= 2);
+    assert.ok(mine.json.orders.every((o) => o.items.length > 0 && o.items[0].name.en));
+    assert.equal((await stranger.get('/v1/orders')).json.orders.length, 0);
+  });
+
+  check('the home shortcuts show the last order and the dishes ordered most', async () => {
+    const home = await guest.get('/v1/customer/home');
+    assert.equal(home.status, 200);
+    assert.ok(home.json.lastOrder, 'there is a last order');
+    assert.ok(home.json.frequent.length >= 1);
+    assert.ok(home.json.frequent.every((d) => d.timesOrdered >= 1 && d.name.en));
+    assert.equal((await stranger.get('/v1/customer/home')).json.lastOrder, null);
+  });
+
+  check('a dish can be saved as a favourite and removed again; an unknown dish is refused', async () => {
+    const on = await guest.call('PUT', `/v1/favourites/${ITEM_B}`);
+    assert.equal(on.status, 204);
+    assert.ok((await guest.get('/v1/customer/home')).json.favourites.some((d) => d.id === ITEM_B));
+    assert.equal((await guest.call('DELETE', `/v1/favourites/${ITEM_B}`)).status, 204);
+    assert.equal((await guest.get('/v1/customer/home')).json.favourites.length, 0);
+    const bogus = await guest.call('PUT', '/v1/favourites/00000000-0000-4000-8000-00000000ffff');
+    assert.equal(bogus.status, 404);
+  });
+
+  check('reordering puts a past order back in the cart', async () => {
+    await guest.put('/v1/cart', { channel: 'delivery', items: [] });
+    const r = await guest.post(`/v1/orders/${codOrderId}/reorder`);
+    assert.equal(r.status, 200);
+    assert.equal(r.json.skipped.length, 0);
+    assert.ok(r.json.added.length >= 2);
+    const cart = await guest.get('/v1/cart');
+    assert.ok(cart.json.lines.length >= 2);
+  });
+
+  check('a sold-out dish is left out of a reorder and named back to the customer', async () => {
+    const pgClient = new pg.Client({ connectionString: DATABASE_URL });
+    await pgClient.connect();
+    try {
+      await pgClient.query('update menu_items set available = false where id = $1', [ITEM_B]);
+      await guest.put('/v1/cart', { channel: 'delivery', items: [] });
+      const r = await guest.post(`/v1/orders/${codOrderId}/reorder`);
+      assert.equal(r.status, 200);
+      assert.equal(r.json.skipped.length, 1);
+    } finally {
+      await pgClient.query('update menu_items set available = true where id = $1', [ITEM_B]);
+      await pgClient.end();
+    }
+  });
+
+  check('another customer cannot reorder a guest order', async () => {
+    const r = await stranger.post(`/v1/orders/${codOrderId}/reorder`);
+    assert.equal(r.status, 404);
+  });
+
   check('a JSON-only endpoint refuses form posts', async () => {
     const r = await fetch(`${BASE}/v1/cart`, { method: 'PUT', headers: { 'content-type': 'text/plain', cookie: `guest=${guest.jar.guest}` }, body: '{"items":[]}' });
     assert.equal(r.status, 415);

@@ -25,6 +25,9 @@ const dashboardCatalogue = <DashboardWidgetDef>[
   DashboardWidgetDef('cart_summary', 'Your cart', 'سلتك', 'Items and total waiting for checkout', 'الأصناف والإجمالي قبل الدفع'),
   DashboardWidgetDef('active_order', 'Active order', 'الطلب الحالي', 'Status of your latest order', 'حالة آخر طلب لك'),
   DashboardWidgetDef('popular', 'Popular on the menu', 'الأكثر طلباً', 'Three dishes you can add in one tap', 'ثلاثة أطباق تضيفها بضغطة واحدة'),
+  DashboardWidgetDef('last_order', 'Order again', 'اطلب مرة أخرى', 'Your last order, with one tap to reorder', 'آخر طلب لك مع زر لإعادة الطلب'),
+  DashboardWidgetDef('frequent', 'Ordered most', 'الأكثر طلبك', 'The dishes you order most often', 'الأطباق التي تطلبها غالباً'),
+  DashboardWidgetDef('favourites', 'Favourites', 'المفضلة', 'Dishes you saved', 'الأطباق التي حفظتها'),
 ];
 
 const defaultDashboard = ['quick_actions', 'cart_summary', 'popular'];
