@@ -66,6 +66,10 @@ class _Server {
 }
 
 Future<void> _pumpHome(WidgetTester tester, _Server server, {required List<String> layout}) async {
+  // The home screen is taller than the default test window, so the widgets under test are laid out in full.
+  tester.view.physicalSize = const Size(800, 2400);
+  tester.view.devicePixelRatio = 1.0;
+  addTearDown(tester.view.resetPhysicalSize);
   SharedPreferences.setMockInitialValues({'dashboard_layout': jsonEncode(layout)});
   final prefs = await SharedPreferences.getInstance();
   final api = ApiClient(baseUrl: 'http://api.test', client: server.client, prefs: prefs);
@@ -87,6 +91,7 @@ void main() {
     await _pumpHome(tester, server, layout: ['last_order']);
 
     await expectOnHome(tester, '2 × Grilled chicken, 1 × Mint lemonade');
+    await tester.ensureVisible(find.widgetWithText(FilledButton, 'Order again'));
     await tester.tap(find.widgetWithText(FilledButton, 'Order again'));
     await tester.pumpAndSettle();
     expect(server.requests, contains('POST /v1/orders/o1/reorder'));
@@ -98,6 +103,7 @@ void main() {
     await _pumpHome(tester, server, layout: ['frequent', 'favourites']);
 
     await expectOnHome(tester, 'AED 45.00 · Ordered 5 times');
+    await tester.ensureVisible(find.byTooltip('Save to favourites').first);
     await tester.tap(find.byTooltip('Save to favourites').first);
     await tester.pumpAndSettle();
     expect(server.requests, contains('PUT /v1/favourites/d1'));

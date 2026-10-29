@@ -215,6 +215,8 @@ class _HomeScreenState extends State<HomeScreen> {
               RevealOnLoad(child: HomeCategoryStrip(menu: _menu!, s: s, onOpen: _openMenu)),
               const SizedBox(height: Tokens.space5),
               RevealOnLoad(child: HomeRecommendedRow(menu: _menu!, s: s, mostOrderedIds: [for (final d in _shortcuts?.frequent ?? const <DishCard>[]) d.id], onAdd: (item) => _add(item, s))),
+              const SizedBox(height: Tokens.space5),
+              RevealOnLoad(child: HomeVideoStrip(s: s, onOpen: _openMenu)),
             ],
             const SizedBox(height: Tokens.space5),
             for (final id in _layout.ids) ...[

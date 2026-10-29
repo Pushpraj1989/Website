@@ -5,6 +5,14 @@ class Art {
   static const hero = 'assets/images/photo/hero-kitchen.webp';
   static const heroVideo = 'assets/video/lemon-chicken.mp4';
   static const heroVideoPoster = 'assets/video/lemon-chicken-poster.jpg';
+  /// The looping kitchen clips (AI-generated). Each has a still poster that shows until the clip plays.
+  static const kitchenClips = [
+    ('assets/video/chef-prep.mp4', 'assets/video/chef-prep-poster.jpg'),
+    ('assets/video/garlic-butter-pan.mp4', 'assets/video/garlic-butter-pan-poster.jpg'),
+    ('assets/video/mint-lemonade.mp4', 'assets/video/mint-lemonade-poster.jpg'),
+    ('assets/video/olive-oil-hummus.mp4', 'assets/video/olive-oil-hummus-poster.jpg'),
+    ('assets/video/lemon-chicken.mp4', 'assets/video/lemon-chicken-poster.jpg'),
+  ];
   static const cartEmpty = 'assets/images/empty-cart.png';
   static const ordersEmpty = 'assets/images/empty-orders.png';
   static const membership = 'assets/images/membership-hero.png';

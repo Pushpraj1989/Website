@@ -52,9 +52,15 @@ class _HomeHeroCarouselState extends State<HomeHeroCarousel> {
   Timer? _timer;
   int _page = 0;
 
+  bool _precached = false;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    if (!_precached) {
+      _precached = true;
+      precacheImage(const AssetImage(Art.heroVideoPoster), context);
+    }
     // Reduced motion: the slides stay still, and the customer moves them by swiping or the dots.
     if (MediaQuery.of(context).disableAnimations) {
       _timer?.cancel();
@@ -322,7 +328,7 @@ class _DishCardState extends State<_DishCard> {
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(Tokens.radiusMd),
-                child: Image.asset(Art.forCategory(widget.pick.illustration), height: 96, width: double.infinity, fit: BoxFit.cover),
+                child: Image.asset(Art.forCategory(widget.pick.illustration), height: 96, width: double.infinity, fit: BoxFit.cover, cacheWidth: 320),
               ),
             const SizedBox(height: Tokens.space2),
             Text(name, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w600)),
@@ -343,5 +349,50 @@ class _DishCardState extends State<_DishCard> {
         ),
       ),
     );
+  }
+}
+
+/// A row of kitchen pictures from the clips. Each card opens the menu. Only the hero plays a clip, so the row costs
+/// one still image per card.
+class HomeVideoStrip extends StatelessWidget {
+  const HomeVideoStrip({super.key, required this.s, required this.onOpen});
+  final Strings s;
+  final VoidCallback onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(s.fromTheKitchen, style: Theme.of(context).textTheme.titleMedium),
+      const SizedBox(height: Tokens.space3),
+      SizedBox(
+        height: 180,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemCount: Art.kitchenClips.length,
+          separatorBuilder: (_, _) => const SizedBox(width: Tokens.space3),
+          itemBuilder: (context, i) {
+            final (_, poster) = Art.kitchenClips[i];
+            return Semantics(
+              button: true,
+              label: s.menu,
+              onTap: onOpen,
+              child: ExcludeSemantics(
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(Tokens.radiusLg),
+                  onTap: onOpen,
+                  child: SizedBox(
+                    width: 150,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(Tokens.radiusLg),
+                      child: Image.asset(poster, fit: BoxFit.cover, cacheWidth: 300, semanticLabel: ''),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    ]);
   }
 }

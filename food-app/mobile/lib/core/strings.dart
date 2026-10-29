@@ -140,6 +140,7 @@ class Strings {
   String get recommendedForYou => isArabic ? 'مقترح لك' : 'Recommended for you';
   String get recommendedFromHistory => isArabic ? 'من الأطباق التي تطلبها غالباً' : 'From the dishes you order most';
   String get recommendedStarter => isArabic ? 'ابدأ بهذه الأطباق' : 'Start with these dishes';
+  String get fromTheKitchen => isArabic ? 'من المطبخ' : 'From the kitchen';
   String get askPlaceholder => isArabic ? 'اكتب سؤالك' : 'Type your question';
   String get send => isArabic ? 'إرسال' : 'Send';
   String get assistantOff => isArabic ? 'المساعد غير مفعّل الآن.' : 'The assistant is not switched on right now.';
