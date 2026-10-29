@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,6 +17,9 @@ class ApiClient {
   final http.Client _client;
   SharedPreferences? prefs;
   String? _guestCookie;
+
+  /// Goes up by one each time the cart changes, so a screen that shows the cart can reload it.
+  final ValueNotifier<int> cartChanges = ValueNotifier<int>(0);
 
   static const _cookieKey = 'guest_cookie';
 
@@ -61,7 +65,7 @@ class ApiClient {
   Future<Map<String, dynamic>> cart({String channel = 'delivery'}) =>
       _send(() => _client.get(_uri('/v1/cart', {'channel': channel}), headers: _headers()));
 
-  Future<Map<String, dynamic>> saveCart(List<CartLine> lines, {String channel = 'delivery'}) => _send(() => _client.put(
+  Future<Map<String, dynamic>> saveCart(List<CartLine> lines, {String channel = 'delivery'}) => _sendCart(() => _client.put(
         _uri('/v1/cart'),
         headers: _headers(json: true),
         body: jsonEncode({
@@ -151,6 +155,7 @@ class ApiClient {
 
   Future<ReorderResult> reorder(String orderId) async {
     final body = await _send(() => _client.post(_uri('/v1/orders/$orderId/reorder'), headers: _headers()));
+    cartChanges.value++;
     return ReorderResult.fromJson(body);
   }
 
@@ -166,6 +171,13 @@ class ApiClient {
   }
 
   /// Adds one of an item, the same way the web app does: read the cart, change it, write it back.
+  /// Sends a cart change and tells the screens that show the cart.
+  Future<Map<String, dynamic>> _sendCart(Future<http.Response> Function() call) async {
+    final body = await _send(call);
+    cartChanges.value++;
+    return body;
+  }
+
   Future<void> addOne(String itemId) async {
     final lines = await cartLines();
     final updated = <CartLine>[];

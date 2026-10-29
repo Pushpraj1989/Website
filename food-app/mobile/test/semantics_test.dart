@@ -51,13 +51,15 @@ void main() {
     }
   });
 
-  testWidgets('the bottom bar has four tabs, each with a name', (tester) async {
+  testWidgets('the floating dock has four tabs, each with a name', (tester) async {
     await pumpShell(tester);
-    final bar = tester.widget<NavigationBar>(find.byType(NavigationBar));
-    expect(bar.destinations.length, 4);
-    for (final d in bar.destinations.cast<NavigationDestination>()) {
-      expect(d.label.trim(), isNotEmpty);
-      expect(d.tooltip, d.label, reason: 'the tab name is also its tooltip');
+    final tabs = find.descendant(
+      of: find.byKey(const Key('nav-dock')),
+      matching: find.byWidgetPredicate((w) => w is Semantics && w.properties.button == true),
+    );
+    expect(tabs, findsNWidgets(4));
+    for (final label in ['Home', 'Menu', 'My orders', 'Membership']) {
+      expect(navTab(label), findsOneWidget, reason: label);
     }
   });
 

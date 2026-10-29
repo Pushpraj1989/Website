@@ -34,6 +34,10 @@ class Tokens {
   // Touch targets: at least 48 px, per the button tokens.
   static const minHit = 48.0;
   static const headingFont = 'Fraunces';
+  /// The floating bottom dock and the floating cart bar: the room content keeps clear of them.
+  static const dockHeight = 64.0;
+  static const dockGap = 12.0;
+  static const cartBarHeight = 64.0;
 }
 
 ThemeData buildTheme() {

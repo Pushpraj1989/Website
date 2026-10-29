@@ -141,6 +141,17 @@ class Strings {
   String get recommendedFromHistory => isArabic ? 'من الأطباق التي تطلبها غالباً' : 'From the dishes you order most';
   String get recommendedStarter => isArabic ? 'ابدأ بهذه الأطباق' : 'Start with these dishes';
   String get fromTheKitchen => isArabic ? 'من المطبخ' : 'From the kitchen';
+  String get searchDishes => isArabic ? 'ابحث عن طبق' : 'Search dishes';
+  String get allCategories => isArabic ? 'الكل' : 'All';
+  String get filterAvailable => isArabic ? 'متوفر الآن' : 'Available now';
+  String get filterUnder => isArabic ? 'أقل من 20' : 'Under 20';
+  String get filterFavourites => isArabic ? 'المفضلة' : 'Favourites';
+  String get filterOrdered => isArabic ? 'طلبته سابقاً' : 'Ordered before';
+  String get noSearchResults => isArabic ? 'لا توجد أطباق تطابق بحثك.' : 'No dishes match your search.';
+  String get yourShortcuts => isArabic ? 'اختصاراتك' : 'Your shortcuts';
+  String get promoMemberBody => isArabic ? 'عروض للأعضاء وتوصيل مجاني على الطلبات المؤهلة.' : 'Member offers and free delivery on eligible orders.';
+  String dishesInCategory(int n) => isArabic ? '$n طبق' : (n == 1 ? '1 dish' : '$n dishes');
+  String get seeCategory => isArabic ? 'اعرض الأطباق' : 'See dishes';
   String get askPlaceholder => isArabic ? 'اكتب سؤالك' : 'Type your question';
   String get send => isArabic ? 'إرسال' : 'Send';
   String get assistantOff => isArabic ? 'المساعد غير مفعّل الآن.' : 'The assistant is not switched on right now.';

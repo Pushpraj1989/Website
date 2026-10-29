@@ -5,13 +5,15 @@ import '../app.dart';
 import '../auth/auth_api.dart';
 import '../auth/session_store.dart';
 import '../core/api.dart';
+import '../core/theme.dart';
+import '../widgets/discovery.dart';
 import 'home_screen.dart';
 import 'membership_screen.dart';
 import 'menu_screen.dart';
 import 'orders_screen.dart';
 
-// The signed-in app: four destinations in a bottom bar. The assistant is a floating button on Home and Menu,
-// so it is one tap away without taking a tab. Each tab keeps its place when the customer switches away.
+// The signed-in app: four destinations in a floating pill dock. The assistant is a button in the Home and Menu
+// headers, so it is one tap away without taking a tab. Each tab keeps its place when the customer switches away.
 class MainShell extends StatefulWidget {
   const MainShell({super.key, required this.api, required this.language, this.auth, this.sessions});
   final ApiClient api;
@@ -33,25 +35,40 @@ class _MainShellState extends State<MainShell> {
     return LanguageScope(
       language: widget.language,
       builder: (context, s) => Scaffold(
-        body: IndexedStack(
-          index: _index,
-          children: [
-            HomeScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions, onSelectTab: _select),
-            MenuScreen(api: widget.api, language: widget.language),
-            OrdersScreen(api: widget.api, language: widget.language),
-            MembershipScreen(api: widget.api, language: widget.language),
-          ],
-        ),
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: _index,
-          onDestinationSelected: _select,
-          destinations: [
-            NavigationDestination(icon: const Icon(LucideIcons.house), selectedIcon: const Icon(LucideIcons.house), label: s.home, tooltip: s.home),
-            NavigationDestination(icon: const Icon(LucideIcons.utensils), selectedIcon: const Icon(LucideIcons.utensils), label: s.menu, tooltip: s.menu),
-            NavigationDestination(icon: const Icon(LucideIcons.receiptText), selectedIcon: const Icon(LucideIcons.receiptText), label: s.orderHistory, tooltip: s.orderHistory),
-            NavigationDestination(icon: const Icon(LucideIcons.award), selectedIcon: const Icon(LucideIcons.award), label: s.membership, tooltip: s.membership),
-          ],
-        ),
+        body: Stack(children: [
+          IndexedStack(
+            index: _index,
+            children: [
+              HomeScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions, onSelectTab: _select),
+              MenuScreen(api: widget.api, language: widget.language),
+              OrdersScreen(api: widget.api, language: widget.language),
+              MembershipScreen(api: widget.api, language: widget.language),
+            ],
+          ),
+          Positioned(
+            left: Tokens.space4,
+            right: Tokens.space4,
+            bottom: MediaQuery.paddingOf(context).bottom + Tokens.dockGap,
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 480),
+                child: KeyedSubtree(
+                  key: const Key('nav-dock'),
+                  child: FloatingDock(
+                    index: _index,
+                    onSelect: _select,
+                    items: [
+                      DockItem(icon: LucideIcons.house, label: s.home),
+                      DockItem(icon: LucideIcons.utensils, label: s.menu),
+                      DockItem(icon: LucideIcons.receiptText, label: s.orderHistory),
+                      DockItem(icon: LucideIcons.award, label: s.membership),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ]),
       ),
     );
   }

@@ -35,3 +35,9 @@ Future<void> expectOnHome(WidgetTester tester, String text) async {
   await tester.scrollUntilVisible(find.text(text), 200, scrollable: find.byType(Scrollable).first);
   expect(find.text(text), findsOneWidget);
 }
+
+/// The floating dock's tab with this name. Only the selected tab shows its label, so tests find it by its semantics.
+Finder navTab(String label) => find.descendant(
+      of: find.byKey(const Key('nav-dock')),
+      matching: find.byWidgetPredicate((w) => w is Semantics && w.properties.button == true && w.properties.label == label),
+    );

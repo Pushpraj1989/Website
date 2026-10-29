@@ -6,6 +6,7 @@ import '../app.dart';
 import '../auth/auth_api.dart';
 import '../auth/session_store.dart';
 import '../core/api.dart';
+import '../core/art.dart';
 import '../core/dashboard.dart';
 import '../core/models.dart';
 import '../core/money.dart';
@@ -14,12 +15,14 @@ import '../core/theme.dart';
 import '../auth/biometrics.dart';
 import '../widgets/app_button.dart';
 import '../widgets/dish_thumb.dart';
-import '../widgets/home_sections.dart';
+import '../widgets/discovery.dart';
+import '../widgets/hero_video.dart';
 import 'cart_screen.dart';
 import 'menu_screen.dart';
 import 'order_screen.dart';
 import '../widgets/ask_button.dart';
 import 'assistant_screen.dart';
+import 'membership_screen.dart';
 import 'sign_in_screen.dart';
 
 // The customisable home. The user chooses which widgets show, and in what order, from the Customise sheet.
@@ -178,57 +181,217 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  String _query = '';
+  String? _category;
+  final Set<String> _filters = {};
+
+  void _openMembership() {
+    if (widget.onSelectTab != null) return widget.onSelectTab!(3);
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => MembershipScreen(api: widget.api, language: widget.language)));
+  }
+
+  /// Picks the dishes for the recommended row: the dishes the customer orders most when there is history.
+  ({List<DishPick> picks, bool personal}) _recommended(Menu menu) {
+    final picks = [
+      for (final c in menu.categories)
+        for (final item in c.items)
+          if (!item.soldOut) DishPick(item: item, illustration: c.illustration),
+    ];
+    final rank = {for (var i = 0; i < (_shortcuts?.frequent.length ?? 0); i++) _shortcuts!.frequent[i].id: i};
+    final personal = picks.any((p) => rank.containsKey(p.item.id));
+    if (personal) picks.sort((a, b) => (rank[a.item.id] ?? 1 << 20).compareTo(rank[b.item.id] ?? 1 << 20));
+    return (picks: picks.take(8).toList(), personal: personal);
+  }
+
+  /// The filter chips. Each one keeps only the dishes that pass its test.
+  List<FilterOption> _filterOptions(Strings s) {
+    final favourites = {for (final d in _shortcuts?.favourites ?? const <DishCard>[]) d.id};
+    final ordered = {for (final d in _shortcuts?.frequent ?? const <DishCard>[]) d.id};
+    return [
+      FilterOption(id: 'available', label: s.filterAvailable, keep: (i) => !i.soldOut),
+      FilterOption(id: 'under', label: s.filterUnder, keep: (i) => i.priceMinor < 2000),
+      FilterOption(id: 'favourites', label: s.filterFavourites, keep: (i) => favourites.contains(i.id)),
+      FilterOption(id: 'ordered', label: s.filterOrdered, keep: (i) => ordered.contains(i.id)),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return LanguageScope(
       language: widget.language,
-      builder: (context, s) => Scaffold(
-        appBar: AppBar(
-          title: Text(_menu?.restaurant.of(s.lang) ?? s.restaurantFallback),
-          actions: [
-            AskButton(api: widget.api, language: widget.language, s: s),
-            TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language)),
-            PopupMenuButton<String>(
-              tooltip: s.more,
-              icon: const Icon(LucideIcons.ellipsisVertical),
-              onSelected: (choice) => switch (choice) {
-                'signout' => _signOut(s),
-                _ => null,
-              },
-              itemBuilder: (_) => [
-                if (widget.auth != null) PopupMenuItem(value: 'signout', child: ListTile(leading: const Icon(LucideIcons.logOut), title: Text(s.signOut))),
-              ],
-            ),
-          ],
-        ),
-        body: ListView(
-          padding: const EdgeInsets.all(Tokens.space4),
-          children: [
-            Row(children: [
-              Expanded(child: Text(s.home, style: Theme.of(context).textTheme.headlineSmall)),
-              AppButton(label: s.customise, icon: LucideIcons.layoutDashboard, variant: ButtonVariant.ghost, size: ButtonSize.sm, onPressed: () => _openCustomise(s)),
+      builder: (context, s) {
+        final menu = _menu;
+        final name = menu?.restaurant.of(s.lang) ?? s.restaurantFallback;
+        final dockSpace = widget.onSelectTab != null ? Tokens.dockHeight + Tokens.dockGap : 0.0;
+        final bottomSpace = MediaQuery.paddingOf(context).bottom + dockSpace;
+        return Scaffold(
+          body: SafeArea(
+            bottom: false,
+            child: Stack(children: [
+              ListView(
+                padding: EdgeInsets.fromLTRB(Tokens.space4, Tokens.space3, Tokens.space4, bottomSpace + Tokens.cartBarHeight + Tokens.space4 + Tokens.space4),
+                children: [
+                  DiscoveryHeader(
+                    title: name,
+                    searchHint: s.searchDishes,
+                    onSearch: (q) => setState(() => _query = q.trim()),
+                    actions: [
+                      AskButton(api: widget.api, language: widget.language, s: s),
+                      TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language)),
+                      PopupMenuButton<String>(
+                        tooltip: s.more,
+                        icon: const Icon(LucideIcons.ellipsisVertical),
+                        onSelected: (choice) => switch (choice) {
+                          'signout' => _signOut(s),
+                          _ => null,
+                        },
+                        itemBuilder: (_) => [
+                          if (widget.auth != null) PopupMenuItem(value: 'signout', child: ListTile(leading: const Icon(LucideIcons.logOut), title: Text(s.signOut))),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: Tokens.space4),
+                  RevealOnLoad(
+                    child: PromoCarousel(banners: [
+                      PromoBanner(title: s.heroTitle, body: s.heroBody, action: s.menu, onAction: _openMenu, background: const HeroVideo(video: Art.heroVideo, poster: Art.heroVideoPoster)),
+                      PromoBanner(
+                        title: s.askTitle,
+                        body: s.askHint,
+                        action: s.askTitle,
+                        onAction: _openAsk,
+                        background: const ColoredBox(color: Tokens.accentSoft),
+                        picture: Image.asset(Art.assistant, fit: BoxFit.contain, semanticLabel: ''),
+                        dark: false,
+                      ),
+                      PromoBanner(
+                        title: s.membership,
+                        body: s.promoMemberBody,
+                        action: s.membership,
+                        onAction: _openMembership,
+                        background: const ColoredBox(color: Tokens.toneLilac),
+                        picture: Image.asset(Art.membership, fit: BoxFit.contain, semanticLabel: ''),
+                        dark: false,
+                      ),
+                    ]),
+                  ),
+                  if (menu != null) ...[
+                    const SizedBox(height: Tokens.space5),
+                    RevealOnLoad(
+                      child: CategoryTabs(
+                        tabs: [
+                          CategoryTab(id: '', label: s.allCategories, image: Art.hero),
+                          for (final c in menu.categories) CategoryTab(id: c.id, label: c.name.of(s.lang), image: Art.forCategory(c.illustration)),
+                        ],
+                        selectedId: _category ?? '',
+                        onSelect: (id) => setState(() => _category = id.isEmpty ? null : id),
+                      ),
+                    ),
+                    const SizedBox(height: Tokens.space3),
+                    RevealOnLoad(
+                      child: FilterChips(
+                        options: _filterOptions(s),
+                        selected: _filters,
+                        onToggle: (id) => setState(() => _filters.contains(id) ? _filters.remove(id) : _filters.add(id)),
+                      ),
+                    ),
+                    const SizedBox(height: Tokens.space5),
+                    RevealOnLoad(child: _discovery(menu, s)),
+                  ],
+                  const SizedBox(height: Tokens.space5),
+                  Text(s.yourShortcuts, style: Theme.of(context).textTheme.titleLarge),
+                  const SizedBox(height: Tokens.space3),
+                  for (final id in _layout.ids) ...[
+                    _widgetFor(id, s),
+                    const SizedBox(height: Tokens.space3),
+                  ],
+                  Row(children: [
+                    Expanded(child: Text(s.home, style: const TextStyle(color: Tokens.textMuted))),
+                    AppButton(label: s.customise, icon: LucideIcons.layoutDashboard, variant: ButtonVariant.ghost, size: ButtonSize.sm, onPressed: () => _openCustomise(s)),
+                  ]),
+                  if (_message != null)
+                    Semantics(liveRegion: true, child: Text(_message!, style: const TextStyle(color: Tokens.textMuted))),
+                ],
+              ),
+              Positioned(
+                left: Tokens.space4,
+                right: Tokens.space4,
+                bottom: bottomSpace + Tokens.space2,
+                child: _FloatingCart(api: widget.api, s: s, onView: _openCart),
+              ),
             ]),
-            const SizedBox(height: Tokens.space3),
-            RevealOnLoad(child: HomeHeroCarousel(s: s, onOrder: _openMenu, onAsk: _openAsk)),
-            if (_menu != null) ...[
-              const SizedBox(height: Tokens.space5),
-              RevealOnLoad(child: HomeCategoryStrip(menu: _menu!, s: s, onOpen: _openMenu)),
-              const SizedBox(height: Tokens.space5),
-              RevealOnLoad(child: HomeRecommendedRow(menu: _menu!, s: s, mostOrderedIds: [for (final d in _shortcuts?.frequent ?? const <DishCard>[]) d.id], onAdd: (item) => _add(item, s))),
-              const SizedBox(height: Tokens.space5),
-              RevealOnLoad(child: HomeVideoStrip(s: s, onOpen: _openMenu)),
-            ],
-            const SizedBox(height: Tokens.space5),
-            for (final id in _layout.ids) ...[
-              _widgetFor(id, s),
-              const SizedBox(height: Tokens.space3),
-            ],
-            if (_message != null)
-              Semantics(liveRegion: true, child: Text(_message!, style: const TextStyle(color: Tokens.textMuted))),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
+  }
+
+  /// The search and filter results when either is active; otherwise the recommended row and the category feed.
+  Widget _discovery(Menu menu, Strings s) {
+    final filtering = _query.isNotEmpty || _filters.isNotEmpty || _category != null;
+    final currency = menu.currency;
+    if (filtering) {
+      final options = _filterOptions(s);
+      final active = [for (final o in options) if (_filters.contains(o.id)) o];
+      final matches = <DishPick>[];
+      for (final c in menu.categories) {
+        if (_category != null && c.id != _category) continue;
+        for (final item in c.items) {
+          if (_query.isNotEmpty && !item.name.of(s.lang).toLowerCase().contains(_query.toLowerCase())) continue;
+          if (!active.every((o) => o.keep(item))) continue;
+          matches.add(DishPick(item: item, illustration: c.illustration));
+        }
+      }
+      if (matches.isEmpty) return Text(s.noSearchResults, style: const TextStyle(color: Tokens.textMuted));
+      return Column(children: [
+        for (final pick in matches)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: Tokens.space1),
+            child: Row(children: [
+              DishThumb(illustration: pick.illustration, size: 64),
+              const SizedBox(width: Tokens.space3),
+              Expanded(child: Text(pick.item.name.of(s.lang), maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w600))),
+              Text(formatMoney(pick.item.priceMinor, currency), style: const TextStyle(fontWeight: FontWeight.w600)),
+              const SizedBox(width: Tokens.space2),
+              Semantics(
+                button: true,
+                label: s.addDish(pick.item.name.of(s.lang)),
+                onTap: () => _add(pick.item, s),
+                child: ExcludeSemantics(
+                  child: IconButton.filledTonal(
+                    onPressed: pick.item.soldOut ? null : () => _add(pick.item, s),
+                    style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: Tokens.accentSoft, foregroundColor: Tokens.accent),
+                    icon: const Icon(LucideIcons.plus),
+                    tooltip: s.addDish(pick.item.name.of(s.lang)),
+                  ),
+                ),
+              ),
+            ]),
+          ),
+      ]);
+    }
+    final rec = _recommended(menu);
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      DishCarousel(
+        title: s.recommendedForYou,
+        caption: rec.personal ? s.recommendedFromHistory : s.recommendedStarter,
+        items: rec.picks,
+        currency: currency,
+        s: s,
+        onAdd: (item) => _add(item, s),
+      ),
+      const SizedBox(height: Tokens.space5),
+      for (final c in menu.categories) ...[
+        FeedCategoryCard(
+          title: c.name.of(s.lang),
+          count: c.items.length,
+          image: Art.forCategory(c.illustration),
+          s: s,
+          onTap: () => setState(() => _category = c.id),
+        ),
+        const SizedBox(height: Tokens.space3),
+      ],
+    ]);
   }
 
   Widget _widgetFor(String id, Strings s) {
@@ -563,5 +726,58 @@ class _DishList extends StatelessWidget {
           ]),
         ),
     ]);
+  }
+}
+
+/// The floating cart on Home. It reloads when the cart changes anywhere in the app, and is hidden while the cart is empty.
+class _FloatingCart extends StatefulWidget {
+  const _FloatingCart({required this.api, required this.s, required this.onView});
+  final ApiClient api;
+  final Strings s;
+  final VoidCallback onView;
+
+  @override
+  State<_FloatingCart> createState() => _FloatingCartState();
+}
+
+class _FloatingCartState extends State<_FloatingCart> {
+  int _count = 0;
+  String? _total;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.api.cartChanges.addListener(_load);
+    _load();
+  }
+
+  @override
+  void dispose() {
+    widget.api.cartChanges.removeListener(_load);
+    super.dispose();
+  }
+
+  Future<void> _load() async {
+    try {
+      final body = await widget.api.cart();
+      final lines = (body['lines'] as List<dynamic>?) ?? const [];
+      final count = lines.fold<int>(0, (sum, l) => sum + ((l as Map<String, dynamic>)['qty'] as int));
+      final quote = body['quote'] == null ? null : Quote.fromJson(body['quote'] as Map<String, dynamic>);
+      if (mounted) {
+        setState(() {
+          _count = count;
+          _total = quote == null ? null : formatMoney(quote.totalMinor, quote.currency);
+        });
+      }
+    } catch (_) {
+      // The cart bar is an extra: if the cart cannot load, it stays hidden rather than showing a wrong total.
+      if (mounted) setState(() => _count = 0);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_count == 0) return const SizedBox.shrink();
+    return FloatingCartBar(count: _count, total: _total, s: widget.s, onView: widget.onView);
   }
 }

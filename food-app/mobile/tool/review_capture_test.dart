@@ -20,6 +20,7 @@ import 'package:sample_kitchen/screens/checkout_screen.dart';
 import 'package:sample_kitchen/screens/home_screen.dart';
 import 'package:sample_kitchen/screens/membership_screen.dart';
 import 'package:sample_kitchen/screens/main_shell.dart';
+
 import 'package:sample_kitchen/screens/menu_screen.dart';
 import 'package:sample_kitchen/screens/order_screen.dart';
 import 'package:sample_kitchen/screens/orders_screen.dart';
@@ -222,6 +223,12 @@ Widget _app(Widget home, {String lang = 'en'}) {
   );
 }
 
+/// The floating dock's tab with this name, found by its semantics label.
+Finder navTab(String label) => find.descendant(
+      of: find.byKey(const Key('nav-dock')),
+      matching: find.byWidgetPredicate((w) => w is Semantics && w.properties.button == true && w.properties.label == label),
+    );
+
 void main() {
   setUpAll(_loadFonts);
 
@@ -284,7 +291,7 @@ void main() {
   for (final (name, label) in [('shell-menu', 'Menu'), ('shell-orders', 'My orders'), ('shell-membership', 'Membership')]) {
     testWidgets(name, (tester) async {
       await shoot(tester, 'customer-$name', (api, lang, prefs) => MainShell(api: api, language: lang, auth: AuthApi(baseUrl: 'http://api.test', client: _server()), sessions: signedInStore()), after: (tester) async {
-        await tester.tap(find.descendant(of: find.byType(NavigationBar), matching: find.text(label)));
+        await tester.tap(navTab(label));
         await tester.pumpAndSettle(const Duration(milliseconds: 300));
       });
     });
