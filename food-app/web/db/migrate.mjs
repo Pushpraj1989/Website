@@ -13,6 +13,7 @@ const platformFile = fileURLToPath(new URL('./platform.sql', import.meta.url));
 const vouchersFile = fileURLToPath(new URL('./vouchers.sql', import.meta.url));
 const templatesFile = fileURLToPath(new URL('./templates.sql', import.meta.url));
 const printingFile = fileURLToPath(new URL('./printing.sql', import.meta.url));
+const walletFile = fileURLToPath(new URL('./wallet.sql', import.meta.url));
 const AUTH_STUB = `
 create schema if not exists auth;
 create table if not exists auth.users (id uuid primary key default gen_random_uuid(), email text);
@@ -37,6 +38,7 @@ try {
   await client.query(readFileSync(vouchersFile, 'utf8'));
   await client.query(readFileSync(templatesFile, 'utf8'));
   await client.query(readFileSync(printingFile, 'utf8'));
+  await client.query(readFileSync(walletFile, 'utf8'));
   await client.query(readFileSync(seedFile, 'utf8'));
   console.log(`schema and seed applied${reset ? ' (after reset)' : ''}`);
 } finally {

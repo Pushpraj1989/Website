@@ -58,6 +58,7 @@ class _SignInScreenState extends State<SignInScreen> {
         verify: (code) async {
           final session = await widget.auth.verifySignInPhone(challengeId: challenge.challengeId, code: code);
           await widget.sessions.writeToken(session.token);
+          widget.api.accessToken = session.token;
         },
       );
       if (ok && mounted) await _enterApp(s);

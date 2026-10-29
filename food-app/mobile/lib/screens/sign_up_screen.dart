@@ -65,6 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         verify: (code) async {
           final session = await widget.auth.verifySignUpPhone(challengeId: challenge.challengeId, code: code);
           await widget.sessions.writeToken(session.token);
+          widget.api.accessToken = session.token;
         },
       );
       if (ok && mounted) setState(() => _step = 1);

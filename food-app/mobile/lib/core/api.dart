@@ -17,6 +17,8 @@ class ApiClient {
   final http.Client _client;
   SharedPreferences? prefs;
   String? _guestCookie;
+  /// The customer's sign-in token, once signed in. Sent as a bearer token on the customer's own requests.
+  String? accessToken;
 
   /// Goes up by one each time the cart changes, so a screen that shows the cart can reload it.
   final ValueNotifier<int> cartChanges = ValueNotifier<int>(0);
@@ -32,6 +34,7 @@ class ApiClient {
     final headers = <String, String>{'Accept': 'application/json'};
     if (json) headers['Content-Type'] = 'application/json';
     if (_guestCookie != null) headers['Cookie'] = 'guest=$_guestCookie';
+    if (accessToken != null) headers['Authorization'] = 'Bearer $accessToken';
     return headers;
   }
 
@@ -142,6 +145,22 @@ class ApiClient {
   Future<List<OrderHistory>> orderHistory() async {
     final body = await _send(() => _client.get(_uri('/v1/orders'), headers: _headers()));
     return (body['orders'] as List<dynamic>).map((o) => OrderHistory.fromJson(o as Map<String, dynamic>)).toList();
+  }
+
+  /// The customer's saved vouchers, grouped by what they can still be used for.
+  Future<Wallet> wallet() async {
+    final body = await _send(() => _client.get(_uri('/v1/me/vouchers'), headers: _headers()));
+    return Wallet.fromJson(body);
+  }
+
+  /// Saves a voucher by its code. Saving does not use it.
+  Future<WalletVoucher> saveVoucher(String code) async {
+    final body = await _send(() => _client.post(_uri('/v1/me/vouchers'), headers: _headers(json: true), body: jsonEncode({'code': code})));
+    return WalletVoucher.fromJson(body['voucher'] as Map<String, dynamic>);
+  }
+
+  Future<void> removeVoucher(String voucherId) async {
+    await _send(() => _client.delete(_uri('/v1/me/vouchers/$voucherId'), headers: _headers()));
   }
 
   Future<HomeShortcuts> homeShortcuts() async {

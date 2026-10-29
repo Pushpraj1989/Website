@@ -23,6 +23,7 @@ import 'order_screen.dart';
 import '../widgets/ask_button.dart';
 import 'assistant_screen.dart';
 import 'membership_screen.dart';
+import 'vouchers_screen.dart';
 import 'sign_in_screen.dart';
 
 // The customisable home. The user chooses which widgets show, and in what order, from the Customise sheet.
@@ -109,6 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // Signing out must work even when the network does not; the local session is removed either way.
     }
     await widget.sessions?.clear();
+    widget.api.accessToken = null;
     if (!mounted) return;
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (_) => SignInScreen(auth: widget.auth ?? AuthApi(baseUrl: ''), sessions: widget.sessions ?? defaultSessionStore(), biometrics: LocalAuthGate(), api: widget.api, language: widget.language)),
@@ -147,6 +149,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _openAsk() {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => AssistantScreen(api: widget.api, language: widget.language)));
+  }
+
+  void _openVouchers() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => VouchersScreen(api: widget.api, language: widget.language)));
   }
 
   void _openCart() {
@@ -242,10 +248,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         tooltip: s.more,
                         icon: const Icon(LucideIcons.ellipsisVertical),
                         onSelected: (choice) => switch (choice) {
+                          'vouchers' => _openVouchers(),
                           'signout' => _signOut(s),
                           _ => null,
                         },
                         itemBuilder: (_) => [
+                          if (widget.auth != null) PopupMenuItem(value: 'vouchers', child: ListTile(leading: const Icon(LucideIcons.ticket), title: Text(s.myVouchers))),
                           if (widget.auth != null) PopupMenuItem(value: 'signout', child: ListTile(leading: const Icon(LucideIcons.logOut), title: Text(s.signOut))),
                         ],
                       ),

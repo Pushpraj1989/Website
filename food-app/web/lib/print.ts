@@ -56,7 +56,7 @@ export function codeOf(row: { code_ciphertext: string; code_hash: string }): str
   return code;
 }
 
-function discountText(row: any): string {
+export function discountText(row: any): string {
   const v = Number(row.value_int);
   switch (row.offer_type) {
     case 'percent': return `${Number((v / 100).toFixed(2))}% OFF`;

@@ -212,3 +212,35 @@ Risks and limits:
   production.
 - Crop marks and bleed are not drawn. Backgrounds must be JPEG or PNG.
 - Print uses the standard Helvetica font. Arabic voucher text needs an embedded font, which is a later step.
+
+## 11. Phase 5 status (customer voucher wallet)
+
+Done on the server and in the customer app. **Decision used:** the wallet references `accounts`, the table customers
+sign in with. This was the open question from Phase 1; please confirm it. If `customers` is chosen instead, change the
+one foreign key in `db/wallet.sql` and `db/vouchers.sql`.
+
+- **API (bearer token, the same sign-in as the rest of the app):** `GET /v1/me/vouchers` returns the wallet in three
+  groups (available, used, expired). `POST /v1/me/vouchers` saves a voucher by its code. `DELETE /v1/me/vouchers/[id]`
+  removes one.
+- **Saving:** saving does not use the voucher. Saving the same code twice is one entry. A voucher bound to another
+  customer gives the same answer as a code that does not exist, so codes cannot be probed. Ten failed attempts in
+  fifteen minutes pause saving for that account. A failed attempt is committed before the answer is given, so the count
+  holds.
+- **Removing:** the wallet entry is hidden and kept for history, the voucher is untouched, and each save and removal is
+  recorded in the ledger.
+- **Customer app:** "My vouchers" in the Home menu, with a code field, a save button, and Available, Used and Expired
+  tabs. Remove is on the available vouchers. The app now sends its sign-in token, and clears it on sign-out.
+
+Tests: `test/wallet.test.ts` (9 database tests), and `test/vouchers_wallet_test.dart` (5 app tests). The full app suite
+passes (65 tests). All five database suites pass in sequence, and the end-to-end API test passes (42 of 42). A live
+request with a bearer token returned an empty wallet, refused a wrong code with the standard message, and returned 401
+without a token.
+
+Not built, and why:
+
+- **QR scanning in the app.** It needs the camera, which needs a device permission and a scanning package. The field
+  takes a typed code only, and the same validation runs either way.
+- **Shared coupon codes in the wallet.** Only single vouchers are saved. Shared codes (one code for many customers) are
+  applied at checkout in Phase 6, because they have no per-customer record to save against.
+- **Orders linked to the wallet.** A saved voucher is applied to an order only when Phase 6 is done.
+- **On a device.** The app tests run in the test environment. Checking the screen on a phone is still to do.

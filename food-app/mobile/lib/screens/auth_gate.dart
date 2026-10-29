@@ -51,6 +51,7 @@ class _AuthGateState extends State<AuthGate> {
     }
     if (token == null) return _go(_signIn());
     widget.auth.token = token;
+    widget.api.accessToken = token;
     try {
       final account = await widget.auth.me();
       if (!account.emailVerified) {

@@ -450,3 +450,45 @@ class MembershipState {
     );
   }
 }
+
+/// One voucher in the customer's wallet. [state] is available, used, expired or unavailable (revoked).
+class WalletVoucher {
+  const WalletVoucher({
+    required this.voucherId,
+    required this.state,
+    required this.discount,
+    required this.campaign,
+    required this.minOrderMinor,
+    required this.currency,
+    required this.expiresAt,
+  });
+  final String voucherId;
+  final String state;
+  final String discount;
+  final String campaign;
+  final int minOrderMinor;
+  final String currency;
+  final DateTime expiresAt;
+
+  factory WalletVoucher.fromJson(Map<String, dynamic> json) => WalletVoucher(
+        voucherId: json['voucherId'] as String,
+        state: json['state'] as String,
+        discount: json['discount'] as String,
+        campaign: json['campaign'] as String,
+        minOrderMinor: json['minOrderMinor'] as int,
+        currency: json['currency'] as String,
+        expiresAt: DateTime.parse(json['expiresAt'] as String),
+      );
+}
+
+class Wallet {
+  const Wallet({required this.available, required this.used, required this.expired});
+  final List<WalletVoucher> available;
+  final List<WalletVoucher> used;
+  final List<WalletVoucher> expired;
+
+  factory Wallet.fromJson(Map<String, dynamic> json) {
+    List<WalletVoucher> group(String key) => [for (final v in json[key] as List<dynamic>) WalletVoucher.fromJson(v as Map<String, dynamic>)];
+    return Wallet(available: group('available'), used: group('used'), expired: group('expired'));
+  }
+}
