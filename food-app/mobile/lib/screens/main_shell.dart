@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../app.dart';
 import '../auth/auth_api.dart';
@@ -45,10 +46,10 @@ class _MainShellState extends State<MainShell> {
           selectedIndex: _index,
           onDestinationSelected: _select,
           destinations: [
-            NavigationDestination(icon: const Icon(Icons.home_outlined), selectedIcon: const Icon(Icons.home), label: s.home, tooltip: s.home),
-            NavigationDestination(icon: const Icon(Icons.restaurant_menu_outlined), selectedIcon: const Icon(Icons.restaurant_menu), label: s.menu, tooltip: s.menu),
-            NavigationDestination(icon: const Icon(Icons.receipt_long_outlined), selectedIcon: const Icon(Icons.receipt_long), label: s.orderHistory, tooltip: s.orderHistory),
-            NavigationDestination(icon: const Icon(Icons.workspace_premium_outlined), selectedIcon: const Icon(Icons.workspace_premium), label: s.membership, tooltip: s.membership),
+            NavigationDestination(icon: const Icon(LucideIcons.house), selectedIcon: const Icon(LucideIcons.house), label: s.home, tooltip: s.home),
+            NavigationDestination(icon: const Icon(LucideIcons.utensils), selectedIcon: const Icon(LucideIcons.utensils), label: s.menu, tooltip: s.menu),
+            NavigationDestination(icon: const Icon(LucideIcons.receiptText), selectedIcon: const Icon(LucideIcons.receiptText), label: s.orderHistory, tooltip: s.orderHistory),
+            NavigationDestination(icon: const Icon(LucideIcons.award), selectedIcon: const Icon(LucideIcons.award), label: s.membership, tooltip: s.membership),
           ],
         ),
       ),

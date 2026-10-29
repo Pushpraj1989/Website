@@ -136,6 +136,10 @@ class Strings {
   String get askSuggestionOrder => isArabic ? 'أين وصل طلبي؟' : 'Where is my order?';
   String get askSuggestionPrice => isArabic ? 'ما الأطباق المتوفرة الآن؟' : 'What is available right now?';
   String get askHint => isArabic ? 'اسأل عن الأطباق والأسعار وطلبك.' : 'Ask about dishes, prices or your order.';
+  String get browseCategories => isArabic ? 'تصفح حسب الفئة' : 'Browse by category';
+  String get recommendedForYou => isArabic ? 'مقترح لك' : 'Recommended for you';
+  String get recommendedFromHistory => isArabic ? 'من الأطباق التي تطلبها غالباً' : 'From the dishes you order most';
+  String get recommendedStarter => isArabic ? 'ابدأ بهذه الأطباق' : 'Start with these dishes';
   String get askPlaceholder => isArabic ? 'اكتب سؤالك' : 'Type your question';
   String get send => isArabic ? 'إرسال' : 'Send';
   String get assistantOff => isArabic ? 'المساعد غير مفعّل الآن.' : 'The assistant is not switched on right now.';

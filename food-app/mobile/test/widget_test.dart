@@ -29,7 +29,7 @@ void main() {
     await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.widgetWithText(InkWell, 'Menu'));
+    await tester.tap(find.descendant(of: find.byType(NavigationBar), matching: find.text('Menu')));
     await tester.pumpAndSettle();
 
     expect(find.text('Grilled chicken plate'), findsWidgets);
@@ -48,7 +48,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('الرئيسية'), findsWidgets, reason: 'the bottom bar and the home title');
 
-    await tester.tap(find.widgetWithText(InkWell, 'القائمة'));
+    await tester.tap(find.descendant(of: find.byType(NavigationBar), matching: find.text('القائمة')));
     await tester.pumpAndSettle();
     expect(find.text('الأطباق الرئيسية'), findsOneWidget);
     expect(find.text('نفدت الكمية'), findsOneWidget);
@@ -62,7 +62,7 @@ void main() {
     await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.widgetWithText(InkWell, 'Menu'));
+    await tester.tap(find.descendant(of: find.byType(NavigationBar), matching: find.text('Menu')));
     await tester.pumpAndSettle();
     expect(find.text('Something went wrong. Please try again.'), findsOneWidget);
     expect(find.text('Try again'), findsOneWidget);

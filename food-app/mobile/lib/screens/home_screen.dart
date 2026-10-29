@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../app.dart';
@@ -12,12 +13,13 @@ import '../core/strings.dart';
 import '../core/theme.dart';
 import '../auth/biometrics.dart';
 import '../widgets/app_button.dart';
-import '../core/art.dart';
 import '../widgets/dish_thumb.dart';
+import '../widgets/home_sections.dart';
 import 'cart_screen.dart';
 import 'menu_screen.dart';
 import 'order_screen.dart';
 import '../widgets/ask_button.dart';
+import 'assistant_screen.dart';
 import 'sign_in_screen.dart';
 
 // The customisable home. The user chooses which widgets show, and in what order, from the Customise sheet.
@@ -140,6 +142,10 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => MenuScreen(api: widget.api, language: widget.language)));
   }
 
+  void _openAsk() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => AssistantScreen(api: widget.api, language: widget.language)));
+  }
+
   void _openCart() {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => CartScreen(api: widget.api, language: widget.language)));
   }
@@ -184,13 +190,13 @@ class _HomeScreenState extends State<HomeScreen> {
             TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language)),
             PopupMenuButton<String>(
               tooltip: s.more,
-              icon: const Icon(Icons.more_vert),
+              icon: const Icon(LucideIcons.ellipsisVertical),
               onSelected: (choice) => switch (choice) {
                 'signout' => _signOut(s),
                 _ => null,
               },
               itemBuilder: (_) => [
-                if (widget.auth != null) PopupMenuItem(value: 'signout', child: ListTile(leading: const Icon(Icons.logout), title: Text(s.signOut))),
+                if (widget.auth != null) PopupMenuItem(value: 'signout', child: ListTile(leading: const Icon(LucideIcons.logOut), title: Text(s.signOut))),
               ],
             ),
           ],
@@ -200,11 +206,17 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Row(children: [
               Expanded(child: Text(s.home, style: Theme.of(context).textTheme.headlineSmall)),
-              AppButton(label: s.customise, icon: Icons.dashboard_customize_outlined, variant: ButtonVariant.ghost, size: ButtonSize.sm, onPressed: () => _openCustomise(s)),
+              AppButton(label: s.customise, icon: LucideIcons.layoutDashboard, variant: ButtonVariant.ghost, size: ButtonSize.sm, onPressed: () => _openCustomise(s)),
             ]),
             const SizedBox(height: Tokens.space3),
-            _Hero(s: s),
-            const SizedBox(height: Tokens.space3),
+            RevealOnLoad(child: HomeHeroCarousel(s: s, onOrder: _openMenu, onAsk: _openAsk)),
+            if (_menu != null) ...[
+              const SizedBox(height: Tokens.space5),
+              RevealOnLoad(child: HomeCategoryStrip(menu: _menu!, s: s, onOpen: _openMenu)),
+              const SizedBox(height: Tokens.space5),
+              RevealOnLoad(child: HomeRecommendedRow(menu: _menu!, s: s, mostOrderedIds: [for (final d in _shortcuts?.frequent ?? const <DishCard>[]) d.id], onAdd: (item) => _add(item, s))),
+            ],
+            const SizedBox(height: Tokens.space5),
             for (final id in _layout.ids) ...[
               _widgetFor(id, s),
               const SizedBox(height: Tokens.space3),
@@ -261,37 +273,6 @@ class _WidgetCard extends StatelessWidget {
   }
 }
 
-/// The top of the home screen: a picture and one line that says what to do.
-class _Hero extends StatelessWidget {
-  const _Hero({required this.s});
-  final Strings s;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(Tokens.radiusLg),
-      child: Stack(
-        children: [
-          Image.asset(Art.hero, height: 180, width: double.infinity, fit: BoxFit.cover, semanticLabel: ''),
-          const Positioned.fill(
-            child: DecoratedBox(decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [Color(0xCC1C1917), Color(0x001C1917)]))),
-          ),
-          Positioned(
-            left: Tokens.space4,
-            right: Tokens.space4,
-            bottom: Tokens.space4,
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(s.heroTitle, style: const TextStyle(color: Tokens.onAccent, fontSize: 22, fontWeight: FontWeight.w700)),
-              const SizedBox(height: Tokens.space1),
-              Text(s.heroBody, style: const TextStyle(color: Color(0xFFF5F5F4), fontSize: 15)),
-            ]),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _QuickActions extends StatelessWidget {
   const _QuickActions({required this.s, required this.canTrack, required this.onMenu, required this.onCart, required this.onTrack});
   final Strings s;
@@ -303,11 +284,11 @@ class _QuickActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      Expanded(child: _QuickTile(icon: Icons.restaurant_menu, label: s.menu, onPressed: onMenu)),
+      Expanded(child: _QuickTile(icon: LucideIcons.utensils, label: s.menu, onPressed: onMenu)),
       const SizedBox(width: Tokens.space2),
-      Expanded(child: _QuickTile(icon: Icons.shopping_bag_outlined, label: s.cart, onPressed: onCart)),
+      Expanded(child: _QuickTile(icon: LucideIcons.shoppingBag, label: s.cart, onPressed: onCart)),
       const SizedBox(width: Tokens.space2),
-      Expanded(child: _QuickTile(icon: Icons.local_shipping_outlined, label: s.trackOrder, onPressed: canTrack ? onTrack : null)),
+      Expanded(child: _QuickTile(icon: LucideIcons.truck, label: s.trackOrder, onPressed: canTrack ? onTrack : null)),
     ]);
   }
 }
@@ -422,7 +403,7 @@ class _Popular extends StatelessWidget {
               child: IconButton.filledTonal(
                 onPressed: () => onAdd(item),
                 style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: Tokens.accentSoft, foregroundColor: Tokens.accent),
-                icon: const Icon(Icons.add),
+                icon: const Icon(LucideIcons.plus),
                 tooltip: s.addDish(item.name.of(s.lang)),
               ),
             ),

@@ -86,7 +86,7 @@ void main() {
     server.reorderMessageSkipped = 'Beef kebab';
     await _pumpHome(tester, server, layout: ['last_order']);
 
-    expect(find.text('2 × Grilled chicken, 1 × Mint lemonade'), findsOneWidget);
+    await expectOnHome(tester, '2 × Grilled chicken, 1 × Mint lemonade');
     await tester.tap(find.widgetWithText(FilledButton, 'Order again'));
     await tester.pumpAndSettle();
     expect(server.requests, contains('POST /v1/orders/o1/reorder'));
@@ -97,7 +97,7 @@ void main() {
     final server = _Server();
     await _pumpHome(tester, server, layout: ['frequent', 'favourites']);
 
-    expect(find.text('AED 45.00 · Ordered 5 times'), findsOneWidget);
+    await expectOnHome(tester, 'AED 45.00 · Ordered 5 times');
     await tester.tap(find.byTooltip('Save to favourites').first);
     await tester.pumpAndSettle();
     expect(server.requests, contains('PUT /v1/favourites/d1'));
