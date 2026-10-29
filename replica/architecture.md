@@ -8,11 +8,11 @@ Reads: `recon.md`, `features.csv`. Schema: `schema.sql` (23 tables, unverified u
 | --- | --- | --- |
 | customer mobile | Flutter (Dart), one codebase for Android and iOS | the team's chosen mobile stack; RTL support is built in; one app runs on any device |
 | customer web and admin panel | Next.js (App Router) + TypeScript, Tailwind with design tokens | one web codebase for the web ordering page and the admin panel; server components keep prices and offers on the server |
-| database | Postgres 15 on Supabase, in the region nearest Muscat (confirm the available region) | one managed database; row level security for customers and staff; PostGIS for delivery zones |
+| database | Postgres 15 on Supabase, in the region nearest the restaurant's country (for the UAE, the nearest available region; confirm) | one managed database; row level security for customers and staff; PostGIS for delivery zones |
 | auth | Supabase Auth, phone one-time code for customers, email and password plus two-factor for staff | guests get a token instead of an account; staff get stronger login |
 | realtime | Supabase Realtime on `orders` for the kitchen board and the customer's tracking screen | no polling; the same table drives both screens |
-| payments | a gateway that supports Omannet and cards (candidates: Paymob, Checkout.com; confirm with the client) behind one adapter | the gateway is a swappable adapter; webhooks are stored before processing |
-| SMS | a local SMS provider for one-time codes (confirm the provider that reaches Omani numbers) | Supabase's default SMS path does not cover Oman reliably; check before launch |
+| payments | a gateway that supports the card schemes and national networks of each country (for the UAE: Visa, Mastercard; confirm with the client) behind one adapter | the gateway is a swappable adapter; webhooks are stored before processing |
+| SMS | an SMS provider that reaches the country's numbers for one-time codes (confirm for the UAE) | the default SMS path of the auth service may not cover every country; test with real numbers before launch |
 | push | Firebase Cloud Messaging (Android and iOS) | order status while the app is closed |
 | email | Resend | receipts and staff alerts |
 | files | Supabase Storage with image transforms for thumbnails | the admin uploads photos; the apps request the size they need |
@@ -28,9 +28,19 @@ Tables: 23 (restaurant, opening_hours, holidays, delivery_zones, media, categori
 option_groups, option_choices, offers, offer_redemptions, customers, addresses, guest_sessions,
 carts, orders, order_lines, order_status_events, payments, refunds, payment_events, staff, audit_log).
 
-Money: integer minor units (baisa for OMR), with a currency code. Times: `timestamptz` in UTC.
-Restaurant local time (Asia/Muscat) is applied in the app, and the opening hours are stored as local
-times with the restaurant's time zone.
+Money: integer count of the currency's smallest unit, with a currency code. The number of decimal places
+comes from the `currencies` table (AED 2, OMR 3). Times: `timestamptz` in UTC. The restaurant's time zone is an
+IANA name (UAE: Asia/Dubai), and opening hours are stored as local times in that zone.
+
+### Country and currency packs
+
+Nothing about a country is written in the code. A pack is data: currency, time zone, phone code, tax label and
+rate, and card networks. The first pack is the UAE (AED, Asia/Dubai, +971, VAT). Adding a country is a new row
+in `countries` and, if needed, in `currencies`. The rate is confirmed per country before launch.
+
+Formatting is one function, used everywhere: `formatMoney(minor, currencyCode, locale)` reads the decimal
+places from the table, rounds half up once at the order total, and prints the code or symbol for the locale.
+Test it with AED (2 places), OMR (3) and a zero-decimal currency before each release.
 
 Access rules: Postgres row level security.
 - Customers: their own profile, addresses, cart and orders only.
@@ -107,8 +117,8 @@ Jobs:
 
 ## The parts that bite
 
-- **Time zones and daylight saving:** Oman does not use daylight saving, but the app still stores UTC and
-  converts for display. Opening hours cross midnight for late-night outlets (handled by the close-before-open
+- **Time zones and daylight saving:** each restaurant has its own IANA time zone. Some countries change clocks,
+  so the app stores UTC and converts for display in the restaurant's zone. Opening hours cross midnight for late-night outlets (handled by the close-before-open
   check, which must be relaxed if the restaurant opens past midnight; decide with the client).
 - **Idempotency:** the order request carries a key; a repeat returns the same order. Webhooks are stored
   once by (provider, event id) and processed only if not yet processed.
@@ -126,8 +136,8 @@ Jobs:
 - **Realtime at the kitchen:** a dropped connection must recover the board without losing orders
   (reload from the table on reconnect, then subscribe).
 - **Offline customer app:** the menu is cached; ordering needs the network, and the app says so.
-- **Push and SMS deliverability:** one-time codes in Oman need a local provider and a sender name agreed
-  with the client; test with real numbers early.
+- **Push and SMS deliverability:** one-time codes need a provider and a sender name that reach the country's
+  numbers; test with real numbers early.
 - **Multi-tenant leakage:** there is one restaurant, but the schema keeps restaurant_id on the tables, so a
   second restaurant later does not need a rewrite. Every query filters on it.
 - **VAT:** the rate is a setting (5% is the assumption; confirm). Prices may include VAT; the quote shows both.
@@ -164,7 +174,7 @@ Jobs:
 
 ## Summary (for the user)
 
-- Stack in one line: Flutter mobile, Next.js web and admin, Supabase Postgres with Realtime, a gateway adapter for Omannet and cards.
+- Stack in one line: Flutter mobile, Next.js web and admin, Supabase Postgres with Realtime, a gateway adapter for the card networks of each country.
 - Tables: 23. Routes: 36. Jobs: 6.
 - Riskiest parts: payment and webhooks with refunds; the offer engine under concurrent use; the Arabic and
   right-to-left content and layout.

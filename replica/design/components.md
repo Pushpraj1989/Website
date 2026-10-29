@@ -121,7 +121,7 @@ only where the direction carries meaning (back arrow, chevron, progress).
   used on   S01, S13, admin header
 
 ## Input and form field
-  variants  text, phone (with the country code fixed to +968), number (OMR with three decimals), password, OTP (6 boxes)
+  variants  text, phone (country code from the restaurant's country pack, +971 for the UAE), money (amount in the restaurant's currency, decimal places from the currency table), password, OTP (6 boxes)
   states    default, focus (2px ring), filled, error (text under the field, linked with aria-describedby), disabled, read only
   tokens    border-input for the edge (3:1 checked), radius md, text base 16px (so phones do not zoom)
   a11y      a visible label (not placeholder only); OTP accepts paste and the one-time code autofill

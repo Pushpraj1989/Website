@@ -1,8 +1,54 @@
 -- Food ordering for ONE restaurant (EN and AR). Postgres 15+ (Supabase).
--- Money: integer minor units (baisa for OMR: 1 OMR = 1000) plus a currency code. Never floats.
--- Times: timestamptz, stored in UTC. Restaurant local time is applied in the app.
+-- Money: integer count of the currency's smallest unit (its decimal digits come from the currencies table),
+-- plus a currency code. Never floats. Currency is data, not code: AED is the first pack, others are added as rows.
+-- Times: timestamptz, stored in UTC. Restaurant local time (restaurant.timezone) is applied in the app.
 
 create extension if not exists pgcrypto;
+
+-- ---------- currencies and country packs (configuration, not code) ----------
+
+-- ISO 4217 currencies. minor_digits is the number of decimal places the currency uses
+-- (AED 2, SAR 2, OMR 3, KWD 3, BHD 3). Money is stored as an integer count of the smallest unit,
+-- and the digits come from this table, so adding a currency is a data change.
+create table currencies (
+  code char(3) primary key check (code ~ '^[A-Z]{3}$'),
+  name_en text not null,
+  name_ar text not null,
+  minor_digits smallint not null check (minor_digits between 0 and 3),
+  active boolean not null default true
+);
+
+insert into currencies (code, name_en, name_ar, minor_digits) values
+  ('AED', 'UAE dirham', 'درهم إماراتي', 2),
+  ('SAR', 'Saudi riyal', 'ريال سعودي', 2),
+  ('QAR', 'Qatari riyal', 'ريال قطري', 2),
+  ('OMR', 'Omani rial', 'ريال عماني', 3),
+  ('BHD', 'Bahraini dinar', 'دينار بحريني', 3),
+  ('KWD', 'Kuwaiti dinar', 'دينار كويتي', 3),
+  ('USD', 'US dollar', 'دولار أمريكي', 2),
+  ('EUR', 'Euro', 'يورو', 2),
+  ('GBP', 'Pound sterling', 'جنيه إسترليني', 2),
+  ('INR', 'Indian rupee', 'روبية هندية', 2);
+
+-- A country pack: everything that differs by country, set once per market.
+-- The first pack is the UAE (AED, Asia/Dubai, +971). Other countries are added as rows.
+create table countries (
+  code char(2) primary key check (code ~ '^[A-Z]{2}$'),          -- ISO 3166-1 alpha-2
+  name_en text not null,
+  name_ar text not null,
+  currency_code char(3) not null references currencies(code),
+  timezone text not null,                                         -- IANA name, e.g. Asia/Dubai
+  phone_code text not null check (phone_code ~ '^\+[0-9]{1,4}$'),
+  tax_label text not null,                                        -- e.g. VAT
+  tax_basis_points int not null check (tax_basis_points between 0 and 3000),  -- rate as basis points: 500 = 5%
+  card_networks text[] not null default '{}',                     -- informational; the gateway decides
+  active boolean not null default true
+);
+
+insert into countries (code, name_en, name_ar, currency_code, timezone, phone_code, tax_label, tax_basis_points) values
+  ('AE', 'United Arab Emirates', 'الإمارات العربية المتحدة', 'AED', 'Asia/Dubai', '+971', 'VAT', 500);
+-- The rate is the public VAT rate for the UAE at the time of writing. Confirm it with the client's accountant
+-- before launch. Other countries (OM, SA, QA, BH, KW) are added as packs with their own confirmed rates.
 
 -- ---------- restaurant and settings ----------
 
@@ -13,10 +59,12 @@ create table restaurant (
   phone text not null,
   address_en text not null default '',
   address_ar text not null default '',
-  currency char(3) not null default 'OMR' check (currency ~ '^[A-Z]{3}$'),
-  currency_minor_digits smallint not null default 3 check (currency_minor_digits between 0 and 3),
-  vat_basis_points int not null default 500 check (vat_basis_points between 0 and 2000),  -- 5% (confirm)
-  prices_include_vat boolean not null default true,
+  country_code char(2) not null references countries(code),
+  currency_code char(3) not null references currencies(code),    -- normally the country's currency; a restaurant may differ
+  timezone text not null,                                         -- IANA name, copied from the country pack and editable
+  tax_label text not null,
+  tax_basis_points int not null check (tax_basis_points between 0 and 3000),
+  prices_include_tax boolean not null default true,
   min_order_minor int not null default 0 check (min_order_minor >= 0),
   cash_limit_minor int not null default 0 check (cash_limit_minor >= 0),
   accepts_card boolean not null default true,
@@ -29,7 +77,7 @@ create table opening_hours (
   id uuid primary key default gen_random_uuid(),
   restaurant_id uuid not null references restaurant(id) on delete cascade,
   weekday smallint not null check (weekday between 0 and 6),
-  opens_local time not null,
+  opens_local time not null,       -- in restaurant.timezone
   closes_local time not null,
   check (closes_local > opens_local)
 );
@@ -236,7 +284,7 @@ create table orders (
   delivery_fee_minor int not null default 0 check (delivery_fee_minor >= 0),
   vat_minor int not null default 0 check (vat_minor >= 0),
   total_minor int not null check (total_minor >= 0),
-  currency char(3) not null,
+  currency char(3) not null references currencies(code),
   payment_method text not null check (payment_method in ('card','cod','pay_on_arrival')),
   payment_status text not null default 'pending' check (payment_status in (
     'pending','authorised','captured','failed','refunded','partly_refunded','not_required')),
@@ -292,7 +340,7 @@ create table payments (
   provider text not null,
   provider_ref text not null,
   amount_minor int not null check (amount_minor > 0),
-  currency char(3) not null,
+  currency char(3) not null references currencies(code),
   status text not null check (status in ('pending','authorised','captured','failed','cancelled')),
   created_at timestamptz not null default now(),
   unique (provider, provider_ref)

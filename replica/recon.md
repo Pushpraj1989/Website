@@ -14,7 +14,7 @@ placeholders such as {{restaurant}}). Date: 2026-10-29.
 - Confidence is marked on every claim: high (official page), medium (several independent
   sources agree), guess (inferred from the category; must be checked by hands-on use).
 - Market promotion terms are bank-specific. None of the sources found a general
-  "guest vs logged-in discount" rule for a food app in Oman. The rules engine in this clone is
+  "guest vs logged-in discount" rule for a food app in the GCC. The rules engine in this clone is
   therefore designed as configurable, not copied from a competitor.
 
 ## Sources
@@ -143,8 +143,9 @@ F09 Language switch mid-flow
 ## Inferred data model
 
 ```
-Restaurant          id, name_en, name_ar, phone, address, currency (OMR), vat_percent,
-                    opening_hours, delivery_fee_rule, min_order, accepts (online, cod, pay_on_arrival)
+Restaurant          id, name_en, name_ar, phone, address, country (ISO code), currency (ISO code),
+                    timezone (IANA), tax_label and tax rate (from the country pack), opening_hours, delivery_fee_rule,
+                    min_order, accepts (card, cod, pay_on_arrival)
                     evidence: S07 settings, A07; sources 2, 8. confidence: high
 
 Category            id, restaurant_id, name_en, name_ar, image_id, sort_order, active
@@ -219,9 +220,12 @@ Order 1-n StatusEvent; Offer 1-n OfferRedemption; Order 0-n OfferRedemption.
 - A discount is recomputed on the server at checkout, never trusted from the app.
 - Stacking: offers have a priority; stackable offers add up, others are exclusive. Admin
   sees a dry-run with a sample cart before publishing.
-- VAT: Oman VAT is 5 percent (confirm with the client's accountant). Prices shown to the
-  customer include or exclude VAT according to the setting.
-- Currency: OMR with three decimal places. Rounding is applied once, at the order total.
+- Tax: the label and the rate come from the country pack, not from the code. The first pack is the UAE
+  (VAT, 5 percent under the public rules; confirm with the client's accountant). Prices shown to the
+  customer include or exclude tax according to the setting.
+- Currency: any ISO 4217 currency. The first pack is AED (two decimal places). The decimal places come
+  from the currency table, so a three-decimal currency such as OMR or KWD works without code changes.
+  Rounding is applied once, at the order total, to the currency's smallest unit.
 - Language: every customer-visible text exists in EN and AR. RTL mirrors layout, icons with
   direction, and the tab order. Numbers stay Western digits unless the client asks otherwise.
 
@@ -236,8 +240,9 @@ See `features.csv`: 49 rows. Must 32, should 8, could 3, skip 6. Columns: featur
 - Bank card partnerships and promotions (Muzn, Oman Arab Bank, Mastercard): partner deals, not product.
 - Wallet, super-app services and the loyalty network of competitors.
 - Competitor logos, photos, menus, copy and icons. Only the client's own content is used.
-- Direct Omannet integration: needs a certified payment gateway. Plan: use a gateway that
-  supports Omannet (for example Paymob or Checkout.com) and confirm the client's merchant account.
+- Direct integration with a national card network (for example Omannet in Oman or mada in Saudi Arabia):
+  needs a certified gateway. Plan: use a gateway that supports the networks of each country and confirm
+  the client's merchant account.
 
 ## Size
 
@@ -250,7 +255,7 @@ fees on a map. Size: L (a quarter for a solid first release with admin, payments
 ## Open questions for the client (block the design, not the recon)
 
 1. Delivery: own riders, or a delivery partner? Which zones and fees?
-2. Payment: which gateway does the client already have? Is Omannet required?
+2. Payment: which gateway does the client already have, and which card networks does it need?
 3. Offers: which combinations must stack? Is a guest allowed any offer?
 4. Cash on delivery: maximum order amount? Who collects change?
 5. Brand: the client's own name, logo, colours and photos (the replica does not use any brand's assets).

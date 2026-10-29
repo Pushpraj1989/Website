@@ -10,7 +10,7 @@ Delivery or pickup choice,checkout,must,yes,no,S06; source 2
 Order now or schedule for later,checkout,should,yes,no,S06; scheduled delivery in source 7
 "Sign in with phone and one-time code, or continue as guest",account,must,yes,no,S07; guest path required by the brief
 Pay online by card (3-D Secure),payments,must,yes,no,"S08; sources 3, 8"
-Pay by cash on delivery,payments,must,yes,no,S06; source 8 (most common in Oman)
+Pay by cash on delivery,payments,must,yes,no,S06; source 8 (evidence from Oman; confirm for the UAE)
 Pay on arrival for pickup,payments,must,yes,no,S06; brief
 Restaurant can switch each payment method on or off,payments,must,no,no,A07
 Refund when an order is cancelled after payment,payments,must,reported,no,"S12, F08"
@@ -31,7 +31,7 @@ Saved addresses with labels,account,must,yes,no,S14
 Saved cards by gateway token (no card numbers stored),account,should,yes,no,S13; source 1
 Rate the order and leave feedback,account,could,no,no,S12
 "Language switch EN and AR, whole layout flips to RTL",i18n,must,yes,no,F09; brief
-"Numbers, dates and currency formatted for each language",i18n,must,no,no,"OMR, three decimals"
+"Numbers, dates and currency formatted for each language",i18n,must,no,no,"Any ISO currency; decimal places from the currency table; AED first"
 Admin: menu manager with images and bilingual text,admin,must,no,no,"A03, F06"
 Admin: media library with alt text in EN and AR,admin,must,no,no,A06
 Admin: offers manager with audience and limits,admin,must,no,no,"A04, F07"
@@ -47,4 +47,4 @@ Third-party riders and dispatch network,other,skip,yes,skip,Decision for the cli
 Bank card partnerships and promotions,other,skip,yes,skip,"Partner deals, not product"
 Wallet and super-app services,other,skip,yes,skip,Not part of a single-restaurant app
 "Competitor logos, photos, menus, copy, icons",other,skip,yes,skip,Clean-room rule: client content only
-Direct Omannet integration,other,skip,yes,skip,Use a gateway that supports Omannet; needs merchant approval
+Direct integration with a national card network,other,skip,yes,skip,Use a gateway that supports the network; needs merchant approval
