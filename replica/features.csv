@@ -1,0 +1,50 @@
+feature,area,priority,original,clone,notes
+Browse menu by category,menu,must,yes,no,S02; category rail
+Search dishes in English and Arabic,menu,must,yes,no,S15
+Item detail with photo and description in EN and AR,menu,must,yes,no,S04; source 1
+Options and add-ons with min and max choices,menu,must,yes,no,S04; guess
+Item sold out or hidden from the menu,menu,must,yes,no,A03 availability
+Cart with quantities and notes,ordering,must,yes,no,S05
+Delivery or pickup choice,checkout,must,yes,no,S06; source 2
+"Delivery address on a map, outside-zone check",checkout,must,yes,no,"S06, S14; guess"
+Order now or schedule for later,checkout,should,yes,no,S06; scheduled delivery in source 7
+"Sign in with phone and one-time code, or continue as guest",account,must,yes,no,S07; guest path required by the brief
+Pay online by card (3-D Secure),payments,must,yes,no,"S08; sources 3, 8"
+Pay by cash on delivery,payments,must,yes,no,S06; source 8 (most common in Oman)
+Pay on arrival for pickup,payments,must,yes,no,S06; brief
+Restaurant can switch each payment method on or off,payments,must,no,no,A07
+Refund when an order is cancelled after payment,payments,must,reported,no,"S12, F08"
+"Offers that apply to guests, members, or both",offers,must,reported,no,"A04; sources 3, 4"
+Member-only offer shows a sign-in prompt to guests,offers,must,reported,no,F03; source 4 pattern
+"Promo code at checkout, with usage limits",offers,must,yes,no,S05; source 3
+Offers scheduled with start and end dates,offers,must,no,no,A04
+"Stacking rules and priority, with a dry-run test",offers,should,no,no,A05
+Minimum order for an offer,offers,must,reported,no,A04
+Free delivery as an offer type,offers,should,reported,no,A04
+Server-side price and discount calculation,payments,must,no,no,Business rules; never trust the app
+Live order status timeline,tracking,must,yes,no,"S10; sources 1, 2"
+Push notifications for status changes,tracking,must,yes,no,S10; source 1
+Map with the rider position,tracking,could,reported,no,S10; needs a rider app
+Order history,account,must,yes,no,S11
+Reorder a past order (changed or sold-out items flagged),account,should,reported,no,F05; source 6
+Saved addresses with labels,account,must,yes,no,S14
+Saved cards by gateway token (no card numbers stored),account,should,yes,no,S13; source 1
+Rate the order and leave feedback,account,could,no,no,S12
+"Language switch EN and AR, whole layout flips to RTL",i18n,must,yes,no,F09; brief
+"Numbers, dates and currency formatted for each language",i18n,must,no,no,"OMR, three decimals"
+Admin: menu manager with images and bilingual text,admin,must,no,no,"A03, F06"
+Admin: media library with alt text in EN and AR,admin,must,no,no,A06
+Admin: offers manager with audience and limits,admin,must,no,no,"A04, F07"
+Admin: live orders board with sound alert,admin,must,no,no,"A02, F08"
+"Admin: restaurant settings (hours, zones, fees, payments)",admin,must,no,no,A07
+Admin: staff roles and two-factor sign-in,admin,must,no,no,A01; AdminUser
+Admin: audit log for price and offer changes,admin,should,no,no,AuditLog
+"Admin: reports (sales, offers used, cash versus card)",admin,should,no,no,A08
+Customer list with guest or member flag,admin,could,no,no,A09
+Print a kitchen ticket,admin,should,no,no,A02
+Multi-restaurant marketplace and commissions,other,skip,yes,skip,One restaurant only (client decision)
+Third-party riders and dispatch network,other,skip,yes,skip,Decision for the client; partner API if chosen
+Bank card partnerships and promotions,other,skip,yes,skip,"Partner deals, not product"
+Wallet and super-app services,other,skip,yes,skip,Not part of a single-restaurant app
+"Competitor logos, photos, menus, copy, icons",other,skip,yes,skip,Clean-room rule: client content only
+Direct Omannet integration,other,skip,yes,skip,Use a gateway that supports Omannet; needs merchant approval
