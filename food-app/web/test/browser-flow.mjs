@@ -1,6 +1,5 @@
 // Browser walkthrough at phone width (390px): customer orders, staff accepts, customer sees "Accepted".
 import { spawn } from 'node:child_process';
-import { rmSync, existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import assert from 'node:assert/strict';
 
@@ -12,11 +11,17 @@ const BASE = 'http://localhost:3100'; // Secure cookies need a secure origin; lo
 const ADMIN_PASSWORD = 'slice-test-password-1';
 const SHOTS = '/home/user/Website/replica/clone-screens';
 
-if (existsSync(`${ROOT}data/store.json`)) rmSync(`${ROOT}data/store.json`);
+
+// Fresh schema and seed for every run. The fake store is gone; the test database is the real one.
+const DATABASE_URL = process.env.DATABASE_URL ?? 'postgres://postgres@127.0.0.1:5432/food_test';
+await new Promise((resolve, reject) => {
+  const migrate = spawn(process.execPath, [`${ROOT}db/migrate.mjs`, '--reset'], { env: { ...process.env, DATABASE_URL }, stdio: 'inherit' });
+  migrate.on('exit', (code) => (code === 0 ? resolve() : reject(new Error('migrate failed'))));
+});
 const server = spawn(process.execPath, [`${ROOT}node_modules/next/dist/bin/next`, 'start', '-p', '3100'], {
   cwd: ROOT,
   detached: true,
-  env: { ...process.env, NEXT_TELEMETRY_DISABLED: '1', ADMIN_PASSWORD, STRIPE_SECRET_KEY: 'sk_test_slice_placeholder', STRIPE_WEBHOOK_SECRET: 'whsec_slice_test_secret', NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: 'pk_test_slice_placeholder' },
+  env: { ...process.env, DATABASE_URL, NEXT_TELEMETRY_DISABLED: '1', ADMIN_PASSWORD, STRIPE_SECRET_KEY: 'sk_test_slice_placeholder', STRIPE_WEBHOOK_SECRET: 'whsec_slice_test_secret', NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: 'pk_test_slice_placeholder' },
   stdio: 'ignore',
 });
 

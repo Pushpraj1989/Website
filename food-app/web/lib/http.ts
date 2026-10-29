@@ -1,8 +1,7 @@
 import { randomBytes, createHmac, timingSafeEqual } from 'node:crypto';
 import { cookies } from 'next/headers';
 import { NextResponse, type NextRequest } from 'next/server';
-import { RuleError } from './orders.ts';
-import { hashToken } from './orders.ts';
+import { RuleError, hashToken } from './orders.ts';
 import * as data from './data.ts';
 
 export const GUEST_COOKIE = 'guest';
@@ -19,22 +18,18 @@ export function guestCookieOptions(maxAgeDays: number) {
   return { ...cookieBase, maxAge: maxAgeDays * 24 * 60 * 60 };
 }
 
-/** The guest's token is only stored as a hash. Returns null when the browser has no guest cookie yet. */
-export async function guestHash(): Promise<string | null> {
+/** The guest session for this browser, or null when it has none yet. The token itself is only stored hashed. */
+export async function currentGuestId(): Promise<string | null> {
   const token = (await cookies()).get(GUEST_COOKIE)?.value;
-  return token ? hashToken(token) : null;
+  return token ? data.findGuestSession(hashToken(token)) : null;
 }
 
-/**
- * Returns the guest hash for this browser, creating a guest when there is none. When a guest is created, the
- * new token is returned so the caller can set the cookie on the response it actually sends.
- */
-export async function ensureGuest(existingHash: string | null): Promise<{ hash: string; newToken: string | null }> {
-  if (existingHash) return { hash: existingHash, newToken: null };
+/** Returns the guest session id, creating one when needed. A new token is returned for the cookie. */
+export async function ensureGuest(existingId: string | null): Promise<{ id: string; newToken: string | null }> {
+  if (existingId) return { id: existingId, newToken: null };
   const token = randomBytes(24).toString('base64url');
-  const hash = hashToken(token);
-  data.createGuest(hash);
-  return { hash, newToken: token };
+  const id = await data.createGuestSession(hashToken(token));
+  return { id, newToken: token };
 }
 
 export function withGuestCookie<T extends NextResponse>(response: T, newToken: string | null): T {
@@ -65,6 +60,10 @@ export async function readJson(request: NextRequest): Promise<Record<string, unk
   } catch {
     throw new RuleError('The request body is not valid JSON.', 'bad_input', 400);
   }
+}
+
+export async function currentLocale(): Promise<'en' | 'ar'> {
+  return (await cookies()).get('locale')?.value === 'ar' ? 'ar' : 'en';
 }
 
 export function errorResponse(error: unknown) {

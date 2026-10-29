@@ -7,7 +7,7 @@ import { RuleError } from '@/lib/orders.ts';
 export async function GET() {
   try {
     if (!(await isStaff())) throw new RuleError('Sign in as staff.', 'unauthorised', 401);
-    const orders = data.listOrders().map((o) => ({
+    const orders = (await data.listOrders()).map((o) => ({
       id: o.id,
       number: o.number,
       channel: o.channel,
@@ -16,9 +16,9 @@ export async function GET() {
       etaMinutes: o.etaMinutes,
       address: o.address,
       lines: o.lines,
-      total: o.quote.totalMinor,
-      currency: o.quote.currency,
-      createdAt: o.createdAt,
+      total: o.totalMinor,
+      currency: o.currency,
+      createdAt: o.placedAt,
     }));
     return NextResponse.json({ orders });
   } catch (error) {

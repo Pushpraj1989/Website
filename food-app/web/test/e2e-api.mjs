@@ -1,7 +1,6 @@
 // Exit test over HTTP against a real `next start` server (see README). Resets the fake store first.
 import { spawn } from 'node:child_process';
 import { createHmac } from 'node:crypto';
-import { rmSync, existsSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
 const ROOT = new URL('..', import.meta.url).pathname;
@@ -9,7 +8,13 @@ const BASE = 'http://127.0.0.1:3100';
 const ADMIN_PASSWORD = 'slice-test-password-1';
 const WEBHOOK_SECRET = 'whsec_slice_test_secret';
 
-if (existsSync(`${ROOT}data/store.json`)) rmSync(`${ROOT}data/store.json`);
+
+// Fresh schema and seed for every run. The fake store is gone; the test database is the real one.
+const DATABASE_URL = process.env.DATABASE_URL ?? 'postgres://postgres@127.0.0.1:5432/food_test';
+await new Promise((resolve, reject) => {
+  const migrate = spawn(process.execPath, [`${ROOT}db/migrate.mjs`, '--reset'], { env: { ...process.env, DATABASE_URL }, stdio: 'inherit' });
+  migrate.on('exit', (code) => (code === 0 ? resolve() : reject(new Error('migrate failed'))));
+});
 
 // Spawn the Next binary directly and kill its process group, so no server outlives the test.
 const server = spawn(process.execPath, [`${ROOT}node_modules/next/dist/bin/next`, 'start', '-p', '3100'], {
@@ -17,6 +22,7 @@ const server = spawn(process.execPath, [`${ROOT}node_modules/next/dist/bin/next`
   detached: true,
   env: {
     ...process.env,
+    DATABASE_URL,
     NEXT_TELEMETRY_DISABLED: '1',
     ADMIN_PASSWORD,
     STRIPE_SECRET_KEY: 'sk_test_slice_placeholder',
@@ -95,7 +101,7 @@ try {
   });
 
   check('a sold-out item cannot be added to the cart', async () => {
-    const r = await guest.put('/v1/cart', { items: [{ itemId: 'itm_kebab', qty: 1, note: '' }] });
+    const r = await guest.put('/v1/cart', { items: [{ itemId: '00000000-0000-4000-8000-000000000203', qty: 1, note: '' }] });
     assert.equal(r.status, 422);
     assert.equal(r.json.error.code, 'sold_out');
   });
@@ -103,7 +109,7 @@ try {
   check('cart stores items and prices come from the server, with a guest cookie set', async () => {
     const r = await guest.put('/v1/cart', {
       channel: 'delivery',
-      items: [{ itemId: 'itm_salad', qty: 1, note: '' }, { itemId: 'itm_chicken', qty: 2, note: 'no onions' }],
+      items: [{ itemId: '00000000-0000-4000-8000-000000000101', qty: 1, note: '' }, { itemId: '00000000-0000-4000-8000-000000000201', qty: 2, note: 'no onions' }],
     });
     assert.equal(r.status, 200);
     assert.ok(guest.jar.guest, 'guest cookie set');
@@ -114,12 +120,12 @@ try {
   });
 
   check('a bad quantity is refused', async () => {
-    const r = await guest.put('/v1/cart', { items: [{ itemId: 'itm_salad', qty: 99, note: '' }] });
+    const r = await guest.put('/v1/cart', { items: [{ itemId: '00000000-0000-4000-8000-000000000101', qty: 99, note: '' }] });
     assert.equal(r.status, 400);
   });
 
   check('cash on delivery without an address is refused', async () => {
-    await guest.put('/v1/cart', { channel: 'delivery', items: [{ itemId: 'itm_salad', qty: 1, note: '' }, { itemId: 'itm_chicken', qty: 2, note: 'no onions' }] });
+    await guest.put('/v1/cart', { channel: 'delivery', items: [{ itemId: '00000000-0000-4000-8000-000000000101', qty: 1, note: '' }, { itemId: '00000000-0000-4000-8000-000000000201', qty: 2, note: 'no onions' }] });
     const r = await guest.post('/v1/orders', { channel: 'delivery', method: 'cod', address: '', idempotencyKey: 'key-cod-0001' });
     assert.equal(r.status, 400);
     assert.equal(r.json.error.code, 'address_missing');
@@ -141,7 +147,7 @@ try {
 
   let cardOrderId;
   check('card order waits for payment', async () => {
-    await guest.put('/v1/cart', { channel: 'delivery', items: [{ itemId: 'itm_salad', qty: 1, note: '' }, { itemId: 'itm_chicken', qty: 2, note: 'no onions' }] });
+    await guest.put('/v1/cart', { channel: 'delivery', items: [{ itemId: '00000000-0000-4000-8000-000000000101', qty: 1, note: '' }, { itemId: '00000000-0000-4000-8000-000000000201', qty: 2, note: 'no onions' }] });
     const r = await guest.post('/v1/orders', { channel: 'delivery', method: 'card', address: '12 Example Street, Dubai', idempotencyKey: 'key-card-0001' });
     assert.equal(r.status, 201);
     assert.equal(r.json.order.status, 'awaiting_payment');
@@ -168,7 +174,7 @@ try {
   });
 
   check('a webhook with a bad signature is refused and changes nothing', async () => {
-    await guest.put('/v1/cart', { channel: 'delivery', items: [{ itemId: 'itm_water', qty: 1, note: '' }] });
+    await guest.put('/v1/cart', { channel: 'delivery', items: [{ itemId: '00000000-0000-4000-8000-000000000302', qty: 1, note: '' }] });
     const placed = await guest.post('/v1/orders', { channel: 'delivery', method: 'card', address: 'x', idempotencyKey: 'key-card-0002' });
     const event = { id: 'evt_bad', type: 'payment_intent.succeeded', data: { object: { id: 'pi_bad', amount: 500, currency: 'aed', metadata: { order_id: placed.json.order.id } } } };
     const r = await fetch(`${BASE}/v1/webhooks/payments/stripe`, { method: 'POST', headers: { 'stripe-signature': 't=1,v1=00', 'content-type': 'application/json' }, body: JSON.stringify(event) });
@@ -178,7 +184,7 @@ try {
   });
 
   check('a webhook with the wrong amount does not confirm the order', async () => {
-    await guest.put('/v1/cart', { channel: 'delivery', items: [{ itemId: 'itm_water', qty: 1, note: '' }] });
+    await guest.put('/v1/cart', { channel: 'delivery', items: [{ itemId: '00000000-0000-4000-8000-000000000302', qty: 1, note: '' }] });
     const placed = await guest.post('/v1/orders', { channel: 'delivery', method: 'card', address: 'x', idempotencyKey: 'key-card-0003' });
     const signed = signedEvent({ id: 'evt_amount', type: 'payment_intent.succeeded', data: { object: { id: 'pi_amt', amount: 1, currency: 'aed', metadata: { order_id: placed.json.order.id } } } });
     const r = await fetch(`${BASE}/v1/webhooks/payments/stripe`, { method: 'POST', headers: { ...signed.headers, 'content-type': 'application/json' }, body: signed.body });
@@ -255,5 +261,5 @@ try {
   console.error(error);
   process.exitCode = 1;
 } finally {
-  process.kill(-server.pid, 'SIGTERM');
+  try { process.kill(-server.pid, 'SIGTERM'); } catch {}
 }

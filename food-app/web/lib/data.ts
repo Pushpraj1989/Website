@@ -1,123 +1,369 @@
-// FAKE DATA LAYER for the slice. Same function names and shapes as the Supabase layer will use, so screens
-// and route handlers do not change when it is swapped. Backed by one JSON file; single process only.
-import { mkdirSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+// Data layer for the slice, on Postgres (replica/schema.sql). Screens and route handlers call these functions.
+// Every write that must be all-or-nothing runs in withTx. State changes are conditional updates, so two requests
+// cannot both move the same order.
+import type { PoolClient } from 'pg';
+import { pool, withTx } from './db.ts';
 import type { OrderStatus } from './status.ts';
-import type { Channel, Quote } from './pricing.ts';
+import type { Channel } from './pricing.ts';
+
+export type Localised = { en: string; ar: string };
+
+export type Restaurant = {
+  id: string;
+  name: Localised;
+  currency: string;
+  taxLabel: string;
+  taxBasisPoints: number;
+  serviceFeeMinor: number;
+  payments: { card: boolean; cod: boolean; payOnArrival: boolean };
+};
+
+export type MenuItem = {
+  id: string;
+  categoryId: string;
+  name: Localised;
+  description: Localised;
+  priceMinor: number;
+  soldOut: boolean;
+};
 
 export type CartLine = { itemId: string; qty: number; note: string };
 
-export type OrderLine = { itemId: string; name: { en: string; ar: string }; unitMinor: number; qty: number; note: string };
+export type OrderLineRow = {
+  itemId: string | null;
+  name: Localised;
+  unitMinor: number;
+  qty: number;
+  note: string;
+};
 
-export type OrderRecord = {
+export type OrderRow = {
   id: string;
-  number: number;
-  ownerHash: string;
-  idempotencyKey: string;
+  number: string;
+  guestSessionId: string | null;
+  customerId: string | null;
   channel: Channel;
   method: 'card' | 'cod' | 'pay_on_arrival';
   status: OrderStatus;
-  address: string | null;
-  lines: OrderLine[];
-  quote: Quote;
-  stripePaymentIntentId: string | null;
   etaMinutes: number | null;
+  address: string | null;
+  currency: string;
+  subtotalMinor: number;
+  deliveryFeeMinor: number;
+  serviceFeeMinor: number;
+  discountMinor: number;
+  tipMinor: number;
+  totalMinor: number;
+  vatMinor: number;
+  taxLabel: string;
+  placedAt: string;
+  lines: OrderLineRow[];
   history: { status: OrderStatus; at: string }[];
-  createdAt: string;
+  paymentIntentId: string | null;
 };
 
-type Store = {
-  sequence: number;
-  guests: Record<string, { createdAt: string }>;
-  carts: Record<string, CartLine[]>;
-  orders: OrderRecord[];
-  paymentEvents: { id: string; type: string; receivedAt: string; orderId: string | null }[];
-};
+const restaurantId = '00000000-0000-4000-8000-000000000001';
 
-// Relative to the app root (next dev / next start run from web/).
-const FILE = join(process.cwd(), 'data', 'store.json');
+const restaurantSql = `
+  select id, name_en, name_ar, currency_code, tax_label, tax_basis_points, service_fee_minor,
+         accepts_card, accepts_cod, accepts_pay_on_arrival
+  from restaurant where id = $1`;
 
-function load(): Store {
-  if (!existsSync(FILE)) return { sequence: 1000, guests: {}, carts: {}, orders: [], paymentEvents: [] };
-  return JSON.parse(readFileSync(FILE, 'utf8')) as Store;
+export async function getRestaurant(c: PoolClient | typeof pool = pool): Promise<Restaurant> {
+  const { rows } = await c.query(restaurantSql, [restaurantId]);
+  const r = rows[0];
+  return {
+    id: r.id,
+    name: { en: r.name_en, ar: r.name_ar },
+    currency: r.currency_code,
+    taxLabel: r.tax_label,
+    taxBasisPoints: r.tax_basis_points,
+    serviceFeeMinor: r.service_fee_minor,
+    payments: { card: r.accepts_card, cod: r.accepts_cod, payOnArrival: r.accepts_pay_on_arrival },
+  };
 }
 
-function save(store: Store) {
-  mkdirSync(dirname(FILE), { recursive: true });
-  writeFileSync(FILE, JSON.stringify(store, null, 2));
+/** The delivery fee for an address. Until addresses are placed on the map, the first active zone applies. */
+export async function deliveryFeeMinor(c: PoolClient | typeof pool = pool): Promise<number> {
+  const { rows } = await c.query(
+    'select fee_minor from delivery_zones where restaurant_id = $1 and active order by fee_minor limit 1',
+    [restaurantId],
+  );
+  if (rows.length === 0) throw new Error('No active delivery zone is set up.');
+  return rows[0].fee_minor;
 }
 
-/** Runs one read-modify-write. The fake layer has no transactions, so this is only safe in one process. */
-function withStore<T>(fn: (store: Store) => T): T {
-  const store = load();
-  const result = fn(store);
-  save(store);
-  return result;
+export async function getMenu() {
+  const { rows } = await pool.query(
+    `select c.id as category_id, c.name_en as cat_en, c.name_ar as cat_ar,
+            i.id, i.name_en, i.name_ar, i.description_en, i.description_ar, i.base_price_minor, i.available
+     from categories c
+     join menu_items i on i.category_id = c.id
+     where c.restaurant_id = $1 and c.active
+     order by c.sort_order, i.sort_order`,
+    [restaurantId],
+  );
+  const categories = new Map<string, { id: string; name: Localised; items: MenuItem[] }>();
+  for (const r of rows) {
+    if (!categories.has(r.category_id)) {
+      categories.set(r.category_id, { id: r.category_id, name: { en: r.cat_en, ar: r.cat_ar }, items: [] });
+    }
+    categories.get(r.category_id)!.items.push({
+      id: r.id,
+      categoryId: r.category_id,
+      name: { en: r.name_en, ar: r.name_ar },
+      description: { en: r.description_en, ar: r.description_ar },
+      priceMinor: r.base_price_minor,
+      soldOut: !r.available,
+    });
+  }
+  return [...categories.values()];
 }
 
-export function guestExists(ownerHash: string): boolean {
-  return withStore((s) => ownerHash in s.guests);
+export async function getItems(ids: string[]): Promise<Map<string, MenuItem>> {
+  if (ids.length === 0) return new Map();
+  const { rows } = await pool.query(
+    `select id, category_id, name_en, name_ar, description_en, description_ar, base_price_minor, available
+     from menu_items where id = any($1::uuid[])`,
+    [ids],
+  );
+  return new Map(
+    rows.map((r) => [
+      r.id,
+      {
+        id: r.id,
+        categoryId: r.category_id,
+        name: { en: r.name_en, ar: r.name_ar },
+        description: { en: r.description_en, ar: r.description_ar },
+        priceMinor: r.base_price_minor,
+        soldOut: !r.available,
+      } satisfies MenuItem,
+    ]),
+  );
 }
 
-export function createGuest(ownerHash: string) {
-  withStore((s) => {
-    s.guests[ownerHash] = { createdAt: new Date().toISOString() };
-  });
+export async function findGuestSession(tokenHash: string): Promise<string | null> {
+  const { rows } = await pool.query('select id from guest_sessions where token_hash = $1', [tokenHash]);
+  if (rows[0]) await pool.query('update guest_sessions set last_seen_at = now() where id = $1', [rows[0].id]);
+  return rows[0]?.id ?? null;
 }
 
-export function getCart(ownerHash: string): CartLine[] {
-  return withStore((s) => s.carts[ownerHash] ?? []);
+export async function createGuestSession(tokenHash: string): Promise<string> {
+  const { rows } = await pool.query('insert into guest_sessions (token_hash) values ($1) returning id', [tokenHash]);
+  return rows[0].id;
 }
 
-export function setCart(ownerHash: string, lines: CartLine[]) {
-  withStore((s) => {
-    s.carts[ownerHash] = lines;
-  });
+export async function getCart(guestId: string): Promise<CartLine[]> {
+  const { rows } = await pool.query('select items from carts where guest_session_id = $1', [guestId]);
+  return rows[0]?.items ?? [];
 }
 
-export function clearCart(ownerHash: string) {
-  setCart(ownerHash, []);
+export async function setCart(guestId: string, lines: CartLine[]) {
+  await pool.query(
+    `insert into carts (guest_session_id, items, updated_at) values ($1, $2, now())
+     on conflict (guest_session_id) where guest_session_id is not null
+     do update set items = excluded.items, updated_at = now()`,
+    [guestId, JSON.stringify(lines)],
+  );
 }
 
-export function insertOrder(input: Omit<OrderRecord, 'id' | 'number'>): OrderRecord {
-  return withStore((s) => {
-    s.sequence += 1;
-    const order: OrderRecord = { ...input, id: `ord_${s.sequence}_${Math.random().toString(36).slice(2, 8)}`, number: s.sequence };
-    s.orders.push(order);
-    return order;
-  });
+async function loadOrder(c: PoolClient | typeof pool, where: string, value: string): Promise<OrderRow | null> {
+  const { rows } = await c.query(
+    `select o.*, p.provider_ref as payment_intent_id, a.line_1 as address_text, r.tax_label
+     from orders o
+     join restaurant r on r.id = o.restaurant_id
+     left join payments p on p.order_id = o.id
+     left join addresses a on a.id = o.address_id
+     where ${where}`,
+    [value],
+  );
+  const o = rows[0];
+  if (!o) return null;
+  const lines = await c.query(
+    'select menu_item_id, name_en, name_ar, unit_price_minor, qty, note from order_lines where order_id = $1 order by id',
+    [o.id],
+  );
+  const events = await c.query(
+    'select status, at from order_status_events where order_id = $1 order by at, id',
+    [o.id],
+  );
+  return {
+    id: o.id,
+    number: o.number,
+    guestSessionId: o.guest_session_id,
+    customerId: o.customer_id,
+    channel: o.channel,
+    method: o.payment_method,
+    status: o.status,
+    etaMinutes: o.eta_minutes,
+    address: o.address_text,
+    currency: o.currency,
+    subtotalMinor: o.subtotal_minor,
+    deliveryFeeMinor: o.delivery_fee_minor,
+    serviceFeeMinor: o.service_fee_minor,
+    discountMinor: o.discount_minor,
+    tipMinor: o.tip_minor,
+    totalMinor: o.total_minor,
+    vatMinor: o.vat_minor,
+    taxLabel: o.tax_label,
+    placedAt: new Date(o.placed_at).toISOString(),
+    lines: lines.rows.map((l) => ({
+      itemId: l.menu_item_id,
+      name: { en: l.name_en, ar: l.name_ar },
+      unitMinor: l.unit_price_minor,
+      qty: l.qty,
+      note: l.note,
+    })),
+    history: events.rows.map((e) => ({ status: e.status, at: new Date(e.at).toISOString() })),
+    paymentIntentId: o.payment_intent_id,
+  };
 }
 
-export function getOrder(id: string): OrderRecord | null {
-  return withStore((s) => s.orders.find((o) => o.id === id) ?? null);
+export async function getOrder(id: string, c: PoolClient | typeof pool = pool): Promise<OrderRow | null> {
+  return loadOrder(c, 'o.id = $1', id);
 }
 
-export function findOrderByKey(ownerHash: string, idempotencyKey: string): OrderRecord | null {
-  return withStore((s) => s.orders.find((o) => o.ownerHash === ownerHash && o.idempotencyKey === idempotencyKey) ?? null);
+export async function listOrders(): Promise<OrderRow[]> {
+  const { rows } = await pool.query(
+    'select id from orders where restaurant_id = $1 order by placed_at desc limit 200',
+    [restaurantId],
+  );
+  const orders = [];
+  for (const r of rows) orders.push((await getOrder(r.id))!);
+  return orders;
 }
 
-export function findOrderByPaymentIntent(intentId: string): OrderRecord | null {
-  return withStore((s) => s.orders.find((o) => o.stripePaymentIntentId === intentId) ?? null);
+/** The order placed with this idempotency key by this guest, if any. */
+export async function findOrderByKey(guestId: string, key: string): Promise<OrderRow | null> {
+  const { rows } = await pool.query(
+    'select id from orders where guest_session_id = $1 and idempotency_key = $2',
+    [guestId, key],
+  );
+  return rows[0] ? getOrder(rows[0].id) : null;
 }
 
-export function listOrders(): OrderRecord[] {
-  return withStore((s) => [...s.orders].sort((a, b) => b.number - a.number));
+export async function findOrderByPaymentIntent(intentId: string): Promise<OrderRow | null> {
+  const { rows } = await pool.query('select order_id from payments where provider = $1 and provider_ref = $2', ['stripe', intentId]);
+  return rows[0] ? getOrder(rows[0].order_id) : null;
 }
 
-export function updateOrder(id: string, patch: Partial<OrderRecord>): OrderRecord | null {
-  return withStore((s) => {
-    const order = s.orders.find((o) => o.id === id);
-    if (!order) return null;
-    Object.assign(order, patch);
-    return order;
-  });
+export async function insertOrder(
+  c: PoolClient,
+  input: {
+    guestId: string;
+    idempotencyKey: string;
+    channel: Channel;
+    method: 'card' | 'cod' | 'pay_on_arrival';
+    status: OrderStatus;
+    address: string | null;
+    locale: 'en' | 'ar';
+    quote: { currency: string; subtotalMinor: number; deliveryFeeMinor: number; serviceFeeMinor: number; discountMinor: number; tipMinor: number; totalMinor: number; taxIncludedMinor: number };
+    lines: { itemId: string; name: Localised; unitMinor: number; qty: number; note: string }[];
+  },
+): Promise<string | null> {
+  // A delivery address is a row owned by the guest session, the same table customers use.
+  let addressId: string | null = null;
+  if (input.address) {
+    const address = await c.query(
+      'insert into addresses (guest_session_id, line_1) values ($1, $2) returning id',
+      [input.guestId, input.address],
+    );
+    addressId = address.rows[0].id;
+  }
+  const { rows } = await c.query(
+    `insert into orders (number, restaurant_id, guest_session_id, channel, status, locale, payment_method, payment_status,
+       address_id, currency, subtotal_minor, delivery_fee_minor, service_fee_minor, discount_minor, tip_minor,
+       total_minor, vat_minor, idempotency_key)
+     values (nextval('order_number_seq')::text, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
+     on conflict (guest_session_id, idempotency_key) do nothing
+     returning id`,
+    [
+      restaurantId,
+      input.guestId,
+      input.channel,
+      input.status,
+      input.locale,
+      input.method,
+      input.method === 'card' ? 'pending' : 'not_required',
+      addressId,
+      input.quote.currency,
+      input.quote.subtotalMinor,
+      input.quote.deliveryFeeMinor,
+      input.quote.serviceFeeMinor,
+      input.quote.discountMinor,
+      input.quote.tipMinor,
+      input.quote.totalMinor,
+      input.quote.taxIncludedMinor,
+      input.idempotencyKey,
+    ],
+  );
+  const id: string | undefined = rows[0]?.id;
+  if (!id) return null;
+  for (const line of input.lines) {
+    await c.query(
+      `insert into order_lines (order_id, menu_item_id, name_en, name_ar, unit_price_minor, qty, line_total_minor, note)
+       values ($1, $2, $3, $4, $5::int, $6::int, $5::int * $6::int, $7)`,
+      [id, line.itemId, line.name.en, line.name.ar, line.unitMinor, line.qty, line.note],
+    );
+  }
+  await c.query(
+    `insert into order_status_events (order_id, status, actor_kind) values ($1, $2, 'customer')`,
+    [id, input.status],
+  );
+  return id;
 }
 
-/** Stores a payment event once. Returns false when the event id was already stored (a retry). */
-export function recordPaymentEvent(eventId: string, type: string, orderId: string | null): boolean {
-  return withStore((s) => {
-    if (s.paymentEvents.some((e) => e.id === eventId)) return false;
-    s.paymentEvents.push({ id: eventId, type, receivedAt: new Date().toISOString(), orderId });
-    return true;
-  });
+/**
+ * Moves an order from one of `from` to `to`. A single conditional update: if the order is not in one of
+ * `from`, nothing changes and null is returned.
+ */
+export async function transitionOrder(
+  c: PoolClient,
+  id: string,
+  from: OrderStatus[],
+  to: OrderStatus,
+  actor: { kind: 'staff' | 'gateway' | 'system'; id?: string },
+  extra: { etaMinutes?: number } = {},
+): Promise<boolean> {
+  const { rowCount } = await c.query(
+    `update orders set status = $2,
+       eta_minutes = coalesce($4, eta_minutes),
+       accepted_at = case when $2 = 'accepted' then now() else accepted_at end,
+       delivered_at = case when $2 in ('delivered','collected') then now() else delivered_at end
+     where id = $1 and status = any($3::text[])`,
+    [id, to, from, extra.etaMinutes ?? null],
+  );
+  if (!rowCount) return false;
+  await c.query(
+    'insert into order_status_events (order_id, status, actor_kind, actor_id) values ($1, $2, $3, $4)',
+    [id, to, actor.kind, actor.id ?? null],
+  );
+  return true;
+}
+
+export async function attachPaymentIntent(c: PoolClient, orderId: string, intentId: string, amountMinor: number, currency: string) {
+  await c.query(
+    `insert into payments (order_id, provider, provider_ref, amount_minor, currency, status)
+     values ($1, 'stripe', $2, $3, $4, 'pending') on conflict (provider, provider_ref) do nothing`,
+    [orderId, intentId, amountMinor, currency],
+  );
+}
+
+/** Stores a Stripe event once. Returns false when it was already stored (a retry). */
+export async function recordPaymentEvent(eventId: string, type: string, payload: unknown): Promise<boolean> {
+  const { rowCount } = await pool.query(
+    `insert into payment_events (provider, event_id, payload) values ('stripe', $1, $2)
+     on conflict (provider, event_id) do nothing`,
+    [eventId, JSON.stringify({ type, ...(payload as object) })],
+  );
+  return rowCount === 1;
+}
+
+export async function markPaymentEventProcessed(eventId: string) {
+  await pool.query("update payment_events set processed_at = now() where provider = 'stripe' and event_id = $1", [eventId]);
+}
+
+export async function markPaymentCaptured(c: PoolClient, intentId: string, orderId: string) {
+  await c.query("update payments set status = 'captured' where provider = 'stripe' and provider_ref = $1", [intentId]);
+  await c.query("update orders set payment_status = 'captured' where id = $1", [orderId]);
 }

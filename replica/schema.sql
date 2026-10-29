@@ -4,6 +4,7 @@
 -- Times: timestamptz, stored in UTC. Restaurant local time (restaurant.timezone) is applied in the app.
 
 create extension if not exists pgcrypto;
+create extension if not exists postgis;   -- delivery zones and addresses; Supabase has it under the extensions schema
 
 -- ---------- currencies and country packs (configuration, not code) ----------
 
@@ -235,20 +236,7 @@ create table customers (
   created_at timestamptz not null default now()
 );
 
-create table addresses (
-  id uuid primary key default gen_random_uuid(),
-  customer_id uuid not null references customers(id) on delete cascade,
-  label text not null default 'home',
-  line_1 text not null,
-  line_2 text not null default '',
-  location geography(point, 4326),
-  zone_id uuid references delivery_zones(id) on delete set null,
-  notes text not null default '',
-  created_at timestamptz not null default now()
-);
-create index on addresses (customer_id);
-
--- A guest is a customer row with no login: id is a random uuid, not an auth user. Guests keep a
+-- A guest has no customers row and no auth user. Guests are identified by a guest session, and keep a
 -- cart and their orders through a guest token kept on the device.
 create table guest_sessions (
   id uuid primary key default gen_random_uuid(),
@@ -256,6 +244,22 @@ create table guest_sessions (
   created_at timestamptz not null default now(),
   last_seen_at timestamptz not null default now()
 );
+
+create table addresses (
+  id uuid primary key default gen_random_uuid(),
+  customer_id uuid references customers(id) on delete cascade,
+  guest_session_id uuid references guest_sessions(id) on delete cascade,
+  label text not null default 'home',
+  line_1 text not null,
+  line_2 text not null default '',
+  location geography(point, 4326),
+  zone_id uuid references delivery_zones(id) on delete set null,
+  notes text not null default '',
+  created_at timestamptz not null default now(),
+  check ((customer_id is null) <> (guest_session_id is null))   -- exactly one owner
+);
+create index on addresses (customer_id);
+create index on addresses (guest_session_id);
 
 create table carts (
   id uuid primary key default gen_random_uuid(),
@@ -304,6 +308,7 @@ create table orders (
   accepted_at timestamptz,
   delivered_at timestamptz,
   cancel_reason text,
+  eta_minutes int check (eta_minutes between 5 and 180),   -- set by staff on acceptance
   unique (customer_id, idempotency_key),
   unique (guest_session_id, idempotency_key),
   check (customer_id is not null or guest_session_id is not null),

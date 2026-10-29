@@ -202,3 +202,26 @@ Rules for the Stripe path:
 - Before launch, confirm Stripe's availability for the UAE merchant account, the card types, Apple Pay and Google Pay
   domains, and the currencies enabled for the account.
 - Test with Stripe test cards for every method before any live charge.
+
+## Changes after running the schema and the slice (2026-10-29)
+
+Verified: `schema.sql` applies from scratch on Postgres 16.15 with PostGIS (no errors), and the hard constraints
+hold under test (total check, unique webhook events, offer-free order path, RLS for customers, staff, anonymous).
+
+Changed in the schema:
+- `create extension postgis` added. Without it the delivery zones and addresses fail.
+- Addresses belong to exactly one of a customer or a guest session. Guests have no customers row; the old
+  comment said so but the foreign key to auth users contradicted it.
+- `orders.eta_minutes` added, set on acceptance.
+- `order_number_seq` used for `orders.number` (numeric text, no prefix).
+
+Changed in the stack for the slice:
+- Data layer: Postgres via `pg`, one transaction per write that must be all-or-nothing. Menu and settings come
+  from the database, not code. Local Postgres stands in for Supabase until the project exists.
+- Staff sign-in: a shared password for the slice. Supabase Auth with two-factor sign-in is the target (A01).
+- Realtime: polling every 5 seconds in the slice. Supabase Realtime is the target.
+- Flutter mobile: still not started. No SDK in the build environment.
+
+Parts of the plan that do not hold yet:
+- The guest order path has no delivery zone check. The first active zone's fee applies to every address.
+- Refunds and the order timeout job are not built. A paid order that is rejected needs a refund path.

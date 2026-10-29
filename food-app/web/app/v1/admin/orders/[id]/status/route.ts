@@ -10,7 +10,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     const body = await readJson(request);
     const to = body.to as OrderStatus;
     if (!ORDER_STATUSES.includes(to)) throw new RuleError('Unknown status.', 'bad_input', 400);
-    const order = setOrderStatus(id, to);
+    const order = await setOrderStatus(id, to);
     return NextResponse.json({ status: order.status });
   } catch (error) {
     return errorResponse(error);

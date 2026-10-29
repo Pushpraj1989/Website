@@ -1,13 +1,14 @@
 import Link from 'next/link';
+import * as data from '@/lib/data.ts';
 import { t, type Locale } from '@/lib/i18n.ts';
-import { RESTAURANT } from '@/lib/seed.ts';
 
-export function Header({ locale }: { locale: Locale }) {
+export async function Header({ locale }: { locale: Locale }) {
   const s = t(locale);
   const other: Locale = locale === 'ar' ? 'en' : 'ar';
+  const restaurant = await data.getRestaurant();
   return (
     <header className="header">
-      <Link className="brand" href="/menu">{RESTAURANT.name[locale]}</Link>
+      <Link className="brand" href="/menu">{restaurant.name[locale]}</Link>
       <nav aria-label={locale === 'ar' ? 'التنقل الرئيسي' : 'Main'}>
         <Link href="/menu">{s.menu}</Link>
         <Link href="/cart">{s.cart}</Link>

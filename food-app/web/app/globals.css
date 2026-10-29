@@ -26,7 +26,7 @@ h2 { font-size: var(--text-lg); line-height: var(--leading-lg); margin: var(--sp
 .muted { color: var(--color-text-muted); font-size: var(--text-sm); }
 .card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-4); box-shadow: var(--shadow-card); }
 .item { display: grid; grid-template-columns: 1fr auto; gap: var(--space-3); align-items: start; padding: var(--space-3) 0; border-block-end: 1px solid var(--color-border); }
-.item.sold { opacity: .6; }
+.item.sold h3, .item.sold .price { color: var(--color-text-muted); }
 .price { font-variant-numeric: tabular-nums; white-space: nowrap; }
 .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 var(--space-4); border-radius: var(--radius-md); border: 1px solid var(--color-border-input); background: var(--color-bg); color: var(--color-text); font: inherit; font-weight: 600; cursor: pointer; text-decoration: none; }
 .btn.primary { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-on-accent); }

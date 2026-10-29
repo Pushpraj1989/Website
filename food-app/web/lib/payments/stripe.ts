@@ -1,7 +1,5 @@
 // The only file that talks to Stripe. Card amounts are sent in the currency's smallest unit, the same
 // integer as orders.total_minor. Calls are plain HTTPS so no secret ever reaches the browser.
-import type { OrderRecord } from '../data.ts';
-
 const API = 'https://api.stripe.com/v1';
 
 export function stripeConfigured(): boolean {
@@ -23,18 +21,26 @@ async function stripeRequest<T>(method: 'GET' | 'POST', path: string, body?: URL
   return (await response.json()) as T;
 }
 
-/** Creates the PaymentIntent once per order. A retry reuses the same key, so Stripe never charges twice. */
-export async function paymentIntentFor(order: OrderRecord): Promise<{ id: string; clientSecret: string }> {
-  if (order.stripePaymentIntentId) {
-    const existing = await stripeRequest<IntentResponse>('GET', `/payment_intents/${order.stripePaymentIntentId}`);
-    return { id: existing.id, clientSecret: existing.client_secret };
+/**
+ * Creates the PaymentIntent once per order. A retry reuses the same idempotency key, so Stripe never charges
+ * twice; an intent that already exists is fetched instead of created.
+ */
+export async function paymentIntentFor(order: {
+  id: string;
+  paymentIntentId: string | null;
+  totalMinor: number;
+  currency: string;
+}): Promise<{ id: string; clientSecret: string; created: boolean }> {
+  if (order.paymentIntentId) {
+    const existing = await stripeRequest<IntentResponse>('GET', `/payment_intents/${order.paymentIntentId}`);
+    return { id: existing.id, clientSecret: existing.client_secret, created: false };
   }
   const body = new URLSearchParams({
-    amount: String(order.quote.totalMinor),
-    currency: order.quote.currency.toLowerCase(),
+    amount: String(order.totalMinor),
+    currency: order.currency.toLowerCase(),
     'metadata[order_id]': order.id,
     'automatic_payment_methods[enabled]': 'true',
   });
   const intent = await stripeRequest<IntentResponse>('POST', '/payment_intents', body, `pi-${order.id}`);
-  return { id: intent.id, clientSecret: intent.client_secret };
+  return { id: intent.id, clientSecret: intent.client_secret, created: true };
 }

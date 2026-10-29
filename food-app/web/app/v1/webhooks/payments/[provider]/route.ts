@@ -10,8 +10,8 @@ type StripeEvent = {
   data: { object: { id: string; amount_received?: number; amount: number; currency: string; metadata?: { order_id?: string } } };
 };
 
-// 1) verify the signature on the raw body, 2) store the event once, 3) process. Processing is idempotent by
-// order status, so a retried event never confirms an order twice.
+// 1) verify the signature on the raw body, 2) store the event once, 3) process. Processing only moves an
+// order that is still awaiting payment, so a retried event cannot confirm an order twice.
 export async function POST(request: NextRequest, { params }: { params: Promise<{ provider: string }> }) {
   const { provider } = await params;
   if (provider !== 'stripe') return NextResponse.json({ error: 'unknown provider' }, { status: 404 });
@@ -29,13 +29,14 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     return NextResponse.json({ error: 'not JSON' }, { status: 400 });
   }
 
-  const object = event.data?.object;
-  const orderId = object?.metadata?.order_id ?? null;
-  data.recordPaymentEvent(event.id, event.type, orderId);
+  await data.recordPaymentEvent(event.id, event.type, { object: event.data?.object });
 
+  const object = event.data?.object;
   if (event.type === 'payment_intent.succeeded' && object) {
+    const orderId = object.metadata?.order_id ?? null;
     const amount = object.amount_received ?? object.amount;
-    confirmCardPayment(object.id, orderId, amount, object.currency);
+    await confirmCardPayment(object.id, orderId, amount, object.currency);
   }
+  await data.markPaymentEventProcessed(event.id);
   return NextResponse.json({ received: true });
 }

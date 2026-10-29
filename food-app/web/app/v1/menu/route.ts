@@ -1,25 +1,23 @@
 import { NextResponse } from 'next/server';
-import { CATEGORIES, ITEMS, RESTAURANT } from '@/lib/seed.ts';
+import * as data from '@/lib/data.ts';
+import { errorResponse } from '@/lib/http.ts';
 import { stripeConfigured } from '@/lib/payments/stripe.ts';
 
 // Public. Both languages in one payload, so the app switches language without a round trip.
 export async function GET() {
-  const categories = CATEGORIES.map((category) => ({
-    id: category.id,
-    name: category.name,
-    items: ITEMS.filter((item) => item.categoryId === category.id).map((item) => ({
-      id: item.id,
-      name: item.name,
-      description: item.description,
-      priceMinor: item.priceMinor,
-      currency: RESTAURANT.pricing.currency,
-      soldOut: item.soldOut,
-    })),
-  }));
-  const payments = {
-    cod: RESTAURANT.payments.cod,
-    payOnArrival: RESTAURANT.payments.payOnArrival,
-    card: RESTAURANT.payments.card && stripeConfigured(),
-  };
-  return NextResponse.json({ restaurant: RESTAURANT.name, categories, payments });
+  try {
+    const [restaurant, categories] = await Promise.all([data.getRestaurant(), data.getMenu()]);
+    return NextResponse.json({
+      restaurant: restaurant.name,
+      currency: restaurant.currency,
+      categories,
+      payments: {
+        cod: restaurant.payments.cod,
+        payOnArrival: restaurant.payments.payOnArrival,
+        card: restaurant.payments.card && stripeConfigured(),
+      },
+    });
+  } catch (error) {
+    return errorResponse(error);
+  }
 }
