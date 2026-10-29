@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { api } from '../api.js';
 import { formatMoney, parseMoney } from '../money.js';
+import Gallery from '../components/Gallery.jsx';
 
 const DIGITS = 2; // AED
 const CODE = 'AED';
@@ -77,6 +78,7 @@ export default function Products({ catalog, onChanged }) {
           key={editing === 'new' ? 'new' : editing.id}
           product={editing === 'new' ? null : editing}
           catalog={catalog}
+          onChanged={onChanged}
           onClose={() => setEditing(null)}
           onSaved={async (text) => {
             setMessage(text);
@@ -89,30 +91,11 @@ export default function Products({ catalog, onChanged }) {
   );
 }
 
-function ProductEditor({ product, catalog, onClose, onSaved }) {
+function ProductEditor({ product, catalog, onChanged, onClose, onSaved }) {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
-  const [preview, setPreview] = useState(product?.imageUrl ?? null);
-  const [file, setFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState(product?.imageUrl ?? null);
   const [id, setId] = useState(product?.id ?? null);
   const categories = catalog.categories;
-
-  function onFile(event) {
-    const chosen = event.target.files?.[0];
-    setError('');
-    if (!chosen) return;
-    if (!['image/jpeg', 'image/png', 'image/webp'].includes(chosen.type)) {
-      setError('Choose a JPEG, PNG or WebP picture.');
-      return;
-    }
-    if (chosen.size > 3 * 1024 * 1024) {
-      setError('The picture is larger than 3 MB. Use a smaller file.');
-      return;
-    }
-    setFile(chosen);
-    setPreview(URL.createObjectURL(chosen));
-  }
 
   async function save(event) {
     event.preventDefault();
@@ -143,30 +126,12 @@ function ProductEditor({ product, catalog, onClose, onSaved }) {
         productId = created.product.id;
         setId(productId);
       }
-      if (file) {
-        const uploaded = await api.uploadImage(productId, file, f.get('nameEn'), f.get('nameAr'));
-        setImageUrl(uploaded.imageUrl);
-        setFile(null);
-      }
       await onSaved(product ? 'Product saved.' : 'Product added.');
       if (!product) onClose();
     } catch (err) {
       setError(err.message);
     } finally {
       setBusy(false);
-    }
-  }
-
-  async function removePicture() {
-    setError('');
-    try {
-      await api.removeImage(id);
-      setImageUrl(null);
-      setPreview(null);
-      setFile(null);
-      await onSaved('Picture removed.');
-    } catch (err) {
-      setError(err.message);
     }
   }
 
@@ -189,20 +154,11 @@ function ProductEditor({ product, catalog, onClose, onSaved }) {
           <button type="button" className="btn ghost sm" onClick={onClose}>Close</button>
         </div>
 
-        <fieldset className="stack">
-          <legend>Picture</legend>
-          <div className="row">
-            {preview ? <img className="preview" src={preview} alt="Preview of the product picture" /> : <div className="preview empty">No picture yet</div>}
-            <div className="stack">
-              <label className="btn secondary file">
-                {imageUrl || preview ? 'Change picture' : 'Choose picture'}
-                <input type="file" accept="image/jpeg,image/png,image/webp" onChange={onFile} />
-              </label>
-              {file ? <span className="muted">Will upload when you save: {file.name}</span> : null}
-              {imageUrl && id ? <button type="button" className="btn danger sm" onClick={removePicture}>Remove picture</button> : null}
-            </div>
-          </div>
-        </fieldset>
+        {product ? (
+          <Gallery productId={product.id} productName={product.name.en} onChanged={onChanged} />
+        ) : (
+          <p className="muted">Save the product first, then add its pictures and videos.</p>
+        )}
 
         <label>Category
           <select name="categoryId" defaultValue={product?.categoryId ?? categories[0]?.id} required>

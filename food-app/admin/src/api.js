@@ -29,14 +29,23 @@ export const api = {
   createProduct: (body) => request('POST', '/v1/admin/products', body),
   updateProduct: (id, body) => request('PATCH', `/v1/admin/products/${id}`, body),
   deleteProduct: (id) => request('DELETE', `/v1/admin/products/${id}`),
-  uploadImage: (id, file, altEn, altAr) => {
+  gallery: (id) => request('GET', `/v1/admin/products/${id}/media`),
+  uploadMedia: (id, file, altEn, altAr) => {
     const form = new FormData();
     form.append('file', file);
     form.append('altEn', altEn ?? '');
     form.append('altAr', altAr ?? '');
-    return request('POST', `/v1/admin/products/${id}/image`, form);
+    return request('POST', `/v1/admin/products/${id}/media`, form);
   },
-  removeImage: (id) => request('DELETE', `/v1/admin/products/${id}/image`),
+  arrangeMedia: (id, order, primary) => request('PATCH', `/v1/admin/products/${id}/media`, { order, primary }),
+  removeMedia: (id, mediaId) => request('DELETE', `/v1/admin/products/${id}/media/${mediaId}`),
+  promotions: () => request('GET', '/v1/admin/promotions'),
+  createPromotion: (body) => request('POST', '/v1/admin/promotions', body),
+  updatePromotion: (id, body) => request('PUT', `/v1/admin/promotions/${id}`, body),
+  deletePromotion: (id) => request('DELETE', `/v1/admin/promotions/${id}`),
+  aiSettings: () => request('GET', '/v1/admin/ai'),
+  saveAiSettings: (body) => request('PUT', '/v1/admin/ai', body),
+  aiModels: (provider, apiKey) => request('POST', '/v1/admin/ai/models', { provider, apiKey }),
   createOffer: (body) => request('POST', '/v1/admin/offers', body),
   updateOffer: (id, body) => request('PATCH', `/v1/admin/offers/${id}`, body),
   deleteOffer: (id) => request('DELETE', `/v1/admin/offers/${id}`),

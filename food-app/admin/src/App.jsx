@@ -4,11 +4,15 @@ import Login from './pages/Login.jsx';
 import Products from './pages/Products.jsx';
 import Categories from './pages/Categories.jsx';
 import Offers from './pages/Offers.jsx';
+import Promotions from './pages/Promotions.jsx';
+import AiSettings from './pages/AiSettings.jsx';
 
 const SECTIONS = [
   { id: 'products', label: 'Products' },
   { id: 'categories', label: 'Categories' },
   { id: 'offers', label: 'Offers' },
+  { id: 'promotions', label: 'Promotions' },
+  { id: 'assistant', label: 'Assistant' },
 ];
 
 // Hash routing keeps the console working without a server rewrite.
@@ -69,6 +73,8 @@ export default function App() {
         {catalog && section === 'products' ? <Products catalog={catalog} onChanged={reload} /> : null}
         {catalog && section === 'categories' ? <Categories catalog={catalog} onChanged={reload} /> : null}
         {catalog && section === 'offers' ? <Offers catalog={catalog} onChanged={reload} /> : null}
+        {catalog && section === 'promotions' ? <Promotions catalog={catalog} /> : null}
+        {catalog && section === 'assistant' ? <AiSettings /> : null}
       </main>
     </div>
   );
