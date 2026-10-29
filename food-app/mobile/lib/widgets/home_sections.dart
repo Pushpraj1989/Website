@@ -9,6 +9,7 @@ import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
 import 'app_button.dart';
+import 'hero_video.dart';
 
 /// Fades and rises a section into place on first build. Skipped when the device asks for reduced motion.
 class RevealOnLoad extends StatelessWidget {
@@ -86,7 +87,7 @@ class _HomeHeroCarouselState extends State<HomeHeroCarousel> {
     final s = widget.s;
     final slides = [
       _HeroSlide(
-        background: Image.asset(Art.hero, fit: BoxFit.cover, semanticLabel: ''),
+        background: const HeroVideo(video: Art.heroVideo, poster: Art.heroVideoPoster),
         title: s.heroTitle,
         body: s.heroBody,
         action: s.menu,

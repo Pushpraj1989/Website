@@ -3,6 +3,8 @@
 class Art {
   const Art._();
   static const hero = 'assets/images/photo/hero-kitchen.webp';
+  static const heroVideo = 'assets/video/lemon-chicken.mp4';
+  static const heroVideoPoster = 'assets/video/lemon-chicken-poster.jpg';
   static const cartEmpty = 'assets/images/empty-cart.png';
   static const ordersEmpty = 'assets/images/empty-orders.png';
   static const membership = 'assets/images/membership-hero.png';
