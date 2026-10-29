@@ -130,6 +130,11 @@ class ApiClient {
     return (body['zones'] as List<dynamic>).map((z) => DeliveryZone.fromJson(z as Map<String, dynamic>)).toList();
   }
 
+  Future<MembershipState> membership() async {
+    final body = await _send(() => _client.get(_uri('/v1/membership'), headers: _headers()));
+    return MembershipState.fromJson(body);
+  }
+
   Future<List<OrderHistory>> orderHistory() async {
     final body = await _send(() => _client.get(_uri('/v1/orders'), headers: _headers()));
     return (body['orders'] as List<dynamic>).map((o) => OrderHistory.fromJson(o as Map<String, dynamic>)).toList();

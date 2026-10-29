@@ -16,6 +16,7 @@ import 'cart_screen.dart';
 import 'menu_screen.dart';
 import 'assistant_screen.dart';
 import 'order_screen.dart';
+import 'membership_screen.dart';
 import 'orders_screen.dart';
 import 'sign_in_screen.dart';
 
@@ -180,6 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: Text(_menu?.restaurant.of(s.lang) ?? s.restaurantFallback),
           actions: [
+            IconButton(tooltip: s.membership, icon: const Icon(Icons.workspace_premium_outlined), onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => MembershipScreen(api: widget.api, language: widget.language)))),
             IconButton(tooltip: s.orderHistory, icon: const Icon(Icons.receipt_long_outlined), onPressed: _openOrders),
             IconButton(tooltip: s.askTitle, icon: const Icon(Icons.chat_bubble_outline), onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => AssistantScreen(api: widget.api, language: widget.language)))),
             TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language)),

@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 
 // Colours and sizes from replica/design/tokens.json. Screens use these, never raw values.
 class Tokens {
+  // Benefit tile tones, keyed by the accent names the server sends. Each tone is a background and an ink colour.
+  static const toneLilac = Color(0xFFEDE9FE);
+  static const toneLilacInk = Color(0xFF5B21B6);
+  static const tonePeach = Color(0xFFFFEDD5);
+  static const tonePeachInk = Color(0xFF9A3412);
+  static const toneMint = Color(0xFFD1FAE5);
+  static const toneMintInk = Color(0xFF065F46);
+  static const brandPurple = Color(0xFF5B21B6);
   static const bg = Color(0xFFFFFFFF);
   static const surface = Color(0xFFF5F5F4);
   static const border = Color(0xFFE7E5E4);

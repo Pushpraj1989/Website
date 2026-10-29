@@ -45,6 +45,16 @@ class Strings {
   String get pinnedAt => isArabic ? 'تم تحديد الموقع على الخريطة' : 'Location pinned on the map';
   String get locationOff => isArabic ? 'فعّل خدمة الموقع أو حرّك الخريطة يدوياً.' : 'Turn on location services, or move the map by hand.';
   String get searchFailed => isArabic ? 'البحث غير متاح الآن. حرّك الخريطة يدوياً.' : 'Search is not available right now. Move the map by hand.';
+  String get close => isArabic ? 'إغلاق' : 'Close';
+  String get membership => isArabic ? 'العضوية' : 'Membership';
+  String get membershipBenefits => isArabic ? 'مزاياك' : 'Your benefits';
+  String get planOverview => isArabic ? 'تفاصيل الخطة' : 'Plan overview';
+  String get notAMember => isArabic ? 'لست عضواً بعد' : 'You are not a member yet';
+  String memberSince(String date) => isArabic ? 'عضو منذ $date' : 'Member since $date';
+  String get upgrade => isArabic ? 'اشترك الآن' : 'Join now';
+  String get comingSoon => isArabic ? 'قريباً' : 'Coming soon';
+  String get benefitDetails => isArabic ? 'تفاصيل الميزة' : 'Benefit details';
+  String perPeriod(String period) => isArabic ? (period == 'month' ? 'شهرياً' : 'سنوياً') : (period == 'month' ? 'per month' : 'per year');
   String get chooseAddress => isArabic ? 'اختر عنوان التوصيل.' : 'Choose a delivery address.';
   String get deliverTo => isArabic ? 'التوصيل إلى' : 'Deliver to';
   String get noAddressYet => isArabic ? 'ليس لديك عناوين محفوظة بعد. أضف عنواناً للمتابعة.' : 'You have no saved addresses yet. Add one to continue.';

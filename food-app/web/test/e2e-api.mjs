@@ -484,6 +484,16 @@ try {
     assert.equal(r.status, 404);
   });
 
+  check('membership shows its benefits, and an inactive plan cannot be bought yet', async () => {
+    const r = await guest.get('/v1/membership');
+    assert.equal(r.status, 200);
+    const solo = r.json.plans.find((p) => p.code === 'solo');
+    assert.equal(solo.active, false, 'the price is not confirmed, so the plan is not for sale');
+    assert.equal(solo.benefits.length, 3);
+    assert.ok(solo.benefits.every((b) => b.title.en && b.title.ar && b.points.length >= 1));
+    assert.equal(r.json.membership, null);
+  });
+
   check('a JSON-only endpoint refuses form posts', async () => {
     const r = await fetch(`${BASE}/v1/cart`, { method: 'PUT', headers: { 'content-type': 'text/plain', cookie: `guest=${guest.jar.guest}` }, body: '{"items":[]}' });
     assert.equal(r.status, 415);

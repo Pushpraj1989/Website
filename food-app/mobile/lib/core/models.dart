@@ -388,3 +388,63 @@ class ReorderResult {
         skipped: (json['skipped'] as List<dynamic>).cast<String>(),
       );
 }
+
+/// One benefit of a membership plan: a tile on the membership screen and the details sheet it opens.
+class MembershipBenefit {
+  const MembershipBenefit({required this.id, required this.title, required this.summary, required this.icon, required this.accent, required this.points});
+  final String id;
+  final Localised title;
+  final Localised summary;
+  final String icon;
+  final String accent;
+  final List<Localised> points;
+
+  factory MembershipBenefit.fromJson(Map<String, dynamic> json) => MembershipBenefit(
+        id: json['id'] as String,
+        title: Localised.fromJson(json['title'] as Map<String, dynamic>),
+        summary: Localised.fromJson(json['summary'] as Map<String, dynamic>),
+        icon: json['icon'] as String? ?? 'star',
+        accent: json['accent'] as String? ?? 'lilac',
+        points: ((json['points'] as List<dynamic>?) ?? []).map((p) => Localised.fromJson(p as Map<String, dynamic>)).toList(),
+      );
+}
+
+class MembershipPlan {
+  const MembershipPlan({required this.id, required this.name, required this.amountMinor, required this.currency, required this.period, required this.active, required this.benefits});
+  final String id;
+  final Localised name;
+  final int amountMinor;
+  final String currency;
+  final String period;
+  final bool active;
+  final List<MembershipBenefit> benefits;
+
+  factory MembershipPlan.fromJson(Map<String, dynamic> json) {
+    final price = json['price'] as Map<String, dynamic>;
+    return MembershipPlan(
+      id: json['id'] as String,
+      name: Localised.fromJson(json['name'] as Map<String, dynamic>),
+      amountMinor: price['amountMinor'] as int,
+      currency: price['currency'] as String,
+      period: price['period'] as String,
+      active: json['active'] as bool,
+      benefits: ((json['benefits'] as List<dynamic>?) ?? []).map((b) => MembershipBenefit.fromJson(b as Map<String, dynamic>)).toList(),
+    );
+  }
+}
+
+class MembershipState {
+  const MembershipState({required this.plans, required this.membershipPlanId, required this.startedAt});
+  final List<MembershipPlan> plans;
+  final String? membershipPlanId;
+  final DateTime? startedAt;
+
+  factory MembershipState.fromJson(Map<String, dynamic> json) {
+    final m = json['membership'] as Map<String, dynamic>?;
+    return MembershipState(
+      plans: ((json['plans'] as List<dynamic>?) ?? []).map((p) => MembershipPlan.fromJson(p as Map<String, dynamic>)).toList(),
+      membershipPlanId: m?['planId'] as String?,
+      startedAt: m == null ? null : DateTime.parse(m['startedAt'] as String),
+    );
+  }
+}
