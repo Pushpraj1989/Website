@@ -9,12 +9,12 @@ import { canTransition, ORDER_STATUSES, type OrderStatus } from './status.ts';
 import { paymentIntentFor } from './payments/stripe.ts';
 
 export class RuleError extends Error {
-  constructor(
-    message: string,
-    readonly code: string,
-    readonly status = 422,
-  ) {
+  code: string;
+  status: number;
+  constructor(message: string, code: string, status = 422) {
     super(message);
+    this.code = code;
+    this.status = status;
   }
 }
 

@@ -207,16 +207,16 @@ test('admin: a product image is checked by its bytes; a text file named .png is 
   const form = new FormData();
   form.append('file', new Blob([PNG], { type: 'image/png' }), 'dish.png');
   form.append('altEn', 'A plate of food');
-  const ok = await call('POST', `/v1/admin/products/${id}/image`, { staff, form });
+  const ok = await call('POST', `/v1/admin/products/${id}/media`, { staff, form });
   assert.equal(ok.status, 201);
-  assert.match(ok.json.imageUrl, /^\/media\/[0-9a-f-]{36}\.png$/);
-  const served = await fetch(`${BASE}${ok.json.imageUrl}`);
+  assert.match(ok.json.media.url, /^\/media\/[0-9a-f-]{36}\.png$/);
+  const served = await fetch(`${BASE}${ok.json.media.url}`);
   assert.equal(served.status, 200);
   assert.equal(served.headers.get('content-type'), 'image/png');
 
   const fake = new FormData();
   fake.append('file', new Blob([Buffer.from('hello, this is text')], { type: 'image/png' }), 'virus.png');
-  const refused = await call('POST', `/v1/admin/products/${id}/image`, { staff, form: fake });
+  const refused = await call('POST', `/v1/admin/products/${id}/media`, { staff, form: fake });
   assert.equal(refused.status, 415);
 
   const traversal = await fetch(`${BASE}/media/..%2F..%2Fpackage.json`);

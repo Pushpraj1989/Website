@@ -1,12 +1,11 @@
 // Admin catalogue: categories, products, product images and offers. Staff only; the routes check the session.
 import { pool, withTx } from './db.ts';
-import { RuleError } from './orders.ts';
-import { randomUUID } from 'node:crypto';
-import { mkdirSync, writeFileSync, unlinkSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
+export const storageDir = () => join(process.cwd(), 'storage', 'media');
+import { RuleError } from './orders.ts';
+
 export const RESTAURANT_ID = '00000000-0000-4000-8000-000000000001';
-export const MAX_IMAGE_BYTES = 3 * 1024 * 1024;
 
 export type Localised = { en: string; ar: string };
 
@@ -31,9 +30,10 @@ export async function adminCatalog() {
   const [categories, items, offers] = await Promise.all([
     pool.query('select id, name_en, name_ar, sort_order, active from categories where restaurant_id = $1 order by sort_order, name_en', [RESTAURANT_ID]),
     pool.query(
-      `select i.*, m.storage_key from menu_items i
+      `select i.*, cover.storage_key from menu_items i
        join categories c on c.id = i.category_id
-       left join media m on m.id = i.image_id
+       left join lateral (select m.storage_key from product_media pm join media m on m.id = pm.media_id
+         where pm.menu_item_id = i.id and pm.is_primary limit 1) cover on true
        where c.restaurant_id = $1 order by i.sort_order, i.name_en`,
       [RESTAURANT_ID],
     ),
@@ -151,54 +151,6 @@ export async function deleteProduct(id: string): Promise<'deleted' | 'hidden'> {
   const { rowCount } = await pool.query('delete from menu_items where id = $1', [id]);
   if (!rowCount) throw new RuleError('Product not found.', 'not_found', 404);
   return 'deleted';
-}
-
-const IMAGE_TYPES: { ext: string; mime: string; test: (b: Buffer) => boolean }[] = [
-  { ext: 'jpg', mime: 'image/jpeg', test: (b) => b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff },
-  { ext: 'png', mime: 'image/png', test: (b) => b.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])) },
-  { ext: 'webp', mime: 'image/webp', test: (b) => b.subarray(0, 4).toString('ascii') === 'RIFF' && b.subarray(8, 12).toString('ascii') === 'WEBP' },
-];
-
-/** Checks the real file type from its first bytes, not the name or the declared type. */
-export function sniffImage(bytes: Buffer): { ext: string; mime: string } {
-  if (bytes.length === 0) throw new RuleError('The file is empty.', 'bad_file', 400);
-  if (bytes.length > MAX_IMAGE_BYTES) throw new RuleError('The image is larger than 3 MB. Use a smaller file.', 'too_large', 413);
-  const found = IMAGE_TYPES.find((t) => t.test(bytes));
-  if (!found) throw new RuleError('Upload a JPEG, PNG or WebP image.', 'bad_file_type', 415);
-  return found;
-}
-
-export const storageDir = () => join(process.cwd(), 'storage', 'media');
-
-/** Stores the image and makes it the product's picture. The previous picture is removed when nothing else uses it. */
-export async function setProductImage(productId: string, bytes: Buffer, altEn: string, altAr: string, staffId: string | null) {
-  const { ext } = sniffImage(bytes);
-  const key = `${randomUUID()}.${ext}`;
-  mkdirSync(storageDir(), { recursive: true });
-  writeFileSync(join(storageDir(), key), bytes);
-  return withTx(async (c) => {
-    const product = await c.query('select image_id from menu_items where id = $1 for update', [productId]);
-    if (!product.rows[0]) throw new RuleError('Product not found.', 'not_found', 404);
-    const media = await c.query(
-      `insert into media (kind, storage_key, alt_en, alt_ar, size_bytes, uploaded_by) values ('image',$1,$2,$3,$4,$5) returning id, storage_key`,
-      [key, altEn, altAr, bytes.length, staffId],
-    );
-    await c.query('update menu_items set image_id = $2, updated_at = now() where id = $1', [productId, media.rows[0].id]);
-    const previous = product.rows[0].image_id as string | null;
-    if (previous) {
-      const stillUsed = await c.query('select 1 from menu_items where image_id = $1', [previous]);
-      if (!stillUsed.rows[0]) {
-        const old = await c.query('delete from media where id = $1 returning storage_key', [previous]);
-        const file = old.rows[0] && join(storageDir(), old.rows[0].storage_key);
-        if (file && existsSync(file)) unlinkSync(file);
-      }
-    }
-    return imageUrl(media.rows[0].storage_key)!;
-  });
-}
-
-export async function removeProductImage(productId: string) {
-  await pool.query('update menu_items set image_id = null, updated_at = now() where id = $1', [productId]);
 }
 
 export async function createOffer(body: Record<string, unknown>) {

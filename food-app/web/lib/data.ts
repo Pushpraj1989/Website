@@ -101,7 +101,8 @@ export async function getMenu() {
             m.storage_key
      from categories c
      join menu_items i on i.category_id = c.id
-     left join media m on m.id = i.image_id
+     left join lateral (select m.storage_key from product_media pm join media m on m.id = pm.media_id
+       where pm.menu_item_id = i.id and pm.is_primary limit 1) m on true
      where c.restaurant_id = $1 and c.active
      order by c.sort_order, i.sort_order`,
     [restaurantId],

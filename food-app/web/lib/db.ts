@@ -1,4 +1,8 @@
-import { Pool, type PoolClient } from 'pg';
+import pg, { type PoolClient } from 'pg';
+
+// pg is CommonJS: import the default and take Pool from it, which works in Next and in plain Node.
+const Pool = pg.Pool;
+type Pool = pg.Pool;
 
 // One pool per process, kept on globalThis so dev hot reloads do not open new pools.
 const globalForDb = globalThis as unknown as { pgPool?: Pool };
