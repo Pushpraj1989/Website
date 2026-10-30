@@ -28,6 +28,8 @@ export type MenuItem = {
   priceMinor: number;
   soldOut: boolean;
   imageUrl: string | null;
+  /** Average stars and how many orders were rated; null until the restaurant's minimum is reached. */
+  rating?: { average: number; count: number } | null;
 };
 
 export type CartLine = { itemId: string; qty: number; note: string };
@@ -245,11 +247,15 @@ export async function getMenu() {
   const { rows } = await pool.query(
     `select c.id as category_id, c.name_en as cat_en, c.name_ar as cat_ar, c.illustration as cat_art,
             i.id, i.name_en, i.name_ar, i.description_en, i.description_ar, i.base_price_minor, i.available,
-            m.storage_key
+            m.storage_key, rt.average, rt.count as rating_count, rest.rating_min_count
      from categories c
      join menu_items i on i.category_id = c.id
+     join restaurant rest on rest.id = c.restaurant_id
      left join lateral (select m.storage_key from product_media pm join media m on m.id = pm.media_id
        where pm.menu_item_id = i.id and m.kind = 'image' order by pm.is_primary desc, pm.position limit 1) m on true
+     -- A dish's rating: the average of the rated orders it was in (see lib/ratings.ts).
+     left join lateral (select round(avg(r.stars)::numeric, 1)::float as average, count(distinct r.order_id)::int as count
+       from order_ratings r join order_lines l on l.order_id = r.order_id where l.menu_item_id = i.id) rt on true
      where c.restaurant_id = $1 and c.active
      order by c.sort_order, i.sort_order`,
     [restaurantId],
@@ -267,6 +273,7 @@ export async function getMenu() {
       priceMinor: r.base_price_minor,
       soldOut: !r.available,
       imageUrl: r.storage_key ? `/media/${r.storage_key}` : null,
+      rating: r.rating_count >= r.rating_min_count ? { average: Number(r.average), count: r.rating_count } : null,
     });
   }
   return [...categories.values()];

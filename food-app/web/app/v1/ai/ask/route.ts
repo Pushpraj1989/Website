@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     const guestId = await currentGuestId();
     if (!guestId) throw new RuleError('Open the menu first, then ask again.', 'no_session', 401);
     const locale = body.locale === 'ar' ? 'ar' : await currentLocale();
-    return NextResponse.json(await ask({ guestId, message: body.message, locale }));
+    return NextResponse.json(await ask({ guestId, message: body.message, locale, history: body.history }));
   } catch (error) {
     return errorResponse(error);
   }
