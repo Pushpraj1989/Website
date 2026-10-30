@@ -85,13 +85,12 @@ class _MenuScreenState extends State<MenuScreen> {
         return FutureBuilder<Menu>(
           future: _menu,
           builder: (context, snapshot) {
-            final menu = snapshot.data;
             final brand = BrandScope.of(context);
             return Scaffold(
               backgroundColor: Tokens.surface,
               appBar: AppBar(
                 backgroundColor: Tokens.bg,
-                title: Text(brand?.name.of(s.lang) ?? menu?.restaurant.of(s.lang) ?? '', maxLines: 1, overflow: TextOverflow.ellipsis),
+                // The restaurant's name is in the header below; the bar keeps only the icons.
                 actions: [
                   AskButton(api: widget.api, language: widget.language, s: s),
                   LanguageIcon(language: widget.language, s: s),

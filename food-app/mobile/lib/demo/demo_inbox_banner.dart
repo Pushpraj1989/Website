@@ -115,7 +115,10 @@ class DemoFrame extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: MediaQuery.removePadding(context: context, removeTop: true, child: DemoInboxBanner(inbox: inbox, child: child)),
+                // The banner sits outside the app's navigator, so it brings its own overlay for its buttons' tooltips.
+                child: Overlay(initialEntries: [
+                  OverlayEntry(builder: (entryContext) => MediaQuery.removePadding(context: entryContext, removeTop: true, child: DemoInboxBanner(inbox: inbox, child: child))),
+                ]),
               ),
             ]),
           ),
