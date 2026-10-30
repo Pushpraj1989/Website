@@ -51,6 +51,16 @@ export async function ordersFor(guestId: string, limit = 20): Promise<OrderHisto
   }));
 }
 
+/** What the customer has saved: the discounts on their orders that went ahead (cancelled and rejected ones do not count). */
+export async function savingsFor(guestId: string): Promise<{ savedMinor: number; currency: string | null }> {
+  const { rows } = await pool.query(
+    `select coalesce(sum(discount_minor), 0)::int as saved, max(currency) as currency
+     from orders where guest_session_id = $1 and status not in ('cancelled','rejected','awaiting_payment')`,
+    [guestId],
+  );
+  return { savedMinor: rows[0].saved, currency: rows[0].currency };
+}
+
 export type DishCard = { id: string; name: Localised; priceMinor: number; soldOut: boolean; imageUrl: string | null; timesOrdered: number };
 
 function toCard(item: MenuItem, timesOrdered: number): DishCard {

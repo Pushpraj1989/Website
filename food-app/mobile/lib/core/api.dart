@@ -145,6 +145,12 @@ class ApiClient {
     return MembershipState.fromJson(body);
   }
 
+  /// How much the customer has saved on their orders, in minor units: the discounts on orders that went ahead.
+  Future<int> savings() async {
+    final body = await _send(() => _client.get(_uri('/v1/orders'), headers: _headers()));
+    return (body['savedMinor'] as num?)?.toInt() ?? 0;
+  }
+
   Future<List<OrderHistory>> orderHistory() async {
     final body = await _send(() => _client.get(_uri('/v1/orders'), headers: _headers()));
     return (body['orders'] as List<dynamic>).map((o) => OrderHistory.fromJson(o as Map<String, dynamic>)).toList();

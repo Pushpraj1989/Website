@@ -14,7 +14,6 @@ import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
 import '../core/brand.dart';
-import '../auth/biometrics.dart';
 import '../widgets/app_button.dart';
 import '../widgets/dish_thumb.dart';
 import '../widgets/discovery.dart';
@@ -25,6 +24,7 @@ import '../widgets/home_sections.dart';
 import '../widgets/top_icons.dart';
 import '../widgets/welcome_offer.dart';
 import 'about_screen.dart';
+import 'account_screen.dart';
 import 'cart_screen.dart';
 import 'menu_screen.dart';
 import 'order_screen.dart';
@@ -32,7 +32,6 @@ import '../widgets/ask_button.dart';
 import 'assistant_screen.dart';
 import 'membership_screen.dart';
 import 'vouchers_screen.dart';
-import 'sign_in_screen.dart';
 
 // The customisable home. The user chooses which widgets show, and in what order, from the Customise sheet.
 class HomeScreen extends StatefulWidget {
@@ -177,21 +176,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Future<void> _signOut(Strings s) async {
-    try {
-      await widget.auth?.logout();
-    } catch (_) {
-      // Signing out must work even when the network does not; the local session is removed either way.
-    }
-    await widget.sessions?.clear();
-    widget.api.accessToken = null;
-    if (!mounted) return;
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => SignInScreen(auth: widget.auth ?? AuthApi(baseUrl: ''), sessions: widget.sessions ?? defaultSessionStore(), biometrics: LocalAuthGate(), api: widget.api, language: widget.language)),
-      (_) => false,
-    );
-  }
-
   Future<void> _saveLayout(DashboardLayout layout) async {
     setState(() => _layout = layout);
     await _store?.save(layout);
@@ -232,6 +216,17 @@ class _HomeScreenState extends State<HomeScreen> {
   void _openCart() {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => CartScreen(api: widget.api, language: widget.language)));
   }
+
+  /// Account: its tab inside the signed-in shell, or its own screen otherwise.
+  void _openAccount() {
+    if (widget.onSelectTab != null) return widget.onSelectTab!(3);
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => AccountScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions)));
+  }
+
+  /// The saved addresses, in Settings.
+  void _openAddresses() => Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) => SettingsScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions),
+      ));
 
   void _openCartSheet(Strings s) => showCartSheet(context, api: widget.api, language: widget.language, s: s);
 
@@ -336,9 +331,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   HomeHero(
                     slides: slides,
                     height: HomeHero.heightFor(heroPromos.isEmpty ? 'standard' : heroPromos.first.look.size, screen),
-                    title: name,
-                    subtitle: _addressLabel == null ? null : s.deliverToLabel(_addressLabel!),
-                    logoUrl: brand?.logoUrl,
+                    deliverTo: _addressLabel == null ? null : s.deliverToLabel(_addressLabel!),
+                    onAddress: _openAddresses,
                     s: s,
                     icons: [
                       AskButton(api: widget.api, language: widget.language, s: s),
@@ -350,9 +344,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         showLanguage: screen.width < 420,
                         onChoice: (choice) => switch (choice) {
                           'language' => toggleLanguage(widget.language),
+                          'account' => _openAccount(),
                           'vouchers' => _openVouchers(),
                           'about' => openAbout(context, widget.language),
-                          'signout' => _signOut(s),
                           _ => null,
                         },
                       ),
@@ -473,8 +467,6 @@ class _HomeScreenState extends State<HomeScreen> {
       const SizedBox(height: Tokens.space3),
       for (final id in _layout.ids)
         Padding(padding: const EdgeInsets.fromLTRB(Tokens.space4, 0, Tokens.space4, Tokens.space3), child: _widgetFor(id, s)),
-      gap,
-      Padding(padding: pad, child: HomeFooter(name: name, s: s, onAbout: () => openAbout(context, widget.language))),
     ];
   }
 
@@ -993,9 +985,9 @@ class _MoreMenu extends StatelessWidget {
       padding: EdgeInsets.zero,
       itemBuilder: (_) => [
         if (showLanguage) PopupMenuItem(value: 'language', child: ListTile(leading: const Icon(LucideIcons.globe), title: Text(s.language))),
+        PopupMenuItem(value: 'account', child: ListTile(leading: const Icon(LucideIcons.user), title: Text(s.account))),
         if (signedIn) PopupMenuItem(value: 'vouchers', child: ListTile(leading: const Icon(LucideIcons.ticket), title: Text(s.myVouchers))),
-        PopupMenuItem(value: 'about', child: ListTile(leading: const Icon(LucideIcons.info), title: Text(s.about))),
-        if (signedIn) PopupMenuItem(value: 'signout', child: ListTile(leading: const Icon(LucideIcons.logOut), title: Text(s.signOut))),
+        PopupMenuItem(value: 'about', child: ListTile(leading: const Icon(LucideIcons.info), title: Text(s.aboutApp))),
       ],
       child: IgnorePointer(child: TopIcon(icon: LucideIcons.ellipsisVertical, label: s.more, onPhoto: true, onTap: () {})),
     );

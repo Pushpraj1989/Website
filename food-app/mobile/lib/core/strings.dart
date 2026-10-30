@@ -266,4 +266,26 @@ class Strings {
   String get askAboutOrder => isArabic ? 'عن طلب' : 'About an order';
   String get askAboutMenu => isArabic ? 'عن القائمة' : 'About the menu';
   String assistantGreeting(String name) => isArabic ? 'أهلاً! أستطيع المساعدة في قائمة $name وطلباتك. عن ماذا تريد أن تسأل؟' : 'Hi! I can help with the $name menu and your orders. What would you like to ask about?';
+
+  // Account and settings
+  String get account => isArabic ? 'الحساب' : 'Account';
+  String get settings => isArabic ? 'الإعدادات' : 'Settings';
+  String get accountInfo => isArabic ? 'معلومات الحساب' : 'Account info';
+  String get savedAddresses => isArabic ? 'العناوين المحفوظة' : 'Saved addresses';
+  String get languageSetting => isArabic ? 'اللغة' : 'Language';
+  String get currentLanguageName => isArabic ? 'العربية' : 'English';
+  String get logOut => isArabic ? 'تسجيل الخروج' : 'Log out';
+  String get lifetimeSavings => isArabic ? 'ما وفّرته حتى الآن' : 'Lifetime savings';
+  String get viewPlans => isArabic ? 'عرض الخطط' : 'View plans';
+  String memberOf(String plan) => isArabic ? 'عضو في $plan' : 'Member of $plan';
+  String get yourOrders => isArabic ? 'طلباتك' : 'Your orders';
+  String get getHelp => isArabic ? 'المساعدة' : 'Get help';
+  String get aboutApp => isArabic ? 'حول التطبيق' : 'About app';
+  String get becomePartner => isArabic ? 'كن شريكاً' : 'Become a partner';
+  String partnerBody(String name) => isArabic ? 'لتصبح شريكاً لـ $name، تواصل مع المطعم:' : 'To become a partner of $name, contact the restaurant:';
+  String get signInForAccount => isArabic ? 'سجّل الدخول لرؤية طلباتك وقسائمك وعضويتك.' : 'Sign in to see your orders, vouchers and membership.';
+  String get signIn => isArabic ? 'تسجيل الدخول' : 'Sign in';
+  String get emailNotAdded => isArabic ? 'لم يُضف بعد' : 'Not added yet';
+  String get deleteAddress => isArabic ? 'حذف العنوان' : 'Delete address';
+  String get chooseDeliveryAddress => isArabic ? 'اختر عنوان التوصيل' : 'Choose an address';
 }

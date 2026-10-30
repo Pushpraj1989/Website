@@ -8,11 +8,12 @@ import '../core/api.dart';
 import '../core/theme.dart';
 import '../widgets/discovery.dart';
 import 'home_screen.dart';
-import 'membership_screen.dart';
+import 'account_screen.dart';
 import 'menu_screen.dart';
 import 'orders_screen.dart';
 
-// The signed-in app: four destinations in a floating pill dock. The assistant is a button in the Home and Menu
+// The signed-in app: four destinations in a floating pill dock: Home, Menu, Orders and Account (membership,
+// vouchers, settings and About live under Account). The assistant is a button in the Home and Menu
 // headers, so it is one tap away without taking a tab. Each tab keeps its place when the customer switches away.
 class MainShell extends StatefulWidget {
   const MainShell({super.key, required this.api, required this.language, this.auth, this.sessions});
@@ -42,7 +43,7 @@ class _MainShellState extends State<MainShell> {
               HomeScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions, onSelectTab: _select),
               MenuScreen(api: widget.api, language: widget.language),
               OrdersScreen(api: widget.api, language: widget.language),
-              MembershipScreen(api: widget.api, language: widget.language),
+              AccountScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions, onSelectTab: _select),
             ],
           ),
           Positioned(
@@ -61,7 +62,7 @@ class _MainShellState extends State<MainShell> {
                       DockItem(icon: LucideIcons.house, label: s.home),
                       DockItem(icon: LucideIcons.utensils, label: s.menu),
                       DockItem(icon: LucideIcons.receiptText, label: s.orderHistory),
-                      DockItem(icon: LucideIcons.award, label: s.membership),
+                      DockItem(icon: LucideIcons.user, label: s.account),
                     ],
                   ),
                 ),

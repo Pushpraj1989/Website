@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { currentGuestId, currentLocale, errorResponse, readJson } from '@/lib/http.ts';
 import { customerView, placeOrder, RuleError } from '@/lib/orders.ts';
-import { ordersFor } from '@/lib/customer.ts';
+import { ordersFor, savingsFor } from '@/lib/customer.ts';
 import { stripeConfigured } from '@/lib/payments/stripe.ts';
 import { accountForToken } from '@/lib/accounts.ts';
 import { bearerToken } from '@/lib/http.ts';
@@ -9,7 +9,9 @@ import { bearerToken } from '@/lib/http.ts';
 export async function GET() {
   try {
     const guestId = await currentGuestId();
-    return NextResponse.json({ orders: guestId ? await ordersFor(guestId) : [] });
+    if (!guestId) return NextResponse.json({ orders: [], savedMinor: 0 });
+    const [orders, savings] = await Promise.all([ordersFor(guestId), savingsFor(guestId)]);
+    return NextResponse.json({ orders, savedMinor: savings.savedMinor });
   } catch (error) {
     return errorResponse(error);
   }

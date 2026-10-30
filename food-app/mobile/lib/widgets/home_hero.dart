@@ -29,16 +29,16 @@ class HeroSlide {
       : Image.network(p.url, fit: BoxFit.cover, gaplessPlayback: true, semanticLabel: '', errorBuilder: (_, _, _) => ColoredBox(color: fallback));
 }
 
-/// The top of the home screen: the photo runs edge to edge under the status bar. The restaurant, the delivery
-/// address, the top icons and the search sit on the photo; the slide's words and button sit at its foot.
+/// The top of the home screen: the photo runs edge to edge under the status bar. Only the delivery address, the
+/// top icons and the search sit on it (the restaurant's name and logo are on the opening screen and in Account); the slide's words and button sit at its foot.
 /// Slides change on their own after each slide's time; a swipe changes them by hand and pauses the timer.
 class HomeHero extends StatefulWidget {
-  const HomeHero({super.key, required this.slides, required this.height, required this.title, required this.subtitle, required this.logoUrl, required this.icons, required this.search, required this.s});
+  const HomeHero({super.key, required this.slides, required this.height, required this.deliverTo, required this.onAddress, required this.icons, required this.search, required this.s});
   final List<HeroSlide> slides;
   final double height;
-  final String title;
-  final String? subtitle;
-  final String? logoUrl;
+  /// "Deliver to Home", or null when the customer has no saved address yet.
+  final String? deliverTo;
+  final VoidCallback onAddress;
   final List<Widget> icons;
   final Widget search;
   final Strings s;
@@ -137,18 +137,28 @@ class _HomeHeroState extends State<HomeHero> {
           end: Tokens.space2,
           child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
             Row(children: [
-              _Logo(url: widget.logoUrl, name: widget.title),
-              const SizedBox(width: Tokens.space3),
               Expanded(
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(widget.title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontFamily: Tokens.headingFont, fontWeight: FontWeight.w700, fontSize: 18)),
-                  if (widget.subtitle != null)
-                    Row(children: [
-                      const Icon(LucideIcons.mapPin, color: Colors.white, size: 13),
-                      const SizedBox(width: 3),
-                      Flexible(child: Text(widget.subtitle!, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 12.5))),
-                    ]),
-                ]),
+                child: Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: widget.deliverTo == null
+                      ? const SizedBox.shrink()
+                      : Semantics(
+                          button: true,
+                          label: widget.deliverTo,
+                          excludeSemantics: true,
+                          child: InkWell(
+                            onTap: widget.onAddress,
+                            borderRadius: BorderRadius.circular(Tokens.radiusMd),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(minHeight: 48),
+                              child: Row(mainAxisSize: MainAxisSize.min, children: [
+                                Flexible(child: Text(widget.deliverTo!, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 15))),
+                                const Icon(LucideIcons.chevronDown, color: Colors.white, size: 20),
+                              ]),
+                            ),
+                          ),
+                        ),
+                ),
               ),
               ...widget.icons,
             ]),
@@ -207,26 +217,6 @@ class _HomeHeroState extends State<HomeHero> {
             ),
           ),
       ]),
-    );
-  }
-}
-
-class _Logo extends StatelessWidget {
-  const _Logo({required this.url, required this.name});
-  final String? url;
-  final String name;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 42,
-      height: 42,
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(color: context.accent, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.white.withValues(alpha: 0.4), width: 1.5)),
-      alignment: Alignment.center,
-      child: url != null
-          ? Image.network(url!, fit: BoxFit.cover, semanticLabel: '', errorBuilder: (_, _, _) => const SizedBox.shrink())
-          : Text(name.isEmpty ? '' : name.characters.first, style: TextStyle(color: context.onAccent, fontFamily: Tokens.headingFont, fontWeight: FontWeight.w700, fontSize: 20)),
     );
   }
 }

@@ -16,6 +16,7 @@ Finder otpField() => find.descendant(of: find.byType(OtpInput), matching: find.b
 Future<void> pumpApp(WidgetTester tester, AuthServer server, {bool signedIn = false, bool faceId = false, FakeBiometricGate? gate}) async {
   SharedPreferences.setMockInitialValues({});
   await tester.pumpWidget(SampleKitchenApp(
+    openingTime: Duration.zero,
     apiBase: 'http://api.test',
     api: ApiClient(baseUrl: 'http://api.test', client: server.client()),
     auth: authWith(server),
@@ -57,7 +58,7 @@ void main() {
     await tester.enterText(otpField(), '123456');
     await tester.pumpAndSettle();
 
-    expect(find.text('Sample Kitchen'), findsWidgets, reason: 'arrives at the home screen');
+    expect(find.byTooltip('Cart'), findsWidgets, reason: 'arrives at the home screen');
     await expectOnHome(tester, 'Popular on the menu');
   });
 

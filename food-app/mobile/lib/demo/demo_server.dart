@@ -193,7 +193,11 @@ class DemoServer {
       case ('POST', '/v1/orders'):
         return _json({'order': _orderView(_place(body, account))}, 201);
       case ('GET', '/v1/orders'):
-        return _ok({'orders': [for (final o in _orders.reversed) _historyView(o)]});
+        return _ok({
+          'orders': [for (final o in _orders.reversed) _historyView(o)],
+          // As lib/customer.ts savingsFor: the discounts on orders that went ahead.
+          'savedMinor': _orders.where((o) => !const {'cancelled', 'rejected', 'awaiting_payment'}.contains(o.status(_now()))).fold<int>(0, (sum, o) => sum + ((o.quote['discountMinor'] as num?)?.toInt() ?? 0)),
+        });
       case ('GET', '/v1/addresses'):
         return _ok({'addresses': _addresses.map(_addressView).toList()});
       case ('POST', '/v1/addresses'):

@@ -4,7 +4,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sample_kitchen/app.dart' show BrandSplash;
+import 'package:sample_kitchen/auth/session_store.dart';
+import 'package:sample_kitchen/core/brand.dart';
 import 'package:sample_kitchen/core/strings.dart';
+import 'package:sample_kitchen/screens/account_screen.dart';
 import 'package:sample_kitchen/core/theme.dart';
 import 'package:sample_kitchen/screens/main_shell.dart';
 import 'package:sample_kitchen/screens/menu_screen.dart';
@@ -59,6 +63,9 @@ void main() {
           return _Opener(open: (c) => showCartSheet(c, api: w.api, language: lang, s: Strings(lang.value)));
         }), theme: theme));
     testWidgets('menu$t', (tester) => shoot(tester, 'new-menu$t', (w, lang) => MenuScreen(api: w.api, language: lang), theme: theme));
+    testWidgets('account$t', (tester) => shoot(tester, 'new-account$t', (w, lang) => AccountScreen(api: w.api, language: lang, auth: w.auth, sessions: MemorySessionStore()), theme: theme));
+    testWidgets('settings$t', (tester) => shoot(tester, 'new-settings$t', (w, lang) => SettingsScreen(api: w.api, language: lang, auth: w.auth, sessions: MemorySessionStore()), theme: theme));
+    testWidgets('splash$t', (tester) => shoot(tester, 'new-splash$t', (w, lang) => BrandSplash(brand: Brand.fromJson(w.snap['brand'] as Map<String, dynamic>), lang: 'en'), theme: theme));
   }
 }
 

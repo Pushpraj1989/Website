@@ -29,7 +29,10 @@ import 'package:sample_kitchen/screens/vouchers_screen.dart';
 import 'package:sample_kitchen/widgets/dish_sheet.dart';
 import 'package:sample_kitchen/core/strings.dart';
 import 'package:sample_kitchen/core/theme.dart';
+import 'package:sample_kitchen/app.dart' show BrandSplash;
+import 'package:sample_kitchen/core/brand.dart';
 import 'package:sample_kitchen/screens/about_screen.dart';
+import 'package:sample_kitchen/screens/account_screen.dart';
 import 'package:sample_kitchen/widgets/cart_sheet.dart';
 import 'package:sample_kitchen/widgets/welcome_offer.dart';
 
@@ -92,6 +95,9 @@ void main() {
     'welcome': (w, lang) => MainShell(api: w.api, language: lang, auth: w.auth, sessions: signedInStore()),
     'cart-sheet': (w, lang) => _OpensOnStart(open: (context) => showCartSheet(context, api: w.api, language: lang, s: Strings(lang.value))),
     'about': (w, lang) => AboutScreen(language: lang),
+    'account': (w, lang) => AccountScreen(api: w.api, language: lang, auth: w.auth, sessions: MemorySessionStore()),
+    'settings': (w, lang) => SettingsScreen(api: w.api, language: lang, auth: w.auth, sessions: MemorySessionStore()),
+    'splash': (w, lang) => BrandSplash(brand: Brand.fromJson(w.snap['brand'] as Map<String, dynamic>), lang: lang.value),
     'menu': (w, lang) => MenuScreen(api: w.api, language: lang),
     'cart': (w, lang) => CartScreen(api: w.api, language: lang),
     'checkout': (w, lang) => CheckoutScreen(api: w.api, language: lang),

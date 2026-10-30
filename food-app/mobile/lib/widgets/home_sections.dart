@@ -8,7 +8,6 @@ import '../core/models.dart';
 import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
-import '../core/version.dart';
 import 'dish_thumb.dart';
 import 'home_hero.dart';
 import 'promo_motion.dart';
@@ -425,26 +424,6 @@ class ExploreRow extends StatelessWidget {
           ),
         ),
       ],
-    ]);
-  }
-}
-
-/// The foot of the home screen: the restaurant's copyright, the app version and a link to About.
-class HomeFooter extends StatelessWidget {
-  const HomeFooter({super.key, required this.name, required this.s, required this.onAbout});
-  final String name;
-  final Strings s;
-  final VoidCallback onAbout;
-
-  @override
-  Widget build(BuildContext context) {
-    final muted = TextStyle(color: Tokens.textMuted, fontSize: 12);
-    return Column(children: [
-      Text(name, style: Theme.of(context).textTheme.titleMedium),
-      const SizedBox(height: 4),
-      Text(s.copyright(DateTime.now().year, name), textAlign: TextAlign.center, style: muted),
-      Text(s.appVersionLine(appVersion, appBuild), style: muted),
-      TextButton(onPressed: onAbout, style: TextButton.styleFrom(foregroundColor: context.accentFg), child: Text(s.about)),
     ]);
   }
 }

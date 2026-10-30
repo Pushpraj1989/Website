@@ -26,7 +26,7 @@ void main() {
   testWidgets('the menu shows items with prices, a sold-out item has no Add button', (tester) async {
     final prefs = await SharedPreferences.getInstance();
     final api = _api(_router(), prefs);
-    await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
+    await tester.pumpWidget(SampleKitchenApp(openingTime: Duration.zero, apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
     await tester.pumpAndSettle();
 
     await tester.tap(navTab('Menu'));
@@ -41,7 +41,7 @@ void main() {
   testWidgets('switching to Arabic flips the layout to right-to-left and shows Arabic labels', (tester) async {
     final prefs = await SharedPreferences.getInstance();
     final api = _api(_router(), prefs);
-    await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
+    await tester.pumpWidget(SampleKitchenApp(openingTime: Duration.zero, apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
     await tester.pumpAndSettle();
 
     await tester.tap(find.byTooltip('العربية').first);
@@ -60,7 +60,7 @@ void main() {
   testWidgets('a failed menu load shows a message and a retry button', (tester) async {
     final prefs = await SharedPreferences.getInstance();
     final api = _api(_router(menuStatus: 500), prefs);
-    await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
+    await tester.pumpWidget(SampleKitchenApp(openingTime: Duration.zero, apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
     await tester.pumpAndSettle();
 
     await tester.tap(navTab('Menu'));
@@ -76,7 +76,7 @@ void main() {
     addTearDown(tester.view.resetPhysicalSize);
     final prefs = await SharedPreferences.getInstance();
     final api = _api(_router(), prefs);
-    await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
+    await tester.pumpWidget(SampleKitchenApp(openingTime: Duration.zero, apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
     await tester.pumpAndSettle();
 
     await tester.tap(find.widgetWithText(AppButton, 'Customise'));

@@ -58,7 +58,7 @@ void main() {
       matching: find.byWidgetPredicate((w) => w is Semantics && w.properties.button == true),
     );
     expect(tabs, findsNWidgets(4));
-    for (final label in ['Home', 'Menu', 'My orders', 'Membership']) {
+    for (final label in ['Home', 'Menu', 'My orders', 'Account']) {
       expect(navTab(label), findsOneWidget, reason: label);
     }
   });
