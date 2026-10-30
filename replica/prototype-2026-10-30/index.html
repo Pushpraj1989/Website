@@ -81,7 +81,7 @@ svg.i { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-widt
 .hero-slide img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); transition: transform 6s ease; }
 .hero-slide.on img { transform: scale(1); }
 .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(0 0 0 / .62) 0%, rgb(0 0 0 / .08) 34%, rgb(0 0 0 / .05) 52%, rgb(0 0 0 / .78) 100%); pointer-events: none; }
-.hero-top { position: absolute; inset: 0 0 auto; z-index: 2; padding: 50px 16px 0; display: grid; gap: 12px; }
+.hero-top { position: absolute; inset: 0 0 auto; z-index: 2; padding: 50px 16px 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
 .status { position: absolute; top: 0; inset-inline: 0; height: 46px; display: flex; align-items: center; justify-content: space-between; padding: 6px 30px 0; font: 600 15px var(--f-app); z-index: 5; color: #fff; pointer-events: none; }
 .status .r { display: flex; gap: 6px; align-items: center; font-size: 12px; }
 .status .batt { width: 24px; height: 12px; border: 1.5px solid currentColor; border-radius: 3px; position: relative; }
@@ -89,8 +89,11 @@ svg.i { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-widt
 .who { display: flex; align-items: center; gap: 10px; }
 .logo { width: 40px; height: 40px; border-radius: 12px; background: var(--a-brand); display: grid; place-items: center; font: 700 20px var(--f-display); color: #fff; box-shadow: 0 0 0 2px rgb(255 255 255 / .35); flex: none; }
 .who .t { min-width: 0; flex: 1; }
-.who .n { font: 700 17px/1.15 var(--f-display); }
-.who .a { font: 400 12.5px/1.3 var(--f-app); opacity: .9; display: flex; align-items: center; gap: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: none; border: 0; color: inherit; padding: 0; cursor: pointer; }
+.who .n { font: 700 17px/1.15 var(--f-display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.who .icons { gap: 6px; }
+.who .ibtn { width: 40px; height: 40px; }
+.who .a span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.who .a { max-width: 100%; min-width: 0; font: 400 12.5px/1.3 var(--f-app); opacity: .9; display: flex; align-items: center; gap: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: none; border: 0; color: inherit; padding: 0; cursor: pointer; }
 .pill-chip { display: inline-flex; align-items: center; gap: 4px; font: 700 12px var(--f-app); padding: 6px 10px; border-radius: 999px; background: rgb(255 255 255 / .18); border: 1px solid rgb(255 255 255 / .28); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #fff; }
 .avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgb(255 255 255 / .2); border: 1px solid rgb(255 255 255 / .35); font: 700 14px var(--f-app); }
 .search { display: flex; gap: 8px; }
@@ -294,6 +297,61 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
 .about dl { width: 100%; display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; text-align: start; font-size: 14px; margin: 0; padding: 14px; }
 .about dt { color: var(--a-muted); }
 .about dd { margin: 0; text-align: end; font-weight: 600; }
+/* Icon buttons in top bars: on photos they are frosted circles, on pages plain circles. Each has a name for screen readers and a tooltip. */
+.icons { display: flex; gap: 8px; align-items: center; }
+.ibtn { position: relative; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; border: 1px solid var(--a-border); background: var(--a-card-solid); color: var(--a-text); }
+.ibtn.on-photo { background: rgb(255 255 255 / .18); border-color: rgb(255 255 255 / .32); color: #fff; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.ibtn .count { position: absolute; top: -3px; inset-inline-end: -3px; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 10px; display: grid; place-items: center; font: 800 11px var(--f-app); background: var(--a-brand); color: #fff; border: 2px solid var(--a-card-solid); }
+.ibtn.on-photo .count { border-color: transparent; background: #fff; color: #1C1917; }
+.ibtn.bump { animation: bump .45s ease; }
+.ibtn .tip { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #1C1917; color: #fff; font: 600 11px var(--f-app); padding: 4px 7px; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s; z-index: 5; }
+.ibtn:hover .tip, .ibtn:focus-visible .tip { opacity: 1; }
+.ibtn.ai { background: linear-gradient(135deg, color-mix(in srgb, var(--a-brand) 85%, #fff), color-mix(in srgb, var(--a-brand) 60%, #000)); color: #fff; border-color: transparent; }
+@keyframes bump { 30% { transform: scale(1.18); } 60% { transform: scale(.94); } }
+.pagebar { position: sticky; top: 0; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 52px 16px 10px; }
+.pagebar.over { position: absolute; inset: 0 0 auto; }
+
+/* Assistant */
+.chat { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.chat-h { padding: 50px 14px 12px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--a-border); background: var(--a-sheet); }
+.chat-h .t { flex: 1; min-width: 0; }
+.chat-h b { display: block; font: 700 16px var(--f-app); }
+.chat-h span { font-size: 12px; }
+.aiface { width: 40px; height: 40px; border-radius: 14px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, color-mix(in srgb, var(--a-brand) 85%, #fff), color-mix(in srgb, var(--a-brand) 55%, #000)); flex: none; }
+.msgs { flex: 1; overflow-y: auto; padding: 14px 14px 10px; display: flex; flex-direction: column; gap: 10px; scrollbar-width: none; }
+.msg { max-width: 86%; padding: 10px 12px; border-radius: 16px; font-size: 14px; line-height: 1.45; animation: rise .25s ease; }
+.msg.me { align-self: flex-end; background: var(--a-brand); color: #fff; border-end-end-radius: 6px; }
+.msg.bot { align-self: flex-start; background: var(--a-card-solid); border: 1px solid var(--a-border); border-end-start-radius: 6px; display: grid; gap: 8px; }
+.msg.bot .say { justify-self: start; display: inline-flex; align-items: center; gap: 4px; font: 600 12px var(--f-app); color: var(--a-brand-fg); background: none; border: 0; padding: 4px 0; cursor: pointer; min-height: 32px; }
+.msg.bot .say svg.i { width: 16px; height: 16px; }
+.qchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.qchips button { font: 600 13px var(--f-app); padding: 8px 12px; border-radius: 999px; border: 1px solid var(--a-brand-fg); color: var(--a-brand-fg); background: transparent; cursor: pointer; min-height: 36px; }
+.ccard { display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; align-items: center; padding: 8px; border-radius: 12px; background: var(--a-fill); }
+.ccard img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; }
+.ccard b { font-size: 13.5px; display: block; }
+.ccard span { font-size: 12px; }
+.confirm { display: grid; gap: 8px; padding: 10px; border-radius: 12px; border: 1px dashed var(--a-brand-fg); }
+.confirm .row { display: flex; gap: 8px; }
+.ordercard { display: grid; gap: 8px; padding: 10px; border-radius: 12px; background: var(--a-fill); }
+.ordercard .bar { height: 6px; border-radius: 3px; background: var(--a-border-strong); overflow: hidden; }
+.ordercard .bar i { display: block; height: 100%; width: 60%; background: linear-gradient(90deg, var(--a-brand), color-mix(in srgb, var(--a-brand) 60%, #fff)); }
+.compose { display: flex; gap: 8px; padding: 10px 12px 22px; border-top: 1px solid var(--a-border); background: var(--a-sheet); }
+.compose input { flex: 1; min-width: 0; height: 46px; border-radius: 23px; border: 1px solid var(--a-border-strong); background: var(--a-card-solid); color: var(--a-text); padding: 0 16px; font: 15px var(--f-app); }
+.compose button { width: 46px; height: 46px; border-radius: 50%; border: 0; display: grid; place-items: center; cursor: pointer; }
+.compose .send { background: var(--a-brand); color: #fff; }
+.compose .mic { background: var(--a-fill); color: var(--a-text); }
+.scope { font-size: 11.5px; text-align: center; padding: 6px 16px 0; }
+.toggle { display: inline-flex; align-items: center; gap: 6px; font: 600 12px var(--f-app); background: none; border: 1px solid var(--a-border); color: var(--a-text); border-radius: 999px; padding: 6px 10px; cursor: pointer; min-height: 36px; }
+.toggle[aria-pressed="true"] { border-color: var(--a-brand-fg); color: var(--a-brand-fg); }
+
+/* Website header, icons only */
+.webhead { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 10px; background: #FFFFFF; color: #1C1917; border: 1px solid #E7E5E4; }
+.webhead .lg { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; color: #fff; font: 700 15px var(--f-display); flex: none; }
+.webhead .nm { font: 700 15px var(--f-display); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.webhead .wi { position: relative; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; border: 1px solid #E7E5E4; color: #1C1917; flex: none; }
+.webhead .wi svg.i { width: 18px; height: 18px; }
+.webhead .wi .count { position: absolute; top: -4px; right: -4px; min-width: 17px; height: 17px; border-radius: 9px; font: 800 10px var(--f-app); display: grid; place-items: center; color: #fff; padding: 0 4px; }
+
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
 </style>
 
@@ -324,13 +382,15 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
         <button type="button" id="b-cart">Open cart</button>
         <button type="button" id="b-menu">Open menu</button>
         <button type="button" id="b-about">About and version</button>
+        <button type="button" id="b-ask">Ask the assistant</button>
         <button type="button" id="b-reset">Empty cart</button>
       </div>
     </section>
     <section class="box">
-      <h2>Website footer</h2>
+      <h2>Website header and footer</h2>
+      <div class="webhead" id="webhead"></div>
       <div class="webfoot" id="webfoot"></div>
-      <p class="note">The same copyright and version line goes on every website page and in the app's About screen, filled from the restaurant's name and the release number.</p>
+      <p class="note">Icons replace the text links, each with a name for screen readers and a tooltip. Staff sign-in moves to the footer. The same copyright and version line goes on every website page and in the app's About screen, filled from the restaurant's name and the release number.</p>
     </section>
     <section class="box">
       <h2>What each part runs on</h2>
@@ -342,6 +402,7 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
         <li><b>Points and vouchers</b>: the customer's membership points and saved vouchers.</li>
         <li><b>Ratings</b>: new. Customers rate a delivered order; a dish shows its score once it has enough ratings.</li>
         <li><b>Offer strip</b>: counts down the customer's best unused code.</li>
+        <li><b>Assistant</b>: the existing assistant, which already answers only about the menu, the restaurant and the customer's own orders, with every dish and order checked by the server. New: it asks "order or menu?" when a question is unclear, offers Add to cart that the customer confirms, and reads replies aloud on the phone. Replies in this preview are scripted.</li>
       </ul>
     </section>
   </aside>
@@ -453,7 +514,11 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
     play: '<path d="M8 5v14l11-7z"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', bike: '<circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17 9 9h5l4 8M14 9l-2-4H9"/>',
     cash: '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>', hand: '<path d="M7 11V6a1.5 1.5 0 0 1 3 0v4M10 10V4.5a1.5 1.5 0 0 1 3 0V10M13 10V5.5a1.5 1.5 0 0 1 3 0V12M16 9.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-3l-2.5-4a1.5 1.5 0 0 1 2.5-1.5L7 14"/>',
     basket: '<path d="M3 10h18l-2 10H5zM8 10l4-6 4 6"/>', calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>', wallet: '<path d="M3 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H5a2 2 0 0 1-2-2zM3 7l12-3v3"/><circle cx="16.5" cy="13.5" r="1.2"/>',
-    check: '<path d="m5 12 5 5 9-10"/>', info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>', edit: '<path d="M4 20h4L19 9l-4-4L4 16z"/>',
+    check: '<path d="m5 12 5 5 9-10"/>',
+    bag: '<path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+    sparkle: '<path d="M12 3c.5 3.5 2 5 5.5 5.5C14 9 12.5 10.5 12 14c-.5-3.5-2-5-5.5-5.5C10 8 11.5 6.5 12 3z"/><path d="M18 14c.3 1.8 1 2.6 2.8 2.9-1.8.3-2.5 1.1-2.8 2.9-.3-1.8-1-2.6-2.8-2.9 1.8-.3 2.5-1.1 2.8-2.9z"/>',
+    send: '<path d="M4 12 20 4l-6 16-3-7z"/>', volume: '<path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/>', info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>', edit: '<path d="M4 20h4L19 9l-4-4L4 16z"/>',
   };
   const ic = (n, extra = '') => `<svg class="i ${extra}" viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
   const starBox = (r) => `<span class="box ${r < 4 ? 'mid' : ''}">${r.toFixed(1)}<svg viewBox="0 0 24 24" aria-hidden="true">${P.star}</svg></span>`;
@@ -493,8 +558,7 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
             <div class="n">Sample Kitchen</div>
             <button class="a" type="button">${ic('pin')}<span>Home · Lavender Building, wing B</span>${ic('down')}</button>
           </div>
-          <span class="pill-chip">${ic('coins')} 1,240</span>
-          <span class="avatar" aria-label="Account">LH</span>
+          <div class="icons">${topIcons(true)}</div>
         </div>
         <div class="search">
           <div class="field">${ic('search')}<span>Search <b>"family tray"</b></span></div>
@@ -564,6 +628,14 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
 
     <div class="float" id="float">${floatHTML(count)}</div>`;
   }
+  // The same three icons on every top bar: ask the assistant, switch language, open the cart.
+  function topIcons(onPhoto) {
+    const n = Object.values(state.cart).reduce((a, b) => a + b, 0);
+    const c = onPhoto ? 'on-photo' : '';
+    return `<button class="ibtn ai" type="button" data-go="ask" aria-label="Ask the assistant">${ic('sparkle')}<span class="tip">Ask</span></button>`
+      + `<button class="ibtn ${c}" type="button" data-lang aria-label="العربية">${ic('globe')}<span class="tip">العربية</span></button>`
+      + `<button class="ibtn ${c} cart-ic" type="button" data-go="cart" aria-label="Cart, ${n} items">${ic('bag')}${n ? `<span class="count">${n}</span>` : ''}<span class="tip">Cart</span></button>`;
+  }
   function heroCopy() {
     const h = HERO[state.hero];
     return `<span class="kicker">${h.kicker}</span><h2>${h.title}</h2><p>${h.copy}</p><button class="btn" type="button" data-go="menu">Order now ${ic('right')}</button>`;
@@ -630,7 +702,7 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
 
   function dishHTML(d) {
     return `
-      <div class="dhero"><img src="${IMG(d.img)}" alt="${d.name}"><button class="back" type="button" data-back aria-label="Back">${ic('left')}</button></div>
+      <div class="dhero"><img src="${IMG(d.img)}" alt="${d.name}"><div class="pagebar over" style="z-index:2"><button class="ibtn on-photo" type="button" data-back aria-label="Back">${ic('left')}</button><div class="icons"><button class="ibtn on-photo" type="button" aria-label="Save ${d.name}">${ic('heart')}<span class="tip">Save</span></button><button class="ibtn on-photo" type="button" aria-label="Share">${ic('share')}<span class="tip">Share</span></button><button class="ibtn on-photo cart-ic" type="button" data-go="cart" aria-label="Cart">${ic('bag')}${Object.values(state.cart).reduce((a, b) => a + b, 0) ? `<span class="count">${Object.values(state.cart).reduce((a, b) => a + b, 0)}</span>` : ''}<span class="tip">Cart</span></button></div></div></div>
       <div class="dbody">
         <div class="mrow"><h2>${d.name}</h2>${rating(d)}</div>
         <div class="chips">${d.reorder ? '<span class="chip ok">Highly reordered</span>' : ''}<span class="chip">${ic('clock')} 15 min</span>${d.ribbon ? `<span class="chip" style="background:linear-gradient(135deg,#7C3AED,#DB2777);color:#fff;border:0">${d.ribbon}</span>` : ''}</div>
@@ -649,7 +721,7 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
     const groups = ['Mains', 'Starters', 'Drinks', 'Desserts'];
     return `
       <div class="mhead">
-        <div class="mtop"><button class="back" type="button" data-back aria-label="Back" style="position:static">${ic('left')}</button><span style="display:flex;gap:8px"><span class="chip">${ic('search')} Search</span></span></div>
+        <div class="mtop"><button class="ibtn" type="button" data-back aria-label="Back">${ic('left')}</button><div class="icons"><button class="ibtn" type="button" aria-label="Search the menu">${ic('search')}<span class="tip">Search</span></button>${topIcons(false)}</div></div>
         <div class="mrow"><div><h2>Sample Kitchen</h2><div class="muted" style="font-size:13px;margin-top:4px;display:flex;gap:6px;align-items:center">${ic('pin')} 2.4 km · Al Barsha</div><div style="font-size:13px;margin-top:4px;display:flex;gap:6px;align-items:center;color:var(--a-success)">${ic('bike')} 25–30 min · Free delivery over AED 60</div></div>${rating({ rating: 4.4, count: '3.6K' })}</div>
         <div class="chips"><span class="chip ok">${ic('check')} Packed in recyclable boxes</span><span class="chip">${ic('cash')} Cash on delivery</span></div>
         <div class="offerbar">${ic('percent')} 3 dishes at 20% off<span style="margin-inline-start:auto" class="muted">4 offers ${ic('down')}</span></div>
@@ -683,6 +755,101 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
       </div>`;
   }
 
+  // ---------- Assistant (scripted for the prototype; the app sends the question to the restaurant's AI provider) ----------
+  const chat = [];
+  let speakAll = false;
+  const ORDER = { no: 'R-1042', status: 'Preparing', eta: 18, items: '1 × Grilled chicken plate, 2 × Mint lemonade', total: 69 };
+  const START = { who: 'bot', text: "Hi Layla. I can help with our menu, your orders and the restaurant. What would you like to ask about?", chips: ['My order', 'The menu', 'Opening hours'] };
+  function askShell() {
+    return `<div class="chat">
+      <div class="chat-h"><button class="ibtn" type="button" data-back aria-label="Back">${ic('left')}</button><span class="aiface">${ic('sparkle')}</span><span class="t"><b>Ask Sample Kitchen</b><span class="muted">Menu, your orders and the restaurant</span></span><button class="toggle" type="button" id="speakAll" aria-pressed="${speakAll}">${ic('volume')} Read aloud</button></div>
+      <div class="msgs" id="msgs" aria-live="polite"></div>
+      <p class="scope muted">Answers come from this restaurant's menu and your own orders. Nothing is added to your cart until you tap Add.</p>
+      <form class="compose" id="compose"><label for="askIn" class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your question</label><input id="askIn" autocomplete="off" placeholder="Ask about a dish or your order"><button class="mic" type="button" data-mic aria-label="Ask by voice">${ic('mic')}</button><button class="send" type="submit" aria-label="Send">${ic('send')}</button></form>
+    </div>`;
+  }
+  const words = (t) => t.toLowerCase().replace(/[^a-z0-9\s]/g, ' ');
+  const NUM = { one: 1, two: 2, three: 3, four: 4, a: 1, an: 1 };
+  function findDishes(t) {
+    const w = words(t);
+    // Whole words only, best match first: "mint lemonade" is the lemonade, not the lemon chicken.
+    const have = new Set(w.split(/\s+/));
+    const scored = DISHES.map((d) => [d, d.name.toLowerCase().split(' ').filter((part) => part.length > 3 && have.has(part)).length]).filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1]);
+    if (scored.length) return scored.filter(([, n]) => n === scored[0][1]).map(([d]) => d);
+    if (/filling|hungry|main|big|grill/.test(w)) return DISHES.filter((d) => d.cat === 'Mains');
+    if (/drink|thirst|juice|lemonade/.test(w)) return DISHES.filter((d) => d.cat === 'Drinks');
+    if (/dessert|sweet|pudding/.test(w)) return DISHES.filter((d) => d.cat === 'Desserts');
+    if (/starter|light|share|mezze|veg/.test(w)) return DISHES.filter((d) => d.cat === 'Starters');
+    if (/cheap|under|budget/.test(w)) return DISHES.filter((d) => d.price <= 20);
+    if (/popular|recommend|best|famous|suggest/.test(w)) return [...DISHES].sort((a, b) => b.rating - a.rating).slice(0, 3);
+    return [];
+  }
+  function reply(text) {
+    const w = words(text);
+    // Adding to the cart: the assistant proposes, the customer confirms.
+    const add = w.match(/\b(add|put|want|get|i ll have|give me)\b\s*(\d+|one|two|three|four|a|an)?/);
+    const dishes = findDishes(text);
+    if (add && dishes.length) {
+      const n = Number(add[2]) || NUM[add[2]] || 1;
+      const d = dishes[0];
+      return { who: 'bot', text: `Add ${n} × ${d.name} to your cart? That's ${money(d.price * n)}.`, confirm: { id: d.id, n } };
+    }
+    if (/what did i order/.test(w)) return { who: 'bot', text: `Order ${ORDER.no}: ${ORDER.items}. Total ${money(ORDER.total)}, cash on delivery.` };
+    if (/\b(order|track|where|late|status|deliver|driver|arriv|refund|receipt)\b/.test(w) && !dishes.length) {
+      return { who: 'bot', text: `Your order ${ORDER.no} is being prepared. It should reach you in about ${ORDER.eta} minutes.`, order: true, chips: ['What did I order?', 'Talk to the restaurant'] };
+    }
+    if (/what did i order/.test(w)) return { who: 'bot', text: `Order ${ORDER.no}: ${ORDER.items}. Total ${money(ORDER.total)}, cash on delivery.` };
+    if (/\b(hour|hours|open|close|address|where are you|location|phone|call|minimum|fee|talk|contact|restaurant)\b/.test(w)) {
+      return { who: 'bot', text: 'We are open every day from 11 am to 1 am. Delivery is free over AED 60, otherwise AED 10. You can reach us on +971 4 000 0000.' };
+    }
+    if (dishes.length) {
+      const d = dishes[0];
+      const text = dishes.length === 1
+        ? `${d.name}: ${d.desc} It's ${money(d.price)} and rated ${d.rating} from ${d.count} ratings.`
+        : `Here are ${dishes.length} you might like. ${dishes.map((x) => `${x.name}, ${money(x.price)}`).join('; ')}.`;
+      return { who: 'bot', text, cards: dishes.map((x) => x.id).slice(0, 3) };
+    }
+    if (/\b(menu|food|dish|eat|hungry)\b/.test(w)) return { who: 'bot', text: 'Happy to help with the menu. Are you after something filling, light, a drink or a dessert?', chips: ['Something filling', 'Light and fresh', 'A drink', 'A dessert'] };
+    if (/^(hi|hello|hey|help|question|i have a question|salam)\b/.test(w.trim()) || w.trim().split(/\s+/).length <= 2) {
+      return { who: 'bot', text: 'Sure. Is this about an order you placed, or about the menu?', chips: ['An order', 'The menu'] };
+    }
+    return { who: 'bot', text: "I can only help with Sample Kitchen: our menu, your orders and the restaurant's details. Is it about an order or the menu?", chips: ['An order', 'The menu'] };
+  }
+  function msgHTML(m, i) {
+    if (m.who === 'me') return `<div class="msg me">${m.text}</div>`;
+    return `<div class="msg bot">
+      <span>${m.text}</span>
+      ${m.cards ? m.cards.map((id) => { const d = byId[id]; return `<div class="ccard"><img src="${IMG(d.img)}" alt=""><span><b>${d.name}</b><span class="muted">${money(d.price)} · ${d.rating}★</span></span><button class="btn sm" type="button" data-chatadd="${id}">${qty(id) ? 'Added' : 'Add'}</button></div>`; }).join('') : ''}
+      ${m.confirm ? (m.done ? `<div class="codechip" style="margin:0">${ic('check')} Added to your cart</div>` : `<div class="confirm"><div class="ccard" style="background:none;padding:0"><img src="${IMG(byId[m.confirm.id].img)}" alt=""><span><b>${m.confirm.n} × ${byId[m.confirm.id].name}</b><span class="muted">${money(byId[m.confirm.id].price * m.confirm.n)}</span></span><span></span></div><div class="row"><button class="btn sm" type="button" data-confirm="${i}" style="background:var(--a-brand);color:#fff;border-color:var(--a-brand)">Add to cart</button><button class="btn sm" type="button" data-cancel="${i}">Not now</button></div></div>`) : ''}
+      ${m.order ? `<div class="ordercard"><b>Order ${ORDER.no} · ${ORDER.status}</b><div class="bar"><i></i></div><span class="muted" style="font-size:12px">${ORDER.items}</span><button class="link" type="button" data-go="orders">Track order ${ic('right')}</button></div>` : ''}
+      ${m.chips ? `<div class="qchips">${m.chips.map((c) => `<button type="button" data-ask="${c}">${c}</button>`).join('')}</div>` : ''}
+      <button class="say" type="button" data-say="${i}">${ic('volume')} Read aloud</button>
+    </div>`;
+  }
+  function drawChat() {
+    const box = document.getElementById('msgs'); if (!box) return;
+    if (!chat.length) chat.push(START);
+    box.innerHTML = chat.map(msgHTML).join('');
+    box.scrollTop = box.scrollHeight;
+  }
+  function speak(text) {
+    try {
+      if (!('speechSynthesis' in window)) return toast('Reading aloud is not available in this browser');
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text.replace(/AED/g, 'dirhams').replace(/×/g, 'times'));
+      u.lang = 'en-GB'; speechSynthesis.speak(u);
+    } catch { toast('Reading aloud is not available here'); }
+  }
+  function askText(text) {
+    if (!text.trim()) return;
+    chat.push({ who: 'me', text: text.replace(/[<>]/g, '') });
+    drawChat();
+    setTimeout(() => {
+      const r = reply(text); chat.push(r); drawChat();
+      if (speakAll) speak(r.text);
+    }, 450);
+  }
+
   // ---------- Assembly ----------
   function render() {
     const t = tokens();
@@ -698,6 +865,7 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
       <div class="page" data-kind="menu" id="pg-menu">${menuHTML()}</div>
       <div class="page" data-kind="dish" id="pg-dish"></div>
       <div class="page" data-kind="about" id="pg-about">${aboutHTML()}</div>
+      <div class="page" data-kind="ask" id="pg-ask">${askShell()}</div>
       <div class="scrim" id="scrim"></div>
       <div class="sheet" data-kind="cart" id="sh-cart" role="dialog" aria-label="Your cart">${cartHTML()}</div>
       <div class="sheet" data-kind="treat" id="sh-treat" role="dialog" aria-label="Welcome offer">${treatHTML()}</div>
@@ -705,7 +873,10 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
     screen.querySelector('.scroll').scrollTop = keep;
     if (open.page) { if (open.page === 'dish') fillDish(open.dish); const pg = screen.querySelector(`.page[data-kind="${open.page}"]`); pg.classList.add('on'); pg.scrollTop = pageKeep; }
     if (open.sheet) showSheet(open.sheet, true);
-    document.getElementById('webfoot').innerHTML = `<strong>Sample Kitchen</strong><span>Al Barsha, Dubai · +971 4 000 0000</span><nav><a href="#">Menu</a><a href="#">About</a><a href="#">Terms</a><a href="#">Privacy</a></nav><span>© 2026 Sample Kitchen. All rights reserved. Website version 1.4.0</span>`;
+    drawChat();
+    const n = Object.values(state.cart).reduce((a, b) => a + b, 0);
+    document.getElementById('webhead').innerHTML = `<span class="lg" style="background:${state.brand}">S</span><span class="nm">Sample Kitchen</span>${[['menu', 'Menu'], ['search', 'Search'], ['sparkle', 'Ask'], ['globe', 'العربية'], ['bag', 'Cart'], ['user', 'Account']].map(([i, l]) => `<span class="wi" title="${l}" aria-label="${l}">${ic(i)}${i === 'bag' && n ? `<span class="count" style="background:${state.brand}">${n}</span>` : ''}</span>`).join('')}`;
+    document.getElementById('webfoot').innerHTML = `<strong>Sample Kitchen</strong><span>Al Barsha, Dubai · +971 4 000 0000</span><nav><a href="#">About</a><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Staff sign-in</a></nav><span>© 2026 Sample Kitchen. All rights reserved. Website version 1.4.0</span>`;
     panel();
   }
   function fillDish(id) { const pg = document.getElementById('pg-dish'); pg.dataset.dish = id; pg.innerHTML = dishHTML(byId[id]); }
@@ -721,6 +892,12 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
   function refreshCart() {
     const count = Object.values(state.cart).reduce((a, b) => a + b, 0);
     document.getElementById('float').innerHTML = floatHTML(count);
+    screen.querySelectorAll('.cart-ic').forEach((b) => {
+      b.setAttribute('aria-label', `Cart, ${count} items`);
+      let c = b.querySelector('.count'); if (!c && count) { c = document.createElement('span'); c.className = 'count'; b.insertBefore(c, b.querySelector('.tip')); }
+      if (c) { if (count) c.textContent = count; else c.remove(); }
+      b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump');
+    });
     document.getElementById('sh-cart').innerHTML = cartHTML();
     screen.querySelectorAll('.dish, .mitem').forEach((el) => {
       const img = el.querySelector('[data-open]'); if (!img) return;
@@ -734,13 +911,23 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
     if (where === 'treat') return showSheet('treat');
     if (where === 'fullcart') { closeSheets(); return toast('Opens the full cart screen'); }
     if (where === 'orders') return toast('Opens Orders');
+    if (where === 'ask') { closeSheets(); document.getElementById('pg-ask').classList.add('on'); setTimeout(() => document.getElementById('askIn')?.focus(), 350); return; }
     const pg = document.getElementById('pg-' + where); if (pg) { closeSheets(); pg.scrollTop = 0; pg.classList.add('on'); }
   }
 
   screen.addEventListener('click', (e) => {
-    const t = e.target.closest('[data-inc],[data-dec],[data-open],[data-go],[data-close],[data-back],[data-pay],[data-place],[data-addclose],[data-cat],#scrim');
+    const t = e.target.closest('[data-inc],[data-dec],[data-open],[data-go],[data-close],[data-back],[data-pay],[data-place],[data-addclose],[data-cat],[data-ask],[data-say],[data-confirm],[data-cancel],[data-chatadd],[data-mic],[data-lang],#speakAll,#scrim');
     if (!t) return;
     if (t.matches('a')) e.preventDefault();
+    if (t.dataset.ask === 'Open my cart') return go('cart');
+    if (t.dataset.ask) return askText(t.dataset.ask);
+    if (t.dataset.say) return speak(chat[+t.dataset.say].text);
+    if (t.dataset.confirm) { const m = chat[+t.dataset.confirm]; state.cart[m.confirm.id] = qty(m.confirm.id) + m.confirm.n; m.done = true; refreshCart(); drawChat(); chat.push({ who: 'bot', text: 'Done. Anything else, or shall I open your cart?', chips: ['Open my cart', 'Suggest a drink'] }); drawChat(); return; }
+    if (t.dataset.cancel) { chat.splice(+t.dataset.cancel, 1, { who: 'bot', text: 'No problem, nothing was added.' }); drawChat(); return; }
+    if (t.dataset.chatadd) { state.cart[t.dataset.chatadd] = qty(t.dataset.chatadd) + 1; refreshCart(); drawChat(); toast(`Added ${byId[t.dataset.chatadd].name}`); return; }
+    if (t.hasAttribute('data-mic')) return toast('Voice questions work in the app. This preview has no microphone.');
+    if (t.hasAttribute('data-lang')) return toast('Switches the app to Arabic');
+    if (t.id === 'speakAll') { speakAll = !speakAll; t.setAttribute('aria-pressed', speakAll); toast(speakAll ? 'Replies will be read aloud' : 'Reading aloud is off'); return; }
     if (t.dataset.inc) { const had = qty(t.dataset.inc); state.cart[t.dataset.inc] = had + 1; refreshCart(); if (!had) toast(`Added ${byId[t.dataset.inc].name}`); return; }
     if (t.dataset.dec) { state.cart[t.dataset.dec] = Math.max(0, qty(t.dataset.dec) - 1); refreshCart(); return; }
     if (t.dataset.addclose) { if (!qty(t.dataset.addclose)) state.cart[t.dataset.addclose] = 1; refreshCart(); document.getElementById('pg-dish').classList.remove('on'); toast('Added to cart'); return; }
@@ -751,6 +938,11 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
     if (t.dataset.cat) { state.cat = t.dataset.cat; screen.querySelectorAll('.cat').forEach((c) => c.classList.toggle('on', c.dataset.cat === state.cat)); return; }
     if (t.id === 'scrim' || t.hasAttribute('data-close')) { closeSheets(); if (t.dataset.goAfter) setTimeout(() => go(t.dataset.goAfter), 250); return; }
     if (t.dataset.go) go(t.dataset.go);
+  });
+
+  screen.addEventListener('submit', (e) => {
+    if (e.target.id !== 'compose') return;
+    e.preventDefault(); const inp = document.getElementById('askIn'); askText(inp.value); inp.value = '';
   });
 
   // Hero and offers move on their own; a person's swipe or tap pauses them.
@@ -797,6 +989,7 @@ textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1
   document.getElementById('b-cart').onclick = () => { closeSheets(); showSheet('cart'); };
   document.getElementById('b-menu').onclick = () => go('menu');
   document.getElementById('b-about').onclick = () => go('about');
+  document.getElementById('b-ask').onclick = () => go('ask');
   document.getElementById('b-reset').onclick = () => { state.cart = {}; refreshCart(); };
 
   render();
