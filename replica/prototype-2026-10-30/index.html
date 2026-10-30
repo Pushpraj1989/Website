@@ -1,0 +1,806 @@
+<title>Kitchen App Prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Roboto:wght@400;500;700;900&family=Figtree:wght@400;600;700&display=swap">
+<style>
+/* Layout: a control panel beside one live phone; the phone's own look comes from the panel, the page around it from the viewer's theme. */
+:root {
+  --page: #EEF0F2; --panel: #FFFFFF; --ink: #16181C; --ink-2: #545A63; --line: #DADDE2; --focus: #2F6FEB;
+  --f-ui: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-app: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-display: "Fraunces", Georgia, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --page: #0E1013; --panel: #171A1F; --ink: #ECEEF1; --ink-2: #A6ADB7; --line: #2A2F37; --focus: #7AA5FF; color-scheme: dark } }
+:root[data-theme="dark"] { --page: #0E1013; --panel: #171A1F; --ink: #ECEEF1; --ink-2: #A6ADB7; --line: #2A2F37; --focus: #7AA5FF; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--page); color: var(--ink); font-family: var(--f-ui); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.wrap > * { min-width: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 860px) { .wrap { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Control panel ---------- */
+.panel { display: grid; gap: 16px; position: sticky; top: 16px; }
+@media (max-width: 860px) { .panel { position: static; } }
+.panel h1 { font-size: 22px; line-height: 1.2; margin: 0; text-wrap: balance; }
+.panel .lede { margin: 6px 0 0; color: var(--ink-2); font-size: 14px; line-height: 1.5; }
+.box { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 10px; }
+.box h2 { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); margin: 0; }
+.seg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.seg.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.seg button { font: 600 13px/1.2 var(--f-ui); color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 10px; padding: 9px 8px; cursor: pointer; text-align: start; display: grid; gap: 2px; min-height: 44px; }
+.seg button small { font-weight: 400; color: var(--ink-2); font-size: 11.5px; }
+.seg button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.swatches button { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--panel); box-shadow: 0 0 0 1px var(--line); cursor: pointer; }
+.swatches button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--ink); }
+.swatches label { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); }
+.swatches input[type=color] { width: 36px; height: 32px; border: 1px solid var(--line); border-radius: 8px; background: none; padding: 2px; }
+.row-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.row-btns button { font: 600 13px var(--f-ui); color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; cursor: pointer; min-height: 40px; }
+.note { font-size: 13px; line-height: 1.5; color: var(--ink-2); margin: 0; }
+.notes { margin: 0; padding-inline-start: 18px; display: grid; gap: 6px; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
+.notes b { color: var(--ink); font-weight: 600; }
+.webfoot { border-radius: 10px; padding: 12px; background: #1C1917; color: #D6D3D1; font: 12px/1.5 var(--f-app); display: grid; gap: 6px; }
+.webfoot strong { color: #fff; }
+.webfoot nav { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.webfoot a { color: #E7E5E4; }
+
+/* ---------- Phone ---------- */
+.stage { width: 100%; display: grid; justify-items: center; gap: 10px; min-width: 0; }
+.stage-cap { font-size: 13px; color: var(--ink-2); text-align: center; }
+.phone { width: min(390px, 100%); height: 844px; border-radius: 46px; padding: 10px; background: #0B0B0C; box-shadow: 0 30px 60px -20px rgb(0 0 0 / .45), 0 0 0 1px rgb(255 255 255 / .06) inset; }
+.screen { position: relative; height: 100%; border-radius: 37px; overflow: hidden; isolation: isolate; font-family: var(--f-app); color: var(--a-text); background: var(--a-page); }
+.scroll { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; overscroll-behavior: contain; }
+.scroll::-webkit-scrollbar { display: none; }
+
+/* App tokens are set on .screen by script (theme x brand x button style). */
+.screen .card { background: var(--a-card); border: 1px solid var(--a-border); border-radius: 18px; }
+.glassy .screen .card, .screen.glassy .card { backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+.muted { color: var(--a-muted); }
+.sec { padding: 22px 16px 0; }
+.sec-h { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.sec-h h3 { margin: 0; font: 700 19px/1.2 var(--f-display); letter-spacing: -.01em; }
+.sec-h .eyebrow { font: 700 11px var(--f-app); letter-spacing: .12em; text-transform: uppercase; color: var(--a-muted); }
+.link { font: 600 13px var(--f-app); color: var(--a-brand-fg); background: none; border: 0; padding: 6px 0; cursor: pointer; display: inline-flex; align-items: center; gap: 2px; }
+.hscroll { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 16px 6px; margin: 0 -16px; scrollbar-width: none; }
+.hscroll::-webkit-scrollbar { display: none; }
+.hscroll > * { scroll-snap-align: start; flex: none; }
+svg.i { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* Buttons follow the chosen style: --b-bg / --b-fg / --b-line. */
+.btn { font: 700 14px/1 var(--f-app); border-radius: 12px; min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; background: var(--b-bg); color: var(--b-fg); border: 1px solid var(--b-line); }
+.btn.main { background: var(--a-brand); color: #fff; border-color: var(--a-brand); width: 100%; min-height: 52px; font-size: 16px; border-radius: 14px; justify-content: space-between; padding: 0 18px; }
+.btn.sm { min-height: 36px; padding: 0 12px; font-size: 13px; border-radius: 10px; }
+.icon-tint { color: var(--a-icon); }
+
+/* Hero: full bleed, under the status bar; address and search sit on the photo. */
+.hero { position: relative; height: 468px; color: #fff; overflow: hidden; }
+.hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .8s ease; }
+.hero-slide.on { opacity: 1; }
+.hero-slide img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); transition: transform 6s ease; }
+.hero-slide.on img { transform: scale(1); }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(0 0 0 / .62) 0%, rgb(0 0 0 / .08) 34%, rgb(0 0 0 / .05) 52%, rgb(0 0 0 / .78) 100%); pointer-events: none; }
+.hero-top { position: absolute; inset: 0 0 auto; z-index: 2; padding: 50px 16px 0; display: grid; gap: 12px; }
+.status { position: absolute; top: 0; inset-inline: 0; height: 46px; display: flex; align-items: center; justify-content: space-between; padding: 6px 30px 0; font: 600 15px var(--f-app); z-index: 5; color: #fff; pointer-events: none; }
+.status .r { display: flex; gap: 6px; align-items: center; font-size: 12px; }
+.status .batt { width: 24px; height: 12px; border: 1.5px solid currentColor; border-radius: 3px; position: relative; }
+.status .batt::after { content: ""; position: absolute; inset: 1.5px; width: 60%; background: currentColor; border-radius: 1px; }
+.who { display: flex; align-items: center; gap: 10px; }
+.logo { width: 40px; height: 40px; border-radius: 12px; background: var(--a-brand); display: grid; place-items: center; font: 700 20px var(--f-display); color: #fff; box-shadow: 0 0 0 2px rgb(255 255 255 / .35); flex: none; }
+.who .t { min-width: 0; flex: 1; }
+.who .n { font: 700 17px/1.15 var(--f-display); }
+.who .a { font: 400 12.5px/1.3 var(--f-app); opacity: .9; display: flex; align-items: center; gap: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: none; border: 0; color: inherit; padding: 0; cursor: pointer; }
+.pill-chip { display: inline-flex; align-items: center; gap: 4px; font: 700 12px var(--f-app); padding: 6px 10px; border-radius: 999px; background: rgb(255 255 255 / .18); border: 1px solid rgb(255 255 255 / .28); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #fff; }
+.avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgb(255 255 255 / .2); border: 1px solid rgb(255 255 255 / .35); font: 700 14px var(--f-app); }
+.search { display: flex; gap: 8px; }
+.search .field { flex: 1; min-width: 0; height: 48px; border-radius: 14px; display: flex; align-items: center; gap: 10px; padding: 0 14px; background: rgb(255 255 255 / .94); color: #57534E; font: 400 15px var(--f-app); box-shadow: 0 6px 18px rgb(0 0 0 / .18); }
+.search .field b { font-weight: 400; color: #1C1917; }
+.search .mic { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: rgb(255 255 255 / .18); border: 1px solid rgb(255 255 255 / .3); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #fff; }
+.hero-copy { position: absolute; z-index: 2; inset: auto 16px 52px; display: grid; gap: 10px; justify-items: start; }
+.hero-copy .kicker { font: 700 11px var(--f-app); letter-spacing: .14em; text-transform: uppercase; padding: 5px 9px; border-radius: 6px; background: rgb(255 255 255 / .16); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.hero-copy h2 { margin: 0; font: 700 34px/1.04 var(--f-display); letter-spacing: -.02em; text-wrap: balance; max-width: 300px; text-shadow: 0 2px 18px rgb(0 0 0 / .35); }
+.hero-copy p { margin: 0; font-size: 14px; opacity: .92; max-width: 280px; }
+.hero-dots { position: absolute; z-index: 2; bottom: 24px; inset-inline-start: 16px; display: flex; gap: 6px; }
+.hero-dots i { width: 6px; height: 6px; border-radius: 3px; background: rgb(255 255 255 / .5); transition: width .3s; }
+.hero-dots i.on { width: 20px; background: #fff; }
+
+/* Categories: gradient tiles that overlap the hero. */
+.cats { position: relative; z-index: 3; margin-top: -18px; background: var(--a-page-solid); border-radius: 22px 22px 0 0; padding: 18px 16px 0; }
+.glass-page .cats { background: transparent; }
+.cat-row { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px 4px; }
+.cat-row::-webkit-scrollbar { display: none; }
+.cat { flex: none; width: 78px; display: grid; justify-items: center; gap: 6px; background: none; border: 0; padding: 0; cursor: pointer; color: var(--a-text); font: 500 12.5px var(--f-app); }
+.cat .tile { width: 72px; height: 72px; border-radius: 20px; display: grid; place-items: center; overflow: hidden; position: relative; }
+.cat .tile img { width: 64px; height: 64px; object-fit: cover; border-radius: 50%; box-shadow: 0 6px 14px rgb(0 0 0 / .22); }
+.cat.on .tile { box-shadow: 0 0 0 2px var(--a-brand-fg); }
+.cat .badge-new { position: absolute; top: 4px; inset-inline-end: 4px; font: 700 9px var(--f-app); background: #111; color: #fff; padding: 2px 5px; border-radius: 5px; }
+
+/* Offers carousel: auto slides, each its own gradient. */
+.offers { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; scroll-behavior: smooth; }
+.offers::-webkit-scrollbar { display: none; }
+.offer { flex: none; width: 86%; scroll-snap-align: center; height: 152px; border-radius: 20px; color: #fff; position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 120px; align-items: stretch; }
+.offer .txt { padding: 16px; display: grid; align-content: space-between; gap: 6px; }
+.offer .tag { font: 700 10.5px var(--f-app); letter-spacing: .1em; text-transform: uppercase; opacity: .9; }
+.offer h4 { margin: 0; font: 800 22px/1.05 var(--f-app); letter-spacing: -.01em; }
+.offer .small { font-size: 12.5px; opacity: .92; }
+.offer .code { justify-self: start; font: 700 12px var(--f-app); padding: 5px 9px; border-radius: 8px; border: 1.5px dashed rgb(255 255 255 / .7); }
+.offer img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; align-self: center; margin-inline-start: -10px; box-shadow: 0 10px 24px rgb(0 0 0 / .3); }
+.dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+.dots i { width: 6px; height: 6px; border-radius: 3px; background: var(--a-border-strong); transition: width .3s, background .3s; }
+.dots i.on { width: 18px; background: var(--a-brand-fg); }
+
+/* Redeem and save */
+.redeem { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.redeem .card { padding: 12px; display: flex; align-items: center; gap: 10px; cursor: pointer; text-align: start; font: inherit; color: inherit; }
+.redeem .coin { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+.redeem b { display: block; font-size: 16px; }
+.redeem span { font-size: 12px; }
+
+/* Spotlight */
+.spot { position: relative; min-height: 236px; border-radius: 22px; overflow: hidden; color: #fff; display: grid; grid-template-columns: 1fr 1fr; }
+.spot .l { padding: 18px; display: grid; align-content: space-between; gap: 8px; position: relative; z-index: 1; }
+.spot .l h4 { margin: 0; font: 700 21px/1.1 var(--f-display); text-wrap: balance; }
+.spot .l p { margin: 0; font-size: 13px; opacity: .9; }
+.spot img { position: absolute; inset: 0 0 0 auto; width: 58%; height: 100%; object-fit: cover; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 35%); mask-image: linear-gradient(90deg, transparent 0, #000 35%); }
+.spot .play { position: absolute; z-index: 1; inset-inline-end: 16px; bottom: 16px; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: rgb(255 255 255 / .22); border: 1px solid rgb(255 255 255 / .4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+
+/* Dish cards */
+.dish { width: 172px; display: grid; gap: 8px; }
+.dish .ph { position: relative; height: 148px; border-radius: 18px; }
+.dish .ph img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; }
+.ribbon { position: absolute; top: 8px; inset-inline-start: 8px; font: 800 10.5px var(--f-app); padding: 4px 7px; border-radius: 6px; color: #fff; background: linear-gradient(135deg, #7C3AED, #DB2777); letter-spacing: .02em; }
+.fav { position: absolute; top: 8px; inset-inline-end: 8px; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: rgb(0 0 0 / .35); color: #fff; border: 0; }
+.fav svg.i { width: 16px; height: 16px; }
+.dish h5 { margin: 0; font: 600 14.5px/1.25 var(--f-app); }
+.meta { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+.price { font: 700 14px var(--f-app); }
+.price s { font-weight: 400; color: var(--a-muted); margin-inline-start: 4px; font-size: 12px; }
+
+/* Rating: score in a gradient box, count beneath. */
+.rate { display: inline-grid; justify-items: center; gap: 2px; }
+.rate .box { display: inline-flex; align-items: center; gap: 3px; font: 800 12px var(--f-app); color: #fff; padding: 3px 6px; border-radius: 7px; background: linear-gradient(135deg, #15803D, #166534); }
+.rate .box.mid { background: linear-gradient(135deg, #B45309, #92400E); }
+.rate .box svg { width: 11px; height: 11px; fill: #fff; stroke: none; }
+.rate .cnt { font-size: 10.5px; color: var(--a-muted); border-bottom: 1px dashed var(--a-border-strong); line-height: 1.3; }
+.rate.inline { display: inline-flex; gap: 6px; align-items: center; }
+
+/* ADD: small, style-driven, sits on the photo edge. Hit area stays 44px. */
+.add { position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); min-width: 76px; height: 32px; border-radius: 9px; font: 800 13px var(--f-app); letter-spacing: .04em; display: inline-flex; align-items: center; justify-content: center; gap: 2px; cursor: pointer; background: var(--b-bg); color: var(--b-fg); border: 1px solid var(--b-line); box-shadow: 0 4px 12px rgb(0 0 0 / .16); }
+.add::before { content: ""; position: absolute; inset: -6px -4px; }
+.add sup { font-size: 11px; margin-inline-start: 1px; top: -.35em; }
+.add.has { padding: 0; min-width: 88px; justify-content: space-between; }
+.add.has button { width: 30px; height: 30px; display: grid; place-items: center; background: none; border: 0; color: inherit; cursor: pointer; }
+.add.has button svg.i { width: 15px; height: 15px; stroke-width: 2.6; }
+.add.has span { font: 800 13px var(--f-app); }
+
+/* Order again */
+.again { width: 92px; display: grid; justify-items: center; gap: 6px; text-align: center; font-size: 12px; background: none; border: 0; color: inherit; cursor: pointer; padding: 0; }
+.again .c { position: relative; width: 84px; height: 84px; border-radius: 22px; overflow: hidden; }
+.again .c img { width: 100%; height: 100%; object-fit: cover; }
+.again .c em { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font: 800 10.5px var(--f-app); font-style: normal; padding: 3px 7px; border-radius: 6px; background: #D9F99D; color: #1A2E05; white-space: nowrap; }
+
+/* Explore more */
+.explore { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.explore button { display: grid; justify-items: center; gap: 6px; padding: 12px 4px; font: 500 12px/1.2 var(--f-app); color: var(--a-text); cursor: pointer; text-align: center; }
+.explore .ic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; color: #fff; }
+
+/* Footer: copyright and version */
+.foot { padding: 28px 16px 190px; text-align: center; display: grid; gap: 6px; font-size: 12px; color: var(--a-muted); }
+.foot strong { color: var(--a-text); font: 700 15px var(--f-display); }
+.foot nav { display: flex; justify-content: center; gap: 14px; }
+.foot nav a { color: var(--a-muted); }
+
+/* Floating layer: offer strip, mini cart, dock */
+.float { position: absolute; inset: auto 0 0; z-index: 20; padding: 0 12px 14px; display: grid; gap: 8px; pointer-events: none; }
+.float > * { pointer-events: auto; }
+.strip { display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 8px; border-radius: 14px; color: #fff; background: linear-gradient(100deg, var(--a-brand), color-mix(in srgb, var(--a-brand) 70%, #000)); box-shadow: 0 8px 20px rgb(0 0 0 / .22); font: 600 13px var(--f-app); }
+.strip .amt { background: #fff; color: #1C1917; font: 900 13px var(--f-app); padding: 5px 8px; border-radius: 8px; transform: rotate(-3deg); white-space: nowrap; }
+.strip .t { flex: 1; min-width: 0; }
+.strip button { background: none; border: 0; color: #fff; width: 32px; height: 32px; display: grid; place-items: center; cursor: pointer; }
+.mini { display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 10px; border-radius: 18px; background: var(--a-bar); border: 1px solid var(--a-border); box-shadow: 0 10px 28px rgb(0 0 0 / .22); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); color: var(--a-text); animation: rise .35s ease; }
+.mini .thumbs { display: flex; }
+.mini .thumbs img { width: 34px; height: 34px; border-radius: 10px; object-fit: cover; border: 2px solid var(--a-card-solid); }
+.mini .thumbs img + img { margin-inline-start: -12px; }
+.mini .t { flex: 1; min-width: 0; font-size: 12px; line-height: 1.3; }
+.mini .t b { display: block; font-size: 14px; }
+.mini .go { border: 0; border-radius: 12px; min-height: 44px; padding: 0 14px; font: 700 14px var(--f-app); display: grid; text-align: center; line-height: 1.15; cursor: pointer; background: var(--a-brand); color: #fff; }
+.mini .go small { font-weight: 400; font-size: 11px; opacity: .9; }
+.dock { display: flex; padding: 6px; border-radius: 26px; background: var(--a-bar); border: 1px solid var(--a-border); box-shadow: 0 10px 28px rgb(0 0 0 / .18); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+.dock button { flex: 1; display: grid; justify-items: center; gap: 2px; padding: 6px 0; border-radius: 20px; background: none; border: 0; color: var(--a-muted); font: 500 11.5px var(--f-app); cursor: pointer; min-height: 48px; }
+.dock button.on { color: var(--a-brand-fg); background: var(--a-brand-soft); font-weight: 700; }
+@keyframes rise { from { transform: translateY(16px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Sheets and pages that slide over the screen */
+.scrim { position: absolute; inset: 0; z-index: 40; background: rgb(0 0 0 / .5); opacity: 0; pointer-events: none; transition: opacity .3s; }
+.scrim.on { opacity: 1; pointer-events: auto; }
+.sheet { position: absolute; inset: auto 0 0; z-index: 41; max-height: 88%; display: flex; flex-direction: column; border-radius: 26px 26px 0 0; background: var(--a-sheet); color: var(--a-text); transform: translateY(105%); transition: transform .38s cubic-bezier(.2, .8, .2, 1); box-shadow: 0 -10px 40px rgb(0 0 0 / .3); }
+.sheet.on { transform: none; }
+.sheet .grab { width: 40px; height: 5px; border-radius: 3px; background: var(--a-border-strong); margin: 8px auto 4px; flex: none; }
+.sheet .body { overflow-y: auto; padding: 4px 16px 16px; scrollbar-width: none; }
+.sheet .foot-bar { padding: 12px 16px 22px; border-top: 1px solid var(--a-border); background: var(--a-sheet); }
+.sheet-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 0 12px; }
+.sheet-h h3 { margin: 0; font: 700 20px var(--f-display); }
+.x { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--a-border); background: var(--a-card-solid); color: var(--a-text); cursor: pointer; flex: none; }
+.line { display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--a-border); }
+.line img { width: 56px; height: 56px; border-radius: 14px; object-fit: cover; }
+.line .nm { font: 600 14px var(--f-app); background: none; border: 0; padding: 0; color: inherit; text-align: start; cursor: pointer; display: inline-flex; align-items: center; gap: 2px; }
+.line .sub { font-size: 12px; }
+.step { display: inline-flex; align-items: center; border-radius: 10px; border: 1px solid var(--b-line); background: var(--b-bg); color: var(--b-fg); }
+.step button { width: 34px; height: 34px; display: grid; place-items: center; background: none; border: 0; color: inherit; cursor: pointer; }
+.step button svg.i { width: 15px; height: 15px; stroke-width: 2.6; }
+.step span { min-width: 18px; text-align: center; font: 800 14px var(--f-app); }
+.bill { display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; font-size: 14px; padding: 12px 0; }
+.bill .tot { font: 800 16px var(--f-app); padding-top: 8px; border-top: 1px dashed var(--a-border-strong); }
+.bill .save { color: var(--a-success); font-weight: 600; }
+.paywrap { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 6px 0 4px; }
+.pay { display: flex; align-items: center; gap: 8px; padding: 10px; border-radius: 12px; border: 1px solid var(--a-border); background: var(--a-card-solid); color: var(--a-text); font: 600 13px var(--f-app); cursor: pointer; text-align: start; min-height: 48px; }
+.pay[aria-pressed="true"] { border-color: var(--a-brand-fg); box-shadow: inset 0 0 0 1px var(--a-brand-fg); }
+.pay .icon-tint { color: var(--a-brand-fg); }
+.addr { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--a-fill); font-size: 13px; margin: 8px 0; }
+.addr .t { flex: 1; min-width: 0; }
+.addr b { display: block; font-size: 13.5px; }
+.codechip { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: var(--a-success-soft); color: var(--a-success-ink); font: 600 13px var(--f-app); margin-top: 10px; }
+
+/* Welcome treat */
+.treat { text-align: center; }
+.treat h3 { font: 800 28px/1.1 var(--f-app); margin: 6px 0 18px; letter-spacing: -.02em; }
+.ticket { position: relative; margin: 0 auto; width: 78%; aspect-ratio: 1.55; max-width: 100%; transform: rotate(-6deg); border-radius: 14px; color: #fff; display: grid; place-content: center; background: linear-gradient(135deg, var(--a-brand), color-mix(in srgb, var(--a-brand) 65%, #000)); box-shadow: 10px 12px 0 color-mix(in srgb, var(--a-brand) 35%, #000); -webkit-mask: radial-gradient(circle at 0 50%, #0000 22px, #000 23px) left / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, #0000 22px, #000 23px) right / 51% 100% no-repeat; mask: radial-gradient(circle at 0 50%, #0000 22px, #000 23px) left / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, #0000 22px, #000 23px) right / 51% 100% no-repeat; }
+.ticket b { font: 900 52px/0.95 var(--f-app); }
+.ticket span { font: 800 20px var(--f-app); letter-spacing: .06em; }
+.confetti { position: absolute; inset: 70px 0 auto; height: 260px; pointer-events: none; }
+.confetti i { position: absolute; width: 44px; height: 10px; border-radius: 6px; background: color-mix(in srgb, var(--a-brand) 40%, #2A1410); }
+.left-days { font: 800 22px var(--f-app); margin: 26px 0 16px; }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-bottom: 18px; }
+.facts div { display: grid; justify-items: center; gap: 6px; font-size: 11.5px; color: var(--a-muted); }
+.facts .ic { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: var(--a-brand-soft); color: var(--a-brand-ink); }
+.facts b { color: var(--a-text); font-size: 13px; }
+
+/* Pages: dish detail, menu, about */
+.page { position: absolute; inset: 0; z-index: 30; background: var(--a-page); transform: translateX(100%); transition: transform .35s cubic-bezier(.2, .8, .2, 1); overflow-y: auto; scrollbar-width: none; }
+.page.on { transform: none; }
+.page::-webkit-scrollbar { display: none; }
+.dhero { position: relative; height: 360px; }
+.dhero img { width: 100%; height: 100%; object-fit: cover; }
+.dhero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(0 0 0 / .45), transparent 30%, transparent 70%, rgb(0 0 0 / .35)); }
+.back { position: absolute; z-index: 2; top: 52px; inset-inline-start: 16px; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: rgb(255 255 255 / .9); color: #1C1917; border: 0; cursor: pointer; box-shadow: 0 4px 12px rgb(0 0 0 / .2); }
+.dbody { position: relative; margin-top: -26px; border-radius: 26px 26px 0 0; background: var(--a-page-solid); padding: 22px 16px 120px; display: grid; gap: 14px; }
+.dbody h2 { margin: 0; font: 700 26px/1.1 var(--f-display); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 600 12px var(--f-app); padding: 7px 10px; border-radius: 999px; background: var(--a-fill); color: var(--a-text); border: 1px solid var(--a-border); display: inline-flex; align-items: center; gap: 4px; }
+.chip.ok { background: var(--a-success-soft); color: var(--a-success-ink); border-color: transparent; }
+textarea.note-in { width: 100%; min-height: 76px; border-radius: 12px; border: 1px solid var(--a-border-strong); background: var(--a-card-solid); color: var(--a-text); font: 14px var(--f-app); padding: 10px 12px; resize: none; }
+.dbar { position: absolute; inset: auto 0 0; padding: 12px 16px 22px; background: var(--a-sheet); border-top: 1px solid var(--a-border); display: flex; gap: 12px; align-items: center; z-index: 31; }
+.mhead { padding: 52px 16px 14px; display: grid; gap: 10px; background: var(--a-card-solid); border-bottom: 1px solid var(--a-border); }
+.glass-page .mhead { background: transparent; }
+.mtop { display: flex; justify-content: space-between; align-items: center; }
+.mhead h2 { margin: 0; font: 700 25px/1.1 var(--f-display); }
+.mrow { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+.offerbar { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: linear-gradient(90deg, var(--a-brand-soft), transparent); font: 600 13px var(--f-app); color: var(--a-brand-ink); }
+.mitem { display: grid; grid-template-columns: 1fr 132px; gap: 14px; padding: 18px 16px 26px; border-bottom: 1px dashed var(--a-border-strong); }
+.mitem h5 { margin: 4px 0; font: 600 16px var(--f-app); }
+.mitem .ph { position: relative; height: 132px; }
+.mitem .ph img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
+.reorder { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--a-muted); margin: 2px 0 4px; }
+.reorder i { width: 40px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, #16A34A 70%, var(--a-fill) 70%); }
+.mini-actions { display: flex; gap: 8px; margin-top: 10px; }
+.mini-actions button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--a-border); background: none; color: var(--a-muted); display: grid; place-items: center; }
+.mini-actions svg.i { width: 15px; height: 15px; }
+.fab { position: absolute; z-index: 32; inset-inline-end: 16px; bottom: 96px; display: inline-flex; gap: 6px; align-items: center; padding: 0 16px; min-height: 46px; border-radius: 14px; border: 0; background: #1C1917; color: #fff; font: 700 14px var(--f-app); box-shadow: 0 10px 24px rgb(0 0 0 / .35); cursor: pointer; }
+.toast { position: absolute; z-index: 60; left: 50%; top: 60px; transform: translate(-50%, -20px); opacity: 0; transition: .3s; background: #1C1917; color: #fff; padding: 10px 14px; border-radius: 12px; font: 600 13px var(--f-app); white-space: nowrap; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+.about { padding: 60px 20px 40px; display: grid; gap: 16px; justify-items: center; text-align: center; }
+.about .logo { width: 76px; height: 76px; border-radius: 22px; font-size: 38px; }
+.about dl { width: 100%; display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; text-align: start; font-size: 14px; margin: 0; padding: 14px; }
+.about dt { color: var(--a-muted); }
+.about dd { margin: 0; text-align: end; font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+  <aside class="panel" aria-label="Prototype controls">
+    <div>
+      <h1>Kitchen app, home and cart redesign</h1>
+      <p class="lede">A clickable prototype for review. Tap dishes, ADD, the cart, Menu and the dock. Everything a restaurant would set is on the left. Menu, prices and ratings are sample data.</p>
+    </div>
+    <section class="box">
+      <h2>Theme</h2>
+      <div class="seg" id="themes"></div>
+    </section>
+    <section class="box">
+      <h2>Brand colour</h2>
+      <div class="swatches" id="swatches"></div>
+    </section>
+    <section class="box">
+      <h2>Buttons and icons</h2>
+      <div class="seg three" id="btnstyles"></div>
+      <div class="seg" id="iconstyles"></div>
+      <p class="note">The main action on a screen (Place order, Add to cart) stays in the brand colour in every style, so there is always one obvious next step.</p>
+    </section>
+    <section class="box">
+      <h2>Try</h2>
+      <div class="row-btns">
+        <button type="button" id="b-treat">Show welcome offer</button>
+        <button type="button" id="b-cart">Open cart</button>
+        <button type="button" id="b-menu">Open menu</button>
+        <button type="button" id="b-about">About and version</button>
+        <button type="button" id="b-reset">Empty cart</button>
+      </div>
+    </section>
+    <section class="box">
+      <h2>Website footer</h2>
+      <div class="webfoot" id="webfoot"></div>
+      <p class="note">The same copyright and version line goes on every website page and in the app's About screen, filled from the restaurant's name and the release number.</p>
+    </section>
+    <section class="box">
+      <h2>What each part runs on</h2>
+      <ul class="notes">
+        <li><b>Hero slides</b>: the hero promotions staff already publish in the admin, now full screen behind the address and search.</li>
+        <li><b>Offers carousel</b>: live campaigns and shared codes, sliding on its own every few seconds.</li>
+        <li><b>Spotlight</b>: the mid-feed promotion slot, with its picture or video.</li>
+        <li><b>Welcome offer</b>: a new placement. Staff pick the offer, who sees it and how often; it shows once when the app opens.</li>
+        <li><b>Points and vouchers</b>: the customer's membership points and saved vouchers.</li>
+        <li><b>Ratings</b>: new. Customers rate a delivered order; a dish shows its score once it has enough ratings.</li>
+        <li><b>Offer strip</b>: counts down the customer's best unused code.</li>
+      </ul>
+    </section>
+  </aside>
+
+  <div class="stage">
+    <div class="phone"><div class="screen" id="screen"></div></div>
+    <p class="stage-cap">390 × 844, the same size as the app captures. Scroll inside the phone.</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  // ---------- Data (sample) ----------
+  const IMG = (n) => `img/${n}.jpg`;
+  const DISHES = [
+    { id: 'chicken', name: 'Grilled chicken plate', price: 45, was: 56, img: 'mains', cat: 'Mains', rating: 4.6, count: '1.2K', ribbon: '20% OFF', reorder: true, desc: 'Chargrilled chicken thigh, saffron rice, grilled peppers and garlic sauce.' },
+    { id: 'hummus', name: 'Hummus and warm bread', price: 18, img: 'starters', cat: 'Starters', rating: 4.5, count: '860', ribbon: null, desc: 'Smooth chickpea hummus with olive oil, paprika and two warm flatbreads.' },
+    { id: 'lemonchicken', name: 'Lemon herb chicken', price: 52, img: 'lemon-chicken', cat: 'Mains', rating: 4.3, count: '540', ribbon: 'AED 10 OFF', desc: 'Half chicken roasted with lemon, garlic and thyme, with spiced rice.' },
+    { id: 'lemonade', name: 'Mint lemonade', price: 12, img: 'drinks', cat: 'Drinks', rating: 4.8, count: '2.1K', ribbon: null, reorder: true, desc: 'Fresh lemon, mint and crushed ice.' },
+    { id: 'pudding', name: 'Saffron pistachio pudding', price: 22, img: 'desserts', cat: 'Desserts', rating: 4.7, count: '410', ribbon: 'NEW', desc: 'Saffron rice pudding with pistachio and rose petals.' },
+    { id: 'mezze', name: 'Mezze for two', price: 38, img: 'hummus', cat: 'Starters', rating: 3.9, count: '120', ribbon: null, desc: 'Hummus, labneh, olives and flatbread to share.' },
+  ];
+  const byId = Object.fromEntries(DISHES.map((d) => [d.id, d]));
+  const HERO = [
+    { img: 'hero', kicker: 'This weekend', title: 'Family grill trays', copy: 'Up to 20% off trays for four. Fridays and Saturdays.' },
+    { img: 'garlic', kicker: 'New on the menu', title: 'Garlic butter prawns', copy: 'Cooked to order in our cast-iron pans.' },
+    { img: 'chef', kicker: 'Members', title: 'Earn 2× points', copy: 'On every order until Sunday.' },
+  ];
+  const CATS = [['All', 'mains', '#FDE68A', '#FCA5A5'], ['Starters', 'starters', '#BBF7D0', '#A7F3D0'], ['Mains', 'lemon-chicken', '#FED7AA', '#FDBA74'], ['Drinks', 'drinks', '#BAE6FD', '#A5F3FC'], ['Desserts', 'desserts', '#FBCFE8', '#F5D0FE'], ['Trays', 'hero', '#DDD6FE', '#C7D2FE']];
+  const OFFERS = [
+    { tag: 'First order', title: '10% off your first order', small: 'Up to AED 20. Min spend AED 40.', code: 'WELCOME10', img: 'starters', bg: ['var(--a-brand)', 'color-mix(in srgb, var(--a-brand) 55%, #000)'] },
+    { tag: 'Delivery', title: 'Free delivery over AED 60', small: 'Every day, all areas we deliver to.', code: null, img: 'mains', bg: ['#0F766E', '#134E4A'] },
+    { tag: 'Fridays', title: 'Trays 20% off', small: 'Family trays for four, Friday lunch.', code: 'TRAY20', img: 'hero', bg: ['#7E22CE', '#4C1D95'] },
+    { tag: 'Members', title: '2× points this week', small: 'Points turn into vouchers at 500.', code: null, img: 'desserts', bg: ['#A16207', '#713F12'] },
+  ];
+  const THEMES = [
+    ['classic', 'Classic', 'Light, white cards'],
+    ['midnight', 'Midnight', 'Dark'],
+    ['glass', 'Glass', 'Frosted, colour wash'],
+    ['glass_night', 'Glass night', 'Frosted, dark glow'],
+  ];
+  const BRANDS = ['#B45309', '#C2410C', '#B91C1C', '#BE123C', '#7E22CE', '#1E40AF', '#0F766E', '#166534', '#1C1917'];
+  const BTN = [['light', 'Light', 'White, brand text'], ['tonal', 'Tonal', 'Soft tint'], ['filled', 'Filled', 'Brand, white text']];
+  const ICONS = [['brand', 'Brand icons', 'Icons in the brand colour'], ['neutral', 'Neutral icons', 'Icons in the text colour']];
+
+  const state = { theme: 'classic', brand: '#B45309', btn: 'light', icons: 'brand', cart: { chicken: 1, lemonade: 2 }, cat: 'All', pay: 'cod', hero: 0, offer: 0 };
+
+  // ---------- Colour maths (the same 4.5:1 rule as the app and website) ----------
+  const hex2rgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  const rgb2hex = (c) => '#' + c.map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
+  const mix = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
+  const lum = (c) => { const f = (v) => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(c[0]) + 0.7152 * f(c[1]) + 0.0722 * f(c[2]); };
+  const contrast = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  const readable = (c, bgs, toLight) => { const end = toLight ? [255, 255, 255] : [0, 0, 0]; for (let t = 0; t <= 1.0001; t += 0.05) { const m = mix(c, end, t); if (bgs.every((b) => contrast(m, b) >= 4.5)) return m; } return end; };
+
+  const PAL = {
+    classic: { dark: false, glass: false, page: '#F5F5F4', card: '#FFFFFF', fill: '#F1F0EE', text: '#1C1917', muted: '#57534E', border: '#E7E5E4', strong: '#C9C5C1', sheet: '#FFFFFF', bar: 'rgb(255 255 255 / .94)' },
+    midnight: { dark: true, glass: false, page: '#0F0E0D', card: '#1C1A18', fill: '#292622', text: '#F5F5F4', muted: '#B0AAA4', border: '#34302C', strong: '#4A4540', sheet: '#1C1A18', bar: 'rgb(28 26 24 / .94)' },
+    glass: { dark: false, glass: true, page: '#FFFFFF', card: 'rgb(255 255 255 / .55)', fill: 'rgb(28 25 23 / .06)', text: '#1C1917', muted: '#48433F', border: 'rgb(255 255 255 / .75)', strong: 'rgb(28 25 23 / .22)', sheet: '#F8F7F6', bar: 'rgb(255 255 255 / .62)' },
+    glass_night: { dark: true, glass: true, page: '#0B0A09', card: 'rgb(255 255 255 / .09)', fill: 'rgb(255 255 255 / .08)', text: '#FAFAF9', muted: '#D0CAC4', border: 'rgb(255 255 255 / .16)', strong: 'rgb(255 255 255 / .28)', sheet: '#1A1816', bar: 'rgb(26 24 22 / .72)' },
+  };
+
+  function tokens() {
+    const p = PAL[state.theme];
+    const brand = hex2rgb(state.brand);
+    const base = hex2rgb(p.page);
+    const glow = p.dark ? mix(base, brand, 0.38) : mix(base, brand, 0.24);
+    const cardSolid = p.glass ? (p.dark ? mix(base, [255, 255, 255], 0.09) : [255, 255, 255]) : hex2rgb(p.card);
+    const pageBgs = [base, cardSolid, ...(p.glass ? [glow] : [])];
+    const fg = readable(brand, pageBgs, p.dark);
+    const soft = p.dark ? mix(brand, base, 0.72) : mix(brand, [255, 255, 255], 0.88);
+    const ink = readable(brand, [soft], p.dark);
+    const pageBg = !p.glass ? p.page : p.dark
+      ? `radial-gradient(130% 70% at 0% 0%, ${rgb2hex(glow)} 0%, ${rgb2hex(mix(base, brand, 0.12))} 45%, ${p.page} 100%)`
+      : `linear-gradient(160deg, ${rgb2hex(glow)} 0%, ${rgb2hex(mix(base, brand, 0.06))} 45%, ${rgb2hex(mix(base, brand, 0.18))} 100%)`;
+    // Button styles: light = white with brand text; tonal = brand tint with its ink; filled = brand with white text.
+    const btn = state.btn === 'light'
+      ? { bg: '#FFFFFF', fg: state.brand, line: p.dark ? 'transparent' : rgb2hex(mix(brand, [255, 255, 255], 0.65)) }
+      : state.btn === 'tonal'
+        ? { bg: rgb2hex(soft), fg: rgb2hex(ink), line: 'transparent' }
+        : { bg: state.brand, fg: '#FFFFFF', line: state.brand };
+    return {
+      '--a-page': pageBg, '--a-page-solid': p.glass ? 'transparent' : p.page, '--a-card': p.card, '--a-card-solid': rgb2hex(cardSolid), '--a-fill': p.fill,
+      '--a-text': p.text, '--a-muted': p.muted, '--a-border': p.border, '--a-border-strong': p.strong, '--a-sheet': p.sheet, '--a-bar': p.bar,
+      '--a-brand': state.brand, '--a-brand-fg': rgb2hex(fg), '--a-brand-soft': rgb2hex(soft), '--a-brand-ink': rgb2hex(ink),
+      '--a-icon': state.icons === 'brand' ? rgb2hex(fg) : p.text,
+      '--a-success': p.dark ? '#4ADE80' : '#15803D', '--a-success-soft': p.dark ? '#14321F' : '#DCFCE7', '--a-success-ink': p.dark ? '#86EFAC' : '#166534',
+      '--b-bg': btn.bg, '--b-fg': btn.fg, '--b-line': btn.line,
+    };
+  }
+
+  // ---------- Icons (simple strokes) ----------
+  const P = {
+    search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+    mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+    down: '<path d="m6 9 6 6 6-6"/>', up: '<path d="m6 15 6-6 6 6"/>', right: '<path d="m9 6 6 6-6 6"/>', left: '<path d="m15 6-6 6 6 6"/>',
+    x: '<path d="M6 6l12 12M18 6 6 18"/>', plus: '<path d="M12 5v14M5 12h14"/>', minus: '<path d="M5 12h14"/>',
+    star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+    home: '<path d="M4 11 12 4l8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/>',
+    menu: '<path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8a2 2 0 0 1-2 2M17 3c-2 2-2 5-2 7h3v11"/>',
+    orders: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/>',
+    user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+    pin: '<path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+    heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+    bookmark: '<path d="M6 3h12v18l-6-4-6 4z"/>', share: '<path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 3v12M8 7l4-4 4 4"/>',
+    coins: '<circle cx="9" cy="9" r="6"/><path d="M15.5 9.5a6 6 0 1 1-6 6"/>', ticket: '<path d="M3 8a2 2 0 0 0 0 4 2 2 0 0 1 0 4v2h18v-2a2 2 0 0 1 0-4 2 2 0 0 0 0-4V6H3z"/><path d="M13 6v12" stroke-dasharray="2 2"/>',
+    percent: '<path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/>', crown: '<path d="m3 8 4 4 5-7 5 7 4-4-2 11H5z"/>',
+    users: '<circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14a5 5 0 0 1 5 5"/>', store: '<path d="M4 9 5 4h14l1 5M4 9v11h16V9M4 9a3 3 0 0 0 5 0 3 3 0 0 0 6 0 3 3 0 0 0 5 0"/>',
+    play: '<path d="M8 5v14l11-7z"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', bike: '<circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17 9 9h5l4 8M14 9l-2-4H9"/>',
+    cash: '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>', hand: '<path d="M7 11V6a1.5 1.5 0 0 1 3 0v4M10 10V4.5a1.5 1.5 0 0 1 3 0V10M13 10V5.5a1.5 1.5 0 0 1 3 0V12M16 9.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-3l-2.5-4a1.5 1.5 0 0 1 2.5-1.5L7 14"/>',
+    basket: '<path d="M3 10h18l-2 10H5zM8 10l4-6 4 6"/>', calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>', wallet: '<path d="M3 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H5a2 2 0 0 1-2-2zM3 7l12-3v3"/><circle cx="16.5" cy="13.5" r="1.2"/>',
+    check: '<path d="m5 12 5 5 9-10"/>', info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>', edit: '<path d="M4 20h4L19 9l-4-4L4 16z"/>',
+  };
+  const ic = (n, extra = '') => `<svg class="i ${extra}" viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
+  const starBox = (r) => `<span class="box ${r < 4 ? 'mid' : ''}">${r.toFixed(1)}<svg viewBox="0 0 24 24" aria-hidden="true">${P.star}</svg></span>`;
+  const rating = (d, inline) => `<span class="rate ${inline ? 'inline' : ''}" aria-label="Rated ${d.rating} from ${d.count} ratings">${starBox(d.rating)}<span class="cnt">${d.count} ratings</span></span>`;
+  const money = (n) => `AED ${n.toFixed(2)}`;
+
+  // ---------- Rendering ----------
+  const screen = document.getElementById('screen');
+  const qty = (id) => state.cart[id] || 0;
+  const addBtn = (d) => qty(d.id)
+    ? `<div class="add has" role="group" aria-label="${d.name} in cart"><button type="button" data-dec="${d.id}" aria-label="One less ${d.name}">${ic('minus')}</button><span>${qty(d.id)}</span><button type="button" data-inc="${d.id}" aria-label="One more ${d.name}">${ic('plus')}</button></div>`
+    : `<button type="button" class="add" data-inc="${d.id}" aria-label="Add ${d.name}">ADD<sup>+</sup></button>`;
+  const dishCard = (d) => `
+    <article class="dish">
+      <div class="ph">
+        <img src="${IMG(d.img)}" alt="" data-open="${d.id}" style="cursor:pointer">
+        ${d.ribbon ? `<span class="ribbon">${d.ribbon}</span>` : ''}
+        <button class="fav" type="button" aria-label="Save ${d.name}">${ic('heart')}</button>
+        ${addBtn(d)}
+      </div>
+      <div style="padding-top:12px;display:grid;gap:6px">
+        <h5>${d.name}</h5>
+        <div class="meta">${rating(d, true)}</div>
+        <div class="price">${money(d.price)}${d.was ? `<s>${money(d.was)}</s>` : ''}</div>
+      </div>
+    </article>`;
+
+  function homeHTML() {
+    const count = Object.values(state.cart).reduce((a, b) => a + b, 0);
+    return `
+    <div class="hero" id="hero">
+      ${HERO.map((h, i) => `<div class="hero-slide ${i === state.hero ? 'on' : ''}"><img src="${IMG(h.img)}" alt=""></div>`).join('')}
+      <div class="hero-top">
+        <div class="who">
+          <div class="logo" aria-hidden="true">S</div>
+          <div class="t">
+            <div class="n">Sample Kitchen</div>
+            <button class="a" type="button">${ic('pin')}<span>Home · Lavender Building, wing B</span>${ic('down')}</button>
+          </div>
+          <span class="pill-chip">${ic('coins')} 1,240</span>
+          <span class="avatar" aria-label="Account">LH</span>
+        </div>
+        <div class="search">
+          <div class="field">${ic('search')}<span>Search <b>"family tray"</b></span></div>
+          <span class="mic" aria-label="Search by voice">${ic('mic')}</span>
+        </div>
+      </div>
+      <div class="hero-copy" id="heroCopy">${heroCopy()}</div>
+      <div class="hero-dots" id="heroDots">${HERO.map((_, i) => `<i class="${i === state.hero ? 'on' : ''}"></i>`).join('')}</div>
+    </div>
+
+    <div class="cats">
+      <div class="cat-row">
+        ${CATS.map(([n, img, a, b], i) => `<button class="cat ${state.cat === n ? 'on' : ''}" type="button" data-cat="${n}"><span class="tile" style="background:linear-gradient(145deg, ${a}, ${b})"><img src="${IMG(img)}" alt="">${i === 5 ? '<span class="badge-new">New</span>' : ''}</span>${n}</button>`).join('')}
+      </div>
+    </div>
+
+    <section class="sec" aria-label="Offers">
+      <div class="sec-h"><h3>Offers for you</h3><button class="link" type="button">All offers ${ic('right')}</button></div>
+      <div class="offers" id="offers">
+        ${OFFERS.map((o) => `<article class="offer" style="background:linear-gradient(120deg, ${o.bg[0]}, ${o.bg[1]})"><div class="txt"><span class="tag">${o.tag}</span><h4>${o.title}</h4><span class="small">${o.small}</span>${o.code ? `<span class="code">${o.code}</span>` : '<span></span>'}</div><img src="${IMG(o.img)}" alt=""></article>`).join('')}
+      </div>
+      <div class="dots" id="offerDots">${OFFERS.map((_, i) => `<i class="${i === state.offer ? 'on' : ''}"></i>`).join('')}</div>
+    </section>
+
+    <section class="sec" aria-label="Redeem and save">
+      <div class="sec-h"><h3>Redeem and save</h3></div>
+      <div class="redeem">
+        <button class="card" type="button"><span class="coin" style="background:linear-gradient(135deg,#F59E0B,#B45309);color:#fff">${ic('coins')}</span><span><b>1,240 points</b><span class="muted">AED 12 to spend</span></span></button>
+        <button class="card" type="button"><span class="coin" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);color:#fff">${ic('ticket')}</span><span><b>2 vouchers</b><span class="muted">1 ends Friday</span></span></button>
+      </div>
+    </section>
+
+    <section class="sec" aria-label="Recommended">
+      <div class="sec-h"><div><div class="eyebrow">Recommended for you</div><h3>Most ordered this week</h3></div><button class="link" type="button" data-go="menu">Menu ${ic('right')}</button></div>
+      <div class="hscroll">${DISHES.slice(0, 5).map(dishCard).join('')}</div>
+    </section>
+
+    <section class="sec" aria-label="In the spotlight">
+      <div class="sec-h"><h3>In the spotlight</h3></div>
+      <article class="spot" style="background:linear-gradient(120deg, #1C1917, color-mix(in srgb, ${state.brand} 55%, #1C1917))">
+        <div class="l"><div><div class="eyebrow" style="color:#FDE68A">Chef's table</div><h4>Lemon herb chicken, new this week</h4></div><p>Roasted to order. Watch how it's made.</p><button class="btn sm" type="button" data-open="lemonchicken" style="justify-self:start">Order now</button></div>
+        <img src="${IMG('chef')}" alt="">
+        <span class="play" aria-hidden="true">${ic('play')}</span>
+      </article>
+    </section>
+
+    <section class="sec" aria-label="Order again">
+      <div class="sec-h"><h3>Order again</h3><button class="link" type="button" data-go="orders">Orders ${ic('right')}</button></div>
+      <div class="hscroll">
+        ${[['chicken', '10% off'], ['lemonade', 'Free drink'], ['hummus', null], ['pudding', '2× points']].map(([id, b]) => `<button class="again" type="button" data-open="${id}"><span class="c"><img src="${IMG(byId[id].img)}" alt="">${b ? `<em>${b}</em>` : ''}</span>${byId[id].name}</button>`).join('')}
+      </div>
+    </section>
+
+    <section class="sec" aria-label="Explore more">
+      <div class="sec-h"><span class="eyebrow">Explore more</span></div>
+      <div class="explore">
+        ${[['percent', 'Offers', '#DB2777', '#9D174D'], ['crown', 'Membership', '#D97706', '#92400E'], ['users', 'Party orders', '#2563EB', '#1E3A8A'], ['store', 'Pickup', '#059669', '#065F46']].map(([i, n, a, b]) => `<button class="card" type="button"><span class="ic" style="background:linear-gradient(135deg, ${a}, ${b})">${ic(i)}</span>${n}</button>`).join('')}
+      </div>
+    </section>
+
+    <footer class="foot">
+      <strong>Sample Kitchen</strong>
+      <span>© 2026 Sample Kitchen. All rights reserved.</span>
+      <span>App version 1.4.0 (52)</span>
+      <nav><a href="#" data-go="about">About</a><a href="#">Terms</a><a href="#">Privacy</a></nav>
+    </footer>
+
+    <div class="float" id="float">${floatHTML(count)}</div>`;
+  }
+  function heroCopy() {
+    const h = HERO[state.hero];
+    return `<span class="kicker">${h.kicker}</span><h2>${h.title}</h2><p>${h.copy}</p><button class="btn" type="button" data-go="menu">Order now ${ic('right')}</button>`;
+  }
+  function floatHTML(count) {
+    const items = Object.keys(state.cart).filter((id) => state.cart[id]);
+    const total = items.reduce((s, id) => s + byId[id].price * state.cart[id], 0);
+    return `
+      ${count ? `<div class="mini" role="region" aria-label="Your cart"><span class="thumbs">${items.slice(0, 3).map((id) => `<img src="${IMG(byId[id].img)}" alt="">`).join('')}</span><span class="t"><b>${count} item${count > 1 ? 's' : ''} · ${money(total)}</b><span class="muted">Sample Kitchen · 25–30 min</span></span><button class="go" type="button" data-go="cart">View cart<small>Pay from here</small></button></div>`
+        : `<div class="strip"><span class="amt">10% OFF</span><span class="t">First order with WELCOME10. 3 days left.</span><button type="button" aria-label="See offer" data-go="treat">${ic('up')}</button></div>`}
+      <nav class="dock" aria-label="Main">
+        ${[['home', 'Home', 'home'], ['menu', 'Menu', 'menu'], ['orders', 'Orders', 'orders'], ['user', 'Account', 'about']].map(([i, n, go], k) => `<button type="button" class="${k === 0 ? 'on' : ''}" ${k ? `data-go="${go}"` : ''}>${ic(i)}${n}</button>`).join('')}
+      </nav>`;
+  }
+
+  function cartHTML() {
+    const items = Object.keys(state.cart).filter((id) => state.cart[id]);
+    const sub = items.reduce((s, id) => s + byId[id].price * state.cart[id], 0);
+    const off = Math.min(20, Math.round(sub * 10) / 100);
+    const fee = sub >= 60 ? 0 : 10;
+    const total = sub - off + fee;
+    return `
+      <div class="grab"></div>
+      <div class="body">
+        <div class="sheet-h"><h3>Your cart</h3><button class="x" type="button" data-close aria-label="Close cart">${ic('x')}</button></div>
+        ${items.length ? items.map((id) => { const d = byId[id]; return `
+          <div class="line">
+            <img src="${IMG(d.img)}" alt="">
+            <div><button class="nm" type="button" data-open="${id}">${d.name} ${ic('right')}</button><div class="sub muted">${money(d.price)} each${id === 'chicken' ? ' · No onions' : ''}</div></div>
+            <div style="display:grid;justify-items:end;gap:6px"><div class="step"><button type="button" data-dec="${id}" aria-label="One less">${ic('minus')}</button><span>${state.cart[id]}</span><button type="button" data-inc="${id}" aria-label="One more">${ic('plus')}</button></div><b style="font-size:13px">${money(d.price * state.cart[id])}</b></div>
+          </div>`; }).join('') : '<p class="muted" style="padding:24px 0;text-align:center">Your cart is empty.</p>'}
+        <button class="link" type="button" data-close style="margin-top:6px">${ic('plus')} Add more items</button>
+        ${items.length ? `
+        <div class="codechip">${ic('check')} WELCOME10 applied · You save ${money(off)}</div>
+        <div class="addr">${ic('pin', 'icon-tint')}<span class="t"><b>Deliver to Home</b><span class="muted">Lavender Building, wing B · Floor 1, flat 106</span></span>${ic('down')}</div>
+        <div class="eyebrow" style="font:700 11px var(--f-app);letter-spacing:.12em;text-transform:uppercase;color:var(--a-muted);margin-top:6px">Pay with</div>
+        <div class="paywrap">
+          <button class="pay" type="button" data-pay="cod" aria-pressed="${state.pay === 'cod'}">${ic('cash', 'icon-tint')} Cash on delivery</button>
+          <button class="pay" type="button" data-pay="arrival" aria-pressed="${state.pay === 'arrival'}">${ic('hand', 'icon-tint')} Pay on arrival</button>
+        </div>
+        <div class="bill"><span>Subtotal</span><span>${money(sub)}</span><span class="save">WELCOME10</span><span class="save">− ${money(off)}</span><span>Delivery</span><span>${fee ? money(fee) : 'Free'}</span><span class="tot">Total</span><span class="tot">${money(total)}</span></div>
+        <button class="link" type="button" data-go="fullcart">See full cart and add notes ${ic('right')}</button>` : ''}
+      </div>
+      ${items.length ? `<div class="foot-bar"><button class="btn main" type="button" data-place>${'Place order'}<span>${money(total)}</span></button></div>` : ''}`;
+  }
+
+  function treatHTML() {
+    const bits = Array.from({ length: 6 }, (_, i) => `<i style="left:${[2, 76, 4, 80, 30, 58][i]}%;top:${[6, 4, 70, 66, 0, 84][i]}%;transform:rotate(${[24, -30, -12, 40, 18, -20][i]}deg)"></i>`).join('');
+    return `
+      <div class="body treat">
+        <div class="sheet-h" style="padding-top:12px"><button class="x" type="button" data-close aria-label="Close">${ic('x')}</button><span></span></div>
+        <h3>A little treat for you</h3>
+        <div style="position:relative;padding:18px 0 8px"><div class="confetti" style="inset:0">${bits}</div><div class="ticket"><b>10%</b><span>OFF</span></div></div>
+        <div class="left-days">3 days left</div>
+        <div class="facts">
+          <div><span class="ic">${ic('basket')}</span>Valid on<b>All dishes</b></div>
+          <div><span class="ic">${ic('wallet')}</span>Min spend<b>AED 40</b></div>
+          <div><span class="ic">${ic('coins')}</span>Max saving<b>AED 20</b></div>
+          <div><span class="ic">${ic('calendar')}</span>Valid until<b>2 Nov</b></div>
+        </div>
+      </div>
+      <div class="foot-bar" style="border:0"><button class="btn main" type="button" data-close data-go-after="menu" style="justify-content:center">Order now</button></div>`;
+  }
+
+  function dishHTML(d) {
+    return `
+      <div class="dhero"><img src="${IMG(d.img)}" alt="${d.name}"><button class="back" type="button" data-back aria-label="Back">${ic('left')}</button></div>
+      <div class="dbody">
+        <div class="mrow"><h2>${d.name}</h2>${rating(d)}</div>
+        <div class="chips">${d.reorder ? '<span class="chip ok">Highly reordered</span>' : ''}<span class="chip">${ic('clock')} 15 min</span>${d.ribbon ? `<span class="chip" style="background:linear-gradient(135deg,#7C3AED,#DB2777);color:#fff;border:0">${d.ribbon}</span>` : ''}</div>
+        <div class="price" style="font-size:20px">${money(d.price)}${d.was ? `<s>${money(d.was)}</s>` : ''}</div>
+        <p class="muted" style="margin:0;line-height:1.5">${d.desc}</p>
+        <label for="note-${d.id}" style="font:600 14px var(--f-app)">Note for the kitchen</label>
+        <textarea class="note-in" id="note-${d.id}" placeholder="No onions, extra sauce…"></textarea>
+      </div>
+      <div class="dbar">
+        <div class="step"><button type="button" data-dec="${d.id}" aria-label="One less">${ic('minus')}</button><span>${Math.max(1, qty(d.id))}</span><button type="button" data-inc="${d.id}" aria-label="One more">${ic('plus')}</button></div>
+        <button class="btn main" type="button" data-addclose="${d.id}">Add to cart<span>${money(d.price * Math.max(1, qty(d.id)))}</span></button>
+      </div>`;
+  }
+
+  function menuHTML() {
+    const groups = ['Mains', 'Starters', 'Drinks', 'Desserts'];
+    return `
+      <div class="mhead">
+        <div class="mtop"><button class="back" type="button" data-back aria-label="Back" style="position:static">${ic('left')}</button><span style="display:flex;gap:8px"><span class="chip">${ic('search')} Search</span></span></div>
+        <div class="mrow"><div><h2>Sample Kitchen</h2><div class="muted" style="font-size:13px;margin-top:4px;display:flex;gap:6px;align-items:center">${ic('pin')} 2.4 km · Al Barsha</div><div style="font-size:13px;margin-top:4px;display:flex;gap:6px;align-items:center;color:var(--a-success)">${ic('bike')} 25–30 min · Free delivery over AED 60</div></div>${rating({ rating: 4.4, count: '3.6K' })}</div>
+        <div class="chips"><span class="chip ok">${ic('check')} Packed in recyclable boxes</span><span class="chip">${ic('cash')} Cash on delivery</span></div>
+        <div class="offerbar">${ic('percent')} 3 dishes at 20% off<span style="margin-inline-start:auto" class="muted">4 offers ${ic('down')}</span></div>
+        <div class="chips">${['Available now', 'Under AED 20', 'Highly reordered', 'Favourites'].map((c) => `<span class="chip">${c}</span>`).join('')}</div>
+      </div>
+      ${groups.map((g) => `<h3 style="margin:0;padding:22px 16px 0;font:700 19px var(--f-display)">${g}</h3>${DISHES.filter((d) => d.cat === g).map((d) => `
+        <article class="mitem">
+          <div>
+            ${rating(d, true)}
+            <h5>${d.name}</h5>
+            ${d.reorder ? '<div class="reorder"><i></i>Highly reordered</div>' : ''}
+            <div class="price">${money(d.price)}${d.was ? `<s>${money(d.was)}</s>` : ''}</div>
+            <p class="muted" style="margin:6px 0 0;font-size:13px;line-height:1.4">${d.desc}</p>
+            <div class="mini-actions"><button type="button" aria-label="Save">${ic('bookmark')}</button><button type="button" aria-label="Share">${ic('share')}</button></div>
+          </div>
+          <div class="ph"><img src="${IMG(d.img)}" alt="" data-open="${d.id}" style="cursor:pointer">${addBtn(d)}</div>
+        </article>`).join('')}`).join('')}
+      <div style="height:170px"></div>
+      <button class="fab" type="button">${ic('menu')} Menu</button>`;
+  }
+
+  function aboutHTML() {
+    return `
+      <button class="back" type="button" data-back aria-label="Back" style="background:var(--a-card-solid);color:var(--a-text)">${ic('left')}</button>
+      <div class="about">
+        <div class="logo">S</div>
+        <h2 style="margin:0;font:700 24px var(--f-display)">Sample Kitchen</h2>
+        <p class="muted" style="margin:0">Charcoal grill and mezze since 2014</p>
+        <dl class="card"><dt>App version</dt><dd>1.4.0 (52)</dd><dt>Released</dt><dd>30 Oct 2026</dd><dt>Phone</dt><dd>+971 4 000 0000</dd><dt>Licences</dt><dd><a href="#" style="color:var(--a-brand-fg)">Open-source notices</a></dd></dl>
+        <p class="muted" style="margin:0;font-size:12px">© 2026 Sample Kitchen. All rights reserved.<br>Terms · Privacy</p>
+      </div>`;
+  }
+
+  // ---------- Assembly ----------
+  function render() {
+    const t = tokens();
+    Object.entries(t).forEach(([k, v]) => screen.style.setProperty(k, v));
+    screen.classList.toggle('glass-page', PAL[state.theme].glass);
+    screen.classList.toggle('glassy', PAL[state.theme].glass);
+    const keep = screen.querySelector('.scroll')?.scrollTop || 0;
+    const open = { sheet: screen.querySelector('.sheet.on')?.dataset.kind, page: screen.querySelector('.page.on')?.dataset.kind, dish: screen.querySelector('.page.on')?.dataset.dish };
+    const pageKeep = screen.querySelector('.page.on')?.scrollTop || 0;
+    screen.innerHTML = `
+      <div class="status"><span>9:41</span><span class="r">5G <span class="batt"></span></span></div>
+      <div class="scroll" id="home">${homeHTML()}</div>
+      <div class="page" data-kind="menu" id="pg-menu">${menuHTML()}</div>
+      <div class="page" data-kind="dish" id="pg-dish"></div>
+      <div class="page" data-kind="about" id="pg-about">${aboutHTML()}</div>
+      <div class="scrim" id="scrim"></div>
+      <div class="sheet" data-kind="cart" id="sh-cart" role="dialog" aria-label="Your cart">${cartHTML()}</div>
+      <div class="sheet" data-kind="treat" id="sh-treat" role="dialog" aria-label="Welcome offer">${treatHTML()}</div>
+      <div class="toast" id="toast" role="status"></div>`;
+    screen.querySelector('.scroll').scrollTop = keep;
+    if (open.page) { if (open.page === 'dish') fillDish(open.dish); const pg = screen.querySelector(`.page[data-kind="${open.page}"]`); pg.classList.add('on'); pg.scrollTop = pageKeep; }
+    if (open.sheet) showSheet(open.sheet, true);
+    document.getElementById('webfoot').innerHTML = `<strong>Sample Kitchen</strong><span>Al Barsha, Dubai · +971 4 000 0000</span><nav><a href="#">Menu</a><a href="#">About</a><a href="#">Terms</a><a href="#">Privacy</a></nav><span>© 2026 Sample Kitchen. All rights reserved. Website version 1.4.0</span>`;
+    panel();
+  }
+  function fillDish(id) { const pg = document.getElementById('pg-dish'); pg.dataset.dish = id; pg.innerHTML = dishHTML(byId[id]); }
+  function showSheet(kind, instant) {
+    const sh = document.getElementById('sh-' + kind);
+    if (instant) sh.style.transition = 'none';
+    sh.classList.add('on'); document.getElementById('scrim').classList.add('on');
+    if (instant) requestAnimationFrame(() => (sh.style.transition = ''));
+  }
+  function closeSheets() { screen.querySelectorAll('.sheet.on').forEach((s) => s.classList.remove('on')); document.getElementById('scrim').classList.remove('on'); }
+  function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('on'), 1800); }
+  // Small updates without rebuilding the whole screen, so open sheets and scroll stay put.
+  function refreshCart() {
+    const count = Object.values(state.cart).reduce((a, b) => a + b, 0);
+    document.getElementById('float').innerHTML = floatHTML(count);
+    document.getElementById('sh-cart').innerHTML = cartHTML();
+    screen.querySelectorAll('.dish, .mitem').forEach((el) => {
+      const img = el.querySelector('[data-open]'); if (!img) return;
+      const d = byId[img.dataset.open]; const old = el.querySelector('.add'); old.outerHTML = addBtn(d);
+    });
+    const pg = document.getElementById('pg-dish'); if (pg.classList.contains('on')) { const s = pg.scrollTop; fillDish(pg.dataset.dish); pg.scrollTop = s; }
+  }
+
+  function go(where) {
+    if (where === 'cart') return showSheet('cart');
+    if (where === 'treat') return showSheet('treat');
+    if (where === 'fullcart') { closeSheets(); return toast('Opens the full cart screen'); }
+    if (where === 'orders') return toast('Opens Orders');
+    const pg = document.getElementById('pg-' + where); if (pg) { closeSheets(); pg.scrollTop = 0; pg.classList.add('on'); }
+  }
+
+  screen.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-inc],[data-dec],[data-open],[data-go],[data-close],[data-back],[data-pay],[data-place],[data-addclose],[data-cat],#scrim');
+    if (!t) return;
+    if (t.matches('a')) e.preventDefault();
+    if (t.dataset.inc) { const had = qty(t.dataset.inc); state.cart[t.dataset.inc] = had + 1; refreshCart(); if (!had) toast(`Added ${byId[t.dataset.inc].name}`); return; }
+    if (t.dataset.dec) { state.cart[t.dataset.dec] = Math.max(0, qty(t.dataset.dec) - 1); refreshCart(); return; }
+    if (t.dataset.addclose) { if (!qty(t.dataset.addclose)) state.cart[t.dataset.addclose] = 1; refreshCart(); document.getElementById('pg-dish').classList.remove('on'); toast('Added to cart'); return; }
+    if (t.dataset.open) { closeSheets(); fillDish(t.dataset.open); const pg = document.getElementById('pg-dish'); pg.scrollTop = 0; pg.classList.add('on'); return; }
+    if (t.hasAttribute('data-back')) { t.closest('.page').classList.remove('on'); return; }
+    if (t.dataset.pay) { state.pay = t.dataset.pay; screen.querySelectorAll('[data-pay]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.pay === state.pay)); return; }
+    if (t.hasAttribute('data-place')) { closeSheets(); state.cart = {}; setTimeout(refreshCart, 300); toast('Order placed · Tracking opens next'); return; }
+    if (t.dataset.cat) { state.cat = t.dataset.cat; screen.querySelectorAll('.cat').forEach((c) => c.classList.toggle('on', c.dataset.cat === state.cat)); return; }
+    if (t.id === 'scrim' || t.hasAttribute('data-close')) { closeSheets(); if (t.dataset.goAfter) setTimeout(() => go(t.dataset.goAfter), 250); return; }
+    if (t.dataset.go) go(t.dataset.go);
+  });
+
+  // Hero and offers move on their own; a person's swipe or tap pauses them.
+  let paused = 0;
+  screen.addEventListener('pointerdown', () => (paused = Date.now()));
+  setInterval(() => {
+    if (Date.now() - paused < 6000 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    state.hero = (state.hero + 1) % HERO.length;
+    screen.querySelectorAll('.hero-slide').forEach((s, i) => s.classList.toggle('on', i === state.hero));
+    const hc = document.getElementById('heroCopy'); if (hc) hc.innerHTML = heroCopy();
+    document.querySelectorAll('#heroDots i').forEach((d, i) => d.classList.toggle('on', i === state.hero));
+  }, 5000);
+  setInterval(() => {
+    if (Date.now() - paused < 6000) return;
+    const row = document.getElementById('offers'); if (!row) return;
+    state.offer = (state.offer + 1) % OFFERS.length;
+    row.scrollTo({ left: row.children[state.offer].offsetLeft - 16, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }, 3500);
+  screen.addEventListener('scroll', (e) => {
+    if (e.target.id !== 'offers') return;
+    const row = e.target; const i = Math.round(row.scrollLeft / (row.children[0].offsetWidth + 12));
+    document.querySelectorAll('#offerDots i').forEach((d, k) => d.classList.toggle('on', k === i));
+  }, true);
+
+  // ---------- Panel ----------
+  function seg(el, items, key) {
+    el.innerHTML = items.map(([v, n, s]) => `<button type="button" data-v="${v}" aria-pressed="${state[key] === v}">${n}<small>${s}</small></button>`).join('');
+    el.onclick = (e) => { const b = e.target.closest('button'); if (!b) return; state[key] = b.dataset.v; render(); };
+  }
+  function panel() {
+    seg(document.getElementById('themes'), THEMES, 'theme');
+    seg(document.getElementById('btnstyles'), BTN, 'btn');
+    seg(document.getElementById('iconstyles'), ICONS, 'icons');
+    const sw = document.getElementById('swatches');
+    sw.innerHTML = BRANDS.map((c) => `<button type="button" style="background:${c}" aria-label="Brand colour ${c}" aria-pressed="${state.brand === c}" data-c="${c}"></button>`).join('') + `<label for="customColour">Custom <input id="customColour" type="color" value="${state.brand}"></label>`;
+    sw.onclick = (e) => { const b = e.target.closest('button[data-c]'); if (b) { state.brand = b.dataset.c; render(); } };
+    document.getElementById('customColour').oninput = (e) => {
+      const c = hex2rgb(e.target.value);
+      // Same rule as the admin: white button text needs 4.5:1, so a too-light pick is darkened until it reads.
+      state.brand = rgb2hex(readable(c, [[255, 255, 255]], false)); render();
+    };
+  }
+  document.getElementById('b-treat').onclick = () => { closeSheets(); showSheet('treat'); };
+  document.getElementById('b-cart').onclick = () => { closeSheets(); showSheet('cart'); };
+  document.getElementById('b-menu').onclick = () => go('menu');
+  document.getElementById('b-about').onclick = () => go('about');
+  document.getElementById('b-reset').onclick = () => { state.cart = {}; refreshCart(); };
+
+  render();
+  // The welcome offer shows once when the app opens.
+  setTimeout(() => showSheet('treat'), 700);
+})();
+</script>
