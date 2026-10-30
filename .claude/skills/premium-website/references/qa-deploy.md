@@ -8,8 +8,23 @@ python3 tools/qa.py <slug> [<slug>…]    # every page at 1440x900 and 390x844 +
 python3 tools/qa.py <slug> --shots      # also screenshots of the home page into qa-shots/
 ```
 qa.py fails on JS/console errors, missing local files, sideways scroll, broken images,
-content that stays hidden while on screen, and anything hidden with reduced motion.
+content that stays hidden while on screen, anything hidden with reduced motion, and a menu
+button that is covered or off-screen after scrolling down on a phone.
 WebGL needs a real web server (qa.py starts one); file:// pages fall back to CSS crossfades.
+
+## Navigation and overlays (the mistakes that shipped before)
+
+- **Hidden header on phones:** a header that slides away when scrolling down makes the menu
+  unreachable until the visitor scrolls to the top. Never hide the header below 961px. On wide
+  screens, hide only while scrolling down and show again on any scroll up.
+- **Menu behind the page:** the header's backdrop blur makes it the box a full-screen menu is
+  sized to (the menu shrinks to the header's height and the page shows through). Turn the blur
+  off while the menu is open. Give the menu a solid background and the header a z-index above
+  every page layer (check: `grep -rhoE "z-index: *[0-9]+" shared/css build/templates`).
+- **Splash or intro film over the site:** a film that waits for a tap must give up after a time
+  limit (9 seconds here). A blocked autoplay must never leave the whole page covered.
+- **Test it:** `tools/qa.py` on phones scrolls to 1400px, then checks that the menu button is the
+  element at its own centre point. A failure names what covers it.
 
 ## Look at it (the part tools miss)
 

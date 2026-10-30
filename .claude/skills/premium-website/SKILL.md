@@ -134,6 +134,11 @@ items they must confirm. Say plainly what is sample or unverified.
 - Shops: add to cart, checkout, a cash order and a test card payment all work end to end.
 - `tools/qa.py` passes: no errors, no missing files, no sideways scroll, nothing stuck hidden,
   reduced motion shows everything.
+- Navigation (phones): after scrolling down a long page, the menu button is still tappable and the
+  menu opens full screen. The header never hides on a phone or tablet (`tools/qa.py` checks this).
+- Overlays: no splash, banner, dock, cookie bar or offer covers the header or the menu button,
+  and any intro film gives up control within 9 seconds even when autoplay is blocked.
+- Nothing stacks above the header except the menu itself (z-index review, see qa-deploy.md).
 
 ## Hard rules
 

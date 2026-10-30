@@ -33,6 +33,14 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parent.parent
 VIEWS = {"desktop": {"width": 1440, "height": 900}, "phone": {"width": 390, "height": 844}}
 
+# menu on phones: after scrolling down, the menu button must still be reachable and open full screen
+MENU_JS = """() => {
+  const t = document.querySelector('[data-menu]');
+  if (!t) return {has: false};
+  const r = t.getBoundingClientRect();
+  const el = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+  return {has: true, clickable: !!el && (el === t || t.contains(el)), hit: el ? el.tagName : null};
+}"""
 PROBE = """async () => {
   // Walk down the page; anything sitting in the middle of the screen must be visible after a moment.
   // (Reveals are bidirectional: content above the viewport is hidden again on purpose.)
@@ -113,6 +121,13 @@ def main():
                         pg.goto(url, wait_until="load", timeout=45000)
                         pg.wait_for_timeout(1500 if f.name == "index.html" else 700)
                         r = pg.evaluate(PROBE)
+                        if view == "phone" and f.name == "index.html":
+                            # let the splash finish (or skip it), then scroll down as a visitor would
+                            pg.evaluate("(() => { const k = document.querySelector('[data-intro-skip]'); if (k) k.click(); })()")
+                            pg.wait_for_timeout(1000)
+                            pg.evaluate("window.scrollTo(0, 1400)")
+                            pg.wait_for_timeout(900)
+                            r["menu"] = pg.evaluate(MENU_JS)
                         if r["hiddenCount"]:
                             # reveal animations can take a couple of seconds after a fast scroll: settle, then re-check
                             pg.wait_for_timeout(2500)
@@ -125,6 +140,7 @@ def main():
                     if bad: problems.append(f"missing files: {bad[:4]}")
                     if r["overflow"] > 1: problems.append(f"horizontal overflow {r['overflow']}px")
                     if r["broken"]: problems.append(f"broken images: {r['broken'][:3]}")
+                    if r.get("menu", {}).get("has") and not r["menu"]["clickable"]: problems.append(f"menu button unreachable after scrolling down (covered by {r['menu']['hit']})")
                     if r["hiddenCount"]: problems.append(f"{r['hiddenCount']} elements never revealed: {r['hidden'][:3]}")
                     if a.shots and f.name == "index.html":
                         out = ROOT / "qa-shots" / slug; out.mkdir(parents=True, exist_ok=True)
