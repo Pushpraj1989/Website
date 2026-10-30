@@ -384,6 +384,7 @@ export function customerView(order: OrderRow) {
       subtotalMinor: order.subtotalMinor,
       deliveryFeeMinor: order.deliveryFeeMinor,
       serviceFeeMinor: order.serviceFeeMinor,
+      discountMinor: order.discountMinor,
       totalMinor: order.totalMinor,
       taxLabel: order.taxLabel,
       taxIncludedMinor: order.vatMinor,
@@ -412,12 +413,19 @@ export async function cancelStaleCardOrders(): Promise<number> {
 }
 
 /** Puts a code on the cart. Refused with the reason when it cannot apply to the cart as it is now. */
+/** The address a delivery cart is priced for: the one chosen, else the customer's default. The cart has not chosen yet. */
+export async function cartAddressId(guestId: string, channel: Channel, addressId: string | null): Promise<string | null> {
+  if (channel !== 'delivery' || addressId) return addressId;
+  const saved = await data.listSavedAddresses(guestId);
+  return saved.find((a) => a.isDefault)?.id ?? null;
+}
+
 export async function applyCartCode(guestId: string, accountId: string | null, raw: unknown, channel: Channel, addressId: string | null) {
   const cart = await data.getCart(guestId);
   if (cart.length === 0) throw new RuleError('Add something to your cart first.', 'empty_cart');
   await pricedLines(cart);
   const facts = await linesFacts(cart);
-  const { quote } = await quoteFor(guestId, channel, addressId, accountId);
+  const { quote } = await quoteFor(guestId, channel, await cartAddressId(guestId, channel, addressId), accountId);
   return withTx(async (c) => {
     await c.query('select 1 from carts where guest_session_id = $1 for update', [guestId]);
     return applyCode(c, guestId, accountId, raw, facts, quote.subtotalMinor, quote.deliveryFeeMinor, channel);

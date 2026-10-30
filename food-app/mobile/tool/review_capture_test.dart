@@ -1,11 +1,8 @@
 // Renders each customer screen with realistic data, the app's real theme and fonts, at a phone size.
 // Run: flutter test tool/review_capture_test.dart --update-goldens   (writes tool/goldens/*.png for the UX review)
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,7 +10,6 @@ import 'package:sample_kitchen/auth/auth_api.dart';
 import 'package:sample_kitchen/auth/biometrics.dart';
 import 'package:sample_kitchen/auth/session_store.dart';
 import 'package:sample_kitchen/core/api.dart';
-import 'package:sample_kitchen/core/theme.dart';
 import 'package:sample_kitchen/screens/assistant_screen.dart';
 import 'package:sample_kitchen/screens/cart_screen.dart';
 import 'package:sample_kitchen/screens/checkout_screen.dart';
@@ -27,6 +23,7 @@ import 'package:sample_kitchen/screens/orders_screen.dart';
 import 'package:sample_kitchen/screens/sign_in_screen.dart';
 
 import '../test/auth_fakes.dart';
+import 'capture_support.dart';
 import '../test/helpers.dart';
 
 Map<String, dynamic> _item(String id, String en, String ar, int price, {bool soldOut = false, String desc = ''}) => {
@@ -175,54 +172,6 @@ MockClient _server() => MockClient((request) async {
       return respond(jsonEncode(_menu()), 200);
     });
 
-Future<void> _loadFonts() async {
-  final roboto = FontLoader('Roboto')
-    ..addFont(Future.value(ByteData.sublistView(File('/opt/flutter/bin/cache/artifacts/material_fonts/Roboto-Regular.ttf').readAsBytesSync())))
-    ..addFont(Future.value(ByteData.sublistView(File('/opt/flutter/bin/cache/artifacts/material_fonts/Roboto-Medium.ttf').readAsBytesSync())))
-    ..addFont(Future.value(ByteData.sublistView(File('/opt/flutter/bin/cache/artifacts/material_fonts/Roboto-Bold.ttf').readAsBytesSync())));
-  await roboto.load();
-  final icons = FontLoader('MaterialIcons')
-    ..addFont(Future.value(ByteData.sublistView(File('/opt/flutter/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf').readAsBytesSync())));
-  await icons.load();
-  // The heading face is bundled with the app (assets/fonts). The test runner does not load app fonts, so it is registered here.
-  final fraunces = FontLoader('Fraunces')..addFont(Future.value(ByteData.sublistView(File('assets/fonts/Fraunces-Variable.ttf').readAsBytesSync())));
-  await fraunces.load();
-  // The Lucide icons (the bottom bar and the home screen) are package fonts. Flutter names a package font
-  // 'packages/<package>/<family>', so each family the package declares is loaded under that name.
-  final config = File('.dart_tool/package_config.json').absolute;
-  final packages = (jsonDecode(config.readAsStringSync())['packages'] as List).cast<Map<String, dynamic>>();
-  final lucideRoot = packages.firstWhere((p) => p['name'] == 'lucide_icons_flutter')['rootUri'] as String;
-  final lucideBase = Uri.file(config.path).resolve(lucideRoot.endsWith('/') ? lucideRoot : '$lucideRoot/');
-  const lucideFonts = {
-    'Lucide': 'assets/lucide.ttf',
-    'Lucide100': 'assets/build_font/LucideVariable-w100.ttf',
-    'Lucide200': 'assets/build_font/LucideVariable-w200.ttf',
-    'Lucide300': 'assets/build_font/LucideVariable-w300.ttf',
-    'Lucide400': 'assets/build_font/LucideVariable-w400.ttf',
-    'Lucide500': 'assets/build_font/LucideVariable-w500.ttf',
-    'Lucide600': 'assets/build_font/LucideVariable-w600.ttf',
-  };
-  for (final entry in lucideFonts.entries) {
-    final lucide = FontLoader('packages/lucide_icons_flutter/${entry.key}')..addFont(Future.value(ByteData.sublistView(File.fromUri(lucideBase.resolve(entry.value)).readAsBytesSync())));
-    await lucide.load();
-  }
-  // Arabic letters are not in Roboto. A device uses its system Arabic font; the capture uses FreeSerif, which has them.
-  final arabic = FontLoader('ArabicFallback')..addFont(Future.value(ByteData.sublistView(File('/usr/share/fonts/truetype/freefont/FreeSerif.ttf').readAsBytesSync())));
-  await arabic.load();
-}
-
-Widget _app(Widget home, {String lang = 'en'}) {
-  return MaterialApp(
-    debugShowCheckedModeBanner: false,
-    theme: buildTheme().copyWith(textTheme: buildTheme().textTheme.apply(fontFamilyFallback: const ['ArabicFallback'])),
-    locale: Locale(lang),
-    supportedLocales: const [Locale('en'), Locale('ar')],
-    localizationsDelegates: const [GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate, GlobalCupertinoLocalizations.delegate],
-    home: home,
-    builder: (context, child) => DefaultTextStyle.merge(style: const TextStyle(fontFamilyFallback: ['ArabicFallback']), child: child!),
-  );
-}
-
 /// The floating dock's tab with this name, found by its semantics label.
 Finder navTab(String label) => find.descendant(
       of: find.byKey(const Key('nav-dock')),
@@ -230,7 +179,7 @@ Finder navTab(String label) => find.descendant(
     );
 
 void main() {
-  setUpAll(_loadFonts);
+  setUpAll(loadCaptureFonts);
 
   Future<void> shoot(WidgetTester tester, String name, Widget Function(ApiClient api, ValueNotifier<String> language, SharedPreferences prefs) build, {String lang = 'en', Future<void> Function(WidgetTester tester)? after}) async {
     tester.view.physicalSize = const Size(390, 844) * 2;
@@ -243,7 +192,7 @@ void main() {
     final prefs = await SharedPreferences.getInstance();
     final api = ApiClient(baseUrl: 'http://api.test', client: _server(), prefs: prefs);
     final language = ValueNotifier(lang);
-    await tester.pumpWidget(_app(build(api, language, prefs), lang: lang));
+    await tester.pumpWidget(captureApp(build(api, language, prefs), lang: lang));
     await tester.pumpAndSettle(const Duration(milliseconds: 300));
     if (after != null) await after(tester);
     // Pictures decode outside the fake clock, so give them real time to load before the frame is captured.

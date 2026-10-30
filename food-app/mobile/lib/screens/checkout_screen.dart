@@ -241,6 +241,7 @@ class _Totals extends StatelessWidget {
       child: Column(children: [
         Row(children: [Expanded(child: Text(s.subtotal)), Text(formatMoney(quote.subtotalMinor, currency))]),
         if (quote.deliveryFeeMinor > 0) Row(children: [Expanded(child: Text(s.deliveryFee)), Text(formatMoney(quote.deliveryFeeMinor, currency))]),
+        if (quote.discountMinor > 0) Row(children: [Expanded(child: Text(s.discount)), Text('− ${formatMoney(quote.discountMinor, currency)}')]),
         const Divider(),
         Row(children: [Expanded(child: Text(s.total, style: const TextStyle(fontWeight: FontWeight.w600))), Text(formatMoney(quote.totalMinor, currency), style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18))]),
         const SizedBox(height: Tokens.space1),

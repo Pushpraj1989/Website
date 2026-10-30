@@ -1,0 +1,16 @@
+Promotion daily check, 2026-10-30
+Issued 52 · still usable 51 · used 1 · expired 0 · revoked 0
+Redemptions 2 · discount given AED 15.80
+
+Campaigns
+  Pilot: Welcome 10% [active] issued 0, used 0, redemptions 1, discount AED 10.80, paid by Restaurant
+  Pilot: AED 5 vouchers [active] issued 52, used 1, redemptions 1, discount AED 5.00, paid by Restaurant
+  Pilot: Free delivery [active] issued 0, used 0, redemptions 0, discount AED 0.00, paid by Shared
+
+Checks
+  OK  Redeemed vouchers with no redemption record: 0
+  OK  Voucher redemptions for vouchers that are not redeemed: 0
+  OK  Orders confirmed with an offer but no redemption record: 0
+  OK  Holds still open on orders that were cancelled: 0
+
+All checks are zero.

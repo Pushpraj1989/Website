@@ -198,6 +198,23 @@ test('a free delivery offer does not apply to a pickup', async () => {
   await expectRule(applyCartCode(g, null, 'FREEDEL1', 'pickup', null), 'offer_not_applicable');
 });
 
+test('free delivery applies on the cart, before checkout, at the default delivery address', async () => {
+  const g = await guest([{ itemId: SALAD, qty: 2 }]);
+  // No address yet: the fee is unknown, and the answer says what to do.
+  await expectRule(applyCartCode(g, null, 'FREEDEL1', 'delivery', null), 'offer_not_applicable');
+  await db.query(
+    `insert into addresses (guest_session_id, label, line_1, line_2, notes, zone_id, is_default, saved)
+     values ($1, 'Home', '12 Example Street', '', '', '00000000-0000-4000-8000-000000000501', true, true)`,
+    [g],
+  );
+  const applied = await applyCartCode(g, null, 'FREEDEL1', 'delivery', null);
+  assert.equal(applied.applies, true);
+  const address = (await data.listSavedAddresses(g))[0];
+  const { quote } = await quoteFor(g, 'delivery', address.id, null);
+  assert.ok(quote.deliveryFeeMinor > 0);
+  assert.equal(quote.discountMinor, quote.deliveryFeeMinor);
+});
+
 test('when the cart changes so a code no longer applies, the quote says so and checkout refuses', async () => {
   await campaignWith('Shrinks', { type: 'fixed', value: 500, code: 'SHRINK01', minSubtotalMinor: 2000 });
   const g = await guest([{ itemId: SALAD, qty: 2 }]);

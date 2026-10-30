@@ -126,13 +126,13 @@ export default function Partners() {
         <fieldset className="stack">
           <legend>Permissions</legend>
           {Object.entries(SCOPES).map(([s, label]) => (
-            <label key={s} className="row"><input type="checkbox" name={`scope:${s}`} defaultChecked={s !== 'codes:export'} /> {label}</label>
+            <label key={s} className="choice"><input type="checkbox" name={`scope:${s}`} defaultChecked={s !== 'codes:export'} /> {label}</label>
           ))}
         </fieldset>
         <fieldset className="stack">
           <legend>Campaigns they may issue from</legend>
           {campaigns.length === 0 ? <p className="muted">Create a campaign first.</p> : campaigns.map((c) => (
-            <label key={c.id} className="row"><input type="checkbox" name={`campaign:${c.id}`} /> {c.name}</label>
+            <label key={c.id} className="choice"><input type="checkbox" name={`campaign:${c.id}`} /> {c.name}</label>
           ))}
         </fieldset>
         <label>Most codes a day<input name="dailyIssueLimit" type="number" min="0" defaultValue="1000" required /></label>

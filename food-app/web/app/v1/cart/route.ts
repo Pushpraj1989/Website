@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as data from '@/lib/data.ts';
 import { currentGuestId, ensureGuest, withGuestCookie, errorResponse, readJson } from '@/lib/http.ts';
-import { pricedLines, quoteFor, validateCart, RuleError } from '@/lib/orders.ts';
+import { cartAddressId, pricedLines, quoteFor, validateCart, RuleError } from '@/lib/orders.ts';
 import { accountForToken } from '@/lib/accounts.ts';
 import { bearerToken } from '@/lib/http.ts';
 
@@ -26,7 +26,7 @@ async function viewFor(guestId: string, channel: Channel, accountId: string | nu
   if (lines.length) {
     try {
       await pricedLines(lines);
-      const priced = await quoteFor(guestId, channel, null, accountId);
+      const priced = await quoteFor(guestId, channel, await cartAddressId(guestId, channel, null), accountId);
       quote = priced.quote;
       offer = priced.offer;
     } catch (error) {

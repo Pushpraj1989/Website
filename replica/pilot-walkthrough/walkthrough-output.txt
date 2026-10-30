@@ -1,0 +1,72 @@
+Pilot walkthrough against http://127.0.0.1:3100
+
+— Customer —
+PASS  Card payment is off for the pilot; cash on delivery and pay on arrival are on
+      payments: {"cod":true,"payOnArrival":true,"card":false}
+PASS  A customer signs up with a phone number
+      account "Pilot Customer"
+PASS  The customer saves a delivery address inside the delivery area
+      zone: Central (sample)
+      cart: subtotal AED 108.00, delivery AED 10.00, total AED 118.00
+PASS  WELCOME10 applies (typed in lower case)
+      offer: 10% off
+PASS  The quote takes 10% off the food, capped at AED 20
+      subtotal AED 108.00 − AED 10.80 + delivery AED 10.00 = AED 107.20
+PASS  Paying by card is refused during the pilot
+      422: Card payment is not available yet.
+PASS  Cash on delivery order is placed with the discount
+      order 42467835 total AED 107.20, discount AED 10.80
+PASS  WELCOME10 a second time is refused (once per customer)
+      422: You have used this offer as many times as it allows.
+PASS  WELCOME10 on a guest cart under AED 30 does not apply, and says why
+      422: Add 12.00 AED more to use this offer.
+
+— Partner —
+PASS  The partner sees only the campaign it is allowed
+      Pilot: AED 5 vouchers
+PASS  The partner issues two AED 5 vouchers
+      codes: PLT-2078-GU, PLT-7993-HN
+PASS  Sending the same request again returns the same codes, not new ones
+      Idempotent-Replayed: true
+PASS  Issuing from a campaign it is not allowed is refused
+      403: This partner cannot issue from that campaign.
+PASS  Reading a code list is refused (no codes:read scope)
+      This partner key does not have the codes:export permission.
+PASS  The partner checks a code: valid and unused
+      {"valid":true,"state":"available","expiresAt":"2026-11-29T00:08:18.000Z","benefit":{"type":"fixed","value":500,"minOrderMinor":2500,"currency":"AED"}}
+
+— Customer uses the voucher —
+PASS  The customer saves the voucher to their wallet
+      wallet:  (available)
+      wallet: 1 available, 0 used
+PASS  The voucher applies to a pickup cart
+      offer: 5.00 AED off
+PASS  Pay on arrival pickup order is placed with AED 5 off
+      order 39636152 placed, total AED 85.00
+PASS  The partner now sees the code as used
+      {"valid":false,"state":"used","expiresAt":"2026-11-29T00:08:18.000Z","benefit":{"type":"fixed","value":500,"minOrderMinor":2500,"currency":"AED"}}
+      wallet: 0 available, 1 used
+PASS  Someone else trying the used voucher is refused
+      409: This voucher has already been used.
+
+— Free delivery, cancelled by staff —
+PASS  FREEDEL takes the delivery fee off
+      delivery AED 10.00, discount AED 10.00, total AED 90.00
+      order d0956dfa placed, total AED 90.00
+
+— Staff —
+PASS  Staff sign in
+      staff session set
+PASS  Staff accept the WELCOME10 order
+      ETA 30 minutes
+PASS  …and move it through to delivered; the customer sees it
+      placed → accepted → preparing → ready → out_for_delivery → delivered
+PASS  Staff cancel the free delivery order (its use of FREEDEL is given back)
+      cancelled
+PASS  The promotions report is reconciled
+      issued 52, used 1, redemptions 2, discount AED 15.80
+      Pilot: Welcome 10%: redemptions 1, discount AED 10.80
+      Pilot: AED 5 vouchers: redemptions 1, discount AED 5.00
+      Pilot: Free delivery: redemptions 0, discount AED 0.00
+
+Every step passed.

@@ -58,7 +58,8 @@ export function outcomeFor(
     return { applies: false, reason: `Add ${((offer.minSubtotalMinor - subtotalMinor) / 100).toFixed(2)} AED more to use this offer.` };
   }
   if (offer.type === 'free_delivery') {
-    if (channel !== 'delivery' || deliveryFeeMinor <= 0) return { applies: false, reason: 'This offer is for delivery orders.' };
+    if (channel !== 'delivery') return { applies: false, reason: 'This offer is for delivery orders.' };
+    if (deliveryFeeMinor <= 0) return { applies: false, reason: 'Choose a delivery address with a delivery fee to use this offer.' };
     return { applies: true, discountMinor: deliveryFeeMinor, freeDeliveryMinor: deliveryFeeMinor, label: 'Free delivery' };
   }
   const eligibleLines = lines.filter((l) =>
