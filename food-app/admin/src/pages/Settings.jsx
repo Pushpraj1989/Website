@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ImageUp, Trash2 } from 'lucide-react';
+import { ImageUp, Store, Trash2 } from 'lucide-react';
 import { api } from '../api.js';
 import { formatMoney, parseMoney } from '../money.js';
 
@@ -22,17 +22,30 @@ const THEMES = [
   { id: 'glass_night', name: 'Glass night', about: 'Frosted dark cards over a glow of your colour.' },
 ];
 
+// How buttons and icons look across the app and website. The main action on a screen always stays filled.
+const BUTTON_STYLES = [
+  { id: 'light', name: 'Light', about: 'White, words in your colour. Calm over photos.' },
+  { id: 'tonal', name: 'Tonal', about: 'A soft tint of your colour.' },
+  { id: 'filled', name: 'Filled', about: 'Your colour, white words. The boldest.' },
+];
+const ICON_STYLES = [
+  { id: 'brand', name: 'Your colour', about: 'Icons in the brand colour.' },
+  { id: 'neutral', name: 'Neutral', about: 'Icons in the text colour.' },
+];
+
 // The restaurant's own identity and ordering rules. Everything the customer app shows about the restaurant comes from here.
 export default function Settings({ onBrandChanged }) {
   const [settings, setSettings] = useState(null);
   const [color, setColor] = useState('#B45309');
   const [theme, setTheme] = useState('classic');
+  const [buttonStyle, setButtonStyle] = useState('light');
+  const [iconStyle, setIconStyle] = useState('brand');
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
-    api.settings().then(({ settings: s }) => { setSettings(s); setColor(s.brandColor); setTheme(s.theme ?? 'classic'); }).catch((err) => setError(err.message));
+    api.settings().then(({ settings: s }) => { setSettings(s); setColor(s.brandColor); setTheme(s.theme ?? 'classic'); setButtonStyle(s.buttonStyle ?? 'light'); setIconStyle(s.iconStyle ?? 'brand'); }).catch((err) => setError(err.message));
   }, []);
 
   if (!settings) return <section className="stack"><h1>Restaurant</h1>{error ? <p role="alert" className="error">{error}</p> : <p className="muted">Loading…</p>}</section>;
@@ -57,6 +70,9 @@ export default function Settings({ onBrandChanged }) {
         address: { en: f.get('addressEn'), ar: f.get('addressAr') },
         brandColor: color,
         theme,
+        buttonStyle,
+        iconStyle,
+        ratingMinCount: Number(f.get('ratingMinCount')),
         cashLimitMinor: cashLimit,
         serviceFeeMinor: serviceFee,
         payments: { cod: f.get('cod') === 'on', payOnArrival: f.get('payOnArrival') === 'on', card: f.get('card') === 'on' },
@@ -172,6 +188,31 @@ export default function Settings({ onBrandChanged }) {
         </div>
 
         <div className="card stack">
+          <h2>Buttons and icons</h2>
+          <fieldset className="choices">
+            <legend>Buttons</legend>
+            {BUTTON_STYLES.map((b) => (
+              <label key={b.id} className={`style-option${buttonStyle === b.id ? ' selected' : ''}`}>
+                <input type="radio" name="buttonStyle" value={b.id} checked={buttonStyle === b.id} onChange={() => setButtonStyle(b.id)} />
+                <span className={`sample-btn-${b.id}`} style={{ '--sample': color }} aria-hidden="true">ADD +</span>
+                <span><b>{b.name}</b><span className="hint">{b.about}</span></span>
+              </label>
+            ))}
+          </fieldset>
+          <fieldset className="choices">
+            <legend>Icons</legend>
+            {ICON_STYLES.map((b) => (
+              <label key={b.id} className={`style-option${iconStyle === b.id ? ' selected' : ''}`}>
+                <input type="radio" name="iconStyle" value={b.id} checked={iconStyle === b.id} onChange={() => setIconStyle(b.id)} />
+                <Store className="icon" aria-hidden="true" style={{ color: b.id === 'brand' ? color : 'var(--text)' }} />
+                <span><b>{b.name}</b><span className="hint">{b.about}</span></span>
+              </label>
+            ))}
+          </fieldset>
+          <p className="hint">Place order and Add to cart stay in your colour in every style, so the next step is always clear.</p>
+        </div>
+
+        <div className="card stack">
           <h2>Ordering</h2>
           <fieldset className="choices">
             <legend>Ways to pay</legend>
@@ -182,8 +223,10 @@ export default function Settings({ onBrandChanged }) {
           <div className="form-grid">
             <label>Cash limit, {settings.currency} <span className="hint">0 for none</span><input id="cashLimit" name="cashLimit" inputMode="decimal" defaultValue={(settings.cashLimitMinor / 100).toFixed(digits)} /></label>
             <label>Service fee, {settings.currency}<input id="serviceFee" name="serviceFee" inputMode="decimal" defaultValue={(settings.serviceFeeMinor / 100).toFixed(digits)} /></label>
+            <label>Show a dish's rating after<input id="ratingMinCount" name="ratingMinCount" type="number" min={1} max={1000} defaultValue={settings.ratingMinCount ?? 5} aria-describedby="ratingHint" /></label>
           </div>
           <p className="hint">Currency {settings.currency} and tax ({settings.taxLabel} {settings.taxBasisPoints / 100}%) are set for your country when the restaurant is set up. Cash orders above {settings.cashLimitMinor > 0 ? formatMoney(settings.cashLimitMinor, digits, settings.currency) : 'any amount'} are refused.</p>
+          <p className="hint" id="ratingHint">Customers rate an order once it reaches them. A dish shows its stars once that many orders with it are rated, so one early rating does not stand for the dish.</p>
         </div>
 
         <div className="actions submit">

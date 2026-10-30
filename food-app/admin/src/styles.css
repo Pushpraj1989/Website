@@ -276,3 +276,44 @@ dialog.more .grab { width: 40px; height: 4px; border-radius: 2px; background: va
 .theme-glass_night { background: radial-gradient(circle at 20% 15%, color-mix(in srgb, var(--sample) 70%, #000), #0b0a09 70%); }
 .theme-glass_night .tp-card { background: rgb(255 255 255 / .08); border: 1px solid rgb(255 255 255 / .16); backdrop-filter: blur(8px); }
 .theme-glass_night .tp-line { background: rgb(255 255 255 / .28); }
+/* Promotions: the chosen file and a small phone that plays the chosen arrival. */
+.promo-thumb { width: 96px; height: 96px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); display: grid; place-items: center; overflow: hidden; flex: none; }
+.promo-thumb img, .promo-thumb video { width: 100%; height: 100%; object-fit: cover; }
+.upload { position: relative; overflow: hidden; align-self: flex-start; }
+.upload input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.upload:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.promo-look { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 16px; align-items: start; }
+@media (max-width: 560px) { .promo-look { grid-template-columns: minmax(0, 1fr); justify-items: center; } }
+.promo-preview { display: grid; gap: 6px; justify-items: center; }
+.pp-phone { position: relative; width: 140px; height: 260px; border-radius: 22px; border: 5px solid #1c1917; background: #f5f5f4; overflow: hidden; }
+.pp-item { position: absolute; display: grid; align-content: end; gap: 4px; padding: 8px; color: #fff; background: var(--pp-bg); overflow: hidden; animation-duration: .7s; animation-fill-mode: both; animation-timing-function: cubic-bezier(.2, .8, .2, 1); }
+.pp-item img, .pp-item video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pp-item .pp-text { position: relative; font-size: 11px; font-weight: 700; line-height: 1.2; text-shadow: 0 1px 4px rgb(0 0 0 / .5); }
+.pp-ticket { position: relative; font-size: 13px; }
+.pp-hero .pp-item { inset: 0 0 auto; height: 45%; }
+.pp-hero .pp-item.size-compact { height: 32%; } .pp-hero .pp-item.size-tall { height: 60%; } .pp-hero .pp-item.size-full { height: 100%; }
+.pp-carousel .pp-item, .pp-mid_feed .pp-item { inset: 40% 10px auto; height: 34%; }
+.pp-mid_feed .pp-item.size-compact { height: 22%; } .pp-mid_feed .pp-item.size-tall { height: 46%; }
+.pp-welcome .pp-item { inset: auto 0 0; height: 62%; place-content: center; text-align: center; background: #fff; color: #1c1917; border-radius: 14px 14px 0 0; }
+.pp-welcome .pp-item.size-compact { height: 45%; } .pp-welcome .pp-item.size-tall { height: 80%; } .pp-welcome .pp-item.size-full { height: 100%; border-radius: 0; }
+.pp-welcome .pp-item .pp-text { text-shadow: none; }
+.pp-welcome .pp-ticket { background: var(--pp-bg); color: #fff; padding: 8px; transform: rotate(-5deg); border-radius: 6px; }
+.pp-strip .pp-item { inset: auto 8px 34px; height: 26px; align-content: center; border-radius: 8px; }
+.frame-rounded { border-radius: 12px; } .frame-square { border-radius: 0; } .frame-circle img, .frame-circle video { inset: 8px 8px auto auto; width: 56px; height: 56px; border-radius: 50%; }
+.frame-ticket { border-radius: 10px; -webkit-mask: radial-gradient(circle at 0 50%, #0000 8px, #000 9px) left / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, #0000 8px, #000 9px) right / 51% 100% no-repeat; mask: radial-gradient(circle at 0 50%, #0000 8px, #000 9px) left / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, #0000 8px, #000 9px) right / 51% 100% no-repeat; }
+.pp-welcome .frame-ticket { -webkit-mask: none; mask: none; }
+.anim-slide_up { animation-name: pp-up; } .anim-slide_down { animation-name: pp-down; } .anim-slide_left { animation-name: pp-left; } .anim-slide_right { animation-name: pp-right; } .anim-zoom { animation-name: pp-zoom; } .anim-fade { animation-name: pp-fade; }
+@keyframes pp-up { from { transform: translateY(110%); } } @keyframes pp-down { from { transform: translateY(-110%); } }
+@keyframes pp-left { from { transform: translateX(-110%); } } @keyframes pp-right { from { transform: translateX(110%); } }
+@keyframes pp-zoom { from { transform: scale(.4); opacity: 0; } } @keyframes pp-fade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .pp-item { animation: none; } }
+/* Button and icon style choices in Settings. */
+.style-option { position: relative; display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 2px solid var(--border); border-radius: var(--radius-md); cursor: pointer; background: var(--bg); }
+.style-option.selected { border-color: var(--accent); }
+.style-option input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.style-option:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.style-option > span:last-child { display: grid; gap: 2px; min-width: 0; }
+.style-option [class^="sample-btn-"] { flex: none; font: 800 12px/1 system-ui, sans-serif; letter-spacing: .04em; padding: 9px 12px; border-radius: 8px; }
+.sample-btn-light { background: #fff; color: var(--sample); border: 1px solid color-mix(in srgb, var(--sample) 40%, #fff); box-shadow: 0 2px 6px rgb(0 0 0 / .12); }
+.sample-btn-tonal { background: color-mix(in srgb, var(--sample) 12%, #fff); color: color-mix(in srgb, var(--sample) 70%, #000); }
+.sample-btn-filled { background: var(--sample); color: #fff; }

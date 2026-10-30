@@ -116,6 +116,11 @@ export const api = {
   rotatePartnerKey: (id) => request('POST', `/v1/admin/partner-clients/${id}/rotate`),
   revokePartner: (id) => request('POST', `/v1/admin/partner-clients/${id}/revoke`),
   promotions: () => request('GET', '/v1/admin/promotions'),
+  uploadPromotionMedia: (file) => {
+    const form = new FormData();
+    form.append('file', file);
+    return request('POST', '/v1/admin/promotions/media', form);
+  },
   createPromotion: (body) => request('POST', '/v1/admin/promotions', body),
   updatePromotion: (id, body) => request('PUT', `/v1/admin/promotions/${id}`, body),
   deletePromotion: (id) => request('DELETE', `/v1/admin/promotions/${id}`),
