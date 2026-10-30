@@ -510,7 +510,8 @@
     if (header) {
       header.classList.toggle("is-scrolled", y > 40);
       const open = header.classList.contains("is-open");
-      header.classList.toggle("is-hidden", !open && y > 300 && y > lastY + 2);
+      // hide on scroll only on wide screens: on phones and tablets the menu button must stay reachable
+      header.classList.toggle("is-hidden", !open && y > 300 && y > lastY + 2 && matchMedia("(min-width: 961px)").matches);
       if (y < lastY - 2) header.classList.remove("is-hidden");
     }
     if (toTop) toTop.classList.toggle("is-visible", y > 900);
@@ -708,6 +709,7 @@
     };
     if (reduce || !video) { reel.remove(); return; }
     video.load();
+    setTimeout(finish, 9000); // never block the site for longer than 9 seconds
     // if the viewer blocks autoplay (or the film fails to load), wait for a tap instead of skipping it
     const tap = $("[data-intro-tap]", reel);
     const showTap = () => { if (tap) tap.hidden = false; };

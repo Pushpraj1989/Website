@@ -510,7 +510,8 @@
     if (header) {
       header.classList.toggle("is-scrolled", y > 40);
       const open = header.classList.contains("is-open");
-      header.classList.toggle("is-hidden", !open && y > 300 && y > lastY + 2);
+      // hide on scroll only on wide screens: on phones and tablets the menu button must stay reachable
+      header.classList.toggle("is-hidden", !open && y > 300 && y > lastY + 2 && matchMedia("(min-width: 961px)").matches);
       if (y < lastY - 2) header.classList.remove("is-hidden");
     }
     if (toTop) toTop.classList.toggle("is-visible", y > 900);
@@ -588,6 +589,8 @@
   if (form) {
     const status = $("[data-status]", form);
     const endpoint = form.dataset.endpoint || "";
+    const pageField = $("[data-page-field]", form);
+    if (pageField) pageField.value = location.pathname;
     const rules = {
       name: (v) => v.trim().length >= 2 || L("Please enter your name."),
       contact: (v) => {
@@ -650,6 +653,80 @@
       .add(fireIntro, dur + 0.55);
   };
 
+  /* ---------- building picker: curved glossy rail, flats slide in ---------- */
+  const initBuildingSlider = () => {
+    $$("[data-bslider]").forEach((root) => {
+      const cards = $$("[data-bs-card]", root);
+      const panels = $$("[data-bs-panel]", root);
+      const rail = $("[data-bs-rail]", root);
+      if (!cards.length || !rail) return;
+      let active = 0;
+      const pick = (i) => {
+        active = (i + cards.length) % cards.length;
+        cards.forEach((c, j) => {
+          const d = j - active;
+          c.style.setProperty("--d", d);
+          c.style.setProperty("--a", Math.abs(d));
+          c.setAttribute("aria-selected", j === active ? "true" : "false");
+          c.tabIndex = j === active ? 0 : -1;
+        });
+        panels.forEach((p, j) => { p.hidden = j !== active; });
+        const panel = panels[active];
+        if (panel) { panel.classList.remove("is-in"); void panel.offsetWidth; panel.classList.add("is-in"); }
+      };
+      cards.forEach((c, j) => c.addEventListener("click", () => pick(j)));
+      const prev = $("[data-bs-prev]", root);
+      const next = $("[data-bs-next]", root);
+      if (prev) prev.addEventListener("click", () => pick(active - 1));
+      if (next) next.addEventListener("click", () => pick(active + 1));
+      root.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") pick(active + 1);
+        if (e.key === "ArrowLeft") pick(active - 1);
+      });
+      let startX = null;
+      rail.addEventListener("pointerdown", (e) => { startX = e.clientX; });
+      rail.addEventListener("pointerup", (e) => {
+        if (startX === null) return;
+        const dx = e.clientX - startX;
+        startX = null;
+        if (Math.abs(dx) > 40) pick(active + (dx < 0 ? 1 : -1));
+      });
+      pick(0);
+    });
+  };
+
+  /* ---------- intro reel: plays on the home page, then the site ---------- */
+  const initIntroReel = () => {
+    const reel = $("[data-intro-reel]");
+    if (!reel) return;
+    // plays on every visit to the home page (demo); the Skip button ends it early
+    const video = $("video", reel);
+    const finish = () => {
+      if (reel.classList.contains("is-done")) return;
+      reel.classList.add("is-done");
+      if (video) video.pause();
+      setTimeout(() => reel.remove(), 800);
+    };
+    if (reduce || !video) { reel.remove(); return; }
+    video.load();
+    setTimeout(finish, 9000); // never block the site for longer than 9 seconds
+    // if the viewer blocks autoplay (or the film fails to load), wait for a tap instead of skipping it
+    const tap = $("[data-intro-tap]", reel);
+    const showTap = () => { if (tap) tap.hidden = false; };
+    const startFilm = () => {
+      if (tap) tap.hidden = true;
+      const p = video.play();
+      if (p && p.catch) p.catch(showTap);
+    };
+    video.addEventListener("ended", finish);
+    video.addEventListener("error", showTap);
+    if (tap) tap.addEventListener("click", startFilm);
+    startFilm();
+    setTimeout(() => { if (video.paused && video.currentTime === 0) showTap(); }, 1500);
+    const skip = $("[data-intro-skip]", reel);
+    if (skip) skip.addEventListener("click", finish);
+  };
+
   /* ---------- boot ---------- */
   const boot = () => {
     // Theme effects first: they create the pinned sections, and every reveal
@@ -666,6 +743,8 @@
       initHeroRecede();
       ST.sort();
     }
+    initBuildingSlider();
+    initIntroReel();
     runLoader();
     if (motion) {
       let t;

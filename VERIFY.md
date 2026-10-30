@@ -1,6 +1,6 @@
 # Verify before pitching
 
-Built 2026-10-18. Facts come from each company's homepage
+Built 2026-10-30. Facts come from each company's homepage
 read on 11 Oct 2026 and from the prospects document. Anything below is unconfirmed
 or conflicting and should be checked against the live site, or with the client, first.
 
@@ -72,6 +72,18 @@ Sources:
 - https://www.linkedin.com/company/asyadexpress/ (posts to Aug 2026, read 12 Oct 2026)
 - https://apps.apple.com/om/app/asyad-express/id6446076409 (app description, read 12 Oct 2026)
 - https://www.youtube.com/@asyadexpress-OM (video thumbnails and stills, read 12 Oct 2026)
+
+## Azaiba Gardens
+
+- Rents (OMR 265, 375, 425 per month) as given by the client team; confirm before publishing
+- Flat sizes, available units and booking process
+- Building and contact details: address, phone and email are placeholders
+- Photos: Rezone Property LLC permission letter (valid to 31 Dec 2027) covers the Rezone photos only, for sample website and client presentations. Tamkeen Homes photos are not used.
+- Rezone photos are small (about 700 px); replace with full-size photos from the client or the building owner
+- Enquiry form stays off until the client's email is set
+
+Sources:
+- Rezone Property LLC, permission letter, 15 Oct 2026 (briefs/azaiba-gardens/rezone-permission-letter.jpg)
 
 ## Badr Al Samaa Group
 
@@ -252,3 +264,40 @@ Sources:
 - https://www.starcarehospital.com/mabela-sub/index and subpages (about, specialities, doctors, packages, news, facilities, insurance), read 12 Oct 2026
 - https://www.starcarehospital.com/bousher-sub/index and subpages (about, specialities, doctors, packages, news, facilities, insurance), read 12 Oct 2026
 - https://www.starcarehospital.com/seeb-sub/starcare-videos (read 12 Oct 2026)
+
+## Towers Real Estate
+
+- WhatsApp number: test number in place; replace with the real business number
+- Developer approval to use the Wadi Zaha renders (Al Ahly Sabbour website)
+- Unit mix, prices and availability for every project: from each developer only
+- Musstir Heights and AIDA: construction and completion dates not confirmed
+- Decision No. 87/2026 and foreign-ownership scope: legal review before publication
+- Original Towers logo file (current logo is a crop from a phone screenshot)
+- Arabic version: native reviewer, including the new project text
+- Photos for Golf Hills, Musstir Heights, AIDA and Azura: none usable yet. Ask each developer or the sales team for press photos
+- Yiti handover: developer says The Plaza December 2027; launch release says city completion by end of 2026. Confirm in writing
+- VISTAL: starting prices differ between listings (OMR 133,546 to 140,316 for one bedroom) and need the developer's current price list
+- Amour Sans Détour 2 (Towers Instagram): name and project not found online; confirm whether it is the AIDA villa collection and send its details
+- AIDA sub-projects: all prices, sizes, handover dates and availability come from the agency site (WhiteWill, which says it is not the developer). Confirm each with DarGlobal before publishing
+- Amour Sans Détour payment plan: the agency shows it under another project's heading; confirm
+
+Sources:
+- Al Ahly Sabbour, Wadi Zaha: https://alahlysabbour-om.com/wadi-zahaa/
+- Omnia Capital Group, Wadi Zaha (construction start 9 Feb 2026): https://www.omniacapitalgroup.com/en/developments/wadi-zaha
+- Oman Observer, Iconic Tower (first and tallest in Sultan Haitham City): https://www.omanobserver.om/article/1177614/business/economy/new-iconic-tower-for-sultan-haitham-city
+- Oman Observer, Decision No. 87/2026 (residency for property owners): https://www.omanobserver.om/ampArticle/1191803
+- Muscat Daily, foreign ownership not open in all areas (19 Aug 2026): https://www.muscatdaily.com/2026/08/19/what-foreign-buyers-get-wrong-about-omans-new-property-rules/
+- https://alahlysabbour-om.com/wadi-zahaa/
+- https://gulfconstructiononline.com/Article/389726/al-osool-unveils-muscat-freehold-residential-project
+- https://www.omanobserver.om/article/1189380/business/economy/ro-300-million-musstir-heights-unveiled-at-al-jabal-al-aali
+- https://darglobal.co.uk/press/dar-al-arkan-introduces-trump-signature-villas-hotel-and-golf-course-at-its-hilltop-project-aida-in-muscat-oman
+- https://thesustainablecity-yiti.com/
+- https://tradearabia.com/News/389288/Al-Mouj-Muscat-launches-last-two-phases-of-key-coastal-residential-project
+- https://whitewill.om/developments/vistal-by-victoria-swarovski
+- https://aida.whitewill.om/
+- https://aida.whitewill.om/amour-sans
+- https://aida.whitewill.om/tge
+- https://aida.whitewill.om/marriott-residences
+- https://aida.whitewill.om/nickelodeon
+- https://aida.whitewill.om/cliff-villas
+- https://aida.whitewill.om/fendi-casa
