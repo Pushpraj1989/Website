@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,7 +18,13 @@ import '../auth/biometrics.dart';
 import '../widgets/app_button.dart';
 import '../widgets/dish_thumb.dart';
 import '../widgets/discovery.dart';
-import '../widgets/hero_video.dart';
+import '../widgets/cart_sheet.dart';
+import '../widgets/dish_sheet.dart';
+import '../widgets/home_hero.dart';
+import '../widgets/home_sections.dart';
+import '../widgets/top_icons.dart';
+import '../widgets/welcome_offer.dart';
+import 'about_screen.dart';
 import 'cart_screen.dart';
 import 'menu_screen.dart';
 import 'order_screen.dart';
@@ -48,6 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
   HomeShortcuts? _shortcuts;
   HomePromotions? _promotions;
   String? _message;
+  // The customer's own vouchers and membership, for "Redeem and save". Null until loaded or when signed out.
+  int? _voucherCount;
+  String? _memberPlan;
+  String? _addressLabel;
 
   @override
   void initState() {
@@ -65,8 +76,58 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     await _refreshShortcuts();
     await _loadPromotions();
+    await _loadAccount();
     if (!mounted) return;
     setState(() => _layout = _store!.load());
+    await _maybeWelcome();
+  }
+
+  /// Vouchers, membership and the default address. Each is optional: a signed-out customer simply has none.
+  Future<void> _loadAccount() async {
+    try {
+      final wallet = await widget.api.wallet();
+      _voucherCount = wallet.available.length;
+    } catch (_) {}
+    try {
+      final m = await widget.api.membership();
+      _memberPlan = m.plans.where((p) => p.id == m.membershipPlanId).firstOrNull?.name.of(widget.language.value);
+    } catch (_) {}
+    try {
+      final addresses = await widget.api.addresses();
+      _addressLabel = (addresses.where((a) => a.isDefault).firstOrNull ?? addresses.firstOrNull)?.label;
+    } catch (_) {}
+    if (mounted) setState(() {});
+  }
+
+  /// The pop-up staff published, at most as often as they chose.
+  Future<void> _maybeWelcome() async {
+    final promo = _promotions?.welcome;
+    if (promo == null || !mounted) return;
+    if (!await shouldShowWelcome(promo, prefs: await SharedPreferences.getInstance())) return;
+    if (!mounted) return;
+    final s = Strings(widget.language.value);
+    await showWelcomeOffer(context, promo: promo, s: s, onAction: () => _openPromo(promo, s, details: false));
+  }
+
+  /// A promotion's button: its dish when staff linked one, otherwise the menu. A linked offer can open its details first.
+  void _openPromo(Promotion promo, Strings s, {bool details = true}) {
+    if (details && promo.offer != null) {
+      showWelcomeOffer(context, promo: promo, s: s, onAction: () => _openPromo(promo, s, details: false));
+      return;
+    }
+    final id = promo.menuItemId;
+    final menu = _menu;
+    if (id != null && menu != null) {
+      for (final c in menu.categories) {
+        for (final item in c.items) {
+          if (item.id == id) {
+            showDishSheet(context, api: widget.api, item: item, illustration: c.illustration, currency: menu.currency, s: s);
+            return;
+          }
+        }
+      }
+    }
+    _openMenu();
   }
 
   /// The promotions staff published in the admin. Without any, the home shows the built-in welcome banner.
@@ -172,6 +233,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => CartScreen(api: widget.api, language: widget.language)));
   }
 
+  void _openCartSheet(Strings s) => showCartSheet(context, api: widget.api, language: widget.language, s: s);
+
   void _openTracking(String orderId) {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => OrderScreen(api: widget.api, language: widget.language, orderId: orderId)));
   }
@@ -244,115 +307,101 @@ class _HomeScreenState extends State<HomeScreen> {
         final name = brand?.name.of(s.lang) ?? menu?.restaurant.of(s.lang) ?? '';
         final dockSpace = widget.onSelectTab != null ? Tokens.dockHeight + Tokens.dockGap : 0.0;
         final bottomSpace = MediaQuery.paddingOf(context).bottom + dockSpace;
-        return Scaffold(
-          body: SafeArea(
-            bottom: false,
-            child: Stack(children: [
+        final screen = MediaQuery.sizeOf(context);
+        final heroPromos = _promotions?.hero ?? const <Promotion>[];
+        final slides = [
+          for (final p in heroPromos)
+            HeroSlide(
+              background: HeroSlide.mediaFor(p, context.accent),
+              kicker: p.kicker.of(s.lang),
+              title: p.title.of(s.lang),
+              body: p.body.of(s.lang),
+              action: p.cta.of(s.lang).isEmpty ? s.orderNow : p.cta.of(s.lang),
+              onAction: () => _openPromo(p, s),
+              seconds: p.look.durationSeconds,
+              animation: p.look.animation,
+            ),
+          if (heroPromos.isEmpty) builtInHeroSlide(s, _openMenu),
+        ];
+        final filtering = _query.isNotEmpty || _filters.isNotEmpty || _category != null;
+        const pad = EdgeInsets.symmetric(horizontal: Tokens.space4);
+        return AnnotatedRegion<SystemUiOverlayStyle>(
+          // The hero runs under the status bar, so its icons are light.
+          value: SystemUiOverlayStyle.light,
+          child: Scaffold(
+            body: Stack(children: [
               ListView(
-                padding: EdgeInsets.fromLTRB(Tokens.space4, Tokens.space3, Tokens.space4, bottomSpace + Tokens.cartBarHeight + Tokens.space4 + Tokens.space4),
+                padding: EdgeInsets.only(bottom: bottomSpace + Tokens.cartBarHeight + Tokens.space5),
                 children: [
-                  DiscoveryHeader(
-                    logoUrl: brand?.logoUrl,
+                  HomeHero(
+                    slides: slides,
+                    height: HomeHero.heightFor(heroPromos.isEmpty ? 'standard' : heroPromos.first.look.size, screen),
                     title: name,
-                    searchHint: s.searchDishes,
-                    onSearch: (q) => setState(() => _query = q.trim()),
-                    actions: [
+                    subtitle: _addressLabel == null ? null : s.deliverToLabel(_addressLabel!),
+                    logoUrl: brand?.logoUrl,
+                    s: s,
+                    icons: [
                       AskButton(api: widget.api, language: widget.language, s: s),
-                      TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language)),
-                      PopupMenuButton<String>(
-                        tooltip: s.more,
-                        icon: const Icon(LucideIcons.ellipsisVertical),
-                        onSelected: (choice) => switch (choice) {
+                      if (screen.width >= 420) LanguageIcon(language: widget.language, s: s, onPhoto: true),
+                      CartIcon(api: widget.api, s: s, onPhoto: true, onTap: () => _openCartSheet(s)),
+                      _MoreMenu(
+                        s: s,
+                        signedIn: widget.auth != null,
+                        showLanguage: screen.width < 420,
+                        onChoice: (choice) => switch (choice) {
+                          'language' => toggleLanguage(widget.language),
                           'vouchers' => _openVouchers(),
+                          'about' => openAbout(context, widget.language),
                           'signout' => _signOut(s),
                           _ => null,
                         },
-                        itemBuilder: (_) => [
-                          if (widget.auth != null) PopupMenuItem(value: 'vouchers', child: ListTile(leading: const Icon(LucideIcons.ticket), title: Text(s.myVouchers))),
-                          if (widget.auth != null) PopupMenuItem(value: 'signout', child: ListTile(leading: const Icon(LucideIcons.logOut), title: Text(s.signOut))),
-                        ],
                       ),
                     ],
+                    search: _HeroSearch(hint: s.searchDishes, onChanged: (q) => setState(() => _query = q.trim())),
                   ),
-                  const SizedBox(height: Tokens.space4),
-                  RevealOnLoad(
-                    child: PromoCarousel(banners: [
-                      // The restaurant's own published promotions come first.
-                      for (final p in _promotions?.hero ?? const <Promotion>[])
-                        PromoBanner(
-                          title: p.title.of(s.lang),
-                          body: '',
-                          action: p.cta.of(s.lang).isEmpty ? s.menu : p.cta.of(s.lang),
-                          onAction: _openMenu,
-                          background: p.kind == 'video'
-                              ? HeroVideo(video: p.url)
-                              : Image.network(p.url, fit: BoxFit.cover, semanticLabel: '', errorBuilder: (_, _, _) => ColoredBox(color: context.accent)),
-                        ),
-                      if ((_promotions?.hero ?? const <Promotion>[]).isEmpty)
-                        PromoBanner(title: s.heroTitle, body: s.heroBody, action: s.menu, onAction: _openMenu, background: const HeroVideo(video: Art.heroVideo, poster: Art.heroVideoPoster)),
-                      PromoBanner(
-                        title: s.askTitle,
-                        body: s.askHint,
-                        action: s.askTitle,
-                        onAction: _openAsk,
-                        background: ColoredBox(color: context.accentSoft),
-                        picture: Image.asset(Art.assistant, fit: BoxFit.contain, semanticLabel: ''),
-                        dark: false,
-                      ),
-                      PromoBanner(
-                        title: s.membership,
-                        body: s.promoMemberBody,
-                        action: s.membership,
-                        onAction: _openMembership,
-                        background: const ColoredBox(color: Tokens.toneLilac),
-                        picture: Image.asset(Art.membership, fit: BoxFit.contain, semanticLabel: ''),
-                        dark: false,
-                      ),
-                    ]),
-                  ),
-                  if (menu != null) ...[
-                    const SizedBox(height: Tokens.space5),
-                    RevealOnLoad(
-                      child: CategoryTabs(
-                        tabs: [
-                          CategoryTab(id: '', label: s.allCategories, image: Art.hero),
-                          for (final c in menu.categories) CategoryTab(id: c.id, label: c.name.of(s.lang), image: Art.forCategory(c.illustration)),
+                  // The categories sit on a panel that rises over the foot of the hero.
+                  Transform.translate(
+                    offset: const Offset(0, -18),
+                    child: Container(
+                      decoration: BoxDecoration(color: Tokens.palette.isGlass ? Tokens.palette.sheet.withValues(alpha: 0.0) : Tokens.surface, borderRadius: const BorderRadius.vertical(top: Radius.circular(22))),
+                      padding: const EdgeInsets.only(top: Tokens.space4),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                        if (menu != null) ...[
+                          Padding(
+                            padding: pad,
+                            child: CategoryTabs(
+                              tabs: [
+                                CategoryTab(id: '', label: s.allCategories, image: Art.hero),
+                                for (final c in menu.categories) CategoryTab(id: c.id, label: c.name.of(s.lang), image: Art.forCategory(c.illustration)),
+                              ],
+                              selectedId: _category ?? '',
+                              onSelect: (id) => setState(() => _category = id.isEmpty ? null : id),
+                            ),
+                          ),
+                          const SizedBox(height: Tokens.space3),
+                          Padding(
+                            padding: pad,
+                            child: FilterChips(
+                              options: _filterOptions(s),
+                              selected: _filters,
+                              onToggle: (id) => setState(() => _filters.contains(id) ? _filters.remove(id) : _filters.add(id)),
+                            ),
+                          ),
                         ],
-                        selectedId: _category ?? '',
-                        onSelect: (id) => setState(() => _category = id.isEmpty ? null : id),
-                      ),
+                        if (menu != null && filtering) Padding(padding: const EdgeInsets.fromLTRB(Tokens.space4, Tokens.space4, Tokens.space4, 0), child: _discovery(menu, s)),
+                        if (!filtering) ..._sections(context, s, menu, name, pad),
+                        if (_message != null)
+                          Padding(padding: pad, child: Semantics(liveRegion: true, child: Text(_message!, style: TextStyle(color: Tokens.textMuted)))),
+                      ]),
                     ),
-                    const SizedBox(height: Tokens.space3),
-                    RevealOnLoad(
-                      child: FilterChips(
-                        options: _filterOptions(s),
-                        selected: _filters,
-                        onToggle: (id) => setState(() => _filters.contains(id) ? _filters.remove(id) : _filters.add(id)),
-                      ),
-                    ),
-                    const SizedBox(height: Tokens.space5),
-                    RevealOnLoad(child: _discovery(menu, s)),
-                  ],
-                  const SizedBox(height: Tokens.space5),
-                  Text(s.yourShortcuts, style: Theme.of(context).textTheme.titleLarge),
-                  const SizedBox(height: Tokens.space3),
-                  for (final id in _layout.ids) ...[
-                    _widgetFor(id, s),
-                    const SizedBox(height: Tokens.space3),
-                  ],
-                  Row(children: [
-                    Expanded(child: Text(s.home, style: TextStyle(color: Tokens.textMuted))),
-                    AppButton(label: s.customise, icon: LucideIcons.layoutDashboard, variant: ButtonVariant.ghost, size: ButtonSize.sm, onPressed: () => _openCustomise(s)),
-                  ]),
-                  if (_message != null)
-                    Semantics(liveRegion: true, child: Text(_message!, style: TextStyle(color: Tokens.textMuted))),
+                  ),
                 ],
               ),
               Positioned(
                 left: Tokens.space4,
                 right: Tokens.space4,
                 bottom: bottomSpace + Tokens.space2,
-                child: _FloatingCart(api: widget.api, s: s, onView: _openCart),
+                child: _FloatingCart(api: widget.api, s: s, menu: menu, strip: _promotions?.strip, onView: () => _openCartSheet(s), onStrip: (p) => _openPromo(p, s)),
               ),
             ]),
           ),
@@ -361,8 +410,76 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  /// Everything below the categories when the customer is not searching: offers, their vouchers and membership,
+  /// recommendations, the spotlight, order again, shortcuts to the rest of the app, the menu, their own widgets and
+  /// the footer. Sections with nothing to show are left out.
+  List<Widget> _sections(BuildContext context, Strings s, Menu? menu, String name, EdgeInsets pad) {
+    const gap = SizedBox(height: Tokens.space5);
+    final carousel = _promotions?.carousel ?? const <Promotion>[];
+    final frequent = _shortcuts?.frequent ?? const <DishCard>[];
+    return [
+      if (carousel.isNotEmpty) ...[
+        gap,
+        Padding(padding: pad, child: HomeSectionTitle(title: s.offersForYou)),
+        OffersCarousel(promos: carousel, s: s, onOpen: (p) => _openPromo(p, s)),
+      ],
+      if (_voucherCount != null) ...[
+        gap,
+        Padding(padding: pad, child: HomeSectionTitle(title: s.redeemAndSave)),
+        Padding(padding: pad, child: RedeemRow(vouchers: _voucherCount!, memberPlan: _memberPlan, s: s, onVouchers: _openVouchers, onMembership: _openMembership)),
+      ],
+      if (menu != null) ...[
+        gap,
+        Padding(padding: pad, child: _discovery(menu, s, feed: false)),
+      ],
+      for (final p in _promotions?.midFeed ?? const <Promotion>[]) ...[
+        gap,
+        Padding(padding: pad, child: HomeSectionTitle(title: s.inTheSpotlight)),
+        Padding(padding: pad, child: SpotlightCard(promo: p, s: s, onOpen: () => _openPromo(p, s))),
+      ],
+      if (frequent.isNotEmpty) ...[
+        gap,
+        Padding(padding: pad, child: HomeSectionTitle(title: s.orderAgain)),
+        Padding(padding: pad, child: OrderAgainRow(dishes: frequent, s: s, onAdd: (d) => _addDish(d, s))),
+      ],
+      gap,
+      Padding(padding: pad, child: HomeSectionTitle(title: s.exploreMore)),
+      Padding(
+        padding: pad,
+        child: ExploreRow(items: [
+          (icon: LucideIcons.ticketPercent, label: s.myVouchers, colours: const [Color(0xFFDB2777), Color(0xFF9D174D)], onTap: _openVouchers),
+          (icon: LucideIcons.crown, label: s.membership, colours: const [Color(0xFFD97706), Color(0xFF92400E)], onTap: _openMembership),
+          (icon: LucideIcons.sparkles, label: s.askTitle, colours: const [Color(0xFF2563EB), Color(0xFF1E3A8A)], onTap: _openAsk),
+          (icon: LucideIcons.utensils, label: s.menu, colours: const [Color(0xFF059669), Color(0xFF065F46)], onTap: _openMenu),
+        ]),
+      ),
+      if (menu != null) ...[
+        gap,
+        Padding(padding: pad, child: HomeSectionTitle(title: s.browseMenu)),
+        for (final c in menu.categories)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(Tokens.space4, 0, Tokens.space4, Tokens.space3),
+            child: FeedCategoryCard(title: c.name.of(s.lang), count: c.items.length, image: Art.forCategory(c.illustration), s: s, onTap: () => setState(() => _category = c.id)),
+          ),
+      ],
+      gap,
+      Padding(
+        padding: pad,
+        child: Row(children: [
+          Expanded(child: Text(s.yourShortcuts, style: Theme.of(context).textTheme.titleLarge)),
+          AppButton(label: s.customise, icon: LucideIcons.layoutDashboard, variant: ButtonVariant.ghost, size: ButtonSize.sm, onPressed: () => _openCustomise(s)),
+        ]),
+      ),
+      const SizedBox(height: Tokens.space3),
+      for (final id in _layout.ids)
+        Padding(padding: const EdgeInsets.fromLTRB(Tokens.space4, 0, Tokens.space4, Tokens.space3), child: _widgetFor(id, s)),
+      gap,
+      Padding(padding: pad, child: HomeFooter(name: name, s: s, onAbout: () => openAbout(context, widget.language))),
+    ];
+  }
+
   /// The search and filter results when either is active; otherwise the recommended row and the category feed.
-  Widget _discovery(Menu menu, Strings s) {
+  Widget _discovery(Menu menu, Strings s, {bool feed = true}) {
     final filtering = _query.isNotEmpty || _filters.isNotEmpty || _category != null;
     final currency = menu.currency;
     if (filtering) {
@@ -415,7 +532,8 @@ class _HomeScreenState extends State<HomeScreen> {
         s: s,
         onAdd: (item) => _add(item, s),
       ),
-      const SizedBox(height: Tokens.space5),
+      if (feed) const SizedBox(height: Tokens.space5),
+      if (feed)
       for (final c in menu.categories) ...[
         FeedCategoryCard(
           title: c.name.of(s.lang),
@@ -764,12 +882,16 @@ class _DishList extends StatelessWidget {
   }
 }
 
-/// The floating cart on Home. It reloads when the cart changes anywhere in the app, and is hidden while the cart is empty.
+/// Above the menu bar: the mini cart while something is in the cart, otherwise the offer strip staff published.
+/// It reloads when the cart changes anywhere in the app.
 class _FloatingCart extends StatefulWidget {
-  const _FloatingCart({required this.api, required this.s, required this.onView});
+  const _FloatingCart({required this.api, required this.s, required this.menu, required this.strip, required this.onView, required this.onStrip});
   final ApiClient api;
   final Strings s;
+  final Menu? menu;
+  final Promotion? strip;
   final VoidCallback onView;
+  final ValueChanged<Promotion> onStrip;
 
   @override
   State<_FloatingCart> createState() => _FloatingCartState();
@@ -777,7 +899,9 @@ class _FloatingCart extends StatefulWidget {
 
 class _FloatingCartState extends State<_FloatingCart> {
   int _count = 0;
-  String? _total;
+  int? _total;
+  String _currency = '';
+  List<String> _itemIds = const [];
 
   @override
   void initState() {
@@ -795,13 +919,14 @@ class _FloatingCartState extends State<_FloatingCart> {
   Future<void> _load() async {
     try {
       final body = await widget.api.cart();
-      final lines = (body['lines'] as List<dynamic>?) ?? const [];
-      final count = lines.fold<int>(0, (sum, l) => sum + ((l as Map<String, dynamic>)['qty'] as int));
+      final lines = ((body['lines'] as List<dynamic>?) ?? const []).cast<Map<String, dynamic>>();
       final quote = body['quote'] == null ? null : Quote.fromJson(body['quote'] as Map<String, dynamic>);
       if (mounted) {
         setState(() {
-          _count = count;
-          _total = quote == null ? null : formatMoney(quote.totalMinor, quote.currency);
+          _count = lines.fold<int>(0, (sum, l) => sum + (l['qty'] as int));
+          _total = quote?.totalMinor;
+          _currency = quote?.currency ?? '';
+          _itemIds = [for (final l in lines) l['itemId'] as String];
         });
       }
     } catch (_) {
@@ -812,7 +937,67 @@ class _FloatingCartState extends State<_FloatingCart> {
 
   @override
   Widget build(BuildContext context) {
-    if (_count == 0) return const SizedBox.shrink();
-    return FloatingCartBar(count: _count, total: _total, s: widget.s, onView: widget.onView);
+    if (_count == 0) {
+      final strip = widget.strip;
+      return strip == null ? const SizedBox.shrink() : OfferStrip(promo: strip, s: widget.s, onOpen: () => widget.onStrip(strip));
+    }
+    final images = <String?>[
+      for (final id in _itemIds)
+        widget.menu?.categories.expand((c) => c.items).where((i) => i.id == id).firstOrNull?.imageUrl,
+    ];
+    return MiniCartBar(count: _count, totalMinor: _total, currency: _currency, images: images, s: widget.s, onOpen: widget.onView);
+  }
+}
+
+
+/// The hero's search: a white field on the photo. Results show under the categories as the customer types.
+class _HeroSearch extends StatelessWidget {
+  const _HeroSearch({required this.hint, required this.onChanged});
+  final String hint;
+  final ValueChanged<String> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      onChanged: onChanged,
+      textInputAction: TextInputAction.search,
+      style: const TextStyle(color: Color(0xFF1C1917)),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: const TextStyle(color: Color(0xFF57534E)),
+        prefixIcon: const Icon(LucideIcons.search, color: Color(0xFF57534E)),
+        filled: true,
+        fillColor: Colors.white.withValues(alpha: 0.95),
+        contentPadding: const EdgeInsets.symmetric(vertical: 14),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none),
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: context.accent, width: 2)),
+      ),
+    );
+  }
+}
+
+/// The More icon on the hero: vouchers, About, sign out, and the language when there is no room for its own icon.
+class _MoreMenu extends StatelessWidget {
+  const _MoreMenu({required this.s, required this.signedIn, required this.showLanguage, required this.onChoice});
+  final Strings s;
+  final bool signedIn;
+  final bool showLanguage;
+  final ValueChanged<String> onChoice;
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<String>(
+      tooltip: s.more,
+      onSelected: onChoice,
+      padding: EdgeInsets.zero,
+      itemBuilder: (_) => [
+        if (showLanguage) PopupMenuItem(value: 'language', child: ListTile(leading: const Icon(LucideIcons.globe), title: Text(s.language))),
+        if (signedIn) PopupMenuItem(value: 'vouchers', child: ListTile(leading: const Icon(LucideIcons.ticket), title: Text(s.myVouchers))),
+        PopupMenuItem(value: 'about', child: ListTile(leading: const Icon(LucideIcons.info), title: Text(s.about))),
+        if (signedIn) PopupMenuItem(value: 'signout', child: ListTile(leading: const Icon(LucideIcons.logOut), title: Text(s.signOut))),
+      ],
+      child: IgnorePointer(child: TopIcon(icon: LucideIcons.ellipsisVertical, label: s.more, onPhoto: true, onTap: () {})),
+    );
   }
 }

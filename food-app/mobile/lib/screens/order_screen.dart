@@ -11,7 +11,9 @@ import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
 import '../widgets/ui.dart';
+import '../widgets/top_icons.dart';
 import 'cart_screen.dart';
+import 'orders_screen.dart';
 
 // S10: order status. Polls every 5 seconds until the order is finished; the web app and this screen read the same order.
 class OrderScreen extends StatefulWidget {
@@ -81,7 +83,7 @@ class _OrderScreenState extends State<OrderScreen> {
         final order = _order;
         return Scaffold(
           backgroundColor: Tokens.surface,
-          appBar: AppBar(backgroundColor: Tokens.bg, title: Text(s.orderStatus), actions: [TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language))]),
+          appBar: AppBar(backgroundColor: Tokens.bg, title: Text(s.orderStatus), actions: [LanguageIcon(language: widget.language, s: s)]),
           body: _error != null && order == null
               ? Center(
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -156,6 +158,10 @@ class _OrderScreenState extends State<OrderScreen> {
             if (order.history.isNotEmpty) _InfoRow(icon: LucideIcons.clock, text: '${s.placedAt} ${at(order.history.first.at)}'),
           ]),
         ),
+        if (order.status == 'delivered' || order.status == 'collected') ...[
+          const SizedBox(height: Tokens.space3),
+          SectionCard(title: s.howWasIt, icon: LucideIcons.star, child: OrderRating(api: widget.api, orderId: order.id, initial: order.ratingStars, s: s)),
+        ],
         const SizedBox(height: Tokens.space3),
         BillCard(quote: order.quote, s: s, currency: order.quote.currency),
         const SizedBox(height: Tokens.space4),

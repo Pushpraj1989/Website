@@ -12,6 +12,7 @@ import '../core/theme.dart';
 import '../core/brand.dart';
 import '../widgets/app_button.dart';
 import '../widgets/otp_sheet.dart';
+import '../widgets/top_icons.dart';
 import 'main_shell.dart';
 
 // Sign-up in three steps: name and mobile (code by SMS), then email (code by email), then done.
@@ -126,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return LanguageScope(
       language: widget.language,
       builder: (context, s) => Scaffold(
-        appBar: AppBar(actions: [TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language))]),
+        appBar: AppBar(actions: [LanguageIcon(language: widget.language, s: s)]),
         body: ListView(
           padding: const EdgeInsets.all(Tokens.space5),
           children: [

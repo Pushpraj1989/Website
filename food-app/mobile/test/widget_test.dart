@@ -44,7 +44,7 @@ void main() {
     await tester.pumpWidget(SampleKitchenApp(apiBase: 'http://api.test', api: api, auth: AuthApi(baseUrl: 'http://api.test', client: _router()), sessions: signedInStore(), biometrics: FakeBiometricGate(available: false)));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('العربية'));
+    await tester.tap(find.byTooltip('العربية').first);
     await tester.pumpAndSettle();
     expect(find.text('الرئيسية'), findsWidgets, reason: 'the bottom bar and the home title');
 

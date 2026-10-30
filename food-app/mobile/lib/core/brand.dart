@@ -9,7 +9,7 @@ import 'theme.dart';
 /// The restaurant's own identity, set by its staff in the admin: name, tagline, logo, colour and contact. The app has
 /// no restaurant built in; it shows whichever restaurant its server belongs to.
 class Brand {
-  const Brand({required this.name, required this.tagline, required this.logoUrl, required this.color, required this.phone, required this.address, this.theme = AppTheme.classic});
+  const Brand({required this.name, required this.tagline, required this.logoUrl, required this.color, required this.phone, required this.address, this.theme = AppTheme.classic, this.buttonStyle = 'light', this.iconStyle = 'brand'});
   final Localised name;
   final Localised tagline;
   /// Absolute address of the logo, or null when the restaurant has none.
@@ -17,6 +17,10 @@ class Brand {
   final Color color;
   /// The look the restaurant chose in the admin.
   final AppTheme theme;
+  /// 'light' (white, brand words), 'tonal' (soft tint) or 'filled' (brand colour, white words).
+  final String buttonStyle;
+  /// 'brand' (icons in the brand colour) or 'neutral' (icons in the text colour).
+  final String iconStyle;
   final String phone;
   final Localised address;
 
@@ -35,6 +39,8 @@ class Brand {
       logoUrl: logo == null || logo.isEmpty ? null : (logo.startsWith('http') ? logo : '$base$logo'),
       color: _parse(json['color']),
       theme: AppTheme.fromId(json['theme'] as String?),
+      buttonStyle: json['buttonStyle'] as String? ?? 'light',
+      iconStyle: json['iconStyle'] as String? ?? 'brand',
       phone: json['phone'] as String? ?? '',
       address: json['address'] == null ? const Localised('', '') : Localised.fromJson(json['address'] as Map<String, dynamic>),
     );
@@ -46,6 +52,8 @@ class Brand {
         'logoUrl': logoUrl,
         'color': '#${(color.toARGB32() & 0xFFFFFF).toRadixString(16).padLeft(6, '0')}',
         'theme': theme.id,
+        'buttonStyle': buttonStyle,
+        'iconStyle': iconStyle,
         'phone': phone,
         'address': {'en': address.en, 'ar': address.ar},
       };
@@ -86,6 +94,12 @@ extension BrandColors on BuildContext {
   Color get accentSoft => _brand.accentSoft;
   /// Text and icons on [accentSoft].
   Color get accentInk => _brand.accentInk;
+  /// Small buttons (ADD, steppers, secondary actions) in the restaurant's chosen button style.
+  Color get buttonBg => _brand.buttonBg;
+  Color get buttonFg => _brand.buttonFg;
+  Color get buttonLine => _brand.buttonLine;
+  /// Icons in the restaurant's chosen icon style: the readable brand shade, or the text colour.
+  Color get iconTint => _brand.iconTint;
 }
 
 /// Makes the restaurant's brand available to every screen: `BrandScope.of(context)`.

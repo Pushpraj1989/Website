@@ -147,18 +147,33 @@ class Palette {
 /// things, and [accentInk] is text on that tint. [accentFg] and [accentInk] are moved towards white (dark themes) or
 /// black (light themes) only as far as needed to reach 4.5:1 on every background they meet.
 class BrandPalette extends ThemeExtension<BrandPalette> {
-  const BrandPalette({required this.accent, required this.onAccent, required this.accentFg, required this.accentSoft, required this.accentInk});
+  const BrandPalette({required this.accent, required this.onAccent, required this.accentFg, required this.accentSoft, required this.accentInk, required this.buttonBg, required this.buttonFg, required this.buttonLine, required this.iconTint});
   final Color accent, onAccent, accentFg, accentSoft, accentInk;
+  /// Small buttons in the chosen style. Light: white with the brand colour in the words (4.5:1 is guaranteed, as the
+  /// brand colour must reach 4.5:1 with white). Tonal: the tint with its ink. Filled: the brand colour with white.
+  final Color buttonBg, buttonFg, buttonLine;
+  final Color iconTint;
 
-  factory BrandPalette.of(Color accent, Palette p) {
+  factory BrandPalette.of(Color accent, Palette p, {String buttonStyle = 'light', String iconStyle = 'brand'}) {
     final soft = p.dark ? Color.lerp(accent, p.base, 0.72)! : Color.lerp(accent, Colors.white, 0.88)!;
     final page = [p.base, Color.alphaBlend(p.bg, p.base), if (p.isGlass) p.glowOf(accent), if (p.isGlass) Color.alphaBlend(p.bg, p.glowOf(accent))];
+    final fg = readableOn(accent, page, toLight: p.dark);
+    final ink = readableOn(accent, [soft], toLight: p.dark);
+    final (bg, text, line) = switch (buttonStyle) {
+      'filled' => (accent, Tokens.onAccent, accent),
+      'tonal' => (soft, ink, Colors.transparent),
+      _ => (Colors.white, accent, p.dark ? Colors.transparent : Color.lerp(accent, Colors.white, 0.65)!),
+    };
     return BrandPalette(
       accent: accent,
       onAccent: Tokens.onAccent,
-      accentFg: readableOn(accent, page, toLight: p.dark),
+      accentFg: fg,
       accentSoft: soft,
-      accentInk: readableOn(accent, [soft], toLight: p.dark),
+      accentInk: ink,
+      buttonBg: bg,
+      buttonFg: text,
+      buttonLine: line,
+      iconTint: iconStyle == 'neutral' ? p.text : fg,
     );
   }
 
@@ -186,10 +201,10 @@ Color readableOn(Color colour, List<Color> backgrounds, {required bool toLight, 
 }
 
 /// The app's theme: the restaurant's [theme] with its brand colour [accent] on top.
-ThemeData buildTheme({Color accent = Tokens.accent, AppTheme theme = AppTheme.classic}) {
+ThemeData buildTheme({Color accent = Tokens.accent, AppTheme theme = AppTheme.classic, String buttonStyle = 'light', String iconStyle = 'brand'}) {
   final p = theme.palette;
   Tokens.palette = p;
-  final brand = BrandPalette.of(accent, p);
+  final brand = BrandPalette.of(accent, p, buttonStyle: buttonStyle, iconStyle: iconStyle);
   // Material's own parts (text buttons, radios, progress) take `primary` as a foreground, so on dark themes it is
   // the readable shade; filled buttons still use the true brand colour.
   final scheme = ColorScheme.fromSeed(

@@ -94,13 +94,14 @@ class QtyStepper extends StatelessWidget {
             tooltip: tip,
             onPressed: onTap,
             iconSize: compact ? 16 : 20,
-            color: context.accentFg,
-            disabledColor: Tokens.textMuted.withValues(alpha: 0.4),
+            color: context.buttonFg,
+            disabledColor: context.buttonFg.withValues(alpha: 0.35),
             icon: Icon(icon),
           ),
         );
     return Container(
-      decoration: BoxDecoration(border: Border.all(color: Tokens.border), borderRadius: BorderRadius.circular(999), color: Tokens.bg),
+      // In the restaurant's button style, like the ADD button it replaces.
+      decoration: BoxDecoration(border: Border.all(color: context.buttonLine == Colors.transparent ? Colors.transparent : Tokens.border), borderRadius: BorderRadius.circular(999), color: context.buttonBg),
       child: Row(mainAxisSize: MainAxisSize.min, children: [
         if (qty <= 1 && removeLabel != null)
           button(LucideIcons.trash2, removeLabel!, () => onChanged(0))
@@ -109,7 +110,7 @@ class QtyStepper extends StatelessWidget {
         Semantics(
           label: label,
           value: '$qty',
-          child: SizedBox(width: 24, child: Text('$qty', textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16))),
+          child: SizedBox(width: 24, child: Text('$qty', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16, color: context.buttonFg))),
         ),
         button(LucideIcons.plus, '+ $label', qty < max ? () => onChanged(qty + 1) : null),
       ]),
@@ -257,6 +258,49 @@ class ChoiceTile extends StatelessWidget {
                 ]),
               ),
               if (selected) Icon(LucideIcons.circleCheck, color: context.accentFg, size: 22),
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The small ADD button that sits on the edge of a dish photo, in the restaurant's button style. It looks compact
+/// (34 points tall) but its touch area is 48 points.
+class AddPill extends StatelessWidget {
+  const AddPill({super.key, required this.label, required this.semanticLabel, required this.onPressed});
+  final String label;
+  final String semanticLabel;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final enabled = onPressed != null;
+    return Semantics(
+      button: true,
+      enabled: enabled,
+      label: semanticLabel,
+      excludeSemantics: true,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onPressed,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 7),
+          child: Container(
+            constraints: const BoxConstraints(minWidth: 80, minHeight: 34),
+            padding: const EdgeInsets.symmetric(horizontal: Tokens.space3),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: enabled ? context.buttonBg : Tokens.fill,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: enabled ? context.buttonLine : Tokens.border),
+              boxShadow: enabled ? const [BoxShadow(color: Color(0x29000000), blurRadius: 10, offset: Offset(0, 3))] : null,
+            ),
+            child: Row(mainAxisSize: MainAxisSize.min, children: [
+              Text(label.toUpperCase(), style: TextStyle(color: enabled ? context.buttonFg : Tokens.textMuted, fontWeight: FontWeight.w800, fontSize: 13, letterSpacing: 0.5)),
+              const SizedBox(width: 2),
+              Icon(LucideIcons.plus, size: 13, color: enabled ? context.buttonFg : Tokens.textMuted),
             ]),
           ),
         ),

@@ -1,6 +1,6 @@
 {
   "source": {
-    "exportedAt": "2026-10-30T11:56:53.134Z",
+    "exportedAt": "2026-10-30T17:04:51.297Z",
     "by": "food-app/web/scripts/export-demo-snapshot.ts",
     "note": "Read from the database with the functions the API uses. Do not edit by hand; export again instead."
   },
@@ -31,12 +31,280 @@
     },
     "logoUrl": null,
     "color": "#B45309",
+    "theme": "classic",
+    "buttonStyle": "light",
+    "iconStyle": "brand",
     "phone": "+971000000000",
     "address": {
       "en": "Placeholder address",
       "ar": "عنوان تجريبي"
+    }
+  },
+  "home": {
+    "hero": [],
+    "midFeed": [],
+    "carousel": [
+      {
+        "id": "b57914e8-45d1-4f56-96ef-cb29e515e29a",
+        "placement": "carousel",
+        "menuItemId": null,
+        "media": null,
+        "kicker": {
+          "en": "First order",
+          "ar": "أول طلب"
+        },
+        "title": {
+          "en": "10% off your first order",
+          "ar": "خصم 10% على طلبك الأول"
+        },
+        "body": {
+          "en": "Up to AED 20 on orders of AED 30 or more.",
+          "ar": "حتى 20 درهماً للطلبات من 30 درهماً."
+        },
+        "cta": {
+          "en": "",
+          "ar": ""
+        },
+        "offer": {
+          "offerId": "9eda068d-8600-46fd-93db-e83e09ad722f",
+          "name": {
+            "en": "Welcome 10% off",
+            "ar": "خصم ترحيبي 10%"
+          },
+          "headline": {
+            "en": "10% OFF",
+            "ar": "خصم 10%"
+          },
+          "code": "WELCOME10",
+          "appliesTo": "order",
+          "minSpendMinor": 3000,
+          "maxSavingMinor": 2000,
+          "currency": "AED",
+          "endsAt": "2026-11-29T16:04:42.000Z",
+          "daysLeft": 30
+        },
+        "look": {
+          "animation": "slide_left",
+          "size": "standard",
+          "frame": "rounded",
+          "colour": null,
+          "durationSeconds": 5,
+          "frequency": "once_per_day"
+        },
+        "position": 1,
+        "startsAt": "2026-10-30T17:03:43.152Z",
+        "endsAt": "2026-11-29T16:04:42.000Z",
+        "active": true
+      },
+      {
+        "id": "e7abefa1-c934-48b8-8f2b-d33b7136f0b7",
+        "placement": "carousel",
+        "menuItemId": null,
+        "media": null,
+        "kicker": {
+          "en": "Delivery",
+          "ar": "التوصيل"
+        },
+        "title": {
+          "en": "Free delivery",
+          "ar": "توصيل مجاني"
+        },
+        "body": {
+          "en": "With code FREEDEL at checkout.",
+          "ar": "بالرمز FREEDEL عند الدفع."
+        },
+        "cta": {
+          "en": "",
+          "ar": ""
+        },
+        "offer": {
+          "offerId": "7232f5e7-a99a-41b0-8cbf-363d2d06fd50",
+          "name": {
+            "en": "Free delivery",
+            "ar": "توصيل مجاني"
+          },
+          "headline": {
+            "en": "FREE DELIVERY",
+            "ar": "توصيل مجاني"
+          },
+          "code": "FREEDEL",
+          "appliesTo": "order",
+          "minSpendMinor": 0,
+          "maxSavingMinor": null,
+          "currency": "AED",
+          "endsAt": "2026-11-29T16:04:42.000Z",
+          "daysLeft": 30
+        },
+        "look": {
+          "animation": "slide_left",
+          "size": "standard",
+          "frame": "rounded",
+          "colour": "#0F766E",
+          "durationSeconds": 5,
+          "frequency": "once_per_day"
+        },
+        "position": 2,
+        "startsAt": "2026-10-30T17:03:43.155Z",
+        "endsAt": "2026-11-29T16:04:42.000Z",
+        "active": true
+      },
+      {
+        "id": "17ef03d6-a3ed-4d95-9f94-d1209497c1df",
+        "placement": "carousel",
+        "menuItemId": null,
+        "media": null,
+        "kicker": {
+          "en": "Printed vouchers",
+          "ar": "قسائم مطبوعة"
+        },
+        "title": {
+          "en": "AED 5 off with your voucher",
+          "ar": "خصم 5 دراهم بقسيمتك"
+        },
+        "body": {
+          "en": "On orders of AED 25 or more.",
+          "ar": "للطلبات من 25 درهماً."
+        },
+        "cta": {
+          "en": "",
+          "ar": ""
+        },
+        "offer": {
+          "offerId": "21d8f8cf-2066-4a11-bc4d-4879b9ef5623",
+          "name": {
+            "en": "AED 5 off",
+            "ar": "خصم 5 دراهم"
+          },
+          "headline": {
+            "en": "AED 5 OFF",
+            "ar": "خصم 5 AED"
+          },
+          "code": null,
+          "appliesTo": "order",
+          "minSpendMinor": 2500,
+          "maxSavingMinor": null,
+          "currency": "AED",
+          "endsAt": "2026-11-29T16:04:42.000Z",
+          "daysLeft": 30
+        },
+        "look": {
+          "animation": "slide_left",
+          "size": "standard",
+          "frame": "rounded",
+          "colour": "#6D28D9",
+          "durationSeconds": 5,
+          "frequency": "once_per_day"
+        },
+        "position": 3,
+        "startsAt": "2026-10-30T17:03:43.158Z",
+        "endsAt": "2026-11-29T16:04:42.000Z",
+        "active": true
+      }
+    ],
+    "welcome": {
+      "id": "38f4c03a-5208-4bd2-886b-2933af86cdc5",
+      "placement": "welcome",
+      "menuItemId": null,
+      "media": null,
+      "kicker": {
+        "en": "",
+        "ar": ""
+      },
+      "title": {
+        "en": "A little treat for you",
+        "ar": "هدية صغيرة لك"
+      },
+      "body": {
+        "en": "",
+        "ar": ""
+      },
+      "cta": {
+        "en": "Order now",
+        "ar": "اطلب الآن"
+      },
+      "offer": {
+        "offerId": "9eda068d-8600-46fd-93db-e83e09ad722f",
+        "name": {
+          "en": "Welcome 10% off",
+          "ar": "خصم ترحيبي 10%"
+        },
+        "headline": {
+          "en": "10% OFF",
+          "ar": "خصم 10%"
+        },
+        "code": "WELCOME10",
+        "appliesTo": "order",
+        "minSpendMinor": 3000,
+        "maxSavingMinor": 2000,
+        "currency": "AED",
+        "endsAt": "2026-11-29T16:04:42.000Z",
+        "daysLeft": 30
+      },
+      "look": {
+        "animation": "slide_up",
+        "size": "tall",
+        "frame": "ticket",
+        "colour": null,
+        "durationSeconds": 5,
+        "frequency": "once_per_day"
+      },
+      "position": 0,
+      "startsAt": "2026-10-30T17:03:43.146Z",
+      "endsAt": "2026-11-29T16:04:42.000Z",
+      "active": true
     },
-    "theme": "classic"
+    "strip": {
+      "id": "9fc055cc-866c-42c0-885e-7ab442ac5173",
+      "placement": "strip",
+      "menuItemId": null,
+      "media": null,
+      "kicker": {
+        "en": "",
+        "ar": ""
+      },
+      "title": {
+        "en": "Free delivery with FREEDEL",
+        "ar": "توصيل مجاني مع FREEDEL"
+      },
+      "body": {
+        "en": "",
+        "ar": ""
+      },
+      "cta": {
+        "en": "",
+        "ar": ""
+      },
+      "offer": {
+        "offerId": "7232f5e7-a99a-41b0-8cbf-363d2d06fd50",
+        "name": {
+          "en": "Free delivery",
+          "ar": "توصيل مجاني"
+        },
+        "headline": {
+          "en": "FREE DELIVERY",
+          "ar": "توصيل مجاني"
+        },
+        "code": "FREEDEL",
+        "appliesTo": "order",
+        "minSpendMinor": 0,
+        "maxSavingMinor": null,
+        "currency": "AED",
+        "endsAt": "2026-11-29T16:04:42.000Z",
+        "daysLeft": 30
+      },
+      "look": {
+        "animation": "slide_up",
+        "size": "standard",
+        "frame": "rounded",
+        "colour": null,
+        "durationSeconds": 5,
+        "frequency": "once_per_day"
+      },
+      "position": 0,
+      "startsAt": "2026-10-30T17:03:43.161Z",
+      "endsAt": "2026-11-29T16:04:42.000Z",
+      "active": true
+    }
   },
   "categories": [
     {
@@ -60,7 +328,8 @@
           },
           "priceMinor": 1800,
           "soldOut": false,
-          "imageUrl": null
+          "imageUrl": null,
+          "rating": null
         },
         {
           "id": "00000000-0000-4000-8000-000000000102",
@@ -75,7 +344,8 @@
           },
           "priceMinor": 1500,
           "soldOut": false,
-          "imageUrl": null
+          "imageUrl": null,
+          "rating": null
         }
       ]
     },
@@ -100,7 +370,8 @@
           },
           "priceMinor": 4500,
           "soldOut": false,
-          "imageUrl": null
+          "imageUrl": null,
+          "rating": null
         },
         {
           "id": "00000000-0000-4000-8000-000000000202",
@@ -115,7 +386,8 @@
           },
           "priceMinor": 3800,
           "soldOut": false,
-          "imageUrl": null
+          "imageUrl": null,
+          "rating": null
         },
         {
           "id": "00000000-0000-4000-8000-000000000203",
@@ -130,7 +402,8 @@
           },
           "priceMinor": 5200,
           "soldOut": true,
-          "imageUrl": null
+          "imageUrl": null,
+          "rating": null
         }
       ]
     },
@@ -155,7 +428,8 @@
           },
           "priceMinor": 1200,
           "soldOut": false,
-          "imageUrl": null
+          "imageUrl": null,
+          "rating": null
         },
         {
           "id": "00000000-0000-4000-8000-000000000302",
@@ -170,14 +444,15 @@
           },
           "priceMinor": 500,
           "soldOut": false,
-          "imageUrl": null
+          "imageUrl": null,
+          "rating": null
         }
       ]
     }
   ],
   "menuOffers": [
     {
-      "id": "1467bd6e-48a6-4f24-b5cf-d0fc97bcdd22",
+      "id": "9eda068d-8600-46fd-93db-e83e09ad722f",
       "name": {
         "en": "Welcome 10% off",
         "ar": "خصم ترحيبي 10%"
@@ -185,10 +460,10 @@
       "type": "percent",
       "value": 1000,
       "code": "WELCOME10",
-      "endsAt": "2026-11-29T10:56:52.000Z"
+      "endsAt": "2026-11-29T16:04:42.000Z"
     },
     {
-      "id": "472dc4c1-2389-4f2b-9646-ab547ba1fff9",
+      "id": "21d8f8cf-2066-4a11-bc4d-4879b9ef5623",
       "name": {
         "en": "AED 5 off",
         "ar": "خصم 5 دراهم"
@@ -196,10 +471,10 @@
       "type": "fixed",
       "value": 500,
       "code": null,
-      "endsAt": "2026-11-29T10:56:52.000Z"
+      "endsAt": "2026-11-29T16:04:42.000Z"
     },
     {
-      "id": "59efbad2-7d83-4428-8cfd-e3390a6caed4",
+      "id": "7232f5e7-a99a-41b0-8cbf-363d2d06fd50",
       "name": {
         "en": "Free delivery",
         "ar": "توصيل مجاني"
@@ -207,7 +482,7 @@
       "type": "free_delivery",
       "value": 0,
       "code": "FREEDEL",
-      "endsAt": "2026-11-29T10:56:52.000Z"
+      "endsAt": "2026-11-29T16:04:42.000Z"
     }
   ],
   "zones": [
@@ -246,7 +521,7 @@
   ],
   "offers": [
     {
-      "id": "59efbad2-7d83-4428-8cfd-e3390a6caed4",
+      "id": "7232f5e7-a99a-41b0-8cbf-363d2d06fd50",
       "code": "FREEDEL",
       "name": {
         "en": "Free delivery",
@@ -255,7 +530,7 @@
       "campaign": "Pilot: Free delivery"
     },
     {
-      "id": "1467bd6e-48a6-4f24-b5cf-d0fc97bcdd22",
+      "id": "9eda068d-8600-46fd-93db-e83e09ad722f",
       "code": "WELCOME10",
       "name": {
         "en": "Welcome 10% off",
@@ -265,8 +540,8 @@
     }
   ],
   "rules": {
-    "59efbad2-7d83-4428-8cfd-e3390a6caed4": {
-      "id": "59efbad2-7d83-4428-8cfd-e3390a6caed4",
+    "7232f5e7-a99a-41b0-8cbf-363d2d06fd50": {
+      "id": "7232f5e7-a99a-41b0-8cbf-363d2d06fd50",
       "type": "free_delivery",
       "value": 0,
       "appliesTo": "order",
@@ -277,13 +552,13 @@
       "usedCount": 0,
       "perCustomerLimit": null,
       "maxDiscountMinor": null,
-      "startsAt": "2026-10-30T10:56:52.000Z",
-      "endsAt": "2026-11-29T10:56:52.000Z",
+      "startsAt": "2026-10-30T16:04:42.000Z",
+      "endsAt": "2026-11-29T16:04:42.000Z",
       "active": true,
       "campaignStatus": "active"
     },
-    "1467bd6e-48a6-4f24-b5cf-d0fc97bcdd22": {
-      "id": "1467bd6e-48a6-4f24-b5cf-d0fc97bcdd22",
+    "9eda068d-8600-46fd-93db-e83e09ad722f": {
+      "id": "9eda068d-8600-46fd-93db-e83e09ad722f",
       "type": "percent",
       "value": 1000,
       "appliesTo": "order",
@@ -294,13 +569,13 @@
       "usedCount": 0,
       "perCustomerLimit": 1,
       "maxDiscountMinor": 2000,
-      "startsAt": "2026-10-30T10:56:52.000Z",
-      "endsAt": "2026-11-29T10:56:52.000Z",
+      "startsAt": "2026-10-30T16:04:42.000Z",
+      "endsAt": "2026-11-29T16:04:42.000Z",
       "active": true,
       "campaignStatus": "active"
     },
-    "472dc4c1-2389-4f2b-9646-ab547ba1fff9": {
-      "id": "472dc4c1-2389-4f2b-9646-ab547ba1fff9",
+    "21d8f8cf-2066-4a11-bc4d-4879b9ef5623": {
+      "id": "21d8f8cf-2066-4a11-bc4d-4879b9ef5623",
       "type": "fixed",
       "value": 500,
       "appliesTo": "order",
@@ -311,39 +586,39 @@
       "usedCount": 0,
       "perCustomerLimit": null,
       "maxDiscountMinor": null,
-      "startsAt": "2026-10-30T10:56:52.000Z",
-      "endsAt": "2026-11-29T10:56:52.000Z",
+      "startsAt": "2026-10-30T16:04:42.000Z",
+      "endsAt": "2026-11-29T16:04:42.000Z",
       "active": true,
       "campaignStatus": "active"
     }
   },
   "vouchers": [
     {
-      "code": "PLT-1531-XD",
-      "offerId": "472dc4c1-2389-4f2b-9646-ab547ba1fff9",
+      "code": "PLT-5294-KP",
+      "offerId": "21d8f8cf-2066-4a11-bc4d-4879b9ef5623",
       "campaign": "Pilot: AED 5 vouchers",
       "discount": "AED 5.00 OFF",
       "minOrderMinor": 2500,
       "currency": "AED",
-      "expiresAt": "2026-11-29T10:56:52.000Z"
+      "expiresAt": "2026-11-29T16:04:42.000Z"
     },
     {
-      "code": "PLT-5918-QN",
-      "offerId": "472dc4c1-2389-4f2b-9646-ab547ba1fff9",
+      "code": "PLT-2837-OT",
+      "offerId": "21d8f8cf-2066-4a11-bc4d-4879b9ef5623",
       "campaign": "Pilot: AED 5 vouchers",
       "discount": "AED 5.00 OFF",
       "minOrderMinor": 2500,
       "currency": "AED",
-      "expiresAt": "2026-11-29T10:56:52.000Z"
+      "expiresAt": "2026-11-29T16:04:42.000Z"
     },
     {
-      "code": "PLT-3358-HQ",
-      "offerId": "472dc4c1-2389-4f2b-9646-ab547ba1fff9",
+      "code": "PLT-0462-TL",
+      "offerId": "21d8f8cf-2066-4a11-bc4d-4879b9ef5623",
       "campaign": "Pilot: AED 5 vouchers",
       "discount": "AED 5.00 OFF",
       "minOrderMinor": 2500,
       "currency": "AED",
-      "expiresAt": "2026-11-29T10:56:52.000Z"
+      "expiresAt": "2026-11-29T16:04:42.000Z"
     }
   ],
   "membership": {

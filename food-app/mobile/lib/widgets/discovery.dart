@@ -7,6 +7,7 @@ import '../core/money.dart';
 import '../core/models.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import 'rating.dart';
 import 'ui.dart';
 import 'dish_thumb.dart';
 import '../core/brand.dart';
@@ -342,7 +343,7 @@ class DishCarousel extends StatelessWidget {
       ],
       const SizedBox(height: Tokens.space3),
       SizedBox(
-        height: scaledHeight(context, 240, 80),
+        height: scaledHeight(context, 262, 84),
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: items.length,
@@ -379,38 +380,33 @@ class _DishTileState extends State<DishTile> {
         scale: _pressed ? 0.97 : 1,
         duration: const Duration(milliseconds: 120),
         child: SizedBox(
-          width: 170,
-          child: Container(
-            decoration: BoxDecoration(color: Tokens.fill, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
-            padding: const EdgeInsets.all(Tokens.space2),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(Tokens.radiusMd),
-                child: DishImage(illustration: widget.pick.illustration, imageUrl: widget.pick.item.imageUrl, height: 100, width: double.infinity, cacheWidth: 340),
-              ),
-              const SizedBox(height: Tokens.space2),
-              Text(name, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w600)),
-              const SizedBox(height: 2),
-              Text(formatMoney(widget.pick.item.priceMinor, widget.currency), style: TextStyle(color: Tokens.textMuted)),
-              const Spacer(),
-              Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: Semantics(
-                  button: true,
-                  label: widget.s.addDish(name),
-                  onTap: widget.onAdd,
-                  child: ExcludeSemantics(
-                    child: IconButton.filled(
-                      onPressed: widget.onAdd,
-                      style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: context.accent, foregroundColor: context.onAccent),
-                      icon: const Icon(LucideIcons.plus),
-                      tooltip: widget.s.addDish(name),
-                    ),
-                  ),
+          width: 172,
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            // The photo with the ADD button sitting on its lower edge.
+            SizedBox(
+              height: 154,
+              child: Stack(clipBehavior: Clip.none, children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(Tokens.radiusLg),
+                  child: DishImage(illustration: widget.pick.illustration, imageUrl: widget.pick.item.imageUrl, height: 136, width: 172, cacheWidth: 344),
                 ),
-              ),
-            ]),
-          ),
+                PositionedDirectional(
+                  start: 0,
+                  end: 0,
+                  bottom: -8,
+                  child: Center(child: AddPill(label: widget.s.add, semanticLabel: widget.s.addDish(name), onPressed: widget.pick.item.soldOut ? null : widget.onAdd)),
+                ),
+              ]),
+            ),
+            const SizedBox(height: Tokens.space2),
+            Text(name, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w600)),
+            const SizedBox(height: 4),
+            if (widget.pick.item.rating != null) ...[
+              RatingChip(rating: widget.pick.item.rating!, s: widget.s, inline: true),
+              const SizedBox(height: 4),
+            ],
+            Text(formatMoney(widget.pick.item.priceMinor, widget.currency), style: const TextStyle(fontWeight: FontWeight.w700)),
+          ]),
         ),
       ),
     );

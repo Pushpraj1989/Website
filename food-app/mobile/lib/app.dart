@@ -71,7 +71,7 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
           key: ValueKey(brand?.theme ?? AppTheme.classic),
           debugShowCheckedModeBanner: false,
           title: brand?.name.of(lang) ?? '',
-          theme: buildTheme(accent: brand?.color ?? Tokens.accent, theme: brand?.theme ?? AppTheme.classic),
+          theme: buildTheme(accent: brand?.color ?? Tokens.accent, theme: brand?.theme ?? AppTheme.classic, buttonStyle: brand?.buttonStyle ?? 'light', iconStyle: brand?.iconStyle ?? 'brand'),
           // The whole layout flips to right-to-left for Arabic: Material's widgets mirror themselves.
           locale: Locale(lang),
           supportedLocales: const [Locale('en'), Locale('ar')],

@@ -7,6 +7,7 @@ import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
 import 'dish_thumb.dart';
+import 'rating.dart';
 import 'ui.dart';
 
 /// Opens a dish: its photo, description and price, a quantity and an optional note for the kitchen, then one button
@@ -98,6 +99,10 @@ class _DishSheetState extends State<_DishSheet> {
                 padding: const EdgeInsets.fromLTRB(Tokens.space4, Tokens.space4, Tokens.space4, Tokens.space2),
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(name, style: Theme.of(context).textTheme.headlineSmall),
+                  if (item.rating != null) ...[
+                    const SizedBox(height: Tokens.space1),
+                    RatingChip(rating: item.rating!, s: s, inline: true),
+                  ],
                   const SizedBox(height: Tokens.space2),
                   Text(formatMoney(item.priceMinor, widget.currency), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
                   if (description.isNotEmpty) ...[

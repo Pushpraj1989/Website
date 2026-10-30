@@ -1,3 +1,5 @@
+import 'dart:ui' show Color;
+
 import 'geo.dart';
 // Shapes returned by the /v1 API (food-app/web/app/v1). Parsed defensively: a missing field is a bug on the server.
 
@@ -23,7 +25,7 @@ class MediaUrls {
 }
 
 class MenuItem {
-  const MenuItem({required this.id, required this.name, required this.description, required this.priceMinor, required this.soldOut, this.imageUrl});
+  const MenuItem({required this.id, required this.name, required this.description, required this.priceMinor, required this.soldOut, this.imageUrl, this.rating});
   final String id;
   final Localised name;
   final Localised description;
@@ -31,6 +33,8 @@ class MenuItem {
   final bool soldOut;
   /// The dish's own photo, uploaded by staff, or null when it has none.
   final String? imageUrl;
+  /// The dish's score from rated orders, or null until it has as many ratings as the restaurant set.
+  final DishRating? rating;
 
   factory MenuItem.fromJson(Map<String, dynamic> json) => MenuItem(
         id: json['id'] as String,
@@ -39,7 +43,16 @@ class MenuItem {
         priceMinor: json['priceMinor'] as int,
         soldOut: json['soldOut'] as bool,
         imageUrl: MediaUrls.resolve(json['imageUrl']),
+        rating: json['rating'] is Map<String, dynamic> ? DishRating.fromJson(json['rating'] as Map<String, dynamic>) : null,
       );
+}
+
+class DishRating {
+  const DishRating({required this.average, required this.count});
+  final double average;
+  final int count;
+
+  factory DishRating.fromJson(Map<String, dynamic> json) => DishRating(average: (json['average'] as num).toDouble(), count: json['count'] as int);
 }
 
 class MenuCategory {
@@ -163,7 +176,7 @@ class OrderStatusEvent {
 }
 
 class PlacedOrder {
-  const PlacedOrder({required this.id, required this.number, required this.status, required this.method, required this.channel, required this.etaMinutes, required this.quote, required this.history, this.lines = const [], this.address});
+  const PlacedOrder({required this.id, required this.number, required this.status, required this.method, required this.channel, required this.etaMinutes, required this.quote, required this.history, this.lines = const [], this.address, this.ratingStars});
   final String id;
   final String number;
   final String status;
@@ -176,6 +189,8 @@ class PlacedOrder {
   final List<OrderLineView> lines;
   /// The delivery address the order went to, as a line of text; null for pickup.
   final String? address;
+  /// The stars the customer gave this order, or null when they have not rated it.
+  final int? ratingStars;
 
   factory PlacedOrder.fromJson(Map<String, dynamic> json) => PlacedOrder(
         id: json['id'] as String,
@@ -198,6 +213,7 @@ class PlacedOrder {
             ),
         ],
         address: json['address'] as String?,
+        ratingStars: ((json['rating'] as Map<String, dynamic>?)?['stars'] as num?)?.toInt(),
       );
 }
 
@@ -252,18 +268,44 @@ class OrderRef {
       );
 }
 
+/// A dish the assistant offers to add, for the customer to confirm. Price and name come from the server's menu.
+class CartProposal {
+  const CartProposal({required this.itemId, required this.name, required this.qty, required this.priceMinor, this.imageUrl});
+  final String itemId;
+  final Localised name;
+  final int qty;
+  final int priceMinor;
+  final String? imageUrl;
+
+  factory CartProposal.fromJson(Map<String, dynamic> json) => CartProposal(
+        itemId: json['itemId'] as String,
+        name: Localised.fromJson(json['name'] as Map<String, dynamic>),
+        qty: (json['qty'] as num).toInt(),
+        priceMinor: (json['priceMinor'] as num).toInt(),
+        imageUrl: MediaUrls.resolve(json['imageUrl']),
+      );
+}
+
 class AssistantReply {
-  const AssistantReply({required this.intent, required this.answer, required this.items, required this.orders});
+  const AssistantReply({required this.intent, required this.answer, required this.items, required this.orders, this.proposals = const [], this.choices = const [], this.currency = ''});
   final String intent;
+  /// The restaurant's currency for the cards' prices.
+  final String currency;
   final String answer;
   final List<ItemRef> items;
   final List<OrderRef> orders;
+  final List<CartProposal> proposals;
+  /// Fixed answers to tap when the assistant asks whether the question is about an order or the menu.
+  final List<String> choices;
 
   factory AssistantReply.fromJson(Map<String, dynamic> json) => AssistantReply(
         intent: json['intent'] as String,
         answer: json['answer'] as String,
         items: ((json['items'] as List<dynamic>?) ?? []).map((i) => ItemRef.fromJson(i as Map<String, dynamic>)).toList(),
         orders: ((json['orders'] as List<dynamic>?) ?? []).map((o) => OrderRef.fromJson(o as Map<String, dynamic>)).toList(),
+        proposals: ((json['proposals'] as List<dynamic>?) ?? []).map((p) => CartProposal.fromJson(p as Map<String, dynamic>)).toList(),
+        choices: ((json['choices'] as List<dynamic>?) ?? []).whereType<String>().toList(),
+        currency: json['currency'] as String? ?? '',
       );
 }
 
@@ -375,17 +417,20 @@ class OrderHistory {
     required this.totalMinor,
     required this.currency,
     required this.items,
+    this.ratingStars,
   });
   final String id;
   final String number;
   final String status;
   final String channel;
+  final int? ratingStars;
   final DateTime placedAt;
   final int totalMinor;
   final String currency;
   final List<HistoryItem> items;
 
   factory OrderHistory.fromJson(Map<String, dynamic> json) => OrderHistory(
+        ratingStars: (json['ratingStars'] as num?)?.toInt(),
         id: json['id'] as String,
         number: json['number'] as String,
         status: json['status'] as String,
@@ -558,35 +603,107 @@ class Wallet {
 
 /// A promotion staff publish in the admin: a picture or a video, with an optional title and button, shown at the top
 /// of the home screen (hero) or between its sections (mid-feed).
+/// How a promotion looks and arrives, as staff set it in the admin.
+class PromoLook {
+  const PromoLook({this.animation = 'slide_up', this.size = 'standard', this.frame = 'rounded', this.colour, this.durationSeconds = 5, this.frequency = 'once_per_day'});
+  final String animation;
+  final String size;
+  final String frame;
+  final Color? colour;
+  final int durationSeconds;
+  final String frequency;
+
+  factory PromoLook.fromJson(Map<String, dynamic>? json) {
+    if (json == null) return const PromoLook();
+    final hex = (json['colour'] as String?)?.replaceFirst('#', '');
+    final n = hex == null ? null : int.tryParse(hex, radix: 16);
+    return PromoLook(
+      animation: json['animation'] as String? ?? 'slide_up',
+      size: json['size'] as String? ?? 'standard',
+      frame: json['frame'] as String? ?? 'rounded',
+      colour: n == null ? null : Color(0xFF000000 | n),
+      durationSeconds: (json['durationSeconds'] as num?)?.toInt() ?? 5,
+      frequency: json['frequency'] as String? ?? 'once_per_day',
+    );
+  }
+}
+
+/// The terms of the offer a promotion is linked to, worked out by the server from the offer itself.
+class PromoOffer {
+  const PromoOffer({required this.headline, required this.code, required this.minSpendMinor, required this.maxSavingMinor, required this.currency, required this.endsAt, required this.daysLeft, required this.appliesTo});
+  final Localised headline;
+  final String? code;
+  final int minSpendMinor;
+  final int? maxSavingMinor;
+  final String currency;
+  final DateTime endsAt;
+  final int daysLeft;
+  final String appliesTo;
+
+  factory PromoOffer.fromJson(Map<String, dynamic> json) => PromoOffer(
+        headline: Localised.fromJson(json['headline'] as Map<String, dynamic>),
+        code: json['code'] as String?,
+        minSpendMinor: (json['minSpendMinor'] as num?)?.toInt() ?? 0,
+        maxSavingMinor: (json['maxSavingMinor'] as num?)?.toInt(),
+        currency: json['currency'] as String? ?? 'AED',
+        endsAt: DateTime.parse(json['endsAt'] as String),
+        daysLeft: (json['daysLeft'] as num?)?.toInt() ?? 0,
+        appliesTo: json['appliesTo'] as String? ?? 'order',
+      );
+}
+
 class Promotion {
-  const Promotion({required this.id, required this.kind, required this.url, required this.title, required this.cta, this.menuItemId});
+  const Promotion({required this.id, required this.kind, required this.url, required this.title, required this.cta, this.menuItemId, this.kicker = const Localised('', ''), this.body = const Localised('', ''), this.offer, this.look = const PromoLook()});
   final String id;
+  /// 'image' or 'video', or 'none' when the promotion runs on colour and words alone.
   final String kind;
+  /// The picture, GIF or video; empty when there is none.
   final String url;
   final Localised title;
   final Localised cta;
   final String? menuItemId;
+  final Localised kicker;
+  final Localised body;
+  final PromoOffer? offer;
+  final PromoLook look;
+
+  bool get hasMedia => url.isNotEmpty;
 
   factory Promotion.fromJson(Map<String, dynamic> json) {
-    final media = json['media'] as Map<String, dynamic>;
+    final media = json['media'] as Map<String, dynamic>?;
+    Localised text(String key) => json[key] is Map<String, dynamic> ? Localised.fromJson(json[key] as Map<String, dynamic>) : const Localised('', '');
     return Promotion(
       id: json['id'] as String,
-      kind: media['kind'] as String,
-      url: MediaUrls.resolve(media['url'])!,
-      title: Localised.fromJson(json['title'] as Map<String, dynamic>),
-      cta: Localised.fromJson(json['cta'] as Map<String, dynamic>),
+      kind: media?['kind'] as String? ?? 'none',
+      url: media == null ? '' : MediaUrls.resolve(media['url'])!,
+      title: text('title'),
+      cta: text('cta'),
       menuItemId: json['menuItemId'] as String?,
+      kicker: text('kicker'),
+      body: text('body'),
+      offer: json['offer'] is Map<String, dynamic> ? PromoOffer.fromJson(json['offer'] as Map<String, dynamic>) : null,
+      look: PromoLook.fromJson(json['look'] as Map<String, dynamic>?),
     );
   }
 }
 
 class HomePromotions {
-  const HomePromotions({required this.hero, required this.midFeed});
+  const HomePromotions({required this.hero, required this.midFeed, this.carousel = const [], this.welcome, this.strip});
   final List<Promotion> hero;
   final List<Promotion> midFeed;
+  final List<Promotion> carousel;
+  /// The pop-up shown when the app opens, if staff published one.
+  final Promotion? welcome;
+  /// The slim offer line above the menu bar.
+  final Promotion? strip;
+
+  static List<Promotion> _list(Object? raw) => [for (final p in (raw as List<dynamic>? ?? [])) Promotion.fromJson(p as Map<String, dynamic>)];
 
   factory HomePromotions.fromJson(Map<String, dynamic> json) => HomePromotions(
-        hero: [for (final p in (json['hero'] as List<dynamic>? ?? [])) Promotion.fromJson(p as Map<String, dynamic>)],
-        midFeed: [for (final p in (json['midFeed'] as List<dynamic>? ?? [])) Promotion.fromJson(p as Map<String, dynamic>)],
+        hero: _list(json['hero']),
+        midFeed: _list(json['midFeed']),
+        carousel: _list(json['carousel']),
+        welcome: json['welcome'] is Map<String, dynamic> ? Promotion.fromJson(json['welcome'] as Map<String, dynamic>) : null,
+        strip: json['strip'] is Map<String, dynamic> ? Promotion.fromJson(json['strip'] as Map<String, dynamic>) : null,
       );
 }

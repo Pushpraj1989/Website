@@ -10,6 +10,7 @@ import '../core/strings.dart';
 import '../core/theme.dart';
 import '../widgets/dish_thumb.dart';
 import '../widgets/ui.dart';
+import '../widgets/top_icons.dart';
 import 'checkout_screen.dart';
 
 // S05: the cart. Every change is saved on the server straight away, and the server prices it.
@@ -147,7 +148,7 @@ class _CartScreenState extends State<CartScreen> {
           appBar: AppBar(
             backgroundColor: Tokens.bg,
             title: Text(s.cart),
-            actions: [TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language))],
+            actions: [LanguageIcon(language: widget.language, s: s)],
           ),
           body: _body(context, s),
           bottomNavigationBar: lines == null || lines.isEmpty

@@ -11,6 +11,7 @@ import 'address_sheet.dart';
 import 'order_screen.dart';
 import 'cart_screen.dart';
 import '../widgets/ui.dart';
+import '../widgets/top_icons.dart';
 
 // S06: delivery to a saved address, or pickup; cash on delivery or pay on arrival. Card is shown but not offered
 // until the Stripe payment sheet is wired into the app (see README). The fee and the minimum order come from the
@@ -226,7 +227,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         final canPlace = !(_busy || _quote == null || _deliveryBlocked || _codeBlocked || methods.isEmpty);
         return Scaffold(
           backgroundColor: Tokens.surface,
-          appBar: AppBar(backgroundColor: Tokens.bg, title: Text(s.checkout), actions: [TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language))]),
+          appBar: AppBar(backgroundColor: Tokens.bg, title: Text(s.checkout), actions: [LanguageIcon(language: widget.language, s: s)]),
           bottomNavigationBar: BottomActionBar(
             child: PrimaryAction(
               label: _busy ? s.placing : s.placeOrder,

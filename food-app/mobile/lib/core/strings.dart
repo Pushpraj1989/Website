@@ -207,4 +207,63 @@ class Strings {
         'cancelled' => isArabic ? 'ملغى' : 'Cancelled',
         _ => status,
       };
+
+  // Ratings
+  String ratingsCount(int n) {
+    final short = n >= 1000 ? '${(n / 1000).toStringAsFixed(n >= 10000 ? 0 : 1)}K' : '$n';
+    return isArabic ? '$short تقييم' : '$short ratings';
+  }
+  String ratedLabel(double average, int count) => isArabic ? 'التقييم $average من 5، $count تقييم' : 'Rated $average out of 5 from $count ratings';
+  String get rateOrder => isArabic ? 'قيّم الطلب' : 'Rate';
+  String get howWasIt => isArabic ? 'كيف كان طلبك؟' : 'How was your order?';
+  String get thanksForRating => isArabic ? 'شكراً على تقييمك' : 'Thanks for rating';
+  String starsLabel(int n) => isArabic ? '$n من 5 نجوم' : '$n out of 5 stars';
+
+  // Home
+  String get offersForYou => isArabic ? 'عروض لك' : 'Offers for you';
+  String get redeemAndSave => isArabic ? 'استبدل ووفّر' : 'Redeem and save';
+  String pointsLine(int points) => isArabic ? '$points نقطة' : '$points points';
+  String vouchersLine(int n) => isArabic ? (n == 1 ? 'قسيمة واحدة' : '$n قسائم') : (n == 1 ? '1 voucher' : '$n vouchers');
+  String get inTheSpotlight => isArabic ? 'تحت الضوء' : 'In the spotlight';
+  String get exploreMore => isArabic ? 'اكتشف المزيد' : 'Explore more';
+  String get browseMenu => isArabic ? 'تصفح القائمة' : 'Browse the menu';
+  String copyright(int year, String name) => isArabic ? '© $year $name. جميع الحقوق محفوظة.' : '© $year $name. All rights reserved.';
+  String appVersionLine(String version, int build) => isArabic ? 'إصدار التطبيق $version ($build)' : 'App version $version ($build)';
+  String get about => isArabic ? 'حول' : 'About';
+  String get openSourceNotices => isArabic ? 'تراخيص البرامج المفتوحة' : 'Open-source notices';
+  String get phoneLabel => isArabic ? 'الهاتف' : 'Phone';
+  String get addressTitle => isArabic ? 'العنوان' : 'Address';
+  String get versionLabel => isArabic ? 'الإصدار' : 'Version';
+  String deliverToLabel(String label) => isArabic ? 'التوصيل إلى $label' : 'Deliver to $label';
+  String get seeAll => isArabic ? 'عرض الكل' : 'See all';
+
+  // Welcome offer
+  String get validOn => isArabic ? 'صالح على' : 'Valid on';
+  String get allDishes => isArabic ? 'كل الأطباق' : 'All dishes';
+  String get selectedDishes => isArabic ? 'أطباق مختارة' : 'Selected dishes';
+  String get minSpend => isArabic ? 'الحد الأدنى' : 'Min spend';
+  String get maxSaving => isArabic ? 'أقصى توفير' : 'Max saving';
+  String get validUntil => isArabic ? 'صالح حتى' : 'Valid until';
+  String get noLimit => isArabic ? 'بلا حد' : 'No limit';
+  String daysLeft(int n) => isArabic ? (n <= 1 ? 'آخر يوم!' : 'باقي $n أيام') : (n <= 1 ? 'Last day!' : '$n days left');
+  String get orderNow => isArabic ? 'اطلب الآن' : 'Order now';
+  String useCode(String code) => isArabic ? 'استخدم الرمز $code' : 'Use code $code';
+
+  // Cart sheet
+  String get yourCart => isArabic ? 'سلتك' : 'Your cart';
+  String get seeFullCart => isArabic ? 'السلة كاملة والملاحظات' : 'See full cart and add notes';
+  String get payWith => isArabic ? 'الدفع' : 'Pay with';
+  String get payFromHere => isArabic ? 'ادفع من هنا' : 'Pay from here';
+
+  // Assistant
+  String get readAloud => isArabic ? 'اقرأ بصوت عالٍ' : 'Read aloud';
+  String get readAllAloud => isArabic ? 'قراءة الردود' : 'Read replies aloud';
+  String confirmAdd(int qty, String name, String total) => isArabic ? 'إضافة $qty × $name إلى سلتك؟ المجموع $total.' : 'Add $qty × $name to your cart? That is $total.';
+  String get addToCartAction => isArabic ? 'أضف إلى السلة' : 'Add to cart';
+  String get addedToYourCart => isArabic ? 'أضيف إلى سلتك' : 'Added to your cart';
+  String get nothingAdded => isArabic ? 'لم تتم إضافة شيء.' : 'Nothing was added.';
+  String get assistantScope => isArabic ? 'الإجابات من قائمة المطعم وطلباتك فقط. لا يضاف شيء إلى سلتك حتى تضغط أضف.' : "Answers come from this restaurant's menu and your own orders. Nothing is added to your cart until you tap Add.";
+  String get askAboutOrder => isArabic ? 'عن طلب' : 'About an order';
+  String get askAboutMenu => isArabic ? 'عن القائمة' : 'About the menu';
+  String assistantGreeting(String name) => isArabic ? 'أهلاً! أستطيع المساعدة في قائمة $name وطلباتك. عن ماذا تريد أن تسأل؟' : 'Hi! I can help with the $name menu and your orders. What would you like to ask about?';
 }

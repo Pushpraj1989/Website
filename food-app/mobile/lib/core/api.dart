@@ -202,10 +202,19 @@ class ApiClient {
   }
 
   /// Asks the restaurant assistant. Sends the question only; the reply's cards are data the server checked.
-  Future<AssistantReply> ask(String message, {String locale = 'en'}) async {
-    final body = await _send(() => _client.post(_uri('/v1/ai/ask'), headers: _headers(json: true), body: jsonEncode({'message': message, 'locale': locale})));
+  /// [history] is the earlier turns, so the assistant can follow on ("an order", "add two of those").
+  Future<AssistantReply> ask(String message, {String locale = 'en', List<({String role, String text})> history = const []}) async {
+    final body = await _send(() => _client.post(_uri('/v1/ai/ask'), headers: _headers(json: true), body: jsonEncode({
+          'message': message,
+          'locale': locale,
+          'history': [for (final h in history) {'role': h.role, 'text': h.text}],
+        })));
     return AssistantReply.fromJson(body);
   }
+
+  /// Rates a delivered or collected order from 1 to 5 stars. Rating again replaces the earlier rating.
+  Future<void> rateOrder(String orderId, int stars, {String comment = ''}) =>
+      _send(() => _client.put(_uri('/v1/orders/$orderId/rating'), headers: _headers(json: true), body: jsonEncode({'stars': stars, 'comment': comment})));
 
   /// Adds one of an item, the same way the web app does: read the cart, change it, write it back.
   /// Sends a cart change and tells the screens that show the cart.

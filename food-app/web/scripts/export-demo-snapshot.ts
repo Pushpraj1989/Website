@@ -4,6 +4,7 @@
 //   DATABASE_URL=... APP_ENCRYPTION_KEY=... VOUCHER_CODE_SECRET=... node --experimental-strip-types scripts/export-demo-snapshot.ts
 // Export from a test or staging database that has run scripts/pilot-setup.ts, never from production: the voucher codes
 // in the snapshot are real codes of the database they came from, and the snapshot ships inside the demo app.
+import { livePromotions } from '../lib/gallery.ts';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -58,6 +59,18 @@ async function main() {
   // The demo runs with no server, so it cannot load the logo file; it shows the name, in the brand's colour.
   const brand = { ...(await publicBrand()), logoUrl: null };
 
+  // The published home promotions. The demo has no server to load pictures from, so promotions that need one are
+  // left out; those that run on colour, words and an offer's terms are kept.
+  const live = await livePromotions();
+  const noMedia = <T extends { media: unknown }>(p: T | null) => (p && p.media === null ? p : null);
+  const home = {
+    hero: [],
+    midFeed: [],
+    carousel: live.carousel.filter((p) => p.media === null),
+    welcome: noMedia(live.welcome),
+    strip: noMedia(live.strip),
+  };
+
   const snapshot = {
     source: {
       exportedAt: new Date().toISOString(),
@@ -75,6 +88,7 @@ async function main() {
       payments: { cod: restaurant.payments.cod, payOnArrival: restaurant.payments.payOnArrival, card: false },
     },
     brand,
+    home,
     categories: categories.map((c) => ({ ...c, items: c.items.map((i) => ({ ...i, imageUrl: null })) })),
     menuOffers,
     zones: zones.rows.map((z) => ({

@@ -8,6 +8,8 @@ const MAX_CART_QTY = 20;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export type OrderHistoryItem = {
+  /** The stars the customer gave, or null when not rated. */
+  ratingStars: number | null;
   id: string;
   number: string;
   status: string;
@@ -20,8 +22,9 @@ export type OrderHistoryItem = {
 
 export async function ordersFor(guestId: string, limit = 20): Promise<OrderHistoryItem[]> {
   const { rows } = await pool.query(
-    `select id, number, status, channel, placed_at, total_minor, currency
-     from orders where guest_session_id = $1 order by placed_at desc limit $2`,
+    `select o.id, o.number, o.status, o.channel, o.placed_at, o.total_minor, o.currency, r.stars as rating_stars
+     from orders o left join order_ratings r on r.order_id = o.id
+     where o.guest_session_id = $1 order by o.placed_at desc limit $2`,
     [guestId, Math.min(Math.max(limit, 1), 50)],
   );
   if (rows.length === 0) return [];
@@ -44,6 +47,7 @@ export async function ordersFor(guestId: string, limit = 20): Promise<OrderHisto
     totalMinor: r.total_minor,
     currency: r.currency,
     items: byOrder.get(r.id) ?? [],
+    ratingStars: r.rating_stars ?? null,
   }));
 }
 

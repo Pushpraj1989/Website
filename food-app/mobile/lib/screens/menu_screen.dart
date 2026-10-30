@@ -12,6 +12,9 @@ import '../widgets/ask_button.dart';
 import '../widgets/ui.dart';
 import '../widgets/dish_sheet.dart';
 import '../widgets/dish_thumb.dart';
+import '../widgets/top_icons.dart';
+import '../widgets/rating.dart';
+import '../widgets/cart_sheet.dart';
 import 'cart_screen.dart';
 
 // S02: the menu. The restaurant's header, a category bar that stays at the top and jumps to a section, and the dishes
@@ -91,8 +94,9 @@ class _MenuScreenState extends State<MenuScreen> {
                 title: Text(brand?.name.of(s.lang) ?? menu?.restaurant.of(s.lang) ?? '', maxLines: 1, overflow: TextOverflow.ellipsis),
                 actions: [
                   AskButton(api: widget.api, language: widget.language, s: s),
-                  TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language)),
-                  IconButton(tooltip: s.cart, icon: const Icon(LucideIcons.shoppingBag), onPressed: _openCart),
+                  LanguageIcon(language: widget.language, s: s),
+                  CartIcon(api: widget.api, s: s, onTap: () => showCartSheet(context, api: widget.api, language: widget.language, s: s)),
+                  const SizedBox(width: Tokens.space2),
                 ],
               ),
               body: _body(context, s, snapshot, brand),
@@ -320,10 +324,15 @@ class _DishCard extends StatelessWidget {
       child: InkWell(
         onTap: onOpen,
         child: Padding(
-          padding: const EdgeInsets.all(Tokens.space3),
+          // Room under the photo for the ADD button that sits on its edge.
+          padding: const EdgeInsets.fromLTRB(Tokens.space3, Tokens.space3, Tokens.space3, Tokens.space3 + 18),
           child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                if (item.rating != null) ...[
+                  RatingChip(rating: item.rating!, s: s, inline: true),
+                  const SizedBox(height: Tokens.space1),
+                ],
                 Text(name, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
                 if (description.isNotEmpty) ...[
                   const SizedBox(height: Tokens.space1),
@@ -351,25 +360,17 @@ class _DishCard extends StatelessWidget {
                     end: 6,
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 4),
-                      decoration: BoxDecoration(color: Tokens.text.withValues(alpha: 0.85), borderRadius: BorderRadius.circular(999)),
+                      // A fixed dark backing: white words stay readable in light and dark themes alike.
+                      decoration: BoxDecoration(color: const Color(0xE61C1917), borderRadius: BorderRadius.circular(999)),
                       child: Text(s.soldOut, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w700)),
                     ),
                   )
                 else
                   PositionedDirectional(
-                    bottom: -6,
-                    end: -6,
-                    child: Material(
-                      color: context.accent,
-                      shape: const CircleBorder(),
-                      elevation: 3,
-                      child: IconButton(
-                        tooltip: s.addDish(name),
-                        onPressed: onAdd,
-                        color: context.onAccent,
-                        icon: const Icon(LucideIcons.plus),
-                      ),
-                    ),
+                    bottom: -20,
+                    start: 0,
+                    end: 0,
+                    child: Center(child: AddPill(label: s.add, semanticLabel: s.addDish(name), onPressed: onAdd)),
                   ),
               ]),
             ),

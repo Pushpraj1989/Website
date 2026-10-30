@@ -29,6 +29,9 @@ import 'package:sample_kitchen/screens/vouchers_screen.dart';
 import 'package:sample_kitchen/widgets/dish_sheet.dart';
 import 'package:sample_kitchen/core/strings.dart';
 import 'package:sample_kitchen/core/theme.dart';
+import 'package:sample_kitchen/screens/about_screen.dart';
+import 'package:sample_kitchen/widgets/cart_sheet.dart';
+import 'package:sample_kitchen/widgets/welcome_offer.dart';
 
 import '../test/auth_fakes.dart';
 import 'capture_support.dart';
@@ -85,6 +88,10 @@ void main() {
 
   final screens = <String, Widget Function(SweepWorld w, ValueNotifier<String> lang)>{
     'home': (w, lang) => MainShell(api: w.api, language: lang, auth: w.auth, sessions: signedInStore()),
+    // The same home, as a first visit of the day: the welcome pop-up staff published opens over it.
+    'welcome': (w, lang) => MainShell(api: w.api, language: lang, auth: w.auth, sessions: signedInStore()),
+    'cart-sheet': (w, lang) => _OpensOnStart(open: (context) => showCartSheet(context, api: w.api, language: lang, s: Strings(lang.value))),
+    'about': (w, lang) => AboutScreen(language: lang),
     'menu': (w, lang) => MenuScreen(api: w.api, language: lang),
     'cart': (w, lang) => CartScreen(api: w.api, language: lang),
     'checkout': (w, lang) => CheckoutScreen(api: w.api, language: lang),
@@ -128,6 +135,13 @@ void main() {
             FlutterError.onError = (details) => found.add(details.exceptionAsString().split('\n').first);
             try {
               final language = ValueNotifier(lang);
+              resetWelcomeForTests();
+              if (entry.key != 'welcome') {
+                // Everywhere but the welcome scenario, the pop-up has already been seen today.
+                final prefs = await SharedPreferences.getInstance();
+                final welcome = (w.snap['home'] as Map<String, dynamic>?)?['welcome'] as Map<String, dynamic>?;
+                if (welcome != null) await prefs.setString('welcome_${welcome['id']}', DateTime.now().toIso8601String().substring(0, 10));
+              }
               await tester.pumpWidget(captureApp(entry.value(w, language), lang: lang, theme: theme, accent: accent));
               for (var i = 0; i < 8; i++) {
                 await tester.pump(const Duration(milliseconds: 300));
@@ -177,4 +191,25 @@ void main() {
     expect(SessionStore, isNotNull);
     expect(BiometricGate, isNotNull);
   });
+}
+
+
+/// A blank screen that opens a sheet once it is on screen, so the sheet itself can be checked.
+class _OpensOnStart extends StatefulWidget {
+  const _OpensOnStart({required this.open});
+  final void Function(BuildContext context) open;
+
+  @override
+  State<_OpensOnStart> createState() => _OpensOnStartState();
+}
+
+class _OpensOnStartState extends State<_OpensOnStart> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => widget.open(context));
+  }
+
+  @override
+  Widget build(BuildContext context) => const Scaffold(body: SizedBox.expand());
 }

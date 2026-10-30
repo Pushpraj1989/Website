@@ -112,7 +112,7 @@ const REFUSAL = {
 };
 
 export function systemPrompt(ctx: Awaited<ReturnType<typeof contextFor>>, locale: 'en' | 'ar') {
-  const menuLines = ctx.items.map((i) => `- id=${i.id} | ${i.name.en} / ${i.name.ar} | ${i.category} | ${formatMoney(i.priceMinor, 'AED', 'en')}${i.soldOut ? ' | SOLD OUT' : ''} | ${i.description.en}`);
+  const menuLines = ctx.items.map((i) => `- id=${i.id} | ${i.name.en} / ${i.name.ar} | ${i.category} | ${formatMoney(i.priceMinor, ctx.restaurant.currency, 'en')}${i.soldOut ? ' | SOLD OUT' : ''} | ${i.description.en}`);
   const orderLines = ctx.orders.map((o) => `- id=${o.id} | #${o.number} | status=${o.status} | total=${formatMoney(o.totalMinor, o.currency, 'en')} | ${o.lines.map((l) => `${l.qty}x ${l.name.en}`).join(', ')}`);
   return [
     `You are the assistant inside the ordering app of ${ctx.restaurant.name.en}.`,
@@ -180,6 +180,8 @@ function underLimit(guestId: string): boolean {
 
 export type AskResult = {
   intent: 'menu' | 'restaurant' | 'order' | 'clarify' | 'off_topic';
+  /** The restaurant's currency, for the prices on the cards. */
+  currency: string;
   /** Dishes the customer asked to add, checked against the menu. The app shows them for the customer to confirm. */
   proposals: { itemId: string; name: { en: string; ar: string }; qty: number; priceMinor: number; imageUrl: string | null }[];
   /** Fixed choices to tap, offered when the assistant asks what the question is about. */
@@ -232,6 +234,7 @@ export async function ask(input: { guestId: string; message: unknown; locale: 'e
   const refused = intent === 'off_topic';
   const result: AskResult = {
     intent,
+    currency: ctx.restaurant.currency,
     proposals: refused || intent === 'clarify' ? [] : parsed!.addToCart.flatMap((a) => {
       const item = itemSet.get(a.itemId);
       return item && !item.soldOut ? [{ itemId: item.id, name: item.name, qty: a.qty, priceMinor: item.priceMinor, imageUrl: item.imageUrl }] : [];

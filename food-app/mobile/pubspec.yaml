@@ -12,6 +12,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_secure_storage: ^11.2.0
+  flutter_tts: 4.2.3
   geolocator: ^14.1.2
   http: ^1.6.0
   local_auth: ^3.0.2

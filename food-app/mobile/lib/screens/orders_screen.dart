@@ -8,6 +8,7 @@ import '../core/money.dart';
 import '../core/art.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../widgets/rating.dart';
 import '../widgets/ui.dart';
 import '../core/brand.dart';
 import 'cart_screen.dart';
@@ -146,6 +147,54 @@ class _OrderTile extends StatelessWidget {
           const SizedBox(width: Tokens.space2),
           Expanded(child: FilledButton.icon(onPressed: () => _reorder(context), style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(44)), icon: const Icon(LucideIcons.rotateCcw, size: 18), label: Text(s.orderAgain))),
         ]),
+        if (order.status == 'delivered' || order.status == 'collected') ...[
+          const SizedBox(height: Tokens.space2),
+          OrderRating(api: api, orderId: order.id, initial: order.ratingStars, s: s),
+        ],
+      ]),
+    );
+  }
+}
+
+/// "Rate" and five stars under a finished order. A tap saves the rating at once; tapping again changes it.
+class OrderRating extends StatefulWidget {
+  const OrderRating({super.key, required this.api, required this.orderId, required this.initial, required this.s});
+  final ApiClient api;
+  final String orderId;
+  final int? initial;
+  final Strings s;
+
+  @override
+  State<OrderRating> createState() => _OrderRatingState();
+}
+
+class _OrderRatingState extends State<OrderRating> {
+  late int? _stars = widget.initial;
+
+  Future<void> _rate(int stars) async {
+    final previous = _stars;
+    setState(() => _stars = stars);
+    final messenger = ScaffoldMessenger.maybeOf(context);
+    try {
+      await widget.api.rateOrder(widget.orderId, stars);
+      messenger?.showSnackBar(SnackBar(content: Text(widget.s.thanksForRating)));
+    } on ApiException catch (e) {
+      if (mounted) setState(() => _stars = previous);
+      messenger?.showSnackBar(SnackBar(content: Text(e.message)));
+    } catch (_) {
+      if (mounted) setState(() => _stars = previous);
+      messenger?.showSnackBar(SnackBar(content: Text(widget.s.genericError)));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsetsDirectional.only(start: Tokens.space3),
+      decoration: BoxDecoration(color: Tokens.fill, borderRadius: BorderRadius.circular(Tokens.radiusMd)),
+      child: Row(children: [
+        Expanded(child: Text(_stars == null ? widget.s.rateOrder : widget.s.thanksForRating, style: const TextStyle(fontWeight: FontWeight.w600))),
+        RateStars(value: _stars, onRate: _rate, s: widget.s),
       ]),
     );
   }

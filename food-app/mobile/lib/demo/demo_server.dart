@@ -208,8 +208,8 @@ class DemoServer {
       case ('GET', '/v1/brand'):
         return _ok({'brand': _snap['brand']});
       case ('GET', '/v1/home'):
-        // Published promotions are pictures and videos on the server, which the demo does not have.
-        return _ok({'hero': <Object>[], 'midFeed': <Object>[]});
+        // The promotions published in the database, minus those that need a picture from the server.
+        return _ok((_snap['home'] as Map<String, dynamic>?) ?? {'hero': <Object>[], 'midFeed': <Object>[]});
       case ('GET', '/v1/membership'):
         return _ok(_snap['membership'] as Map<String, dynamic>);
       case ('POST', '/v1/ai/ask'):
@@ -251,6 +251,7 @@ class DemoServer {
       return _ok({'ok': true});
     }
     if (path.startsWith('/v1/orders/') && path.endsWith('/reorder') && method == 'POST') return _ok(_reorder(parts[3]));
+    if (path.startsWith('/v1/orders/') && path.endsWith('/rating') && method == 'PUT') return _ok({'rating': _rate(parts[3], body)});
     if (path.startsWith('/v1/orders/') && method == 'GET' && parts.length == 4) {
       final order = _orders.where((o) => o.id == parts[3]).firstOrNull;
       if (order == null) throw const _Refused('Order not found.', 'not_found', 404);
@@ -556,13 +557,27 @@ class DemoServer {
       'id': o.id, 'number': o.number, 'channel': o.channel, 'method': o.method, 'status': o.status(now), 'etaMinutes': o.etaMinutes(now),
       'lines': [for (final l in o.lines) {'name': l['name'], 'qty': l['qty'], 'note': l['note'], 'unitMinor': l['unitMinor']}],
       'quote': o.quote, 'address': o.address, 'history': o.history(now),
+      'rating': _ratings[o.id] == null ? null : {'stars': _ratings[o.id], 'comment': ''},
     };
+  }
+
+  // Order ratings, as lib/ratings.ts: the owner rates a delivered or collected order from 1 to 5; again replaces it.
+  final Map<String, int> _ratings = {};
+  Map<String, dynamic> _rate(String id, Map<String, dynamic> body) {
+    final order = _orders.where((o) => o.id == id).firstOrNull;
+    if (order == null) throw const _Refused('Order not found.', 'not_found', 404);
+    final stars = body['stars'];
+    if (stars is! int || stars < 1 || stars > 5) throw const _Refused('Choose from 1 to 5 stars.', 'bad_input', 400);
+    if (!const {'delivered', 'collected'}.contains(order.status(_now()))) throw const _Refused('You can rate an order once it has reached you.', 'not_finished', 409);
+    _ratings[id] = stars;
+    return {'stars': stars, 'comment': ''};
   }
 
   Map<String, dynamic> _historyView(_Order o) => {
         'id': o.id, 'number': o.number, 'status': o.status(_now()), 'channel': o.channel,
         'placedAt': o.placedAt.toUtc().toIso8601String(), 'totalMinor': o.quote['totalMinor'], 'currency': _currency,
         'items': [for (final l in o.lines) {'name': l['name'], 'qty': l['qty']}],
+        'ratingStars': _ratings[o.id],
       };
 
   Map<String, dynamic> _reorder(String id) {
