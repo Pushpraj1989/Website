@@ -68,6 +68,7 @@ export function offerView(o: Record<string, any>) {
     startsAt: new Date(o.starts_at).toISOString(),
     endsAt: new Date(o.ends_at).toISOString(),
     usageLimit: o.usage_limit,
+    perCustomerLimit: o.per_customer_limit ?? null,
     usedCount: o.used_count,
     maxDiscountMinor: o.max_discount_minor,
     active: o.active,
@@ -168,9 +169,9 @@ export async function createOffer(body: Record<string, unknown>) {
   const v = validateOffer(body);
   const { rows } = await pool.query(
     `insert into offers (restaurant_id, name_en, name_ar, offer_type, value_int, applies_to, audience, min_subtotal_minor,
-       code, starts_at, ends_at, usage_limit, max_discount_minor, active)
-     values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) returning *`,
-    [RESTAURANT_ID, v.nameEn, v.nameAr, v.type, v.value, v.appliesTo, v.audience, v.minSubtotalMinor, v.code, v.startsAt, v.endsAt, v.usageLimit, v.maxDiscountMinor, v.active],
+       code, starts_at, ends_at, usage_limit, max_discount_minor, active, per_customer_limit)
+     values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) returning *`,
+    [RESTAURANT_ID, v.nameEn, v.nameAr, v.type, v.value, v.appliesTo, v.audience, v.minSubtotalMinor, v.code, v.startsAt, v.endsAt, v.usageLimit, v.maxDiscountMinor, v.active, v.perCustomerLimit],
   );
   return offerView(rows[0]);
 }
@@ -185,8 +186,8 @@ export async function updateOffer(id: string, body: Record<string, unknown>) {
   const { rows } = await pool.query(
     `update offers set name_en=$2, name_ar=$3, offer_type=$4, value_int=$5, applies_to=$6, audience=$7,
        min_subtotal_minor=$8, code=$9, starts_at=$10, ends_at=$11, usage_limit=$12, max_discount_minor=$13,
-       active=$14, updated_at=now() where id=$1 returning *`,
-    [id, v.nameEn, v.nameAr, v.type, v.value, v.appliesTo, v.audience, v.minSubtotalMinor, v.code, v.startsAt, v.endsAt, v.usageLimit, v.maxDiscountMinor, v.active],
+       active=$14, per_customer_limit=$15, updated_at=now() where id=$1 returning *`,
+    [id, v.nameEn, v.nameAr, v.type, v.value, v.appliesTo, v.audience, v.minSubtotalMinor, v.code, v.startsAt, v.endsAt, v.usageLimit, v.maxDiscountMinor, v.active, v.perCustomerLimit],
   );
   return offerView(rows[0]);
 }
@@ -219,6 +220,11 @@ export function validateOffer(body: Record<string, unknown>) {
   if (!['guest', 'member', 'any'].includes(audience)) throw new RuleError('Choose who can use the offer.', 'bad_input', 400);
   const code = body.code === undefined || body.code === '' || body.code === null ? null : text(body.code, 'Code', 30).toUpperCase().replace(/\s+/g, '');
   const usageLimit = body.usageLimit === undefined || body.usageLimit === null || body.usageLimit === '' ? null : int(body.usageLimit, 'Usage limit', 0, 1_000_000);
+  // How many times one customer may use it; empty means no limit per customer.
+  const perCustomerLimit = body.perCustomerLimit === undefined || body.perCustomerLimit === null || body.perCustomerLimit === '' ? null : int(body.perCustomerLimit, 'Uses per customer', 1, 1000);
+  if (perCustomerLimit !== null && usageLimit !== null && perCustomerLimit > usageLimit) {
+    throw new RuleError('Uses per customer cannot be more than the uses in total.', 'bad_input', 400);
+  }
   const maxDiscount = body.maxDiscountMinor === undefined || body.maxDiscountMinor === null || body.maxDiscountMinor === '' ? null : int(body.maxDiscountMinor, 'Maximum discount', 0, 1_000_000_000);
   return {
     nameEn: text(body.nameEn ?? (body.name as { en?: string } | undefined)?.en, 'English name', 80),
@@ -232,6 +238,7 @@ export function validateOffer(body: Record<string, unknown>) {
     startsAt: startsAt.toISOString(),
     endsAt: endsAt.toISOString(),
     usageLimit,
+    perCustomerLimit,
     maxDiscountMinor: maxDiscount,
     active: bool(body.active, true),
   };

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { X } from 'lucide-react';
 import { api } from '../api.js';
 
 // Placeholders a field can show. The server accepts only these, and fills them when a voucher is printed.
@@ -75,7 +76,7 @@ export default function Templates() {
           )}
         </div>
         {creating ? <NewTemplate onSaved={(t) => { setCreating(false); setSelected(t.id); setMessage(`Created ${t.name}.`); load(); }} onCancel={() => setCreating(false)} onError={setError} /> : null}
-        {selected && !creating ? <Editor key={selected} id={selected} onChanged={(text) => { setMessage(text); load(); }} onError={setError} /> : null}
+        {selected && !creating ? <Editor key={selected} id={selected} onClose={() => setSelected(null)} onChanged={(text) => { setMessage(text); load(); }} onError={setError} /> : null}
       </div>
     </section>
   );
@@ -94,12 +95,17 @@ function NewTemplate({ onSaved, onCancel, onError }) {
   }
   return (
     <form className="card stack" onSubmit={submit} aria-label="New design">
-      <h2>New design</h2>
-      <label>Name<input name="name" required maxLength={120} /></label>
-      <label>Width in millimetres<input name="widthMm" type="number" min="20" max="400" defaultValue="85" required /></label>
-      <label>Height in millimetres<input name="heightMm" type="number" min="20" max="400" defaultValue="55" required /></label>
-      <p className="muted">85 × 55 mm is a card. A4 is 210 × 297.</p>
-      <div className="row">
+      <div className="row between sheet-head">
+        <h2>New design</h2>
+        <button type="button" className="btn ghost sm" onClick={onCancel} aria-label="Close"><X className="icon" aria-hidden="true" /></button>
+      </div>
+      <div className="form-grid dense">
+        <label className="full">Name<input name="name" required maxLength={120} /></label>
+        <label>Width, mm<input name="widthMm" type="number" min="20" max="400" defaultValue="85" required /></label>
+        <label>Height, mm<input name="heightMm" type="number" min="20" max="400" defaultValue="55" required /></label>
+      </div>
+      <p className="hint">85 × 55 mm is a card. A4 is 210 × 297.</p>
+      <div className="actions submit">
         <button type="submit" className="btn primary">Create design</button>
         <button type="button" className="btn ghost" onClick={onCancel}>Cancel</button>
       </div>
@@ -107,7 +113,7 @@ function NewTemplate({ onSaved, onCancel, onError }) {
   );
 }
 
-function Editor({ id, onChanged, onError }) {
+function Editor({ id, onClose, onChanged, onError }) {
   const [data, setData] = useState(null);
   const [layout, setLayout] = useState(null);
   const [active, setActive] = useState(null);
@@ -250,9 +256,12 @@ function Editor({ id, onChanged, onError }) {
 
   return (
     <div className="card stack">
-      <div className="row between">
+      <div className="row between sheet-head">
         <h2>{data.template.name}</h2>
-        <span className="pill">{STATUS[data.template.status]}{data.template.currentVersion ? ` · v${data.template.currentVersion}` : ''}</span>
+        <div className="row">
+          <span className="pill">{STATUS[data.template.status]}{data.template.currentVersion ? ` · v${data.template.currentVersion}` : ''}</span>
+          <button type="button" className="btn ghost sm" onClick={onClose} aria-label="Close"><X className="icon" aria-hidden="true" /></button>
+        </div>
       </div>
       <div className="row">
         <button type="button" className="btn" disabled={!editable} onClick={save}>Save draft</button>
@@ -263,10 +272,10 @@ function Editor({ id, onChanged, onError }) {
       </div>
       {data.versions.length ? <p className="muted">Published versions: {data.versions.map((v) => `v${v.version}`).join(', ')}</p> : null}
 
-      <div className="row">
-        <label>Width (mm)<input type="number" min="20" max="400" value={layout.widthMm} disabled={!editable} onChange={(e) => update({ widthMm: Number(e.target.value) })} /></label>
-        <label>Height (mm)<input type="number" min="20" max="400" value={layout.heightMm} disabled={!editable} onChange={(e) => update({ heightMm: Number(e.target.value) })} /></label>
-        <label>Background picture<input type="file" accept="image/png,image/jpeg,image/webp" disabled={!editable} onChange={upload} /></label>
+      <div className="form-grid dense">
+        <label>Width, mm<input type="number" min="20" max="400" value={layout.widthMm} disabled={!editable} onChange={(e) => update({ widthMm: Number(e.target.value) })} /></label>
+        <label>Height, mm<input type="number" min="20" max="400" value={layout.heightMm} disabled={!editable} onChange={(e) => update({ heightMm: Number(e.target.value) })} /></label>
+        <label className="full">Background picture<input type="file" accept="image/png,image/jpeg,image/webp" disabled={!editable} onChange={upload} /></label>
       </div>
 
       <div className="row">
@@ -321,14 +330,14 @@ function Editor({ id, onChanged, onError }) {
               </select></label>
             </>
           ) : <p className="muted">A QR code shows the voucher's own QR code when it is printed.</p>}
-          <div className="row">
+          <div className="form-grid dense">
             <label>Left (mm)<input type="number" step="0.5" value={selected.x} onChange={(e) => updateField(selected.id, { x: Number(e.target.value) })} /></label>
             <label>Top (mm)<input type="number" step="0.5" value={selected.y} onChange={(e) => updateField(selected.id, { y: Number(e.target.value) })} /></label>
             <label>Width (mm)<input type="number" step="0.5" value={selected.w} onChange={(e) => updateField(selected.id, { w: Number(e.target.value) })} /></label>
             <label>Height (mm)<input type="number" step="0.5" value={selected.h} onChange={(e) => updateField(selected.id, { h: Number(e.target.value) })} /></label>
           </div>
           {selected.type === 'text' ? (
-            <div className="row">
+            <div className="form-grid dense">
               <label>Size (pt)<input type="number" min="6" max="72" value={selected.fontSizePt} onChange={(e) => updateField(selected.id, { fontSizePt: Number(e.target.value) })} /></label>
               <label>Weight<select value={selected.fontWeight} onChange={(e) => updateField(selected.id, { fontWeight: Number(e.target.value) })}><option value={400}>Regular</option><option value={700}>Bold</option></select></label>
               <label>Align<select value={selected.align} onChange={(e) => updateField(selected.id, { align: e.target.value })}><option value="left">Left</option><option value="center">Centre</option><option value="right">Right</option></select></label>

@@ -16,6 +16,15 @@ function nextStatus(order) {
   }
 }
 
+// New orders need attention (accent); orders in the kitchen or on the way are live (green); finished ones are quiet;
+// cancelled and rejected ones are red, so they never read as a success.
+function statusTone(status) {
+  if (status === 'placed') return 'scheduled';
+  if (status === 'cancelled' || status === 'rejected') return status;
+  if (status === 'delivered' || status === 'collected') return 'done';
+  return 'live';
+}
+
 const STATUS_TEXT = {
   placed: 'New', awaiting_payment: 'Awaiting payment', accepted: 'Accepted', preparing: 'Preparing', ready: 'Ready',
   out_for_delivery: 'Out for delivery', delivered: 'Delivered', collected: 'Collected', cancelled: 'Cancelled', rejected: 'Rejected',
@@ -135,7 +144,7 @@ export default function Orders() {
                   <tr key={o.id}>
                     <td><strong>{o.number}</strong></td>
                     <td>{o.channel === 'delivery' ? 'Delivery' : 'Pickup'}</td>
-                    <td><span className={`status ${o.status === 'placed' ? 'scheduled' : o.status === 'delivered' || o.status === 'collected' ? 'ended' : 'live'}`}>{STATUS_TEXT[o.status] ?? o.status}</span>{o.etaMinutes ? <span className="muted"> · {o.etaMinutes} min</span> : null}</td>
+                    <td><span className={`status ${statusTone(o.status)}`}>{STATUS_TEXT[o.status] ?? o.status}</span>{o.etaMinutes ? <span className="muted"> · {o.etaMinutes} min</span> : null}</td>
                     <td>{o.lines.map((l) => `${l.qty} × ${l.name?.en ?? ''}`).join(', ')}</td>
                     <td>{o.address ?? '—'}</td>
                     <td className="num">{formatMoney(o.total, DIGITS, o.currency)}</td>

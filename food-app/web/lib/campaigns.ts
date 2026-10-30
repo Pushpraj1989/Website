@@ -204,9 +204,9 @@ export async function createCampaignOffer(campaignId: string, body: Record<strin
     const active = campaign.status === 'active';
     const { rows } = await c.query(
       `insert into offers (restaurant_id, campaign_id, name_en, name_ar, offer_type, value_int, applies_to, audience, min_subtotal_minor,
-         code, starts_at, ends_at, usage_limit, max_discount_minor, active)
-       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) returning *`,
-      [RESTAURANT_ID, campaignId, v.nameEn, v.nameAr, v.type, v.value, v.appliesTo, v.audience, v.minSubtotalMinor, v.code, v.startsAt, v.endsAt, v.usageLimit, v.maxDiscountMinor, active],
+         code, starts_at, ends_at, usage_limit, max_discount_minor, active, per_customer_limit)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16) returning *`,
+      [RESTAURANT_ID, campaignId, v.nameEn, v.nameAr, v.type, v.value, v.appliesTo, v.audience, v.minSubtotalMinor, v.code, v.startsAt, v.endsAt, v.usageLimit, v.maxDiscountMinor, active, v.perCustomerLimit],
     );
     return offerView(rows[0]);
   });

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { X } from 'lucide-react';
 import { api } from '../api.js';
 import { illustrationSrc } from '../art.js';
 import { formatMoney, parseMoney } from '../money.js';
@@ -153,38 +154,37 @@ function ProductEditor({ product, catalog, onChanged, onClose, onSaved }) {
   return (
     <div className="drawer" role="dialog" aria-modal="false" aria-labelledby="editor-title">
       <form className="card stack" onSubmit={save} key={id ?? 'new'}>
-        <div className="row between">
+        <div className="row between sheet-head">
           <h2 id="editor-title">{product ? 'Edit product' : 'New product'}</h2>
-          <button type="button" className="btn ghost sm" onClick={onClose}>Close</button>
+          <button type="button" className="btn ghost sm" onClick={onClose} aria-label="Close"><X className="icon" aria-hidden="true" /></button>
+        </div>
+
+        <div className="form-grid">
+          <label>Name (English)<input name="nameEn" required maxLength={80} defaultValue={product?.name.en ?? ''} /></label>
+          <label>Name (Arabic)<input name="nameAr" required maxLength={80} dir="rtl" defaultValue={product?.name.ar ?? ''} /></label>
+          <label>Category
+            <select name="categoryId" defaultValue={product?.categoryId ?? categories[0]?.id} required>
+              {categories.map((c) => <option key={c.id} value={c.id}>{c.name.en}</option>)}
+            </select>
+          </label>
+          <label>Price, AED<input name="price" inputMode="decimal" required defaultValue={product ? (product.priceMinor / 100).toFixed(2) : ''} placeholder="45.00" /></label>
+          <label>Place on the menu<input name="sortOrder" type="number" min="0" max="999" defaultValue={product?.sortOrder ?? 0} /></label>
+          <label className="choice"><input name="available" type="checkbox" defaultChecked={product ? product.available : true} /> Shown to customers</label>
+          <label>Description (English)<textarea name="descriptionEn" maxLength={300} rows={3} defaultValue={product?.description.en ?? ''} /></label>
+          <label>Description (Arabic)<textarea name="descriptionAr" maxLength={300} rows={3} dir="rtl" defaultValue={product?.description.ar ?? ''} /></label>
         </div>
 
         {product ? (
-          <Gallery productId={product.id} productName={product.name.en} onChanged={onChanged} />
+          <details className="disclose">
+            <summary>Pictures and videos</summary>
+            <div className="body"><Gallery productId={product.id} productName={product.name.en} onChanged={onChanged} /></div>
+          </details>
         ) : (
-          <p className="muted">Save the product first, then add its pictures and videos.</p>
+          <p className="hint">Save the product first, then add its pictures and videos.</p>
         )}
 
-        <label>Category
-          <select name="categoryId" defaultValue={product?.categoryId ?? categories[0]?.id} required>
-            {categories.map((c) => <option key={c.id} value={c.id}>{c.name.en}</option>)}
-          </select>
-        </label>
-        <div className="grid-form">
-          <label>Name (English)<input name="nameEn" required maxLength={80} defaultValue={product?.name.en ?? ''} /></label>
-          <label>Name (Arabic)<input name="nameAr" required maxLength={80} dir="rtl" defaultValue={product?.name.ar ?? ''} /></label>
-        </div>
-        <div className="grid-form">
-          <label>Description (English)<textarea name="descriptionEn" maxLength={300} defaultValue={product?.description.en ?? ''} /></label>
-          <label>Description (Arabic)<textarea name="descriptionAr" maxLength={300} dir="rtl" defaultValue={product?.description.ar ?? ''} /></label>
-        </div>
-        <div className="grid-form">
-          <label>Price (AED)<input name="price" inputMode="decimal" required defaultValue={product ? (product.priceMinor / 100).toFixed(2) : ''} placeholder="45.00" /></label>
-          <label>Order on the menu<input name="sortOrder" type="number" min="0" max="999" defaultValue={product?.sortOrder ?? 0} /></label>
-        </div>
-        <label className="choice"><input name="available" type="checkbox" defaultChecked={product ? product.available : true} /> Shown to customers</label>
-
         {error ? <p role="alert" className="error">{error}</p> : null}
-        <div className="row">
+        <div className="actions submit">
           <button type="submit" className="btn primary" disabled={busy} aria-busy={busy}>{busy ? 'Saving…' : 'Save'}</button>
           {product ? <button type="button" className="btn danger" onClick={remove}>Delete</button> : null}
         </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { X } from 'lucide-react';
 import { api } from '../api.js';
 
 const PLACEMENTS = {
@@ -142,10 +143,11 @@ function PromotionEditor({ promo, catalog, mediaByProduct, onClose, onSaved }) {
   return (
     <div className="drawer" role="dialog" aria-modal="false" aria-labelledby="promo-title">
       <form className="card stack" onSubmit={save}>
-        <div className="row between">
+        <div className="row between sheet-head">
           <h2 id="promo-title">{promo ? 'Edit promotion' : 'New promotion'}</h2>
-          <button type="button" className="btn ghost sm" onClick={onClose}>Close</button>
+          <button type="button" className="btn ghost sm" onClick={onClose} aria-label="Close"><X className="icon" aria-hidden="true" /></button>
         </div>
+        <div className="form-grid">
         <label>Where it shows
           <select name="placement" value={placement} onChange={(e) => setPlacement(e.target.value)}>
             {Object.entries(PLACEMENTS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
@@ -164,22 +166,19 @@ function PromotionEditor({ promo, catalog, mediaByProduct, onClose, onSaved }) {
             {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
           </select>
         </label>
-        {options.length === 0 ? <p className="muted">Add pictures or videos to a product first.</p> : null}
-        <div className="grid-form">
           <label>Title (English)<input name="titleEn" maxLength={120} defaultValue={promo?.title.en ?? ''} /></label>
           <label>Title (Arabic)<input name="titleAr" maxLength={120} dir="rtl" defaultValue={promo?.title.ar ?? ''} /></label>
-        </div>
-        <div className="grid-form">
           <label>Button (English)<input name="ctaEn" maxLength={40} defaultValue={promo?.cta.en ?? ''} placeholder="Order now" /></label>
           <label>Button (Arabic)<input name="ctaAr" maxLength={40} dir="rtl" defaultValue={promo?.cta.ar ?? ''} /></label>
-        </div>
-        <div className="grid-form">
           <label>Starts<input name="startsAt" type="datetime-local" required defaultValue={promo ? toLocal(promo.startsAt) : toLocal(now.toISOString())} /></label>
           <label>Ends<input name="endsAt" type="datetime-local" required defaultValue={promo ? toLocal(promo.endsAt) : toLocal(new Date(now.getTime() + 14 * 864e5).toISOString())} /></label>
+          <label className="choice full"><input name="active" type="checkbox" defaultChecked={promo ? promo.active : true} /> Switched on</label>
         </div>
-        <label className="choice"><input name="active" type="checkbox" defaultChecked={promo ? promo.active : true} /> Switched on</label>
+        {options.length === 0 ? <p className="hint">Add pictures or videos to a product first.</p> : null}
         {error ? <p role="alert" className="error">{error}</p> : null}
-        <button type="submit" className="btn primary" disabled={busy || options.length === 0} aria-busy={busy}>{busy ? 'Saving…' : 'Save'}</button>
+        <div className="actions submit">
+          <button type="submit" className="btn primary" disabled={busy || options.length === 0} aria-busy={busy}>{busy ? 'Saving…' : 'Save'}</button>
+        </div>
       </form>
     </div>
   );

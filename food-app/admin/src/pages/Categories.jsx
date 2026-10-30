@@ -76,16 +76,18 @@ export default function Categories({ catalog, onChanged }) {
         </table>
       </div>
 
-      <form className="card" onSubmit={add}>
+      <form className="card stack" onSubmit={add}>
         <h2>Add a category</h2>
+        <div className="form-grid">
         <label>English name<input name="nameEn" required maxLength={60} /></label>
         <label>Arabic name<input name="nameAr" required maxLength={60} dir="rtl" /></label>
-        <label>Order<input name="sortOrder" type="number" min="0" max="999" defaultValue="0" /></label>
+        <label>Place in the list<input name="sortOrder" type="number" min="0" max="999" defaultValue="0" /></label>
         <label>Picture
           <select name="illustration" defaultValue="dish">
             {Object.entries(ILLUSTRATION_LABELS).map(([key, label]) => <option key={key} value={key}>{label}</option>)}
           </select>
         </label>
+        </div>
         <div className="actions"><button className="btn primary" type="submit">Add category</button></div>
       </form>
     </section>

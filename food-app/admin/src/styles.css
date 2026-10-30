@@ -15,18 +15,43 @@ h2 { font-size: 18px; line-height: 26px; margin: 0; }
 .muted { color: var(--muted); margin: 0; }
 .ok { color: var(--success); margin: 0; }
 .error { color: var(--danger); margin: 0; }
-.stack { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.stack { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-content: start; }
 .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 .between { justify-content: space-between; }
 .pad { padding: 24px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; }
 .table-wrap { overflow-x: auto; padding: 0; }
-.grid-form { display: grid; gap: 12px; grid-template-columns: 1fr; }
-@media (min-width: 720px) { .grid-form { grid-template-columns: 1fr 1fr; } }
+.grid-form, .form-grid {
+  display: grid; gap: 12px 16px; align-items: end;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr));
+}
+/* Short number fields (millimetres, points) sit four or more to a row. */
+.form-grid.dense { grid-template-columns: repeat(auto-fill, minmax(min(100%, 104px), 1fr)); }
+.form-grid .full, .grid-form .full { grid-column: 1 / -1; }
+.hint { font-weight: 400; font-size: 13px; color: var(--muted); }
+.actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+/* A set of checkboxes or radios, laid out in columns instead of one long list. */
+.choices { display: grid; gap: 8px 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+/* Sections of a long panel that open when needed. Native details/summary: keyboard and screen readers get it for free. */
+details.disclose { border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg); }
+details.disclose > summary {
+  list-style: none; cursor: pointer; min-height: 44px; padding: 10px 14px; display: flex; align-items: center;
+  justify-content: space-between; gap: 12px; font-weight: 600;
+}
+details.disclose > summary::-webkit-details-marker { display: none; }
+details.disclose > summary::after { content: '+'; font-size: 20px; line-height: 1; color: var(--accent); }
+details.disclose[open] > summary::after { content: '−'; }
+details.disclose[open] > summary { border-bottom: 1px solid var(--border); }
+details.disclose > .body { padding: 14px; display: grid; gap: 12px; }
+.facts { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.facts li { background: var(--surface); border-radius: 999px; padding: 2px 10px; font-size: 13px; }
+.rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.rules > li { border: 1px solid var(--border); border-radius: var(--radius-md); padding: 10px 12px; display: grid; gap: 6px; }
 
-label { display: grid; gap: 6px; font-weight: 600; font-size: 14px; }
-.choice { display: flex; align-items: center; gap: 8px; font-weight: 500; }
+label { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; font-weight: 600; font-size: 14px; }
+label > input:not([type=checkbox]):not([type=radio]), label > select, label > textarea { flex: 1 0 100%; }
+.choice { display: flex; flex-wrap: nowrap; align-items: center; gap: 8px; font-weight: 500; min-height: 44px; }
 input, select, textarea {
   font: inherit; min-height: 40px; padding: 8px 12px; border: 1px solid var(--border-input);
   border-radius: var(--radius-md); background: var(--bg); color: var(--text); width: 100%;
@@ -53,7 +78,7 @@ legend { font-weight: 600; margin-bottom: 8px; }
 .login { min-height: 100vh; display: grid; place-items: center; padding: 16px; }
 .login form { width: min(420px, 100%); }
 
-.shell { display: grid; grid-template-columns: 220px minmax(0, 1fr); min-height: 100vh; }
+.shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-height: 100vh; }
 @media (max-width: 720px) { .shell { grid-template-columns: minmax(0, 1fr); } }
 .side { background: var(--bg); border-inline-end: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; gap: 16px; }
 .brand { font-weight: 700; font-size: 18px; }
@@ -71,13 +96,16 @@ code { background: var(--surface); padding: 2px 6px; border-radius: 6px; font-si
 .thumb { width: 56px; height: 56px; object-fit: cover; border-radius: var(--radius-md); border: 1px solid var(--border); }
 .thumb.empty, .preview.empty { display: grid; place-items: center; font-size: 12px; color: var(--muted); background: var(--surface); }
 .preview { width: 140px; height: 140px; object-fit: cover; border-radius: var(--radius-lg); border: 1px solid var(--border); }
-.pill { min-height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--border-input); background: var(--bg); font: inherit; font-weight: 600; cursor: pointer; }
+.pill { white-space: nowrap; min-height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--border-input); background: var(--bg); font: inherit; font-weight: 600; cursor: pointer; }
 .pill.on { background: #dcfce7; border-color: var(--success); color: #14532d; }
 .pill.off { background: var(--surface); color: var(--muted); }
 .status { font-weight: 600; font-size: 13px; }
 .status.live { color: var(--success); }
 .status.scheduled { color: var(--accent); }
 .status.ended, .status.stopped { color: var(--muted); }
+/* Order states: a cancelled or rejected order is not a success, so it is not green. */
+.status.cancelled, .status.rejected { color: var(--danger); }
+.status.done { color: var(--muted); }
 
 .drawer {
   position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto;
@@ -116,3 +144,100 @@ code { background: var(--surface); padding: 2px 6px; border-radius: 6px; font-si
 /* Page sections may shrink to the screen; their wide content scrolls inside its own card. */
 .main > *, .stack, .row { min-width: 0; }
 .stack > *, .main > * { min-width: 0; max-width: 100%; }
+
+/* Figures at the top of a report: an even grid of tiles, three to a row on a phone. */
+.stats { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+.stat { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 12px 14px; display: grid; gap: 2px; }
+.stat strong { font-size: 22px; font-variant-numeric: tabular-nums; }
+
+/* ---------- Phone: an app layout, not a shrunken web page ---------- */
+.appbar, .tabbar { display: none; }
+.icon { width: 20px; height: 20px; flex: none; }
+.nav { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+
+.sheet-close { display: none; }
+
+@media (max-width: 720px) {
+  .side { display: none; }
+  .appbar {
+    display: flex; position: sticky; top: 0; z-index: 20; align-items: center; justify-content: space-between; gap: 8px;
+    min-height: 56px; padding: 6px 8px 6px 16px; background: var(--bg); border-bottom: 1px solid var(--border);
+    padding-top: max(6px, env(safe-area-inset-top));
+  }
+  .appbar .title { font-weight: 700; font-size: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tabbar {
+    display: grid; grid-template-columns: repeat(5, 1fr); position: fixed; inset: auto 0 0 0; z-index: 20;
+    background: var(--bg); border-top: 1px solid var(--border); padding-bottom: env(safe-area-inset-bottom);
+  }
+  .tab {
+    display: grid; justify-items: center; gap: 2px; min-height: 56px; padding: 8px 2px 6px; font: inherit; font-size: 11px;
+    font-weight: 600; color: var(--muted); text-decoration: none; background: none; border: 0; cursor: pointer;
+  }
+  .tab.active { color: var(--accent); }
+  .tab.active .icon { stroke-width: 2.5; }
+  .main { padding: 16px 16px calc(88px + env(safe-area-inset-bottom)); gap: 16px; }
+  h1 { font-size: 22px; line-height: 28px; }
+  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .stat { padding: 10px; }
+  .stat strong { font-size: 18px; }
+  .stat .muted { font-size: 12px; }
+  /* 16 px text stops phones zooming into a field; 44 px is a comfortable finger target. */
+  input, select, textarea { font-size: 16px; min-height: 44px; }
+  .btn { min-height: 44px; }
+  .row.between > .btn.primary, .toolbar > .btn.primary { padding: 0 14px; }
+
+  /* Tables become lists of cards: one card per row, each value with its column name. */
+  .card.table-wrap, .card:has(> table) { background: transparent; border: 0; padding: 0; overflow: visible; }
+  .card table { min-width: 0; background: transparent; }
+  .card table, .card tbody, .card tr, .card td { display: block; }
+  .card thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .card tr {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 12px 14px;
+    margin-bottom: 10px; display: grid; gap: 6px;
+  }
+  /* Each value sits beside its column name, like a settings row. The name is positioned, so any content fits. */
+  .card td { border: 0; padding: 2px 0; padding-inline-start: 116px; position: relative; min-height: 22px; }
+  .card td::before {
+    content: attr(data-label); position: absolute; inset-inline-start: 0; top: 3px; width: 108px;
+    font-size: 13px; color: var(--muted); font-weight: 500;
+  }
+  .card td[data-label=""] { padding-inline-start: 0; }
+  .card td[data-label=""]::before { content: none; }
+  /* The first column names the row: it is the card's title, with its column name small above it. */
+  .card td:first-child { padding-inline-start: 0; font-size: 16px; padding-bottom: 6px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+  .card td:first-child::before { position: static; display: block; width: auto; font-size: 12px; }
+  .card td.num { white-space: normal; }
+  .card td:empty { display: none; }
+
+  /* An editor opens as a full-screen sheet over the list, with its title and close button pinned at the top. */
+  .split > :nth-child(2) {
+    position: fixed; inset: 0; align-self: stretch; justify-self: stretch; z-index: 30; overflow-y: auto; overscroll-behavior: contain; max-height: none;
+    background: var(--bg); padding: 0 16px calc(24px + env(safe-area-inset-bottom)); border-radius: 0; box-shadow: none; border: 0;
+    animation: sheet-in .22s ease-out;
+  }
+  .split > :nth-child(2) > .card { border-radius: 0; border: 0; min-height: 100%; padding: 0; }
+  .sheet-close { display: inline-flex; }
+  .sheet-head {
+    position: sticky; top: 0; z-index: 2; background: var(--bg); margin: 0 -16px; padding: 8px 8px 8px 16px;
+    padding-top: max(8px, env(safe-area-inset-top)); border-bottom: 1px solid var(--border); flex-wrap: nowrap;
+  }
+  .sheet-head, .split > :nth-child(2) .actions.submit { max-width: none; }
+  .sheet-head h2 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+  .sheet-head .row { flex-wrap: nowrap; }
+  .split > :nth-child(2) .actions.submit, .split > :nth-child(2) form > .row:last-child {
+    position: sticky; bottom: 0; background: var(--bg); padding: 12px 16px; margin: 0 -16px; border-top: 1px solid var(--border); z-index: 2;
+  }
+  body:has(.split > :nth-child(2)) .tabbar, body:has(.split > :nth-child(2)) .appbar { visibility: hidden; }
+}
+@keyframes sheet-in { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* The full section list on a phone: a native dialog sliding up from the bottom. */
+dialog.more {
+  border: 0; padding: 8px 8px calc(16px + env(safe-area-inset-bottom)); margin: auto 0 0; width: 100%; max-width: 100%;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0; background: var(--bg); color: var(--text);
+}
+dialog.more::backdrop { background: rgba(28, 25, 23, .4); }
+dialog.more[open] { animation: sheet-in .2s ease-out; }
+dialog.more nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+dialog.more .nav { flex-direction: column; justify-content: center; text-align: center; min-height: 76px; font-size: 13px; gap: 6px; }
+dialog.more .grab { width: 40px; height: 4px; border-radius: 2px; background: var(--border); margin: 4px auto 12px; }

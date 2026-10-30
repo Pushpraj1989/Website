@@ -26,7 +26,7 @@ export default function Reports() {
 
   return (
     <section className="stack">
-      <div className="row between">
+      <div className="toolbar">
         <h1>Promotion reports</h1>
         <div className="row">
           <button type="button" className="btn" onClick={load}>Refresh</button>
@@ -35,11 +35,11 @@ export default function Reports() {
       </div>
       {error ? <p role="alert" className="error">{error}</p> : null}
 
-      <div className="row" role="list" aria-label="Summary">
+      <ul className="stats" aria-label="Summary">
         {[['Issued', s.issued], ['Still usable', s.available], ['Used', s.redeemed], ['Expired', s.expired], ['Revoked', s.revoked], ['Discount given', money(s.discountMinor)]].map(([label, value]) => (
-          <div key={label} className="card" role="listitem"><div className="muted">{label}</div><strong style={{ fontSize: 22 }}>{value}</strong></div>
+          <li key={label} className="stat"><span className="muted">{label}</span><strong>{value}</strong></li>
         ))}
-      </div>
+      </ul>
 
       <p role="status" className={report.reconciled ? 'ok' : 'error'}>
         {report.reconciled ? 'The records agree with each other.' : 'Some records do not agree. See the checks below before you rely on these figures.'}

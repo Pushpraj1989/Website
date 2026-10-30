@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { api } from '../api.js';
+import { X } from 'lucide-react';
 import { formatMoney, parseMoney } from '../money.js';
 
 const DIGITS = 2;
@@ -22,6 +23,31 @@ const toLocalInput = (iso) => {
   const pad = (n) => String(n).padStart(2, '0');
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 };
+// The rule's settings as short facts, so staff can check a rule at a glance.
+function ruleFacts(o) {
+  const money = (minor) => formatMoney(minor, DIGITS, CODE);
+  const facts = [o.type === 'percent' ? `${o.value / 100}% off` : o.type === 'fixed' ? `${money(o.value)} off` : TYPES[o.type]];
+  if (o.maxDiscountMinor != null) facts.push(`at most ${money(o.maxDiscountMinor)}`);
+  if (o.minSubtotalMinor > 0) facts.push(`min order ${money(o.minSubtotalMinor)}`);
+  if (o.audience !== 'any') facts.push(o.audience === 'member' ? 'members only' : 'guests only');
+  if (o.perCustomerLimit != null) facts.push(o.perCustomerLimit === 1 ? 'once per customer' : `${o.perCustomerLimit} per customer`);
+  if (o.usageLimit != null) facts.push(`${o.usedCount ?? 0} of ${o.usageLimit} used`);
+  return facts;
+}
+
+/** A panel's title row. On a phone the panel is a full-screen sheet, and this row stays at the top with Close. */
+function SheetHead({ id, title, onClose, children }) {
+  return (
+    <div className="row between sheet-head">
+      <h2 id={id}>{title}</h2>
+      <div className="row">
+        {children}
+        {onClose ? <button type="button" className="btn ghost sm" onClick={onClose} aria-label="Close"><X className="icon" aria-hidden="true" /></button> : null}
+      </div>
+    </div>
+  );
+}
+
 const fromLocal = (value) => (value ? new Date(value).toISOString() : '');
 const optionalMoney = (text) => (text ? parseMoney(text, DIGITS) : undefined);
 
@@ -75,7 +101,7 @@ export default function Campaigns() {
         </div>
 
         {creating ? <NewCampaign onSaved={(c) => { setCreating(false); setMessage(`Created ${c.name}.`); load(); setSelected(c.id); }} onCancel={() => setCreating(false)} onError={setError} /> : null}
-        {selected && !creating ? <CampaignDetail key={selected} id={selected} onChanged={(text) => { setMessage(text); load(); }} onError={setError} /> : null}
+        {selected && !creating ? <CampaignDetail key={selected} id={selected} onClose={() => setSelected(null)} onChanged={(text) => { setMessage(text); load(); }} onError={setError} /> : null}
       </div>
     </section>
   );
@@ -102,15 +128,17 @@ function NewCampaign({ onSaved, onCancel, onError }) {
     }
   }
   return (
-    <form className="card stack" onSubmit={submit} aria-label="New campaign">
-      <h2>New campaign</h2>
-      <label>Name<input name="name" required maxLength={120} /></label>
-      <label>Starts<input name="startsAt" type="datetime-local" required /></label>
-      <label>Ends<input name="endsAt" type="datetime-local" required /></label>
-      <label>Who pays<select name="fundingSource" defaultValue="restaurant">{Object.entries(FUNDING).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select></label>
-      <label>Budget in AED (optional)<input name="budget" inputMode="decimal" /></label>
-      <label>Most vouchers to issue (optional)<input name="maxIssuance" type="number" min="1" /></label>
-      <div className="row">
+    <form className="card stack" onSubmit={submit} aria-labelledby="new-campaign-title">
+      <SheetHead id="new-campaign-title" title="New campaign" onClose={onCancel} />
+      <div className="form-grid">
+        <label className="full">Name<input name="name" required maxLength={120} /></label>
+        <label>Starts<input name="startsAt" type="datetime-local" required /></label>
+        <label>Ends<input name="endsAt" type="datetime-local" required /></label>
+        <label>Who pays<select name="fundingSource" defaultValue="restaurant">{Object.entries(FUNDING).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select></label>
+        <label>Budget, AED <span className="hint">optional</span><input name="budget" inputMode="decimal" placeholder="500.00" /></label>
+        <label>Most vouchers <span className="hint">optional</span><input name="maxIssuance" type="number" min="1" /></label>
+      </div>
+      <div className="actions submit">
         <button type="submit" className="btn primary">Create as draft</button>
         <button type="button" className="btn ghost" onClick={onCancel}>Cancel</button>
       </div>
@@ -118,7 +146,7 @@ function NewCampaign({ onSaved, onCancel, onError }) {
   );
 }
 
-function CampaignDetail({ id, onChanged, onError }) {
+function CampaignDetail({ id, onClose, onChanged, onError }) {
   const [data, setData] = useState(null);
 
   const load = useCallback(async () => {
@@ -144,11 +172,10 @@ function CampaignDetail({ id, onChanged, onError }) {
   if (!data) return <div className="card"><p className="muted">Loading…</p></div>;
   const { campaign, offers, pools } = data;
   return (
-    <div className="card stack">
-      <div className="row between">
-        <h2>{campaign.name}</h2>
+    <div className="card stack" role="region" aria-labelledby="campaign-title">
+      <SheetHead id="campaign-title" title={campaign.name} onClose={onClose}>
         <span className={`pill ${campaign.status}`}>{STATUS[campaign.status]}</span>
-      </div>
+      </SheetHead>
       <p className="muted">{new Date(campaign.startsAt).toLocaleString()} – {new Date(campaign.endsAt).toLocaleString()} · {FUNDING[campaign.fundingSource]}{campaign.budgetMinor !== null ? ` · budget ${formatMoney(campaign.budgetMinor, DIGITS, CODE)}` : ''}</p>
       <div className="row">
         {(ACTIONS[campaign.status] ?? []).map(([action, label]) => (
@@ -157,17 +184,32 @@ function CampaignDetail({ id, onChanged, onError }) {
       </div>
 
       <h3>Rules</h3>
-      {offers.length === 0 ? <p className="muted">No rules yet.</p> : (
-        <ul>{offers.map((o) => <li key={o.id}>{o.name.en} — {TYPES[o.type]}{o.code ? ` (code ${o.code})` : ''}</li>)}</ul>
+      {offers.length === 0 ? <p className="muted">No rules yet. Add one to start the campaign.</p> : (
+        <ul className="rules">
+          {offers.map((o) => (
+            <li key={o.id}>
+              <strong>{o.name.en}{o.code ? <> · <code>{o.code}</code></> : null}</strong>
+              <ul className="facts" aria-label="Rule details">{ruleFacts(o).map((f) => <li key={f}>{f}</li>)}</ul>
+            </li>
+          ))}
+        </ul>
       )}
       {campaign.status === 'draft' || campaign.status === 'scheduled' || campaign.status === 'active' || campaign.status === 'paused' ? (
-        <RuleForm campaign={campaign} onSaved={() => { load(); onChanged('Rule added.'); }} onError={onError} />
+        <details className="disclose" open={offers.length === 0}>
+          <summary>Add a rule</summary>
+          <div className="body"><RuleForm campaign={campaign} onSaved={() => { load(); onChanged('Rule added.'); }} onError={onError} /></div>
+        </details>
       ) : null}
 
       <h3>Code pools</h3>
       {pools.length === 0 ? <p className="muted">No pools yet. A pool is where codes are made for one rule.</p> : null}
       {pools.map((p) => <PoolPanel key={p.id} pool={p} offers={offers} onChanged={onChanged} onError={onError} />)}
-      {offers.length > 0 ? <PoolForm campaignId={campaign.id} offers={offers} onSaved={() => { load(); onChanged('Pool created.'); }} onError={onError} /> : null}
+      {offers.length > 0 ? (
+        <details className="disclose" open={pools.length === 0}>
+          <summary>New code pool</summary>
+          <div className="body"><PoolForm campaignId={campaign.id} offers={offers} onSaved={() => { load(); onChanged('Pool created.'); }} onError={onError} /></div>
+        </details>
+      ) : null}
     </div>
   );
 }
@@ -188,6 +230,8 @@ function RuleForm({ campaign, onSaved, onError }) {
     }
     const minSpend = optionalMoney(f.get('minSpend'));
     if (minSpend === null) return onError('Enter the minimum order in AED, like 50.00.');
+    const maxDiscount = type === 'percent' ? optionalMoney(f.get('maxDiscount')) : undefined;
+    if (maxDiscount === null) return onError('Enter the largest discount in AED, like 20.00.');
     try {
       await api.addCampaignRule(campaign.id, {
         name: { en: f.get('nameEn'), ar: f.get('nameAr') },
@@ -198,6 +242,8 @@ function RuleForm({ campaign, onSaved, onError }) {
         minSubtotalMinor: minSpend ?? 0,
         code: f.get('code') || undefined,
         usageLimit: f.get('usageLimit') ? Number(f.get('usageLimit')) : undefined,
+        perCustomerLimit: f.get('perCustomerLimit') ? Number(f.get('perCustomerLimit')) : undefined,
+        maxDiscountMinor: maxDiscount,
         startsAt: fromLocal(f.get('startsAt')),
         endsAt: fromLocal(f.get('endsAt')),
       });
@@ -209,19 +255,22 @@ function RuleForm({ campaign, onSaved, onError }) {
   }
   return (
     <form className="stack" onSubmit={submit} aria-label="Add a rule">
-      <h4>Add a rule</h4>
-      <label>Name (English)<input name="nameEn" required maxLength={80} /></label>
-      <label>Name (Arabic)<input name="nameAr" required maxLength={80} dir="rtl" /></label>
-      <label>Type<select value={type} onChange={(e) => setType(e.target.value)}>{Object.entries(TYPES).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select></label>
-      {type === 'percent' ? <label>Percent off<input name="percent" inputMode="decimal" required defaultValue={10} /></label> : null}
-      {type === 'fixed' ? <label>Amount off (AED)<input name="amount" inputMode="decimal" required defaultValue="5.00" /></label> : null}
-      <label>Who can use it<select name="audience" defaultValue="any"><option value="any">Everyone</option><option value="guest">Guests</option><option value="member">Members</option></select></label>
-      <label>Minimum order in AED (optional)<input name="minSpend" inputMode="decimal" /></label>
-      <label>Shared code (optional)<input name="code" maxLength={30} placeholder="WEEKEND10" /></label>
-      <label>Uses in total (optional)<input name="usageLimit" type="number" min="0" /></label>
-      <label>Starts<input name="startsAt" type="datetime-local" required defaultValue={toLocalInput(campaign.startsAt)} /></label>
-      <label>Ends<input name="endsAt" type="datetime-local" required defaultValue={toLocalInput(campaign.endsAt)} /></label>
-      <button type="submit" className="btn">Add rule</button>
+      <div className="form-grid">
+        <label>Name (English)<input name="nameEn" required maxLength={80} /></label>
+        <label>Name (Arabic)<input name="nameAr" required maxLength={80} dir="rtl" /></label>
+        <label>Type<select value={type} onChange={(e) => setType(e.target.value)}>{Object.entries(TYPES).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select></label>
+        {type === 'percent' ? <label>Percent off<input name="percent" inputMode="decimal" required defaultValue={10} /></label> : null}
+        {type === 'percent' ? <label>Largest discount, AED <span className="hint">optional</span><input name="maxDiscount" inputMode="decimal" placeholder="20.00" /></label> : null}
+        {type === 'fixed' ? <label>Amount off, AED<input name="amount" inputMode="decimal" required defaultValue="5.00" /></label> : null}
+        <label>Minimum order, AED <span className="hint">optional</span><input name="minSpend" inputMode="decimal" placeholder="30.00" /></label>
+        <label>Who can use it<select name="audience" defaultValue="any"><option value="any">Everyone</option><option value="guest">Guests</option><option value="member">Members</option></select></label>
+        <label>Shared code <span className="hint">optional</span><input name="code" maxLength={30} placeholder="WEEKEND10" /></label>
+        <label>Uses in total <span className="hint">optional</span><input name="usageLimit" type="number" min="0" /></label>
+        <label>Uses per customer <span className="hint">optional</span><input name="perCustomerLimit" type="number" min="1" max="1000" placeholder="1" /></label>
+        <label>Starts<input name="startsAt" type="datetime-local" required defaultValue={toLocalInput(campaign.startsAt)} /></label>
+        <label>Ends<input name="endsAt" type="datetime-local" required defaultValue={toLocalInput(campaign.endsAt)} /></label>
+      </div>
+      <div className="actions"><button type="submit" className="btn primary">Add rule</button></div>
     </form>
   );
 }
@@ -244,12 +293,13 @@ function PoolForm({ campaignId, offers, onSaved, onError }) {
   }
   return (
     <form className="stack" onSubmit={submit} aria-label="New code pool">
-      <h4>New code pool</h4>
-      <label>Rule<select name="offerId" required>{offers.map((o) => <option key={o.id} value={o.id}>{o.name.en}</option>)}</select></label>
-      <label>Code pattern<input name="codePattern" required defaultValue="FOOD##@@" maxLength={40} /></label>
-      <p className="muted"># is a digit, @ is a letter, * is a letter or digit. Other characters are copied as they are.</p>
-      <label>Most codes in this pool (optional)<input name="quantityLimit" type="number" min="1" /></label>
-      <button type="submit" className="btn">Create pool</button>
+      <div className="form-grid">
+        <label>Rule<select name="offerId" required>{offers.map((o) => <option key={o.id} value={o.id}>{o.name.en}</option>)}</select></label>
+        <label>Code pattern<input name="codePattern" required defaultValue="FOOD##@@" maxLength={40} aria-describedby="pattern-help" /></label>
+        <label>Most codes <span className="hint">optional</span><input name="quantityLimit" type="number" min="1" /></label>
+      </div>
+      <p className="hint" id="pattern-help"># is a digit, @ is a letter, * is a letter or digit. Other characters are copied as they are.</p>
+      <div className="actions"><button type="submit" className="btn primary">Create pool</button></div>
     </form>
   );
 }
@@ -361,19 +411,28 @@ function PoolPanel({ pool, offers, onChanged, onError }) {
       </div>
       <p className="muted">Printing and exporting codes are recorded with the time and the staff session. Print only usable vouchers: revoked and expired ones are left out.</p>
 
-      <form className="stack" onSubmit={generate} aria-label="Generate codes">
-        <h5>Generate codes</h5>
-        <label>How many (up to 10,000; large batches are made in the background)<input name="quantity" type="number" min="1" max="10000" required /></label>
-        <label>Expires<input name="expiresAt" type="datetime-local" required /></label>
-        <button type="submit" className="btn primary">Generate codes</button>
-      </form>
+      <details className="disclose">
+        <summary>Generate codes</summary>
+        <form className="body" onSubmit={generate} aria-label="Generate codes">
+          <div className="form-grid">
+            <label>How many <span className="hint">up to 10,000</span><input name="quantity" type="number" min="1" max="10000" required /></label>
+            <label>Expires<input name="expiresAt" type="datetime-local" required /></label>
+            <button type="submit" className="btn primary">Generate</button>
+          </div>
+          <p className="hint">Large batches are made in the background; you can keep working.</p>
+        </form>
+      </details>
 
-      <form className="stack" onSubmit={addCode} aria-label="Add one code">
-        <h5>Add one code</h5>
-        <label>Code<input name="code" required maxLength={30} placeholder="SUMMER-2026" /></label>
-        <label>Expires<input name="expiresAt" type="datetime-local" required /></label>
-        <button type="submit" className="btn">Add code</button>
-      </form>
+      <details className="disclose">
+        <summary>Add one code</summary>
+        <form className="body" onSubmit={addCode} aria-label="Add one code">
+          <div className="form-grid">
+            <label>Code<input name="code" required maxLength={30} placeholder="SUMMER-2026" /></label>
+            <label>Expires<input name="expiresAt" type="datetime-local" required /></label>
+            <button type="submit" className="btn">Add code</button>
+          </div>
+        </form>
+      </details>
     </div>
   );
 }

@@ -67,6 +67,7 @@ export default function AiSettings() {
         It does not answer other questions.
       </p>
       <form className="card stack" onSubmit={save} aria-label="Assistant settings">
+        <div className="form-grid">
         <label>Provider
           <select value={provider} onChange={(e) => { setProvider(e.target.value); setModels([]); setModel(''); }}>
             {providers.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
@@ -84,12 +85,12 @@ export default function AiSettings() {
             aria-describedby="key-help"
           />
         </label>
-        <p id="key-help" className="muted">The key is sent to the provider only, stored encrypted, and never shown again. Create it in your provider's console with only the access it needs.</p>
-        <div className="row">
-          <button type="button" className="btn secondary" onClick={loadModels} disabled={busy || (!typedKey && !(current.hasKey && current.provider === provider))}>
+        </div>
+        <p id="key-help" className="hint">The key is sent to the provider only, stored encrypted, and never shown again. Create it in your provider's console with only the access it needs.</p>
+        <div className="form-grid">
+          <button type="button" className="btn" onClick={loadModels} disabled={busy || (!typedKey && !(current.hasKey && current.provider === provider))}>
             Load models
           </button>
-        </div>
 
         <label>Model
           <select value={model} onChange={(e) => setModel(e.target.value)} disabled={models.length === 0}>
@@ -97,6 +98,7 @@ export default function AiSettings() {
             {models.map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}
           </select>
         </label>
+        </div>
 
         <label className="choice"><input type="checkbox" checked={enabled} onChange={(e) => setEnabled(e.target.checked)} /> Switch the assistant on for customers</label>
 

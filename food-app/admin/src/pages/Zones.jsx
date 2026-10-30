@@ -157,10 +157,10 @@ export default function Zones() {
   const problem = editing ? outlineProblem(points) : null;
 
   return (
-    <section>
+    <section className="stack">
       <header className="toolbar">
         <h1>Delivery areas</h1>
-        {!editing ? <button type="button" onClick={startNew}>Add an area</button> : null}
+        {!editing ? <button type="button" className="btn primary" onClick={startNew}>Add an area</button> : null}
       </header>
       {message ? <p role="status">{message}</p> : null}
       {error ? <p role="alert" className="error">{error}</p> : null}
@@ -169,22 +169,24 @@ export default function Zones() {
       <div ref={mapEl} className="zone-map" aria-label="Delivery areas map" />
 
       {!zones ? null : editing ? (
-        <form className="card" onSubmit={save}>
-          <h3>{editing.id ? 'Edit area' : 'New area'}</h3>
-          <p>{points.length === 0 ? 'Click the map to place the first corner. Place the corners in order around the area.' : `${points.length} corner${points.length === 1 ? '' : 's'} placed.`}</p>
+        <form className="card stack" onSubmit={save}>
+          <h2>{editing.id ? 'Edit area' : 'New area'}</h2>
+          <p className="hint">{points.length === 0 ? 'Click the map to place the first corner. Place the corners in order around the area.' : `${points.length} corner${points.length === 1 ? '' : 's'} placed.`}</p>
           {problem && points.length > 0 ? <p className="error">{problem}</p> : null}
           <div className="actions">
-            <button type="button" onClick={() => setPoints((p) => undoCorner(p))} disabled={points.length === 0}>Undo last corner</button>
-            <button type="button" onClick={() => setPoints([])} disabled={points.length === 0}>Clear outline</button>
+            <button type="button" className="btn sm" onClick={() => setPoints((p) => undoCorner(p))} disabled={points.length === 0}>Undo last corner</button>
+            <button type="button" className="btn sm ghost" onClick={() => setPoints([])} disabled={points.length === 0}>Clear outline</button>
           </div>
+          <div className="form-grid">
           <label>Name in English <input required maxLength={80} value={editing.nameEn} onChange={(e) => setEditing({ ...editing, nameEn: e.target.value })} /></label>
           <label>Name in Arabic <input required maxLength={80} dir="rtl" value={editing.nameAr} onChange={(e) => setEditing({ ...editing, nameAr: e.target.value })} /></label>
           <label>Delivery fee ({CODE}) <input required inputMode="decimal" value={editing.fee} onChange={(e) => setEditing({ ...editing, fee: e.target.value })} /></label>
           <label>Minimum order ({CODE}) <input required inputMode="decimal" value={editing.minOrder} onChange={(e) => setEditing({ ...editing, minOrder: e.target.value })} /></label>
-          <label className="choice"><input type="checkbox" checked={editing.active} onChange={(e) => setEditing({ ...editing, active: e.target.checked })} /> Taking orders for this area</label>
+          <label className="choice full"><input type="checkbox" checked={editing.active} onChange={(e) => setEditing({ ...editing, active: e.target.checked })} /> Taking orders for this area</label>
+          </div>
           <div className="actions">
-            <button type="submit" disabled={problem !== null}>Save area</button>
-            <button type="button" onClick={stopEditing}>Cancel</button>
+            <button type="submit" className="btn primary" disabled={problem !== null}>Save area</button>
+            <button type="button" className="btn ghost" onClick={stopEditing}>Cancel</button>
           </div>
         </form>
       ) : (
@@ -202,7 +204,7 @@ export default function Zones() {
                     <td className="num">{formatMoney(z.feeMinor, DIGITS, CODE)}</td>
                     <td className="num">{formatMoney(z.minOrderMinor, DIGITS, CODE)}</td>
                     <td>{z.active ? 'Active' : 'Off'}</td>
-                    <td><button type="button" onClick={() => startEdit(z)}>Edit</button></td>
+                    <td><button type="button" className="btn ghost sm" onClick={() => startEdit(z)}>Edit</button></td>
                   </tr>
                 ))}
               </tbody>

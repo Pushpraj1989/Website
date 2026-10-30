@@ -219,3 +219,12 @@ test('a queued batch fails and keeps its codes if the campaign stops before it f
   assert.equal(rows[0].status, 'failed');
   assert.equal(rows[0].generated_quantity, 500);
 });
+
+test('a rule can limit how often one customer uses it, never above the uses in total', async () => {
+  const now = Date.now();
+  const campaign = await c.createCampaign({ name: 'Per customer', startsAt: new Date(now - hour), endsAt: new Date(now + 9 * day) });
+  const rule = await c.createCampaignOffer(campaign.id, { name: { en: 'r', ar: 'ر' }, type: 'percent', value: 500, usageLimit: 50, perCustomerLimit: 2, startsAt: new Date(now - hour), endsAt: new Date(now + 9 * day) });
+  assert.equal(rule.perCustomerLimit, 2);
+  await expectRule(c.createCampaignOffer(campaign.id, { name: { en: 'r', ar: 'ر' }, type: 'percent', value: 500, usageLimit: 1, perCustomerLimit: 3, startsAt: new Date(now - hour), endsAt: new Date(now + 9 * day) }), 'bad_input');
+  await expectRule(c.createCampaignOffer(campaign.id, { name: { en: 'r', ar: 'ر' }, type: 'percent', value: 500, perCustomerLimit: 0, startsAt: new Date(now - hour), endsAt: new Date(now + 9 * day) }), 'bad_input');
+});

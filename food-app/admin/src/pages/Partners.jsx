@@ -122,22 +122,24 @@ export default function Partners() {
 
       <form className="card stack" onSubmit={create} aria-label="New partner">
         <h2>New partner</h2>
-        <label>Name<input name="name" required maxLength={120} /></label>
-        <fieldset className="stack">
+        <div className="form-grid">
+          <label>Name<input name="name" required maxLength={120} /></label>
+          <label>Most codes a day<input name="dailyIssueLimit" type="number" min="0" defaultValue="1000" required /></label>
+          <label>Most requests a minute<input name="requestsPerMinute" type="number" min="1" defaultValue="60" required /></label>
+        </div>
+        <fieldset className="choices">
           <legend>Permissions</legend>
           {Object.entries(SCOPES).map(([s, label]) => (
             <label key={s} className="choice"><input type="checkbox" name={`scope:${s}`} defaultChecked={s !== 'codes:export'} /> {label}</label>
           ))}
         </fieldset>
-        <fieldset className="stack">
+        <fieldset className="choices">
           <legend>Campaigns they may issue from</legend>
           {campaigns.length === 0 ? <p className="muted">Create a campaign first.</p> : campaigns.map((c) => (
             <label key={c.id} className="choice"><input type="checkbox" name={`campaign:${c.id}`} /> {c.name}</label>
           ))}
         </fieldset>
-        <label>Most codes a day<input name="dailyIssueLimit" type="number" min="0" defaultValue="1000" required /></label>
-        <label>Most requests a minute<input name="requestsPerMinute" type="number" min="1" defaultValue="60" required /></label>
-        <button type="submit" className="btn primary">Create partner and key</button>
+        <div className="actions"><button type="submit" className="btn primary">Create partner and key</button></div>
       </form>
     </section>
   );

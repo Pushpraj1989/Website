@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { X } from 'lucide-react';
 import { api } from '../api.js';
 import { formatMoney, parseMoney } from '../money.js';
 
@@ -110,6 +111,7 @@ function OfferEditor({ offer, onClose, onSaved, onError }) {
       startsAt: new Date(f.get('startsAt')).toISOString(),
       endsAt: new Date(f.get('endsAt')).toISOString(),
       usageLimit: f.get('usageLimit') ? Number(f.get('usageLimit')) : null,
+      perCustomerLimit: f.get('perCustomerLimit') ? Number(f.get('perCustomerLimit')) : null,
       maxDiscountMinor: maxDiscount,
       active: f.get('active') === 'on',
     };
@@ -143,47 +145,42 @@ function OfferEditor({ offer, onClose, onSaved, onError }) {
   return (
     <div className="drawer" role="dialog" aria-modal="false" aria-labelledby="offer-title">
       <form className="card stack" onSubmit={save}>
-        <div className="row between">
+        <div className="row between sheet-head">
           <h2 id="offer-title">{offer ? 'Edit offer' : 'New offer'}</h2>
-          <button type="button" className="btn ghost sm" onClick={onClose}>Close</button>
+          <button type="button" className="btn ghost sm" onClick={onClose} aria-label="Close"><X className="icon" aria-hidden="true" /></button>
         </div>
-        <div className="grid-form">
+        <div className="form-grid">
           <label>Name (English)<input name="nameEn" required maxLength={80} defaultValue={offer?.name.en ?? ''} /></label>
           <label>Name (Arabic)<input name="nameAr" required maxLength={80} dir="rtl" defaultValue={offer?.name.ar ?? ''} /></label>
-        </div>
-        <label>Type
-          <select value={type} onChange={(e) => setType(e.target.value)}>
-            {Object.entries(TYPES).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-          </select>
-        </label>
-        {type === 'percent' ? (
-          <label>Percent off<input name="percent" inputMode="decimal" required defaultValue={offer ? offer.value / 100 : 10} /></label>
-        ) : null}
-        {type === 'fixed' ? (
-          <label>Amount off (AED)<input name="amount" inputMode="decimal" required defaultValue={offer ? (offer.value / 100).toFixed(2) : '5.00'} /></label>
-        ) : null}
-        <div className="grid-form">
-          <label>Minimum order (AED)<input name="minSubtotal" inputMode="decimal" defaultValue={offer ? (offer.minSubtotalMinor / 100).toFixed(2) : '0.00'} /></label>
-          <label>Largest discount (AED, optional)<input name="maxDiscount" inputMode="decimal" defaultValue={offer?.maxDiscountMinor != null ? (offer.maxDiscountMinor / 100).toFixed(2) : ''} /></label>
-        </div>
-        <div className="grid-form">
+          <label>Type
+            <select value={type} onChange={(e) => setType(e.target.value)}>
+              {Object.entries(TYPES).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+            </select>
+          </label>
+          {type === 'percent' ? (
+            <label>Percent off<input name="percent" inputMode="decimal" required defaultValue={offer ? offer.value / 100 : 10} /></label>
+          ) : null}
+          {type === 'fixed' ? (
+            <label>Amount off, AED<input name="amount" inputMode="decimal" required defaultValue={offer ? (offer.value / 100).toFixed(2) : '5.00'} /></label>
+          ) : null}
+          <label>Minimum order, AED<input name="minSubtotal" inputMode="decimal" defaultValue={offer ? (offer.minSubtotalMinor / 100).toFixed(2) : '0.00'} /></label>
+          <label>Largest discount, AED <span className="hint">optional</span><input name="maxDiscount" inputMode="decimal" defaultValue={offer?.maxDiscountMinor != null ? (offer.maxDiscountMinor / 100).toFixed(2) : ''} /></label>
           <label>Starts<input name="startsAt" type="datetime-local" required defaultValue={defaultStart} /></label>
           <label>Ends<input name="endsAt" type="datetime-local" required defaultValue={defaultEnd} /></label>
+          <label>Code <span className="hint">optional</span><input name="code" maxLength={30} defaultValue={offer?.code ?? ''} placeholder="WEEKEND10" /></label>
+          <label>Uses in total <span className="hint">optional</span><input name="usageLimit" type="number" min="0" defaultValue={offer?.usageLimit ?? ''} /></label>
+          <label>Uses per customer <span className="hint">optional</span><input name="perCustomerLimit" type="number" min="1" max="1000" placeholder="1" defaultValue={offer?.perCustomerLimit ?? ''} /></label>
+          <label>Who can use it
+            <select name="audience" defaultValue={offer?.audience ?? 'any'}>
+              <option value="any">Everyone</option>
+              <option value="member">Signed-in customers</option>
+              <option value="guest">Guests</option>
+            </select>
+          </label>
+          <label className="choice full"><input name="active" type="checkbox" defaultChecked={offer ? offer.active : true} /> Switched on</label>
         </div>
-        <div className="grid-form">
-          <label>Code (optional)<input name="code" maxLength={30} defaultValue={offer?.code ?? ''} placeholder="WEEKEND10" /></label>
-          <label>Usage limit (optional)<input name="usageLimit" type="number" min="0" defaultValue={offer?.usageLimit ?? ''} /></label>
-        </div>
-        <label>Who can use it
-          <select name="audience" defaultValue={offer?.audience ?? 'any'}>
-            <option value="any">Everyone</option>
-            <option value="member">Signed-in customers</option>
-            <option value="guest">Guests</option>
-          </select>
-        </label>
-        <label className="choice"><input name="active" type="checkbox" defaultChecked={offer ? offer.active : true} /> Switched on</label>
         {error ? <p role="alert" className="error">{error}</p> : null}
-        <div className="row">
+        <div className="actions submit">
           <button type="submit" className="btn primary" disabled={busy} aria-busy={busy}>{busy ? 'Saving…' : 'Save'}</button>
           {offer ? <button type="button" className="btn danger" onClick={stopOrDelete}>{offer.usedCount > 0 ? 'Stop offer' : 'Delete'}</button> : null}
         </div>

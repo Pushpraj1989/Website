@@ -29,12 +29,10 @@ async function main() {
 
   // 2. A shared welcome code: 10% off, at most AED 20, on orders of AED 30 or more, once per customer, 500 uses.
   const welcome = await c.createCampaign({ name: 'Pilot: Welcome 10%', startsAt: start, endsAt: end, fundingSource: 'restaurant', budgetMinor: 200000 });
-  const welcomeRule = await c.createCampaignOffer(welcome.id, {
+  await c.createCampaignOffer(welcome.id, {
     name: { en: 'Welcome 10% off', ar: 'خصم ترحيبي 10%' }, type: 'percent', value: 1000, code: 'WELCOME10',
-    minSubtotalMinor: 3000, maxDiscountMinor: 2000, usageLimit: 500, startsAt: start, endsAt: ruleEnd,
+    minSubtotalMinor: 3000, maxDiscountMinor: 2000, usageLimit: 500, perCustomerLimit: 1, startsAt: start, endsAt: ruleEnd,
   });
-  // The admin form does not set a per-customer limit yet, so it is set here.
-  await pool.query(`update offers set per_customer_limit = 1 where id = $1`, [welcomeRule.id]);
   await c.transitionCampaign(welcome.id, 'activate', ACTOR, 'pilot launch');
 
   // 3. Printed vouchers: AED 5 off orders of AED 25 or more, single use, with a printed design.
