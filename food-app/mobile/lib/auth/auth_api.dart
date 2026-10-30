@@ -82,6 +82,19 @@ class AuthApi {
     return _session(json);
   }
 
+  /// Sign-up by email: name, mobile and email; the code goes to the email.
+  Future<Challenge> signUpEmail({required String name, required String phone, required String email}) async =>
+      Challenge.fromJson(await _send('POST', '/v1/auth/signup/email', body: {'name': name, 'phone': phone, 'email': email}));
+
+  Future<Session> verifySignUpEmail({required String challengeId, required String code}) async =>
+      _session(await _send('POST', '/v1/auth/signup/email/verify', body: {'challengeId': challengeId, 'code': code}));
+
+  Future<Challenge> signInEmail({required String email}) async =>
+      Challenge.fromJson(await _send('POST', '/v1/auth/login/email', body: {'email': email}));
+
+  Future<Session> verifySignInEmail({required String challengeId, required String code}) async =>
+      _session(await _send('POST', '/v1/auth/login/email/verify', body: {'challengeId': challengeId, 'code': code}));
+
   /// Sends the code to the typed address. Needs the signed-in token from the sign-up step.
   Future<Challenge> startEmailVerification({required String email}) async =>
       Challenge.fromJson(await _send('POST', '/v1/auth/email/start', body: {'email': email}));

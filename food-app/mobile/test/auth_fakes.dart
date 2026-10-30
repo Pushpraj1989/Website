@@ -7,7 +7,7 @@ import 'package:sample_kitchen/auth/session_store.dart';
 import 'helpers.dart';
 
 /// Answers the auth endpoints the way the server does. The only accepted code is 123456.
-/// Setting [phoneRegistered] to false makes sign-in say "no account".
+/// Setting [phoneRegistered] to false makes sign-in say "no account" (by mobile or by email).
 class AuthServer {
   AuthServer({this.phoneRegistered = true, this.emailVerified = false});
   bool phoneRegistered;
@@ -22,8 +22,23 @@ class AuthServer {
         switch (path) {
           case '/v1/auth/signup/phone':
             return respond(jsonEncode({'challengeId': 'c-signup', 'sentTo': '+971 •••4567', 'resendInSeconds': 30}), 200);
+          case '/v1/auth/signup/email':
+            email = body['email'] as String;
+            return respond(jsonEncode({'challengeId': 'c-signup', 'sentTo': 'sa••@example.com', 'resendInSeconds': 30}), 200);
+          case '/v1/auth/signup/email/verify':
+            if (body['code'] != '123456') {
+              return respond(jsonEncode({'error': {'code': 'wrong_code', 'message': 'That code is wrong. 4 tries left.'}}), 422);
+            }
+            emailVerified = true;
+            return respond(jsonEncode({'token': 'tok-1', 'account': _account()}), 201);
+          case '/v1/auth/login/email':
+            if (!phoneRegistered) {
+              return respond(jsonEncode({'error': {'code': 'no_account', 'message': 'No account uses this email. Create one first.'}}), 404);
+            }
+            return respond(jsonEncode({'challengeId': 'c-login', 'sentTo': 'sa••@example.com', 'resendInSeconds': 30}), 200);
           case '/v1/auth/signup/phone/verify':
           case '/v1/auth/login/phone/verify':
+          case '/v1/auth/login/email/verify':
             if (body['code'] != '123456') {
               return respond(jsonEncode({'error': {'code': 'wrong_code', 'message': 'That code is wrong. 4 tries left.'}}), 422);
             }

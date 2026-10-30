@@ -27,7 +27,7 @@ Future<void> pumpApp(WidgetTester tester, AuthServer server, {bool signedIn = fa
 }
 
 void main() {
-  testWidgets('sign-up: name and mobile, the code sheet, email, verify email, the email code, then home', (tester) async {
+  testWidgets('sign-up: name, mobile and email, the email code sheet, then home', (tester) async {
     final server = AuthServer();
     await pumpApp(tester, server);
 
@@ -38,45 +38,41 @@ void main() {
 
     await tester.enterText(find.widgetWithText(TextField, 'Full name'), 'Sara Tester');
     await tester.enterText(find.widgetWithText(TextField, 'Mobile number'), '+971 50 123 4567');
+    await tester.enterText(find.widgetWithText(TextField, 'Email address'), 'sara@example.com');
     await tester.tap(find.text('Send code'));
     await tester.pumpAndSettle();
 
-    // The phone code sheet comes up from the bottom.
-    expect(find.text('Mobile code'), findsOneWidget);
-    await tester.enterText(otpField(), '123456');
-    await tester.pumpAndSettle();
-
-    // Step two: the email. Nothing is sent until "Verify email" is pressed.
-    expect(find.text('Add your email'), findsOneWidget);
-    expect(server.calls.where((c) => c.contains('email/start')), isEmpty);
-    await tester.enterText(find.widgetWithText(TextField, 'Email address'), 'sara@example.com');
-    await tester.tap(find.text('Verify email'));
-    await tester.pumpAndSettle();
-
-    expect(server.calls.where((c) => c.contains('email/start')), hasLength(1), reason: 'the email code is sent on Verify email');
+    // One code, sent to the email; no text message and no second email step.
+    expect(server.calls, contains('POST /v1/auth/signup/email'));
+    expect(server.calls.where((c) => c.contains('/phone')), isEmpty);
+    expect(server.email, 'sara@example.com');
     expect(find.text('Email code'), findsOneWidget);
     await tester.enterText(otpField(), '123456');
     await tester.pumpAndSettle();
 
+    expect(find.text('Add your email'), findsNothing);
     expect(find.byTooltip('Cart'), findsWidgets, reason: 'arrives at the home screen');
     await expectOnHome(tester, 'Popular on the menu');
   });
 
-  testWidgets('sign-in: an unknown number is told so and offered an account', (tester) async {
+  testWidgets('sign-in: an unknown email is told so and offered an account', (tester) async {
     final server = AuthServer(phoneRegistered: false);
     await pumpApp(tester, server);
+    await tester.enterText(find.widgetWithText(TextField, 'Email address'), 'nobody@example.com');
     await tester.tap(find.text('Continue'));
     await tester.pumpAndSettle();
-    expect(find.text('No account uses this number. Create one first.'), findsOneWidget);
+    expect(find.text('No account uses this email. Create one first.'), findsOneWidget);
     expect(find.text('Create an account'), findsWidgets);
   });
 
-  testWidgets('sign-in with a registered number opens the code sheet and then home', (tester) async {
-    final server = AuthServer();
+  testWidgets('sign-in with a registered email opens the email code sheet and then home', (tester) async {
+    final server = AuthServer(emailVerified: true);
     await pumpApp(tester, server);
+    await tester.enterText(find.widgetWithText(TextField, 'Email address'), 'sara@example.com');
     await tester.tap(find.text('Continue'));
     await tester.pumpAndSettle();
-    expect(find.text('Mobile code'), findsOneWidget);
+    expect(server.calls, contains('POST /v1/auth/login/email'));
+    expect(find.text('Email code'), findsOneWidget);
     await tester.enterText(otpField(), '123456');
     await tester.pumpAndSettle();
     await expectOnHome(tester, 'Popular on the menu');
@@ -98,7 +94,7 @@ void main() {
     await expectOnHome(tester, 'Popular on the menu');
   });
 
-  testWidgets('a user who stopped before verifying email is taken back to the email step', (tester) async {
+  testWidgets('an older account without a confirmed email is taken to the email step', (tester) async {
     final server = AuthServer(emailVerified: false);
     await pumpApp(tester, server, signedIn: true);
     expect(find.text('Add your email'), findsOneWidget);

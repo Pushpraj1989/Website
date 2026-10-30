@@ -1,5 +1,5 @@
 // Applies the schema from replica/schema.sql, then the sample seed. Usage:
-//   DATABASE_URL=postgres://... node db/migrate.mjs            apply (safe to re-run)
+//   DATABASE_URL=postgres://... node db/migrate.mjs            new database: schema and seed; existing: later files only
 //   DATABASE_URL=postgres://... node db/migrate.mjs --reset    drop the public schema first (local and test only)
 // On Supabase the auth schema already exists; the stub below is only created when auth.uid() is missing.
 import { readFileSync } from 'node:fs';
@@ -20,6 +20,7 @@ const reportingFile = fileURLToPath(new URL('./reporting.sql', import.meta.url))
 const brandingFile = fileURLToPath(new URL('./branding.sql', import.meta.url));
 const securityFile = fileURLToPath(new URL('./security.sql', import.meta.url));
 const homeFile = fileURLToPath(new URL('./home.sql', import.meta.url));
+const emailSigninFile = fileURLToPath(new URL('./email-signin.sql', import.meta.url));
 const AUTH_STUB = `
 create schema if not exists auth;
 create table if not exists auth.users (id uuid primary key default gen_random_uuid(), email text);
@@ -37,8 +38,11 @@ const client = new pg.Client({ connectionString: url });
 await client.connect();
 try {
   if (reset) await client.query('drop schema public cascade; create schema public;');
+  // A database that already has the schema only gets the later files, which are written to run again safely. The base
+  // schema and the sample seed run once, on a new database, so a deploy never touches a restaurant's own data.
+  const existing = (await client.query("select to_regclass('public.restaurant') is not null as present")).rows[0].present;
   await client.query(AUTH_STUB);
-  await client.query(readFileSync(schemaFile, 'utf8'));
+  if (!existing) await client.query(readFileSync(schemaFile, 'utf8'));
   await client.query(readFileSync(authFile, 'utf8'));
   await client.query(readFileSync(platformFile, 'utf8'));
   await client.query(readFileSync(vouchersFile, 'utf8'));
@@ -51,8 +55,9 @@ try {
   await client.query(readFileSync(brandingFile, 'utf8'));
   await client.query(readFileSync(securityFile, 'utf8'));
   await client.query(readFileSync(homeFile, 'utf8'));
-  await client.query(readFileSync(seedFile, 'utf8'));
-  console.log(`schema and seed applied${reset ? ' (after reset)' : ''}`);
+  await client.query(readFileSync(emailSigninFile, 'utf8'));
+  if (!existing) await client.query(readFileSync(seedFile, 'utf8'));
+  console.log(existing ? 'database brought up to date (existing data kept)' : `schema and seed applied${reset ? ' (after reset)' : ''}`);
 } finally {
   await client.end();
 }

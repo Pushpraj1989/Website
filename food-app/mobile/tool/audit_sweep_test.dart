@@ -63,11 +63,11 @@ Future<SweepWorld> _world() async {
   final api = ApiClient(baseUrl: 'https://demo.invalid', client: server.client, prefs: prefs);
   final auth = AuthApi(baseUrl: 'https://demo.invalid', client: server.client);
   // Sign up the way the app does, reading the code from the demo inbox.
-  final start = jsonDecode((await server.client.post(Uri.parse('https://demo.invalid/v1/auth/signup/phone'),
-          headers: {'content-type': 'application/json'}, body: jsonEncode({'name': 'Layla Haddad', 'phone': '+971507654321'})))
+  final start = jsonDecode((await server.client.post(Uri.parse('https://demo.invalid/v1/auth/signup/email'),
+          headers: {'content-type': 'application/json'}, body: jsonEncode({'name': 'Layla Haddad', 'phone': '+971507654321', 'email': 'layla@example.com'})))
       .body);
   final code = RegExp(r'\d{6}').firstMatch(server.inbox.value!.text)!.group(0)!;
-  final session = jsonDecode((await server.client.post(Uri.parse('https://demo.invalid/v1/auth/signup/phone/verify'),
+  final session = jsonDecode((await server.client.post(Uri.parse('https://demo.invalid/v1/auth/signup/email/verify'),
           headers: {'content-type': 'application/json'}, body: jsonEncode({'challengeId': start['challengeId'], 'code': code})))
       .body);
   api.accessToken = session['token'] as String;

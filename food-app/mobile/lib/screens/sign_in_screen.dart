@@ -15,7 +15,7 @@ import '../widgets/top_icons.dart';
 import 'main_shell.dart';
 import 'sign_up_screen.dart';
 
-// Sign-in by mobile number and a code. A new user is sent to create an account.
+// Sign-in by email and a code sent to it. A new user is sent to create an account.
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key, required this.auth, required this.sessions, required this.biometrics, required this.api, required this.language});
   final AuthApi auth;
@@ -29,13 +29,13 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final _phone = TextEditingController(text: '+971 ');
+  final _email = TextEditingController();
   String? _error;
   bool _busy = false;
 
   @override
   void dispose() {
-    _phone.dispose();
+    _email.dispose();
     super.dispose();
   }
 
@@ -45,19 +45,19 @@ class _SignInScreenState extends State<SignInScreen> {
       _error = null;
     });
     try {
-      final phone = _phone.text.trim();
-      final challenge = await widget.auth.signInPhone(phone: phone);
+      final email = _email.text.trim();
+      final challenge = await widget.auth.signInEmail(email: email);
       if (!mounted) return;
       setState(() => _busy = false);
       final ok = await showOtpSheet(
         context,
         s: s,
         sentTo: challenge.sentTo,
-        purposeLabel: s.phoneCodeTitle,
+        purposeLabel: s.emailCodeTitle,
         resendSeconds: challenge.resendInSeconds,
-        resend: () => widget.auth.signInPhone(phone: phone),
+        resend: () => widget.auth.signInEmail(email: email),
         verify: (code) async {
-          final session = await widget.auth.verifySignInPhone(challengeId: challenge.challengeId, code: code);
+          final session = await widget.auth.verifySignInEmail(challengeId: challenge.challengeId, code: code);
           await widget.sessions.writeToken(session.token);
           widget.api.accessToken = session.token;
         },
@@ -98,10 +98,11 @@ class _SignInScreenState extends State<SignInScreen> {
             Text(s.signInHint, style: TextStyle(color: Tokens.textMuted)),
             const SizedBox(height: Tokens.space5),
             TextField(
-              controller: _phone,
-              keyboardType: TextInputType.phone,
-              autofillHints: const [AutofillHints.telephoneNumber],
-              decoration: InputDecoration(labelText: s.mobileLabel, hintText: s.mobileHint),
+              controller: _email,
+              keyboardType: TextInputType.emailAddress,
+              autofillHints: const [AutofillHints.email],
+              autocorrect: false,
+              decoration: InputDecoration(labelText: s.emailLabel),
             ),
             if (_error != null) ...[
               const SizedBox(height: Tokens.space3),

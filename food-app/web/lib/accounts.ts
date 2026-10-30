@@ -2,6 +2,7 @@
 import { createHmac, randomBytes, randomInt, createHash, timingSafeEqual } from 'node:crypto';
 import { appendFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
+import nodemailer from 'nodemailer';
 import { pool, withTx } from './db.ts';
 import { RuleError } from './orders.ts';
 
@@ -10,7 +11,8 @@ export const MAX_ATTEMPTS = 5;
 export const RESEND_COOLDOWN_SECONDS = 30;
 const SESSION_DAYS = 30;
 
-export type Purpose = 'signup_phone' | 'login_phone' | 'verify_email';
+export type Purpose = 'signup_phone' | 'login_phone' | 'verify_email' | 'signup_email' | 'login_email';
+const EMAIL_PURPOSES: Purpose[] = ['verify_email', 'signup_email', 'login_email'];
 export type Account = { id: string; name: string; phone: string; email: string | null; emailVerified: boolean };
 
 /** Accepts +971 50 123 4567 style numbers, returns +971501234567. Country code is required. */
@@ -54,8 +56,9 @@ export function mask(target: string): string {
 }
 
 /**
- * Sends a code. Development writes it to data/outbox.jsonl (never shown to a client). Production needs a real
- * provider; until one is configured, sending is refused rather than skipped.
+ * Sends a code. Development writes it to data/outbox.jsonl (never shown to a client). In production, OTP_DELIVERY=smtp
+ * sends email codes through the restaurant's mail account (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM).
+ * Anything not configured is refused rather than skipped, so a customer is never told a code was sent when it was not.
  */
 async function deliver(channel: 'sms' | 'email', to: string, code: string, purpose: Purpose) {
   const mode = process.env.OTP_DELIVERY ?? (process.env.NODE_ENV === 'production' ? 'none' : 'outbox');
@@ -65,11 +68,41 @@ async function deliver(channel: 'sms' | 'email', to: string, code: string, purpo
     appendFileSync(file, JSON.stringify({ at: new Date().toISOString(), channel, to, purpose, code }) + '\n');
     return;
   }
+  if (mode === 'smtp' && channel === 'email') {
+    await sendEmailCode(to, code);
+    return;
+  }
   throw new RuleError('Verification messages are not set up yet. Try again later.', 'delivery_unavailable', 503);
 }
 
+let transport: nodemailer.Transporter | null = null;
+
+/** The code by email, in the restaurant's own name. The SMTP password never appears in an error or a log. */
+async function sendEmailCode(to: string, code: string) {
+  const host = process.env.SMTP_HOST;
+  const from = process.env.SMTP_FROM;
+  if (!host || !from || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+    throw new RuleError('Verification messages are not set up yet. Try again later.', 'delivery_unavailable', 503);
+  }
+  const port = Number(process.env.SMTP_PORT ?? 465);
+  transport ??= nodemailer.createTransport({ host, port, secure: port === 465, auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS } });
+  const { rows } = await pool.query('select name_en from restaurant limit 1');
+  const name = rows[0]?.name_en ?? '';
+  try {
+    await transport.sendMail({
+      from: name ? `"${name.replace(/"/g, '')}" <${from}>` : from,
+      to,
+      subject: `${code} is your ${name} code`.replace(/\s+/g, ' ').trim(),
+      text: `${code} is your ${name} code. It expires in ${CODE_TTL_MINUTES} minutes.\n\nIf you did not ask for it, you can ignore this email.`,
+    });
+  } catch (error) {
+    console.error('email code not sent:', (error as { code?: string }).code ?? 'unknown');
+    throw new RuleError('The code could not be sent. Try again in a minute.', 'delivery_failed', 502);
+  }
+}
+
 /** Creates a challenge and sends its code. Refuses a second code for the same target within the cooldown. */
-export async function startChallenge(input: { purpose: Purpose; target: string; accountId?: string | null; name?: string | null }) {
+export async function startChallenge(input: { purpose: Purpose; target: string; accountId?: string | null; name?: string | null; phone?: string | null }) {
   const recent = await pool.query(
     `select created_at from otp_challenges where target = $1 and purpose = $2 order by created_at desc limit 1`,
     [input.target, input.purpose],
@@ -82,13 +115,13 @@ export async function startChallenge(input: { purpose: Purpose; target: string; 
   }
   const code = randomInt(0, 1_000_000).toString().padStart(6, '0');
   const { rows } = await pool.query(
-    `insert into otp_challenges (purpose, target, account_id, name, code_hash, expires_at)
-     values ($1, $2, $3, $4, 'pending', now() + make_interval(mins => $5)) returning id`,
-    [input.purpose, input.target, input.accountId ?? null, input.name ?? null, CODE_TTL_MINUTES],
+    `insert into otp_challenges (purpose, target, account_id, name, phone, code_hash, expires_at)
+     values ($1, $2, $3, $4, $5, 'pending', now() + make_interval(mins => $6)) returning id`,
+    [input.purpose, input.target, input.accountId ?? null, input.name ?? null, input.phone ?? null, CODE_TTL_MINUTES],
   );
   const id: string = rows[0].id;
   await pool.query('update otp_challenges set code_hash = $2 where id = $1', [id, hashCode(id, code)]);
-  await deliver(input.purpose === 'verify_email' ? 'email' : 'sms', input.target, code, input.purpose);
+  await deliver(EMAIL_PURPOSES.includes(input.purpose) ? 'email' : 'sms', input.target, code, input.purpose);
   return { challengeId: id, sentTo: mask(input.target), resendInSeconds: RESEND_COOLDOWN_SECONDS };
 }
 
@@ -116,7 +149,7 @@ export async function checkChallenge(challengeId: string, purpose: Purpose, code
       };
     }
     await c.query('update otp_challenges set consumed_at = now() where id = $1', [challengeId]);
-    return { row: row as { id: string; target: string; account_id: string | null; name: string | null } };
+    return { row: row as { id: string; target: string; account_id: string | null; name: string | null; phone: string | null } };
   });
   if ('refuse' in outcome) throw outcome.refuse;
   return outcome.row;
@@ -164,6 +197,27 @@ export async function createAccount(name: string, phone: string): Promise<Accoun
     [name, phone],
   );
   return toAccount(rows[0]);
+}
+
+export async function accountByEmail(email: string): Promise<Account | null> {
+  const { rows } = await pool.query('select * from accounts where email = $1 and email_verified_at is not null', [email]);
+  return rows[0] ? toAccount(rows[0]) : null;
+}
+
+/** An account made by email sign-up: the email is verified by the code; the mobile number is as the customer typed it. */
+export async function createAccountWithEmail(name: string, phone: string, email: string): Promise<Account> {
+  try {
+    const { rows } = await pool.query(
+      `insert into accounts (name, phone, email, email_verified_at) values ($1, $2, $3, now()) returning *`,
+      [name, phone, email],
+    );
+    return toAccount(rows[0]);
+  } catch (error) {
+    if ((error as { code?: string }).code === '23505') {
+      throw new RuleError('This email or mobile number already has an account. Sign in instead.', 'already_registered', 409);
+    }
+    throw error;
+  }
 }
 
 export async function setVerifiedEmail(accountId: string, email: string): Promise<Account> {

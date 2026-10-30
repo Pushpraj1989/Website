@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "next": "15.5.28",
+    "nodemailer": "6.9.16",
     "pg": "^8.13.1",
     "react": "19.0.0",
     "react-dom": "19.0.0"
@@ -33,6 +34,7 @@
     "@axe-core/playwright": "^4.10.1",
     "@playwright/test": "^1.56.1",
     "@types/node": "22.10.5",
+    "@types/nodemailer": "6.4.17",
     "@types/pg": "^8.11.10",
     "@types/react": "19.0.4",
     "@types/react-dom": "19.0.2",

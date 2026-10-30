@@ -247,3 +247,30 @@ test('admin: offers are checked (percent cap, dates) and can be stopped or delet
   const gone = await call('DELETE', `/v1/admin/offers/${id}`, { staff });
   assert.equal(gone.json.result, 'deleted', 'an unused offer is deleted');
 });
+
+test('sign-up by email: name, mobile and email; the code goes to the email and makes a verified account', async () => {
+  const email = 'Layla.New@example.com';
+  const bad = await call('POST', '/v1/auth/signup/email', { body: { name: 'Layla', phone: '+971502223344', email: 'not-an-email' } });
+  assert.equal(bad.status, 400);
+  const start = await call('POST', '/v1/auth/signup/email', { body: { name: 'Layla New', phone: '+971 50 222 3344', email } });
+  assert.equal(start.status, 200);
+  assert.match(start.json.sentTo, /@example\.com$/);
+  const done = await call('POST', '/v1/auth/signup/email/verify', { body: { challengeId: start.json.challengeId, code: codeFor('layla.new@example.com', 'signup_email') } });
+  assert.equal(done.status, 201);
+  assert.equal(done.json.account.email, 'layla.new@example.com');
+  assert.equal(done.json.account.emailVerified, true);
+  assert.equal(done.json.account.phone, '+971502223344');
+  const again = await call('POST', '/v1/auth/signup/email', { body: { name: 'Layla Two', phone: '+971509998877', email } });
+  assert.equal(again.status, 409, 'the same email cannot sign up twice');
+});
+
+test('sign-in by email: an unknown email is told so, and the code from the email gives a session', async () => {
+  const unknown = await call('POST', '/v1/auth/login/email', { body: { email: 'nobody@example.com' } });
+  assert.equal(unknown.status, 404);
+  const start = await call('POST', '/v1/auth/login/email', { body: { email: 'LAYLA.NEW@example.com' } });
+  assert.equal(start.status, 200);
+  const done = await call('POST', '/v1/auth/login/email/verify', { body: { challengeId: start.json.challengeId, code: codeFor('layla.new@example.com', 'login_email') } });
+  assert.equal(done.status, 200);
+  const me = await call('GET', '/v1/auth/me', { token: done.json.token });
+  assert.equal(me.json.account.name, 'Layla New');
+});

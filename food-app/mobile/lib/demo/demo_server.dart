@@ -81,7 +81,7 @@ class _Order {
 }
 
 class _Challenge {
-  _Challenge({required this.id, required this.purpose, required this.target, required this.code, required this.expiresAt, this.name, this.accountId});
+  _Challenge({required this.id, required this.purpose, required this.target, required this.code, required this.expiresAt, this.name, this.accountId, this.phone});
   final String id;
   final String purpose;
   final String target;
@@ -89,6 +89,7 @@ class _Challenge {
   final DateTime expiresAt;
   final String? name;
   final String? accountId;
+  final String? phone;
   int attempts = 0;
   bool consumed = false;
 }
@@ -230,6 +231,14 @@ class DemoServer {
         return _ok(_loginStart(body));
       case ('POST', '/v1/auth/login/phone/verify'):
         return _ok(_loginVerify(body));
+      case ('POST', '/v1/auth/signup/email'):
+        return _ok(_signupEmailStart(body));
+      case ('POST', '/v1/auth/signup/email/verify'):
+        return _json(_signupEmailVerify(body), 201);
+      case ('POST', '/v1/auth/login/email'):
+        return _ok(_loginEmailStart(body));
+      case ('POST', '/v1/auth/login/email/verify'):
+        return _ok(_loginEmailVerify(body));
       case ('POST', '/v1/auth/email/start'):
         return _ok(_emailStart(_signedIn(account), body));
       case ('POST', '/v1/auth/email/verify'):
@@ -791,7 +800,7 @@ class DemoServer {
     return '${target.substring(0, 4)} ${'•' * max(3, target.length - 7)}${target.substring(target.length - 3)}';
   }
 
-  Map<String, dynamic> _challenge(String purpose, String target, {String? name, String? accountId}) {
+  Map<String, dynamic> _challenge(String purpose, String target, {String? name, String? accountId, String? phone}) {
     final now = _now();
     final recent = _challenges.values.where((c) => c.target == target && c.purpose == purpose).toList();
     if (recent.isNotEmpty) {
@@ -801,7 +810,7 @@ class DemoServer {
       }
     }
     final code = _random.nextInt(1000000).toString().padLeft(6, '0');
-    final c = _Challenge(id: _uuid('c'), purpose: purpose, target: target, code: code, expiresAt: now.add(_codeTtl), name: name, accountId: accountId);
+    final c = _Challenge(id: _uuid('c'), purpose: purpose, target: target, code: code, expiresAt: now.add(_codeTtl), name: name, accountId: accountId, phone: phone);
     _challenges[c.id] = c;
     final restaurant = (_restaurant['name'] as Map)['en'];
     inbox.value = DemoMessage(to: target, text: '$code is your $restaurant code. It expires in ${_codeTtl.inMinutes} minutes.', at: now);
@@ -857,6 +866,49 @@ class DemoServer {
     final c = _check(body, 'login_phone');
     final account = _accounts[c.target];
     if (account == null) throw const _Refused('No account uses this number.', 'no_account', 404);
+    return _session(account);
+  }
+
+  static String _email(Object? value) {
+    final email = (value is String ? value : '').trim().toLowerCase();
+    if (email.length > 254 || !RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]{2,}$').hasMatch(email)) throw const _Refused('Enter a valid email address.', 'bad_email', 400);
+    return email;
+  }
+
+  Map<String, dynamic>? _accountByEmail(String email) => _accounts.values.where((a) => a['email'] == email && a['emailVerified'] == true).firstOrNull;
+
+  // Sign-up by email, as on the server: name, mobile and email, then the code sent to the email.
+  Map<String, dynamic> _signupEmailStart(Map<String, dynamic> body) {
+    final name = (body['name'] is String ? body['name'] as String : '').trim().replaceAll(RegExp(r'\s+'), ' ');
+    if (name.length < 2 || name.length > 80) throw const _Refused('Enter your name (2 to 80 characters).', 'bad_name', 400);
+    final phone = _phone(body['phone']);
+    final email = _email(body['email']);
+    if (_accountByEmail(email) != null) throw const _Refused('This email already has an account. Sign in instead.', 'email_registered', 409);
+    if (_accounts.containsKey(phone)) throw const _Refused('This number already has an account. Sign in instead.', 'phone_registered', 409);
+    return _challenge('signup_email', email, name: name, phone: phone);
+  }
+
+  Map<String, dynamic> _signupEmailVerify(Map<String, dynamic> body) {
+    final c = _check(body, 'signup_email');
+    if (_accountByEmail(c.target) != null || _accounts.containsKey(c.phone)) {
+      throw const _Refused('This email or number already has an account. Sign in instead.', 'already_registered', 409);
+    }
+    final account = {'id': _uuid('u'), 'name': c.name, 'phone': c.phone, 'email': c.target, 'emailVerified': true};
+    _accounts[c.phone!] = account;
+    return _session(account);
+  }
+
+  Map<String, dynamic> _loginEmailStart(Map<String, dynamic> body) {
+    final email = _email(body['email']);
+    final account = _accountByEmail(email);
+    if (account == null) throw const _Refused('No account uses this email. Create one first.', 'no_account', 404);
+    return _challenge('login_email', email, accountId: account['id'] as String);
+  }
+
+  Map<String, dynamic> _loginEmailVerify(Map<String, dynamic> body) {
+    final c = _check(body, 'login_email');
+    final account = _accountByEmail(c.target);
+    if (account == null) throw const _Refused('No account uses this email.', 'no_account', 404);
     return _session(account);
   }
 

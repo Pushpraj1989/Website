@@ -72,6 +72,26 @@ void main() {
     expect(jsonDecode(me.body)['account']['phone'], '+971507654321');
   });
 
+  test('sign-up and sign-in by email: the code goes to the email, the account is confirmed, a second sign-up is refused', () async {
+    final server = DemoServer(snapshot: snapshot());
+    final client = server.client;
+    Future<http.Response> post(String path, Object body) =>
+        client.post(Uri.parse('https://demo.invalid$path'), headers: {'content-type': 'application/json'}, body: jsonEncode(body));
+    String lastCode() => RegExp(r'\d{6}').firstMatch(server.inbox.value!.text)!.group(0)!;
+    expect((await post('/v1/auth/login/email', {'email': 'layla@example.com'})).statusCode, 404);
+    final start = jsonDecode((await post('/v1/auth/signup/email', {'name': 'Layla Haddad', 'phone': '+971 50 765 4321', 'email': 'Layla@Example.com'})).body);
+    expect(server.inbox.value!.to, 'layla@example.com');
+    final ok = await post('/v1/auth/signup/email/verify', {'challengeId': start['challengeId'], 'code': lastCode()});
+    expect(ok.statusCode, 201);
+    final account = jsonDecode(ok.body)['account'];
+    expect([account['phone'], account['email'], account['emailVerified']], ['+971507654321', 'layla@example.com', true]);
+    final twice = await post('/v1/auth/signup/email', {'name': 'Layla Haddad', 'phone': '+971 50 000 0000', 'email': 'layla@example.com'});
+    expect(jsonDecode(twice.body)['error']['code'], 'email_registered');
+    final login = jsonDecode((await post('/v1/auth/login/email', {'email': 'layla@example.com'})).body);
+    final session = await post('/v1/auth/login/email/verify', {'challengeId': login['challengeId'], 'code': lastCode()});
+    expect(jsonDecode(session.body)['account']['id'], account['id']);
+  });
+
   test('WELCOME10 follows its stored rules: 10% at most the cap, once per customer; card is not offered', () async {
     final snap = snapshot();
     final api = ApiClient(baseUrl: 'https://demo.invalid', client: DemoServer(snapshot: snap).client);

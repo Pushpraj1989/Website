@@ -121,7 +121,7 @@ class Strings {
   String get placedAt => isArabic ? 'وقت الطلب' : 'Placed';
   // Sign-in and sign-up
   String get signInTitle => isArabic ? 'تسجيل الدخول' : 'Sign in';
-  String get signInHint => isArabic ? 'أدخل رقم جوالك. سنرسل رمزاً للتأكيد.' : 'Enter your mobile number. We will send you a code.';
+  String get signInHint => isArabic ? 'أدخل بريدك الإلكتروني. سنرسل إليه رمزاً للتأكيد.' : 'Enter your email. We will email you a code.';
   String get mobileLabel => isArabic ? 'رقم الجوال' : 'Mobile number';
   String get mobileHint => isArabic ? '+971 50 123 4567' : '+971 50 123 4567';
   String get nameLabel => isArabic ? 'الاسم' : 'Full name';
@@ -131,7 +131,7 @@ class Strings {
   String get createAccount => isArabic ? 'إنشاء حساب' : 'Create an account';
   String get haveAccount => isArabic ? 'لديك حساب؟ سجّل الدخول' : 'Already have an account? Sign in';
   String get signUpTitle => isArabic ? 'إنشاء حساب' : 'Create your account';
-  String get signUpHint => isArabic ? 'الاسم ورقم الجوال. سنرسل رمزاً إلى جوالك.' : 'Your name and mobile number. We will text you a code.';
+  String get signUpHint => isArabic ? 'الاسم ورقم الجوال والبريد الإلكتروني. سنرسل رمزاً إلى بريدك.' : 'Your name, mobile number and email. We will email you a code.';
   String get phoneCodeTitle => isArabic ? 'رمز الجوال' : 'Mobile code';
   String get emailTitle => isArabic ? 'أضف بريدك الإلكتروني' : 'Add your email';
   String get emailHint => isArabic ? 'سنرسل رمزاً إلى بريدك للتأكد منه.' : 'We will email you a code to confirm it is yours.';
