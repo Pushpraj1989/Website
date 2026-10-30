@@ -42,6 +42,15 @@ export async function query<T = Record<string, unknown>>(sql: string, params: un
 }
 
 /** Puts one item in the cart through the menu screen, the way a customer does. */
+/** On checkout: saves a delivery address in the first delivery area and leaves it chosen. */
+export async function addDeliveryAddress(page: Page, line1: string) {
+  await page.getByRole('button', { name: 'Add a new address' }).click();
+  await page.getByRole('textbox', { name: 'Street, building and area' }).fill(line1);
+  await page.getByRole('combobox', { name: 'Delivery area' }).selectOption({ index: 1 });
+  await page.getByRole('button', { name: 'Save address' }).click();
+  await expect(page.getByRole('radio', { name: new RegExp(line1.split(',')[0]) })).toBeChecked();
+}
+
 export async function addToCart(page: Page, name: string) {
   await page.goto('/menu');
   await page.getByRole('button', { name: `Add: ${name}` }).click();

@@ -221,6 +221,10 @@ export async function placeOrder(input: {
   const orderId = await withTx(async (c: PoolClient) => {
     // Lock the cart's items for the length of the transaction, then re-check availability and price here.
     const cart = await c.query('select items from carts where guest_session_id = $1 for update', [input.guestId]);
+    // A request with the same key may have placed the order (and emptied the cart) while this one waited for the
+    // lock. That is the same order, not an empty cart.
+    const placed = await data.findOrderByKey(input.guestId, input.idempotencyKey);
+    if (placed) return placed.id;
     const lines = (cart.rows[0]?.items ?? []) as CartLine[];
     if (lines.length === 0) throw new RuleError('Your cart is empty.', 'empty_cart');
     const ids = lines.map((l) => l.itemId);

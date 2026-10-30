@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { addToCart, failOnErrors, query } from './helpers.ts';
+import { addDeliveryAddress, addToCart, failOnErrors, query } from './helpers.ts';
 import { signedStripeEvent } from './stripe-signature.ts';
 
 // F03: card payment. The Stripe call itself needs real keys, so these tests cover what this environment can prove:
@@ -16,7 +16,7 @@ test.describe('F03 card payment', () => {
     await addToCart(page, 'Garden salad');
     await page.goto('/checkout');
     await page.getByRole('radio', { name: 'Pay by card' }).check();
-    await page.getByRole('textbox', { name: 'Delivery address' }).fill('Tower 1, Business Bay, Dubai');
+    await addDeliveryAddress(page, 'Tower 1, Business Bay, Dubai');
     await page.getByRole('button', { name: 'Place order' }).click();
     await page.waitForURL(/\/orders\//);
     await expect(page.getByRole('status').filter({ hasText: 'Waiting for payment' })).toBeVisible();
@@ -31,7 +31,7 @@ test.describe('F03 card payment', () => {
     await addToCart(page, 'Garden salad');
     await page.goto('/checkout');
     await page.getByRole('radio', { name: 'Pay by card' }).check();
-    await page.getByRole('textbox', { name: 'Delivery address' }).fill('Tower 3, Downtown, Dubai');
+    await addDeliveryAddress(page, 'Tower 3, Downtown, Dubai');
     await page.getByRole('button', { name: 'Place order' }).click();
     await page.waitForURL(/\/orders\//);
     const [order] = await query<{ id: string; total_minor: number }>(

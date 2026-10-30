@@ -35,8 +35,8 @@ import 'capture_support.dart';
 Map<String, dynamic> _snapshot() => jsonDecode(File('assets/demo/snapshot.json').readAsStringSync()) as Map<String, dynamic>;
 
 /// A signed-in customer with an address, a cart with a code on it, a saved voucher and one placed order.
-class _World {
-  _World(this.server, this.api, this.auth, this.orderId, this.snap);
+class SweepWorld {
+  SweepWorld(this.server, this.api, this.auth, this.orderId, this.snap);
   final DemoServer server;
   final ApiClient api;
   final AuthApi auth;
@@ -45,9 +45,9 @@ class _World {
 }
 
 /// Builds the signed-in world the sweep uses; shared with the overflow probe.
-Future<_World> buildWorld() => _world();
+Future<SweepWorld> buildWorld() => _world();
 
-Future<_World> _world() async {
+Future<SweepWorld> _world() async {
   final snap = _snapshot();
   final server = DemoServer(snapshot: snap);
   // ignore: invalid_use_of_visible_for_testing_member
@@ -76,13 +76,13 @@ Future<_World> _world() async {
   await api.saveCart([for (final i in items.take(3)) CartLine(itemId: i['id'] as String, qty: 1, note: 'No onions, please', name: null, unitMinor: null, soldOut: false)]);
   await api.applyCartCode((snap['offers'] as List).firstWhere((o) => o['code'] == 'WELCOME10', orElse: () => (snap['offers'] as List).first)['code'] as String);
   await api.saveVoucher((snap['vouchers'] as List).first['code'] as String);
-  return _World(server, api, auth, order.id, snap);
+  return SweepWorld(server, api, auth, order.id, snap);
 }
 
 void main() {
   setUpAll(loadCaptureFonts);
 
-  final screens = <String, Widget Function(_World w, ValueNotifier<String> lang)>{
+  final screens = <String, Widget Function(SweepWorld w, ValueNotifier<String> lang)>{
     'home': (w, lang) => MainShell(api: w.api, language: lang, auth: w.auth, sessions: signedInStore()),
     'menu': (w, lang) => MenuScreen(api: w.api, language: lang),
     'cart': (w, lang) => CartScreen(api: w.api, language: lang),
@@ -108,7 +108,7 @@ void main() {
         for (final entry in screens.entries) {
           final scenario = '${entry.key} @${width.toInt()} text ${scale}x $lang';
           testWidgets(scenario, (tester) async {
-            late _World w;
+            late SweepWorld w;
             await tester.runAsync(() async => w = await _world());
             tester.view.physicalSize = Size(width, 844) * 2;
             tester.view.devicePixelRatio = 2;

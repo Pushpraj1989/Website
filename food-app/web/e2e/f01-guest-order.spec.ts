@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { addToCart, CHICKEN, expectAccessible, failOnErrors, query, SALAD } from './helpers.ts';
+import { addDeliveryAddress, addToCart, CHICKEN, expectAccessible, failOnErrors, query, SALAD } from './helpers.ts';
 
 // F01: a guest builds a cart, checks out and places an order.
 test.describe('F01 guest places an order', () => {
@@ -11,7 +11,7 @@ test.describe('F01 guest places an order', () => {
     await page.goto('/cart');
     await expect(page.getByText('Grilled chicken plate', { exact: true })).toBeVisible();
     await page.getByRole('link', { name: 'Checkout' }).click();
-    await page.getByRole('textbox', { name: 'Delivery address' }).fill('Flat 4, Example Tower, Al Barsha, Dubai');
+    await addDeliveryAddress(page, 'Flat 4, Example Tower, Al Barsha, Dubai');
     await page.getByRole('button', { name: 'Place order' }).click();
     await page.waitForURL(/\/orders\//);
     await expect(page.getByRole('status').filter({ hasText: 'Placed' })).toBeVisible();
@@ -27,11 +27,15 @@ test.describe('F01 guest places an order', () => {
     const before = (await query<{ n: number }>('select count(*)::int as n from orders'))[0].n;
     await addToCart(page, 'Garden salad');
     await page.goto('/checkout');
-    await page.getByRole('textbox', { name: 'Delivery address' }).fill('Tower 2, Marina, Dubai');
+    await addDeliveryAddress(page, 'Tower 2, Marina, Dubai');
     const place = page.getByRole('button', { name: 'Place order' });
     // The button is enabled once the server has priced the cart; a double tap is only meaningful after that.
     await expect(place).toBeEnabled();
-    await Promise.all([place.dblclick(), place.dblclick()]);
+    // Two clicks in the same instant, before the page can disable the button: both requests reach the server.
+    await place.evaluate((button: HTMLButtonElement) => {
+      button.click();
+      button.click();
+    });
     await page.waitForURL(/\/orders\//);
     const after = (await query<{ n: number }>('select count(*)::int as n from orders'))[0].n;
     expect(after - before).toBe(1);
@@ -75,8 +79,9 @@ test.describe('F01 guest places an order', () => {
     await addToCart(page, 'Garden salad');
     await page.goto('/checkout');
     const before = (await query<{ n: number }>('select count(*)::int as n from orders'))[0].n;
-    await page.getByRole('button', { name: 'Place order' }).click();
-    await expect(page.locator('p[role="alert"]')).toHaveText('A delivery address is needed.');
+    // With no saved address the order cannot be sent: the button waits and the page says what is missing.
+    await expect(page.getByText('No saved address yet. Add one to get a delivery price.')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Place order' })).toBeDisabled();
     const after = (await query<{ n: number }>('select count(*)::int as n from orders'))[0].n;
     expect(after).toBe(before);
   });

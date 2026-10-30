@@ -64,7 +64,11 @@ try {
   await page.screenshot({ path: `${SHOTS}/S05.png`, fullPage: true });
   await page.getByRole('link', { name: 'Checkout' }).click();
   await page.waitForURL('**/checkout');
-  await page.getByRole('textbox', { name: 'Delivery address' }).fill('Flat 4, Example Tower, Al Barsha, Dubai');
+  await page.getByRole('button', { name: 'Add a new address' }).click();
+  await page.getByRole('textbox', { name: 'Street, building and area' }).fill('Flat 4, Example Tower, Al Barsha, Dubai');
+  await page.getByRole('combobox', { name: 'Delivery area' }).selectOption({ index: 1 });
+  await page.getByRole('button', { name: 'Save address' }).click();
+  await page.getByRole('radio', { name: /Flat 4/ }).waitFor();
   await page.getByRole('button', { name: 'Place order' }).waitFor();
   await page.screenshot({ path: `${SHOTS}/S06.png`, fullPage: true });
   await page.getByRole('button', { name: 'Place order' }).click();

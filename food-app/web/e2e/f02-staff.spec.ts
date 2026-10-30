@@ -1,10 +1,10 @@
 import { test, expect, type Page } from '@playwright/test';
-import { ADMIN_PASSWORD, addToCart, expectAccessible, failOnErrors } from './helpers.ts';
+import { addDeliveryAddress, ADMIN_PASSWORD, addToCart, expectAccessible, failOnErrors } from './helpers.ts';
 
 async function placeCodOrder(page: Page) {
   await addToCart(page, 'Garden salad');
   await page.goto('/checkout');
-  await page.getByRole('textbox', { name: 'Delivery address' }).fill('Villa 9, Jumeirah, Dubai');
+  await addDeliveryAddress(page, 'Villa 9, Jumeirah, Dubai');
   await page.getByRole('button', { name: 'Place order' }).click();
   await page.waitForURL(/\/orders\//);
   return page.url();

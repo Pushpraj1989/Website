@@ -18,6 +18,7 @@ const checkoutFile = fileURLToPath(new URL('./checkout.sql', import.meta.url));
 const partnersFile = fileURLToPath(new URL('./partners.sql', import.meta.url));
 const reportingFile = fileURLToPath(new URL('./reporting.sql', import.meta.url));
 const brandingFile = fileURLToPath(new URL('./branding.sql', import.meta.url));
+const securityFile = fileURLToPath(new URL('./security.sql', import.meta.url));
 const AUTH_STUB = `
 create schema if not exists auth;
 create table if not exists auth.users (id uuid primary key default gen_random_uuid(), email text);
@@ -47,6 +48,7 @@ try {
   await client.query(readFileSync(partnersFile, 'utf8'));
   await client.query(readFileSync(reportingFile, 'utf8'));
   await client.query(readFileSync(brandingFile, 'utf8'));
+  await client.query(readFileSync(securityFile, 'utf8'));
   await client.query(readFileSync(seedFile, 'utf8'));
   console.log(`schema and seed applied${reset ? ' (after reset)' : ''}`);
 } finally {

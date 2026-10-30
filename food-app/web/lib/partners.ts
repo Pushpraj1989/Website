@@ -17,7 +17,8 @@ const BATCH_FIELDS = ['campaignId', 'quantity', 'expiresAt', 'externalReference'
 
 function secretKey(): string {
   const s = process.env.PARTNER_KEY_SECRET;
-  if (!s && process.env.NODE_ENV === 'production') throw new Error('PARTNER_KEY_SECRET must be set in production');
+  // Fail closed, but say so: staff see why keys cannot be made instead of a server error.
+  if (!s && process.env.NODE_ENV === 'production') throw new RuleError('Partner keys are not set up on this server yet. Ask whoever runs it to set PARTNER_KEY_SECRET.', 'not_configured', 503);
   return s ?? 'dev-only-partner-secret';
 }
 

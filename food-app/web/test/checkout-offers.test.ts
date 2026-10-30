@@ -290,3 +290,11 @@ test('a cash or pay-on-arrival order above the restaurant cash limit is refused,
   assert.ok(18 * 20 * 100 + 12 * 20 * 100 > limit);
   await expectRule(place(g, { key: 'cash-over-limit' }), 'over_cash_limit');
 });
+
+test('two requests with the same key at the same moment both get the one order', async () => {
+  const g = await guest([{ itemId: SALAD, qty: 1 }]);
+  const [first, second] = await Promise.all([place(g, { channel: 'pickup', method: 'pay_on_arrival', key: 'same-moment-01' }), place(g, { channel: 'pickup', method: 'pay_on_arrival', key: 'same-moment-01' })]);
+  assert.equal(first.id, second.id);
+  const { rows } = await db.query('select count(*)::int as n from orders where guest_session_id = $1', [g]);
+  assert.equal(rows[0].n, 1);
+});
