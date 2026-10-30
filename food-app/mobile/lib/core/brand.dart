@@ -76,6 +76,9 @@ extension BrandColors on BuildContext {
   Color get onAccent => Theme.of(this).colorScheme.onPrimary;
   /// A pale tint of the brand colour, for selected chips and soft backgrounds.
   Color get accentSoft => Color.lerp(accent, Colors.white, 0.88)!;
+  /// The brand colour darkened for text on [accentSoft]. Any brand colour the server accepts (4.5:1 on white) gives
+  /// at least 6:1 here, where the plain brand colour can fall below 4.5:1.
+  Color get accentInk => Color.lerp(accent, Colors.black, 0.3)!;
 }
 
 /// Makes the restaurant's brand available to every screen: `BrandScope.of(context)`.

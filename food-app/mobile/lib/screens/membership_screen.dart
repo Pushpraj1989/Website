@@ -71,7 +71,7 @@ class _MembershipScreenState extends State<MembershipScreen> {
           child: Text(s.membershipBenefits, style: Theme.of(context).textTheme.titleLarge),
         ),
         SizedBox(
-          height: 184,
+          height: scaledHeight(context, 184, 100),
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: Tokens.space4),

@@ -251,7 +251,7 @@ class _CategoryBar extends SliverPersistentHeaderDelegate {
   final Color accent;
   final Color accentSoft;
 
-  static const _height = 60.0;
+  static const _height = 64.0;
 
   @override
   double get minExtent => _height;
@@ -279,6 +279,7 @@ class _CategoryBar extends SliverPersistentHeaderDelegate {
             selected: on,
             onSelected: (_) => onSelect(c.id),
             showCheckmark: false,
+            materialTapTargetSize: MaterialTapTargetSize.padded,
             selectedColor: accent,
             backgroundColor: Tokens.surface,
             side: BorderSide.none,

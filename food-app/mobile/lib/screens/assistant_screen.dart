@@ -35,6 +35,17 @@ class _AssistantScreenState extends State<AssistantScreen> {
   final _controller = TextEditingController();
   final _turns = <_Turn>[];
   bool _busy = false;
+  // A dish from the restaurant's own menu, for the suggested question.
+  Localised? _sampleDish;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.api.menu().then((menu) {
+      final dish = [for (final c in menu.categories) ...c.items].where((i) => !i.soldOut).firstOrNull;
+      if (mounted && dish != null) setState(() => _sampleDish = dish.name);
+    }).catchError((Object _) {});
+  }
 
   @override
   void dispose() {
@@ -72,7 +83,7 @@ class _AssistantScreenState extends State<AssistantScreen> {
         body: Column(children: [
           Expanded(
             child: _turns.isEmpty
-                ? _EmptyAsk(s: s, onPick: (text) => _controller.text = text)
+                ? _EmptyAsk(s: s, dish: _sampleDish?.of(s.lang), onPick: (text) => _controller.text = text)
                 : ListView(
                     padding: const EdgeInsets.all(Tokens.space4),
                     children: [for (final t in _turns) _bubble(context, s, t)],
@@ -185,13 +196,14 @@ class _Card extends StatelessWidget {
 
 /// What to do before the first question: a picture, what the assistant can answer, and three questions to tap.
 class _EmptyAsk extends StatelessWidget {
-  const _EmptyAsk({required this.s, required this.onPick});
+  const _EmptyAsk({required this.s, required this.onPick, this.dish});
   final Strings s;
+  final String? dish;
   final ValueChanged<String> onPick;
 
   @override
   Widget build(BuildContext context) {
-    final questions = [s.askSuggestionDish, s.askSuggestionOrder, s.askSuggestionPrice];
+    final questions = [s.askSuggestionDish(dish), s.askSuggestionOrder, s.askSuggestionPrice];
     return ListView(
       padding: const EdgeInsets.all(Tokens.space4),
       children: [

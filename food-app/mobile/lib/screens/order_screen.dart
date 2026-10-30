@@ -138,7 +138,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(color: context.accentSoft, borderRadius: BorderRadius.circular(Tokens.radiusSm)),
-                    child: Text('${l.qty}×', style: TextStyle(color: context.accent, fontWeight: FontWeight.w700)),
+                    child: Text('${l.qty}×', style: TextStyle(color: context.accentInk, fontWeight: FontWeight.w700)),
                   ),
                   const SizedBox(width: Tokens.space3),
                   Expanded(

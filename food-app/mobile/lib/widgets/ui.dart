@@ -60,7 +60,8 @@ class QtyStepper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = compact ? 36.0 : 44.0;
+    // Every button is at least 48 px to tap, even in the compact cart rows.
+    final size = compact ? 40.0 : 44.0;
     Widget button(IconData icon, String tip, VoidCallback? onTap) => SizedBox(
           width: size + 8,
           height: size + 8,
@@ -178,7 +179,7 @@ class StatusChip extends StatelessWidget {
     final (bg, fg) = switch (status) {
       'delivered' || 'collected' => (const Color(0xFFDCFCE7), const Color(0xFF166534)),
       'cancelled' || 'rejected' => (const Color(0xFFFEE2E2), Tokens.danger),
-      _ => (context.accentSoft, context.accent),
+      _ => (context.accentSoft, context.accentInk),
     };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),

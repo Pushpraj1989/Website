@@ -148,7 +148,10 @@ class Strings {
   String get skipEmail => isArabic ? 'لاحقاً' : 'Later';
   String get askTitle => isArabic ? 'اسأل المطعم' : 'Ask the restaurant';
   String get askSuggestionsTitle => isArabic ? 'جرّب أحد هذه الأسئلة' : 'Try one of these';
-  String get askSuggestionDish => isArabic ? 'ما مكونات طبق الدجاج المشوي؟' : 'What comes with the grilled chicken plate?';
+  /// A question about one of the restaurant's own dishes; without a dish, a general one.
+  String askSuggestionDish(String? dish) => dish == null || dish.isEmpty
+      ? (isArabic ? 'ما الأطباق التي تنصح بها؟' : 'What do you recommend?')
+      : (isArabic ? 'ماذا يأتي مع $dish؟' : 'What comes with the $dish?');
   String get askSuggestionOrder => isArabic ? 'أين وصل طلبي؟' : 'Where is my order?';
   String get askSuggestionPrice => isArabic ? 'ما الأطباق المتوفرة الآن؟' : 'What is available right now?';
   String get askHint => isArabic ? 'اسأل عن الأطباق والأسعار وطلبك.' : 'Ask about dishes, prices or your order.';

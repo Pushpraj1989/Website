@@ -40,6 +40,9 @@ Future<void> loadCaptureFonts() async {
     await lucide.load();
   }
   // Arabic letters are not in Roboto. A device uses its system Arabic font; the capture uses FreeSerif, which has them.
+  // The app's own Arabic face, bundled in assets/fonts.
+  final noto = FontLoader('NotoSansArabic')..addFont(Future.value(ByteData.sublistView(File('assets/fonts/NotoSansArabic-Variable.ttf').readAsBytesSync())));
+  await noto.load();
   final arabic = FontLoader('ArabicFallback')..addFont(Future.value(ByteData.sublistView(File('/usr/share/fonts/truetype/freefont/FreeSerif.ttf').readAsBytesSync())));
   await arabic.load();
 }

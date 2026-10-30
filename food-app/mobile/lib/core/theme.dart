@@ -74,3 +74,7 @@ ThemeData buildTheme({Color accent = Tokens.accent}) {
     bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Tokens.bg, surfaceTintColor: Colors.transparent, modalBackgroundColor: Tokens.bg),
   );
 }
+
+/// The height of a fixed-height row that holds text, grown by however much the reader's text size enlarges that text.
+/// [textPart] is the share of [base] taken by text at normal size.
+double scaledHeight(BuildContext context, double base, double textPart) => base + MediaQuery.textScalerOf(context).scale(textPart) - textPart;

@@ -137,7 +137,7 @@ class _PromoCarouselState extends State<PromoCarousel> {
     if (widget.banners.isEmpty) return const SizedBox.shrink();
     return Column(children: [
       SizedBox(
-        height: 200,
+        height: scaledHeight(context, 200, 120),
         child: NotificationListener<ScrollStartNotification>(
           onNotification: (_) {
             _restartTimer();
@@ -233,7 +233,7 @@ class CategoryTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 104,
+      height: scaledHeight(context, 104, 24),
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: tabs.length,
@@ -303,7 +303,7 @@ class FilterChips extends StatelessWidget {
             selected: selected.contains(option.id),
             onSelected: (_) => onToggle(option.id),
             selectedColor: context.accentSoft,
-            checkmarkColor: context.accent,
+            checkmarkColor: context.accentInk,
             side: BorderSide(color: selected.contains(option.id) ? context.accent : Tokens.border),
             materialTapTargetSize: MaterialTapTargetSize.padded,
           );
@@ -341,7 +341,7 @@ class DishCarousel extends StatelessWidget {
       ],
       const SizedBox(height: Tokens.space3),
       SizedBox(
-        height: 240,
+        height: scaledHeight(context, 240, 80),
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: items.length,
@@ -561,7 +561,7 @@ class _DockButton extends StatelessWidget {
                 Icon(item.icon, color: selected ? context.accent : Tokens.textMuted, size: 22),
                 if (selected) ...[
                   const SizedBox(width: Tokens.space2),
-                  Flexible(child: Text(item.label, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: context.accent, fontWeight: FontWeight.w700, fontSize: 13))),
+                  Flexible(child: Text(item.label, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: context.accentInk, fontWeight: FontWeight.w700, fontSize: 13))),
                 ],
               ]),
             ),
