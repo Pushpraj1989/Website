@@ -14,16 +14,25 @@ function contrastWithWhite(hex) {
   return 1.05 / (l + 0.05);
 }
 
+// The looks the restaurant can choose for its app and website. The brand colour goes on top of each.
+const THEMES = [
+  { id: 'classic', name: 'Classic', about: 'Light and clean, white cards on a soft grey.' },
+  { id: 'midnight', name: 'Midnight', about: 'Dark, for evening menus and bold food photos.' },
+  { id: 'glass', name: 'Glass', about: 'Frosted cards over a soft wash of your colour.' },
+  { id: 'glass_night', name: 'Glass night', about: 'Frosted dark cards over a glow of your colour.' },
+];
+
 // The restaurant's own identity and ordering rules. Everything the customer app shows about the restaurant comes from here.
 export default function Settings({ onBrandChanged }) {
   const [settings, setSettings] = useState(null);
   const [color, setColor] = useState('#B45309');
+  const [theme, setTheme] = useState('classic');
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
-    api.settings().then(({ settings: s }) => { setSettings(s); setColor(s.brandColor); }).catch((err) => setError(err.message));
+    api.settings().then(({ settings: s }) => { setSettings(s); setColor(s.brandColor); setTheme(s.theme ?? 'classic'); }).catch((err) => setError(err.message));
   }, []);
 
   if (!settings) return <section className="stack"><h1>Restaurant</h1>{error ? <p role="alert" className="error">{error}</p> : <p className="muted">Loading…</p>}</section>;
@@ -47,6 +56,7 @@ export default function Settings({ onBrandChanged }) {
         phone: f.get('phone'),
         address: { en: f.get('addressEn'), ar: f.get('addressAr') },
         brandColor: color,
+        theme,
         cashLimitMinor: cashLimit,
         serviceFeeMinor: serviceFee,
         payments: { cod: f.get('cod') === 'on', payOnArrival: f.get('payOnArrival') === 'on', card: f.get('card') === 'on' },
@@ -142,6 +152,23 @@ export default function Settings({ onBrandChanged }) {
               ? `White text on this colour has a contrast of ${contrast.toFixed(1)}:1, which is easy to read.`
               : `White text on this colour has a contrast of ${contrast.toFixed(1)}:1. Choose a darker shade (4.5:1 or more).`}
           </p>
+        </div>
+
+        <div className="card stack">
+          <h2>Theme</h2>
+          <fieldset className="theme-grid">
+            <legend className="sr-only">Theme for the customer app and website</legend>
+            {THEMES.map((t) => (
+              <label key={t.id} className={`theme-option${theme === t.id ? ' selected' : ''}`}>
+                <input type="radio" name="theme" value={t.id} checked={theme === t.id} onChange={() => setTheme(t.id)} />
+                <span className={`theme-preview theme-${t.id}`} style={{ '--sample': color }} aria-hidden="true">
+                  <span className="tp-card"><span className="tp-line" /><span className="tp-line short" /><span className="tp-btn" /></span>
+                </span>
+                <span className="theme-name">{t.name}</span>
+                <span className="hint">{t.about}</span>
+              </label>
+            ))}
+          </fieldset>
         </div>
 
         <div className="card stack">

@@ -88,13 +88,13 @@ class _MembershipScreenState extends State<MembershipScreen> {
           padding: const EdgeInsets.all(Tokens.space4),
           child: Container(
             padding: const EdgeInsets.all(Tokens.space4),
-            decoration: BoxDecoration(color: Tokens.surface, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
+            decoration: BoxDecoration(color: Tokens.fill, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
             child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
               Text(plan.name.of(s.lang), style: const TextStyle(fontWeight: FontWeight.w600)),
               const SizedBox(height: Tokens.space1),
               Text(
                 plan.active && plan.amountMinor > 0 ? '${formatMoney(plan.amountMinor, plan.currency)} ${s.perPeriod(plan.period)}' : s.priceToBeAnnounced,
-                style: const TextStyle(color: Tokens.textMuted),
+                style: TextStyle(color: Tokens.textMuted),
               ),
               const SizedBox(height: Tokens.space3),
               // A plan is for sale only once its price is confirmed and the server marks it active.
@@ -193,7 +193,7 @@ Future<void> showBenefitSheet(BuildContext context, MembershipBenefit benefit, S
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(benefit.title.of(s.lang), style: Theme.of(sheetContext).textTheme.headlineSmall),
             const SizedBox(height: Tokens.space1),
-            Text(benefit.summary.of(s.lang), style: const TextStyle(color: Tokens.textMuted)),
+            Text(benefit.summary.of(s.lang), style: TextStyle(color: Tokens.textMuted)),
             const SizedBox(height: Tokens.space4),
             for (final point in benefit.points)
               Padding(

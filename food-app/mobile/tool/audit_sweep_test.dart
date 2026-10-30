@@ -28,6 +28,7 @@ import 'package:sample_kitchen/screens/sign_up_screen.dart';
 import 'package:sample_kitchen/screens/vouchers_screen.dart';
 import 'package:sample_kitchen/widgets/dish_sheet.dart';
 import 'package:sample_kitchen/core/strings.dart';
+import 'package:sample_kitchen/core/theme.dart';
 
 import '../test/auth_fakes.dart';
 import 'capture_support.dart';
@@ -102,11 +103,18 @@ void main() {
     report.writeAsStringSync(problems.isEmpty ? 'No problems found.\n' : '${problems.join('\n')}\n');
   });
 
-  for (final width in [320.0, 390.0]) {
-    for (final scale in [1.0, 1.4]) {
-      for (final lang in ['en', 'ar']) {
+  // Every layout at the default look, then every screen in each other theme the restaurant can choose. The dark and
+  // glass themes use a deep navy brand colour, the hardest case for brand-coloured text on a dark page.
+  final runs = <(double, double, String, AppTheme, Color)>[
+    for (final width in [320.0, 390.0])
+      for (final scale in [1.0, 1.4])
+        for (final lang in ['en', 'ar']) (width, scale, lang, AppTheme.classic, Tokens.accent),
+    for (final theme in [AppTheme.midnight, AppTheme.glass, AppTheme.glassNight])
+      for (final lang in ['en', 'ar']) (390.0, 1.0, lang, theme, const Color(0xFF1E3A8A)),
+  ];
+  for (final (width, scale, lang, theme, accent) in runs) {
         for (final entry in screens.entries) {
-          final scenario = '${entry.key} @${width.toInt()} text ${scale}x $lang';
+          final scenario = '${entry.key} @${width.toInt()} text ${scale}x $lang${theme == AppTheme.classic ? '' : ' ${theme.id}'}';
           testWidgets(scenario, (tester) async {
             late SweepWorld w;
             await tester.runAsync(() async => w = await _world());
@@ -120,7 +128,7 @@ void main() {
             FlutterError.onError = (details) => found.add(details.exceptionAsString().split('\n').first);
             try {
               final language = ValueNotifier(lang);
-              await tester.pumpWidget(captureApp(entry.value(w, language), lang: lang));
+              await tester.pumpWidget(captureApp(entry.value(w, language), lang: lang, theme: theme, accent: accent));
               for (var i = 0; i < 8; i++) {
                 await tester.pump(const Duration(milliseconds: 300));
                 await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 10)));
@@ -158,8 +166,6 @@ void main() {
             }
           });
         }
-      }
-    }
   }
 
   // The bottom sheet uses its own dummy references to keep this file's imports honest.

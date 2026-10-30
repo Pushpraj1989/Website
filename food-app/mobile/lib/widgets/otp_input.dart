@@ -107,20 +107,20 @@ class _Box extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final border = active ? context.accent : (filled ? Tokens.borderInput : Tokens.border);
+    final border = active ? context.accentFg : (filled ? Tokens.borderInput : Tokens.border);
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       width: 44,
       height: 56,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: filled ? Tokens.surface : Tokens.bg,
+        color: filled ? Tokens.fill : Tokens.bg,
         borderRadius: BorderRadius.circular(Tokens.radiusMd),
         border: Border.all(color: border, width: active ? 2 : 1),
       ),
       child: Text(
         digit,
-        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, fontFeatures: [FontFeature.tabularFigures()], color: Tokens.text),
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, fontFeatures: [const FontFeature.tabularFigures()], color: Tokens.text),
       ),
     );
   }

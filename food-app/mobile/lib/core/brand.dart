@@ -9,12 +9,14 @@ import 'theme.dart';
 /// The restaurant's own identity, set by its staff in the admin: name, tagline, logo, colour and contact. The app has
 /// no restaurant built in; it shows whichever restaurant its server belongs to.
 class Brand {
-  const Brand({required this.name, required this.tagline, required this.logoUrl, required this.color, required this.phone, required this.address});
+  const Brand({required this.name, required this.tagline, required this.logoUrl, required this.color, required this.phone, required this.address, this.theme = AppTheme.classic});
   final Localised name;
   final Localised tagline;
   /// Absolute address of the logo, or null when the restaurant has none.
   final String? logoUrl;
   final Color color;
+  /// The look the restaurant chose in the admin.
+  final AppTheme theme;
   final String phone;
   final Localised address;
 
@@ -32,6 +34,7 @@ class Brand {
       tagline: json['tagline'] == null ? const Localised('', '') : Localised.fromJson(json['tagline'] as Map<String, dynamic>),
       logoUrl: logo == null || logo.isEmpty ? null : (logo.startsWith('http') ? logo : '$base$logo'),
       color: _parse(json['color']),
+      theme: AppTheme.fromId(json['theme'] as String?),
       phone: json['phone'] as String? ?? '',
       address: json['address'] == null ? const Localised('', '') : Localised.fromJson(json['address'] as Map<String, dynamic>),
     );
@@ -42,6 +45,7 @@ class Brand {
         'tagline': {'en': tagline.en, 'ar': tagline.ar},
         'logoUrl': logoUrl,
         'color': '#${(color.toARGB32() & 0xFFFFFF).toRadixString(16).padLeft(6, '0')}',
+        'theme': theme.id,
         'phone': phone,
         'address': {'en': address.en, 'ar': address.ar},
       };
@@ -69,16 +73,19 @@ class BrandController extends ValueNotifier<Brand?> {
   }
 }
 
-/// The brand colours for the screen being built, from the theme. Use these instead of fixed colours, so every
-/// restaurant's own colour shows through.
+/// The brand colours for the screen being built, worked out for the restaurant's theme (see [BrandPalette]). Use
+/// these instead of fixed colours, so every restaurant's own colour shows through and stays readable.
 extension BrandColors on BuildContext {
-  Color get accent => Theme.of(this).colorScheme.primary;
-  Color get onAccent => Theme.of(this).colorScheme.onPrimary;
-  /// A pale tint of the brand colour, for selected chips and soft backgrounds.
-  Color get accentSoft => Color.lerp(accent, Colors.white, 0.88)!;
-  /// The brand colour darkened for text on [accentSoft]. Any brand colour the server accepts (4.5:1 on white) gives
-  /// at least 6:1 here, where the plain brand colour can fall below 4.5:1.
-  Color get accentInk => Color.lerp(accent, Colors.black, 0.3)!;
+  BrandPalette get _brand => Theme.of(this).extension<BrandPalette>() ?? BrandPalette.of(Theme.of(this).colorScheme.primary, Tokens.palette);
+  /// Fills: buttons, badges, the status card. White text on it reaches 4.5:1.
+  Color get accent => _brand.accent;
+  Color get onAccent => _brand.onAccent;
+  /// Text, icons and outlines in the brand colour, on the page or on a card.
+  Color get accentFg => _brand.accentFg;
+  /// A tint of the brand colour, for selected chips and soft backgrounds.
+  Color get accentSoft => _brand.accentSoft;
+  /// Text and icons on [accentSoft].
+  Color get accentInk => _brand.accentInk;
 }
 
 /// Makes the restaurant's brand available to every screen: `BrandScope.of(context)`.

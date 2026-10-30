@@ -152,8 +152,8 @@ class _OtpSheetState extends State<_OtpSheet> {
                 child: Container(
                   width: 52,
                   height: 52,
-                  decoration: const BoxDecoration(color: Tokens.surface, shape: BoxShape.circle),
-                  child: Icon(Icons.lock_outline, color: context.accent, size: 26),
+                  decoration: BoxDecoration(color: Tokens.fill, shape: BoxShape.circle),
+                  child: Icon(Icons.lock_outline, color: context.accentFg, size: 26),
                 ),
               ),
               const SizedBox(height: Tokens.space3),
@@ -162,7 +162,7 @@ class _OtpSheetState extends State<_OtpSheet> {
               Text(
                 s.isArabic ? 'أدخل الرمز المكون من 6 أرقام المرسل إلى $_challengeNote' : 'Enter the 6-digit code sent to $_challengeNote',
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Tokens.textMuted),
+                style: TextStyle(color: Tokens.textMuted),
               ),
               const SizedBox(height: Tokens.space5),
               OtpInput(
@@ -180,7 +180,7 @@ class _OtpSheetState extends State<_OtpSheet> {
                 child: Text(
                   _error ?? '',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Tokens.danger),
+                  style: TextStyle(color: Tokens.danger),
                 ),
               ),
               const SizedBox(height: Tokens.space3),
@@ -196,7 +196,7 @@ class _OtpSheetState extends State<_OtpSheet> {
                 child: _secondsLeft > 0
                     ? Text(
                         s.isArabic ? 'إعادة الإرسال خلال ${_mmss(_secondsLeft)}' : 'Send a new code in ${_mmss(_secondsLeft)}',
-                        style: const TextStyle(color: Tokens.textMuted),
+                        style: TextStyle(color: Tokens.textMuted),
                       )
                     : AppButton(label: s.isArabic ? 'إرسال رمز جديد' : 'Send a new code', variant: ButtonVariant.ghost, onPressed: _resend),
               ),

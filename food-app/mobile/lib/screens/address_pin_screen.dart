@@ -149,7 +149,7 @@ class _AddressPinScreenState extends State<AddressPinScreen> {
                   onMapCreated: (controller) => _map = controller,
                   onCameraIdle: _onCameraIdle,
                 ),
-                const IgnorePointer(child: Icon(Icons.location_pin, size: 44, color: Tokens.danger)),
+                IgnorePointer(child: Icon(Icons.location_pin, size: 44, color: Tokens.danger)),
                 Positioned(
                   right: Tokens.space3,
                   top: Tokens.space3,
@@ -167,7 +167,7 @@ class _AddressPinScreenState extends State<AddressPinScreen> {
               child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
                 Text(_looking ? s.pinLoading : (label ?? s.pinHint), maxLines: 2, overflow: TextOverflow.ellipsis),
                 if (_message != null)
-                  Padding(padding: const EdgeInsets.only(top: Tokens.space2), child: Text(_message!, style: const TextStyle(color: Tokens.danger))),
+                  Padding(padding: const EdgeInsets.only(top: Tokens.space2), child: Text(_message!, style: TextStyle(color: Tokens.danger))),
                 const SizedBox(height: Tokens.space3),
                 FilledButton(
                   style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(48)),

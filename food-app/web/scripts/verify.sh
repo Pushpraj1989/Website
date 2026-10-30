@@ -30,7 +30,7 @@ step "type check (web)"            npx tsc --noEmit -p .
 for suite in test/vouchers.test.mjs test/campaigns.test.ts test/templates.test.ts test/print.test.ts test/wallet.test.ts test/checkout-offers.test.ts test/partners.test.ts test/reporting.test.ts test/gates.test.ts test/branding.test.ts test/staff-login.test.ts; do
   step "database: $suite"          node --test "$suite"
 done
-step "unit tests"                  node --test test/unit.test.ts
+step "unit tests"                  node --test test/unit.test.ts test/theme.test.ts
 step "end-to-end API (42 checks)"  node test/e2e-api.mjs
 step "admin build"                 bash -c "cd '$ROOT_ADMIN' && npx vite build"
 step "web build"                   npx next build

@@ -39,3 +39,6 @@
   --motion-ease: cubic-bezier(.2,.8,.2,1);
 }
 :root[dir='rtl'] { --font-body: var(--font-arabic); }
+
+/* The restaurant's theme sets the colours above on <html> (lib/theme.ts). These are what is not a colour. */
+:root { --color-accent-fg: var(--color-accent); --page-backdrop: var(--color-bg); }

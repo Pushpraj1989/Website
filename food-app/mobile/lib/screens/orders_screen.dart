@@ -54,7 +54,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
           body: _error != null
               ? Center(
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
-                    Text(s.genericError, style: const TextStyle(color: Tokens.danger)),
+                    Text(s.genericError, style: TextStyle(color: Tokens.danger)),
                     const SizedBox(height: Tokens.space3),
                     FilledButton(onPressed: () { setState(() => _error = null); _load(); }, child: Text(s.retry)),
                   ]),
@@ -70,7 +70,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                               const SizedBox(height: Tokens.space3),
                               Text(s.noOrdersYet, style: Theme.of(context).textTheme.titleMedium),
                               const SizedBox(height: Tokens.space1),
-                              Text(s.ordersEmptyBody, textAlign: TextAlign.center, style: const TextStyle(color: Tokens.textMuted)),
+                              Text(s.ordersEmptyBody, textAlign: TextAlign.center, style: TextStyle(color: Tokens.textMuted)),
                             ]),
                           ),
                         )
@@ -125,13 +125,13 @@ class _OrderTile extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(color: context.accentSoft, borderRadius: BorderRadius.circular(Tokens.radiusMd)),
-            child: Icon(order.channel == 'pickup' ? LucideIcons.store : LucideIcons.bike, color: context.accent, size: 20),
+            child: Icon(order.channel == 'pickup' ? LucideIcons.store : LucideIcons.bike, color: context.accentInk, size: 20),
           ),
           const SizedBox(width: Tokens.space3),
           Expanded(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(s.orderNumber(order.number), style: const TextStyle(fontWeight: FontWeight.w700)),
-              Text(date, style: const TextStyle(color: Tokens.textMuted, fontSize: 13)),
+              Text(date, style: TextStyle(color: Tokens.textMuted, fontSize: 13)),
             ]),
           ),
           StatusChip(status: order.status, s: s),

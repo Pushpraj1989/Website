@@ -12,3 +12,9 @@ exception when duplicate_object then null; end $$;
 alter table promotion_audit_log drop constraint if exists promotion_audit_log_target_type_check;
 alter table promotion_audit_log add constraint promotion_audit_log_target_type_check
   check (target_type in ('campaign','voucher','partner','batch','restaurant'));
+
+-- The look of the customer app and website, chosen by the restaurant in the admin. The brand colour goes on top.
+alter table restaurant add column if not exists theme text not null default 'classic';
+do $$ begin
+  alter table restaurant add constraint restaurant_theme_known check (theme in ('classic','midnight','glass','glass_night'));
+exception when duplicate_object then null; end $$;

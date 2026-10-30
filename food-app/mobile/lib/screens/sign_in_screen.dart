@@ -94,7 +94,7 @@ class _SignInScreenState extends State<SignInScreen> {
           children: [
             Text(s.signInTitle, style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: Tokens.space2),
-            Text(s.signInHint, style: const TextStyle(color: Tokens.textMuted)),
+            Text(s.signInHint, style: TextStyle(color: Tokens.textMuted)),
             const SizedBox(height: Tokens.space5),
             TextField(
               controller: _phone,
@@ -104,7 +104,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             if (_error != null) ...[
               const SizedBox(height: Tokens.space3),
-              Semantics(liveRegion: true, child: Text(_error!, style: const TextStyle(color: Tokens.danger))),
+              Semantics(liveRegion: true, child: Text(_error!, style: TextStyle(color: Tokens.danger))),
               if (_error!.contains('No account')) ...[
                 const SizedBox(height: Tokens.space2),
                 AppButton(
@@ -125,7 +125,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 alignment: WrapAlignment.center,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Text(s.newHere, style: const TextStyle(color: Tokens.textMuted)),
+                  Text(s.newHere, style: TextStyle(color: Tokens.textMuted)),
                   AppButton(
                     label: s.createAccount,
                     variant: ButtonVariant.ghost,

@@ -3,14 +3,18 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; }
 body {
-  background: var(--color-bg);
+  background: var(--page-backdrop);
+  background-attachment: fixed;
+  min-height: 100vh;
   color: var(--color-text);
   font-family: var(--font-body, var(--font-sans));
   font-size: var(--text-base);
   line-height: var(--leading-base);
 }
-a { color: var(--color-accent); }
-:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+a { color: var(--color-accent-fg); }
+/* Radios, checkboxes and range inputs in the brand colour, at the readable shade. */
+:root { accent-color: var(--color-accent-fg); }
+:focus-visible { outline: 2px solid var(--color-accent-fg); outline-offset: 2px; }
 .skip { position: absolute; inset-inline-start: -9999px; }
 .skip:focus { inset-inline-start: var(--space-4); top: var(--space-2); background: var(--color-bg); padding: var(--space-2); }
 
@@ -48,11 +52,20 @@ legend { font-weight: 600; margin-bottom: var(--space-2); }
 .totals .grand { font-size: var(--text-lg); font-weight: 600; }
 .timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-2); }
 .timeline li { padding-inline-start: var(--space-4); border-inline-start: 2px solid var(--color-border); }
-.timeline li[aria-current='step'] { border-color: var(--color-accent); font-weight: 600; }
+.timeline li[aria-current='step'] { border-color: var(--color-accent-fg); font-weight: 600; }
 .board { display: grid; gap: var(--space-3); grid-template-columns: 1fr; }
 @media (min-width: 768px) { .board { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1024px) { .board { grid-template-columns: 1fr 1fr 1fr; } }
 .skeleton { background: linear-gradient(90deg, var(--color-surface), var(--color-border), var(--color-surface)); min-height: 1em; border-radius: var(--radius-sm); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
-.linkish { background: none; border: 0; padding: 0; font: inherit; color: var(--color-accent); cursor: pointer; text-decoration: underline; }
+.linkish { background: none; border: 0; padding: 0; font: inherit; color: var(--color-accent-fg); cursor: pointer; text-decoration: underline; }
+
+/* Glass themes: cards, the header and fields are frosted panes over the backdrop. */
+[data-glass='true'] .card, [data-glass='true'] .header, [data-glass='true'] input, [data-glass='true'] textarea, [data-glass='true'] select {
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+}
+[data-glass='true'] .card { border-color: rgb(255 255 255 / .55); }
+[data-theme='glass_night'] .card { border-color: rgb(255 255 255 / .16); }
+[data-glass='true'] .header { background: var(--color-bg); }
+.btn.primary { box-shadow: 0 1px 0 rgb(255 255 255 / .12) inset; }

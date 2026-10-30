@@ -23,6 +23,8 @@ import 'package:sample_kitchen/screens/orders_screen.dart';
 import 'package:sample_kitchen/screens/sign_in_screen.dart';
 
 import '../test/auth_fakes.dart';
+import 'package:sample_kitchen/core/theme.dart';
+
 import 'capture_support.dart';
 import '../test/helpers.dart';
 
@@ -194,7 +196,7 @@ Finder navTab(String label) => find.descendant(
 void main() {
   setUpAll(loadCaptureFonts);
 
-  Future<void> shoot(WidgetTester tester, String name, Widget Function(ApiClient api, ValueNotifier<String> language, SharedPreferences prefs) build, {String lang = 'en', Future<void> Function(WidgetTester tester)? after}) async {
+  Future<void> shoot(WidgetTester tester, String name, Widget Function(ApiClient api, ValueNotifier<String> language, SharedPreferences prefs) build, {String lang = 'en', AppTheme theme = AppTheme.classic, Future<void> Function(WidgetTester tester)? after}) async {
     tester.view.physicalSize = const Size(390, 844) * 2;
     tester.view.devicePixelRatio = 2;
     addTearDown(tester.view.resetPhysicalSize);
@@ -205,7 +207,7 @@ void main() {
     final prefs = await SharedPreferences.getInstance();
     final api = ApiClient(baseUrl: 'http://api.test', client: _server(), prefs: prefs);
     final language = ValueNotifier(lang);
-    await tester.pumpWidget(captureApp(build(api, language, prefs), lang: lang));
+    await tester.pumpWidget(captureApp(build(api, language, prefs), lang: lang, theme: theme));
     await tester.pumpAndSettle(const Duration(milliseconds: 300));
     if (after != null) await after(tester);
     // Pictures decode outside the fake clock, so give them real time to load before the frame is captured.
@@ -269,4 +271,17 @@ void main() {
   testWidgets('home-arabic', (tester) async {
     await shoot(tester, 'customer-home-ar', (api, lang, prefs) => HomeScreen(api: api, language: lang, sessions: signedInStore(), auth: AuthApi(baseUrl: 'http://api.test', client: _server())), lang: 'ar');
   });
+
+  // The same screens in each theme a restaurant can choose in the admin.
+  for (final theme in [AppTheme.midnight, AppTheme.glass, AppTheme.glassNight]) {
+    testWidgets('theme ${theme.id}: home', (tester) async {
+      await shoot(tester, 'theme-${theme.id}-home', theme: theme, (api, lang, prefs) => HomeScreen(api: api, language: lang, sessions: signedInStore(), auth: AuthApi(baseUrl: 'http://api.test', client: _server())));
+    });
+    testWidgets('theme ${theme.id}: menu', (tester) async {
+      await shoot(tester, 'theme-${theme.id}-menu', theme: theme, (api, lang, prefs) => MenuScreen(api: api, language: lang));
+    });
+    testWidgets('theme ${theme.id}: cart', (tester) async {
+      await shoot(tester, 'theme-${theme.id}-cart', theme: theme, (api, lang, prefs) => CartScreen(api: api, language: lang));
+    });
+  }
 }

@@ -7,6 +7,7 @@ import '../core/money.dart';
 import '../core/models.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import 'ui.dart';
 import 'dish_thumb.dart';
 import '../core/brand.dart';
 import 'app_button.dart';
@@ -65,7 +66,7 @@ class DiscoveryHeader extends StatelessWidget {
           hintText: searchHint,
           prefixIcon: const Icon(LucideIcons.search),
           filled: true,
-          fillColor: Tokens.surface,
+          fillColor: Tokens.fill,
           isDense: true,
           contentPadding: const EdgeInsets.symmetric(vertical: Tokens.space3),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(Tokens.radiusLg), borderSide: BorderSide.none),
@@ -173,7 +174,7 @@ class _PromoCarouselState extends State<PromoCarousel> {
               margin: const EdgeInsets.symmetric(horizontal: 3),
               width: i == _page ? 20 : 8,
               height: 8,
-              decoration: BoxDecoration(color: i == _page ? context.accent : Tokens.border, borderRadius: BorderRadius.circular(4)),
+              decoration: BoxDecoration(color: i == _page ? context.accentFg : Tokens.border, borderRadius: BorderRadius.circular(4)),
             ),
         ]),
       ),
@@ -254,15 +255,15 @@ class CategoryTabs extends StatelessWidget {
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: selected ? context.accent : Colors.transparent, width: 2)),
+                    decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: selected ? context.accentFg : Colors.transparent, width: 2)),
                     child: ClipOval(child: SizedBox(width: 60, height: 60, child: tab.image.isEmpty ? ColoredBox(color: context.accentSoft) : Image.asset(tab.image, fit: BoxFit.cover, cacheWidth: 180, semanticLabel: ''))),
                   ),
                   const SizedBox(height: Tokens.space2),
                   ExcludeSemantics(
-                    child: Text(tab.label, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: selected ? context.accent : Tokens.text)),
+                    child: Text(tab.label, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: selected ? context.accentFg : Tokens.text)),
                   ),
                   const SizedBox(height: 2),
-                  ExcludeSemantics(child: Container(height: 2, width: 28, color: selected ? context.accent : Colors.transparent)),
+                  ExcludeSemantics(child: Container(height: 2, width: 28, color: selected ? context.accentFg : Colors.transparent)),
                 ]),
               ),
             ),
@@ -304,7 +305,7 @@ class FilterChips extends StatelessWidget {
             onSelected: (_) => onToggle(option.id),
             selectedColor: context.accentSoft,
             checkmarkColor: context.accentInk,
-            side: BorderSide(color: selected.contains(option.id) ? context.accent : Tokens.border),
+            side: BorderSide(color: selected.contains(option.id) ? context.accentFg : Tokens.border),
             materialTapTargetSize: MaterialTapTargetSize.padded,
           );
         },
@@ -337,7 +338,7 @@ class DishCarousel extends StatelessWidget {
       Text(title, style: Theme.of(context).textTheme.titleMedium),
       if (caption != null) ...[
         const SizedBox(height: 2),
-        Text(caption!, style: const TextStyle(color: Tokens.textMuted, fontSize: 13)),
+        Text(caption!, style: TextStyle(color: Tokens.textMuted, fontSize: 13)),
       ],
       const SizedBox(height: Tokens.space3),
       SizedBox(
@@ -380,7 +381,7 @@ class _DishTileState extends State<DishTile> {
         child: SizedBox(
           width: 170,
           child: Container(
-            decoration: BoxDecoration(color: Tokens.surface, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
+            decoration: BoxDecoration(color: Tokens.fill, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
             padding: const EdgeInsets.all(Tokens.space2),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               ClipRRect(
@@ -390,7 +391,7 @@ class _DishTileState extends State<DishTile> {
               const SizedBox(height: Tokens.space2),
               Text(name, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w600)),
               const SizedBox(height: 2),
-              Text(formatMoney(widget.pick.item.priceMinor, widget.currency), style: const TextStyle(color: Tokens.textMuted)),
+              Text(formatMoney(widget.pick.item.priceMinor, widget.currency), style: TextStyle(color: Tokens.textMuted)),
               const Spacer(),
               Align(
                 alignment: AlignmentDirectional.centerEnd,
@@ -428,7 +429,7 @@ class FeedCategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Tokens.surface,
+      color: Tokens.fill,
       borderRadius: BorderRadius.circular(Tokens.radiusLg),
       child: InkWell(
         borderRadius: BorderRadius.circular(Tokens.radiusLg),
@@ -445,12 +446,12 @@ class FeedCategoryCard extends StatelessWidget {
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(title, style: Theme.of(context).textTheme.titleMedium),
                 const SizedBox(height: 2),
-                Text(s.dishesInCategory(count), style: const TextStyle(color: Tokens.textMuted)),
+                Text(s.dishesInCategory(count), style: TextStyle(color: Tokens.textMuted)),
                 const SizedBox(height: Tokens.space2),
-                Text(s.seeCategory, style: TextStyle(color: context.accent, fontWeight: FontWeight.w600)),
+                Text(s.seeCategory, style: TextStyle(color: context.accentFg, fontWeight: FontWeight.w600)),
               ]),
             ),
-            const Icon(LucideIcons.chevronRight, color: Tokens.textMuted),
+            Icon(LucideIcons.chevronRight, color: Tokens.textMuted),
           ]),
         ),
       ),
@@ -516,21 +517,24 @@ class FloatingDock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: Tokens.dockHeight,
-      padding: const EdgeInsets.symmetric(horizontal: Tokens.space1),
-      decoration: BoxDecoration(
-        color: Tokens.bg,
-        borderRadius: BorderRadius.circular(Tokens.dockHeight),
-        border: Border.all(color: Tokens.border),
+    return Frosted(
+      radius: Tokens.dockHeight,
+      child: Container(
+        height: Tokens.dockHeight,
+        padding: const EdgeInsets.symmetric(horizontal: Tokens.space1),
+        decoration: BoxDecoration(
+          color: Tokens.bg,
+          borderRadius: BorderRadius.circular(Tokens.dockHeight),
+          border: glassEdge() ?? Border.all(color: Tokens.border),
+        ),
+        child: Row(children: [
+          for (var i = 0; i < items.length; i++)
+            Expanded(
+              flex: i == index ? 2 : 1,
+              child: _DockButton(item: items[i], selected: i == index, onTap: () => onSelect(i)),
+            ),
+        ]),
       ),
-      child: Row(children: [
-        for (var i = 0; i < items.length; i++)
-          Expanded(
-            flex: i == index ? 2 : 1,
-            child: _DockButton(item: items[i], selected: i == index, onTap: () => onSelect(i)),
-          ),
-      ]),
     );
   }
 }
@@ -558,7 +562,7 @@ class _DockButton extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: selected ? Tokens.space3 : Tokens.space2, vertical: Tokens.space2),
               decoration: BoxDecoration(color: selected ? context.accentSoft : Colors.transparent, borderRadius: BorderRadius.circular(Tokens.dockHeight)),
               child: Row(mainAxisSize: MainAxisSize.min, children: [
-                Icon(item.icon, color: selected ? context.accent : Tokens.textMuted, size: 22),
+                Icon(item.icon, color: selected ? context.accentFg : Tokens.textMuted, size: 22),
                 if (selected) ...[
                   const SizedBox(width: Tokens.space2),
                   Flexible(child: Text(item.label, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: context.accentInk, fontWeight: FontWeight.w700, fontSize: 13))),

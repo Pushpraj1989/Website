@@ -102,7 +102,7 @@ class _DishSheetState extends State<_DishSheet> {
                   Text(formatMoney(item.priceMinor, widget.currency), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
                   if (description.isNotEmpty) ...[
                     const SizedBox(height: Tokens.space3),
-                    Text(description, style: const TextStyle(color: Tokens.textMuted, fontSize: 15, height: 1.4)),
+                    Text(description, style: TextStyle(color: Tokens.textMuted, fontSize: 15, height: 1.4)),
                   ],
                   const SizedBox(height: Tokens.space4),
                   const Divider(height: 1),
@@ -123,7 +123,7 @@ class _DishSheetState extends State<_DishSheet> {
                       decoration: InputDecoration(labelText: s.note, hintText: s.noteHint),
                     ),
                   if (_error != null)
-                    Semantics(liveRegion: true, child: Padding(padding: const EdgeInsets.only(top: Tokens.space2), child: Text(_error!, style: const TextStyle(color: Tokens.danger)))),
+                    Semantics(liveRegion: true, child: Padding(padding: const EdgeInsets.only(top: Tokens.space2), child: Text(_error!, style: TextStyle(color: Tokens.danger)))),
                 ]),
               ),
             ]),

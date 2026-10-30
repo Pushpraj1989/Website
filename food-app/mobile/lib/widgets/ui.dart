@@ -1,3 +1,5 @@
+import 'dart:ui' show ImageFilter;
+
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -5,7 +7,26 @@ import '../core/brand.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
 
-/// A white card with an optional icon and title, the building block of the cart, checkout and order screens.
+/// In the glass themes, blurs whatever is behind [child] so it reads as frosted glass; elsewhere it is [child].
+class Frosted extends StatelessWidget {
+  const Frosted({super.key, required this.child, this.radius = 0});
+  final Widget child;
+  final double radius;
+
+  @override
+  Widget build(BuildContext context) {
+    if (!Tokens.palette.isGlass) return child;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
+      child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18), child: child),
+    );
+  }
+}
+
+/// The light edge a glass card has; none in the solid themes.
+Border? glassEdge() => Tokens.palette.isGlass ? Border.all(color: Colors.white.withValues(alpha: Tokens.palette.dark ? 0.16 : 0.7)) : null;
+
+/// A card with an optional icon and title, the building block of the cart, checkout and order screens.
 class SectionCard extends StatelessWidget {
   const SectionCard({super.key, this.title, this.icon, this.trailing, required this.child, this.padding = const EdgeInsets.all(Tokens.space4)});
   final String? title;
@@ -16,13 +37,16 @@ class SectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Frosted(
+      radius: Tokens.radiusLg,
+      child: Container(
       width: double.infinity,
       padding: padding,
       decoration: BoxDecoration(
         color: Tokens.bg,
         borderRadius: BorderRadius.circular(Tokens.radiusLg),
-        boxShadow: const [BoxShadow(color: Color(0x14000000), blurRadius: 16, offset: Offset(0, 4))],
+        border: glassEdge(),
+        boxShadow: Tokens.palette.dark ? null : const [BoxShadow(color: Color(0x14000000), blurRadius: 16, offset: Offset(0, 4))],
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         if (title != null) ...[
@@ -32,7 +56,7 @@ class SectionCard extends StatelessWidget {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(color: context.accentSoft, borderRadius: BorderRadius.circular(Tokens.radiusMd)),
-                child: Icon(icon, size: 18, color: context.accent),
+                child: Icon(icon, size: 18, color: context.accentInk),
               ),
               const SizedBox(width: Tokens.space3),
             ],
@@ -43,6 +67,7 @@ class SectionCard extends StatelessWidget {
         ],
         child,
       ]),
+    ),
     );
   }
 }
@@ -69,7 +94,7 @@ class QtyStepper extends StatelessWidget {
             tooltip: tip,
             onPressed: onTap,
             iconSize: compact ? 16 : 20,
-            color: context.accent,
+            color: context.accentFg,
             disabledColor: Tokens.textMuted.withValues(alpha: 0.4),
             icon: Icon(icon),
           ),
@@ -99,13 +124,16 @@ class BottomActionBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(Tokens.space4, Tokens.space3, Tokens.space4, Tokens.space3 + MediaQuery.paddingOf(context).bottom),
-      decoration: const BoxDecoration(
-        color: Tokens.bg,
-        boxShadow: [BoxShadow(color: Color(0x1F000000), blurRadius: 20, offset: Offset(0, -4))],
+    return Frosted(
+      child: Container(
+        padding: EdgeInsets.fromLTRB(Tokens.space4, Tokens.space3, Tokens.space4, Tokens.space3 + MediaQuery.paddingOf(context).bottom),
+        decoration: BoxDecoration(
+          color: Tokens.bg,
+          border: Tokens.palette.isGlass || Tokens.palette.dark ? Border(top: BorderSide(color: Tokens.border)) : null,
+          boxShadow: Tokens.palette.dark ? null : const [BoxShadow(color: Color(0x1F000000), blurRadius: 20, offset: Offset(0, -4))],
+        ),
+        child: child,
       ),
-      child: child,
     );
   }
 }
@@ -177,8 +205,8 @@ class StatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (bg, fg) = switch (status) {
-      'delivered' || 'collected' => (const Color(0xFFDCFCE7), const Color(0xFF166534)),
-      'cancelled' || 'rejected' => (const Color(0xFFFEE2E2), Tokens.danger),
+      'delivered' || 'collected' => (Tokens.palette.successSoft, Tokens.palette.successInk),
+      'cancelled' || 'rejected' => (Tokens.palette.dangerSoft, Tokens.danger),
       _ => (context.accentSoft, context.accentInk),
     };
     return Container(
@@ -211,7 +239,7 @@ class ChoiceTile extends StatelessWidget {
         color: selected ? context.accentSoft : Tokens.bg,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Tokens.radiusLg),
-          side: BorderSide(color: selected ? context.accent : Tokens.border, width: selected ? 2 : 1),
+          side: BorderSide(color: selected ? context.accentFg : Tokens.border, width: selected ? 2 : 1),
         ),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -219,16 +247,16 @@ class ChoiceTile extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: Tokens.space3, vertical: Tokens.space3),
             child: Row(children: [
-              Icon(icon, color: enabled ? (selected ? context.accent : Tokens.text) : Tokens.textMuted),
+              Icon(icon, color: enabled ? (selected ? context.accentFg : Tokens.text) : Tokens.textMuted),
               const SizedBox(width: Tokens.space3),
               Expanded(
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(title, style: TextStyle(fontWeight: FontWeight.w700, color: enabled ? Tokens.text : Tokens.textMuted)),
                   if (subtitle != null && subtitle!.isNotEmpty)
-                    Text(subtitle!, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Tokens.textMuted, fontSize: 13)),
+                    Text(subtitle!, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Tokens.textMuted, fontSize: 13)),
                 ]),
               ),
-              if (selected) Icon(LucideIcons.circleCheck, color: context.accent, size: 22),
+              if (selected) Icon(LucideIcons.circleCheck, color: context.accentFg, size: 22),
             ]),
           ),
         ),

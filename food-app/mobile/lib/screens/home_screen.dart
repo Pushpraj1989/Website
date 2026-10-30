@@ -341,11 +341,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: Tokens.space3),
                   ],
                   Row(children: [
-                    Expanded(child: Text(s.home, style: const TextStyle(color: Tokens.textMuted))),
+                    Expanded(child: Text(s.home, style: TextStyle(color: Tokens.textMuted))),
                     AppButton(label: s.customise, icon: LucideIcons.layoutDashboard, variant: ButtonVariant.ghost, size: ButtonSize.sm, onPressed: () => _openCustomise(s)),
                   ]),
                   if (_message != null)
-                    Semantics(liveRegion: true, child: Text(_message!, style: const TextStyle(color: Tokens.textMuted))),
+                    Semantics(liveRegion: true, child: Text(_message!, style: TextStyle(color: Tokens.textMuted))),
                 ],
               ),
               Positioned(
@@ -377,7 +377,7 @@ class _HomeScreenState extends State<HomeScreen> {
           matches.add(DishPick(item: item, illustration: c.illustration));
         }
       }
-      if (matches.isEmpty) return Text(s.noSearchResults, style: const TextStyle(color: Tokens.textMuted));
+      if (matches.isEmpty) return Text(s.noSearchResults, style: TextStyle(color: Tokens.textMuted));
       return Column(children: [
         for (final pick in matches)
           Padding(
@@ -395,7 +395,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ExcludeSemantics(
                   child: IconButton.filledTonal(
                     onPressed: pick.item.soldOut ? null : () => _add(pick.item, s),
-                    style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: context.accentSoft, foregroundColor: context.accent),
+                    style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: context.accentSoft, foregroundColor: context.accentInk),
                     icon: const Icon(LucideIcons.plus),
                     tooltip: s.addDish(pick.item.name.of(s.lang)),
                   ),
@@ -459,7 +459,7 @@ class _WidgetCard extends StatelessWidget {
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(Tokens.space4),
-        decoration: BoxDecoration(color: Tokens.surface, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
+        decoration: BoxDecoration(color: Tokens.fill, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -504,15 +504,15 @@ class _QuickTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final enabled = onPressed != null;
     return Material(
-      color: enabled ? Tokens.bg : Tokens.surface,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Tokens.radiusMd), side: const BorderSide(color: Tokens.border)),
+      color: enabled ? Tokens.bg : Tokens.fill,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Tokens.radiusMd), side: BorderSide(color: Tokens.border)),
       child: InkWell(
         borderRadius: BorderRadius.circular(Tokens.radiusMd),
         onTap: onPressed,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: Tokens.space3, horizontal: Tokens.space2),
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            Icon(icon, color: enabled ? context.accent : Tokens.textMuted),
+            Icon(icon, color: enabled ? context.accentFg : Tokens.textMuted),
             const SizedBox(height: Tokens.space1),
             Text(label, textAlign: TextAlign.center, maxLines: 2, style: TextStyle(fontWeight: FontWeight.w600, color: enabled ? Tokens.text : Tokens.textMuted)),
           ]),
@@ -533,12 +533,12 @@ class _CartSummary extends StatelessWidget {
     return FutureBuilder<Map<String, dynamic>>(
       future: api.cart(),
       builder: (context, snapshot) {
-        if (snapshot.hasError) return Text(s.genericError, style: const TextStyle(color: Tokens.danger));
+        if (snapshot.hasError) return Text(s.genericError, style: TextStyle(color: Tokens.danger));
         if (!snapshot.hasData) return const SizedBox(height: 24, child: LinearProgressIndicator());
         final lines = (snapshot.data!['lines'] as List<dynamic>?) ?? const [];
         final quote = snapshot.data!['quote'] == null ? null : Quote.fromJson(snapshot.data!['quote'] as Map<String, dynamic>);
         final count = lines.fold<int>(0, (sum, l) => sum + ((l as Map<String, dynamic>)['qty'] as int));
-        if (count == 0) return Text(s.cartEmptyShort, style: const TextStyle(color: Tokens.textMuted));
+        if (count == 0) return Text(s.cartEmptyShort, style: TextStyle(color: Tokens.textMuted));
         return Row(children: [
           Expanded(
             child: Text('${s.itemCount(count)}${quote == null ? '' : ' · ${formatMoney(quote.totalMinor, quote.currency)}'}'),
@@ -559,11 +559,11 @@ class _ActiveOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (orderId == null) return Text(s.noActiveOrder, style: const TextStyle(color: Tokens.textMuted));
+    if (orderId == null) return Text(s.noActiveOrder, style: TextStyle(color: Tokens.textMuted));
     return FutureBuilder<PlacedOrder>(
       future: api.order(orderId!),
       builder: (context, snapshot) {
-        if (snapshot.hasError) return Text(s.genericError, style: const TextStyle(color: Tokens.danger));
+        if (snapshot.hasError) return Text(s.genericError, style: TextStyle(color: Tokens.danger));
         if (!snapshot.hasData) return const SizedBox(height: 24, child: LinearProgressIndicator());
         final order = snapshot.data!;
         return Row(children: [
@@ -583,7 +583,7 @@ class _Popular extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (menu == null) return Text(s.genericError, style: const TextStyle(color: Tokens.danger));
+    if (menu == null) return Text(s.genericError, style: TextStyle(color: Tokens.danger));
     final items = [for (final c in menu!.categories) ...c.items].where((i) => !i.soldOut).take(3).toList();
     // Each dish shows its own category's picture, the same as on the menu.
     final pictureByDish = {for (final c in menu!.categories) for (final i in c.items) i.id: c.illustration};
@@ -602,7 +602,7 @@ class _Popular extends StatelessWidget {
               message: s.addDish(item.name.of(s.lang)),
               child: IconButton.filledTonal(
                 onPressed: () => onAdd(item),
-                style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: context.accentSoft, foregroundColor: context.accent),
+                style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: context.accentSoft, foregroundColor: context.accentInk),
                 icon: const Icon(LucideIcons.plus),
                 tooltip: s.addDish(item.name.of(s.lang)),
               ),
@@ -630,7 +630,7 @@ class _CustomiseSheet extends StatelessWidget {
         child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(s.customiseTitle, style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: Tokens.space1),
-          Text(s.customiseHint(dashboardMin, dashboardMax), style: const TextStyle(color: Tokens.textMuted)),
+          Text(s.customiseHint(dashboardMin, dashboardMax), style: TextStyle(color: Tokens.textMuted)),
           const SizedBox(height: Tokens.space4),
           Flexible(
             child: ListView(shrinkWrap: true, children: [
@@ -674,12 +674,12 @@ class _Row extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: Tokens.space2),
-      decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Tokens.border))),
+      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Tokens.border))),
       child: Row(children: [
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(label),
-            if (sub != null) Text(sub!, style: const TextStyle(color: Tokens.textMuted, fontSize: 12)),
+            if (sub != null) Text(sub!, style: TextStyle(color: Tokens.textMuted, fontSize: 12)),
           ]),
         ),
         ...trailing,

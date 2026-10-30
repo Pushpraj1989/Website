@@ -131,7 +131,7 @@ class _AssistantScreenState extends State<AssistantScreen> {
     if (t.failure != null) {
       return Padding(
         padding: const EdgeInsets.only(bottom: Tokens.space3),
-        child: Semantics(liveRegion: true, child: Text(t.failure!, style: const TextStyle(color: Tokens.danger))),
+        child: Semantics(liveRegion: true, child: Text(t.failure!, style: TextStyle(color: Tokens.danger))),
       );
     }
     final reply = t.reply!;
@@ -141,7 +141,7 @@ class _AssistantScreenState extends State<AssistantScreen> {
         Container(
           margin: const EdgeInsets.only(bottom: Tokens.space2),
           padding: const EdgeInsets.all(Tokens.space3),
-          decoration: BoxDecoration(color: Tokens.surface, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
+          decoration: BoxDecoration(color: Tokens.fill, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
           child: Semantics(liveRegion: true, child: Text(reply.answer)),
         ),
         for (final item in reply.items)
@@ -149,7 +149,7 @@ class _AssistantScreenState extends State<AssistantScreen> {
             title: item.name.of(s.lang),
             subtitle: formatMoney(item.priceMinor, 'AED'),
             trailing: item.soldOut
-                ? Text(s.soldOut, style: const TextStyle(color: Tokens.danger))
+                ? Text(s.soldOut, style: TextStyle(color: Tokens.danger))
                 : AppButton(label: s.add, size: ButtonSize.sm, onPressed: () => widget.api.addOne(item.id)),
           ),
         for (final order in reply.orders)
@@ -185,7 +185,7 @@ class _Card extends StatelessWidget {
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
-            Text(subtitle, style: const TextStyle(color: Tokens.textMuted)),
+            Text(subtitle, style: TextStyle(color: Tokens.textMuted)),
           ]),
         ),
         trailing,
@@ -211,7 +211,7 @@ class _EmptyAsk extends StatelessWidget {
         const SizedBox(height: Tokens.space3),
         Text(s.askHint, textAlign: TextAlign.center, style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: Tokens.space5),
-        Text(s.askSuggestionsTitle, style: const TextStyle(color: Tokens.textMuted, fontWeight: FontWeight.w600)),
+        Text(s.askSuggestionsTitle, style: TextStyle(color: Tokens.textMuted, fontWeight: FontWeight.w600)),
         const SizedBox(height: Tokens.space2),
         for (final question in questions)
           Padding(

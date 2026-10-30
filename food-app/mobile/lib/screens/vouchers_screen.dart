@@ -115,13 +115,13 @@ class _VouchersScreenState extends State<VouchersScreen> {
             if (_message != null)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: Tokens.space4),
-                child: Semantics(liveRegion: true, child: Text(_message!, style: const TextStyle(color: Tokens.textMuted))),
+                child: Semantics(liveRegion: true, child: Text(_message!, style: TextStyle(color: Tokens.textMuted))),
               ),
             Expanded(
               child: _failed
                   ? Center(
                       child: Column(mainAxisSize: MainAxisSize.min, children: [
-                        Text(s.genericError, style: const TextStyle(color: Tokens.danger)),
+                        Text(s.genericError, style: TextStyle(color: Tokens.danger)),
                         const SizedBox(height: Tokens.space3),
                         FilledButton(onPressed: _load, child: Text(s.retry)),
                       ]),
@@ -142,7 +142,7 @@ class _VouchersScreenState extends State<VouchersScreen> {
 
   Widget _list(List<WalletVoucher> items, Strings s, {bool removable = false}) {
     if (items.isEmpty) {
-      return Center(child: Padding(padding: const EdgeInsets.all(Tokens.space4), child: Text(s.noVouchersYet, textAlign: TextAlign.center, style: const TextStyle(color: Tokens.textMuted))));
+      return Center(child: Padding(padding: const EdgeInsets.all(Tokens.space4), child: Text(s.noVouchersYet, textAlign: TextAlign.center, style: TextStyle(color: Tokens.textMuted))));
     }
     return ListView.separated(
       padding: const EdgeInsets.all(Tokens.space4),
@@ -153,22 +153,22 @@ class _VouchersScreenState extends State<VouchersScreen> {
         final expires = MaterialLocalizations.of(context).formatMediumDate(v.expiresAt);
         return Container(
           padding: const EdgeInsets.all(Tokens.space4),
-          decoration: BoxDecoration(color: Tokens.surface, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
+          decoration: BoxDecoration(color: Tokens.fill, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
           child: Row(children: [
-            Icon(LucideIcons.ticket, color: context.accent),
+            Icon(LucideIcons.ticket, color: context.accentFg),
             const SizedBox(width: Tokens.space3),
             Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(v.discount, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
                 const SizedBox(height: 2),
-                Text(v.campaign, style: const TextStyle(color: Tokens.textMuted)),
+                Text(v.campaign, style: TextStyle(color: Tokens.textMuted)),
                 const SizedBox(height: 2),
                 Text(
                   [
                     if (v.minOrderMinor > 0) s.minOrder(formatMoney(v.minOrderMinor, v.currency)),
                     if (v.state == 'available') s.expiresOn(expires),
                   ].join(' · '),
-                  style: const TextStyle(color: Tokens.textMuted, fontSize: 13),
+                  style: TextStyle(color: Tokens.textMuted, fontSize: 13),
                 ),
               ]),
             ),

@@ -87,7 +87,7 @@ class _AuthGateState extends State<AuthGate> {
           child: _problem == null
               ? const CircularProgressIndicator()
               : Column(mainAxisSize: MainAxisSize.min, children: [
-                  Text(_problem!, textAlign: TextAlign.center, style: const TextStyle(color: Tokens.danger)),
+                  Text(_problem!, textAlign: TextAlign.center, style: TextStyle(color: Tokens.danger)),
                   const SizedBox(height: Tokens.space3),
                   AppButton(label: 'Try again', onPressed: _resolve),
                 ]),

@@ -171,7 +171,7 @@ class _CartScreenState extends State<CartScreen> {
     if (_error != null) {
       return Center(
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Text(s.genericError, style: const TextStyle(color: Tokens.danger)),
+          Text(s.genericError, style: TextStyle(color: Tokens.danger)),
           const SizedBox(height: Tokens.space3),
           FilledButton(onPressed: _load, child: Text(s.retry)),
         ]),
@@ -188,7 +188,7 @@ class _CartScreenState extends State<CartScreen> {
             const SizedBox(height: Tokens.space3),
             Text(s.emptyCart, style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: Tokens.space1),
-            Text(s.cartEmptyBody, textAlign: TextAlign.center, style: const TextStyle(color: Tokens.textMuted)),
+            Text(s.cartEmptyBody, textAlign: TextAlign.center, style: TextStyle(color: Tokens.textMuted)),
             const SizedBox(height: Tokens.space4),
             FilledButton.icon(onPressed: () => Navigator.of(context).maybePop(), icon: const Icon(LucideIcons.utensils), label: Text(s.menu)),
           ]),
@@ -222,7 +222,7 @@ class _CartScreenState extends State<CartScreen> {
           ]),
         ),
         if (_problem != null)
-          Semantics(liveRegion: true, child: Padding(padding: const EdgeInsets.only(top: Tokens.space3), child: Text(_problem!, style: const TextStyle(color: Tokens.danger)))),
+          Semantics(liveRegion: true, child: Padding(padding: const EdgeInsets.only(top: Tokens.space3), child: Text(_problem!, style: TextStyle(color: Tokens.danger)))),
         const SizedBox(height: Tokens.space3),
         _OffersSection(code: _code, offer: _offer, message: _offerMessage, s: s, onApply: () => _applyCode(s), onRemove: () => _removeCode(s)),
         if (_quote != null) ...[
@@ -277,8 +277,8 @@ class _LineRowState extends State<_LineRow> {
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(name, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w700)),
             if (line.unitMinor != null)
-              Text(formatMoney(line.unitMinor!, widget.currency), style: const TextStyle(color: Tokens.textMuted, fontSize: 13)),
-            if (line.soldOut) Text(s.soldOut, style: const TextStyle(color: Tokens.danger, fontWeight: FontWeight.w600)),
+              Text(formatMoney(line.unitMinor!, widget.currency), style: TextStyle(color: Tokens.textMuted, fontSize: 13)),
+            if (line.soldOut) Text(s.soldOut, style: TextStyle(color: Tokens.danger, fontWeight: FontWeight.w600)),
           ]),
         ),
         const SizedBox(width: Tokens.space2),
@@ -333,7 +333,7 @@ class BillCard extends StatelessWidget {
         if (quote.discountMinor > 0) BillRow(label: s.discount, amount: '− ${formatMoney(quote.discountMinor, currency)}', positive: true),
         const Divider(height: Tokens.space4),
         BillRow(label: s.total, amount: formatMoney(quote.totalMinor, currency), strong: true),
-        Align(alignment: AlignmentDirectional.centerStart, child: Text(s.includesTax(quote.taxLabel), style: const TextStyle(color: Tokens.textMuted, fontSize: 12))),
+        Align(alignment: AlignmentDirectional.centerStart, child: Text(s.includesTax(quote.taxLabel), style: TextStyle(color: Tokens.textMuted, fontSize: 12))),
       ]),
     );
   }
@@ -359,12 +359,12 @@ class _OffersSection extends StatelessWidget {
         if (o != null && o.applied)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: Tokens.space3, vertical: Tokens.space2),
-            decoration: BoxDecoration(color: const Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(Tokens.radiusMd)),
+            decoration: BoxDecoration(color: Tokens.palette.successSoft, borderRadius: BorderRadius.circular(Tokens.radiusMd)),
             child: Row(children: [
-              const Icon(LucideIcons.circleCheck, color: Tokens.success, size: 20),
+              Icon(LucideIcons.circleCheck, color: Tokens.success, size: 20),
               const SizedBox(width: Tokens.space2),
-              Expanded(child: Text(s.offerApplied(o.label ?? ''), style: const TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF166534)))),
-              TextButton(onPressed: onRemove, child: Text(s.removeCode)),
+              Expanded(child: Text(s.offerApplied(o.label ?? ''), style: TextStyle(fontWeight: FontWeight.w700, color: Tokens.palette.successInk))),
+              TextButton(onPressed: onRemove, style: TextButton.styleFrom(foregroundColor: Tokens.palette.successInk), child: Text(s.removeCode)),
             ]),
           )
         else ...[
@@ -384,14 +384,14 @@ class _OffersSection extends StatelessWidget {
           if (o != null && o.reason != null) ...[
             const SizedBox(height: Tokens.space2),
             Row(children: [
-              Expanded(child: Semantics(liveRegion: true, child: Text(o.reason!, style: const TextStyle(color: Tokens.textMuted)))),
+              Expanded(child: Semantics(liveRegion: true, child: Text(o.reason!, style: TextStyle(color: Tokens.textMuted)))),
               TextButton(onPressed: onRemove, child: Text(s.removeCode)),
             ]),
           ],
         ],
         if (message != null) ...[
           const SizedBox(height: Tokens.space2),
-          Semantics(liveRegion: true, child: Text(message!, style: const TextStyle(color: Tokens.danger))),
+          Semantics(liveRegion: true, child: Text(message!, style: TextStyle(color: Tokens.danger))),
         ],
       ]),
     );

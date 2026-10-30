@@ -48,10 +48,11 @@ Future<void> loadCaptureFonts() async {
 }
 
 /// The app's theme and localisation around one screen.
-Widget captureApp(Widget home, {String lang = 'en'}) {
+Widget captureApp(Widget home, {String lang = 'en', AppTheme theme = AppTheme.classic, Color accent = Tokens.accent}) {
+  final built = buildTheme(accent: accent, theme: theme);
   return MaterialApp(
     debugShowCheckedModeBanner: false,
-    theme: buildTheme().copyWith(textTheme: buildTheme().textTheme.apply(fontFamilyFallback: const ['ArabicFallback'])),
+    theme: built.copyWith(textTheme: built.textTheme.apply(fontFamilyFallback: const ['ArabicFallback'])),
     locale: Locale(lang),
     supportedLocales: const [Locale('en'), Locale('ar')],
     localizationsDelegates: const [GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate, GlobalCupertinoLocalizations.delegate],

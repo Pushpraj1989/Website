@@ -137,7 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             if (_step == 2) Center(child: Text(s.allSet, style: Theme.of(context).textTheme.titleLarge)),
             if (_error != null) ...[
               const SizedBox(height: Tokens.space3),
-              Semantics(liveRegion: true, child: Text(_error!, style: const TextStyle(color: Tokens.danger))),
+              Semantics(liveRegion: true, child: Text(_error!, style: TextStyle(color: Tokens.danger))),
             ],
           ],
         ),
@@ -148,7 +148,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   List<Widget> _nameAndPhone(BuildContext context, Strings s) => [
         Text(s.signUpTitle, style: Theme.of(context).textTheme.headlineMedium),
         const SizedBox(height: Tokens.space2),
-        Text(s.signUpHint, style: const TextStyle(color: Tokens.textMuted)),
+        Text(s.signUpHint, style: TextStyle(color: Tokens.textMuted)),
         const SizedBox(height: Tokens.space5),
         TextField(controller: _name, textCapitalization: TextCapitalization.words, autofillHints: const [AutofillHints.name], decoration: InputDecoration(labelText: s.nameLabel)),
         const SizedBox(height: Tokens.space3),
@@ -164,7 +164,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   List<Widget> _emailStep(BuildContext context, Strings s) => [
         Text(s.emailTitle, style: Theme.of(context).textTheme.headlineMedium),
         const SizedBox(height: Tokens.space2),
-        Text(s.emailHint, style: const TextStyle(color: Tokens.textMuted)),
+        Text(s.emailHint, style: TextStyle(color: Tokens.textMuted)),
         const SizedBox(height: Tokens.space5),
         TextField(
           controller: _email,
@@ -194,7 +194,7 @@ class _StepDots extends StatelessWidget {
               child: Container(
                 height: 6,
                 decoration: BoxDecoration(
-                  color: i <= step ? context.accent : Tokens.border,
+                  color: i <= step ? context.accentFg : Tokens.border,
                   borderRadius: BorderRadius.circular(3),
                 ),
               ),

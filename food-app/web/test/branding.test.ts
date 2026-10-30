@@ -48,6 +48,16 @@ test('names have limits, at least one way to pay stays on, and card needs the pa
   if (!process.env.STRIPE_SECRET_KEY) await expectRule(s.updateSettings({ payments: { card: true } }, 'staff'), 'card_unavailable');
 });
 
+test('the restaurant chooses a theme; the public brand carries it, and an unknown theme is refused', async () => {
+  assert.equal((await s.getSettings()).theme, 'classic');
+  await s.updateSettings({ theme: 'glass_night' }, 'staff');
+  assert.equal((await s.publicBrand()).theme, 'glass_night');
+  await expectRule(s.updateSettings({ theme: 'neon' }, 'staff'), 'bad_input');
+  assert.equal((await s.getSettings()).theme, 'glass_night');
+  await s.updateSettings({ theme: 'classic' }, 'staff');
+});
+
+
 test('the logo is a checked picture; replacing it removes the old one, and it can be removed', async () => {
   await expectRule(s.setLogo(Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"></svg>'), 'staff'), 'bad_file_type');
   await expectRule(s.setLogo(Buffer.concat([PNG, Buffer.alloc(1024 * 1024)]), 'staff'), 'too_large');

@@ -85,7 +85,7 @@ class _OrderScreenState extends State<OrderScreen> {
           body: _error != null && order == null
               ? Center(
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
-                    Text(s.genericError, style: const TextStyle(color: Tokens.danger)),
+                    Text(s.genericError, style: TextStyle(color: Tokens.danger)),
                     const SizedBox(height: Tokens.space3),
                     FilledButton(onPressed: _load, child: Text(s.retry)),
                   ]),
@@ -144,7 +144,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   Expanded(
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       Text(l.name.of(s.lang), style: const TextStyle(fontWeight: FontWeight.w600)),
-                      if (l.note.isNotEmpty) Text(l.note, style: const TextStyle(color: Tokens.textMuted, fontSize: 13)),
+                      if (l.note.isNotEmpty) Text(l.note, style: TextStyle(color: Tokens.textMuted, fontSize: 13)),
                     ]),
                   ),
                   Text(formatMoney(l.unitMinor * l.qty, order.quote.currency), style: const TextStyle(fontFeatures: [FontFeature.tabularFigures()])),
@@ -174,7 +174,7 @@ class _StatusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bg = stopped ? Tokens.danger : context.accent;
+    final bg = stopped ? Tokens.dangerFill : context.accent;
     return Container(
       padding: const EdgeInsets.all(Tokens.space4),
       decoration: BoxDecoration(
@@ -230,7 +230,7 @@ class _StepRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final on = done || current;
-    final colour = on ? context.accent : Tokens.border;
+    final colour = on ? context.accentFg : Tokens.border;
     return Semantics(
       label: '$label${current ? ', current' : done ? ', done' : ''}${time == null ? '' : ', $time'}',
       excludeSemantics: true,
@@ -241,13 +241,13 @@ class _StepRow extends StatelessWidget {
               width: 32,
               height: 32,
               decoration: BoxDecoration(
-                color: current ? context.accent : (done ? context.accentSoft : Tokens.surface),
+                color: current ? context.accent : (done ? context.accentSoft : Tokens.fill),
                 shape: BoxShape.circle,
                 border: Border.all(color: colour, width: 2),
               ),
-              child: Icon(done ? LucideIcons.check : icon, size: 16, color: current ? context.onAccent : (done ? context.accent : Tokens.textMuted)),
+              child: Icon(done ? LucideIcons.check : icon, size: 16, color: current ? context.onAccent : (done ? context.accentInk : Tokens.textMuted)),
             ),
-            if (!last) Expanded(child: Container(width: 2, color: done ? context.accent : Tokens.border, margin: const EdgeInsets.symmetric(vertical: 2))),
+            if (!last) Expanded(child: Container(width: 2, color: done ? context.accentFg : Tokens.border, margin: const EdgeInsets.symmetric(vertical: 2))),
           ]),
           const SizedBox(width: Tokens.space3),
           Expanded(
@@ -255,7 +255,7 @@ class _StepRow extends StatelessWidget {
               padding: EdgeInsets.only(top: 6, bottom: last ? 0 : Tokens.space4),
               child: Row(children: [
                 Expanded(child: Text(label, style: TextStyle(fontWeight: current ? FontWeight.w800 : FontWeight.w500, color: on ? Tokens.text : Tokens.textMuted))),
-                if (time != null) Text(time!, style: const TextStyle(color: Tokens.textMuted, fontSize: 13, fontFeatures: [FontFeature.tabularFigures()])),
+                if (time != null) Text(time!, style: TextStyle(color: Tokens.textMuted, fontSize: 13, fontFeatures: [const FontFeature.tabularFigures()])),
               ]),
             ),
           ),
@@ -277,7 +277,7 @@ class _InfoRow extends StatelessWidget {
       child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Icon(icon, size: 18, color: Tokens.textMuted),
         const SizedBox(width: Tokens.space2),
-        Expanded(child: Text(text, style: const TextStyle(color: Tokens.textMuted))),
+        Expanded(child: Text(text, style: TextStyle(color: Tokens.textMuted))),
       ]),
     );
   }

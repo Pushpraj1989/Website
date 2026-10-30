@@ -194,7 +194,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       title: s.deliverTo,
       icon: LucideIcons.mapPin,
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        if (_addresses.isEmpty) Padding(padding: const EdgeInsets.only(bottom: Tokens.space2), child: Text(s.noAddressYet, style: const TextStyle(color: Tokens.textMuted))),
+        if (_addresses.isEmpty) Padding(padding: const EdgeInsets.only(bottom: Tokens.space2), child: Text(s.noAddressYet, style: TextStyle(color: Tokens.textMuted))),
         for (final a in _addresses) ...[
           ChoiceTile(
             icon: a.isDefault ? LucideIcons.house : LucideIcons.mapPin,
@@ -210,9 +210,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           child: TextButton.icon(onPressed: () => _addAddress(s), icon: const Icon(LucideIcons.plus, size: 18), label: Text(s.addNewAddress)),
         ),
         if (_addressId != null && _delivery == null && _quote != null)
-          Text(s.feeAfterAddress, style: const TextStyle(color: Tokens.textMuted)),
+          Text(s.feeAfterAddress, style: TextStyle(color: Tokens.textMuted)),
         if (_delivery != null && !_delivery!.deliverable)
-          Semantics(liveRegion: true, child: Text(s.belowMinimum(formatMoney(_delivery!.minOrderMinor, _currency)), style: const TextStyle(color: Tokens.danger))),
+          Semantics(liveRegion: true, child: Text(s.belowMinimum(formatMoney(_delivery!.minOrderMinor, _currency)), style: TextStyle(color: Tokens.danger))),
       ]),
     );
   }
@@ -265,7 +265,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ),
                     if (m != methods.last) const SizedBox(height: Tokens.space2),
                   ],
-                  if (_payments != null && methods.isEmpty) Text(s.noPaymentMethod, style: const TextStyle(color: Tokens.danger)),
+                  if (_payments != null && methods.isEmpty) Text(s.noPaymentMethod, style: TextStyle(color: Tokens.danger)),
                 ]),
               ),
               if (_codeBlocked) ...[
@@ -274,12 +274,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   liveRegion: true,
                   child: Container(
                     padding: const EdgeInsets.all(Tokens.space3),
-                    decoration: BoxDecoration(color: const Color(0xFFFEF3C7), borderRadius: BorderRadius.circular(Tokens.radiusLg)),
+                    decoration: BoxDecoration(color: Tokens.palette.warnSoft, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
                     child: Row(children: [
-                      const Icon(LucideIcons.ticketPercent, color: Color(0xFF92400E)),
+                      Icon(LucideIcons.ticketPercent, color: Tokens.palette.warnInk),
                       const SizedBox(width: Tokens.space2),
-                      Expanded(child: Text(s.codeDoesNotApply(_offer!.reason ?? ''))),
-                      TextButton(onPressed: () => _removeCode(s), child: Text(s.removeCode)),
+                      Expanded(child: Text(s.codeDoesNotApply(_offer!.reason ?? ''), style: TextStyle(color: Tokens.palette.warnInk))),
+                      TextButton(onPressed: () => _removeCode(s), style: TextButton.styleFrom(foregroundColor: Tokens.palette.warnInk), child: Text(s.removeCode)),
                     ]),
                   ),
                 ),
@@ -289,7 +289,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 BillCard(quote: _quote!, s: s, currency: _currency),
               ],
               if (_error != null)
-                Semantics(liveRegion: true, child: Padding(padding: const EdgeInsets.only(top: Tokens.space3), child: Text(_error!, style: const TextStyle(color: Tokens.danger)))),
+                Semantics(liveRegion: true, child: Padding(padding: const EdgeInsets.only(top: Tokens.space3), child: Text(_error!, style: TextStyle(color: Tokens.danger)))),
               const SizedBox(height: Tokens.space4),
             ],
           ),

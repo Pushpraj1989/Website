@@ -9,6 +9,7 @@ import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
 import '../widgets/ask_button.dart';
+import '../widgets/ui.dart';
 import '../widgets/dish_sheet.dart';
 import '../widgets/dish_thumb.dart';
 import 'cart_screen.dart';
@@ -46,7 +47,7 @@ class _MenuScreenState extends State<MenuScreen> {
   void _failed(String message) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(behavior: SnackBarBehavior.floating, content: Text(message), backgroundColor: Tokens.danger));
+      ..showSnackBar(SnackBar(behavior: SnackBarBehavior.floating, content: Text(message), backgroundColor: Tokens.dangerFill));
   }
 
   Future<void> _quickAdd(Strings s, MenuItem item) async {
@@ -106,7 +107,7 @@ class _MenuScreenState extends State<MenuScreen> {
     if (snapshot.hasError) {
       return Center(
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Text(s.genericError, style: const TextStyle(color: Tokens.danger)),
+          Text(s.genericError, style: TextStyle(color: Tokens.danger)),
           const SizedBox(height: Tokens.space3),
           FilledButton(onPressed: () => setState(() => _menu = widget.api.menu()), child: Text(s.retry)),
         ]),
@@ -135,7 +136,7 @@ class _MenuScreenState extends State<MenuScreen> {
             padding: const EdgeInsets.fromLTRB(Tokens.space4, Tokens.space5, Tokens.space4, Tokens.space2),
             child: Row(children: [
               Expanded(child: Text(category.name.of(s.lang), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700))),
-              Text(s.dishesInCategory(category.items.length), style: const TextStyle(color: Tokens.textMuted)),
+              Text(s.dishesInCategory(category.items.length), style: TextStyle(color: Tokens.textMuted)),
             ]),
           ),
         ),
@@ -190,7 +191,7 @@ class _RestaurantHeader extends StatelessWidget {
           Expanded(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(name, maxLines: 2, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700)),
-              if (tagline.isNotEmpty) Text(tagline, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Tokens.textMuted)),
+              if (tagline.isNotEmpty) Text(tagline, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Tokens.textMuted)),
             ]),
           ),
         ]),
@@ -200,9 +201,9 @@ class _RestaurantHeader extends StatelessWidget {
             for (final (icon, label) in chips)
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                decoration: BoxDecoration(color: Tokens.surface, borderRadius: BorderRadius.circular(999)),
+                decoration: BoxDecoration(color: Tokens.fill, borderRadius: BorderRadius.circular(999)),
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  Icon(icon, size: 16, color: context.accent),
+                  Icon(icon, size: 16, color: context.accentFg),
                   const SizedBox(width: 6),
                   Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
                 ]),
@@ -260,7 +261,8 @@ class _CategoryBar extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
+    return Frosted(
+      child: Container(
       decoration: BoxDecoration(
         color: Tokens.bg,
         boxShadow: overlapsContent || shrinkOffset > 0 ? const [BoxShadow(color: Color(0x14000000), blurRadius: 8, offset: Offset(0, 2))] : null,
@@ -281,13 +283,14 @@ class _CategoryBar extends SliverPersistentHeaderDelegate {
             showCheckmark: false,
             materialTapTargetSize: MaterialTapTargetSize.padded,
             selectedColor: accent,
-            backgroundColor: Tokens.surface,
+            backgroundColor: Tokens.fill,
             side: BorderSide.none,
             shape: const StadiumBorder(),
             labelStyle: TextStyle(color: on ? Colors.white : Tokens.text, fontWeight: FontWeight.w600),
           );
         },
       ),
+    ),
     );
   }
 
@@ -324,7 +327,7 @@ class _DishCard extends StatelessWidget {
                 Text(name, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
                 if (description.isNotEmpty) ...[
                   const SizedBox(height: Tokens.space1),
-                  Text(description, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Tokens.textMuted, fontSize: 14, height: 1.35)),
+                  Text(description, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Tokens.textMuted, fontSize: 14, height: 1.35)),
                 ],
                 const SizedBox(height: Tokens.space2),
                 Text(formatMoney(item.priceMinor, currency), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15, fontFeatures: [FontFeature.tabularFigures()])),

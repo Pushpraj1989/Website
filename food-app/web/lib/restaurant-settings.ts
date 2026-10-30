@@ -12,6 +12,9 @@ import { recordAudit } from './audit.ts';
 import { stripeConfigured } from './payments/stripe.ts';
 
 export const MAX_LOGO_BYTES = 1024 * 1024;
+/** The looks a restaurant can choose. Each works with any brand colour the settings accept. */
+export const THEMES = ['classic', 'midnight', 'glass', 'glass_night'] as const;
+export type Theme = (typeof THEMES)[number];
 
 export type RestaurantSettings = {
   name: { en: string; ar: string };
@@ -19,6 +22,7 @@ export type RestaurantSettings = {
   phone: string;
   address: { en: string; ar: string };
   brandColor: string;
+  theme: Theme;
   logoUrl: string | null;
   currency: string;
   taxLabel: string;
@@ -30,7 +34,7 @@ export type RestaurantSettings = {
 };
 
 const SQL = `
-  select r.name_en, r.name_ar, r.tagline_en, r.tagline_ar, r.phone, r.address_en, r.address_ar, r.brand_color,
+  select r.name_en, r.name_ar, r.tagline_en, r.tagline_ar, r.phone, r.address_en, r.address_ar, r.brand_color, r.theme,
          r.currency_code, r.tax_label, r.tax_basis_points, r.service_fee_minor, r.cash_limit_minor,
          r.accepts_cod, r.accepts_pay_on_arrival, r.accepts_card, m.storage_key as logo_key
   from restaurant r left join media m on m.id = r.logo_media_id
@@ -46,6 +50,7 @@ export async function getSettings(): Promise<RestaurantSettings> {
     phone: r.phone,
     address: { en: r.address_en, ar: r.address_ar },
     brandColor: r.brand_color,
+    theme: r.theme,
     logoUrl: r.logo_key ? urlFor(r.logo_key) : null,
     currency: r.currency_code,
     taxLabel: r.tax_label,
@@ -60,7 +65,7 @@ export async function getSettings(): Promise<RestaurantSettings> {
 /** What the customer app needs to look like this restaurant. Public. */
 export async function publicBrand() {
   const s = await getSettings();
-  return { name: s.name, tagline: s.tagline, logoUrl: s.logoUrl, color: s.brandColor, phone: s.phone, address: s.address };
+  return { name: s.name, tagline: s.tagline, logoUrl: s.logoUrl, color: s.brandColor, theme: s.theme, phone: s.phone, address: s.address };
 }
 
 /** Relative luminance of a #RRGGBB colour (WCAG 2.2 definition). */
@@ -104,6 +109,7 @@ export async function updateSettings(body: Record<string, unknown>, actor: strin
     addressEn: address?.en === undefined ? current.address.en : text(address.en, 'The English address', 0, 200),
     addressAr: address?.ar === undefined ? current.address.ar : text(address.ar, 'The Arabic address', 0, 200),
     brandColor: body.brandColor === undefined ? current.brandColor : String(body.brandColor).trim().toUpperCase(),
+    theme: (body.theme === undefined ? current.theme : body.theme) as Theme,
     serviceFeeMinor: body.serviceFeeMinor === undefined ? current.serviceFeeMinor : minor(body.serviceFeeMinor, 'The service fee', 100_000),
     cashLimitMinor: body.cashLimitMinor === undefined ? current.cashLimitMinor : minor(body.cashLimitMinor, 'The cash limit', 10_000_000),
     cod: payments?.cod === undefined ? current.payments.cod : payments.cod === true,
@@ -115,6 +121,7 @@ export async function updateSettings(body: Record<string, unknown>, actor: strin
   if (contrastWithWhite(next.brandColor) < 4.5) {
     throw new RuleError('That colour is too light for white button text. Choose a darker shade.', 'low_contrast', 400);
   }
+  if (!THEMES.includes(next.theme)) throw new RuleError('Choose one of the themes.', 'bad_input', 400);
   if (payments?.card === true && !current.payments.card && !stripeConfigured()) throw new RuleError('Card payment needs the payment provider set up first.', 'card_unavailable', 422);
   if (!next.cod && !next.payOnArrival && !next.card) throw new RuleError('Keep at least one way to pay switched on.', 'bad_input', 400);
 
@@ -122,12 +129,12 @@ export async function updateSettings(body: Record<string, unknown>, actor: strin
     await c.query(
       `update restaurant set name_en=$2, name_ar=$3, tagline_en=$4, tagline_ar=$5, phone=$6, address_en=$7, address_ar=$8,
          brand_color=$9, service_fee_minor=$10, cash_limit_minor=$11, accepts_cod=$12, accepts_pay_on_arrival=$13,
-         accepts_card=$14, updated_at=now()
+         accepts_card=$14, theme=$15, updated_at=now()
        where id=$1`,
       [RESTAURANT_ID, next.nameEn, next.nameAr, next.taglineEn, next.taglineAr, next.phone, next.addressEn, next.addressAr,
-        next.brandColor, next.serviceFeeMinor, next.cashLimitMinor, next.cod, next.payOnArrival, next.card],
+        next.brandColor, next.serviceFeeMinor, next.cashLimitMinor, next.cod, next.payOnArrival, next.card, next.theme],
     );
-    const changed = Object.keys(body).filter((k) => ['name', 'tagline', 'phone', 'address', 'brandColor', 'serviceFeeMinor', 'cashLimitMinor', 'payments'].includes(k));
+    const changed = Object.keys(body).filter((k) => ['name', 'tagline', 'phone', 'address', 'brandColor', 'theme', 'serviceFeeMinor', 'cashLimitMinor', 'payments'].includes(k));
     await recordAudit(c, actor, 'restaurant_settings_changed', 'restaurant', RESTAURANT_ID, { fields: changed });
   });
   return getSettings();

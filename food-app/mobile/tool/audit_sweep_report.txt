@@ -1,7 +1,7 @@
 home @390 text 1.0x en: contrast: SemanticsNode#7(Rect.fromLTRB(246.0, 0.0, 310.0, 48.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
 home @390 text 1.0x en: contrast: Expected contrast ratio of at least 4.5 but found 1.08 for a font size of 14.0.
 home @390 text 1.0x en: contrast: The computed colors was:
-home @390 text 1.0x en: contrast: light - Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.9843, green: 0.9608, blue: 0.9451, colorSpace: ColorSpace.sRGB)
+home @390 text 1.0x en: contrast: light - Color(alpha: 1.0000, red: 0.9608, green: 0.9608, blue: 0.9569, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.9451, green: 0.9216, blue: 0.9020, colorSpace: ColorSpace.sRGB)
 home @390 text 1.0x en: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
 menu @390 text 1.0x en: contrast: SemanticsNode#8(Rect.fromLTRB(278.0, 4.0, 342.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
 menu @390 text 1.0x en: contrast: Expected contrast ratio of at least 4.5 but found 1.08 for a font size of 14.0.
@@ -39,15 +39,15 @@ sign-up @390 text 1.0x en: contrast: The computed colors was:
 sign-up @390 text 1.0x en: contrast: light - Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.9843, green: 0.9608, blue: 0.9451, colorSpace: ColorSpace.sRGB)
 sign-up @390 text 1.0x en: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
 home @390 text 1.0x ar: contrast: SemanticsNode#55(Rect.fromLTRB(0.0, 0.0, 81.2, 48.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable, hasSelectedState], label: "متوفر الآن", textDirection: rtl):
-home @390 text 1.0x ar: contrast: Expected contrast ratio of at least 4.5 but found 1.09 for a font size of 14.0.
+home @390 text 1.0x ar: contrast: Expected contrast ratio of at least 4.5 but found 1.08 for a font size of 14.0.
 home @390 text 1.0x ar: contrast: The computed colors was:
-home @390 text 1.0x ar: contrast: light - Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.9647, green: 0.9608, blue: 0.9608, colorSpace: ColorSpace.sRGB)
+home @390 text 1.0x ar: contrast: light - Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.9647, green: 0.9647, blue: 0.9647, colorSpace: ColorSpace.sRGB)
 home @390 text 1.0x ar: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
 home @390 text 1.0x ar: contrast: SemanticsNode#59(Rect.fromLTRB(0.0, 0.0, 69.8, 48.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable, hasSelectedState], label: "المفضلة", textDirection: rtl):
 cart @390 text 1.0x ar: contrast: SemanticsNode#25(Rect.fromLTRB(28.0, 68.0, 92.0, 116.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "إزالة", textDirection: rtl):
-cart @390 text 1.0x ar: contrast: Expected contrast ratio of at least 4.5 but found 1.34 for a font size of 14.0.
+cart @390 text 1.0x ar: contrast: Expected contrast ratio of at least 4.5 but found 1.38 for a font size of 14.0.
 cart @390 text 1.0x ar: contrast: The computed colors was:
-cart @390 text 1.0x ar: contrast: light - Color(alpha: 1.0000, red: 0.8627, green: 0.9882, blue: 0.9059, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.8314, green: 0.8471, blue: 0.7216, colorSpace: ColorSpace.sRGB)
+cart @390 text 1.0x ar: contrast: light - Color(alpha: 1.0000, red: 0.8627, green: 0.9882, blue: 0.9059, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.6980, green: 0.8627, blue: 0.7569, colorSpace: ColorSpace.sRGB)
 cart @390 text 1.0x ar: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
 checkout @390 text 1.0x ar: contrast: SemanticsNode#18(Rect.fromLTRB(205.5, 151.0, 342.0, 199.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "إضافة عنوان جديد", textDirection: rtl):
 checkout @390 text 1.0x ar: contrast: Expected contrast ratio of at least 4.5 but found 1.07 for a font size of 14.0.
@@ -57,5 +57,162 @@ checkout @390 text 1.0x ar: contrast: See also: https://www.w3.org/TR/UNDERSTAND
 sign-in @390 text 1.0x ar: contrast: SemanticsNode#7(Rect.fromLTRB(24.0, 70.0, 366.0, 91.0), tags: [RenderViewport.twoPane], label: "أدخل رقم جوالك. سنرسل رمزاً للتأكيد.", textDirection: rtl, indexInParent: 2):
 sign-in @390 text 1.0x ar: contrast: Expected contrast ratio of at least 4.5 but found 1.06 for a font size of 14.0.
 sign-in @390 text 1.0x ar: contrast: The computed colors was:
-sign-in @390 text 1.0x ar: contrast: light - Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.9725, green: 0.9725, blue: 0.9725, colorSpace: ColorSpace.sRGB)
+sign-in @390 text 1.0x ar: contrast: light - Color(alpha: 1.0000, red: 0.9608, green: 0.9608, blue: 0.9569, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.9373, green: 0.9373, blue: 0.9294, colorSpace: ColorSpace.sRGB)
 sign-in @390 text 1.0x ar: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+home @390 text 1.0x en midnight: contrast: SemanticsNode#7(Rect.fromLTRB(246.0, 0.0, 310.0, 48.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+home @390 text 1.0x en midnight: contrast: Expected contrast ratio of at least 4.5 but found 1.11 for a font size of 14.0.
+home @390 text 1.0x en midnight: contrast: The computed colors was:
+home @390 text 1.0x en midnight: contrast: light - Color(alpha: 1.0000, red: 0.0980, green: 0.1020, blue: 0.1137, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.0588, green: 0.0549, blue: 0.0510, colorSpace: ColorSpace.sRGB)
+home @390 text 1.0x en midnight: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+menu @390 text 1.0x en midnight: contrast: SemanticsNode#8(Rect.fromLTRB(278.0, 4.0, 342.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+menu @390 text 1.0x en midnight: contrast: Expected contrast ratio of at least 4.5 but found 1.12 for a font size of 14.0.
+menu @390 text 1.0x en midnight: contrast: The computed colors was:
+menu @390 text 1.0x en midnight: contrast: light - Color(alpha: 1.0000, red: 0.1451, green: 0.1412, blue: 0.1529, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1098, green: 0.1020, blue: 0.0941, colorSpace: ColorSpace.sRGB)
+menu @390 text 1.0x en midnight: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+cart @390 text 1.0x en midnight: contrast: SemanticsNode#7(Rect.fromLTRB(326.0, 4.0, 390.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+cart @390 text 1.0x en midnight: contrast: Expected contrast ratio of at least 4.5 but found 1.12 for a font size of 14.0.
+cart @390 text 1.0x en midnight: contrast: The computed colors was:
+cart @390 text 1.0x en midnight: contrast: light - Color(alpha: 1.0000, red: 0.1451, green: 0.1412, blue: 0.1529, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1098, green: 0.1020, blue: 0.0941, colorSpace: ColorSpace.sRGB)
+cart @390 text 1.0x en midnight: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+checkout @390 text 1.0x en midnight: contrast: SemanticsNode#16(Rect.fromLTRB(326.0, 4.0, 390.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+checkout @390 text 1.0x en midnight: contrast: Expected contrast ratio of at least 4.5 but found 1.12 for a font size of 14.0.
+checkout @390 text 1.0x en midnight: contrast: The computed colors was:
+checkout @390 text 1.0x en midnight: contrast: light - Color(alpha: 1.0000, red: 0.1451, green: 0.1412, blue: 0.1529, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1098, green: 0.1020, blue: 0.0941, colorSpace: ColorSpace.sRGB)
+checkout @390 text 1.0x en midnight: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+tracking @390 text 1.0x en midnight: contrast: SemanticsNode#7(Rect.fromLTRB(326.0, 4.0, 390.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+tracking @390 text 1.0x en midnight: contrast: Expected contrast ratio of at least 4.5 but found 1.12 for a font size of 14.0.
+tracking @390 text 1.0x en midnight: contrast: The computed colors was:
+tracking @390 text 1.0x en midnight: contrast: light - Color(alpha: 1.0000, red: 0.1451, green: 0.1412, blue: 0.1529, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1098, green: 0.1020, blue: 0.0941, colorSpace: ColorSpace.sRGB)
+tracking @390 text 1.0x en midnight: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+assistant @390 text 1.0x en midnight: contrast: SemanticsNode#23(Rect.fromLTRB(326.0, 4.0, 390.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+assistant @390 text 1.0x en midnight: contrast: Expected contrast ratio of at least 4.5 but found 1.12 for a font size of 14.0.
+assistant @390 text 1.0x en midnight: contrast: The computed colors was:
+assistant @390 text 1.0x en midnight: contrast: light - Color(alpha: 1.0000, red: 0.1451, green: 0.1412, blue: 0.1529, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1098, green: 0.1020, blue: 0.0941, colorSpace: ColorSpace.sRGB)
+assistant @390 text 1.0x en midnight: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+sign-in @390 text 1.0x en midnight: contrast: SemanticsNode#16(Rect.fromLTRB(326.0, 4.0, 390.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+sign-in @390 text 1.0x en midnight: contrast: Expected contrast ratio of at least 4.5 but found 1.12 for a font size of 14.0.
+sign-in @390 text 1.0x en midnight: contrast: The computed colors was:
+sign-in @390 text 1.0x en midnight: contrast: light - Color(alpha: 1.0000, red: 0.1451, green: 0.1412, blue: 0.1529, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1098, green: 0.1020, blue: 0.0941, colorSpace: ColorSpace.sRGB)
+sign-in @390 text 1.0x en midnight: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+sign-up @390 text 1.0x en midnight: contrast: SemanticsNode#20(Rect.fromLTRB(326.0, 4.0, 390.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+sign-up @390 text 1.0x en midnight: contrast: Expected contrast ratio of at least 4.5 but found 1.12 for a font size of 14.0.
+sign-up @390 text 1.0x en midnight: contrast: The computed colors was:
+sign-up @390 text 1.0x en midnight: contrast: light - Color(alpha: 1.0000, red: 0.1451, green: 0.1412, blue: 0.1529, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1098, green: 0.1020, blue: 0.0941, colorSpace: ColorSpace.sRGB)
+sign-up @390 text 1.0x en midnight: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+home @390 text 1.0x ar midnight: contrast: SemanticsNode#55(Rect.fromLTRB(0.0, 0.0, 81.2, 48.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable, hasSelectedState], label: "متوفر الآن", textDirection: rtl):
+home @390 text 1.0x ar midnight: contrast: Expected contrast ratio of at least 4.5 but found 1.23 for a font size of 14.0.
+home @390 text 1.0x ar midnight: contrast: The computed colors was:
+home @390 text 1.0x ar midnight: contrast: light - Color(alpha: 1.0000, red: 0.1765, green: 0.1686, blue: 0.1569, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1098, green: 0.1020, blue: 0.0941, colorSpace: ColorSpace.sRGB)
+home @390 text 1.0x ar midnight: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+home @390 text 1.0x ar midnight: contrast: SemanticsNode#59(Rect.fromLTRB(0.0, 0.0, 69.8, 48.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable, hasSelectedState], label: "المفضلة", textDirection: rtl):
+cart @390 text 1.0x ar midnight: contrast: SemanticsNode#22(Rect.fromLTRB(200.1, 470.0, 342.0, 518.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "إضافة أصناف أخرى", textDirection: rtl):
+cart @390 text 1.0x ar midnight: contrast: Expected contrast ratio of at least 4.5 but found 1.66 for a font size of 14.0.
+cart @390 text 1.0x ar midnight: contrast: The computed colors was:
+cart @390 text 1.0x ar midnight: contrast: light - Color(alpha: 1.0000, red: 0.2314, green: 0.2471, blue: 0.3059, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1098, green: 0.1020, blue: 0.0941, colorSpace: ColorSpace.sRGB)
+cart @390 text 1.0x ar midnight: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+cart @390 text 1.0x ar midnight: contrast: SemanticsNode#25(Rect.fromLTRB(28.0, 68.0, 92.0, 116.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "إزالة", textDirection: rtl):
+checkout @390 text 1.0x ar midnight: contrast: SemanticsNode#18(Rect.fromLTRB(205.5, 151.0, 342.0, 199.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "إضافة عنوان جديد", textDirection: rtl):
+checkout @390 text 1.0x ar midnight: contrast: Expected contrast ratio of at least 4.5 but found 1.08 for a font size of 14.0.
+checkout @390 text 1.0x ar midnight: contrast: The computed colors was:
+checkout @390 text 1.0x ar midnight: contrast: light - Color(alpha: 1.0000, red: 0.1333, green: 0.1294, blue: 0.1373, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1098, green: 0.1020, blue: 0.0941, colorSpace: ColorSpace.sRGB)
+checkout @390 text 1.0x ar midnight: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+sign-in @390 text 1.0x ar midnight: contrast: SemanticsNode#7(Rect.fromLTRB(24.0, 70.0, 366.0, 91.0), tags: [RenderViewport.twoPane], label: "أدخل رقم جوالك. سنرسل رمزاً للتأكيد.", textDirection: rtl, indexInParent: 2):
+sign-in @390 text 1.0x ar midnight: contrast: Expected contrast ratio of at least 4.5 but found 1.14 for a font size of 14.0.
+sign-in @390 text 1.0x ar midnight: contrast: The computed colors was:
+sign-in @390 text 1.0x ar midnight: contrast: light - Color(alpha: 1.0000, red: 0.1176, green: 0.1098, blue: 0.1059, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.0588, green: 0.0549, blue: 0.0510, colorSpace: ColorSpace.sRGB)
+sign-in @390 text 1.0x ar midnight: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+menu @390 text 1.0x en glass: contrast: SemanticsNode#8(Rect.fromLTRB(278.0, 4.0, 342.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+menu @390 text 1.0x en glass: contrast: Expected contrast ratio of at least 4.5 but found 1.20 for a font size of 14.0.
+menu @390 text 1.0x en glass: contrast: The computed colors was:
+menu @390 text 1.0x en glass: contrast: light - Color(alpha: 1.0000, red: 0.9255, green: 0.9333, blue: 0.9608, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.8353, green: 0.8549, blue: 0.9137, colorSpace: ColorSpace.sRGB)
+menu @390 text 1.0x en glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+cart @390 text 1.0x en glass: contrast: SemanticsNode#7(Rect.fromLTRB(326.0, 4.0, 390.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+cart @390 text 1.0x en glass: contrast: Expected contrast ratio of at least 4.5 but found 1.09 for a font size of 14.0.
+cart @390 text 1.0x en glass: contrast: The computed colors was:
+cart @390 text 1.0x en glass: contrast: light - Color(alpha: 1.0000, red: 0.9294, green: 0.9373, blue: 0.9647, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.8863, green: 0.9020, blue: 0.9412, colorSpace: ColorSpace.sRGB)
+cart @390 text 1.0x en glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+checkout @390 text 1.0x en glass: contrast: SemanticsNode#16(Rect.fromLTRB(326.0, 4.0, 390.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+checkout @390 text 1.0x en glass: contrast: Expected contrast ratio of at least 4.5 but found 1.09 for a font size of 14.0.
+checkout @390 text 1.0x en glass: contrast: The computed colors was:
+checkout @390 text 1.0x en glass: contrast: light - Color(alpha: 1.0000, red: 0.9294, green: 0.9373, blue: 0.9647, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.8863, green: 0.9020, blue: 0.9412, colorSpace: ColorSpace.sRGB)
+checkout @390 text 1.0x en glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+tracking @390 text 1.0x en glass: contrast: SemanticsNode#7(Rect.fromLTRB(326.0, 4.0, 390.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+tracking @390 text 1.0x en glass: contrast: Expected contrast ratio of at least 4.5 but found 1.09 for a font size of 14.0.
+tracking @390 text 1.0x en glass: contrast: The computed colors was:
+tracking @390 text 1.0x en glass: contrast: light - Color(alpha: 1.0000, red: 0.9294, green: 0.9373, blue: 0.9647, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.8863, green: 0.9020, blue: 0.9412, colorSpace: ColorSpace.sRGB)
+tracking @390 text 1.0x en glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+assistant @390 text 1.0x en glass: contrast: SemanticsNode#23(Rect.fromLTRB(326.0, 4.0, 390.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+assistant @390 text 1.0x en glass: contrast: Expected contrast ratio of at least 4.5 but found 1.09 for a font size of 14.0.
+assistant @390 text 1.0x en glass: contrast: The computed colors was:
+assistant @390 text 1.0x en glass: contrast: light - Color(alpha: 1.0000, red: 0.9294, green: 0.9373, blue: 0.9647, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.8863, green: 0.9020, blue: 0.9412, colorSpace: ColorSpace.sRGB)
+assistant @390 text 1.0x en glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+sign-in @390 text 1.0x en glass: contrast: SemanticsNode#16(Rect.fromLTRB(326.0, 4.0, 390.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+sign-in @390 text 1.0x en glass: contrast: Expected contrast ratio of at least 4.5 but found 1.09 for a font size of 14.0.
+sign-in @390 text 1.0x en glass: contrast: The computed colors was:
+sign-in @390 text 1.0x en glass: contrast: light - Color(alpha: 1.0000, red: 0.9294, green: 0.9373, blue: 0.9647, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.8863, green: 0.9020, blue: 0.9412, colorSpace: ColorSpace.sRGB)
+sign-in @390 text 1.0x en glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+sign-up @390 text 1.0x en glass: contrast: SemanticsNode#20(Rect.fromLTRB(326.0, 4.0, 390.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+sign-up @390 text 1.0x en glass: contrast: Expected contrast ratio of at least 4.5 but found 1.09 for a font size of 14.0.
+sign-up @390 text 1.0x en glass: contrast: The computed colors was:
+sign-up @390 text 1.0x en glass: contrast: light - Color(alpha: 1.0000, red: 0.9294, green: 0.9373, blue: 0.9647, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.8863, green: 0.9020, blue: 0.9412, colorSpace: ColorSpace.sRGB)
+sign-up @390 text 1.0x en glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+home @390 text 1.0x ar glass: contrast: SemanticsNode#55(Rect.fromLTRB(0.0, 0.0, 81.2, 48.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable, hasSelectedState], label: "متوفر الآن", textDirection: rtl):
+home @390 text 1.0x ar glass: contrast: Expected contrast ratio of at least 4.5 but found 1.08 for a font size of 14.0.
+home @390 text 1.0x ar glass: contrast: The computed colors was:
+home @390 text 1.0x ar glass: contrast: light - Color(alpha: 1.0000, red: 0.9725, green: 0.9686, blue: 0.9647, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.9373, green: 0.9333, blue: 0.9294, colorSpace: ColorSpace.sRGB)
+home @390 text 1.0x ar glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+home @390 text 1.0x ar glass: contrast: SemanticsNode#59(Rect.fromLTRB(0.0, 0.0, 69.8, 48.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable, hasSelectedState], label: "المفضلة", textDirection: rtl):
+cart @390 text 1.0x ar glass: contrast: SemanticsNode#25(Rect.fromLTRB(29.0, 69.0, 93.0, 117.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "إزالة", textDirection: rtl):
+cart @390 text 1.0x ar glass: contrast: Expected contrast ratio of at least 4.5 but found 1.38 for a font size of 14.0.
+cart @390 text 1.0x ar glass: contrast: The computed colors was:
+cart @390 text 1.0x ar glass: contrast: light - Color(alpha: 1.0000, red: 0.8627, green: 0.9882, blue: 0.9059, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.6980, green: 0.8627, blue: 0.7569, colorSpace: ColorSpace.sRGB)
+cart @390 text 1.0x ar glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+checkout @390 text 1.0x ar glass: contrast: SemanticsNode#18(Rect.fromLTRB(204.5, 152.0, 341.0, 200.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "إضافة عنوان جديد", textDirection: rtl):
+checkout @390 text 1.0x ar glass: contrast: Expected contrast ratio of at least 4.5 but found 1.31 for a font size of 14.0.
+checkout @390 text 1.0x ar glass: contrast: The computed colors was:
+checkout @390 text 1.0x ar glass: contrast: light - Color(alpha: 1.0000, red: 0.9373, green: 0.9412, blue: 0.9490, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.8078, green: 0.8275, blue: 0.8863, colorSpace: ColorSpace.sRGB)
+checkout @390 text 1.0x ar glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+membership @390 text 1.0x ar glass: contrast: SemanticsNode#11(Rect.fromLTRB(0.0, 284.0, 390.0, 344.0), tags: [RenderViewport.twoPane], label: "مزاياك", textDirection: rtl, indexInParent: 2):
+membership @390 text 1.0x ar glass: contrast: Expected contrast ratio of at least 3.0 but found 1.05 for a font size of 22.0.
+membership @390 text 1.0x ar glass: contrast: The computed colors was:
+membership @390 text 1.0x ar glass: contrast: light - Color(alpha: 1.0000, red: 0.9255, green: 0.9333, blue: 0.9608, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.9020, green: 0.9137, blue: 0.9490, colorSpace: ColorSpace.sRGB)
+membership @390 text 1.0x ar glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+membership @390 text 1.0x ar glass: contrast: SemanticsNode#18(Rect.fromLTRB(0.0, 528.0, 390.0, 581.0), tags: [RenderViewport.twoPane], label: "تفاصيل الخطة", textDirection: rtl, indexInParent: 4):
+assistant @390 text 1.0x ar glass: contrast: SemanticsNode#8(Rect.fromLTRB(16.0, 178.0, 374.0, 203.0), tags: [RenderViewport.twoPane], label: "اسأل عن الأطباق والأسعار وطلبك.", textDirection: rtl, indexInParent: 2):
+assistant @390 text 1.0x ar glass: contrast: Expected contrast ratio of at least 4.5 but found 1.03 for a font size of 16.0.
+assistant @390 text 1.0x ar glass: contrast: The computed colors was:
+assistant @390 text 1.0x ar glass: contrast: light - Color(alpha: 1.0000, red: 0.8706, green: 0.8863, blue: 0.9333, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.8549, green: 0.8745, blue: 0.9255, colorSpace: ColorSpace.sRGB)
+assistant @390 text 1.0x ar glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+assistant @390 text 1.0x ar glass: contrast: SemanticsNode#10(Rect.fromLTRB(16.0, 227.0, 374.0, 248.0), tags: [RenderViewport.twoPane], label: "جرّب أحد هذه الأسئلة", textDirection: rtl, indexInParent: 4):
+sign-in @390 text 1.0x ar glass: contrast: SemanticsNode#7(Rect.fromLTRB(24.0, 70.0, 366.0, 91.0), tags: [RenderViewport.twoPane], label: "أدخل رقم جوالك. سنرسل رمزاً للتأكيد.", textDirection: rtl, indexInParent: 2):
+sign-in @390 text 1.0x ar glass: contrast: Expected contrast ratio of at least 4.5 but found 1.03 for a font size of 14.0.
+sign-in @390 text 1.0x ar glass: contrast: The computed colors was:
+sign-in @390 text 1.0x ar glass: contrast: light - Color(alpha: 1.0000, red: 0.8431, green: 0.8627, blue: 0.9176, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.8314, green: 0.8510, blue: 0.9098, colorSpace: ColorSpace.sRGB)
+sign-in @390 text 1.0x ar glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+sign-up @390 text 1.0x ar glass: contrast: SemanticsNode#7(Rect.fromLTRB(24.0, 46.0, 366.0, 84.0), tags: [RenderViewport.twoPane], label: "إنشاء حساب", textDirection: rtl, indexInParent: 2):
+sign-up @390 text 1.0x ar glass: contrast: Expected contrast ratio of at least 3.0 but found 1.03 for a font size of 28.0.
+sign-up @390 text 1.0x ar glass: contrast: The computed colors was:
+sign-up @390 text 1.0x ar glass: contrast: light - Color(alpha: 1.0000, red: 0.8431, green: 0.8627, blue: 0.9176, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.8275, green: 0.8510, blue: 0.9098, colorSpace: ColorSpace.sRGB)
+sign-up @390 text 1.0x ar glass: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+sign-up @390 text 1.0x ar glass: contrast: SemanticsNode#9(Rect.fromLTRB(24.0, 92.0, 366.0, 113.0), tags: [RenderViewport.twoPane], label: "الاسم ورقم الجوال. سنرسل رمزاً إلى جوالك.", textDirection: rtl, indexInParent: 4):
+menu @390 text 1.0x en glass_night: contrast: SemanticsNode#8(Rect.fromLTRB(278.0, 4.0, 342.0, 52.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "العربية", textDirection: ltr):
+menu @390 text 1.0x en glass_night: contrast: Expected contrast ratio of at least 4.5 but found 2.66 for a font size of 14.0.
+menu @390 text 1.0x en glass_night: contrast: The computed colors was:
+menu @390 text 1.0x en glass_night: contrast: light - Color(alpha: 1.0000, red: 0.3804, green: 0.4157, blue: 0.5216, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1529, green: 0.1647, blue: 0.2039, colorSpace: ColorSpace.sRGB)
+menu @390 text 1.0x en glass_night: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+home @390 text 1.0x ar glass_night: contrast: SemanticsNode#55(Rect.fromLTRB(0.0, 0.0, 81.2, 48.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable, hasSelectedState], label: "متوفر الآن", textDirection: rtl):
+home @390 text 1.0x ar glass_night: contrast: Expected contrast ratio of at least 4.5 but found 1.54 for a font size of 14.0.
+home @390 text 1.0x ar glass_night: contrast: The computed colors was:
+home @390 text 1.0x ar glass_night: contrast: light - Color(alpha: 1.0000, red: 0.2353, green: 0.2235, blue: 0.2118, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1020, green: 0.0941, blue: 0.0863, colorSpace: ColorSpace.sRGB)
+home @390 text 1.0x ar glass_night: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+cart @390 text 1.0x ar glass_night: contrast: SemanticsNode#22(Rect.fromLTRB(199.1, 471.0, 341.0, 519.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "إضافة أصناف أخرى", textDirection: rtl):
+cart @390 text 1.0x ar glass_night: contrast: Expected contrast ratio of at least 4.5 but found 1.23 for a font size of 14.0.
+cart @390 text 1.0x ar glass_night: contrast: The computed colors was:
+cart @390 text 1.0x ar glass_night: contrast: light - Color(alpha: 1.0000, red: 0.1922, green: 0.1961, blue: 0.2118, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.1412, green: 0.1373, blue: 0.1333, colorSpace: ColorSpace.sRGB)
+cart @390 text 1.0x ar glass_night: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+cart @390 text 1.0x ar glass_night: contrast: SemanticsNode#25(Rect.fromLTRB(29.0, 69.0, 93.0, 117.0), actions: [focus, tap], flags: [isButton, hasEnabledState, isEnabled, isFocusable], label: "إزالة", textDirection: rtl):
+sign-up @390 text 1.0x ar glass_night: contrast: SemanticsNode#7(Rect.fromLTRB(24.0, 46.0, 366.0, 84.0), tags: [RenderViewport.twoPane], label: "إنشاء حساب", textDirection: rtl, indexInParent: 2):
+sign-up @390 text 1.0x ar glass_night: contrast: Expected contrast ratio of at least 3.0 but found 1.01 for a font size of 28.0.
+sign-up @390 text 1.0x ar glass_night: contrast: The computed colors was:
+sign-up @390 text 1.0x ar glass_night: contrast: light - Color(alpha: 1.0000, red: 0.0627, green: 0.0941, blue: 0.1804, colorSpace: ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.0627, green: 0.0902, blue: 0.1725, colorSpace: ColorSpace.sRGB)
+sign-up @390 text 1.0x ar glass_night: contrast: See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html

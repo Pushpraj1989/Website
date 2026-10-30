@@ -80,12 +80,12 @@ class AppButton extends StatelessWidget {
   }
 
   _Colours _colours(BuildContext context, ButtonVariant v, bool enabled) {
-    if (!enabled) return const _Colours(bg: Tokens.surface, text: Tokens.textMuted, border: Tokens.border);
+    if (!enabled) return _Colours(bg: Tokens.fill, text: Tokens.textMuted, border: Tokens.border);
     return switch (v) {
       ButtonVariant.primary => _Colours(bg: context.accent, text: context.onAccent, border: context.accent),
-      ButtonVariant.secondary => const _Colours(bg: Tokens.bg, text: Tokens.text, border: Tokens.borderInput),
-      ButtonVariant.ghost => _Colours(bg: Colors.transparent, text: context.accent, border: Colors.transparent),
-      ButtonVariant.danger => const _Colours(bg: Tokens.bg, text: Tokens.danger, border: Tokens.danger),
+      ButtonVariant.secondary => _Colours(bg: Tokens.bg, text: Tokens.text, border: Tokens.borderInput),
+      ButtonVariant.ghost => _Colours(bg: Colors.transparent, text: context.accentFg, border: Colors.transparent),
+      ButtonVariant.danger => _Colours(bg: Tokens.bg, text: Tokens.danger, border: Tokens.danger),
     };
   }
 }

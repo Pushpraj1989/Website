@@ -35,7 +35,8 @@
     "address": {
       "en": "Placeholder address",
       "ar": "عنوان تجريبي"
-    }
+    },
+    "theme": "classic"
   },
   "categories": [
     {

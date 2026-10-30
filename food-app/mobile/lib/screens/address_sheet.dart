@@ -135,7 +135,7 @@ class _AddressSheetState extends State<AddressSheet> {
           if (zones == null)
             const Center(child: Padding(padding: EdgeInsets.all(Tokens.space3), child: CircularProgressIndicator()))
           else if (zones.isEmpty && _pin == null)
-            Text(s.noZones, style: const TextStyle(color: Tokens.danger))
+            Text(s.noZones, style: TextStyle(color: Tokens.danger))
           else if (_pin == null)
             DropdownButtonFormField<String>(
               initialValue: _zoneId,
@@ -153,7 +153,7 @@ class _AddressSheetState extends State<AddressSheet> {
             onChanged: widget.isFirst ? null : (v) => setState(() => _isDefault = v),
           ),
           if (_error != null)
-            Semantics(liveRegion: true, child: Padding(padding: const EdgeInsets.only(bottom: Tokens.space2), child: Text(_error!, style: const TextStyle(color: Tokens.danger)))),
+            Semantics(liveRegion: true, child: Padding(padding: const EdgeInsets.only(bottom: Tokens.space2), child: Text(_error!, style: TextStyle(color: Tokens.danger)))),
           FilledButton(
             style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(48)),
             onPressed: _busy || zones == null || (_pin == null && _zoneId == null) || _line1.text.trim().length < 3 ? null : _save,

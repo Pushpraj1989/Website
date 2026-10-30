@@ -4,6 +4,8 @@ import { cookies } from 'next/headers';
 import './globals.css';
 import { Header } from '@/components/Header';
 import type { Locale } from '@/lib/i18n.ts';
+import { getSettings } from '@/lib/restaurant-settings.ts';
+import { themeStyle } from '@/lib/theme.ts';
 
 // The page title is the restaurant's own name, from its settings.
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,8 +15,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const locale: Locale = (await cookies()).get('locale')?.value === 'ar' ? 'ar' : 'en';
+  // The restaurant's own theme and colour, from its settings in the admin.
+  const settings = await getSettings();
   return (
-    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} data-theme={settings.theme} data-glass={String(settings.theme.startsWith('glass'))} style={themeStyle(settings.theme, settings.brandColor) as React.CSSProperties}>
       <body>
         <a className="skip" href="#main">{locale === 'ar' ? 'تخطي إلى المحتوى' : 'Skip to content'}</a>
         <Header locale={locale} />

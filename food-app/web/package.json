@@ -11,7 +11,7 @@
     "build": "next build",
     "start": "next start -p 3100",
     "test": "npm run test:unit && npm run test:api && npm run test:db && npm run test:e2e",
-    "test:unit": "node --test test/unit.test.ts",
+    "test:unit": "node --test test/unit.test.ts test/theme.test.ts",
     "test:db": "node test/rls.test.mjs",
     "test:api": "node test/e2e-api.mjs",
     "test:browser": "node test/browser-flow.mjs",

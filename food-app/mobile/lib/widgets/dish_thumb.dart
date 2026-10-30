@@ -26,7 +26,7 @@ class DishImage extends StatelessWidget {
       fit: fit,
       cacheWidth: cacheWidth,
       semanticLabel: '',
-      loadingBuilder: (context, child, progress) => progress == null ? child : SizedBox(width: width, height: height, child: const ColoredBox(color: Tokens.surface)),
+      loadingBuilder: (context, child, progress) => progress == null ? child : SizedBox(width: width, height: height, child: ColoredBox(color: Tokens.fill)),
       errorBuilder: (_, _, _) => fallback,
     );
   }
