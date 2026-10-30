@@ -2,7 +2,7 @@
 import type { PoolClient } from 'pg';
 import { pool } from './db.ts';
 
-export type AuditTarget = 'campaign' | 'voucher' | 'partner' | 'batch';
+export type AuditTarget = 'campaign' | 'voucher' | 'partner' | 'batch' | 'restaurant';
 
 export async function recordAudit(c: { query: PoolClient['query'] } = pool, actor: string, action: string, targetType: AuditTarget, targetId: string | null, detail: Record<string, unknown> = {}) {
   await c.query(

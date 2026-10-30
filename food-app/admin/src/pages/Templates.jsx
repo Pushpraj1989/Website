@@ -23,13 +23,16 @@ const STATUS = { draft: 'Draft', published: 'Published', archived: 'Archived' };
 const SAMPLE = {
   'voucher.code': 'SAMPLE-1234', 'voucher.discount': '30% OFF', 'voucher.expiry_date': '31 Dec 2026',
   'voucher.terms': 'Sample terms.', 'voucher.serial_number': 'SN-0001', 'campaign.name': 'Sample campaign',
-  'restaurant.name': 'Sample Kitchen', 'customer.name': 'Customer name', 'voucher.qr': '',
+  'restaurant.name': 'Restaurant name', 'customer.name': 'Customer name', 'voucher.qr': '',
 };
 const fillSample = (text) => text.replace(/\{\{([^}]*)\}\}/g, (_m, key) => SAMPLE[key] ?? '');
+// The canvas shows the restaurant's own name, from its settings.
+const setSampleName = (name) => { if (name) SAMPLE['restaurant.name'] = name; };
 // One point is 0.3528 mm. Text is sized from the page's own scale, so it keeps its proportions at any width.
 const PT_TO_MM = 0.3528;
 
-export default function Templates() {
+export default function Templates({ restaurantName }) {
+  setSampleName(restaurantName);
   const [templates, setTemplates] = useState(null);
   const [selected, setSelected] = useState(null);
   const [creating, setCreating] = useState(false);

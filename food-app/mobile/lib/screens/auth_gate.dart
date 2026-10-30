@@ -4,7 +4,9 @@ import '../auth/auth_api.dart';
 import '../auth/biometrics.dart';
 import '../auth/session_store.dart';
 import '../core/api.dart';
+import '../core/brand.dart';
 import '../core/models.dart';
+import '../core/strings.dart';
 import '../core/theme.dart';
 import '../widgets/app_button.dart';
 import 'main_shell.dart';
@@ -58,7 +60,9 @@ class _AuthGateState extends State<AuthGate> {
         return _go(SignUpScreen(auth: widget.auth, sessions: widget.sessions, biometrics: widget.biometrics, api: widget.api, language: widget.language, resumeAtEmail: true));
       }
       if (await widget.sessions.faceIdEnabled() && await widget.biometrics.faceIdAvailable()) {
-        final unlocked = await widget.biometrics.authenticate('Unlock Sample Kitchen');
+        final brand = mounted ? BrandScope.of(context) : null;
+        final s = Strings(widget.language.value);
+        final unlocked = await widget.biometrics.authenticate(s.unlockReason(brand?.name.of(s.lang) ?? ''));
         if (!unlocked) return _go(_signIn());
       }
       return _go(MainShell(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions));

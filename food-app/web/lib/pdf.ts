@@ -221,7 +221,7 @@ export function buildPdf(pages: PageOps[], images: PdfImage[], title: string): B
   put(pagesRoot, `<< /Type /Pages /Kids [${pageIds.map((id) => `${id} 0 R`).join(' ')}] /Count ${pageIds.length} >>`);
   put(catalog, `<< /Type /Catalog /Pages ${pagesRoot} 0 R >>`);
   const info = reserve();
-  put(info, `<< /Title (${escapeString(title)}) /Producer (Sample Kitchen voucher print) >>`);
+  put(info, `<< /Title (${escapeString(title)}) /Producer (Voucher print) >>`);
 
   const parts: Buffer[] = [Buffer.from('%PDF-1.4\n%\xe2\xe3\xcf\xd3\n', 'latin1')];
   let offset = parts[0].length;

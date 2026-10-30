@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../core/theme.dart';
+import '../core/brand.dart';
 
 /// Six boxes over one real text field. The field does the typing, so iOS can offer the SMS code, paste works,
 /// and a screen reader hears one "verification code" field. The boxes only show what was typed.
@@ -106,7 +107,7 @@ class _Box extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final border = active ? Tokens.accent : (filled ? Tokens.borderInput : Tokens.border);
+    final border = active ? context.accent : (filled ? Tokens.borderInput : Tokens.border);
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       width: 44,

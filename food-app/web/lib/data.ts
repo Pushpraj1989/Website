@@ -249,7 +249,7 @@ export async function getMenu() {
      from categories c
      join menu_items i on i.category_id = c.id
      left join lateral (select m.storage_key from product_media pm join media m on m.id = pm.media_id
-       where pm.menu_item_id = i.id and pm.is_primary limit 1) m on true
+       where pm.menu_item_id = i.id and m.kind = 'image' order by pm.is_primary desc, pm.position limit 1) m on true
      where c.restaurant_id = $1 and c.active
      order by c.sort_order, i.sort_order`,
     [restaurantId],
@@ -293,8 +293,12 @@ export async function activeOffers() {
 export async function getItems(ids: string[]): Promise<Map<string, MenuItem>> {
   if (ids.length === 0) return new Map();
   const { rows } = await pool.query(
-    `select id, category_id, name_en, name_ar, description_en, description_ar, base_price_minor, available
-     from menu_items where id = any($1::uuid[])`,
+    `select i.id, i.category_id, i.name_en, i.name_ar, i.description_en, i.description_ar, i.base_price_minor, i.available,
+            m.storage_key
+     from menu_items i
+     left join lateral (select m.storage_key from product_media pm join media m on m.id = pm.media_id
+       where pm.menu_item_id = i.id and m.kind = 'image' order by pm.is_primary desc, pm.position limit 1) m on true
+     where i.id = any($1::uuid[])`,
     [ids],
   );
   return new Map(
@@ -307,7 +311,8 @@ export async function getItems(ids: string[]): Promise<Map<string, MenuItem>> {
         description: { en: r.description_en, ar: r.description_ar },
         priceMinor: r.base_price_minor,
         soldOut: !r.available,
-        imageUrl: null,
+        // The dish's cover picture, the same one the menu shows.
+        imageUrl: r.storage_key ? `/media/${r.storage_key}` : null,
       } satisfies MenuItem,
     ]),
   );

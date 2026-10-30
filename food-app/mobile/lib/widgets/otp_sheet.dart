@@ -6,6 +6,7 @@ import '../auth/auth_api.dart';
 import '../core/models.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../core/brand.dart';
 import 'app_button.dart';
 import 'otp_input.dart';
 
@@ -152,7 +153,7 @@ class _OtpSheetState extends State<_OtpSheet> {
                   width: 52,
                   height: 52,
                   decoration: const BoxDecoration(color: Tokens.surface, shape: BoxShape.circle),
-                  child: const Icon(Icons.lock_outline, color: Tokens.accent, size: 26),
+                  child: Icon(Icons.lock_outline, color: context.accent, size: 26),
                 ),
               ),
               const SizedBox(height: Tokens.space3),

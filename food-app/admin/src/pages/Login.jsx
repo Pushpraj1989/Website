@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { api } from '../api.js';
 
-export default function Login({ onSignedIn }) {
+export default function Login({ brand, onSignedIn }) {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -22,6 +22,9 @@ export default function Login({ onSignedIn }) {
   return (
     <main className="login">
       <form className="card stack" onSubmit={submit}>
+        {brand ? (
+          <div className="brand">{brand.logoUrl ? <img className="brand-logo" src={brand.logoUrl} alt="" /> : null}<span>{brand.name.en}</span></div>
+        ) : null}
         <h1>Staff sign-in</h1>
         <p className="muted">Sign in to manage the menu, pictures and offers.</p>
         <label>

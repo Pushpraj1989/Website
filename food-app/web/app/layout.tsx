@@ -1,10 +1,15 @@
 import type { Metadata } from 'next';
+import { getRestaurant } from '@/lib/data.ts';
 import { cookies } from 'next/headers';
 import './globals.css';
 import { Header } from '@/components/Header';
 import type { Locale } from '@/lib/i18n.ts';
 
-export const metadata: Metadata = { title: 'Sample Kitchen', description: 'Order from Sample Kitchen' };
+// The page title is the restaurant's own name, from its settings.
+export async function generateMetadata(): Promise<Metadata> {
+  const restaurant = await getRestaurant();
+  return { title: restaurant.name.en, description: `Order from ${restaurant.name.en}` };
+}
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const locale: Locale = (await cookies()).get('locale')?.value === 'ar' ? 'ar' : 'en';

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ChartColumn, ClipboardList, Bot, Handshake, LayoutGrid, LogOut, Map as MapIcon, Megaphone, Menu, Palette, Percent, Tags, UtensilsCrossed, X } from 'lucide-react';
+import { ChartColumn, Store, ClipboardList, Bot, Handshake, LayoutGrid, LogOut, Map as MapIcon, Megaphone, Menu, Palette, Percent, Tags, UtensilsCrossed, X } from 'lucide-react';
 import { api } from './api.js';
 import Login from './pages/Login.jsx';
 import Products from './pages/Products.jsx';
@@ -13,6 +13,7 @@ import Promotions from './pages/Promotions.jsx';
 import Zones from './pages/Zones.jsx';
 import Orders from './pages/Orders.jsx';
 import AiSettings from './pages/AiSettings.jsx';
+import Settings from './pages/Settings.jsx';
 
 const SECTIONS = [
   { id: 'orders', label: 'Orders', short: 'Orders', Icon: ClipboardList },
@@ -26,6 +27,7 @@ const SECTIONS = [
   { id: 'promotions', label: 'Promotions', Icon: Tags },
   { id: 'zones', label: 'Delivery areas', Icon: MapIcon },
   { id: 'assistant', label: 'Assistant', Icon: Bot },
+  { id: 'restaurant', label: 'Restaurant', Icon: Store },
 ];
 // The phone's tab bar holds the four sections staff open most; the rest are under More.
 const TABS = ['orders', 'products', 'campaigns', 'reports'];
@@ -68,6 +70,7 @@ export default function App() {
   const [section, setSection] = useState(currentSection());
   const [catalog, setCatalog] = useState(null);
   const [loadError, setLoadError] = useState('');
+  const [brand, setBrand] = useState(null);
   const mainRef = useRef(null);
   const moreRef = useRef(null);
   useCardTables(mainRef, signedIn);
@@ -83,7 +86,20 @@ export default function App() {
     }
   }, []);
 
+  // The restaurant's own name, logo and colour, from its settings. The console takes the colour as its accent.
+  const loadBrand = useCallback(async () => {
+    try {
+      const { brand: b } = await api.brand();
+      setBrand(b);
+      document.title = `${b.name.en} · Admin`;
+      document.documentElement.style.setProperty('--accent', b.color);
+    } catch {
+      // The console still works with its own default look.
+    }
+  }, []);
+
   useEffect(() => {
+    loadBrand();
     reload();
     const onHash = () => {
       setSection(currentSection());
@@ -95,7 +111,7 @@ export default function App() {
   }, [reload]);
 
   if (signedIn === null) return <p className="pad muted">Loading…</p>;
-  if (!signedIn) return <Login onSignedIn={reload} />;
+  if (!signedIn) return <Login brand={brand} onSignedIn={reload} />;
 
   async function signOut() {
     // Ending the staff session is done by letting the cookie expire; the console shows the sign-in page again.
@@ -116,12 +132,12 @@ export default function App() {
   return (
     <div className="shell">
       <aside className="side">
-        <div className="brand">Sample Kitchen</div>
+        <div className="brand">{brand?.logoUrl ? <img className="brand-logo" src={brand.logoUrl} alt="" /> : null}<span>{brand?.name.en ?? ''}</span></div>
         {navLinks}
         <button type="button" className="btn ghost block" onClick={signOut}>Sign out</button>
       </aside>
       <header className="appbar">
-        <span className="title">Sample Kitchen</span>
+        <span className="title brand">{brand?.logoUrl ? <img className="brand-logo" src={brand.logoUrl} alt="" /> : null}<span>{brand?.name.en ?? ''}</span></span>
         <button type="button" className="btn ghost sm" onClick={signOut} aria-label="Sign out"><LogOut className="icon" aria-hidden="true" /></button>
       </header>
       <nav className="tabbar" aria-label="Main sections">
@@ -152,13 +168,14 @@ export default function App() {
         {catalog && section === 'categories' ? <Categories catalog={catalog} onChanged={reload} /> : null}
         {catalog && section === 'offers' ? <Offers catalog={catalog} onChanged={reload} /> : null}
         {catalog && section === 'campaigns' ? <Campaigns /> : null}
-        {catalog && section === 'designs' ? <Templates /> : null}
+        {catalog && section === 'designs' ? <Templates restaurantName={brand?.name.en} /> : null}
         {catalog && section === 'partners' ? <Partners /> : null}
         {catalog && section === 'reports' ? <Reports /> : null}
         {catalog && section === 'promotions' ? <Promotions catalog={catalog} /> : null}
         {section === 'zones' ? <Zones /> : null}
         {section === 'orders' ? <Orders /> : null}
         {catalog && section === 'assistant' ? <AiSettings /> : null}
+        {section === 'restaurant' ? <Settings onBrandChanged={loadBrand} /> : null}
       </main>
     </div>
   );

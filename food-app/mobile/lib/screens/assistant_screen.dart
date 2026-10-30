@@ -7,6 +7,7 @@ import '../core/money.dart';
 import '../core/art.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../core/brand.dart';
 import '../widgets/app_button.dart';
 import 'order_screen.dart';
 
@@ -111,8 +112,8 @@ class _AssistantScreenState extends State<AssistantScreen> {
         child: Container(
           margin: const EdgeInsets.only(bottom: Tokens.space2),
           padding: const EdgeInsets.all(Tokens.space3),
-          decoration: BoxDecoration(color: Tokens.accent, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
-          child: Text(t.text!, style: const TextStyle(color: Tokens.onAccent)),
+          decoration: BoxDecoration(color: context.accent, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
+          child: Text(t.text!, style: TextStyle(color: context.onAccent)),
         ),
       );
     }

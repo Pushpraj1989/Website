@@ -205,6 +205,11 @@ class DemoServer {
         throw const _Refused('Address search is not configured yet.', 'places_unavailable', 503);
       case ('GET', '/v1/customer/home'):
         return _ok(_home());
+      case ('GET', '/v1/brand'):
+        return _ok({'brand': _snap['brand']});
+      case ('GET', '/v1/home'):
+        // Published promotions are pictures and videos on the server, which the demo does not have.
+        return _ok({'hero': <Object>[], 'midFeed': <Object>[]});
       case ('GET', '/v1/membership'):
         return _ok(_snap['membership'] as Map<String, dynamic>);
       case ('POST', '/v1/ai/ask'):
@@ -260,6 +265,7 @@ class DemoServer {
 
   Map<String, dynamic> _menu() => {
         'restaurant': _restaurant['name'],
+        if (_snap['brand'] != null) 'brand': _snap['brand'],
         'currency': _currency,
         'categories': _snap['categories'],
         'offers': _snap['menuOffers'],

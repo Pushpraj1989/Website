@@ -40,8 +40,9 @@ class Tokens {
   static const cartBarHeight = 64.0;
 }
 
-ThemeData buildTheme() {
-  final scheme = ColorScheme.fromSeed(seedColor: Tokens.accent, primary: Tokens.accent, onPrimary: Tokens.onAccent, surface: Tokens.bg, onSurface: Tokens.text, error: Tokens.danger);
+/// The app's theme in the restaurant's colour. [accent] is the brand colour from the restaurant's settings.
+ThemeData buildTheme({Color accent = Tokens.accent}) {
+  final scheme = ColorScheme.fromSeed(seedColor: accent, primary: accent, onPrimary: Tokens.onAccent, surface: Tokens.bg, onSurface: Tokens.text, error: Tokens.danger);
   // Headings use Fraunces, a free serif (SIL Open Font License). Body text is the bundled Roboto, and Arabic falls back to
   // the bundled Noto Sans Arabic (OFL), so text is the same on every phone and the web build needs no font downloads.
   final base = Typography.material2021().black.apply(fontFamily: 'Roboto', fontFamilyFallback: const ['NotoSansArabic']);
@@ -59,7 +60,7 @@ ThemeData buildTheme() {
     appBarTheme: const AppBarTheme(backgroundColor: Tokens.bg, foregroundColor: Tokens.text, elevation: 0, surfaceTintColor: Colors.transparent),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        backgroundColor: Tokens.accent,
+        backgroundColor: accent,
         foregroundColor: Tokens.onAccent,
         minimumSize: const Size(48, 48),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Tokens.radiusMd)),

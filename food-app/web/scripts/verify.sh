@@ -27,7 +27,7 @@ step() {
 }
 
 step "type check (web)"            npx tsc --noEmit -p .
-for suite in test/vouchers.test.mjs test/campaigns.test.ts test/templates.test.ts test/print.test.ts test/wallet.test.ts test/checkout-offers.test.ts test/partners.test.ts test/reporting.test.ts test/gates.test.ts; do
+for suite in test/vouchers.test.mjs test/campaigns.test.ts test/templates.test.ts test/print.test.ts test/wallet.test.ts test/checkout-offers.test.ts test/partners.test.ts test/reporting.test.ts test/gates.test.ts test/branding.test.ts; do
   step "database: $suite"          node --test "$suite"
 done
 step "unit tests"                  node --test test/unit.test.ts

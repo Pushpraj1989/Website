@@ -12,6 +12,7 @@ import * as data from '../lib/data.ts';
 import { offerRules } from '../lib/discounts.ts';
 import { listPlans } from '../lib/membership.ts';
 import { codeOf, discountText } from '../lib/print.ts';
+import { publicBrand } from '../lib/restaurant-settings.ts';
 
 const OUT = fileURLToPath(new URL('../../mobile/assets/demo/snapshot.json', import.meta.url));
 const VOUCHERS = Number(process.env.DEMO_VOUCHERS ?? 3);
@@ -54,6 +55,9 @@ async function main() {
     if (r) rules[id] = { ...r, startsAt: r.startsAt.toISOString(), endsAt: r.endsAt.toISOString() };
   }
 
+  // The demo runs with no server, so it cannot load the logo file; it shows the name, in the brand's colour.
+  const brand = { ...(await publicBrand()), logoUrl: null };
+
   const snapshot = {
     source: {
       exportedAt: new Date().toISOString(),
@@ -70,6 +74,7 @@ async function main() {
       // Card needs a payment provider, which the demo does not have, so it is off whatever the database says.
       payments: { cod: restaurant.payments.cod, payOnArrival: restaurant.payments.payOnArrival, card: false },
     },
+    brand,
     categories: categories.map((c) => ({ ...c, items: c.items.map((i) => ({ ...i, imageUrl: null })) })),
     menuOffers,
     zones: zones.rows.map((z) => ({

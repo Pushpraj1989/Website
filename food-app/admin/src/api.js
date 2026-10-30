@@ -23,6 +23,15 @@ async function request(method, path, body, headers = {}) {
 
 export const api = {
   signIn: (password) => request('POST', '/v1/admin/session', { password }),
+  brand: () => request('GET', '/v1/brand'),
+  settings: () => request('GET', '/v1/admin/restaurant'),
+  saveSettings: (body) => request('PUT', '/v1/admin/restaurant', body),
+  uploadLogo: (file) => {
+    const form = new FormData();
+    form.append('file', file);
+    return request('POST', '/v1/admin/restaurant/logo', form);
+  },
+  removeLogo: () => request('DELETE', '/v1/admin/restaurant/logo'),
   catalog: () => request('GET', '/v1/admin/catalog'),
   createCategory: (body) => request('POST', '/v1/admin/categories', body),
   updateCategory: (id, body) => request('PATCH', `/v1/admin/categories/${id}`, body),

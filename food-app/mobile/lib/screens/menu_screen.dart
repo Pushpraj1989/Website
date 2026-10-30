@@ -6,6 +6,7 @@ import '../core/models.dart';
 import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../core/brand.dart';
 import '../widgets/ask_button.dart';
 import '../widgets/dish_thumb.dart';
 import 'cart_screen.dart';
@@ -51,7 +52,7 @@ class _MenuScreenState extends State<MenuScreen> {
             final menu = snapshot.data;
             return Scaffold(
               appBar: AppBar(
-                title: Text(menu?.restaurant.of(s.lang) ?? s.restaurantFallback),
+                title: Text(BrandScope.of(context)?.name.of(s.lang) ?? menu?.restaurant.of(s.lang) ?? ''),
                 actions: [
                   AskButton(api: widget.api, language: widget.language, s: s),
                   TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language)),
@@ -117,7 +118,7 @@ class _ItemRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          DishThumb(illustration: illustration),
+          DishThumb(illustration: illustration, imageUrl: item.imageUrl),
           const SizedBox(width: Tokens.space3),
           Expanded(
             child: Column(
@@ -142,7 +143,7 @@ class _ItemRow extends StatelessWidget {
               message: s.addDish(name),
               child: IconButton.filledTonal(
                 onPressed: onAdd,
-                style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: Tokens.accentSoft, foregroundColor: Tokens.accent),
+                style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: context.accentSoft, foregroundColor: context.accent),
                 icon: const Icon(Icons.add),
                 tooltip: s.addDish(name),
               ),

@@ -1,6 +1,6 @@
 {
   "source": {
-    "exportedAt": "2026-10-30T07:54:31.210Z",
+    "exportedAt": "2026-10-30T11:56:53.134Z",
     "by": "food-app/web/scripts/export-demo-snapshot.ts",
     "note": "Read from the database with the functions the API uses. Do not edit by hand; export again instead."
   },
@@ -18,6 +18,23 @@
       "cod": true,
       "payOnArrival": true,
       "card": false
+    }
+  },
+  "brand": {
+    "name": {
+      "en": "Sample Kitchen",
+      "ar": "مطبخ تجريبي"
+    },
+    "tagline": {
+      "en": "",
+      "ar": ""
+    },
+    "logoUrl": null,
+    "color": "#B45309",
+    "phone": "+971000000000",
+    "address": {
+      "en": "Placeholder address",
+      "ar": "عنوان تجريبي"
     }
   },
   "categories": [
@@ -159,7 +176,7 @@
   ],
   "menuOffers": [
     {
-      "id": "0c8a872c-af9c-49d8-8f03-e784b9b201b8",
+      "id": "1467bd6e-48a6-4f24-b5cf-d0fc97bcdd22",
       "name": {
         "en": "Welcome 10% off",
         "ar": "خصم ترحيبي 10%"
@@ -167,10 +184,10 @@
       "type": "percent",
       "value": 1000,
       "code": "WELCOME10",
-      "endsAt": "2026-11-29T06:54:30.000Z"
+      "endsAt": "2026-11-29T10:56:52.000Z"
     },
     {
-      "id": "befe40a1-2bf0-497b-bbf8-58a36b471312",
+      "id": "472dc4c1-2389-4f2b-9646-ab547ba1fff9",
       "name": {
         "en": "AED 5 off",
         "ar": "خصم 5 دراهم"
@@ -178,10 +195,10 @@
       "type": "fixed",
       "value": 500,
       "code": null,
-      "endsAt": "2026-11-29T06:54:30.000Z"
+      "endsAt": "2026-11-29T10:56:52.000Z"
     },
     {
-      "id": "d6f21c21-d847-4cad-a431-b3c61ef36a95",
+      "id": "59efbad2-7d83-4428-8cfd-e3390a6caed4",
       "name": {
         "en": "Free delivery",
         "ar": "توصيل مجاني"
@@ -189,7 +206,7 @@
       "type": "free_delivery",
       "value": 0,
       "code": "FREEDEL",
-      "endsAt": "2026-11-29T06:54:30.000Z"
+      "endsAt": "2026-11-29T10:56:52.000Z"
     }
   ],
   "zones": [
@@ -228,7 +245,7 @@
   ],
   "offers": [
     {
-      "id": "d6f21c21-d847-4cad-a431-b3c61ef36a95",
+      "id": "59efbad2-7d83-4428-8cfd-e3390a6caed4",
       "code": "FREEDEL",
       "name": {
         "en": "Free delivery",
@@ -237,7 +254,7 @@
       "campaign": "Pilot: Free delivery"
     },
     {
-      "id": "0c8a872c-af9c-49d8-8f03-e784b9b201b8",
+      "id": "1467bd6e-48a6-4f24-b5cf-d0fc97bcdd22",
       "code": "WELCOME10",
       "name": {
         "en": "Welcome 10% off",
@@ -247,8 +264,8 @@
     }
   ],
   "rules": {
-    "d6f21c21-d847-4cad-a431-b3c61ef36a95": {
-      "id": "d6f21c21-d847-4cad-a431-b3c61ef36a95",
+    "59efbad2-7d83-4428-8cfd-e3390a6caed4": {
+      "id": "59efbad2-7d83-4428-8cfd-e3390a6caed4",
       "type": "free_delivery",
       "value": 0,
       "appliesTo": "order",
@@ -259,13 +276,13 @@
       "usedCount": 0,
       "perCustomerLimit": null,
       "maxDiscountMinor": null,
-      "startsAt": "2026-10-30T06:54:30.000Z",
-      "endsAt": "2026-11-29T06:54:30.000Z",
+      "startsAt": "2026-10-30T10:56:52.000Z",
+      "endsAt": "2026-11-29T10:56:52.000Z",
       "active": true,
       "campaignStatus": "active"
     },
-    "0c8a872c-af9c-49d8-8f03-e784b9b201b8": {
-      "id": "0c8a872c-af9c-49d8-8f03-e784b9b201b8",
+    "1467bd6e-48a6-4f24-b5cf-d0fc97bcdd22": {
+      "id": "1467bd6e-48a6-4f24-b5cf-d0fc97bcdd22",
       "type": "percent",
       "value": 1000,
       "appliesTo": "order",
@@ -276,13 +293,13 @@
       "usedCount": 0,
       "perCustomerLimit": 1,
       "maxDiscountMinor": 2000,
-      "startsAt": "2026-10-30T06:54:30.000Z",
-      "endsAt": "2026-11-29T06:54:30.000Z",
+      "startsAt": "2026-10-30T10:56:52.000Z",
+      "endsAt": "2026-11-29T10:56:52.000Z",
       "active": true,
       "campaignStatus": "active"
     },
-    "befe40a1-2bf0-497b-bbf8-58a36b471312": {
-      "id": "befe40a1-2bf0-497b-bbf8-58a36b471312",
+    "472dc4c1-2389-4f2b-9646-ab547ba1fff9": {
+      "id": "472dc4c1-2389-4f2b-9646-ab547ba1fff9",
       "type": "fixed",
       "value": 500,
       "appliesTo": "order",
@@ -293,39 +310,39 @@
       "usedCount": 0,
       "perCustomerLimit": null,
       "maxDiscountMinor": null,
-      "startsAt": "2026-10-30T06:54:30.000Z",
-      "endsAt": "2026-11-29T06:54:30.000Z",
+      "startsAt": "2026-10-30T10:56:52.000Z",
+      "endsAt": "2026-11-29T10:56:52.000Z",
       "active": true,
       "campaignStatus": "active"
     }
   },
   "vouchers": [
     {
-      "code": "PLT-6820-ZR",
-      "offerId": "befe40a1-2bf0-497b-bbf8-58a36b471312",
+      "code": "PLT-1531-XD",
+      "offerId": "472dc4c1-2389-4f2b-9646-ab547ba1fff9",
       "campaign": "Pilot: AED 5 vouchers",
       "discount": "AED 5.00 OFF",
       "minOrderMinor": 2500,
       "currency": "AED",
-      "expiresAt": "2026-11-29T06:54:30.000Z"
+      "expiresAt": "2026-11-29T10:56:52.000Z"
     },
     {
-      "code": "PLT-0090-AZ",
-      "offerId": "befe40a1-2bf0-497b-bbf8-58a36b471312",
+      "code": "PLT-5918-QN",
+      "offerId": "472dc4c1-2389-4f2b-9646-ab547ba1fff9",
       "campaign": "Pilot: AED 5 vouchers",
       "discount": "AED 5.00 OFF",
       "minOrderMinor": 2500,
       "currency": "AED",
-      "expiresAt": "2026-11-29T06:54:30.000Z"
+      "expiresAt": "2026-11-29T10:56:52.000Z"
     },
     {
-      "code": "PLT-3412-DZ",
-      "offerId": "befe40a1-2bf0-497b-bbf8-58a36b471312",
+      "code": "PLT-3358-HQ",
+      "offerId": "472dc4c1-2389-4f2b-9646-ab547ba1fff9",
       "campaign": "Pilot: AED 5 vouchers",
       "discount": "AED 5.00 OFF",
       "minOrderMinor": 2500,
       "currency": "AED",
-      "expiresAt": "2026-11-29T06:54:30.000Z"
+      "expiresAt": "2026-11-29T10:56:52.000Z"
     }
   ],
   "membership": {

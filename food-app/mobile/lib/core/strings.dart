@@ -85,7 +85,6 @@ class Strings {
   String get genericError => isArabic ? 'حدث خطأ. حاول مرة أخرى.' : 'Something went wrong. Please try again.';
   String get retry => isArabic ? 'إعادة المحاولة' : 'Try again';
   String get language => isArabic ? 'English' : 'العربية';
-  String get restaurantFallback => isArabic ? 'مطبخ تجريبي' : 'Sample Kitchen';
   String get home => isArabic ? 'الرئيسية' : 'Home';
   String get customise => isArabic ? 'تخصيص' : 'Customise';
   String get customiseTitle => isArabic ? 'خصص لوحتك' : 'Customise your home';
@@ -129,7 +128,7 @@ class Strings {
   String get faceIdBody => isArabic ? 'يمكنك فتح التطبيق بوجهك بدلاً من الرمز.' : 'Open the app with your face instead of a code.';
   String get notNow => isArabic ? 'ليس الآن' : 'Not now';
   String get turnOn => isArabic ? 'تفعيل' : 'Turn on';
-  String get unlockReason => isArabic ? 'افتح تطبيق مطبخ تجريبي' : 'Unlock Sample Kitchen';
+  String unlockReason(String restaurant) => isArabic ? 'افتح تطبيق $restaurant' : 'Unlock $restaurant';
   String get signOut => isArabic ? 'تسجيل الخروج' : 'Sign out';
   String get skipEmail => isArabic ? 'لاحقاً' : 'Later';
   String get askTitle => isArabic ? 'اسأل المطعم' : 'Ask the restaurant';

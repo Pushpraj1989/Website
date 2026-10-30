@@ -150,6 +150,17 @@ code { background: var(--surface); padding: 2px 6px; border-radius: 6px; font-si
 .stat { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 12px 14px; display: grid; gap: 2px; }
 .stat strong { font-size: 22px; font-variant-numeric: tabular-nums; }
 
+/* Restaurant settings: the logo preview and the colour sample. */
+.logo-preview { width: 88px; height: 88px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface); display: grid; place-items: center; overflow: hidden; flex: none; }
+.logo-preview img { width: 100%; height: 100%; object-fit: contain; }
+.logo-preview span { font-size: 36px; font-weight: 700; color: var(--muted); }
+.brand-sample { display: flex; align-items: flex-end; }
+.brand-sample .sample-btn { background: var(--sample); border-color: var(--sample); pointer-events: none; }
+.brand-logo { width: 32px; height: 32px; border-radius: 8px; object-fit: contain; background: var(--bg); flex: none; }
+.brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.brand span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+input[type=color] { padding: 4px; height: 44px; cursor: pointer; }
+
 /* ---------- Phone: an app layout, not a shrunken web page ---------- */
 .appbar, .tabbar { display: none; }
 .icon { width: 20px; height: 20px; flex: none; }

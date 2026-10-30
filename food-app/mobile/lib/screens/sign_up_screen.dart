@@ -9,6 +9,7 @@ import '../core/api.dart';
 import '../core/models.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../core/brand.dart';
 import '../widgets/app_button.dart';
 import '../widgets/otp_sheet.dart';
 import 'main_shell.dart';
@@ -193,7 +194,7 @@ class _StepDots extends StatelessWidget {
               child: Container(
                 height: 6,
                 decoration: BoxDecoration(
-                  color: i <= step ? Tokens.accent : Tokens.border,
+                  color: i <= step ? context.accent : Tokens.border,
                   borderRadius: BorderRadius.circular(3),
                 ),
               ),

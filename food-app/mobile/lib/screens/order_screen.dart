@@ -8,6 +8,7 @@ import '../core/models.dart';
 import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../core/brand.dart';
 
 // S10: order status. Polls every 5 seconds; the web app and this screen read the same order.
 class OrderScreen extends StatefulWidget {
@@ -93,7 +94,7 @@ class _OrderScreenState extends State<OrderScreen> {
           Container(
             margin: const EdgeInsets.only(bottom: Tokens.space2),
             padding: const EdgeInsetsDirectional.only(start: Tokens.space3),
-            decoration: BoxDecoration(border: BorderDirectional(start: BorderSide(color: i == current ? Tokens.accent : Tokens.border, width: 2))),
+            decoration: BoxDecoration(border: BorderDirectional(start: BorderSide(color: i == current ? context.accent : Tokens.border, width: 2))),
             child: Text(
               s.statusLabel(steps[i]),
               style: TextStyle(fontWeight: i == current ? FontWeight.w600 : FontWeight.w400),

@@ -11,13 +11,26 @@ class Localised {
   String of(String languageCode) => languageCode == 'ar' ? ar : en;
 }
 
+/// Where the server's media files live. The API client sets it; models turn the server's relative media paths into
+/// full addresses with it.
+class MediaUrls {
+  const MediaUrls._();
+  static String base = '';
+  static String? resolve(Object? path) {
+    if (path is! String || path.isEmpty) return null;
+    return path.startsWith('http') ? path : '$base$path';
+  }
+}
+
 class MenuItem {
-  const MenuItem({required this.id, required this.name, required this.description, required this.priceMinor, required this.soldOut});
+  const MenuItem({required this.id, required this.name, required this.description, required this.priceMinor, required this.soldOut, this.imageUrl});
   final String id;
   final Localised name;
   final Localised description;
   final int priceMinor;
   final bool soldOut;
+  /// The dish's own photo, uploaded by staff, or null when it has none.
+  final String? imageUrl;
 
   factory MenuItem.fromJson(Map<String, dynamic> json) => MenuItem(
         id: json['id'] as String,
@@ -25,6 +38,7 @@ class MenuItem {
         description: Localised.fromJson(json['description'] as Map<String, dynamic>),
         priceMinor: json['priceMinor'] as int,
         soldOut: json['soldOut'] as bool,
+        imageUrl: MediaUrls.resolve(json['imageUrl']),
       );
 }
 
@@ -51,8 +65,10 @@ class PaymentOptions {
 }
 
 class Menu {
-  const Menu({required this.restaurant, required this.currency, required this.categories, required this.payments});
+  const Menu({required this.restaurant, required this.currency, required this.categories, required this.payments, this.brandJson});
   final Localised restaurant;
+  /// The restaurant's brand as the server sent it; see Brand.fromJson.
+  final Map<String, dynamic>? brandJson;
   final String currency;
   final List<MenuCategory> categories;
   final PaymentOptions payments;
@@ -64,6 +80,7 @@ class Menu {
       currency: json['currency'] as String,
       categories: (json['categories'] as List<dynamic>).map((c) => MenuCategory.fromJson(c as Map<String, dynamic>)).toList(),
       payments: PaymentOptions(cod: p['cod'] as bool, payOnArrival: p['payOnArrival'] as bool, card: p['card'] as bool),
+      brandJson: json['brand'] as Map<String, dynamic>?,
     );
   }
 }
@@ -373,18 +390,20 @@ class HistoryItem {
 
 /// A dish shown on the home screen: frequent, favourite or in the menu, with the server's price and availability.
 class DishCard {
-  const DishCard({required this.id, required this.name, required this.priceMinor, required this.soldOut, required this.timesOrdered});
+  const DishCard({required this.id, required this.name, required this.priceMinor, required this.soldOut, required this.timesOrdered, this.imageUrl});
   final String id;
   final Localised name;
   final int priceMinor;
   final bool soldOut;
   final int timesOrdered;
+  final String? imageUrl;
 
   factory DishCard.fromJson(Map<String, dynamic> json) => DishCard(
         id: json['id'] as String,
         name: Localised.fromJson(json['name'] as Map<String, dynamic>),
         priceMinor: json['priceMinor'] as int,
         soldOut: json['soldOut'] as bool? ?? false,
+        imageUrl: MediaUrls.resolve(json['imageUrl']),
         timesOrdered: json['timesOrdered'] as int? ?? 0,
       );
 }
@@ -513,4 +532,39 @@ class Wallet {
     List<WalletVoucher> group(String key) => [for (final v in json[key] as List<dynamic>) WalletVoucher.fromJson(v as Map<String, dynamic>)];
     return Wallet(available: group('available'), used: group('used'), expired: group('expired'));
   }
+}
+
+/// A promotion staff publish in the admin: a picture or a video, with an optional title and button, shown at the top
+/// of the home screen (hero) or between its sections (mid-feed).
+class Promotion {
+  const Promotion({required this.id, required this.kind, required this.url, required this.title, required this.cta, this.menuItemId});
+  final String id;
+  final String kind;
+  final String url;
+  final Localised title;
+  final Localised cta;
+  final String? menuItemId;
+
+  factory Promotion.fromJson(Map<String, dynamic> json) {
+    final media = json['media'] as Map<String, dynamic>;
+    return Promotion(
+      id: json['id'] as String,
+      kind: media['kind'] as String,
+      url: MediaUrls.resolve(media['url'])!,
+      title: Localised.fromJson(json['title'] as Map<String, dynamic>),
+      cta: Localised.fromJson(json['cta'] as Map<String, dynamic>),
+      menuItemId: json['menuItemId'] as String?,
+    );
+  }
+}
+
+class HomePromotions {
+  const HomePromotions({required this.hero, required this.midFeed});
+  final List<Promotion> hero;
+  final List<Promotion> midFeed;
+
+  factory HomePromotions.fromJson(Map<String, dynamic> json) => HomePromotions(
+        hero: [for (final p in (json['hero'] as List<dynamic>? ?? [])) Promotion.fromJson(p as Map<String, dynamic>)],
+        midFeed: [for (final p in (json['midFeed'] as List<dynamic>? ?? [])) Promotion.fromJson(p as Map<String, dynamic>)],
+      );
 }

@@ -5,6 +5,8 @@ import 'auth/auth_api.dart';
 import 'auth/biometrics.dart';
 import 'auth/session_store.dart';
 import 'core/api.dart';
+import 'core/brand.dart';
+import 'core/models.dart';
 import 'core/strings.dart';
 import 'core/theme.dart';
 import 'screens/auth_gate.dart';
@@ -27,27 +29,47 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
   late final SessionStore _sessions = widget.sessions ?? defaultSessionStore();
   late final BiometricGate _biometrics = widget.biometrics ?? LocalAuthGate();
   final ValueNotifier<String> _language = ValueNotifier('en');
+  final BrandController _brand = BrandController();
 
   @override
   void initState() {
     super.initState();
-    _api.init();
+    _start();
+  }
+
+  /// Opens in the restaurant's last known colours, then asks the server for its current name, logo and colour.
+  Future<void> _start() async {
+    await _api.init();
+    await _brand.restore(_api.prefs);
+    try {
+      final menu = await _api.menu();
+      final json = menu.brandJson;
+      if (json != null) await _brand.update(Brand.fromJson(json, base: MediaUrls.base), _api.prefs);
+    } catch (_) {
+      // Offline or the server is unavailable: the screens say so when they load; the last brand stays.
+    }
   }
 
   @override
   void dispose() {
     _language.dispose();
+    _brand.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<String>(
+    return ValueListenableBuilder<Brand?>(
+      valueListenable: _brand,
+      builder: (context, brand, _) => ValueListenableBuilder<String>(
       valueListenable: _language,
       builder: (context, lang, _) {
-        return MaterialApp(
+        return BrandScope(
+          brand: brand,
+          child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: buildTheme(),
+          title: brand?.name.of(lang) ?? '',
+          theme: buildTheme(accent: brand?.color ?? Tokens.accent),
           // The whole layout flips to right-to-left for Arabic: Material's widgets mirror themselves.
           locale: Locale(lang),
           supportedLocales: const [Locale('en'), Locale('ar')],
@@ -57,8 +79,10 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
             GlobalCupertinoLocalizations.delegate,
           ],
           home: AuthGate(api: _api, auth: _auth, sessions: _sessions, biometrics: _biometrics, language: _language),
+          ),
         );
       },
+      ),
     );
   }
 }

@@ -12,6 +12,7 @@ import '../core/models.dart';
 import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../core/brand.dart';
 import '../auth/biometrics.dart';
 import '../widgets/app_button.dart';
 import '../widgets/dish_thumb.dart';
@@ -227,7 +228,8 @@ class _HomeScreenState extends State<HomeScreen> {
       language: widget.language,
       builder: (context, s) {
         final menu = _menu;
-        final name = menu?.restaurant.of(s.lang) ?? s.restaurantFallback;
+        final brand = BrandScope.of(context);
+        final name = brand?.name.of(s.lang) ?? menu?.restaurant.of(s.lang) ?? '';
         final dockSpace = widget.onSelectTab != null ? Tokens.dockHeight + Tokens.dockGap : 0.0;
         final bottomSpace = MediaQuery.paddingOf(context).bottom + dockSpace;
         return Scaffold(
@@ -238,6 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.fromLTRB(Tokens.space4, Tokens.space3, Tokens.space4, bottomSpace + Tokens.cartBarHeight + Tokens.space4 + Tokens.space4),
                 children: [
                   DiscoveryHeader(
+                    logoUrl: brand?.logoUrl,
                     title: name,
                     searchHint: s.searchDishes,
                     onSearch: (q) => setState(() => _query = q.trim()),
@@ -268,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         body: s.askHint,
                         action: s.askTitle,
                         onAction: _openAsk,
-                        background: const ColoredBox(color: Tokens.accentSoft),
+                        background: ColoredBox(color: context.accentSoft),
                         picture: Image.asset(Art.assistant, fit: BoxFit.contain, semanticLabel: ''),
                         dark: false,
                       ),
@@ -356,7 +359,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: Tokens.space1),
             child: Row(children: [
-              DishThumb(illustration: pick.illustration, size: 64),
+              DishThumb(illustration: pick.illustration, imageUrl: pick.item.imageUrl, size: 64),
               const SizedBox(width: Tokens.space3),
               Expanded(child: Text(pick.item.name.of(s.lang), maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w600))),
               Text(formatMoney(pick.item.priceMinor, currency), style: const TextStyle(fontWeight: FontWeight.w600)),
@@ -368,7 +371,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ExcludeSemantics(
                   child: IconButton.filledTonal(
                     onPressed: pick.item.soldOut ? null : () => _add(pick.item, s),
-                    style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: Tokens.accentSoft, foregroundColor: Tokens.accent),
+                    style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: context.accentSoft, foregroundColor: context.accent),
                     icon: const Icon(LucideIcons.plus),
                     tooltip: s.addDish(pick.item.name.of(s.lang)),
                   ),
@@ -485,7 +488,7 @@ class _QuickTile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: Tokens.space3, horizontal: Tokens.space2),
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            Icon(icon, color: enabled ? Tokens.accent : Tokens.textMuted),
+            Icon(icon, color: enabled ? context.accent : Tokens.textMuted),
             const SizedBox(height: Tokens.space1),
             Text(label, textAlign: TextAlign.center, maxLines: 2, style: TextStyle(fontWeight: FontWeight.w600, color: enabled ? Tokens.text : Tokens.textMuted)),
           ]),
@@ -566,7 +569,7 @@ class _Popular extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: Tokens.space1),
           child: Row(children: [
-            DishThumb(illustration: illustrationFor(item.id), size: 48),
+            DishThumb(illustration: illustrationFor(item.id), imageUrl: item.imageUrl, size: 48),
             const SizedBox(width: Tokens.space3),
             Expanded(child: Text(item.name.of(s.lang), maxLines: 2, overflow: TextOverflow.ellipsis)),
             Text(formatMoney(item.priceMinor, menu!.currency), style: const TextStyle(fontWeight: FontWeight.w600)),
@@ -575,7 +578,7 @@ class _Popular extends StatelessWidget {
               message: s.addDish(item.name.of(s.lang)),
               child: IconButton.filledTonal(
                 onPressed: () => onAdd(item),
-                style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: Tokens.accentSoft, foregroundColor: Tokens.accent),
+                style: IconButton.styleFrom(minimumSize: const Size(48, 48), backgroundColor: context.accentSoft, foregroundColor: context.accent),
                 icon: const Icon(LucideIcons.plus),
                 tooltip: s.addDish(item.name.of(s.lang)),
               ),

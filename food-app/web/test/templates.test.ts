@@ -60,7 +60,7 @@ test('field ids are unique, colours are hex, and a QR field is always the QR pla
 });
 
 test('filling a placeholder uses only sample values', () => {
-  assert.equal(t.fill('{{restaurant.name}} — {{voucher.code}}'), 'Sample Kitchen — SAMPLE-1234');
+  assert.equal(t.fill('{{restaurant.name}} — {{voucher.code}}'), 'Restaurant name — SAMPLE-1234');
   assert.equal(t.fill('plain text'), 'plain text');
 });
 

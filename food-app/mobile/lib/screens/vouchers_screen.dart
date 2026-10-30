@@ -7,6 +7,7 @@ import '../core/models.dart';
 import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../core/brand.dart';
 import '../widgets/app_button.dart';
 
 // The customer's wallet: save a voucher by its code, see what is still usable, what was used and what expired.
@@ -154,7 +155,7 @@ class _VouchersScreenState extends State<VouchersScreen> {
           padding: const EdgeInsets.all(Tokens.space4),
           decoration: BoxDecoration(color: Tokens.surface, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
           child: Row(children: [
-            const Icon(LucideIcons.ticket, color: Tokens.accent),
+            Icon(LucideIcons.ticket, color: context.accent),
             const SizedBox(width: Tokens.space3),
             Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

@@ -24,7 +24,8 @@ export const PLACEHOLDERS: Record<string, string> = {
   'voucher.serial_number': 'SN-0001',
   'voucher.qr': '',
   'campaign.name': 'Sample campaign',
-  'restaurant.name': 'Sample Kitchen',
+  // Filled with the restaurant's own name when a preview is made.
+  'restaurant.name': 'Restaurant name',
   'customer.name': 'Customer name',
 };
 
@@ -237,18 +238,20 @@ export async function previewTemplate(id: string, which: 'draft' | 'current') {
     const v = await pool.query(`select layout from voucher_template_versions where template_id = $1 and version = $2`, [id, rows[0].current_version]);
     layout = v.rows[0].layout as Layout;
   }
+  const restaurant = await pool.query('select name_en from restaurant where id = $1', [RESTAURANT_ID]);
+  const values = { ...PLACEHOLDERS, 'restaurant.name': restaurant.rows[0]?.name_en ?? PLACEHOLDERS['restaurant.name'] };
   return {
     widthMm: layout.widthMm,
     heightMm: layout.heightMm,
     backgroundMediaId: layout.backgroundMediaId,
-    fields: layout.fields.map((f) => ({ ...f, text: f.type === 'qr' ? 'QR' : fill(f.content) })),
+    fields: layout.fields.map((f) => ({ ...f, text: f.type === 'qr' ? 'QR' : fill(f.content, values) })),
     sample: true,
   };
 }
 
 /** Fills the placeholders in a text. Only the known placeholders reach here, because the layout was checked. */
-export function fill(content: string): string {
-  return content.replace(/\{\{([^}]*)\}\}/g, (_m, key: string) => PLACEHOLDERS[key] ?? '');
+export function fill(content: string, values: Record<string, string> = PLACEHOLDERS): string {
+  return content.replace(/\{\{([^}]*)\}\}/g, (_m, key: string) => values[key] ?? '');
 }
 
 /** The issued version of a template for a new voucher: the current published one, or none if unpublished. */

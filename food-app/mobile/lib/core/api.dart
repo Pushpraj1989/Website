@@ -11,7 +11,9 @@ import 'models.dart';
 /// Talks to the same /v1 API as the web app. The guest cookie is kept on the device and sent back on every call,
 /// the way a browser does. The server only ever stores its hash.
 class ApiClient {
-  ApiClient({required this.baseUrl, http.Client? client, this.prefs}) : _client = client ?? http.Client();
+  ApiClient({required this.baseUrl, http.Client? client, this.prefs}) : _client = client ?? http.Client() {
+    MediaUrls.base = baseUrl;
+  }
 
   final String baseUrl;
   final http.Client _client;
@@ -171,6 +173,12 @@ class ApiClient {
 
   Future<void> removeCartCode() async {
     await _send(() => _client.delete(_uri('/v1/cart/offer'), headers: _headers()));
+  }
+
+  /// The hero and mid-feed promotions staff have published, live now.
+  Future<HomePromotions> homePromotions() async {
+    final body = await _send(() => _client.get(_uri('/v1/home'), headers: _headers()));
+    return HomePromotions.fromJson(body);
   }
 
   Future<HomeShortcuts> homeShortcuts() async {

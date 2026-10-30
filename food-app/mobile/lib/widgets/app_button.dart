@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
+import '../core/brand.dart';
 
 // Variants and sizes come from replica/design/tokens.json ("button"). Colours are roles, never raw values.
 enum ButtonVariant { primary, secondary, ghost, danger }
@@ -36,7 +37,7 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final enabled = onPressed != null && !loading;
-    final colours = _colours(variant, enabled);
+    final colours = _colours(context, variant, enabled);
     final visualHeight = _heights[size]!;
 
     final visual = Container(
@@ -78,12 +79,12 @@ class AppButton extends StatelessWidget {
     );
   }
 
-  _Colours _colours(ButtonVariant v, bool enabled) {
+  _Colours _colours(BuildContext context, ButtonVariant v, bool enabled) {
     if (!enabled) return const _Colours(bg: Tokens.surface, text: Tokens.textMuted, border: Tokens.border);
     return switch (v) {
-      ButtonVariant.primary => const _Colours(bg: Tokens.accent, text: Tokens.onAccent, border: Tokens.accent),
+      ButtonVariant.primary => _Colours(bg: context.accent, text: context.onAccent, border: context.accent),
       ButtonVariant.secondary => const _Colours(bg: Tokens.bg, text: Tokens.text, border: Tokens.borderInput),
-      ButtonVariant.ghost => const _Colours(bg: Colors.transparent, text: Tokens.accent, border: Colors.transparent),
+      ButtonVariant.ghost => _Colours(bg: Colors.transparent, text: context.accent, border: Colors.transparent),
       ButtonVariant.danger => const _Colours(bg: Tokens.bg, text: Tokens.danger, border: Tokens.danger),
     };
   }

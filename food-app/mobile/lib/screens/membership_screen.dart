@@ -7,6 +7,7 @@ import '../core/money.dart';
 import '../core/art.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../core/brand.dart';
 
 // S40: the membership plan. Benefit tiles open a sheet from below with the details. The plan, its benefits and
 // the price all come from the server; the app holds only the icon and colour sets for the keys the server sends.
@@ -125,7 +126,7 @@ class _Hero extends StatelessWidget {
       padding: const EdgeInsets.all(Tokens.space5),
       color: Tokens.brandPurple,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(plan.name.of(s.lang), style: const TextStyle(color: Tokens.onAccent, fontSize: 22, fontWeight: FontWeight.w700)),
+        Text(plan.name.of(s.lang), style: TextStyle(color: context.onAccent, fontSize: 22, fontWeight: FontWeight.w700)),
         const SizedBox(height: Tokens.space1),
         Text(member ? s.memberSince(date) : s.notAMember, style: const TextStyle(color: Color(0xFFEDE9FE))),
       ]),
