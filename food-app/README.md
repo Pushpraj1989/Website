@@ -9,6 +9,11 @@ Single restaurant, English and Arabic. Four parts, all in this folder.
 | Customer app | `mobile/` | Flutter 3.47.8 (Dart 3.13) |
 | Design system | `../replica/design/` | tokens.json, tokens.css |
 
+## Put it live
+
+On the Hostinger VPS: follow [`deploy/README.md`](deploy/README.md). One script sets up the database, HTTPS,
+the service and nginx for your subdomain.
+
 ## Run it locally
 
 ```

@@ -1,0 +1,22 @@
+[Unit]
+Description=Restaurant ordering: website, API and order board
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+User=foodapp
+Group=foodapp
+WorkingDirectory=/srv/food-app/repo/food-app/web
+EnvironmentFile=/etc/food-app.env
+Environment=NODE_ENV=production
+# Only nginx talks to it; it is not reachable from outside the server.
+ExecStart=/srv/food-app/repo/food-app/web/node_modules/.bin/next start -H 127.0.0.1 -p 3100
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
