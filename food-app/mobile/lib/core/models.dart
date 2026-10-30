@@ -163,7 +163,7 @@ class OrderStatusEvent {
 }
 
 class PlacedOrder {
-  const PlacedOrder({required this.id, required this.number, required this.status, required this.method, required this.channel, required this.etaMinutes, required this.quote, required this.history});
+  const PlacedOrder({required this.id, required this.number, required this.status, required this.method, required this.channel, required this.etaMinutes, required this.quote, required this.history, this.lines = const [], this.address});
   final String id;
   final String number;
   final String status;
@@ -172,6 +172,10 @@ class PlacedOrder {
   final int? etaMinutes;
   final Quote quote;
   final List<OrderStatusEvent> history;
+  /// What was ordered, as the server priced it.
+  final List<OrderLineView> lines;
+  /// The delivery address the order went to, as a line of text; null for pickup.
+  final String? address;
 
   factory PlacedOrder.fromJson(Map<String, dynamic> json) => PlacedOrder(
         id: json['id'] as String,
@@ -184,7 +188,25 @@ class PlacedOrder {
         history: ((json['history'] as List<dynamic>?) ?? [])
             .map((h) => OrderStatusEvent(status: (h as Map<String, dynamic>)['status'] as String, at: DateTime.parse(h['at'] as String)))
             .toList(),
+        lines: [
+          for (final l in (json['lines'] as List<dynamic>? ?? []))
+            OrderLineView(
+              name: Localised.fromJson((l as Map<String, dynamic>)['name'] as Map<String, dynamic>),
+              qty: l['qty'] as int,
+              note: l['note'] as String? ?? '',
+              unitMinor: l['unitMinor'] as int? ?? 0,
+            ),
+        ],
+        address: json['address'] as String?,
       );
+}
+
+class OrderLineView {
+  const OrderLineView({required this.name, required this.qty, required this.note, required this.unitMinor});
+  final Localised name;
+  final int qty;
+  final String note;
+  final int unitMinor;
 }
 
 class ApiException implements Exception {

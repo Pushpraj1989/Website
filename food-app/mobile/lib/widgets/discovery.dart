@@ -195,13 +195,18 @@ class _BannerCard extends StatelessWidget {
           const DecoratedBox(
             decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [Color(0xF21C1917), Color(0xB31C1917), Color(0x001C1917)], stops: [0, 0.55, 1])),
           ),
-        if (banner.picture != null) Positioned(right: Tokens.space2, top: Tokens.space2, bottom: Tokens.space2, width: 140, child: banner.picture!),
+        if (banner.picture != null) PositionedDirectional(end: Tokens.space2, top: Tokens.space2, bottom: Tokens.space2, width: 140, child: banner.picture!),
         Padding(
           padding: const EdgeInsets.all(Tokens.space4),
           child: Column(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(banner.title, style: TextStyle(color: banner.dark ? Colors.white : Tokens.text, fontFamily: Tokens.headingFont, fontSize: 26, fontWeight: FontWeight.w600)),
-            const SizedBox(height: Tokens.space1),
-            SizedBox(width: banner.picture == null ? double.infinity : 200, child: Text(banner.body, style: TextStyle(color: banner.dark ? const Color(0xFFF5F5F4) : Tokens.textMuted, fontSize: 15))),
+            SizedBox(
+              width: banner.picture == null ? double.infinity : 200,
+              child: Text(banner.title, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: banner.dark ? Colors.white : Tokens.text, fontFamily: Tokens.headingFont, fontSize: 26, fontWeight: FontWeight.w600, height: 1.1)),
+            ),
+            if (banner.body.isNotEmpty) ...[
+              const SizedBox(height: Tokens.space1),
+              SizedBox(width: banner.picture == null ? double.infinity : 200, child: Text(banner.body, maxLines: 3, overflow: TextOverflow.ellipsis, style: TextStyle(color: banner.dark ? const Color(0xFFF5F5F4) : Tokens.textMuted, fontSize: 15))),
+            ],
             const SizedBox(height: Tokens.space3),
             AppButton(label: banner.action, size: ButtonSize.sm, variant: banner.dark ? ButtonVariant.primary : ButtonVariant.secondary, onPressed: banner.onAction),
           ]),

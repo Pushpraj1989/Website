@@ -117,7 +117,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(home: OrdersScreen(api: api, language: ValueNotifier('en'))));
     await tester.pumpAndSettle();
 
-    expect(find.text('R-0001'), findsOneWidget);
+    expect(find.text('Order R-0001'), findsOneWidget);
     expect(find.text('2 × Grilled chicken, 1 × Mint lemonade'), findsOneWidget);
     expect(find.widgetWithText(FilledButton, 'Add to cart'), findsOneWidget);
   });

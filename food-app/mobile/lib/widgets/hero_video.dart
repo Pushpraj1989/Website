@@ -3,10 +3,11 @@ import 'package:video_player/video_player.dart';
 
 /// A muted, looping clip behind the hero text. The poster frame shows until the video is ready, and stays on
 /// screen if the video cannot play or the device asks for reduced motion.
+/// [video] and [poster] are bundled assets, or full addresses for media staff published in the admin.
 class HeroVideo extends StatefulWidget {
-  const HeroVideo({super.key, required this.video, required this.poster});
+  const HeroVideo({super.key, required this.video, this.poster});
   final String video;
-  final String poster;
+  final String? poster;
 
   @override
   State<HeroVideo> createState() => _HeroVideoState();
@@ -23,7 +24,9 @@ class _HeroVideoState extends State<HeroVideo> {
   }
 
   Future<void> _start() async {
-    final controller = VideoPlayerController.asset(widget.video);
+    final controller = widget.video.startsWith('http')
+        ? VideoPlayerController.networkUrl(Uri.parse(widget.video))
+        : VideoPlayerController.asset(widget.video);
     _controller = controller;
     try {
       await controller.initialize();
@@ -44,7 +47,12 @@ class _HeroVideoState extends State<HeroVideo> {
 
   @override
   Widget build(BuildContext context) {
-    final poster = Image.asset(widget.poster, fit: BoxFit.cover, semanticLabel: '');
+    final p = widget.poster;
+    final Widget poster = p == null
+        ? const ColoredBox(color: Color(0xFF1C1917))
+        : p.startsWith('http')
+            ? Image.network(p, fit: BoxFit.cover, semanticLabel: '', errorBuilder: (_, _, _) => const ColoredBox(color: Color(0xFF1C1917)))
+            : Image.asset(p, fit: BoxFit.cover, semanticLabel: '');
     final controller = _controller;
     if (!_ready || controller == null) return poster;
     return FittedBox(

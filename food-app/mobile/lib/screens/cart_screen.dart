@@ -3,15 +3,16 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../app.dart';
 import '../core/api.dart';
+import '../core/art.dart';
 import '../core/models.dart';
 import '../core/money.dart';
-import '../core/art.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
-import '../widgets/app_button.dart';
+import '../widgets/dish_thumb.dart';
+import '../widgets/ui.dart';
 import 'checkout_screen.dart';
 
-// S05: cart with quantities and notes. Every change is saved on the server, which prices it.
+// S05: the cart. Every change is saved on the server straight away, and the server prices it.
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key, required this.api, required this.language});
   final ApiClient api;
@@ -30,19 +31,38 @@ class _CartScreenState extends State<CartScreen> {
   String? _problem;
   String? _error;
   String _currency = 'AED';
+  bool _saving = false;
+  // The dish photos and category pictures, from the menu, so each line shows its dish.
+  final Map<String, (String illustration, String? imageUrl)> _pictures = {};
 
   @override
   void initState() {
     super.initState();
     _load();
+    _loadPictures();
+  }
+
+  Future<void> _loadPictures() async {
+    try {
+      final menu = await widget.api.menu();
+      if (!mounted) return;
+      setState(() {
+        for (final c in menu.categories) {
+          for (final i in c.items) {
+            _pictures[i.id] = (c.illustration, i.imageUrl);
+          }
+        }
+      });
+    } catch (_) {
+      // Lines show the plain plate picture until the menu loads.
+    }
   }
 
   Future<void> _load() async {
     try {
-      final body = await widget.api.cart();
-      _apply(body);
+      _apply(await widget.api.cart());
     } catch (_) {
-      setState(() => _error = 'load');
+      if (mounted) setState(() => _error = 'load');
     }
   }
 
@@ -59,13 +79,30 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   Future<void> _save(List<CartLine> lines) async {
+    setState(() => _saving = true);
     try {
       _apply(await widget.api.saveCart(lines.where((l) => l.qty > 0).toList()));
     } on ApiException catch (e) {
-      setState(() => _problem = e.message);
+      if (mounted) setState(() => _problem = e.message);
     } catch (_) {
-      setState(() => _error = 'save');
+      if (mounted) setState(() => _error = 'save');
+    } finally {
+      if (mounted) setState(() => _saving = false);
     }
+  }
+
+  void _setQty(int index, int qty) {
+    final lines = [..._lines!];
+    lines[index] = lines[index].copyWith(qty: qty);
+    setState(() => _lines = lines);
+    _save(lines);
+  }
+
+  void _setNote(int index, String note) {
+    final lines = [..._lines!];
+    lines[index] = lines[index].copyWith(note: note);
+    setState(() => _lines = lines);
+    _save(lines);
   }
 
   Future<void> _applyCode(Strings s) async {
@@ -98,23 +135,35 @@ class _CartScreenState extends State<CartScreen> {
     super.dispose();
   }
 
-  void _change(int index, {int? qty, String? note}) {
-    final lines = [..._lines!];
-    lines[index] = lines[index].copyWith(qty: qty, note: note);
-    setState(() => _lines = lines);
-  }
-
   @override
   Widget build(BuildContext context) {
     return LanguageScope(
       language: widget.language,
-      builder: (context, s) => Scaffold(
-        appBar: AppBar(
-          title: Text(s.cart),
-          actions: [TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language))],
-        ),
-        body: _body(context, s),
-      ),
+      builder: (context, s) {
+        final lines = _lines;
+        final canCheckout = _quote != null && _problem == null && !_saving && lines != null && lines.isNotEmpty;
+        return Scaffold(
+          backgroundColor: Tokens.surface,
+          appBar: AppBar(
+            backgroundColor: Tokens.bg,
+            title: Text(s.cart),
+            actions: [TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language))],
+          ),
+          body: _body(context, s),
+          bottomNavigationBar: lines == null || lines.isEmpty
+              ? null
+              : BottomActionBar(
+                  child: PrimaryAction(
+                    label: s.checkout,
+                    amount: _quote == null ? null : formatMoney(_quote!.totalMinor, _currency),
+                    busy: _saving,
+                    onPressed: canCheckout
+                        ? () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => CheckoutScreen(api: widget.api, language: widget.language)))
+                        : null,
+                  ),
+                ),
+        );
+      },
     );
   }
 
@@ -140,6 +189,8 @@ class _CartScreenState extends State<CartScreen> {
             Text(s.emptyCart, style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: Tokens.space1),
             Text(s.cartEmptyBody, textAlign: TextAlign.center, style: const TextStyle(color: Tokens.textMuted)),
+            const SizedBox(height: Tokens.space4),
+            FilledButton.icon(onPressed: () => Navigator.of(context).maybePop(), icon: const Icon(LucideIcons.utensils), label: Text(s.menu)),
           ]),
         ),
       );
@@ -148,167 +199,195 @@ class _CartScreenState extends State<CartScreen> {
     return ListView(
       padding: const EdgeInsets.all(Tokens.space4),
       children: [
-        for (var i = 0; i < lines.length; i++) _LineCard(line: lines[i], s: s, currency: _currency, onQty: (q) => _change(i, qty: q), onNote: (n) => _change(i, note: n), onSave: () => _save(_lines!), onRemove: () => _save(_lines!.where((l) => l.itemId != lines[i].itemId).toList())),
+        SectionCard(
+          title: s.yourOrder,
+          icon: LucideIcons.shoppingBag,
+          child: Column(children: [
+            for (var i = 0; i < lines.length; i++) ...[
+              if (i > 0) const Divider(height: Tokens.space5),
+              _LineRow(
+                line: lines[i],
+                picture: _pictures[lines[i].itemId],
+                s: s,
+                currency: _currency,
+                onQty: (q) => _setQty(i, q),
+                onNote: (n) => _setNote(i, n),
+              ),
+            ],
+            const SizedBox(height: Tokens.space2),
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: TextButton.icon(onPressed: () => Navigator.of(context).maybePop(), icon: const Icon(LucideIcons.plus, size: 18), label: Text(s.addMore)),
+            ),
+          ]),
+        ),
         if (_problem != null)
           Semantics(liveRegion: true, child: Padding(padding: const EdgeInsets.only(top: Tokens.space3), child: Text(_problem!, style: const TextStyle(color: Tokens.danger)))),
-        const SizedBox(height: Tokens.space4),
-        _OffersSection(code: _code, offer: _offer, message: _offerMessage, s: s, currency: _currency, onApply: () => _applyCode(s), onRemove: () => _removeCode(s)),
+        const SizedBox(height: Tokens.space3),
+        _OffersSection(code: _code, offer: _offer, message: _offerMessage, s: s, onApply: () => _applyCode(s), onRemove: () => _removeCode(s)),
         if (_quote != null) ...[
-          const SizedBox(height: Tokens.space4),
-          _TotalsCard(quote: _quote!, s: s, currency: _currency),
+          const SizedBox(height: Tokens.space3),
+          BillCard(quote: _quote!, s: s, currency: _currency),
         ],
-        if (_quote != null && _problem == null) ...[
-          const SizedBox(height: Tokens.space4),
-          FilledButton(
-            style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(48)),
-            onPressed: () async {
-              await _save(_lines!);
-              if (!context.mounted || _quote == null) return;
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) => CheckoutScreen(api: widget.api, language: widget.language)));
-            },
-            child: Text(s.checkout),
-          ),
-        ],
+        const SizedBox(height: Tokens.space4),
       ],
     );
   }
 }
 
-class _LineCard extends StatelessWidget {
-  const _LineCard({required this.line, required this.s, required this.currency, required this.onQty, required this.onNote, required this.onSave, required this.onRemove});
+/// One cart line: the dish photo, name and price, a quantity stepper, and its note for the kitchen.
+class _LineRow extends StatefulWidget {
+  const _LineRow({required this.line, required this.picture, required this.s, required this.currency, required this.onQty, required this.onNote});
   final CartLine line;
+  final (String, String?)? picture;
   final Strings s;
   final String currency;
   final ValueChanged<int> onQty;
   final ValueChanged<String> onNote;
-  final VoidCallback onSave;
-  final VoidCallback onRemove;
+
+  @override
+  State<_LineRow> createState() => _LineRowState();
+}
+
+class _LineRowState extends State<_LineRow> {
+  bool _editing = false;
+  late final _note = TextEditingController(text: widget.line.note);
+
+  @override
+  void dispose() {
+    _note.dispose();
+    super.dispose();
+  }
+
+  void _saveNote() {
+    setState(() => _editing = false);
+    if (_note.text.trim() != widget.line.note) widget.onNote(_note.text.trim());
+  }
 
   @override
   Widget build(BuildContext context) {
+    final s = widget.s;
+    final line = widget.line;
     final name = line.name?.of(s.lang) ?? '—';
-    return Container(
-      margin: const EdgeInsets.only(bottom: Tokens.space3),
-      padding: const EdgeInsets.all(Tokens.space3),
-      decoration: BoxDecoration(color: Tokens.bg, border: Border.all(color: Tokens.border), borderRadius: BorderRadius.circular(Tokens.radiusLg)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(children: [
-            Expanded(child: Text(name, style: const TextStyle(fontWeight: FontWeight.w600))),
-            if (line.unitMinor != null) Text(formatMoney(line.unitMinor! * line.qty, currency)),
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        DishThumb(illustration: widget.picture?.$1 ?? 'dish', imageUrl: widget.picture?.$2, size: 60),
+        const SizedBox(width: Tokens.space3),
+        Expanded(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(name, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w700)),
+            if (line.unitMinor != null)
+              Text(formatMoney(line.unitMinor!, widget.currency), style: const TextStyle(color: Tokens.textMuted, fontSize: 13)),
+            if (line.soldOut) Text(s.soldOut, style: const TextStyle(color: Tokens.danger, fontWeight: FontWeight.w600)),
           ]),
-          if (line.soldOut) Padding(padding: const EdgeInsets.only(top: Tokens.space1), child: Text(s.soldOut, style: const TextStyle(color: Tokens.danger))),
-          const SizedBox(height: Tokens.space2),
-          Row(children: [
-            IconButton(
-              tooltip: '− $name',
-              onPressed: line.qty > 1 ? () => onQty(line.qty - 1) : null,
-              icon: const Icon(Icons.remove_circle_outline),
+        ),
+        const SizedBox(width: Tokens.space2),
+        if (line.unitMinor != null)
+          Text(formatMoney(line.unitMinor! * line.qty, widget.currency), style: const TextStyle(fontWeight: FontWeight.w700, fontFeatures: [FontFeature.tabularFigures()])),
+      ]),
+      const SizedBox(height: Tokens.space2),
+      Row(children: [
+        QtyStepper(qty: line.qty, label: name, removeLabel: '${s.remove} $name', compact: true, onChanged: widget.onQty),
+        const SizedBox(width: Tokens.space2),
+        if (!_editing)
+          Expanded(
+            child: Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: TextButton.icon(
+              onPressed: () => setState(() => _editing = true),
+              icon: Icon(line.note.isEmpty ? LucideIcons.notebookPen : LucideIcons.pencil, size: 16),
+              label: Text(line.note.isEmpty ? s.addNote : line.note, maxLines: 1, overflow: TextOverflow.ellipsis),
+              ),
             ),
-            Semantics(
-              label: '${s.note}: $name',
-              value: '${line.qty}',
-              child: Text('${line.qty}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-            ),
-            IconButton(
-              tooltip: '+ $name',
-              onPressed: line.qty < 20 ? () => onQty(line.qty + 1) : null,
-              icon: const Icon(Icons.add_circle_outline),
-            ),
-            const Spacer(),
-            TextButton(onPressed: onRemove, child: Text(s.remove)),
-          ]),
-          TextFormField(
-            initialValue: line.note,
-            maxLength: 200,
-            decoration: InputDecoration(labelText: s.note),
-            onChanged: onNote,
-            onEditingComplete: onSave,
           ),
-        ],
-      ),
-    );
+      ]),
+      if (_editing)
+        TextField(
+          controller: _note,
+          autofocus: true,
+          maxLength: 200,
+          decoration: InputDecoration(labelText: s.note, hintText: s.noteHint, isDense: true),
+          onSubmitted: (_) => _saveNote(),
+          onTapOutside: (_) => _saveNote(),
+        ),
+    ]);
   }
 }
 
-class _TotalsCard extends StatelessWidget {
-  const _TotalsCard({required this.quote, required this.s, required this.currency});
+/// The bill: subtotal, fees, discount and total. Shared with checkout.
+class BillCard extends StatelessWidget {
+  const BillCard({super.key, required this.quote, required this.s, required this.currency});
   final Quote quote;
   final Strings s;
   final String currency;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(Tokens.space4),
-      decoration: BoxDecoration(color: Tokens.bg, border: Border.all(color: Tokens.border), borderRadius: BorderRadius.circular(Tokens.radiusLg)),
+    return SectionCard(
+      title: s.billDetails,
+      icon: LucideIcons.receipt,
       child: Column(children: [
-        _row(s.subtotal, formatMoney(quote.subtotalMinor, currency)),
-        if (quote.deliveryFeeMinor > 0) _row(s.deliveryFee, formatMoney(quote.deliveryFeeMinor, currency)),
-        if (quote.discountMinor > 0) _row(s.discount, '− ${formatMoney(quote.discountMinor, currency)}'),
-        const Divider(),
-        _row(s.total, formatMoney(quote.totalMinor, currency), bold: true),
-        const SizedBox(height: Tokens.space1),
+        BillRow(label: s.subtotal, amount: formatMoney(quote.subtotalMinor, currency)),
+        if (quote.deliveryFeeMinor > 0) BillRow(label: s.deliveryFee, amount: formatMoney(quote.deliveryFeeMinor, currency)),
+        if (quote.serviceFeeMinor > 0) BillRow(label: s.serviceFee, amount: formatMoney(quote.serviceFeeMinor, currency)),
+        if (quote.discountMinor > 0) BillRow(label: s.discount, amount: '− ${formatMoney(quote.discountMinor, currency)}', positive: true),
+        const Divider(height: Tokens.space4),
+        BillRow(label: s.total, amount: formatMoney(quote.totalMinor, currency), strong: true),
         Align(alignment: AlignmentDirectional.centerStart, child: Text(s.includesTax(quote.taxLabel), style: const TextStyle(color: Tokens.textMuted, fontSize: 12))),
       ]),
     );
   }
-
-  Widget _row(String label, String value, {bool bold = false}) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2),
-        child: Row(children: [
-          Expanded(child: Text(label, style: TextStyle(fontWeight: bold ? FontWeight.w600 : FontWeight.w400))),
-          Text(value, style: TextStyle(fontWeight: bold ? FontWeight.w600 : FontWeight.w400, fontSize: bold ? 18 : 16)),
-        ]),
-      );
 }
 
-/// The offers and vouchers section: a code field, the applied code, and the reason when it does not apply.
+/// The offers and vouchers card: a code field, the applied code, and the reason when it does not apply.
 class _OffersSection extends StatelessWidget {
-  const _OffersSection({required this.code, required this.offer, required this.message, required this.s, required this.currency, required this.onApply, required this.onRemove});
+  const _OffersSection({required this.code, required this.offer, required this.message, required this.s, required this.onApply, required this.onRemove});
   final TextEditingController code;
   final CartOffer? offer;
   final String? message;
   final Strings s;
-  final String currency;
   final VoidCallback onApply;
   final VoidCallback onRemove;
 
   @override
   Widget build(BuildContext context) {
     final o = offer;
-    return Container(
-      padding: const EdgeInsets.all(Tokens.space4),
-      decoration: BoxDecoration(color: Tokens.surface, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
+    return SectionCard(
+      title: s.offersAndVouchers,
+      icon: LucideIcons.ticketPercent,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(s.offersAndVouchers, style: const TextStyle(fontWeight: FontWeight.w600)),
-        const SizedBox(height: Tokens.space2),
-        Row(children: [
-          Expanded(
-            child: TextField(
-              controller: code,
-              textCapitalization: TextCapitalization.characters,
-              textInputAction: TextInputAction.done,
-              onSubmitted: (_) => onApply(),
-              decoration: InputDecoration(labelText: s.enterVoucherCode, border: const OutlineInputBorder(), isDense: true),
-            ),
-          ),
-          const SizedBox(width: Tokens.space2),
-          AppButton(label: s.applyCode, size: ButtonSize.md, onPressed: onApply),
-        ]),
-        if (o != null && o.applied) ...[
-          const SizedBox(height: Tokens.space3),
+        if (o != null && o.applied)
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: Tokens.space3, vertical: Tokens.space2),
+            decoration: BoxDecoration(color: const Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(Tokens.radiusMd)),
+            child: Row(children: [
+              const Icon(LucideIcons.circleCheck, color: Tokens.success, size: 20),
+              const SizedBox(width: Tokens.space2),
+              Expanded(child: Text(s.offerApplied(o.label ?? ''), style: const TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF166534)))),
+              TextButton(onPressed: onRemove, child: Text(s.removeCode)),
+            ]),
+          )
+        else ...[
           Row(children: [
-            const Icon(LucideIcons.tag, color: Tokens.success),
+            Expanded(
+              child: TextField(
+                controller: code,
+                textCapitalization: TextCapitalization.characters,
+                textInputAction: TextInputAction.done,
+                onSubmitted: (_) => onApply(),
+                decoration: InputDecoration(labelText: s.enterVoucherCode, border: const OutlineInputBorder(), isDense: true),
+              ),
+            ),
             const SizedBox(width: Tokens.space2),
-            Expanded(child: Text(s.offerApplied(o.label ?? ''), style: const TextStyle(fontWeight: FontWeight.w600))),
-            TextButton(onPressed: onRemove, child: Text(s.removeCode)),
+            FilledButton(onPressed: onApply, style: FilledButton.styleFrom(minimumSize: const Size(88, 48)), child: Text(s.applyCode)),
           ]),
-        ] else if (o != null && o.reason != null) ...[
-          const SizedBox(height: Tokens.space3),
-          Semantics(liveRegion: true, child: Text(o.reason!, style: const TextStyle(color: Tokens.textMuted))),
-          TextButton(onPressed: onRemove, child: Text(s.removeCode)),
+          if (o != null && o.reason != null) ...[
+            const SizedBox(height: Tokens.space2),
+            Row(children: [
+              Expanded(child: Semantics(liveRegion: true, child: Text(o.reason!, style: const TextStyle(color: Tokens.textMuted)))),
+              TextButton(onPressed: onRemove, child: Text(s.removeCode)),
+            ]),
+          ],
         ],
         if (message != null) ...[
           const SizedBox(height: Tokens.space2),

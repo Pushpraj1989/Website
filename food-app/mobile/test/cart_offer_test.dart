@@ -7,7 +7,6 @@ import 'package:http/testing.dart';
 import 'package:sample_kitchen/core/api.dart';
 import 'package:sample_kitchen/core/models.dart';
 import 'package:sample_kitchen/screens/cart_screen.dart';
-import 'package:sample_kitchen/widgets/app_button.dart';
 
 import 'helpers.dart';
 
@@ -68,7 +67,7 @@ void main() {
     });
     await _pump(tester, ApiClient(baseUrl: 'http://api.test', client: client));
     await tester.enterText(_codeField, 'save10');
-    await tester.tap(find.widgetWithText(AppButton, 'Apply'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Apply'));
     await tester.pumpAndSettle();
     expect(sent, ['save10']);
     expect(find.text('Applied: 10% off'), findsOneWidget);
@@ -85,7 +84,7 @@ void main() {
     });
     await _pump(tester, ApiClient(baseUrl: 'http://api.test', client: client));
     await tester.enterText(_codeField, 'SHRINK');
-    await tester.tap(find.widgetWithText(AppButton, 'Apply'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Apply'));
     await tester.pumpAndSettle();
     expect(find.text('Add 2.00 AED more to use this offer.'), findsOneWidget);
     expect(find.text('Discount'), findsNothing);

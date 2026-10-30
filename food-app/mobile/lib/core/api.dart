@@ -215,6 +215,24 @@ class ApiClient {
     return body;
   }
 
+  /// Adds [qty] of a dish with an optional note for the kitchen. A dish already in the cart gets the extra quantity;
+  /// a note replaces the line's note only when one is given.
+  Future<void> addToCart(String itemId, {int qty = 1, String note = ''}) async {
+    final lines = await cartLines();
+    final updated = <CartLine>[];
+    var found = false;
+    for (final line in lines) {
+      if (line.itemId == itemId) {
+        updated.add(line.copyWith(qty: (line.qty + qty).clamp(1, 20), note: note.isEmpty ? null : note));
+        found = true;
+      } else {
+        updated.add(line);
+      }
+    }
+    if (!found) updated.add(CartLine(itemId: itemId, qty: qty.clamp(1, 20), note: note, name: null, unitMinor: null, soldOut: false));
+    await saveCart(updated);
+  }
+
   Future<void> addOne(String itemId) async {
     final lines = await cartLines();
     final updated = <CartLine>[];

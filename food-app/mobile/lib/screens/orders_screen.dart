@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../app.dart';
 import '../core/api.dart';
@@ -7,6 +8,8 @@ import '../core/money.dart';
 import '../core/art.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
+import '../widgets/ui.dart';
+import '../core/brand.dart';
 import 'cart_screen.dart';
 import 'order_screen.dart';
 
@@ -46,9 +49,16 @@ class _OrdersScreenState extends State<OrdersScreen> {
       builder: (context, s) {
         final orders = _orders;
         return Scaffold(
-          appBar: AppBar(title: Text(s.orderHistory)),
+          backgroundColor: Tokens.surface,
+          appBar: AppBar(backgroundColor: Tokens.bg, title: Text(s.orderHistory)),
           body: _error != null
-              ? Center(child: Text(s.genericError))
+              ? Center(
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    Text(s.genericError, style: const TextStyle(color: Tokens.danger)),
+                    const SizedBox(height: Tokens.space3),
+                    FilledButton(onPressed: () { setState(() => _error = null); _load(); }, child: Text(s.retry)),
+                  ]),
+                )
               : orders == null
                   ? const Center(child: CircularProgressIndicator())
                   : orders.isEmpty
@@ -106,28 +116,37 @@ class _OrderTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final lang = s.lang;
     final summary = order.items.map((i) => '${i.qty} × ${i.name.of(lang)}').join(', ');
-    return DecoratedBox(
-      decoration: BoxDecoration(color: Tokens.bg, border: Border.all(color: Tokens.border), borderRadius: BorderRadius.circular(Tokens.radiusLg)),
-      child: Padding(
-        padding: const EdgeInsets.all(Tokens.space4),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(children: [
-            Expanded(child: Text(order.number, style: const TextStyle(fontWeight: FontWeight.w600))),
-            Text(formatMoney(order.totalMinor, order.currency)),
-          ]),
-          const SizedBox(height: Tokens.space1),
-          Text(summary, maxLines: 2, overflow: TextOverflow.ellipsis),
-          const SizedBox(height: Tokens.space2),
-          Row(children: [
-            TextButton(
-              onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => OrderScreen(api: api, language: language, orderId: order.id))),
-              child: Text(s.viewOrder),
-            ),
-            const Spacer(),
-            FilledButton(onPressed: () => _reorder(context), child: Text(s.orderAgain)),
-          ]),
+    final date = MaterialLocalizations.of(context).formatMediumDate(order.placedAt.toLocal());
+    void open() => Navigator.of(context).push(MaterialPageRoute(builder: (_) => OrderScreen(api: api, language: language, orderId: order.id)));
+    return SectionCard(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Row(children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(color: context.accentSoft, borderRadius: BorderRadius.circular(Tokens.radiusMd)),
+            child: Icon(order.channel == 'pickup' ? LucideIcons.store : LucideIcons.bike, color: context.accent, size: 20),
+          ),
+          const SizedBox(width: Tokens.space3),
+          Expanded(
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(s.orderNumber(order.number), style: const TextStyle(fontWeight: FontWeight.w700)),
+              Text(date, style: const TextStyle(color: Tokens.textMuted, fontSize: 13)),
+            ]),
+          ),
+          StatusChip(status: order.status, s: s),
         ]),
-      ),
+        const SizedBox(height: Tokens.space3),
+        Text(summary, maxLines: 2, overflow: TextOverflow.ellipsis),
+        const SizedBox(height: Tokens.space2),
+        Text(formatMoney(order.totalMinor, order.currency), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16, fontFeatures: [FontFeature.tabularFigures()])),
+        const SizedBox(height: Tokens.space3),
+        Row(children: [
+          Expanded(child: OutlinedButton(onPressed: open, style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(44)), child: Text(s.viewOrder))),
+          const SizedBox(width: Tokens.space2),
+          Expanded(child: FilledButton.icon(onPressed: () => _reorder(context), style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(44)), icon: const Icon(LucideIcons.rotateCcw, size: 18), label: Text(s.orderAgain))),
+        ]),
+      ]),
     );
   }
 }

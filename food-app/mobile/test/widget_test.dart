@@ -50,9 +50,10 @@ void main() {
 
     await tester.tap(navTab('القائمة'));
     await tester.pumpAndSettle();
-    expect(find.text('الأطباق الرئيسية'), findsOneWidget);
+    // The category shows in the category bar and as its section heading.
+    expect(find.text('الأطباق الرئيسية'), findsNWidgets(2));
     expect(find.text('نفدت الكمية'), findsOneWidget);
-    final direction = Directionality.of(tester.element(find.text('الأطباق الرئيسية')));
+    final direction = Directionality.of(tester.element(find.text('الأطباق الرئيسية').first));
     expect(direction, TextDirection.rtl);
   });
 

@@ -46,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   DashboardLayout _layout = const DashboardLayout(defaultDashboard);
   Menu? _menu;
   HomeShortcuts? _shortcuts;
+  HomePromotions? _promotions;
   String? _message;
 
   @override
@@ -63,8 +64,19 @@ class _HomeScreenState extends State<HomeScreen> {
       // The popular widget shows its own error; the rest of the dashboard still works.
     }
     await _refreshShortcuts();
+    await _loadPromotions();
     if (!mounted) return;
     setState(() => _layout = _store!.load());
+  }
+
+  /// The promotions staff published in the admin. Without any, the home shows the built-in welcome banner.
+  Future<void> _loadPromotions() async {
+    try {
+      final promos = await widget.api.homePromotions();
+      if (mounted) setState(() => _promotions = promos);
+    } catch (_) {
+      // The built-in banners still show.
+    }
   }
 
   /// The personal shortcuts. A failure only hides them; the rest of the home screen still works.
@@ -265,7 +277,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: Tokens.space4),
                   RevealOnLoad(
                     child: PromoCarousel(banners: [
-                      PromoBanner(title: s.heroTitle, body: s.heroBody, action: s.menu, onAction: _openMenu, background: const HeroVideo(video: Art.heroVideo, poster: Art.heroVideoPoster)),
+                      // The restaurant's own published promotions come first.
+                      for (final p in _promotions?.hero ?? const <Promotion>[])
+                        PromoBanner(
+                          title: p.title.of(s.lang),
+                          body: '',
+                          action: p.cta.of(s.lang).isEmpty ? s.menu : p.cta.of(s.lang),
+                          onAction: _openMenu,
+                          background: p.kind == 'video'
+                              ? HeroVideo(video: p.url)
+                              : Image.network(p.url, fit: BoxFit.cover, semanticLabel: '', errorBuilder: (_, _, _) => ColoredBox(color: context.accent)),
+                        ),
+                      if ((_promotions?.hero ?? const <Promotion>[]).isEmpty)
+                        PromoBanner(title: s.heroTitle, body: s.heroBody, action: s.menu, onAction: _openMenu, background: const HeroVideo(video: Art.heroVideo, poster: Art.heroVideoPoster)),
                       PromoBanner(
                         title: s.askTitle,
                         body: s.askHint,

@@ -37,6 +37,14 @@ Map<String, dynamic> _item(String id, String en, String ar, int price, {bool sol
 
 Map<String, dynamic> _menu() => {
       'restaurant': {'en': 'Sample Kitchen', 'ar': 'مطبخ تجريبي'},
+      'brand': {
+        'name': {'en': 'Sample Kitchen', 'ar': 'مطبخ تجريبي'},
+        'tagline': {'en': 'Home-style grills and fresh salads', 'ar': 'مشويات منزلية وسلطات طازجة'},
+        'logoUrl': null,
+        'color': '#B45309',
+        'phone': '+971000000000',
+        'address': {'en': '', 'ar': ''},
+      },
       'currency': 'AED',
       'payments': {'cod': true, 'payOnArrival': true, 'card': false},
       'offers': [],
@@ -143,6 +151,11 @@ MockClient _server() => MockClient((request) async {
         return respond(jsonEncode({'order': {
           'id': 'o2', 'number': 'R-0031', 'status': 'preparing', 'method': 'cod', 'channel': 'delivery', 'etaMinutes': 25,
           'quote': _quote()['quote'],
+          'lines': [
+            {'name': {'en': 'Grilled chicken plate', 'ar': 'طبق دجاج مشوي'}, 'qty': 2, 'note': 'Extra garlic sauce', 'unitMinor': 4500},
+            {'name': {'en': 'Mint lemonade', 'ar': 'ليمونادة بالنعناع'}, 'qty': 1, 'note': '', 'unitMinor': 1200},
+          ],
+          'address': 'Lavender Building, wing B, Floor 1, flat 106',
           'history': [
             {'status': 'placed', 'at': '2026-10-28T19:10:00Z'},
             {'status': 'accepted', 'at': '2026-10-28T19:11:00Z'},
@@ -209,6 +222,12 @@ void main() {
   });
   testWidgets('cart', (tester) async {
     await shoot(tester, 'customer-cart', (api, lang, prefs) => CartScreen(api: api, language: lang));
+  });
+  testWidgets('dish-sheet', (tester) async {
+    await shoot(tester, 'customer-dish', (api, lang, prefs) => MenuScreen(api: api, language: lang), after: (tester) async {
+      await tester.tap(find.text('Grilled chicken plate').first);
+      await tester.pumpAndSettle(const Duration(milliseconds: 300));
+    });
   });
   testWidgets('checkout', (tester) async {
     await shoot(tester, 'customer-checkout', (api, lang, prefs) => CheckoutScreen(api: api, language: lang));

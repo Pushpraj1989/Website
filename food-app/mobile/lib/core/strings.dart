@@ -104,6 +104,21 @@ class Strings {
   String get cartEmptyShort => isArabic ? 'السلة فارغة.' : 'Nothing in your cart yet.';
   String itemCount(int n) => isArabic ? '$n صنف' : (n == 1 ? '1 item' : '$n items');
   String get added => isArabic ? 'تمت الإضافة' : 'Added';
+  String addedToCart(String name) => isArabic ? 'أُضيف $name إلى السلة' : 'Added $name to your cart';
+  String addToCartFor(String amount) => isArabic ? 'أضف إلى السلة · $amount' : 'Add to cart · $amount';
+  String get quantity => isArabic ? 'الكمية' : 'Quantity';
+  String get addNote => isArabic ? 'إضافة ملاحظة' : 'Add a note';
+  String get noteHint => isArabic ? 'مثلاً: بدون بصل' : 'For example: no onions';
+  String get billDetails => isArabic ? 'تفاصيل الفاتورة' : 'Bill details';
+  String get serviceFee => isArabic ? 'رسوم الخدمة' : 'Service fee';
+  String get change => isArabic ? 'تغيير' : 'Change';
+  String get orderType => isArabic ? 'نوع الطلب' : 'How you get it';
+  String get yourOrder => isArabic ? 'طلبك' : 'Your order';
+  String get orderItems => isArabic ? 'الأصناف' : 'Items';
+  String get paidWith => isArabic ? 'الدفع' : 'Payment';
+  String get orderStopped => isArabic ? 'توقف هذا الطلب. لن يتم تحصيل أي مبلغ.' : 'This order was stopped. You will not be charged.';
+  String get addMore => isArabic ? 'إضافة أصناف أخرى' : 'Add more items';
+  String get placedAt => isArabic ? 'وقت الطلب' : 'Placed';
   // Sign-in and sign-up
   String get signInTitle => isArabic ? 'تسجيل الدخول' : 'Sign in';
   String get signInHint => isArabic ? 'أدخل رقم جوالك. سنرسل رمزاً للتأكيد.' : 'Enter your mobile number. We will send you a code.';
