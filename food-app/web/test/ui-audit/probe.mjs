@@ -10,7 +10,7 @@ export const probe = () => {
     if (!visible(el)) continue;
     const r = el.getBoundingClientRect();
     if ((r.right > vw + 1 || r.left < -1) && !scrolls(el)) issues.push(`off-screen ${el.tagName.toLowerCase()} "${name(el)}" (${Math.round(r.left)}–${Math.round(r.right)})`);
-    const p = el.parentElement; if (p && /^(BUTTON|INPUT|SELECT|TEXTAREA)$/.test(el.tagName)) { const pr = p.getBoundingClientRect(); const ps = getComputedStyle(p); if (r.right > pr.right + 1 && ps.overflowX === 'visible' && !scrolls(el)) issues.push(`${el.tagName.toLowerCase()} "${name(el)}" sticks out of its box by ${Math.round(r.right-pr.right)}px`); }
+    let p = el.parentElement; while (p && getComputedStyle(p).display === 'contents') p = p.parentElement; if (p && /^(BUTTON|INPUT|SELECT|TEXTAREA)$/.test(el.tagName)) { const pr = p.getBoundingClientRect(); const ps = getComputedStyle(p); if (r.right > pr.right + 1 && ps.overflowX === 'visible' && !scrolls(el)) issues.push(`${el.tagName.toLowerCase()} "${name(el)}" sticks out of its box by ${Math.round(r.right-pr.right)}px`); }
     if (/^(BUTTON|A|LABEL|TH|TD)$/.test(el.tagName) && el.scrollWidth > el.clientWidth + 2 && getComputedStyle(el).textOverflow !== 'ellipsis' && getComputedStyle(el).overflow !== 'visible') issues.push(`clipped text in ${el.tagName.toLowerCase()} "${name(el)}"`);
     if (/^(BUTTON|A|INPUT|SELECT|TEXTAREA)$/.test(el.tagName) && el.type !== 'hidden') {
       const lab = el.getAttribute('aria-label') || el.getAttribute('aria-labelledby') || el.textContent.trim() || el.title || (el.id && document.querySelector(`label[for="${el.id}"]`)) || el.closest('label') || el.placeholder || el.alt || el.querySelector?.('img[alt]:not([alt=""])');

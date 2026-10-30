@@ -1,7 +1,7 @@
 // The restaurant's theme for the web pages, matching the customer app (mobile/lib/core/theme.dart): the same four
 // looks, the same colours, and the same rule for brand-coloured text: moved towards white or black only as far as
 // needed to reach 4.5:1 on every background it meets.
-import type { Theme } from './restaurant-settings.ts';
+import type { ButtonStyle, Theme } from './restaurant-settings.ts';
 
 type Rgba = [number, number, number, number];
 type Palette = {
@@ -57,8 +57,14 @@ export function themeColours(theme: Theme, brandHex: string) {
 }
 
 /** CSS custom properties for the page: set on <html> next to data-theme. */
-export function themeStyle(theme: Theme, brandHex: string): Record<string, string> {
+export function themeStyle(theme: Theme, brandHex: string, buttonStyle: ButtonStyle = 'light'): Record<string, string> {
   const { p, accent, base, glow, accentFg } = themeColours(theme, brandHex);
+  // Small buttons in the chosen style: light (white, brand words), tonal (a soft tint, readable ink), filled (brand).
+  const soft = p.dark ? mix(accent, base, 0.72) : mix(accent, [255, 255, 255, 1], 0.88);
+  const ink = readableOn(accent, [soft], p.dark);
+  const button = buttonStyle === 'filled' ? { bg: hex(accent), fg: '#FFFFFF', line: hex(accent) }
+    : buttonStyle === 'tonal' ? { bg: hex(soft), fg: hex(ink), line: 'transparent' }
+      : { bg: '#FFFFFF', fg: hex(accent), line: p.dark ? 'transparent' : hex(mix(accent, [255, 255, 255, 1], 0.65)) };
   const backdrop = !p.glass
     ? css(parse(p.surface))
     : p.dark
@@ -77,6 +83,9 @@ export function themeStyle(theme: Theme, brandHex: string): Record<string, strin
     '--color-accent': hex(accent),
     '--color-accent-fg': hex(accentFg),
     '--page-backdrop': backdrop,
+    '--btn-bg': button.bg,
+    '--btn-fg': button.fg,
+    '--btn-line': button.line,
     'color-scheme': p.dark ? 'dark' : 'light',
   };
 }

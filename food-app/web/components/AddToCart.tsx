@@ -40,7 +40,7 @@ export function AddToCart({ itemId, label, addLabel }: { itemId: string; label: 
 
   return (
     <div>
-      <button type="button" className="btn" onClick={add} disabled={busy} aria-label={label} aria-busy={busy}>
+      <button type="button" className="btn add" onClick={add} disabled={busy} aria-label={label} aria-busy={busy}>
         {addLabel}
       </button>
       <span role="status" className="muted" aria-live="polite">{message}</span>

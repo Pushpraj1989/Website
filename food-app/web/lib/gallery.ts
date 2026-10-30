@@ -139,7 +139,8 @@ export const SIZES = ['compact', 'standard', 'tall', 'full'] as const;
 export const FRAMES = ['rounded', 'square', 'ticket', 'circle'] as const;
 export const FREQUENCIES = ['every_open', 'once_per_day', 'once'] as const;
 
-const PROMO_SELECT = `select p.*, m.kind, m.storage_key, m.mime,
+// Built when used, not when the file loads: RESTAURANT_ID comes from a module that imports this one.
+const promoSelect = () => `select p.*, m.kind, m.storage_key, m.mime,
     o.offer_type, o.value_int, o.code as offer_code, o.min_subtotal_minor, o.max_discount_minor, o.ends_at as offer_ends_at,
     o.applies_to, o.name_en as offer_name_en, o.name_ar as offer_name_ar, r.currency_code
   from promotions p
@@ -148,7 +149,7 @@ const PROMO_SELECT = `select p.*, m.kind, m.storage_key, m.mime,
   cross join (select currency_code from restaurant where id = '${RESTAURANT_ID}') r`;
 
 export async function listPromotions() {
-  const { rows } = await pool.query(`${PROMO_SELECT} order by p.placement, p.position, p.starts_at`);
+  const { rows } = await pool.query(`${promoSelect()} order by p.placement, p.position, p.starts_at`);
   return rows.map(promotionView);
 }
 
@@ -328,7 +329,7 @@ export async function addPromotionMedia(bytes: Buffer, uploadedBy: string | null
 /** What the customer app shows now, grouped by place. The welcome pop-up and the strip show one each: the first by position. */
 export async function livePromotions() {
   const { rows } = await pool.query(
-    `${PROMO_SELECT}
+    `${promoSelect()}
      where p.active and now() between p.starts_at and p.ends_at and p.placement in ('hero','mid_feed','carousel','welcome','strip')
        and (p.offer_id is null or (o.active and now() between o.starts_at and o.ends_at))
      order by p.placement, p.position, p.starts_at`,
@@ -341,7 +342,7 @@ export async function livePromotions() {
 /** The video that plays behind a product, if one is live for it. */
 export async function productBackground(productId: string) {
   const { rows } = await pool.query(
-    `${PROMO_SELECT}
+    `${promoSelect()}
      where p.active and p.placement = 'product_background' and p.menu_item_id = $1 and now() between p.starts_at and p.ends_at
      order by p.position, p.starts_at limit 1`,
     [productId],
