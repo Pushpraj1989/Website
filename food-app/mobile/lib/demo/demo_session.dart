@@ -1,8 +1,9 @@
 import '../auth/session_store.dart';
 
-/// The demo starts signed in as a demo customer, and keeps the session in memory only.
+/// The demo keeps the sign-in session in memory only. It starts signed out: the person trying the demo signs up
+/// with their own name and number, and the one-time code arrives in the demo inbox.
 class DemoSessionStore implements SessionStore {
-  String? _token = 'demo-token';
+  String? _token;
   bool _faceId = false;
 
   @override

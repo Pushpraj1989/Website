@@ -267,6 +267,10 @@ export async function placeOrder(input: {
       throw new RuleError(`Your code no longer applies: ${held.reason ?? 'please remove it'}`, 'offer_not_applicable', 409);
     }
     const quote = held && held.outcome.applies ? computeQuote(pricedPlain, input.channel, settings, held.outcome.discountMinor) : plain;
+    // Cash is collected by the driver or at the counter, so the restaurant caps how much one cash order may come to.
+    if (input.method !== 'card' && restaurant.cashLimitMinor !== null && quote.totalMinor > restaurant.cashLimitMinor) {
+      throw new RuleError(`Orders paid in cash can be up to ${restaurant.currency} ${(restaurant.cashLimitMinor / 100).toFixed(2)}. Remove something to continue.`, 'over_cash_limit');
+    }
     const status: OrderStatus = input.method === 'card' ? 'awaiting_payment' : 'placed';
     const orderAddressId = zone ? await data.copyAddressForOrder(c, input.guestId, input.addressId!) : null;
     const id = await data.insertOrder(c, {

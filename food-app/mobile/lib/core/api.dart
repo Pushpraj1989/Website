@@ -91,6 +91,7 @@ class ApiClient {
     return QuoteResult(
       quote: Quote.fromJson(body['quote'] as Map<String, dynamic>),
       delivery: body['delivery'] == null ? null : DeliveryQuote.fromJson(body['delivery'] as Map<String, dynamic>),
+      offer: body['offer'] == null ? null : CartOffer.fromJson(body['offer'] as Map<String, dynamic>),
     );
   }
 

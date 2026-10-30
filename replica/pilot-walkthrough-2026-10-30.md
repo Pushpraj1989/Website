@@ -106,3 +106,34 @@ The app screens were captured from the running pilot API by `mobile/tool/pilot_l
 - The admin form cannot set a per-customer limit. The setup script sets it on WELCOME10 directly.
 - The "Cancelled" order status shows in green on the orders board. It should be neutral.
 - The production blockers in `release-gates-2026-10-29.md` still stand. This is a pilot, not a launch.
+
+## The demo app (added 2026-10-30)
+
+Demo mode runs the customer app with no server. It uses data exported from a database and builds the API's rules into the app.
+
+**Export the data from a test or staging database** that has run `pilot-setup.ts`, never from production:
+
+```sh
+cd food-app/web
+node --experimental-strip-types scripts/export-demo-snapshot.ts
+```
+
+The script writes `food-app/mobile/assets/demo/snapshot.json` using the API's own functions. The snapshot holds:
+- the menu and prices
+- the delivery areas and their outlines
+- the running offer codes and their stored rules
+- a few real voucher codes
+- the membership plans
+
+Run the demo with:
+
+```sh
+flutter run --profile --dart-define=DEMO=true
+```
+
+Release builds refuse to start in demo mode.
+
+**How it behaves:**
+- The demo starts signed out. One-time codes appear in an on-screen message, and the demo checks them with the API's rules.
+- The kitchen's steps happen on a timer.
+- Address search and the assistant reply that they are not set up, as the live API does when those services are not configured.

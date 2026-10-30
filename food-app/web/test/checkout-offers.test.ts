@@ -280,3 +280,13 @@ test('a wallet voucher saved by a customer can be applied at checkout by that cu
   const order = await place(g, { accountId: me.id, key: 'wallet-order-01' });
   assert.equal(order.discountMinor, 150);
 });
+
+test('a cash or pay-on-arrival order above the restaurant cash limit is refused, and card is not limited by it', async () => {
+  const { rows } = await db.query('select cash_limit_minor from restaurant limit 1');
+  const limit = Number(rows[0].cash_limit_minor);
+  assert.ok(limit > 0, 'the seed sets a cash limit');
+  // Enough salads to go over the limit; each line is capped at 20, so spread over two dishes.
+  const g = await guest([{ itemId: SALAD, qty: 20 }, { itemId: LEMONADE, qty: 20 }]);
+  assert.ok(18 * 20 * 100 + 12 * 20 * 100 > limit);
+  await expectRule(place(g, { key: 'cash-over-limit' }), 'over_cash_limit');
+});

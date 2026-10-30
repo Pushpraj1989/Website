@@ -37,6 +37,7 @@ class _Server {
   late final client = MockClient((request) async {
     requests.add('${request.method} ${request.url.path} ${request.body}');
     final path = request.url.path;
+    if (path == '/v1/menu') return respond(jsonEncode(menuPayload()), 200);
     if (path == '/v1/addresses' && request.method == 'GET') return respond(jsonEncode({'addresses': addresses}), 200);
     if (path == '/v1/addresses' && request.method == 'POST') {
       final body = jsonDecode(request.body) as Map<String, dynamic>;

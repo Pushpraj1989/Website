@@ -1,0 +1,421 @@
+{
+  "source": {
+    "exportedAt": "2026-10-30T07:54:31.210Z",
+    "by": "food-app/web/scripts/export-demo-snapshot.ts",
+    "note": "Read from the database with the functions the API uses. Do not edit by hand; export again instead."
+  },
+  "restaurant": {
+    "name": {
+      "en": "Sample Kitchen",
+      "ar": "مطبخ تجريبي"
+    },
+    "currency": "AED",
+    "taxLabel": "VAT",
+    "taxBasisPoints": 500,
+    "serviceFeeMinor": 0,
+    "cashLimitMinor": 30000,
+    "payments": {
+      "cod": true,
+      "payOnArrival": true,
+      "card": false
+    }
+  },
+  "categories": [
+    {
+      "id": "00000000-0000-4000-8000-000000000010",
+      "name": {
+        "en": "Starters",
+        "ar": "المقبلات"
+      },
+      "illustration": "starters",
+      "items": [
+        {
+          "id": "00000000-0000-4000-8000-000000000101",
+          "categoryId": "00000000-0000-4000-8000-000000000010",
+          "name": {
+            "en": "Garden salad",
+            "ar": "سلطة الحديقة"
+          },
+          "description": {
+            "en": "Crisp leaves, tomato, cucumber and lemon.",
+            "ar": "أوراق خضراء طازجة وطماطم وخيار وليمون."
+          },
+          "priceMinor": 1800,
+          "soldOut": false,
+          "imageUrl": null
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000102",
+          "categoryId": "00000000-0000-4000-8000-000000000010",
+          "name": {
+            "en": "Lentil soup",
+            "ar": "شوربة العدس"
+          },
+          "description": {
+            "en": "Red lentils with cumin, served warm.",
+            "ar": "عدس أحمر بالكمون يقدم دافئاً."
+          },
+          "priceMinor": 1500,
+          "soldOut": false,
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000020",
+      "name": {
+        "en": "Mains",
+        "ar": "الأطباق الرئيسية"
+      },
+      "illustration": "mains",
+      "items": [
+        {
+          "id": "00000000-0000-4000-8000-000000000201",
+          "categoryId": "00000000-0000-4000-8000-000000000020",
+          "name": {
+            "en": "Grilled chicken plate",
+            "ar": "طبق دجاج مشوي"
+          },
+          "description": {
+            "en": "Chicken, rice and grilled vegetables.",
+            "ar": "دجاج وأرز وخضار مشوية."
+          },
+          "priceMinor": 4500,
+          "soldOut": false,
+          "imageUrl": null
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000202",
+          "categoryId": "00000000-0000-4000-8000-000000000020",
+          "name": {
+            "en": "Vegetable stew",
+            "ar": "يخنة الخضار"
+          },
+          "description": {
+            "en": "Seasonal vegetables slow-cooked in tomato.",
+            "ar": "خضار الموسم مطهوة ببطء في الطماطم."
+          },
+          "priceMinor": 3800,
+          "soldOut": false,
+          "imageUrl": null
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000203",
+          "categoryId": "00000000-0000-4000-8000-000000000020",
+          "name": {
+            "en": "Beef kebab",
+            "ar": "كباب لحم"
+          },
+          "description": {
+            "en": "Charcoal-grilled beef skewers.",
+            "ar": "أسياخ لحم بقري مشوية على الفحم."
+          },
+          "priceMinor": 5200,
+          "soldOut": true,
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000030",
+      "name": {
+        "en": "Drinks",
+        "ar": "المشروبات"
+      },
+      "illustration": "drinks",
+      "items": [
+        {
+          "id": "00000000-0000-4000-8000-000000000301",
+          "categoryId": "00000000-0000-4000-8000-000000000030",
+          "name": {
+            "en": "Mint lemonade",
+            "ar": "ليموناضة بالنعناع"
+          },
+          "description": {
+            "en": "Fresh lemon with mint.",
+            "ar": "ليمون طازج مع النعناع."
+          },
+          "priceMinor": 1200,
+          "soldOut": false,
+          "imageUrl": null
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000302",
+          "categoryId": "00000000-0000-4000-8000-000000000030",
+          "name": {
+            "en": "Still water",
+            "ar": "مياه معدنية"
+          },
+          "description": {
+            "en": "Bottled water, 500 ml.",
+            "ar": "مياه معبأة، 500 مل."
+          },
+          "priceMinor": 500,
+          "soldOut": false,
+          "imageUrl": null
+        }
+      ]
+    }
+  ],
+  "menuOffers": [
+    {
+      "id": "0c8a872c-af9c-49d8-8f03-e784b9b201b8",
+      "name": {
+        "en": "Welcome 10% off",
+        "ar": "خصم ترحيبي 10%"
+      },
+      "type": "percent",
+      "value": 1000,
+      "code": "WELCOME10",
+      "endsAt": "2026-11-29T06:54:30.000Z"
+    },
+    {
+      "id": "befe40a1-2bf0-497b-bbf8-58a36b471312",
+      "name": {
+        "en": "AED 5 off",
+        "ar": "خصم 5 دراهم"
+      },
+      "type": "fixed",
+      "value": 500,
+      "code": null,
+      "endsAt": "2026-11-29T06:54:30.000Z"
+    },
+    {
+      "id": "d6f21c21-d847-4cad-a431-b3c61ef36a95",
+      "name": {
+        "en": "Free delivery",
+        "ar": "توصيل مجاني"
+      },
+      "type": "free_delivery",
+      "value": 0,
+      "code": "FREEDEL",
+      "endsAt": "2026-11-29T06:54:30.000Z"
+    }
+  ],
+  "zones": [
+    {
+      "id": "00000000-0000-4000-8000-000000000501",
+      "name": {
+        "en": "Central (sample)",
+        "ar": "الوسط (تجريبي)"
+      },
+      "feeMinor": 1000,
+      "minOrderMinor": 0,
+      "active": true,
+      "polygon": [
+        [
+          55,
+          24.8
+        ],
+        [
+          55.6,
+          24.8
+        ],
+        [
+          55.6,
+          25.4
+        ],
+        [
+          55,
+          25.4
+        ],
+        [
+          55,
+          24.8
+        ]
+      ]
+    }
+  ],
+  "offers": [
+    {
+      "id": "d6f21c21-d847-4cad-a431-b3c61ef36a95",
+      "code": "FREEDEL",
+      "name": {
+        "en": "Free delivery",
+        "ar": "توصيل مجاني"
+      },
+      "campaign": "Pilot: Free delivery"
+    },
+    {
+      "id": "0c8a872c-af9c-49d8-8f03-e784b9b201b8",
+      "code": "WELCOME10",
+      "name": {
+        "en": "Welcome 10% off",
+        "ar": "خصم ترحيبي 10%"
+      },
+      "campaign": "Pilot: Welcome 10%"
+    }
+  ],
+  "rules": {
+    "d6f21c21-d847-4cad-a431-b3c61ef36a95": {
+      "id": "d6f21c21-d847-4cad-a431-b3c61ef36a95",
+      "type": "free_delivery",
+      "value": 0,
+      "appliesTo": "order",
+      "appliesToIds": [],
+      "audience": "any",
+      "minSubtotalMinor": 0,
+      "usageLimit": 200,
+      "usedCount": 0,
+      "perCustomerLimit": null,
+      "maxDiscountMinor": null,
+      "startsAt": "2026-10-30T06:54:30.000Z",
+      "endsAt": "2026-11-29T06:54:30.000Z",
+      "active": true,
+      "campaignStatus": "active"
+    },
+    "0c8a872c-af9c-49d8-8f03-e784b9b201b8": {
+      "id": "0c8a872c-af9c-49d8-8f03-e784b9b201b8",
+      "type": "percent",
+      "value": 1000,
+      "appliesTo": "order",
+      "appliesToIds": [],
+      "audience": "any",
+      "minSubtotalMinor": 3000,
+      "usageLimit": 500,
+      "usedCount": 0,
+      "perCustomerLimit": 1,
+      "maxDiscountMinor": 2000,
+      "startsAt": "2026-10-30T06:54:30.000Z",
+      "endsAt": "2026-11-29T06:54:30.000Z",
+      "active": true,
+      "campaignStatus": "active"
+    },
+    "befe40a1-2bf0-497b-bbf8-58a36b471312": {
+      "id": "befe40a1-2bf0-497b-bbf8-58a36b471312",
+      "type": "fixed",
+      "value": 500,
+      "appliesTo": "order",
+      "appliesToIds": [],
+      "audience": "any",
+      "minSubtotalMinor": 2500,
+      "usageLimit": null,
+      "usedCount": 0,
+      "perCustomerLimit": null,
+      "maxDiscountMinor": null,
+      "startsAt": "2026-10-30T06:54:30.000Z",
+      "endsAt": "2026-11-29T06:54:30.000Z",
+      "active": true,
+      "campaignStatus": "active"
+    }
+  },
+  "vouchers": [
+    {
+      "code": "PLT-6820-ZR",
+      "offerId": "befe40a1-2bf0-497b-bbf8-58a36b471312",
+      "campaign": "Pilot: AED 5 vouchers",
+      "discount": "AED 5.00 OFF",
+      "minOrderMinor": 2500,
+      "currency": "AED",
+      "expiresAt": "2026-11-29T06:54:30.000Z"
+    },
+    {
+      "code": "PLT-0090-AZ",
+      "offerId": "befe40a1-2bf0-497b-bbf8-58a36b471312",
+      "campaign": "Pilot: AED 5 vouchers",
+      "discount": "AED 5.00 OFF",
+      "minOrderMinor": 2500,
+      "currency": "AED",
+      "expiresAt": "2026-11-29T06:54:30.000Z"
+    },
+    {
+      "code": "PLT-3412-DZ",
+      "offerId": "befe40a1-2bf0-497b-bbf8-58a36b471312",
+      "campaign": "Pilot: AED 5 vouchers",
+      "discount": "AED 5.00 OFF",
+      "minOrderMinor": 2500,
+      "currency": "AED",
+      "expiresAt": "2026-11-29T06:54:30.000Z"
+    }
+  ],
+  "membership": {
+    "plans": [
+      {
+        "id": "00000000-0000-4000-8000-000000000701",
+        "code": "solo",
+        "name": {
+          "en": "Solo",
+          "ar": "الفردية"
+        },
+        "price": {
+          "amountMinor": 0,
+          "currency": "AED",
+          "period": "year"
+        },
+        "active": false,
+        "benefits": [
+          {
+            "id": "00000000-0000-4000-8000-000000000711",
+            "title": {
+              "en": "Free delivery",
+              "ar": "توصيل مجاني"
+            },
+            "summary": {
+              "en": "No delivery fee on your member orders.",
+              "ar": "لا رسوم توصيل على طلباتك كعضو."
+            },
+            "icon": "delivery",
+            "accent": "lilac",
+            "points": [
+              {
+                "en": "No delivery fee on orders from any served area",
+                "ar": "بدون رسوم توصيل على الطلبات من أي منطقة نخدمها"
+              },
+              {
+                "en": "Applies to every order you place while the plan is active",
+                "ar": "ينطبق على كل طلب تقدمه ما دامت العضوية فعالة"
+              }
+            ]
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000712",
+            "title": {
+              "en": "Member deals",
+              "ar": "عروض الأعضاء"
+            },
+            "summary": {
+              "en": "Offers that only members can use.",
+              "ar": "عروض يستخدمها الأعضاء فقط."
+            },
+            "icon": "tag",
+            "accent": "peach",
+            "points": [
+              {
+                "en": "Limited-time offers made for members",
+                "ar": "عروض محدودة المدة مخصصة للأعضاء"
+              },
+              {
+                "en": "Extra discount on selected dishes",
+                "ar": "خصم إضافي على أطباق مختارة"
+              }
+            ]
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000713",
+            "title": {
+              "en": "Member days",
+              "ar": "أيام الأعضاء"
+            },
+            "summary": {
+              "en": "Bigger savings on selected days.",
+              "ar": "وفورات أكبر في أيام مختارة."
+            },
+            "icon": "calendar",
+            "accent": "mint",
+            "points": [
+              {
+                "en": "Bigger discounts on the days we announce",
+                "ar": "خصومات أكبر في الأيام التي نعلن عنها"
+              },
+              {
+                "en": "New member offers each time a day is announced",
+                "ar": "عروض جديدة للأعضاء مع كل إعلان"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "membership": null
+  }
+}

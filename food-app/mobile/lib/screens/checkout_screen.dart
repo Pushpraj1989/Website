@@ -29,6 +29,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   bool _loadingAddresses = true;
   Quote? _quote;
   DeliveryQuote? _delivery;
+  CartOffer? _offer;
+  PaymentOptions? _payments;
   String _currency = 'AED';
   String? _error;
   bool _busy = false;
@@ -38,7 +40,30 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   void initState() {
     super.initState();
+    _loadPayments();
     _loadAddresses();
+  }
+
+  /// The payment methods the restaurant accepts, from its settings (the menu response), not from the screen.
+  Future<void> _loadPayments() async {
+    try {
+      final menu = await widget.api.menu();
+      if (!mounted) return;
+      setState(() {
+        _payments = menu.payments;
+        _method = _methodsFor(_channel).firstOrNull ?? _method;
+      });
+    } catch (_) {
+      if (mounted) setState(() => _error = 'payments');
+    }
+  }
+
+  /// Methods offered for an order type. Card needs the in-app payment step, which this app does not have yet, so it
+  /// is not offered even when the restaurant accepts card.
+  List<String> _methodsFor(String channel) {
+    final p = _payments;
+    if (p == null) return const [];
+    return channel == 'delivery' ? [if (p.cod) 'cod'] : [if (p.payOnArrival) 'pay_on_arrival'];
   }
 
   /// Keeps the chosen address when it still exists, otherwise the default, otherwise the first saved one.
@@ -73,9 +98,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       setState(() {
         _quote = result.quote;
         _delivery = result.delivery;
+        _offer = result.offer;
         _currency = result.quote.currency;
         _error = null;
-        _method = _channel == 'delivery' ? 'cod' : 'pay_on_arrival';
+        _method = _methodsFor(_channel).firstOrNull ?? _method;
       });
     } on ApiException catch (e) {
       if (mounted) setState(() => _error = e.message);
@@ -114,6 +140,20 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     setState(() => _addressId = saved.id);
     await _loadAddresses();
   }
+
+  /// Takes the code off the cart when it does not apply to this order, then prices the order again.
+  Future<void> _removeCode(Strings s) async {
+    try {
+      await widget.api.removeCartCode();
+      await _loadQuote();
+    } on ApiException catch (e) {
+      if (mounted) setState(() => _error = e.message);
+    } catch (_) {
+      if (mounted) setState(() => _error = s.genericError);
+    }
+  }
+
+  bool get _codeBlocked => _offer != null && !_offer!.applied;
 
   bool get _deliveryBlocked => _channel == 'delivery' && (_addressId == null || (_delivery != null && !_delivery!.deliverable));
 
@@ -181,9 +221,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return LanguageScope(
       language: widget.language,
       builder: (context, s) {
-        final methods = _channel == 'delivery'
-            ? [('cod', s.payCod)]
-            : [('pay_on_arrival', s.payArrival)];
+        final methods = [for (final m in _methodsFor(_channel)) (m, m == 'cod' ? s.payCod : s.payArrival)];
         return Scaffold(
           appBar: AppBar(title: Text(s.checkout), actions: [TextButton(onPressed: () => toggleLanguage(widget.language), child: Text(s.language))]),
           body: ListView(
@@ -207,6 +245,22 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   for (final (value, label) in methods) RadioListTile<String>(value: value, title: Text(label)),
                 ]),
               ),
+              if (_payments != null && methods.isEmpty)
+                Padding(padding: const EdgeInsets.only(top: Tokens.space1), child: Text(s.noPaymentMethod, style: const TextStyle(color: Tokens.danger))),
+              if (_codeBlocked) ...[
+                const SizedBox(height: Tokens.space3),
+                Semantics(
+                  liveRegion: true,
+                  child: Container(
+                    padding: const EdgeInsets.all(Tokens.space3),
+                    decoration: BoxDecoration(color: Tokens.surface, borderRadius: BorderRadius.circular(Tokens.radiusLg)),
+                    child: Row(children: [
+                      Expanded(child: Text(s.codeDoesNotApply(_offer!.reason ?? ''))),
+                      TextButton(onPressed: () => _removeCode(s), child: Text(s.removeCode)),
+                    ]),
+                  ),
+                ),
+              ],
               if (_quote != null) ...[
                 const SizedBox(height: Tokens.space3),
                 _Totals(quote: _quote!, s: s, currency: _currency),
@@ -216,7 +270,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               const SizedBox(height: Tokens.space4),
               FilledButton(
                 style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(48)),
-                onPressed: _busy || _quote == null || _deliveryBlocked ? null : () => _place(s),
+                onPressed: _busy || _quote == null || _deliveryBlocked || _codeBlocked || methods.isEmpty ? null : () => _place(s),
                 child: Text(_busy ? s.placing : s.placeOrder),
               ),
             ],

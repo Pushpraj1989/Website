@@ -16,6 +16,8 @@ export type Restaurant = {
   taxBasisPoints: number;
   serviceFeeMinor: number;
   payments: { card: boolean; cod: boolean; payOnArrival: boolean };
+  /** The most a cash or pay-on-arrival order may come to, or null for no limit. */
+  cashLimitMinor: number | null;
 };
 
 export type MenuItem = {
@@ -67,7 +69,7 @@ export const restaurantId = '00000000-0000-4000-8000-000000000001';
 
 const restaurantSql = `
   select id, name_en, name_ar, currency_code, tax_label, tax_basis_points, service_fee_minor,
-         accepts_card, accepts_cod, accepts_pay_on_arrival
+         accepts_card, accepts_cod, accepts_pay_on_arrival, cash_limit_minor
   from restaurant where id = $1`;
 
 export async function getRestaurant(c: PoolClient | typeof pool = pool): Promise<Restaurant> {
@@ -81,6 +83,8 @@ export async function getRestaurant(c: PoolClient | typeof pool = pool): Promise
     taxBasisPoints: r.tax_basis_points,
     serviceFeeMinor: r.service_fee_minor,
     payments: { card: r.accepts_card, cod: r.accepts_cod, payOnArrival: r.accepts_pay_on_arrival },
+    // 0 means the restaurant has not set a limit.
+    cashLimitMinor: Number(r.cash_limit_minor) > 0 ? Number(r.cash_limit_minor) : null,
   };
 }
 

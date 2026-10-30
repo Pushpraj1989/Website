@@ -318,9 +318,11 @@ class DeliveryQuote {
 }
 
 class QuoteResult {
-  const QuoteResult({required this.quote, required this.delivery});
+  const QuoteResult({required this.quote, required this.delivery, this.offer});
   final Quote quote;
   final DeliveryQuote? delivery;
+  /// The cart's code checked against this order type and address; null when the cart has no code.
+  final CartOffer? offer;
 }
 
 /// One past order in the history list, with its dish names and quantities.

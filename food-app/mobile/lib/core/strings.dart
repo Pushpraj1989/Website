@@ -22,6 +22,8 @@ class Strings {
   String get paymentMethod => isArabic ? 'طريقة الدفع' : 'Payment method';
   String get payCod => isArabic ? 'الدفع نقداً عند الاستلام' : 'Cash on delivery';
   String get payArrival => isArabic ? 'الدفع عند الوصول' : 'Pay on arrival';
+  String get noPaymentMethod => isArabic ? 'لا تتوفر طريقة دفع لهذا النوع من الطلبات حالياً.' : 'No payment method is available for this kind of order right now.';
+  String codeDoesNotApply(String reason) => isArabic ? 'الرمز لا ينطبق على هذا الطلب: $reason' : 'Your code does not apply to this order: $reason';
   String get placeOrder => isArabic ? 'تأكيد الطلب' : 'Place order';
   String get placing => isArabic ? 'جارٍ تأكيد الطلب…' : 'Placing order…';
   String get orderAgain => isArabic ? 'أضف إلى السلة' : 'Add to cart';
