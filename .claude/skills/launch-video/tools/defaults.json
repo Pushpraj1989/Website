@@ -1,0 +1,213 @@
+{
+  "BRAND": {
+    "name": "Your Product",
+    "wordmark": [
+      "Your",
+      "Product"
+    ],
+    "tagline": "Say what it does in one line.",
+    "repo": "example.com/your-product",
+    "logo": "monogram"
+  },
+  "COPY": {
+    "hook": {
+      "landscape": "Still paying for\nthe wrong *thing?*",
+      "portrait": "Still paying\nfor the\nwrong *thing?*"
+    },
+    "brandBeats": [
+      "Meet",
+      "your *own*",
+      "product *name.*"
+    ],
+    "promise": {
+      "line": "Free. Open source.",
+      "from": 30,
+      "value": 0,
+      "unit": "%",
+      "word": "commission.",
+      "sub": "No subscription. No per-order fee."
+    },
+    "deploy": {
+      "lead": "Deploy on",
+      "words": [
+        "your server."
+      ],
+      "host": "root@your-server",
+      "command": "curl -fsSL …/install.sh | sudo DOMAIN=app.yourdomain.com bash",
+      "steps": [
+        "Database",
+        "HTTPS certificate",
+        "Website · Console · App"
+      ],
+      "liveTitle": "Your app is live",
+      "liveUrl": "app.yourdomain.com",
+      "pills": [
+        "Website",
+        "Admin console",
+        "Customer app"
+      ]
+    },
+    "details": {
+      "lead": "Add your",
+      "words": [
+        "business.",
+        "products."
+      ],
+      "sectionLabel": "Business and look",
+      "nameLabel": "Business name",
+      "colourLabel": "Brand colour",
+      "productsLabel": "Products",
+      "addLabel": "+ Add product"
+    },
+    "offers": {
+      "lead": "Run",
+      "words": [
+        "offers.",
+        "vouchers.",
+        "campaigns."
+      ]
+    },
+    "dashboard": {
+      "headline": "Watch it *grow.*"
+    },
+    "stores": {
+      "lead": "Ready for the",
+      "words": [
+        "stores."
+      ],
+      "chips": [
+        "iOS",
+        "Android",
+        "Web"
+      ],
+      "fine": "Built with Flutter. Publish under your own name with your Apple and Google developer accounts."
+    },
+    "sectors": {
+      "headline": "One app. *Every business.*",
+      "before": "Your",
+      "after": "app is ready."
+    },
+    "end": {
+      "tagline": "Build it in a day.",
+      "tags": [
+        "0% commission",
+        "Free & open source",
+        "Apache 2.0"
+      ]
+    }
+  },
+  "DEMO": {
+    "restaurant": "Demo Business",
+    "currency": "AED",
+    "dishes": [
+      {
+        "name": "Product one",
+        "cat": "Category A",
+        "price": 18,
+        "img": "dishes/product-1.png"
+      },
+      {
+        "name": "Product two",
+        "cat": "Category A",
+        "price": 15,
+        "img": "dishes/product-1.png"
+      },
+      {
+        "name": "Product three",
+        "cat": "Category B",
+        "price": 45,
+        "img": "dishes/product-1.png"
+      }
+    ],
+    "months": [
+      {
+        "m": "May",
+        "v": 182
+      },
+      {
+        "m": "Jun",
+        "v": 420
+      },
+      {
+        "m": "Jul",
+        "v": 270
+      },
+      {
+        "m": "Aug",
+        "v": 635
+      },
+      {
+        "m": "Sep",
+        "v": 449
+      },
+      {
+        "m": "Oct",
+        "v": 281
+      }
+    ],
+    "sales": 2237,
+    "orders": 40,
+    "collected": 32,
+    "average": 62.14,
+    "customers": 36
+  },
+  "SECTORS": [
+    {
+      "key": "one",
+      "name": "first business",
+      "shot": "shots/sector-one.png"
+    },
+    {
+      "key": "two",
+      "name": "second business",
+      "shot": "shots/sector-two.png"
+    },
+    {
+      "key": "three",
+      "name": "third business",
+      "shot": "shots/sector-three.png"
+    }
+  ],
+  "SCENE_PLAN": [
+    {
+      "id": "hook",
+      "frames": 96
+    },
+    {
+      "id": "brand",
+      "frames": 126
+    },
+    {
+      "id": "promise",
+      "frames": 96
+    },
+    {
+      "id": "deploy",
+      "frames": 174
+    },
+    {
+      "id": "details",
+      "frames": 186
+    },
+    {
+      "id": "offers",
+      "frames": 180
+    },
+    {
+      "id": "dashboard",
+      "frames": 198
+    },
+    {
+      "id": "stores",
+      "frames": 174
+    },
+    {
+      "id": "sectors",
+      "frames": 240
+    },
+    {
+      "id": "end",
+      "frames": 108
+    }
+  ]
+}
