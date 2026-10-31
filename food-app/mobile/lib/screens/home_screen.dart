@@ -384,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               tabs: [
                                 // A category shows its first product photo when it has one (always for shops, whose
                                 // categories are not food), else its bundled picture.
-                                CategoryTab(id: '', label: s.allCategories, image: Strings.shop ? _firstPhoto(menu.categories.expand((c) => c.items)) ?? '' : Art.hero),
+                                CategoryTab(id: '', label: s.allCategories, image: _firstPhoto(menu.categories.expand((c) => c.items)) ?? (Strings.shop ? '' : Art.hero)),
                                 for (final c in menu.categories)
                                   CategoryTab(id: c.id, label: c.name.of(s.lang), image: _firstPhoto(c.items) ?? (Strings.shop ? '' : Art.forCategory(c.illustration))),
                               ],

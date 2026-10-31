@@ -1,6 +1,6 @@
 # Launch video (Remotion)
 
-The 48-second launch film for Free Restaurant Ordering, written as code: every word, number, colour and timing
+The 53-second launch film for Free Restaurant Ordering, written as code: every word, number, colour and timing
 can be edited and the video rendered again. The plan, timing sheet and LinkedIn caption are in
 [`STORYBOARD.md`](STORYBOARD.md).
 

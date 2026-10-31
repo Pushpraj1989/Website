@@ -1,6 +1,6 @@
 # Launch video: storyboard and motion specification
 
-**Free Restaurant Ordering.** A 48-second LinkedIn launch film, built as code (Remotion) in `src/`.
+**Free Restaurant Ordering.** A 53-second LinkedIn launch film, built as code (Remotion) in `src/`.
 
 ## Formats
 
@@ -9,7 +9,7 @@
 | Master | 1920 × 1080 | `Launch` |
 | Feed variant | 1080 × 1350 | `LaunchFeed` |
 
-Both run at 30 fps, 1440 frames.
+Both run at 30 fps, 1578 frames.
 
 ## Ground rules
 
@@ -29,16 +29,16 @@ Both run at 30 fps, 1440 frames.
 
 | # | Time | On screen (accent word in *italics*) |
 | --- | --- | --- |
-| 1 | 0.0–3.2 | Still paying for / your restaurant's *app?* |
+| 1 | 0.0–3.2 | Still paying for / your business *app?* |
 | 2 | 3.2–7.4 | Meet / your *own* / ordering app. → logo |
 | 3 | 7.4–10.6 | Free. Open source. / *0%* commission. |
 | 4 | 10.6–16.4 | ① Deploy on *your server.* (one command; live) |
-| 5 | 16.4–22.6 | ② Add your *restaurant.* / Add your *dishes.* |
+| 5 | 16.4–22.6 | ② Add your *business.* / Add your *products.* |
 | 6 | 22.6–28.6 | ③ Run *offers.* → *vouchers.* → *campaigns.* (new order arrives) |
 | 7 | 28.6–35.2 | Watch it *grow.* (sales dashboard; orders board) |
 | 8 | 35.2–41.0 | ④ Ready for the *stores.* · iOS · Android · Web |
-| 9 | 41.0–44.4 | Website. App. *Admin.* |
-| 10 | 44.4–48.0 | Logo · 0% commission · Apache 2.0 · repo link |
+| 9 | 41.0–49.0 | One app. *Every business.* → "Your {restaurant, fashion, beauty, supplements, pharmacy, grocery, flower shop, bakery, café} app is ready." |
+| 10 | 49.0–52.6 | Logo · 0% commission · Restaurants & shops · Free & open source · Apache 2.0 · repo link |
 
 ## Scene by scene
 
@@ -111,13 +111,19 @@ Both run at 30 fps, 1440 frames.
 - **Platforms:** three chips pop in: iOS, Android, Web.
 - **Fine print:** "Built with Flutter. Publish with your own Apple and Google developer accounts."
 
-### 9. Recap (1230–1332)
-- Website, App and Admin in three small cards. Each tilts in and settles with a spring, 8 frames apart.
-- The glow sweeps under them.
+### 9. Every business (1230–1470)
+- Headline "One app. Every business." builds in word by word.
+- Nine phones sit on a curve (an arc, like the branches carousel on the website). The centre phone is upright and
+  largest; the others turn away, shrink and drop along the arc, and fade at the ends.
+- The ring turns one phone every 22 frames after a short hold, easing into each stop. One full lap shows all nine.
+- Each phone is the real app set up as that business: its own name, brand colour, hero slide, categories and products.
+  Restaurant, fashion, beauty, supplements, pharmacy, grocery, flower shop, bakery, café.
+- The label under the centre phone changes with it: "Your *fashion* app is ready."
+- Photos are free CC0 or public-domain pictures from Wikimedia Commons; credits are in `public/sectors/SOURCES.md`.
 
-### 10. End card (1332–1440)
+### 10. End card (1470–1578)
 - The logo, large, centred: the mark scales 0.9 → 1 and the wordmark fades up.
-- Tags: "0% commission" (filled), "Free & open source", "Apache 2.0".
+- Tags: "0% commission" (filled), "Restaurants & shops", "Free & open source", "Apache 2.0".
 - The URL `github.com/Pushpraj1989/free-restaurant-ordering` types in.
 - The glow settles behind. The last 10 frames hold.
 
@@ -154,8 +160,8 @@ heart, rising from *satisfaction*, a full warm bowl. The colours run from a saff
 | 6 Offers | 678–858 | 22.6–28.6 |
 | 7 Dashboard | 858–1056 | 28.6–35.2 |
 | 8 Stores | 1056–1230 | 35.2–41.0 |
-| 9 Recap | 1230–1332 | 41.0–44.4 |
-| 10 End | 1332–1440 | 44.4–48.0 |
+| 9 Every business | 1230–1470 | 41.0–49.0 |
+| 10 End | 1470–1578 | 49.0–52.6 |
 
 ## LinkedIn caption
 
