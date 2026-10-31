@@ -12,10 +12,25 @@ const TIMEOUT_MS = 10_000;
 export class GraphMailError extends Error {
   readonly status: number;
   readonly stage: 'token' | 'send' | 'settings';
-  constructor(status: number, stage: 'token' | 'send' | 'settings') {
-    super(`graph ${stage} failed (${status})`);
+  /** Microsoft's own reason, a short code such as AADSTS7000215 or ErrorAccessDenied. It never holds a secret. */
+  readonly reason: string;
+  constructor(status: number, stage: 'token' | 'send' | 'settings', reason = '') {
+    super(`graph ${stage} failed (${status}${reason ? ` ${reason}` : ''})`);
     this.status = status;
     this.stage = stage;
+    this.reason = reason;
+  }
+}
+
+// The reason code from Microsoft's error reply: AADSTS numbers from sign-in, error.code from Graph. Only letters,
+// digits and dots are kept, so nothing else from the reply can reach a log.
+async function reasonOf(response: Response): Promise<string> {
+  try {
+    const body = (await response.json()) as { error?: string | { code?: string }; error_codes?: number[] };
+    const code = body.error_codes?.length ? `AADSTS${body.error_codes[0]}` : typeof body.error === 'string' ? body.error : body.error?.code ?? '';
+    return String(code).replace(/[^A-Za-z0-9_.]/g, '').slice(0, 60);
+  } catch {
+    return '';
   }
 }
 
@@ -41,7 +56,7 @@ async function token(): Promise<string> {
     }),
     signal: AbortSignal.timeout(TIMEOUT_MS),
   });
-  if (!response.ok) throw new GraphMailError(response.status, 'token');
+  if (!response.ok) throw new GraphMailError(response.status, 'token', await reasonOf(response));
   const body = (await response.json()) as { access_token?: string; expires_in?: number };
   if (!body.access_token) throw new GraphMailError(502, 'token');
   cached = { token: body.access_token, expires: Date.now() + (body.expires_in ?? 3600) * 1000, key };
@@ -73,7 +88,27 @@ export async function sendGraphMail(input: { to: string; subject: string; text: 
     cached = null;
     response = await send(await token());
   }
-  if (response.status !== 202 && !response.ok) throw new GraphMailError(response.status, 'send');
+  if (response.status !== 202 && !response.ok) throw new GraphMailError(response.status, 'send', await reasonOf(response));
+}
+
+/** What a Graph failure means, in words for whoever looks after the server. */
+export function explainGraphError(e: GraphMailError): string {
+  const r = e.reason;
+  if (e.stage === 'settings') return 'One of GRAPH_TENANT_ID, GRAPH_CLIENT_ID, GRAPH_CLIENT_SECRET or GRAPH_SENDER is empty.';
+  if (e.stage === 'token') {
+    if (/AADSTS7000215|invalid_client/.test(r)) return "GRAPH_CLIENT_SECRET is not right. Use the secret's Value (shown once when it is made), not its Secret ID.";
+    if (/AADSTS7000222/.test(r)) return 'The client secret has expired. Make a new one under Certificates & secrets and put its Value in GRAPH_CLIENT_SECRET.';
+    if (/AADSTS700016|unauthorized_client/.test(r)) return 'GRAPH_CLIENT_ID was not found in this tenant. Copy the Application (client) ID from the app\u2019s Overview page.';
+    if (/AADSTS90002|AADSTS900023|invalid_tenant/.test(r)) return 'GRAPH_TENANT_ID is not right. Copy the Directory (tenant) ID from the app\u2019s Overview page.';
+    return `Microsoft refused to sign the app in (${e.status} ${r}). Check the three IDs and the secret.`;
+  }
+  if (e.status === 403 || /AccessDenied|Authorization_RequestDenied/.test(r)) {
+    return 'The app may not send mail: under API permissions, add Microsoft Graph > Application permissions > Mail.Send and press Grant admin consent. If your Exchange administrator limited the app to certain mailboxes, GRAPH_SENDER must be one of them.';
+  }
+  if (e.status === 404 || /ResourceNotFound|ErrorInvalidUser|MailboxNotEnabledForRESTAPI|MailboxNotFound/.test(r)) {
+    return 'GRAPH_SENDER is not a Microsoft 365 mailbox in this tenant. It must be a licensed Exchange Online mailbox (not a personal outlook.com address), written exactly as its email address.';
+  }
+  return `Microsoft refused the email (${e.status} ${r}).`;
 }
 
 /** For tests: forget the cached token. */

@@ -2,13 +2,15 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { createServer, type Server } from 'node:http';
-import { GraphMailError, resetGraphToken, sendGraphMail } from '../lib/graph-mail.ts';
+import { GraphMailError, explainGraphError, resetGraphToken, sendGraphMail } from '../lib/graph-mail.ts';
 
 type Call = { path: string; auth?: string; body: string };
 const calls: Call[] = [];
 let tokensIssued = 0;
 let sendStatus = 202;
 let rejectToken: string | null = null;
+let tokenReply: { status: number; body: unknown } | null = null;
+let sendReply: unknown = null;
 let server: Server;
 
 before(async () => {
@@ -17,11 +19,14 @@ before(async () => {
     req.on('data', (c) => (body += c));
     req.on('end', () => {
       calls.push({ path: req.url ?? '', auth: req.headers.authorization, body });
-      if (req.url?.endsWith('/oauth2/v2.0/token')) {
+      if (req.url?.endsWith('/oauth2/v2.0/token') && tokenReply) {
+        res.writeHead(tokenReply.status, { 'content-type': 'application/json' }).end(JSON.stringify(tokenReply.body));
+      } else if (req.url?.endsWith('/oauth2/v2.0/token')) {
         tokensIssued += 1;
         res.writeHead(200, { 'content-type': 'application/json' }).end(JSON.stringify({ access_token: `tok-${tokensIssued}`, expires_in: 3600 }));
       } else if (req.url?.includes('/sendMail')) {
         if (rejectToken && req.headers.authorization === `Bearer ${rejectToken}`) res.writeHead(401).end();
+        else if (sendReply) res.writeHead(sendStatus, { 'content-type': 'application/json' }).end(JSON.stringify(sendReply));
         else res.writeHead(sendStatus).end();
       } else res.writeHead(404).end();
     });
@@ -78,4 +83,27 @@ test('a refused send and missing settings are errors that name the step, never t
   delete process.env.GRAPH_SENDER;
   await assert.rejects(sendGraphMail({ to: 'a@example.com', subject: 's', text: 't' }), (e: unknown) => e instanceof GraphMailError && e.stage === 'settings');
   process.env.GRAPH_SENDER = saved;
+});
+
+test("Microsoft's reason is kept and explained: a wrong secret, a missing permission, a sender with no mailbox", async () => {
+  const fail = async () => {
+    try { await sendGraphMail({ to: 'a@example.com', subject: 's', text: 't' }); } catch (e) { return e as GraphMailError; }
+    throw new Error('expected a failure');
+  };
+  resetGraphToken();
+  tokenReply = { status: 401, body: { error: 'invalid_client', error_description: 'AADSTS7000215: Invalid client secret provided. Trace ID: x', error_codes: [7000215] } };
+  let e = await fail();
+  assert.equal(e.reason, 'AADSTS7000215');
+  assert.match(explainGraphError(e), /GRAPH_CLIENT_SECRET is not right/);
+  assert.ok(!e.message.includes('very-secret-value'));
+  tokenReply = null;
+  resetGraphToken();
+  sendStatus = 403; sendReply = { error: { code: 'ErrorAccessDenied', message: 'Access is denied.' } };
+  e = await fail();
+  assert.equal(e.reason, 'ErrorAccessDenied');
+  assert.match(explainGraphError(e), /Mail\.Send/);
+  sendStatus = 404; sendReply = { error: { code: 'MailboxNotEnabledForRESTAPI', message: 'x' } };
+  e = await fail();
+  assert.match(explainGraphError(e), /GRAPH_SENDER is not a Microsoft 365 mailbox/);
+  sendStatus = 202; sendReply = null;
 });

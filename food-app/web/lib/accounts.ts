@@ -125,7 +125,7 @@ async function sendGraphCode(to: string, code: string) {
   try {
     await sendGraphMail({ to, subject: mail.subject, text: mail.text, fromName: mail.name || undefined });
   } catch (error) {
-    console.error('email code not sent (graph):', error instanceof GraphMailError ? `${error.stage} ${error.status}` : 'network');
+    console.error('email code not sent (graph):', error instanceof GraphMailError ? `${error.stage} ${error.status} ${error.reason}`.trim() : `network ${(error as { name?: string }).name ?? ''}`.trim());
     throw new RuleError('The code could not be sent. Try again in a minute.', 'delivery_failed', 502);
   }
 }
