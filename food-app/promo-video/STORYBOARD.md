@@ -1,6 +1,6 @@
 # Launch video: storyboard and motion specification
 
-**Free Restaurant Ordering.** A 53-second LinkedIn launch film, built as code (Remotion) in `src/`.
+**Business App Kit.** A 53-second LinkedIn launch film, built as code (Remotion) in `src/`.
 
 ## Formats
 
@@ -124,7 +124,7 @@ Both run at 30 fps, 1578 frames.
 ### 10. End card (1470–1578)
 - The logo, large, centred: the mark scales 0.9 → 1 and the wordmark fades up.
 - Tags: "0% commission" (filled), "Restaurants & shops", "Free & open source", "Apache 2.0".
-- The URL `github.com/Pushpraj1989/free-restaurant-ordering` types in.
+- The URL `github.com/Pushpraj1989/business-app-kit` types in.
 - The glow settles behind. The last 10 frames hold.
 
 ## Motion system (shared, in `src/motion.ts`)
@@ -146,7 +146,7 @@ Both run at 30 fps, 1578 frames.
 The mark is a bowl drawn with one confident stroke. The steam rising from it curls into a heart: *passion*, the
 heart, rising from *satisfaction*, a full warm bowl. The colours run from a saffron-to-chilli gradient (#F59E0B →
 #DC2626) for the heart to deep ink for the bowl. It works in one colour and at favicon size. The wordmark is
-"Free Restaurant Ordering" in Inter 700. Files: `public/logo.svg`, `public/logo-mark.svg`.
+"Business App Kit" in Inter 700. Files: `public/logo.svg`, `public/logo-mark.svg`.
 
 ## Timing sheet
 
@@ -165,28 +165,31 @@ heart, rising from *satisfaction*, a full warm bowl. The colours run from a saff
 
 ## LinkedIn caption
 
-> Are you still paying a developer, or a platform's commission, for your restaurant's ordering app?
+> Are you still paying a developer, or a platform's commission, for your business's app?
 >
-> I've open-sourced a complete one. It's free, with 0% commission and no subscription.
+> I've open-sourced a complete one. It's free, with 0% commission and no subscription. Build your business app in a day.
+>
+> It works for restaurants, cafés, bakeries, fashion and beauty shops, pharmacies, supplements, grocery and flowers.
 >
 > What's in the repo:
 > → A customer website and app (web now; iPhone and Android builds with Flutter)
-> → An admin console: live orders, sales dashboard, menu and dishes, offers, vouchers, delivery areas
+> → An admin console: live orders, sales dashboard, products, offers, vouchers, delivery and courier shipping, returns
+> → Restaurant mode and shop mode, switched in the console
 > → English and Arabic, guest ordering, cash or card (your own Stripe)
 >
 > How it works:
 > 1. Run one command on your own server.
-> 2. Add your restaurant, logo, colours and dishes.
+> 2. Add your business, logo, colours and products.
 > 3. Run your offers and campaigns.
 > 4. Build the app for the stores with your own developer accounts.
 >
 > You keep your customers, your data and every dirham of every order. Your only costs are a small server, and card
 > fees if you take cards.
 >
-> It's Apache 2.0: free for restaurants, and for the developers and agencies who set them up.
+> It's Apache 2.0: free for businesses, and for the developers and agencies who set them up.
 >
-> 👉 github.com/Pushpraj1989/free-restaurant-ordering
+> 👉 github.com/Pushpraj1989/business-app-kit
 >
-> If you run a restaurant or build for one, try it and tell me what's missing. Comments and pull requests welcome.
+> If you run a business or build for one, try it and tell me what's missing. Comments and pull requests welcome.
 >
-> #restaurants #opensource #foodtech #smallbusiness #flutter
+> #opensource #smallbusiness #ecommerce #flutter #nextjs

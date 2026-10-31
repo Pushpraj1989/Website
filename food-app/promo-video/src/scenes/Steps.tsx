@@ -8,12 +8,12 @@ const Header: React.FC<{ portrait: boolean; children: React.ReactNode }> = ({ po
   <div style={{ position: 'absolute', left: portrait ? 64 : 110, top: portrait ? 80 : 86, right: 60 }}>{children}</div>
 );
 
-// 4. Step 1: one command on your own server; the restaurant is live.
+// 4. Step 1: one command on your own server; your app is live.
 export const Deploy: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const portrait = usePortrait();
-  const cmd = 'curl -fsSL …/install.sh | sudo DOMAIN=order.yourrestaurant.com bash';
+  const cmd = 'curl -fsSL …/install.sh | sudo DOMAIN=order.yourbusiness.com bash';
   const shown = typed(cmd, frame, 22, 1.25);
   const steps = [['Database', 86], ['HTTPS certificate', 96], ['Website · Console · App', 106]] as const;
   const live = progress(frame, 116, 22);
@@ -33,8 +33,8 @@ export const Deploy: React.FC = () => {
   );
   const liveCard = (
     <Card style={{ width: portrait ? 952 : 620, padding: 36, opacity: live, transform: `translate(${portrait ? 0 : (1 - live) * 120}px, ${portrait ? (1 - live) * 80 : 0}px)` }}>
-      <div style={{ fontSize: 22, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Your restaurant is live</div>
-      <div style={{ marginTop: 14, fontSize: 40, fontWeight: 700, letterSpacing: '-0.02em' }}>order.yourrestaurant.com</div>
+      <div style={{ fontSize: 22, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Your app is live</div>
+      <div style={{ marginTop: 14, fontSize: 40, fontWeight: 700, letterSpacing: '-0.02em' }}>order.yourbusiness.com</div>
       <div style={{ display: 'flex', gap: 14, marginTop: 26, flexWrap: 'wrap' }}>
         {['Website', 'Admin console', 'Customer app'].map((label, i) => (
           <span key={label} style={{ transform: `scale(${pop(frame, 128 + i * 6, fps)})`, display: 'inline-block' }}><Pill tone="green" size={24}>● {label}</Pill></span>
@@ -70,8 +70,8 @@ export const Restaurant: React.FC = () => {
   const top = portrait ? 300 : 300;
   const restaurantCard = (
     <Card style={{ position: 'absolute', left, top, width: cardW, padding: 40, opacity: 1 - toDishes, filter: `blur(${toDishes * 12}px)`, ...(frame < swap ? rise(frame, 6, { lift: 60 }) : {}) }}>
-      <div style={{ fontSize: 22, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Restaurant and look</div>
-      <div style={{ marginTop: 26, fontSize: 24, fontWeight: 600, color: C.muted }}>Restaurant name</div>
+      <div style={{ fontSize: 22, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Business and look</div>
+      <div style={{ marginTop: 26, fontSize: 24, fontWeight: 600, color: C.muted }}>Business name</div>
       <div style={{ marginTop: 10, height: 76, borderRadius: 16, border: `2px solid ${C.accent}`, display: 'flex', alignItems: 'center', padding: '0 24px', fontSize: 38, fontWeight: 600 }}>
         {name}{name.length < DEMO.restaurant.length || frame < 50 ? <Caret size={38} /> : null}
       </div>
@@ -86,8 +86,8 @@ export const Restaurant: React.FC = () => {
   const dishesCard = (
     <Card style={{ position: 'absolute', left, top, width: cardW, padding: '34px 40px', opacity: toDishes, filter: `blur(${(1 - toDishes) * 10}px)` }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ fontSize: 22, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Dishes</div>
-        <Pill tone="accent" size={20}>+ Add dish</Pill>
+        <div style={{ fontSize: 22, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Products</div>
+        <Pill tone="accent" size={20}>+ Add product</Pill>
       </div>
       {DEMO.dishes.map((d, i) => {
         const at = swap + 8 + i * 7;

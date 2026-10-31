@@ -15,8 +15,8 @@ export const C = {
 export const FONT = "'Inter', system-ui, sans-serif";
 export const MONO = "'JetBrains Mono', ui-monospace, monospace";
 export const BRAND = {
-  name: 'Free Restaurant Ordering',
-  repo: 'github.com/Pushpraj1989/free-restaurant-ordering',
+  name: 'Business App Kit',
+  repo: 'github.com/Pushpraj1989/business-app-kit',
 };
 // The demo restaurant, with the real demo data from the app.
 export const DEMO = {

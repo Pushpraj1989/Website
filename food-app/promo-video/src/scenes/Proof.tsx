@@ -171,7 +171,10 @@ export const End: React.FC = () => {
     <AbsoluteFill style={{ alignItems: 'center', justifyContent: 'center', fontFamily: FONT, textAlign: 'center' }}>
       <LogoMark size={portrait ? 230 : 210} start={0} />
       <div style={{ fontWeight: 800, fontSize: portrait ? 96 : 104, letterSpacing: '-0.045em', lineHeight: 1, color: C.ink, marginTop: 22, opacity: word, transform: `translateY(${(1 - word) * 30}px)` }}>
-        {portrait ? <>Free Restaurant<br />Ordering</> : BRAND.name}
+        {BRAND.name}
+      </div>
+      <div style={{ fontWeight: 600, fontSize: portrait ? 50 : 46, letterSpacing: '-0.025em', color: C.accent, marginTop: 22, opacity: progress(frame, 22, 14) }}>
+        Build your business app in a day.
       </div>
       <div style={{ display: 'flex', gap: 16, marginTop: 36, flexWrap: 'wrap', justifyContent: 'center', maxWidth: 1000 }}>
         {tags.map((t, i) => <span key={t} style={{ transform: `scale(${pop(frame, 26 + i * 5, fps)})`, display: 'inline-block' }}><Pill tone={i === 0 ? 'accent' : 'soft'} size={portrait ? 32 : 30}>{t}</Pill></span>)}

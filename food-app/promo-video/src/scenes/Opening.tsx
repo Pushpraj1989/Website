@@ -46,7 +46,7 @@ export const Brand: React.FC = () => {
         <div style={{ display: 'flex', flexDirection: portrait ? 'column' : 'row', alignItems: 'center', gap: portrait ? 30 : 40 }}>
           <LogoMark size={portrait ? 260 : 240} start={logoAt} />
           <div style={{ fontFamily: FONT, fontWeight: 800, fontSize: portrait ? 84 : 100, letterSpacing: '-0.04em', lineHeight: 0.98, color: C.ink, opacity: wordmark, transform: `translateX(${(1 - wordmark) * (portrait ? 0 : -30)}px) translateY(${(1 - wordmark) * (portrait ? 20 : 0)}px)`, textAlign: portrait ? 'center' : 'left' }}>
-            Free Restaurant<br />Ordering
+            Business App<br />Kit
           </div>
         </div>
       )}
