@@ -4,6 +4,8 @@ import { cookies } from 'next/headers';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { CartBar } from '@/components/CartBar';
+import { BottomDock } from '@/components/SiteNav';
 import type { Locale } from '@/lib/i18n.ts';
 import { getSettings } from '@/lib/restaurant-settings.ts';
 import { themeStyle } from '@/lib/theme.ts';
@@ -25,6 +27,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Header locale={locale} />
         <main id="main" className="shell">{children}</main>
         <Footer locale={locale} />
+        <CartBar locale={locale} />
+        <BottomDock locale={locale} />
       </body>
     </html>
   );

@@ -46,6 +46,7 @@ async function viewFor(guestId: string, channel: Channel, accountId: string | nu
         name: item?.name ?? null,
         unitMinor: item?.priceMinor ?? null,
         soldOut: item?.soldOut ?? false,
+        imageUrl: item?.imageUrl ?? null,
       };
     }),
     quote,

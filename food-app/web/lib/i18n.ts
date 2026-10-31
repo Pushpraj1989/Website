@@ -1,6 +1,9 @@
 // Every customer and staff sentence exists in both languages. A missing key fails the build (see test/unit.test.ts).
 export type Locale = 'en' | 'ar';
 
+/** The letter shown on a tile when there is no photo. Arabic names often begin with "ال" (the), so it is skipped. */
+export const initialOf = (name: string) => name.trim().replace(/^ال(?=\S)/, '').slice(0, 1).toUpperCase();
+
 export const STRINGS = {
   en: {
     menu: 'Menu',
@@ -73,6 +76,26 @@ export const STRINGS = {
     daysLeft: (n: number) => (n <= 1 ? 'Last day!' : `${n} days left`),
     useCode: (code: string) => `Use code ${code}`,
     orderNow: 'Order now', close: 'Close',
+    home: 'Home',
+    searchDishes: 'Search dishes',
+    search: 'Search',
+    popular: 'Popular on the menu',
+    offersForYou: 'Offers for you',
+    categories: 'Categories',
+    seeFullMenu: 'See the full menu',
+    viewCart: 'View cart',
+    seeFullCart: 'See full cart',
+    itemsCount: (n: number) => (n === 1 ? '1 item' : `${n} items`),
+    noResults: (q: string) => `No dishes match “${q}”.`,
+    resultsFor: (n: number, q: string) => `${n} ${n === 1 ? 'dish matches' : 'dishes match'} “${q}”`,
+    clearSearch: 'Clear search',
+    oneMore: (name: string) => `One more ${name}`,
+    oneLess: (name: string) => `One less ${name}`,
+    pause: 'Pause slides', play: 'Play slides',
+    slideOf: (n: number, total: number) => `Slide ${n} of ${total}`,
+    previous: 'Previous', next: 'Next',
+    welcomeTitle: (name: string) => `Welcome to ${name}`,
+    welcomeLine: 'Fresh food, ready when you are.',
   },
   ar: {
     menu: 'القائمة',
@@ -145,6 +168,26 @@ export const STRINGS = {
     daysLeft: (n: number) => (n <= 1 ? 'آخر يوم!' : `باقي ${n} أيام`),
     useCode: (code: string) => `استخدم الرمز ${code}`,
     orderNow: 'اطلب الآن', close: 'إغلاق',
+    home: 'الرئيسية',
+    searchDishes: 'ابحث عن طبق',
+    search: 'بحث',
+    popular: 'الأكثر طلباً',
+    offersForYou: 'عروض لك',
+    categories: 'الفئات',
+    seeFullMenu: 'عرض القائمة كاملة',
+    viewCart: 'عرض السلة',
+    seeFullCart: 'السلة كاملة',
+    itemsCount: (n: number) => (n === 1 ? 'صنف واحد' : n === 2 ? 'صنفان' : n <= 10 ? `${n} أصناف` : `${n} صنفاً`),
+    noResults: (q: string) => `لا توجد أطباق تطابق «${q}».`,
+    resultsFor: (n: number, q: string) => `${n} من الأطباق تطابق «${q}»`,
+    clearSearch: 'مسح البحث',
+    oneMore: (name: string) => `واحد إضافي من ${name}`,
+    oneLess: (name: string) => `واحد أقل من ${name}`,
+    pause: 'إيقاف الشرائح', play: 'تشغيل الشرائح',
+    slideOf: (n: number, total: number) => `الشريحة ${n} من ${total}`,
+    previous: 'السابق', next: 'التالي',
+    welcomeTitle: (name: string) => `أهلاً بك في ${name}`,
+    welcomeLine: 'طعام طازج، جاهز متى شئت.',
   },
 } as const;
 

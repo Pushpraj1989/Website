@@ -2,7 +2,11 @@
 
 import { useState } from 'react';
 
-// Adds one of an item to the cart. The cart on the server is the source of truth; this sends the whole list back.
+/** Sent on window whenever the cart changes, with the cart as the server now has it. The cart bar listens for it. */
+export const CART_CHANGED = 'cart:changed';
+
+// Adds one of an item to the cart. The cart on the server is the source of truth; this sends the whole list back,
+// then tells the rest of the page (the cart bar at the bottom) what the cart now holds.
 export function AddToCart({ itemId, label, addLabel }: { itemId: string; label: string; addLabel: string }) {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
@@ -25,11 +29,13 @@ export function AddToCart({ itemId, label, addLabel }: { itemId: string; label: 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ items }),
       });
+      const body = await response.json();
       if (!response.ok) {
-        const body = await response.json();
         setMessage(body.error?.message ?? 'Something went wrong.');
       } else {
         setMessage('✓');
+        window.dispatchEvent(new CustomEvent(CART_CHANGED, { detail: body }));
+        setTimeout(() => setMessage(''), 2500);
       }
     } catch {
       setMessage('Something went wrong.');
@@ -39,11 +45,11 @@ export function AddToCart({ itemId, label, addLabel }: { itemId: string; label: 
   }
 
   return (
-    <div>
-      <button type="button" className="btn add" onClick={add} disabled={busy} aria-label={label} aria-busy={busy}>
-        {addLabel}
+    <div className="add-wrap">
+      <button type="button" className={message === '✓' ? 'btn add done' : 'btn add'} onClick={add} disabled={busy} aria-label={label} aria-busy={busy}>
+        {message === '✓' ? <span aria-hidden="true">✓</span> : <>{addLabel.toUpperCase()}<span aria-hidden="true" className="plus">+</span></>}
       </button>
-      <span role="status" className="muted" aria-live="polite">{message}</span>
+      <span role="status" className={message && message !== '✓' ? 'add-error' : 'sr'} aria-live="polite">{message}</span>
     </div>
   );
 }
