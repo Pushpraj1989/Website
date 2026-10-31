@@ -34,9 +34,19 @@ class _UnlockScreenState extends State<UnlockScreen> {
   bool _busy = false;
   String? _note;
 
+  /// Whether Face ID is on here, known before the tap (null until read), so a browser can ask for it at once.
+  bool? _faceOn;
+
+  Future<void> _getReady() async {
+    final on = await widget.sessions.faceIdEnabled();
+    if (mounted) _faceOn = on;
+    if (on && widget.biometrics.signsIn) await widget.biometrics.prepare(widget.auth);
+  }
+
   @override
   void initState() {
     super.initState();
+    _getReady();
     // Face ID is asked for once, as the screen opens. A browser needs a tap first, so there it waits for the button.
     if (!widget.biometrics.signsIn) WidgetsBinding.instance.addPostFrameCallback((_) => _unlock());
   }
@@ -56,7 +66,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
       _busy = true;
       _note = null;
     });
-    final result = await faceIdSignIn(gate: widget.biometrics, auth: widget.auth, api: widget.api, sessions: widget.sessions, reason: s.unlockReason(name));
+    final result = await faceIdSignIn(gate: widget.biometrics, auth: widget.auth, api: widget.api, sessions: widget.sessions, reason: s.unlockReason(name), enabled: _faceOn);
     if (!mounted) return;
     if (result == FaceIdResult.signedIn) return _enter();
     setState(() {

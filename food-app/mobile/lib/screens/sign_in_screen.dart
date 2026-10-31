@@ -41,6 +41,21 @@ class _SignInScreenState extends State<SignInScreen> {
   String? _note;
   bool _busy = false;
 
+  /// Whether Face ID is on here, known before the tap (null until read), so a browser can ask for it at once.
+  bool? _faceOn;
+
+  Future<void> _getReady() async {
+    final on = await widget.sessions.faceIdEnabled();
+    if (mounted) _faceOn = on;
+    if (on && widget.biometrics.signsIn) await widget.biometrics.prepare(widget.auth);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getReady();
+  }
+
   @override
   void dispose() {
     _email.dispose();
@@ -100,7 +115,7 @@ class _SignInScreenState extends State<SignInScreen> {
       _error = null;
       _note = null;
     });
-    final result = await faceIdSignIn(gate: widget.biometrics, auth: widget.auth, api: widget.api, sessions: widget.sessions, reason: s.signInWithFaceId);
+    final result = await faceIdSignIn(gate: widget.biometrics, auth: widget.auth, api: widget.api, sessions: widget.sessions, reason: s.signInWithFaceId, enabled: _faceOn);
     if (!mounted) return;
     setState(() {
       _busy = false;

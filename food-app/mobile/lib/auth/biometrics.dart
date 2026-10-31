@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -25,6 +26,12 @@ abstract class BiometricGate {
 
   /// Browser only: signs in with a passkey and returns the new session, or null when it did not happen.
   Future<Session?> passkeySignIn(AuthApi auth) async => null;
+
+  /// Browser only: fetches the server's challenge ahead of the tap (see [PasskeyGate]). Nothing to do elsewhere.
+  Future<void> prepare(AuthApi auth, {bool register = false}) async {}
+
+  /// Whether a tap can go straight to Face ID, with nothing to wait for first.
+  bool get ready => true;
 }
 
 class LocalAuthGate extends BiometricGate {
@@ -56,7 +63,16 @@ class LocalAuthGate extends BiometricGate {
 }
 
 /// Face ID in the browser, through passkeys (web/passkey.js).
+///
+/// Safari on an iPhone only shows Face ID when it is asked straight from a tap: if the app first waits for the server,
+/// Safari refuses without showing anything. So the server's challenge is fetched ahead ([prepare], as a screen opens
+/// or before the "turn on Face ID?" question), and the tap asks the browser at once. A challenge lasts five minutes on
+/// the server; one older than four is fetched again.
 class PasskeyGate extends BiometricGate {
+  static const _fresh = Duration(minutes: 4);
+  ({Map<String, dynamic> start, DateTime at})? _login;
+  ({Map<String, dynamic> start, DateTime at})? _register;
+
   @override
   bool get signsIn => true;
 
@@ -66,9 +82,31 @@ class PasskeyGate extends BiometricGate {
   @override
   Future<bool> authenticate(String reason) async => false;
 
+  static Map<String, dynamic>? _take(({Map<String, dynamic> start, DateTime at})? kept) =>
+      kept != null && DateTime.now().difference(kept.at) < _fresh ? kept.start : null;
+
+  @override
+  bool get ready => _take(_login) != null;
+
+  @override
+  Future<void> prepare(AuthApi auth, {bool register = false}) async {
+    try {
+      if (register) {
+        _register = (start: await auth.passkeyRegisterOptions(), at: DateTime.now());
+      } else {
+        _login = (start: await auth.passkeyLoginOptions(), at: DateTime.now());
+      }
+    } catch (_) {
+      // Offline or refused: the tap fetches it instead.
+    }
+  }
+
   @override
   Future<bool> enroll(AuthApi auth, String reason) async {
-    final start = await auth.passkeyRegisterOptions();
+    // No waiting before Passkeys.create when the challenge is already here (see the class note).
+    final kept = _take(_register);
+    _register = null;
+    final start = kept ?? await auth.passkeyRegisterOptions();
     final made = await Passkeys.create(jsonEncode(start['options']));
     await auth.passkeyRegister(challengeId: start['challengeId'] as String, response: jsonDecode(made) as Map<String, dynamic>);
     return true;
@@ -76,9 +114,16 @@ class PasskeyGate extends BiometricGate {
 
   @override
   Future<Session?> passkeySignIn(AuthApi auth) async {
-    final start = await auth.passkeyLoginOptions();
-    final signed = await Passkeys.get(jsonEncode(start['options']));
-    return auth.passkeyLogin(challengeId: start['challengeId'] as String, response: jsonDecode(signed) as Map<String, dynamic>);
+    final kept = _take(_login);
+    _login = null;
+    try {
+      final start = kept ?? await auth.passkeyLoginOptions();
+      final signed = await Passkeys.get(jsonEncode(start['options']));
+      return await auth.passkeyLogin(challengeId: start['challengeId'] as String, response: jsonDecode(signed) as Map<String, dynamic>);
+    } finally {
+      // A challenge is used once: have the next one ready in case the customer tries again.
+      unawaited(prepare(auth));
+    }
   }
 }
 

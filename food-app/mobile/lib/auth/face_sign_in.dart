@@ -18,26 +18,36 @@ enum FaceIdResult {
 
 /// Signs in with Face ID. In the phone app it unlocks the sign-in kept on the device; in a browser it signs in with a
 /// passkey. Either way it only works once Face ID was turned on after an email sign-in on this device.
-Future<FaceIdResult> faceIdSignIn({required BiometricGate gate, required AuthApi auth, required ApiClient api, required SessionStore sessions, required String reason}) async {
-  if (!await sessions.faceIdEnabled()) return FaceIdResult.notSetUp;
+///
+/// [enabled] is whether Face ID is on here, when the screen already knows: in a browser, with the challenge fetched
+/// ahead ([BiometricGate.prepare]), the passkey is then asked for at once, inside the tap, which Safari requires.
+Future<FaceIdResult> faceIdSignIn({required BiometricGate gate, required AuthApi auth, required ApiClient api, required SessionStore sessions, required String reason, bool? enabled}) async {
+  if (gate.signsIn && enabled == true && gate.ready) return _passkey(gate.passkeySignIn(auth), api, sessions);
+  if (!(enabled ?? await sessions.faceIdEnabled())) return FaceIdResult.notSetUp;
   if (!await gate.faceIdAvailable()) return FaceIdResult.unavailable;
   if (gate.signsIn) {
-    try {
-      final session = await gate.passkeySignIn(auth);
-      if (session == null) return FaceIdResult.failed;
-      await sessions.writeToken(session.token);
-      api.accessToken = session.token;
-    } on PasskeyError {
-      return FaceIdResult.failed;
-    } on ApiException catch (e) {
-      return e.code == 'passkey_unknown' ? FaceIdResult.notSetUp : FaceIdResult.failed;
-    }
+    return _passkey(gate.passkeySignIn(auth), api, sessions);
   } else {
     final token = await sessions.readToken();
     if (token == null) return FaceIdResult.notSetUp;
     if (!await gate.authenticate(reason)) return FaceIdResult.failed;
     auth.token = token;
     api.accessToken = token;
+  }
+  await GuestMode.set(false);
+  return FaceIdResult.signedIn;
+}
+
+Future<FaceIdResult> _passkey(Future<Session?> signing, ApiClient api, SessionStore sessions) async {
+  try {
+    final session = await signing;
+    if (session == null) return FaceIdResult.failed;
+    await sessions.writeToken(session.token);
+    api.accessToken = session.token;
+  } on PasskeyError {
+    return FaceIdResult.failed;
+  } on ApiException catch (e) {
+    return e.code == 'passkey_unknown' ? FaceIdResult.notSetUp : FaceIdResult.failed;
   }
   await GuestMode.set(false);
   return FaceIdResult.signedIn;
