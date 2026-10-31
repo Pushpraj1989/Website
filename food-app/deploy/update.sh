@@ -46,14 +46,34 @@ grep -q '^STAFF_URL=' "$ENV_FILE" || echo 'STAFF_URL="/console/"' >> "$ENV_FILE"
 
 # The settings are read for the build too (the card payment key is built into the website). They are read the way
 # the service reads them, one NAME=value per line, quotes optional, so a value with spaces or brackets is fine.
+# Windows line endings, spaces before a name and a leading "export " are all accepted.
 while IFS= read -r line || [ -n "$line" ]; do
+  line="${line%$'\r'}"
+  line="${line#"${line%%[![:space:]]*}"}"
+  line="${line#export }"
   case "$line" in ''|'#'*) continue ;; esac
   name="${line%%=*}"; value="${line#*=}"
   [[ "$name" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]] || continue
   if [[ "$value" =~ ^\"(.*)\"$ ]] || [[ "$value" =~ ^\'(.*)\'$ ]]; then value="${BASH_REMATCH[1]}"; fi
   export "$name=$value"
 done < "$ENV_FILE"
+# The domain: from DOMAIN if given, else PUBLIC_URL, else the name nginx already answers for this site. A missing
+# PUBLIC_URL line is written back so the next update finds it.
+PUBLIC_URL="${PUBLIC_URL:-}"
 DOMAIN="${DOMAIN:-${PUBLIC_URL#https://}}"
+if [ -z "$DOMAIN" ] && [ -f /etc/nginx/conf.d/food-app.conf ]; then
+  DOMAIN="$(awk '$1 == "server_name" { gsub(/;/, "", $2); print $2; exit }' /etc/nginx/conf.d/food-app.conf)"
+fi
+if [ -n "$DOMAIN" ] && ! grep -q '^[[:space:]]*\(export \)\{0,1\}PUBLIC_URL=.' "$ENV_FILE"; then
+  echo "PUBLIC_URL=\"https://$DOMAIN\"" >> "$ENV_FILE"
+  echo "Added PUBLIC_URL for $DOMAIN to $ENV_FILE."
+fi
+for required in DATABASE_URL ADMIN_PASSWORD; do
+  if [ -z "${!required:-}" ]; then
+    echo "$ENV_FILE has no $required line. It was written by setup.sh; restore it from your backup of that file." >&2
+    exit 1
+  fi
+done
 export NODE_ENV=production
 
 say "Website and API: install, migrate, build"
