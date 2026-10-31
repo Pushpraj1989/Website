@@ -105,3 +105,11 @@ class _PrefsFaceFlag extends SessionStore {
   @override
   Future<void> setFaceIdEnabled(bool enabled) async => (await SharedPreferences.getInstance()).setBool('face_id_enabled', enabled);
 }
+
+/// Browsing and ordering as a guest, without an account. Remembered, so the app opens straight onto the menu next
+/// time; signing in turns it off.
+class GuestMode {
+  static const _key = 'guest_mode';
+  static Future<bool> isOn() async => (await SharedPreferences.getInstance()).getBool(_key) ?? false;
+  static Future<void> set(bool on) async => (await SharedPreferences.getInstance()).setBool(_key, on);
+}

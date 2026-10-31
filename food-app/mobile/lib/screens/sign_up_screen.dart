@@ -113,12 +113,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> _finish(Strings s) async {
     setState(() => _step = 2);
+    await GuestMode.set(false);
     if (await widget.biometrics.faceIdAvailable() && !await widget.sessions.faceIdEnabled() && mounted) {
-      await offerFaceId(context, s, widget.sessions);
+      await offerFaceId(context, s, widget.sessions, gate: widget.biometrics, auth: widget.auth);
     }
     if (!mounted) return;
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => MainShell(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions)),
+      MaterialPageRoute(builder: (_) => MainShell(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions, biometrics: widget.biometrics)),
       (_) => false,
     );
   }

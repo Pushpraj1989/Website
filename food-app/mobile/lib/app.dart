@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -9,12 +11,13 @@ import 'core/brand.dart';
 import 'core/models.dart';
 import 'core/strings.dart';
 import 'core/theme.dart';
+import 'widgets/brand_intro.dart';
 import 'screens/auth_gate.dart';
 
 class SampleKitchenApp extends StatefulWidget {
-  const SampleKitchenApp({super.key, required this.apiBase, this.api, this.auth, this.sessions, this.biometrics, this.openingTime = const Duration(milliseconds: 900)});
+  const SampleKitchenApp({super.key, required this.apiBase, this.api, this.auth, this.sessions, this.biometrics, this.openingTime = const Duration(milliseconds: 2600)});
   final String apiBase;
-  /// The least time the opening screen shows, so it reads rather than flickers. Tests set it to zero.
+  /// Whether the opening animation plays: it stays until it has played through. Tests set it to zero to skip it.
   final Duration openingTime;
   final ApiClient? api;
   final AuthApi? auth;
@@ -29,11 +32,13 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
   late final ApiClient _api = widget.api ?? ApiClient(baseUrl: widget.apiBase);
   late final AuthApi _auth = widget.auth ?? AuthApi(baseUrl: widget.apiBase);
   late final SessionStore _sessions = widget.sessions ?? defaultSessionStore();
-  late final BiometricGate _biometrics = widget.biometrics ?? LocalAuthGate();
+  late final BiometricGate _biometrics = widget.biometrics ?? defaultBiometricGate();
   final ValueNotifier<String> _language = ValueNotifier('en');
   final BrandController _brand = BrandController();
-  // The opening screen in the restaurant's colour, shown while the app starts (at least a moment, so it reads).
+  // The opening animation in the restaurant's name and colour (widgets/brand_intro.dart), shown while the app starts,
+  // long enough to play through. Once it has faded it leaves the screen.
   bool _opening = true;
+  bool _openingGone = false;
 
   @override
   void initState() {
@@ -41,9 +46,9 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
     _start();
   }
 
-  /// Opens in the restaurant's last known colours, then asks the server for its current name, logo and colour.
+  /// Opens in the restaurant's last known colours, then asks the server for its current name, logo and colour. The
+  /// opening animation leaves once it has played through with the name (at most a few seconds on a slow device).
   Future<void> _start() async {
-    final shownAtLeast = Future<void>.delayed(widget.openingTime);
     await _api.init();
     await _brand.restore(_api.prefs);
     // From here the opening screen has the restaurant's colour and name; the rest loads behind it.
@@ -55,8 +60,16 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
     } catch (_) {
       // Offline or the server is unavailable: the screens say so when they load; the last brand stays.
     }
-    await shownAtLeast;
+    if (widget.openingTime > Duration.zero) {
+      await _introDone.future.timeout(const Duration(seconds: 6), onTimeout: () {});
+    }
     if (mounted) setState(() => _opening = false);
+  }
+
+  // Completes when the opening animation has played through with the restaurant's name in it.
+  final Completer<void> _introDone = Completer<void>();
+  void _onIntroDone() {
+    if ((_brand.value?.name.of(_language.value) ?? '').isNotEmpty && !_introDone.isCompleted) _introDone.complete();
   }
 
   @override
@@ -92,14 +105,16 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
           home: AuthGate(api: _api, auth: _auth, sessions: _sessions, biometrics: _biometrics, language: _language),
           builder: (context, child) => Stack(children: [
             child!,
-            IgnorePointer(
-              ignoring: !_opening,
-              child: AnimatedOpacity(
-                opacity: _opening ? 1 : 0,
-                duration: const Duration(milliseconds: 350),
-                child: BrandSplash(brand: brand, lang: lang),
+            if (!_openingGone)
+              IgnorePointer(
+                ignoring: !_opening,
+                child: AnimatedOpacity(
+                  opacity: _opening ? 1 : 0,
+                  duration: const Duration(milliseconds: 350),
+                  onEnd: () { if (!_opening && mounted) setState(() => _openingGone = true); },
+                  child: BrandSplash(brand: brand, lang: lang, animate: widget.openingTime > Duration.zero, onDone: _onIntroDone),
+                ),
               ),
-            ),
           ]),
           ),
         );
@@ -127,39 +142,14 @@ class LanguageScope extends StatelessWidget {
 
 /// The opening screen: the restaurant's logo, or its name, on its own colour (white words on the brand colour reach
 /// 4.5:1, which the admin enforces). Before the first brand is known it is the plain default colour.
+/// The opening screen: the restaurant's name and colour, animated (see BrandIntro). Tests turn [animate] off.
 class BrandSplash extends StatelessWidget {
-  const BrandSplash({super.key, required this.brand, required this.lang});
+  const BrandSplash({super.key, required this.brand, required this.lang, this.animate = false, this.onDone});
   final Brand? brand;
   final String lang;
+  final bool animate;
+  final VoidCallback? onDone;
 
   @override
-  Widget build(BuildContext context) {
-    final name = brand?.name.of(lang) ?? '';
-    return Semantics(
-      label: name,
-      child: ColoredBox(
-        color: brand?.color ?? Tokens.accent,
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(Tokens.space5),
-            child: brand?.logoUrl != null
-                ? ClipRRect(borderRadius: BorderRadius.circular(28), child: Image.network(brand!.logoUrl!, width: 140, height: 140, fit: BoxFit.cover, semanticLabel: name, errorBuilder: (_, _, _) => _Name(name: name)))
-                : _Name(name: name),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _Name extends StatelessWidget {
-  const _Name({required this.name});
-  final String name;
-
-  @override
-  Widget build(BuildContext context) => Text(
-        name,
-        textAlign: TextAlign.center,
-        style: const TextStyle(color: Colors.white, fontFamily: Tokens.headingFont, fontSize: 40, fontWeight: FontWeight.w800, height: 1.05, decoration: TextDecoration.none),
-      );
+  Widget build(BuildContext context) => BrandIntro(brand: brand, lang: lang, play: animate, onDone: onDone);
 }

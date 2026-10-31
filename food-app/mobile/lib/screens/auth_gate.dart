@@ -4,16 +4,16 @@ import '../auth/auth_api.dart';
 import '../auth/biometrics.dart';
 import '../auth/session_store.dart';
 import '../core/api.dart';
-import '../core/brand.dart';
 import '../core/models.dart';
-import '../core/strings.dart';
 import '../core/theme.dart';
 import '../widgets/app_button.dart';
 import 'main_shell.dart';
 import 'sign_in_screen.dart';
 import 'sign_up_screen.dart';
+import 'unlock_screen.dart';
 
-// The first screen on every launch. Decides where the user goes: sign in, finish sign-up, or straight in.
+// The first screen on every launch, behind the opening animation. Decides where the customer goes: the unlock screen
+// (signed in, Face ID on), straight in (signed in), the menu as a guest (chose that before), or sign-in.
 class AuthGate extends StatefulWidget {
   const AuthGate({super.key, required this.api, required this.auth, required this.sessions, required this.biometrics, required this.language});
   final ApiClient api;
@@ -40,6 +40,8 @@ class _AuthGateState extends State<AuthGate> {
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => screen));
   }
 
+  Widget _shell() => MainShell(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions, biometrics: widget.biometrics);
+
   Widget _signIn() => SignInScreen(auth: widget.auth, sessions: widget.sessions, biometrics: widget.biometrics, api: widget.api, language: widget.language);
 
   Future<void> _resolve() async {
@@ -51,7 +53,7 @@ class _AuthGateState extends State<AuthGate> {
       // Secure storage can be locked or unavailable. Say so, rather than leave the spinner running.
       return setState(() => _problem = 'We could not open your saved session. Try again.');
     }
-    if (token == null) return _go(_signIn());
+    if (token == null) return _go(await GuestMode.isOn() ? _shell() : _signIn());
     widget.auth.token = token;
     widget.api.accessToken = token;
     try {
@@ -60,12 +62,9 @@ class _AuthGateState extends State<AuthGate> {
         return _go(SignUpScreen(auth: widget.auth, sessions: widget.sessions, biometrics: widget.biometrics, api: widget.api, language: widget.language, resumeAtEmail: true));
       }
       if (await widget.sessions.faceIdEnabled() && await widget.biometrics.faceIdAvailable()) {
-        final brand = mounted ? BrandScope.of(context) : null;
-        final s = Strings(widget.language.value);
-        final unlocked = await widget.biometrics.authenticate(s.unlockReason(brand?.name.of(s.lang) ?? ''));
-        if (!unlocked) return _go(_signIn());
+        return _go(UnlockScreen(api: widget.api, auth: widget.auth, sessions: widget.sessions, biometrics: widget.biometrics, language: widget.language));
       }
-      return _go(MainShell(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions));
+      return _go(_shell());
     } on ApiException catch (e) {
       // The session was refused (expired or signed out elsewhere): start again from sign-in.
       if (e.code == 'unauthorised') {

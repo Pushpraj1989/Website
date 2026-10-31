@@ -12,6 +12,7 @@ import '../core/money.dart';
 import '../core/strings.dart';
 import '../core/theme.dart';
 import '../core/version.dart';
+import '../widgets/app_button.dart';
 import '../widgets/top_icons.dart';
 import 'about_screen.dart';
 import 'address_sheet.dart';
@@ -24,11 +25,12 @@ import 'vouchers_screen.dart';
 // membership, then everything else as a plain list: membership, orders, vouchers, help, About, becoming a partner.
 // The restaurant's copyright and the app version sit at the foot, out of the way of ordering.
 class AccountScreen extends StatefulWidget {
-  const AccountScreen({super.key, required this.api, required this.language, this.auth, this.sessions, this.onSelectTab});
+  const AccountScreen({super.key, required this.api, required this.language, this.auth, this.sessions, this.biometrics, this.onSelectTab});
   final ApiClient api;
   final ValueNotifier<String> language;
   final AuthApi? auth;
   final SessionStore? sessions;
+  final BiometricGate? biometrics;
   /// Switches to another tab of the signed-in shell (2 is Orders).
   final void Function(int index)? onSelectTab;
 
@@ -53,9 +55,12 @@ class _AccountScreenState extends State<AccountScreen> {
 
   /// Each part loads on its own; one that fails is simply left out.
   Future<void> _load() async {
-    try {
-      _account = await widget.auth?.me();
-    } catch (_) {}
+    // A guest has no account to ask about.
+    if (!_guest) {
+      try {
+        _account = await widget.auth?.me();
+      } catch (_) {}
+    }
     try {
       final menu = await widget.api.menu();
       _currency = menu.currency;
@@ -72,7 +77,12 @@ class _AccountScreenState extends State<AccountScreen> {
     if (mounted) setState(() {});
   }
 
+  /// Browsing without an account: no sign-in on this device.
+  bool get _guest => widget.auth?.token == null;
+
   void _push(Widget screen) => Navigator.of(context).push(MaterialPageRoute(builder: (_) => screen));
+
+  void _signIn() => _push(SignInScreen(auth: widget.auth!, sessions: widget.sessions!, biometrics: widget.biometrics ?? defaultBiometricGate(), api: widget.api, language: widget.language));
 
   void _openSettings() => _push(SettingsScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions, account: _account));
 
@@ -103,7 +113,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         excludeSemantics: true,
                         child: InkWell(
                           borderRadius: BorderRadius.circular(Tokens.radiusLg),
-                          onTap: widget.auth == null ? null : _openSettings,
+                          onTap: _guest ? null : _openSettings,
                           child: Row(children: [
                             CircleAvatar(
                               radius: 28,
@@ -121,13 +131,20 @@ class _AccountScreenState extends State<AccountScreen> {
                         ),
                       ),
                     ),
-                    if (widget.auth != null) IconButton(onPressed: _openSettings, tooltip: s.settings, icon: const Icon(LucideIcons.settings), style: IconButton.styleFrom(minimumSize: const Size(48, 48))),
+                    if (!_guest) IconButton(onPressed: _openSettings, tooltip: s.settings, icon: const Icon(LucideIcons.settings), style: IconButton.styleFrom(minimumSize: const Size(48, 48))),
                   ]),
                 ),
-                if (widget.auth == null)
+                // A guest is invited to sign in or make an account; ordering works without one.
+                if (_guest)
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: Tokens.space4),
-                    child: Text(s.signInForAccount, style: TextStyle(color: Tokens.textMuted)),
+                    padding: const EdgeInsets.fromLTRB(Tokens.space4, 0, Tokens.space4, Tokens.space3),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                      Text(s.guestTitle, style: Theme.of(context).textTheme.titleMedium),
+                      const SizedBox(height: Tokens.space1),
+                      Text(s.signInForAccount, style: TextStyle(color: Tokens.textMuted)),
+                      const SizedBox(height: Tokens.space3),
+                      AppButton(label: s.signInOrCreate, expand: true, onPressed: widget.auth == null || widget.sessions == null ? null : _signIn),
+                    ]),
                   ),
                 // Savings and membership, in one clean card.
                 if (_savedMinor != null || _plan != null)
@@ -146,11 +163,11 @@ class _AccountScreenState extends State<AccountScreen> {
                   child: Column(children: [
                     _Row(icon: LucideIcons.crown, label: s.membership, value: _plan, onTap: () => _push(MembershipScreen(api: widget.api, language: widget.language))),
                     _Row(icon: LucideIcons.receiptText, label: s.yourOrders, onTap: () => widget.onSelectTab?.call(2)),
-                    if (widget.auth != null) _Row(icon: LucideIcons.ticket, label: s.myVouchers, value: _vouchers?.toString(), onTap: () => _push(VouchersScreen(api: widget.api, language: widget.language))),
+                    if (!_guest) _Row(icon: LucideIcons.ticket, label: s.myVouchers, value: _vouchers?.toString(), onTap: () => _push(VouchersScreen(api: widget.api, language: widget.language))),
                     _Row(icon: LucideIcons.circleQuestionMark, label: s.getHelp, onTap: () => _push(AssistantScreen(api: widget.api, language: widget.language))),
                     _Row(icon: LucideIcons.info, label: s.aboutApp, onTap: () => openAbout(context, widget.language)),
                     _Row(icon: LucideIcons.handshake, label: s.becomePartner, onTap: () => _showPartner(context, s, restaurant, brand?.phone ?? '')),
-                    if (widget.auth != null) _Row(icon: LucideIcons.settings, label: s.settings, onTap: _openSettings),
+                    if (!_guest) _Row(icon: LucideIcons.settings, label: s.settings, onTap: _openSettings),
                   ]),
                 ),
                 const SizedBox(height: Tokens.space5),

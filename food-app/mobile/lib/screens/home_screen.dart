@@ -340,7 +340,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       CartIcon(api: widget.api, s: s, onPhoto: true, onTap: () => _openCartSheet(s)),
                       _MoreMenu(
                         s: s,
-                        signedIn: widget.auth != null,
+                        signedIn: widget.auth?.token != null,
                         showLanguage: screen.width < 420,
                         onChoice: (choice) => switch (choice) {
                           'language' => toggleLanguage(widget.language),

@@ -95,6 +95,19 @@ class AuthApi {
   Future<Session> verifySignInEmail({required String challengeId, required String code}) async =>
       _session(await _send('POST', '/v1/auth/login/email/verify', body: {'challengeId': challengeId, 'code': code}));
 
+  /// Face ID in the browser (a passkey), added to the signed-in account: the server's options, then what the device made.
+  Future<Map<String, dynamic>> passkeyRegisterOptions() => _send('POST', '/v1/auth/passkey/register/options');
+
+  Future<void> passkeyRegister({required String challengeId, required Map<String, dynamic> response}) async {
+    await _send('POST', '/v1/auth/passkey/register/verify', body: {'challengeId': challengeId, 'response': response});
+  }
+
+  /// Sign-in with Face ID in the browser (a passkey): the server's challenge, then the device's signature.
+  Future<Map<String, dynamic>> passkeyLoginOptions() => _send('POST', '/v1/auth/passkey/login/options');
+
+  Future<Session> passkeyLogin({required String challengeId, required Map<String, dynamic> response}) async =>
+      _session(await _send('POST', '/v1/auth/passkey/login/verify', body: {'challengeId': challengeId, 'response': response}));
+
   /// Sends the code to the typed address. Needs the signed-in token from the sign-up step.
   Future<Challenge> startEmailVerification({required String email}) async =>
       Challenge.fromJson(await _send('POST', '/v1/auth/email/start', body: {'email': email}));

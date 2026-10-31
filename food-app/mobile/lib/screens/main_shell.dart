@@ -3,6 +3,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../app.dart';
 import '../auth/auth_api.dart';
+import '../auth/biometrics.dart';
 import '../auth/session_store.dart';
 import '../core/api.dart';
 import '../core/theme.dart';
@@ -16,11 +17,12 @@ import 'orders_screen.dart';
 // vouchers, settings and About live under Account). The assistant is a button in the Home and Menu
 // headers, so it is one tap away without taking a tab. Each tab keeps its place when the customer switches away.
 class MainShell extends StatefulWidget {
-  const MainShell({super.key, required this.api, required this.language, this.auth, this.sessions});
+  const MainShell({super.key, required this.api, required this.language, this.auth, this.sessions, this.biometrics});
   final ApiClient api;
   final ValueNotifier<String> language;
   final AuthApi? auth;
   final SessionStore? sessions;
+  final BiometricGate? biometrics;
 
   @override
   State<MainShell> createState() => _MainShellState();
@@ -43,7 +45,7 @@ class _MainShellState extends State<MainShell> {
               HomeScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions, onSelectTab: _select),
               MenuScreen(api: widget.api, language: widget.language),
               OrdersScreen(api: widget.api, language: widget.language),
-              AccountScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions, onSelectTab: _select),
+              AccountScreen(api: widget.api, language: widget.language, auth: widget.auth, sessions: widget.sessions, biometrics: widget.biometrics, onSelectTab: _select),
             ],
           ),
           Positioned(
