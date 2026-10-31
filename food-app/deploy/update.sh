@@ -20,11 +20,17 @@ as_app() { sudo -u foodapp -H env PATH="/opt/flutter/bin:$PATH" "$@"; }
 say() { printf '\n== %s\n' "$*"; }
 cd /
 
+SELF_COPY="$(mktemp)"; cp "$REPO/food-app/deploy/update.sh" "$SELF_COPY"
 say "Download the latest code"
 BRANCH="$(as_app git -C "$REPO" rev-parse --abbrev-ref HEAD)"
 as_app git -C "$REPO" fetch --quiet origin "$BRANCH"
 as_app git -C "$REPO" reset --quiet --hard "origin/$BRANCH"
 echo "At $(as_app git -C "$REPO" log -1 --format='%h %s')"
+# When the download brought a newer copy of this script, the rest of the update runs from that copy.
+if [ -z "${FOOD_APP_RESTARTED:-}" ] && ! cmp -s "$SELF_COPY" "$REPO/food-app/deploy/update.sh"; then
+  echo "This update script changed; continuing with the new one."
+  FOOD_APP_RESTARTED=1 exec bash "$REPO/food-app/deploy/update.sh" "$@"
+fi
 
 # Uploaded pictures and videos live outside the code folder, so a download never touches them.
 for link in storage data; do
@@ -38,8 +44,15 @@ done
 # Settings added by later versions get their default once; a value already there is never changed.
 grep -q '^STAFF_URL=' "$ENV_FILE" || echo 'STAFF_URL="/console/"' >> "$ENV_FILE"
 
-# The settings are read for the build too (the card payment key is built into the website).
-set -a; . "$ENV_FILE"; set +a
+# The settings are read for the build too (the card payment key is built into the website). They are read the way
+# the service reads them, one NAME=value per line, quotes optional, so a value with spaces or brackets is fine.
+while IFS= read -r line || [ -n "$line" ]; do
+  case "$line" in ''|'#'*) continue ;; esac
+  name="${line%%=*}"; value="${line#*=}"
+  [[ "$name" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]] || continue
+  if [[ "$value" =~ ^\"(.*)\"$ ]] || [[ "$value" =~ ^\'(.*)\'$ ]]; then value="${BASH_REMATCH[1]}"; fi
+  export "$name=$value"
+done < "$ENV_FILE"
 DOMAIN="${DOMAIN:-${PUBLIC_URL#https://}}"
 export NODE_ENV=production
 
