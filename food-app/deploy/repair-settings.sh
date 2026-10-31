@@ -5,7 +5,7 @@
 # when there is none makes a new one. Values are never printed. The file is copied to a dated backup before a change.
 set -euo pipefail
 
-ENV_FILE="${ENV_FILE:-/etc/food-app.env}"
+. "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/instance.sh"   # this copy's settings file, service and database
 SERVICE_ENV="${SERVICE_ENV:-}"   # tests point this at a file; on the server it is read from the running service
 REQUIRED=(DATABASE_URL ADMIN_PASSWORD OTP_SECRET APP_ENCRYPTION_KEY PARTNER_KEY_SECRET VOUCHER_CODE_SECRET)
 
@@ -19,7 +19,7 @@ for name in "${REQUIRED[@]}"; do has "$name" || missing+=("$name"); done
 
 # The environment of the running service: what it loaded from the settings file when it last started.
 if [ -z "$SERVICE_ENV" ]; then
-  pid="$(systemctl show -p MainPID --value food-app 2>/dev/null || echo 0)"
+  pid="$(systemctl show -p MainPID --value "$SERVICE" 2>/dev/null || echo 0)"
   if [ "${pid:-0}" != 0 ] && [ -r "/proc/$pid/environ" ]; then
     SERVICE_ENV="$(mktemp)"; chmod 600 "$SERVICE_ENV"
     tr '\0' '\n' < "/proc/$pid/environ" > "$SERVICE_ENV"
@@ -38,8 +38,8 @@ for name in "${missing[@]}"; do
       DATABASE_URL)
         # A new password for the database account; the data stays as it is.
         pass="$(openssl rand -hex 24)"
-        sudo -u postgres psql -qc "alter role foodapp with login password '$pass'" >/dev/null
-        value="postgres://foodapp:${pass}@127.0.0.1:5432/food_app"
+        sudo -u postgres psql -qc "alter role $DB_ROLE with login password '$pass'" >/dev/null
+        value="postgres://${DB_ROLE}:${pass}@127.0.0.1:5432/${DB_NAME}"
         how="new database password set (the data is kept)" ;;
       ADMIN_PASSWORD) value="$(openssl rand -base64 18 | tr -d '/+=' | cut -c1-20)"; how="new staff password (see it with: grep ADMIN_PASSWORD $ENV_FILE)" ;;
       OTP_SECRET) value="$(openssl rand -hex 32)"; how="new; codes already sent stop working, customers ask for a new one" ;;

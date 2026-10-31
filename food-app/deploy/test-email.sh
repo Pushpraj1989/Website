@@ -3,8 +3,8 @@
 #   bash /srv/food-app/repo/food-app/deploy/test-email.sh you@example.com
 # Prints no password, secret or token.
 set -euo pipefail
-ENV_FILE=/etc/food-app.env
-WEB=/srv/food-app/repo/food-app/web
+. "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/instance.sh"   # this copy's settings file and code
+WEB="$REPO/food-app/web"
 [ "$(id -u)" = 0 ] || { echo "Run this as root (sudo -i first)." >&2; exit 1; }
 [ $# -eq 1 ] || { echo "Usage: bash test-email.sh you@example.com" >&2; exit 2; }
 

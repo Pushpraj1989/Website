@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Brings the server up to the latest code on its branch: download, install, migrate, build, restart. Run as root:
 #   bash /srv/food-app/repo/food-app/deploy/update.sh
+# A second copy updates the same way from its own folder, for example bash /srv/food-demo/repo/food-app/deploy/update.sh
+# (see instance.sh); each copy is updated on its own.
 # WITH_APP=1 also rebuilds the customer app for the browser (needs DOMAIN, or reads it from the settings file).
 # The database is migrated in place; restaurant data and uploaded media are kept.
 set -euo pipefail
@@ -8,11 +10,9 @@ set -euo pipefail
 # Everything is inside main, so bash reads the whole script before running it: the download below replaces this file.
 main() {
 
-ROOT=/srv/food-app
-REPO="$ROOT/repo"
-DATA=/var/lib/food-app
-WWW=/var/www/food-app
-ENV_FILE=/etc/food-app.env
+# This copy's folders, settings file, service, port and nginx file (ROOT, REPO, DATA, WWW, ENV_FILE, SERVICE, PORT,
+# NGINX_CONF).
+. "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/instance.sh"
 FLUTTER_VERSION=3.47.8
 
 [ "$(id -u)" = 0 ] || { echo "Run this as root (sudo -i first)." >&2; exit 1; }
@@ -42,7 +42,7 @@ for link in storage data; do
 done
 
 # Settings setup.sh wrote that have gone missing from the file are put back, from the running service where it has them.
-bash "$REPO/food-app/deploy/repair-settings.sh"
+ENV_FILE="$ENV_FILE" INSTANCE="$INSTANCE" bash "$REPO/food-app/deploy/repair-settings.sh"
 
 # Settings added by later versions get their default once; a value already there is never changed.
 grep -q '^STAFF_URL=' "$ENV_FILE" || echo 'STAFF_URL="/console/"' >> "$ENV_FILE"
@@ -64,8 +64,8 @@ done < "$ENV_FILE"
 # PUBLIC_URL line is written back so the next update finds it.
 PUBLIC_URL="${PUBLIC_URL:-}"
 DOMAIN="${DOMAIN:-${PUBLIC_URL#https://}}"
-if [ -z "$DOMAIN" ] && [ -f /etc/nginx/conf.d/food-app.conf ]; then
-  DOMAIN="$(awk '$1 == "server_name" { gsub(/;/, "", $2); print $2; exit }' /etc/nginx/conf.d/food-app.conf)"
+if [ -z "$DOMAIN" ] && [ -f "$NGINX_CONF" ]; then
+  DOMAIN="$(awk '$1 == "server_name" { gsub(/;/, "", $2); print $2; exit }' "$NGINX_CONF")"
 fi
 if [ -n "$DOMAIN" ] && ! grep -q '^[[:space:]]*\(export \)\{0,1\}PUBLIC_URL=.' "$ENV_FILE"; then
   echo "PUBLIC_URL=\"https://$DOMAIN\"" >> "$ENV_FILE"
@@ -117,32 +117,32 @@ chmod -R a+rX "$WWW"
 
 say "Web server"
 # The nginx file follows the code too. A config nginx refuses is put back as it was.
-CONF=/etc/nginx/conf.d/food-app.conf
+CONF="$NGINX_CONF"
 if [ -n "$DOMAIN" ] && [ -f "/etc/letsencrypt/live/$DOMAIN/fullchain.pem" ]; then
   cp "$CONF" "$CONF.previous" 2>/dev/null || true
-  sed -e "s|__DOMAIN__|$DOMAIN|g" "$REPO/food-app/deploy/nginx-https.conf" > "$CONF"
+  render_template "$REPO/food-app/deploy/nginx-https.conf" > "$CONF"
   if nginx -t 2>/dev/null; then systemctl reload nginx; echo "Updated."
   else echo "nginx refused the new file; kept the old one." >&2; mv "$CONF.previous" "$CONF"; fi
 fi
 
 say "Restart"
-systemctl restart food-app
+systemctl restart "$SERVICE"
 for i in $(seq 1 30); do
-  if curl -fs -o /dev/null http://127.0.0.1:3100/v1/brand; then break; fi
+  if curl -fs -o /dev/null "http://127.0.0.1:$PORT/v1/brand"; then break; fi
   sleep 1
 done
-if curl -fsS -o /dev/null http://127.0.0.1:3100/v1/brand; then
-  echo "Running."
+if curl -fsS -o /dev/null "http://127.0.0.1:$PORT/v1/brand"; then
+  echo "Running ($INSTANCE)."
 else
-  echo "The service did not answer. See: journalctl -u food-app -n 50" >&2
+  echo "The service did not answer. See: journalctl -u $SERVICE -n 50" >&2
   exit 1
 fi
 
 # Which settings are set and which are empty, without showing any value.
 echo
-bash "$REPO/food-app/deploy/check-settings.sh"
+ENV_FILE="$ENV_FILE" bash "$REPO/food-app/deploy/check-settings.sh"
 echo
-echo "After changing $ENV_FILE: systemctl restart food-app"
+echo "After changing $ENV_FILE: systemctl restart $SERVICE"
 }
 main "$@"
 exit

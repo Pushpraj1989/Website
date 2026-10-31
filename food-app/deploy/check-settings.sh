@@ -2,7 +2,7 @@
 # Lists the settings in /etc/food-app.env as set or empty, never showing a value, and says what each missing one stops.
 #   bash /srv/food-app/repo/food-app/deploy/check-settings.sh
 set -uo pipefail
-ENV_FILE="${ENV_FILE:-/etc/food-app.env}"
+. "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/instance.sh"   # this copy's settings file
 [ -r "$ENV_FILE" ] || { echo "Cannot read $ENV_FILE (run as root)." >&2; exit 1; }
 
 # The value of a setting, read the way the service reads it (quotes optional, "export " and spaces allowed).

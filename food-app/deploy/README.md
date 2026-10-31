@@ -144,6 +144,38 @@ WITH_APP=1 bash /srv/food-app/repo/food-app/deploy/update.sh
 
 The first run downloads the Flutter SDK (about 2 GB) and takes longer.
 
+## A second, temporary copy without a domain (to share a demo)
+
+To show the system somewhere public without the company's domain, run a separate copy on the same server, on an
+address made from the server's IP. `DOMAIN=ip` turns the IP into a name like `187-77-125-86.sslip.io`: sslip.io is a
+free public service whose names point to the IP written in them, so the copy gets a normal HTTPS certificate with no
+domain to buy and no DNS to set up. (A bare `http://187.77.125.86` would work for looking only: phones block Face ID,
+location and secure sign-in on pages without HTTPS.)
+
+```bash
+INSTANCE=food-demo DOMAIN=ip WITH_APP=1 bash /srv/food-app/repo/food-app/deploy/setup.sh
+```
+
+The copy is fully separate from the company one: its own code folder (`/srv/food-demo`), database, settings file
+(`/etc/food-demo.env`), staff password, service (`food-demo`), port (3200) and uploads. The company site is not
+touched or restarted. Then:
+
+```bash
+nano /etc/food-demo.env                                    # email lines, as in step 4; then: systemctl restart food-demo
+bash /srv/food-demo/repo/food-app/deploy/load-demo.sh      # demo photos, videos, offers
+WITH_APP=1 bash /srv/food-demo/repo/food-app/deploy/update.sh   # later updates, for this copy only
+grep ADMIN_PASSWORD /etc/food-demo.env                     # this copy's staff password (do not share the output)
+```
+
+The addresses are `https://<ip-with-dashes>.sslip.io/` (website), `/app/` (customer app) and `/console/` (staff).
+Sign-in emails are sent from whichever mailbox the copy's email settings name, so use one you are happy to show.
+When you no longer need it, remove it and everything it holds (it asks you to type its name first, and refuses to
+touch the company copy):
+
+```bash
+bash /srv/food-demo/repo/food-app/deploy/remove-instance.sh
+```
+
 ## The phone app
 
 Phone builds talk to the same API. Build them with `--dart-define=API_BASE=https://order.example.com`. Release builds

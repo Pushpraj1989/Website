@@ -1,16 +1,17 @@
+# A template: setup.sh fills in __INSTANCE__, __ENV_FILE__ and __PORT__ for each copy (see instance.sh).
 [Unit]
-Description=Restaurant ordering: website, API and order board
+Description=Restaurant ordering (__INSTANCE__): website, API and order board
 After=network.target postgresql.service
 Wants=postgresql.service
 
 [Service]
 User=foodapp
 Group=foodapp
-WorkingDirectory=/srv/food-app/repo/food-app/web
-EnvironmentFile=/etc/food-app.env
+WorkingDirectory=/srv/__INSTANCE__/repo/food-app/web
+EnvironmentFile=__ENV_FILE__
 Environment=NODE_ENV=production
 # Only nginx talks to it; it is not reachable from outside the server.
-ExecStart=/srv/food-app/repo/food-app/web/node_modules/.bin/next start -H 127.0.0.1 -p 3100
+ExecStart=/srv/__INSTANCE__/repo/food-app/web/node_modules/.bin/next start -H 127.0.0.1 -p __PORT__
 Restart=on-failure
 RestartSec=3
 NoNewPrivileges=true

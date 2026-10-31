@@ -5,8 +5,8 @@
 # It only works while the sample menu is still there, and running it again changes nothing. The pilot step prints a
 # partner key once; it belongs to a demo partner, which can be revoked in the console under Partners.
 set -euo pipefail
-ENV_FILE=/etc/food-app.env
-WEB=/srv/food-app/repo/food-app/web
+. "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/instance.sh"   # this copy's settings file and code
+WEB="$REPO/food-app/web"
 [ "$(id -u)" = 0 ] || { echo "Run this as root (sudo -i first)." >&2; exit 1; }
 
 # The settings, read the way the service reads them (see update.sh), passed to the scripts as the service user.
