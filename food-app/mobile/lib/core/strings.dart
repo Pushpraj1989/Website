@@ -85,7 +85,7 @@ class Strings {
   String get comingSoon => isArabic ? 'قريباً' : 'Coming soon';
   String get benefitDetails => isArabic ? 'تفاصيل الميزة' : 'Benefit details';
   String perPeriod(String period) => isArabic ? (period == 'month' ? 'شهرياً' : 'سنوياً') : (period == 'month' ? 'per month' : 'per year');
-  String get heroTitle => isArabic ? 'جوع؟ اطلب الآن' : 'Hungry? Order now';
+  String get heroTitle => _w('Hungry? Order now', 'جوع؟ اطلب الآن', 'New in. Shop now', 'وصل حديثاً. تسوق الآن');
   String get heroBody => _w('Browse the menu and order in a few taps.', 'تصفح القائمة واطلب في خطوات قليلة.', 'Browse the shop and order in a few taps.', 'تصفح المتجر واطلب في خطوات قليلة.');
   String get more => isArabic ? 'المزيد' : 'More';
   String get priceToBeAnnounced => isArabic ? 'السعر يُعلن لاحقاً' : 'Price to be announced';
