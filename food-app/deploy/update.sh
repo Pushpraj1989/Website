@@ -41,6 +41,9 @@ for link in storage data; do
   fi
 done
 
+# Settings setup.sh wrote that have gone missing from the file are put back, from the running service where it has them.
+bash "$REPO/food-app/deploy/repair-settings.sh"
+
 # Settings added by later versions get their default once; a value already there is never changed.
 grep -q '^STAFF_URL=' "$ENV_FILE" || echo 'STAFF_URL="/console/"' >> "$ENV_FILE"
 
@@ -90,6 +93,8 @@ rsync -a --delete "$REPO/food-app/admin/dist/" "$WWW/console/"
 
 if [ "${WITH_APP:-0}" = 1 ]; then
   say "Customer app for the browser: build"
+  # Flutter unpacks its own tools on first use and needs these to do it.
+  for tool in unzip xz; do command -v "$tool" >/dev/null || { apt-get update -y >/dev/null; apt-get install -y unzip xz-utils zip >/dev/null; break; }; done
   if [ ! -x /opt/flutter/bin/flutter ]; then
     install -d -o foodapp -g foodapp /opt/flutter
     as_app git clone --quiet --depth 1 --branch "$FLUTTER_VERSION" https://github.com/flutter/flutter.git /opt/flutter
@@ -97,7 +102,8 @@ if [ "${WITH_APP:-0}" = 1 ]; then
   cd "$REPO/food-app/mobile"
   as_app flutter --disable-analytics >/dev/null 2>&1 || true
   as_app flutter pub get
-  as_app flutter build web --release --no-web-resources-cdn --base-href /app/ --dart-define=API_BASE="https://$DOMAIN"
+  # No offline cache (--pwa-strategy=none), so a phone never keeps showing an old copy after an update.
+  as_app flutter build web --release --no-web-resources-cdn --pwa-strategy=none --base-href /app/ --dart-define=API_BASE="https://$DOMAIN"
   rsync -a --delete "$REPO/food-app/mobile/build/web/" "$WWW/app/"
 fi
 chmod -R a+rX "$WWW"

@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 
-/// Face ID on an iPhone. Anywhere else (Android, desktop, a phone without Face ID) the gate reports "not available"
-/// and the app falls back to the one-time code, so nothing depends on this being present.
+/// Face ID on an iPhone. Anywhere else (Android, desktop, a phone without Face ID, or the app running in a browser,
+/// even Safari on an iPhone) the gate reports "not available" and the app falls back to the one-time code, so nothing
+/// depends on this being present.
 abstract class BiometricGate {
   Future<bool> faceIdAvailable();
   Future<bool> authenticate(String reason);
@@ -16,7 +17,8 @@ class LocalAuthGate implements BiometricGate {
 
   @override
   Future<bool> faceIdAvailable() async {
-    if (defaultTargetPlatform != TargetPlatform.iOS) return false;
+    // In a browser the platform reads as iOS on an iPhone, but the browser offers no Face ID to the app.
+    if (kIsWeb || defaultTargetPlatform != TargetPlatform.iOS) return false;
     try {
       if (!await _auth.isDeviceSupported()) return false;
       return (await _auth.getAvailableBiometrics()).contains(BiometricType.face);
@@ -27,6 +29,7 @@ class LocalAuthGate implements BiometricGate {
 
   @override
   Future<bool> authenticate(String reason) async {
+    if (kIsWeb) return false;
     try {
       return await _auth.authenticate(localizedReason: reason, biometricOnly: true);
     } on PlatformException {
