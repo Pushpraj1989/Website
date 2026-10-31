@@ -215,7 +215,7 @@ class _Ticket extends StatelessWidget {
       ),
       alignment: Alignment.center,
       child: promo.hasMedia
-          ? SizedBox.expand(child: ExcludeSemantics(child: HeroSlide.mediaFor(promo, colours.first)))
+          ? SizedBox.expand(child: ExcludeSemantics(child: HeroSlide.mediaFor(promo, colours.first, lead: true)))
           : Padding(
               padding: const EdgeInsets.symmetric(horizontal: Tokens.space5),
               child: FittedBox(

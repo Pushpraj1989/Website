@@ -4,10 +4,14 @@ import 'package:video_player/video_player.dart';
 /// A muted, looping clip behind the hero text. The poster frame shows until the video is ready, and stays on
 /// screen if the video cannot play or the device asks for reduced motion.
 /// [video] and [poster] are bundled assets, or full addresses for media staff published in the admin.
+///
+/// [startAfter] holds back clips lower on the screen for a moment, so the one at the top gets the connection first;
+/// their poster shows meanwhile.
 class HeroVideo extends StatefulWidget {
-  const HeroVideo({super.key, required this.video, this.poster});
+  const HeroVideo({super.key, required this.video, this.poster, this.startAfter = Duration.zero});
   final String video;
   final String? poster;
+  final Duration startAfter;
 
   @override
   State<HeroVideo> createState() => _HeroVideoState();
@@ -20,10 +24,18 @@ class _HeroVideoState extends State<HeroVideo> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (_controller == null && !MediaQuery.of(context).disableAnimations) _start();
+    if (!_starting && !MediaQuery.of(context).disableAnimations) _start();
   }
 
+  bool _starting = false;
+
   Future<void> _start() async {
+    if (_starting) return;
+    _starting = true;
+    if (widget.startAfter > Duration.zero) {
+      await Future<void>.delayed(widget.startAfter);
+      if (!mounted) return;
+    }
     final controller = widget.video.startsWith('http')
         ? VideoPlayerController.networkUrl(Uri.parse(widget.video))
         : VideoPlayerController.asset(widget.video);

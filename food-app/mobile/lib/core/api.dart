@@ -181,8 +181,30 @@ class ApiClient {
     await _send(() => _client.delete(_uri('/v1/cart/offer'), headers: _headers()));
   }
 
+  Future<HomePromotions>? _homeAhead;
+
+  /// Starts loading the home's promotions early, during the opening animation; the home screen then has them at once.
+  Future<HomePromotions> prefetchHomePromotions() {
+    final ahead = _homeAhead ??= _fetchHomePromotions();
+    ahead.ignore(); // A failure here is handled when the home screen asks.
+    return ahead;
+  }
+
   /// The hero and mid-feed promotions staff have published, live now.
   Future<HomePromotions> homePromotions() async {
+    final ahead = _homeAhead;
+    _homeAhead = null;
+    if (ahead != null) {
+      try {
+        return await ahead;
+      } catch (_) {
+        // Fetched early and failed: ask again.
+      }
+    }
+    return _fetchHomePromotions();
+  }
+
+  Future<HomePromotions> _fetchHomePromotions() async {
     final body = await _send(() => _client.get(_uri('/v1/home'), headers: _headers()));
     return HomePromotions.fromJson(body);
   }

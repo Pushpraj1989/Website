@@ -10,15 +10,17 @@ const TYPES: Record<string, string> = {
 };
 
 // Serves uploaded pictures and videos. Only names the server created can be read: a UUID and a known extension.
+// Every file gets a new name when it is uploaded and is never changed, so browsers may keep it for a year: a
+// returning visitor's pictures and videos come from the phone, not the network.
 // Video is served in byte ranges, so a phone can start playing and seek without downloading the whole file.
 export async function GET(request: NextRequest, { params }: { params: Promise<{ key: string }> }) {
   const { key } = await params;
-  const match = /^([0-9a-f-]{36})\.(jpg|png|webp|mp4|mov|webm)$/.exec(key);
+  const match = /^([0-9a-f-]{36})(?:\.poster)?\.(jpg|png|webp|mp4|mov|webm)$/.exec(key);
   const file = match ? join(storageDir(), key) : null;
   if (!file || !existsSync(file)) return new NextResponse('Not found', { status: 404 });
   const type = TYPES[match![2]];
   const size = statSync(file).size;
-  const common = { 'Content-Type': type, 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'public, max-age=3600' };
+  const common = { 'Content-Type': type, 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'public, max-age=31536000, immutable' };
   const range = request.headers.get('range');
   if (range && type.startsWith('video/')) {
     const m = /^bytes=(\d*)-(\d*)$/.exec(range);

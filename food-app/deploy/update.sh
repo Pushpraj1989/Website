@@ -83,6 +83,9 @@ say "Website and API: install, migrate, build"
 cd "$REPO/food-app/web"
 as_app npm ci --no-audit --no-fund --include=dev
 as_app env DATABASE_URL="$DATABASE_URL" node db/migrate.mjs
+# Video posters (a still shown at once while a video loads) are made with ffmpeg.
+command -v ffmpeg >/dev/null || { apt-get update -y >/dev/null; apt-get install -y ffmpeg >/dev/null; }
+as_app node --experimental-strip-types --no-warnings scripts/make-posters.ts || echo "Posters could not be made; videos still play."
 as_app env NODE_ENV=production NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:-}" npx next build
 
 say "Admin console: build"
@@ -104,8 +107,12 @@ if [ "${WITH_APP:-0}" = 1 ]; then
   as_app flutter pub get >/dev/null
   # No offline cache (--pwa-strategy=none), so a phone never keeps showing an old copy after an update.
   as_app flutter build web --release --no-web-resources-cdn --pwa-strategy=none --no-wasm-dry-run --base-href /app/ --dart-define=API_BASE="https://$DOMAIN"
+  as_app node tool/slim_web.mjs build/web
   rsync -a --delete "$REPO/food-app/mobile/build/web/" "$WWW/app/"
 fi
+# Compressed copies for nginx to send (gzip_static): rsync --delete removed the old ones, so they are made afresh.
+find "$WWW/console" "$WWW/app" -type f \( -name '*.js' -o -name '*.wasm' -o -name '*.json' -o -name '*.css' -o -name '*.html' -o -name '*.otf' -o -name '*.ttf' -o -name '*.svg' \) \
+  ! -name '*.symbols' -size +1k -exec gzip -9 -k -f {} + 2>/dev/null || true
 chmod -R a+rX "$WWW"
 
 say "Web server"

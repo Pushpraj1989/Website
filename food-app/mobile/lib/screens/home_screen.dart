@@ -68,13 +68,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _init() async {
     final prefs = await SharedPreferences.getInstance();
     _store = DashboardStore(prefs);
+    // The promotions (the top of the screen) load alongside the menu, not after it.
+    final promotions = _loadPromotions();
     try {
       _menu = await widget.api.menu();
     } catch (_) {
       // The popular widget shows its own error; the rest of the dashboard still works.
     }
     await _refreshShortcuts();
-    await _loadPromotions();
+    await promotions;
     await _loadAccount();
     if (!mounted) return;
     setState(() => _layout = _store!.load());
@@ -307,7 +309,7 @@ class _HomeScreenState extends State<HomeScreen> {
         final slides = [
           for (final p in heroPromos)
             HeroSlide(
-              background: HeroSlide.mediaFor(p, context.accent),
+              background: HeroSlide.mediaFor(p, context.accent, lead: true),
               kicker: p.kicker.of(s.lang),
               title: p.title.of(s.lang),
               body: p.body.of(s.lang),

@@ -25,7 +25,7 @@ cd /
 say "Packages"
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -y
-apt-get install -y nginx certbot git curl ca-certificates openssl ufw rsync postgresql postgresql-contrib
+apt-get install -y nginx certbot git curl ca-certificates openssl ufw rsync ffmpeg postgresql postgresql-contrib
 PG_MAJOR="$(ls /usr/lib/postgresql | sort -n | tail -1)"
 apt-get install -y "postgresql-${PG_MAJOR}-postgis-3"
 if ! command -v node >/dev/null || [ "$(node -p 'process.versions.node.split(".")[0]')" -lt 22 ]; then

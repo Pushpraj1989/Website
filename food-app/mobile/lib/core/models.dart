@@ -653,12 +653,14 @@ class PromoOffer {
 }
 
 class Promotion {
-  const Promotion({required this.id, required this.kind, required this.url, required this.title, required this.cta, this.menuItemId, this.kicker = const Localised('', ''), this.body = const Localised('', ''), this.offer, this.look = const PromoLook()});
+  const Promotion({required this.id, required this.kind, required this.url, this.posterUrl, required this.title, required this.cta, this.menuItemId, this.kicker = const Localised('', ''), this.body = const Localised('', ''), this.offer, this.look = const PromoLook()});
   final String id;
   /// 'image' or 'video', or 'none' when the promotion runs on colour and words alone.
   final String kind;
   /// The picture, GIF or video; empty when there is none.
   final String url;
+  /// For a video: a still of its first frame, shown at once while the video loads. Null when the server has none.
+  final String? posterUrl;
   final Localised title;
   final Localised cta;
   final String? menuItemId;
@@ -676,6 +678,7 @@ class Promotion {
       id: json['id'] as String,
       kind: media?['kind'] as String? ?? 'none',
       url: media == null ? '' : MediaUrls.resolve(media['url'])!,
+      posterUrl: media == null ? null : MediaUrls.resolve(media['posterUrl']),
       title: text('title'),
       cta: text('cta'),
       menuItemId: json['menuItemId'] as String?,

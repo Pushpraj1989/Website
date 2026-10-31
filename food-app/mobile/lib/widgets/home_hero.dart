@@ -23,9 +23,10 @@ class HeroSlide {
   final int seconds;
   final String animation;
 
-  /// A picture, GIF or video from the admin. GIFs play as they are; videos loop silently.
-  static Widget mediaFor(Promotion p, Color fallback) => p.kind == 'video'
-      ? HeroVideo(video: p.url)
+  /// A picture, GIF or video from the admin. GIFs play as they are; videos loop silently, their still showing at once.
+  /// [lead] is for the clip at the top of the screen, which loads first; the others wait a moment.
+  static Widget mediaFor(Promotion p, Color fallback, {bool lead = false}) => p.kind == 'video'
+      ? HeroVideo(video: p.url, poster: p.posterUrl, startAfter: lead ? Duration.zero : const Duration(milliseconds: 2500))
       : Image.network(p.url, fit: BoxFit.cover, gaplessPlayback: true, semanticLabel: '', errorBuilder: (_, _, _) => ColoredBox(color: fallback));
 }
 

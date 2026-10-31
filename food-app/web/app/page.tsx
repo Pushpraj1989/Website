@@ -1,3 +1,4 @@
+import { LoopVideo } from '@/components/LoopVideo';
 import Link from 'next/link';
 import * as data from '@/lib/data.ts';
 import { currentLocale } from '@/lib/http.ts';
@@ -64,7 +65,7 @@ export default async function Home() {
         <Carousel id="offers-h" title={s.offersForYou} previous={s.previous} next={s.next}>
           {live.carousel.map((p) => (
             <Link key={p.id} href={linkFor(p)} className="offer-card" style={{ '--offer': p.look.colour ?? 'var(--color-accent)' } as React.CSSProperties}>
-              {p.media ? (p.media.kind === 'video' ? <video src={p.media.url} autoPlay muted loop playsInline aria-hidden="true" /> : <img src={p.media.url} alt="" />) : null}
+              {p.media ? (p.media.kind === 'video' ? <LoopVideo src={p.media.url} poster={p.media.posterUrl} hidden /> : <img src={p.media.url} alt="" loading="lazy" />) : null}
               <span className="offer-words">
                 {p.kicker[locale] ? <span className="offer-kicker">{p.kicker[locale]}</span> : null}
                 <strong>{p.title[locale]}</strong>
@@ -84,7 +85,7 @@ export default async function Home() {
 
       {live.midFeed.map((p) => (
         <Link key={p.id} href={linkFor(p)} className={`spotlight size-${p.look.size}`} style={{ '--offer': p.look.colour ?? 'var(--color-accent)' } as React.CSSProperties}>
-          {p.media ? (p.media.kind === 'video' ? <video src={p.media.url} autoPlay muted loop playsInline aria-hidden="true" /> : <img src={p.media.url} alt="" />) : null}
+          {p.media ? (p.media.kind === 'video' ? <LoopVideo src={p.media.url} poster={p.media.posterUrl} hidden /> : <img src={p.media.url} alt="" loading="lazy" />) : null}
           <span className="spotlight-words">
             {p.kicker[locale] ? <span className="offer-kicker">{p.kicker[locale]}</span> : null}
             <strong>{p.title[locale]}</strong>

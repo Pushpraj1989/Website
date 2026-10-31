@@ -1,5 +1,6 @@
 'use client';
 
+import { LoopVideo } from '@/components/LoopVideo';
 import { useEffect, useRef, useState } from 'react';
 import { Icon } from '@/components/Icon';
 
@@ -12,7 +13,7 @@ export type WelcomePromo = {
   title: Localised;
   body: Localised;
   cta: Localised;
-  media: { url: string; kind: string } | null;
+  media: { url: string; kind: string; posterUrl?: string | null } | null;
   offer: { headline: Localised; code: string | null; minSpendMinor: number; maxSavingMinor: number | null; currency: string; endsAt: string; daysLeft: number; appliesTo: string } | null;
   look: { animation: string; size: string; frame: string; colour: string | null; frequency: string };
 };
@@ -67,7 +68,7 @@ export function WelcomeOffer({ promo, locale, words }: { promo: WelcomePromo; lo
         <h2 id="welcome-title">{title}</h2>
         {promo.body[locale] ? <p className="muted">{promo.body[locale]}</p> : null}
         <div className={`ticket frame-${promo.look.frame}`} style={{ '--ticket': colour } as React.CSSProperties}>
-          {promo.media ? (promo.media.kind === 'video' ? <video src={promo.media.url} autoPlay muted loop playsInline /> : <img src={promo.media.url} alt="" />) : <b>{offer?.headline[locale]}</b>}
+          {promo.media ? (promo.media.kind === 'video' ? <LoopVideo src={promo.media.url} poster={promo.media.posterUrl} /> : <img src={promo.media.url} alt="" />) : <b>{offer?.headline[locale]}</b>}
         </div>
         {offer ? (
           <>

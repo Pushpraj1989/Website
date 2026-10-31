@@ -4,10 +4,11 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { t, type Locale } from '@/lib/i18n.ts';
 import { Icon } from '@/components/Icon';
+import { LoopVideo } from '@/components/LoopVideo';
 
 export type HeroSlide = {
   id: string;
-  media: { kind: string; url: string } | null;
+  media: { kind: string; url: string; posterUrl?: string | null } | null;
   kicker: string;
   title: string;
   body: string;
@@ -42,7 +43,9 @@ export function HeroSlider({ slides, locale, address }: { slides: HeroSlide[]; l
     >
       {slides.map((sl, i) => (
         <div key={sl.id} className={i === index ? 'hero-media on' : 'hero-media'} aria-hidden="true" style={{ '--hero': sl.colour ?? 'var(--color-accent)' } as React.CSSProperties}>
-          {sl.media?.kind === 'video' ? <video src={sl.media.url} autoPlay muted loop playsInline /> : sl.media ? <img src={sl.media.url} alt="" /> : null}
+          {sl.media?.kind === 'video'
+            ? <LoopVideo src={sl.media.url} poster={sl.media.posterUrl} first={i === 0} active={i === index} warm={i === (index + 1) % slides.length} />
+            : sl.media ? <img src={sl.media.url} alt="" fetchPriority={i === 0 ? 'high' : undefined} loading={i === 0 ? 'eager' : 'lazy'} /> : null}
         </div>
       ))}
       <div className="hero-shade" aria-hidden="true" />

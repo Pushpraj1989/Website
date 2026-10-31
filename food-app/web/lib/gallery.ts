@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { pool, withTx } from './db.ts';
 import { RuleError } from './orders.ts';
 import { RESTAURANT_ID, storageDir } from './catalog.ts';
+import { dropPoster, makePoster, posterUrlFor } from './posters.ts';
 
 export const MAX_IMAGE_BYTES = 3 * 1024 * 1024;
 export const MAX_VIDEO_BYTES = 60 * 1024 * 1024;
@@ -56,6 +57,7 @@ export async function addProductMedia(productId: string, bytes: Buffer, altEn: s
   const key = `${randomUUID()}.${kind.ext}`;
   mkdirSync(storageDir(), { recursive: true });
   writeFileSync(join(storageDir(), key), bytes);
+  if (kind.kind === 'video') await makePoster(key);
   return withTx(async (c) => {
     const media = await c.query(
       `insert into media (kind, storage_key, mime, alt_en, alt_ar, size_bytes, uploaded_by)
@@ -73,7 +75,7 @@ export async function addProductMedia(productId: string, bytes: Buffer, altEn: s
 }
 
 function galleryItem(m: { id: string; kind: string; storage_key: string; mime: string | null }, position: number, primary: boolean) {
-  return { id: m.id, kind: m.kind, url: urlFor(m.storage_key), mime: m.mime, position, primary };
+  return { id: m.id, kind: m.kind, url: urlFor(m.storage_key), posterUrl: posterUrlFor(m.storage_key), mime: m.mime, position, primary };
 }
 
 export async function productGallery(productId: string) {
@@ -125,6 +127,7 @@ export async function removeProductMedia(productId: string, mediaId: string) {
       const gone = await c.query('delete from media where id = $1 returning storage_key', [mediaId]);
       const file = gone.rows[0] && join(storageDir(), gone.rows[0].storage_key);
       if (file && existsSync(file)) unlinkSync(file);
+      if (gone.rows[0]) dropPoster(gone.rows[0].storage_key);
     }
   });
 }
@@ -181,7 +184,7 @@ export function promotionView(r: Record<string, any>) {
     id: r.id,
     placement: r.placement,
     menuItemId: r.menu_item_id,
-    media: r.media_id ? { id: r.media_id, kind: r.kind, url: urlFor(r.storage_key), mime: r.mime } : null,
+    media: r.media_id ? { id: r.media_id, kind: r.kind, url: urlFor(r.storage_key), posterUrl: posterUrlFor(r.storage_key), mime: r.mime } : null,
     kicker: { en: r.kicker_en ?? '', ar: r.kicker_ar ?? '' },
     title: { en: r.title_en, ar: r.title_ar },
     body: { en: r.body_en ?? '', ar: r.body_ar ?? '' },
@@ -309,6 +312,7 @@ async function dropIfUnused(c: { query: (q: string, v: unknown[]) => Promise<{ r
   const gone = await c.query('delete from media where id = $1 returning storage_key', [mediaId]);
   const file = gone.rows[0] && join(storageDir(), gone.rows[0].storage_key);
   if (file && existsSync(file)) unlinkSync(file);
+  if (gone.rows[0]) dropPoster(gone.rows[0].storage_key);
 }
 
 /** A picture, GIF or video uploaded for a promotion rather than for a product. */
@@ -318,12 +322,13 @@ export async function addPromotionMedia(bytes: Buffer, uploadedBy: string | null
   const key = `${randomUUID()}.${kind.ext}`;
   mkdirSync(storageDir(), { recursive: true });
   writeFileSync(join(storageDir(), key), bytes);
+  if (kind.kind === 'video') await makePoster(key);
   const { rows } = await pool.query(
     `insert into media (kind, storage_key, mime, alt_en, alt_ar, size_bytes, uploaded_by) values ($1,$2,$3,'','',$4,$5) returning id, kind, storage_key, mime`,
     [kind.kind, key, kind.mime, bytes.length, uploadedBy],
   );
   const m = rows[0];
-  return { id: m.id as string, kind: m.kind as string, url: urlFor(m.storage_key), mime: m.mime as string };
+  return { id: m.id as string, kind: m.kind as string, url: urlFor(m.storage_key), posterUrl: posterUrlFor(m.storage_key), mime: m.mime as string };
 }
 
 /** What the customer app shows now, grouped by place. The welcome pop-up and the strip show one each: the first by position. */

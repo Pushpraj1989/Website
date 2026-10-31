@@ -57,6 +57,7 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
       final menu = await _api.menu();
       final json = menu.brandJson;
       if (json != null) await _brand.update(Brand.fromJson(json, base: MediaUrls.base), _api.prefs);
+      _warmHome();
     } catch (_) {
       // Offline or the server is unavailable: the screens say so when they load; the last brand stays.
     }
@@ -64,6 +65,16 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
       await _introDone.future.timeout(const Duration(seconds: 6), onTimeout: () {});
     }
     if (mounted) setState(() => _opening = false);
+  }
+
+  /// While the opening plays: loads the home's promotions and the first top picture (a video's still), so the home
+  /// shows them the moment it appears instead of an empty dark box.
+  void _warmHome() {
+    _api.prefetchHomePromotions().then((home) {
+      final first = home.hero.isEmpty ? null : home.hero.first;
+      final picture = first == null ? null : first.kind == 'video' ? first.posterUrl : first.kind == 'image' ? first.url : null;
+      if (picture != null && mounted) precacheImage(NetworkImage(picture), context).ignore();
+    }).ignore();
   }
 
   // Completes when the opening animation has played through with the restaurant's name in it.
