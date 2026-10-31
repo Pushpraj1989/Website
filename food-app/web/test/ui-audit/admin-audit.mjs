@@ -2,17 +2,19 @@
 // Checks sideways scroll, controls off-screen or out of their box, clipped and overlapping text, unnamed controls,
 // console errors and axe (WCAG 2.2 AA). Uses the local test database: opening editors can create records.
 // Usage: ADMIN_URL=http://127.0.0.1:4173 node test/ui-audit/admin-audit.mjs <file holding the staff password>
+// APPEARANCE='{"mode":"dark","wallpaper":"ocean"}' runs it in another console look (see admin/src/appearance.js).
 import { chromium } from 'playwright';
 import { readFileSync } from 'node:fs';
 import { probe } from './probe.mjs';
 const AXE = readFileSync(new URL('../../node_modules/axe-core/axe.min.js', import.meta.url), 'utf8');
 const ADMIN = process.env.ADMIN_URL ?? 'http://127.0.0.1:4173';
 const PW = readFileSync(process.argv[2], 'utf8').trim();
-const SECTIONS = ['dashboard','orders','products','categories','offers','campaigns','designs','partners','reports','promotions','zones','assistant','restaurant'];
+const SECTIONS = ['dashboard','orders','products','categories','offers','campaigns','designs','partners','reports','promotions','zones','assistant','restaurant','appearance'];
 const out = [];
 const browser = await chromium.launch();
 for (const width of [390, 1280]) {
   const page = await browser.newPage({ viewport: { width, height: 900 } });
+  if (process.env.APPEARANCE) await page.addInitScript((a) => localStorage.setItem('console-appearance', a), process.env.APPEARANCE);
   const errs = []; page.on('pageerror', (e) => errs.push(e.message)); page.on('console', (m) => { if (m.type()==='error' && !/401/.test(m.text())) errs.push(m.text()); });
   await page.goto(`${ADMIN}/#/orders`);
   const loginIssues = await page.evaluate(probe); await page.addScriptTag({ content: AXE });

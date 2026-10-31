@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ChartColumn, Gauge, Store, ClipboardList, Bot, Handshake, LayoutGrid, LogOut, Map as MapIcon, Megaphone, Menu, Palette, Percent, Tags, UtensilsCrossed, X } from 'lucide-react';
+import { ChartColumn, Gauge, Moon, Paintbrush, Store, Sun, ClipboardList, Bot, Handshake, LayoutGrid, LogOut, Map as MapIcon, Megaphone, Menu, Palette, Percent, Tags, UtensilsCrossed, X } from 'lucide-react';
 import { api } from './api.js';
 import Login from './pages/Login.jsx';
 import Products from './pages/Products.jsx';
@@ -13,6 +13,8 @@ import Promotions from './pages/Promotions.jsx';
 import Zones from './pages/Zones.jsx';
 import Orders from './pages/Orders.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import Appearance from './pages/Appearance.jsx';
+import { changeAppearance, loadAppearance, setBrandColour } from './appearance.js';
 import AiSettings from './pages/AiSettings.jsx';
 import Settings from './pages/Settings.jsx';
 
@@ -31,7 +33,26 @@ const SECTIONS = [
   { id: 'zones', group: 'Settings', label: 'Delivery areas', Icon: MapIcon },
   { id: 'assistant', group: 'Settings', label: 'Assistant', Icon: Bot },
   { id: 'partners', group: 'Settings', label: 'Partners', Icon: Handshake },
+  { id: 'appearance', group: 'Settings', label: 'Appearance', Icon: Paintbrush },
 ];
+
+// The quick light/dark switch beside the menu. The full set of choices is under Settings, Appearance.
+function ThemeToggle({ className }) {
+  const [, redraw] = useState(0);
+  const dark = document.documentElement.dataset.mode === 'dark';
+  return (
+    <button
+      type="button" className={className} aria-label={dark ? 'Switch to light' : 'Switch to dark'} title={dark ? 'Light' : 'Dark'}
+      onClick={(e) => {
+        const box = e.currentTarget.getBoundingClientRect();
+        changeAppearance({ ...loadAppearance(), mode: dark ? 'light' : 'dark' }, { x: box.left + box.width / 2, y: box.top + box.height / 2 });
+        setTimeout(() => redraw((n) => n + 1), 30);
+      }}
+    >
+      {dark ? <Sun className="icon" aria-hidden="true" /> : <Moon className="icon" aria-hidden="true" />}
+    </button>
+  );
+}
 // The phone's tab bar holds the four sections staff open most; the rest are under More.
 const TABS = ['dashboard', 'orders', 'products'];
 
@@ -95,7 +116,8 @@ export default function App() {
       const { brand: b } = await api.brand();
       setBrand(b);
       document.title = `${b.name.en} · Admin`;
-      document.documentElement.style.setProperty('--accent', b.color);
+      document.documentElement.style.setProperty('--brand', b.color);
+      setBrandColour(b.color);
     } catch {
       // The console still works with its own default look.
     }
@@ -140,11 +162,17 @@ export default function App() {
       <aside className="side">
         <div className="brand">{brand?.logoUrl ? <img className="brand-logo" src={brand.logoUrl} alt="" /> : null}<span>{brand?.name.en ?? ''}</span></div>
         {navLinks}
-        <button type="button" className="btn ghost block" onClick={signOut}>Sign out</button>
+        <div className="side-foot">
+          <button type="button" className="btn ghost" onClick={signOut}><LogOut className="icon" aria-hidden="true" />Sign out</button>
+          <ThemeToggle className="btn icon-btn" />
+        </div>
       </aside>
       <header className="appbar">
         <span className="title brand">{brand?.logoUrl ? <img className="brand-logo" src={brand.logoUrl} alt="" /> : null}<span>{brand?.name.en ?? ''}</span></span>
-        <button type="button" className="btn ghost sm" onClick={signOut} aria-label="Sign out"><LogOut className="icon" aria-hidden="true" /></button>
+        <div className="row" style={{ gap: 4 }}>
+          <ThemeToggle className="btn ghost sm" />
+          <button type="button" className="btn ghost sm" onClick={signOut} aria-label="Sign out"><LogOut className="icon" aria-hidden="true" /></button>
+        </div>
       </header>
       <nav className="tabbar" aria-label="Main sections">
         {TABS.map((id) => {
@@ -183,6 +211,7 @@ export default function App() {
         {section === 'orders' ? <Orders /> : null}
         {catalog && section === 'assistant' ? <AiSettings /> : null}
         {section === 'restaurant' ? <Settings onBrandChanged={loadBrand} /> : null}
+        {section === 'appearance' ? <Appearance /> : null}
       </main>
     </div>
   );
