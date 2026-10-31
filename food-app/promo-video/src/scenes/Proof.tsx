@@ -176,7 +176,7 @@ export const End: React.FC = () => {
       <div style={{ fontWeight: 600, fontSize: portrait ? 50 : 46, letterSpacing: '-0.025em', color: C.accent, marginTop: 22, opacity: progress(frame, 22, 14) }}>
         Build your business app in a day.
       </div>
-      <div style={{ display: 'flex', gap: 16, marginTop: 36, flexWrap: 'wrap', justifyContent: 'center', maxWidth: 1000 }}>
+      <div style={{ display: 'flex', gap: 16, marginTop: 36, flexWrap: 'wrap', justifyContent: 'center', maxWidth: portrait ? 1000 : 1400 }}>
         {tags.map((t, i) => <span key={t} style={{ transform: `scale(${pop(frame, 26 + i * 5, fps)})`, display: 'inline-block' }}><Pill tone={i === 0 ? 'accent' : 'soft'} size={portrait ? 32 : 30}>{t}</Pill></span>)}
       </div>
       <div style={{ marginTop: 40, fontFamily: MONO, fontSize: portrait ? 34 : 36, color: C.ink, padding: '18px 28px', borderRadius: 18, background: '#fff', border: `1px solid ${C.line}`, minWidth: portrait ? 900 : 1040, opacity: progress(frame, 40, 8) }}>
