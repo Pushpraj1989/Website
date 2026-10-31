@@ -81,6 +81,38 @@ Your staff password is the `ADMIN_PASSWORD` line in the same file. Sign in at `/
 **Back up `/etc/food-app.env` somewhere private.** Without `APP_ENCRYPTION_KEY`, stored assistant keys and printed
 voucher codes cannot be read again.
 
+### Sign-in codes from a Microsoft 365 mailbox (no SMTP)
+
+If your email is Microsoft 365 (Outlook for business) and SMTP sign-in is switched off, the codes can go through
+Microsoft Graph instead. This needs a Microsoft 365 work or business mailbox; a personal outlook.com or hotmail.com
+address cannot be used this way.
+
+In the Microsoft Entra admin centre (entra.microsoft.com), signed in as an administrator:
+
+1. **App registrations → New registration.** Name it, for example, "Restaurant ordering", keep "Accounts in this
+   organizational directory only", and register it. From its Overview page, copy the **Application (client) ID** and
+   the **Directory (tenant) ID**.
+2. **Certificates & secrets → New client secret.** Copy its **Value** straight away: it is shown once. Note the expiry
+   date, because codes stop going out when the secret expires, until you make a new one.
+3. **API permissions → Add a permission → Microsoft Graph → Application permissions → Mail.Send**, then
+   **Grant admin consent**.
+4. Recommended: the Mail.Send permission lets the app send as any mailbox in your organisation. Ask your Exchange
+   administrator to limit the app to the one mailbox that sends the codes.
+
+On the server, open `/etc/food-app.env` (`nano /etc/food-app.env`) and set these lines. Add any that are missing:
+
+```
+OTP_DELIVERY="graph"
+GRAPH_TENANT_ID="the Directory (tenant) ID"
+GRAPH_CLIENT_ID="the Application (client) ID"
+GRAPH_CLIENT_SECRET="the secret's Value"
+GRAPH_SENDER="orders@yourdomain.com"
+```
+
+Then run `systemctl restart food-app` and sign up on the website with your own email to check that a code arrives. If
+none comes, `journalctl -u food-app -n 30` shows `email code not sent (graph): token 401` (wrong IDs or secret),
+`send 403` (Mail.Send not granted, or the app is not allowed to use that mailbox) or `send 404` (no such mailbox).
+
 ## 5. Make it your restaurant
 
 A new database starts with sample data. In the admin console (`/console/`), set:

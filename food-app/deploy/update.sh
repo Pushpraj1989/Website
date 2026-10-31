@@ -126,14 +126,16 @@ else
 fi
 
 # Say which optional features are still switched off, without printing any value.
+# Only the settings for the chosen way of sending codes are asked for: OTP_DELIVERY=graph (Microsoft 365) or smtp.
 missing=()
-for name in SMTP_HOST SMTP_USER SMTP_PASS SMTP_FROM PLACES_USER_AGENT; do
+if [ "${OTP_DELIVERY:-}" = graph ]; then mail=(GRAPH_TENANT_ID GRAPH_CLIENT_ID GRAPH_CLIENT_SECRET GRAPH_SENDER); else mail=(SMTP_HOST SMTP_USER SMTP_PASS SMTP_FROM); fi
+for name in "${mail[@]}" PLACES_USER_AGENT; do
   [ -n "${!name:-}" ] || missing+=("$name")
 done
 if [ ${#missing[@]} -gt 0 ]; then
   echo
   echo "Still empty in $ENV_FILE: ${missing[*]}"
-  echo "  SMTP_*: customers cannot get sign-in codes until these are set."
+  echo "  ${mail[0]%%_*}_*: customers cannot get sign-in codes until these are set (OTP_DELIVERY is \"${OTP_DELIVERY:-}\")."
   echo "  PLACES_USER_AGENT: address search at checkout stays off until it is set."
   echo "Fill them in, then: systemctl restart food-app"
 fi

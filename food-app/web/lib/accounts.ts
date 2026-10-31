@@ -3,6 +3,7 @@ import { createHmac, randomBytes, randomInt, createHash, timingSafeEqual } from 
 import { appendFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import nodemailer from 'nodemailer';
+import { GraphMailError, graphConfigured, sendGraphMail } from './graph-mail.ts';
 import { pool, withTx } from './db.ts';
 import { RuleError } from './orders.ts';
 
@@ -57,7 +58,9 @@ export function mask(target: string): string {
 
 /**
  * Sends a code. Development writes it to data/outbox.jsonl (never shown to a client). In production, OTP_DELIVERY=smtp
- * sends email codes through the restaurant's mail account (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM).
+ * sends email codes through the restaurant's mail account (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM), and
+ * OTP_DELIVERY=graph through Microsoft Graph for a Microsoft 365 mailbox (GRAPH_TENANT_ID, GRAPH_CLIENT_ID,
+ * GRAPH_CLIENT_SECRET, GRAPH_SENDER).
  * Anything not configured is refused rather than skipped, so a customer is never told a code was sent when it was not.
  */
 async function deliver(channel: 'sms' | 'email', to: string, code: string, purpose: Purpose) {
@@ -72,12 +75,27 @@ async function deliver(channel: 'sms' | 'email', to: string, code: string, purpo
     await sendEmailCode(to, code);
     return;
   }
+  if (mode === 'graph' && channel === 'email') {
+    await sendGraphCode(to, code);
+    return;
+  }
   throw new RuleError('Verification messages are not set up yet. Try again later.', 'delivery_unavailable', 503);
 }
 
 let transport: nodemailer.Transporter | null = null;
 
-/** The code by email, in the restaurant's own name. The SMTP password never appears in an error or a log. */
+// The email that carries a code, the same whichever way it is sent.
+async function codeEmail(code: string) {
+  const { rows } = await pool.query('select name_en from restaurant limit 1');
+  const name = rows[0]?.name_en ?? '';
+  return {
+    name,
+    subject: `${code} is your ${name} code`.replace(/\s+/g, ' ').trim(),
+    text: `${code} is your ${name} code. It expires in ${CODE_TTL_MINUTES} minutes.\n\nIf you did not ask for it, you can ignore this email.`,
+  };
+}
+
+/** The code by email through SMTP, in the restaurant's own name. The SMTP password never appears in an error or a log. */
 async function sendEmailCode(to: string, code: string) {
   const host = process.env.SMTP_HOST;
   const from = process.env.SMTP_FROM;
@@ -86,17 +104,28 @@ async function sendEmailCode(to: string, code: string) {
   }
   const port = Number(process.env.SMTP_PORT ?? 465);
   transport ??= nodemailer.createTransport({ host, port, secure: port === 465, auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS } });
-  const { rows } = await pool.query('select name_en from restaurant limit 1');
-  const name = rows[0]?.name_en ?? '';
+  const mail = await codeEmail(code);
   try {
     await transport.sendMail({
-      from: name ? `"${name.replace(/"/g, '')}" <${from}>` : from,
+      from: mail.name ? `"${mail.name.replace(/"/g, '')}" <${from}>` : from,
       to,
-      subject: `${code} is your ${name} code`.replace(/\s+/g, ' ').trim(),
-      text: `${code} is your ${name} code. It expires in ${CODE_TTL_MINUTES} minutes.\n\nIf you did not ask for it, you can ignore this email.`,
+      subject: mail.subject,
+      text: mail.text,
     });
   } catch (error) {
     console.error('email code not sent:', (error as { code?: string }).code ?? 'unknown');
+    throw new RuleError('The code could not be sent. Try again in a minute.', 'delivery_failed', 502);
+  }
+}
+
+/** The code by email through Microsoft Graph (lib/graph-mail.ts), for Microsoft 365 mailboxes without SMTP. */
+async function sendGraphCode(to: string, code: string) {
+  if (!graphConfigured()) throw new RuleError('Verification messages are not set up yet. Try again later.', 'delivery_unavailable', 503);
+  const mail = await codeEmail(code);
+  try {
+    await sendGraphMail({ to, subject: mail.subject, text: mail.text, fromName: mail.name || undefined });
+  } catch (error) {
+    console.error('email code not sent (graph):', error instanceof GraphMailError ? `${error.stage} ${error.status}` : 'network');
     throw new RuleError('The code could not be sent. Try again in a minute.', 'delivery_failed', 502);
   }
 }

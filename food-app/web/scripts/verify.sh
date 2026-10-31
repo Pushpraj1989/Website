@@ -31,7 +31,7 @@ for suite in test/vouchers.test.mjs test/campaigns.test.ts test/templates.test.t
   step "database: $suite"          node --test "$suite"
 done
 step "migration runs again safely" bash -c "node db/migrate.mjs --reset && node db/migrate.mjs && node db/migrate.mjs"
-step "unit tests"                  node --test test/unit.test.ts test/theme.test.ts
+step "unit tests"                  node --test test/unit.test.ts test/theme.test.ts test/graph-mail.test.ts
 step "end-to-end API (42 checks)"  node test/e2e-api.mjs
 step "admin build"                 bash -c "cd '$ROOT_ADMIN' && npx vite build"
 step "web build"                   npx next build
