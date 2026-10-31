@@ -97,13 +97,13 @@ if [ "${WITH_APP:-0}" = 1 ]; then
   for tool in unzip xz; do command -v "$tool" >/dev/null || { apt-get update -y >/dev/null; apt-get install -y unzip xz-utils zip >/dev/null; break; }; done
   if [ ! -x /opt/flutter/bin/flutter ]; then
     install -d -o foodapp -g foodapp /opt/flutter
-    as_app git clone --quiet --depth 1 --branch "$FLUTTER_VERSION" https://github.com/flutter/flutter.git /opt/flutter
+    as_app git -c advice.detachedHead=false clone --quiet --depth 1 --branch "$FLUTTER_VERSION" https://github.com/flutter/flutter.git /opt/flutter
   fi
   cd "$REPO/food-app/mobile"
   as_app flutter --disable-analytics >/dev/null 2>&1 || true
-  as_app flutter pub get
+  as_app flutter pub get >/dev/null
   # No offline cache (--pwa-strategy=none), so a phone never keeps showing an old copy after an update.
-  as_app flutter build web --release --no-web-resources-cdn --pwa-strategy=none --base-href /app/ --dart-define=API_BASE="https://$DOMAIN"
+  as_app flutter build web --release --no-web-resources-cdn --pwa-strategy=none --no-wasm-dry-run --base-href /app/ --dart-define=API_BASE="https://$DOMAIN"
   rsync -a --delete "$REPO/food-app/mobile/build/web/" "$WWW/app/"
 fi
 chmod -R a+rX "$WWW"
@@ -121,7 +121,7 @@ fi
 say "Restart"
 systemctl restart food-app
 for i in $(seq 1 30); do
-  if curl -fsS -o /dev/null http://127.0.0.1:3100/v1/brand; then break; fi
+  if curl -fs -o /dev/null http://127.0.0.1:3100/v1/brand; then break; fi
   sleep 1
 done
 if curl -fsS -o /dev/null http://127.0.0.1:3100/v1/brand; then
@@ -131,20 +131,11 @@ else
   exit 1
 fi
 
-# Say which optional features are still switched off, without printing any value.
-# Only the settings for the chosen way of sending codes are asked for: OTP_DELIVERY=graph (Microsoft 365) or smtp.
-missing=()
-if [ "${OTP_DELIVERY:-}" = graph ]; then mail=(GRAPH_TENANT_ID GRAPH_CLIENT_ID GRAPH_CLIENT_SECRET GRAPH_SENDER); else mail=(SMTP_HOST SMTP_USER SMTP_PASS SMTP_FROM); fi
-for name in "${mail[@]}" PLACES_USER_AGENT; do
-  [ -n "${!name:-}" ] || missing+=("$name")
-done
-if [ ${#missing[@]} -gt 0 ]; then
-  echo
-  echo "Still empty in $ENV_FILE: ${missing[*]}"
-  echo "  ${mail[0]%%_*}_*: customers cannot get sign-in codes until these are set (OTP_DELIVERY is \"${OTP_DELIVERY:-}\")."
-  echo "  PLACES_USER_AGENT: address search at checkout stays off until it is set."
-  echo "Fill them in, then: systemctl restart food-app"
-fi
+# Which settings are set and which are empty, without showing any value.
+echo
+bash "$REPO/food-app/deploy/check-settings.sh"
+echo
+echo "After changing $ENV_FILE: systemctl restart food-app"
 }
 main "$@"
 exit
