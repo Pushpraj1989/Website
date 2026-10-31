@@ -43,8 +43,8 @@ export const SECTORS = [
   { key: 'fashion', name: 'fashion', shot: 'shots/sector-fashion.png' },
   { key: 'beauty', name: 'beauty', shot: 'shots/sector-beauty.png' },
   //   { key: 'supplements', name: 'supplements', shot: 'shots/sector-supplements.png' }, (screen not captured yet)
-  //   { key: 'pharmacy', name: 'pharmacy', shot: 'shots/sector-pharmacy.png' }, (screen not captured yet)
-  //   { key: 'grocery', name: 'grocery', shot: 'shots/sector-grocery.png' }, (screen not captured yet)
+  { key: 'pharmacy', name: 'pharmacy', shot: 'shots/sector-pharmacy.png' },
+  { key: 'grocery', name: 'grocery', shot: 'shots/sector-grocery.png' },
   //   { key: 'flowers', name: 'flower shop', shot: 'shots/sector-flowers.png' }, (screen not captured yet)
   //   { key: 'bakery', name: 'bakery', shot: 'shots/sector-bakery.png' }, (screen not captured yet)
   //   { key: 'cafe', name: 'café', shot: 'shots/sector-cafe.png' }, (screen not captured yet)

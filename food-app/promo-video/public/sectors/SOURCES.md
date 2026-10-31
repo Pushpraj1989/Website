@@ -21,3 +21,9 @@ app's own demo pictures. Each file below links to its Commons page, where its li
 | fashion/sequin.jpg | [Pexels-photo-458694.jpg](https://commons.wikimedia.org/wiki/File:Pexels-photo-458694.jpg) | CC0 | Anna_Bella |
 | fashion/socks.jpg | [SZ 深圳 Shenzhen 南山區 Nanshan 深圳灣 Shenzhen Bay MixC mall shop 蕉內 Banana In Clothing Store May 2026 N13P 04.jpg](https://commons.wikimedia.org/wiki/File:SZ_%E6%B7%B1%E5%9C%B3_Shenzhen_%E5%8D%97%E5%B1%B1%E5%8D%80_Nanshan_%E6%B7%B1%E5%9C%B3%E7%81%A3_Shenzhen_Bay_MixC_mall_shop_%E8%95%89%E5%85%A7_Banana_In_Clothing_Store_May_2026_N13P_04.jpg) | CC0 | TWS LUOK Mingaowpuo |
 | fashion/tees.jpg | [Clothing store downtown Boston.jpg](https://commons.wikimedia.org/wiki/File:Clothing_store_downtown_Boston.jpg) | CC0 | Kurt Kaiser |
+| grocery/apple.jpg | [Apple15112024.jpg](https://commons.wikimedia.org/wiki/File:Apple15112024.jpg) | CC0 | mali maeder |
+| grocery/blueberries.jpg | [Blueberries 545041.jpg](https://commons.wikimedia.org/wiki/File:Blueberries_545041.jpg) | CC0 | Matthew Henry |
+| grocery/cherries.jpg | [Cerises rouges de bouche.jpg](https://commons.wikimedia.org/wiki/File:Cerises_rouges_de_bouche.jpg) | CC0 | Lisa Fotios |
+| pharmacy/blister.jpg | [Pill 3.jpg](https://commons.wikimedia.org/wiki/File:Pill_3.jpg) | CC0 | freestocks.org |
+| pharmacy/pills.jpg | [Pill 1.jpg](https://commons.wikimedia.org/wiki/File:Pill_1.jpg) | CC0 | Pixabay |
+| pharmacy/water.jpg | [Pill 2.jpg](https://commons.wikimedia.org/wiki/File:Pill_2.jpg) | CC0 | JESHOOTS.com |
