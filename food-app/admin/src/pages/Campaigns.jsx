@@ -218,7 +218,8 @@ function RuleForm({ campaign, onSaved, onError }) {
   const [type, setType] = useState('percent');
   async function submit(event) {
     event.preventDefault();
-    const f = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const f = new FormData(form);
     let value = 0;
     if (type === 'percent') {
       const pct = Number(f.get('percent'));
@@ -247,7 +248,7 @@ function RuleForm({ campaign, onSaved, onError }) {
         startsAt: fromLocal(f.get('startsAt')),
         endsAt: fromLocal(f.get('endsAt')),
       });
-      event.currentTarget.reset();
+      form.reset();
       onSaved();
     } catch (err) {
       onError(err.message);
@@ -278,14 +279,15 @@ function RuleForm({ campaign, onSaved, onError }) {
 function PoolForm({ campaignId, offers, onSaved, onError }) {
   async function submit(event) {
     event.preventDefault();
-    const f = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const f = new FormData(form);
     try {
       await api.createPool(campaignId, {
         offerId: f.get('offerId'),
         codePattern: f.get('codePattern'),
         quantityLimit: f.get('quantityLimit') ? Number(f.get('quantityLimit')) : undefined,
       });
-      event.currentTarget.reset();
+      form.reset();
       onSaved();
     } catch (err) {
       onError(err.message);
@@ -324,7 +326,8 @@ function PoolPanel({ pool, offers, onChanged, onError }) {
 
   async function generate(event) {
     event.preventDefault();
-    const f = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const f = new FormData(form);
     // One key per attempt: a double click or a retry sends the same key, so the server makes one batch.
     const idempotencyKey = key ?? crypto.randomUUID();
     setKey(idempotencyKey);
@@ -332,7 +335,7 @@ function PoolPanel({ pool, offers, onChanged, onError }) {
       const { batch } = await api.createBatch(pool.id, { quantity: Number(f.get('quantity')), expiresAt: fromLocal(f.get('expiresAt')) }, idempotencyKey);
       setLastBatch(batch);
       setKey(null);
-      event.currentTarget.reset();
+      form.reset();
       load();
       if (batch.status === 'completed') onChanged(`Made ${batch.generatedQuantity} codes.`);
       else finish(batch);
@@ -371,10 +374,11 @@ function PoolPanel({ pool, offers, onChanged, onError }) {
 
   async function addCode(event) {
     event.preventDefault();
-    const f = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const f = new FormData(form);
     try {
       const { voucher } = await api.addManualCode(pool.id, { code: f.get('code'), expiresAt: fromLocal(f.get('expiresAt')) });
-      event.currentTarget.reset();
+      form.reset();
       load();
       onChanged(`Added code ending ${voucher.codeHint}.`);
     } catch (err) {

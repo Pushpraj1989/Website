@@ -16,6 +16,7 @@ import 'main_shell.dart';
 import 'sign_up_screen.dart';
 
 // Sign-in by email and a code sent to it. A new user is sent to create an account.
+// The email field reads left to right in both languages, like the address itself.
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key, required this.auth, required this.sessions, required this.biometrics, required this.api, required this.language});
   final AuthApi auth;
@@ -100,6 +101,7 @@ class _SignInScreenState extends State<SignInScreen> {
             TextField(
               controller: _email,
               keyboardType: TextInputType.emailAddress,
+              textDirection: TextDirection.ltr,
               autofillHints: const [AutofillHints.email],
               autocorrect: false,
               decoration: InputDecoration(labelText: s.emailLabel),

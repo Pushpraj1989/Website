@@ -161,7 +161,7 @@ code { background: var(--surface); padding: 2px 6px; border-radius: 6px; font-si
 .brand-logo { width: 32px; height: 32px; border-radius: 8px; object-fit: contain; background: var(--bg); flex: none; }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .brand span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-input[type=color] { padding: 4px; height: 44px; cursor: pointer; }
+input[type=color] { padding: 4px; cursor: pointer; }
 
 /* ---------- Phone: an app layout, not a shrunken web page ---------- */
 .appbar, .tabbar { display: none; }
@@ -522,3 +522,8 @@ dialog.more .grab { width: 40px; height: 4px; border-radius: 2px; background: va
   .hero { padding: 18px; border-radius: 20px; }
   .rings, .donut { justify-content: center; }
 }
+
+/* A list beside an open editor fits the space left, wrapping its text, so its last column (Edit) is never cut off. */
+@media (min-width: 721px) { .split > .table-wrap table { min-width: 0; } .split > .table-wrap td, .split > .table-wrap th { padding: 10px 8px; } }
+/* On a phone a date and time does not fit in half the width, so each one takes a full row. */
+@media (max-width: 720px) { .form-grid > label:has(> input[type=datetime-local]), .grid-form > label:has(> input[type=datetime-local]) { grid-column: 1 / -1; } }

@@ -55,10 +55,11 @@ export function CartEditor({ locale }: { locale: Locale }) {
             {line.unitMinor !== null ? <Money minor={line.unitMinor * line.qty} currency={currency} locale={locale} /> : null}
           </div>
           {line.soldOut ? <span className="badge danger">{s.soldOut}</span> : null}
-          <div className="row">
+          <div className="row" style={{ alignItems: 'flex-end' }}>
             <label style={{ width: 'auto' }}>
-              <span className="sr">{`${s.quantity}: ${line.name?.[locale] ?? ''}`}</span>
+              {s.quantity}
               <input
+                aria-label={`${s.quantity}: ${line.name?.[locale] ?? ''}`}
                 type="number"
                 inputMode="numeric"
                 min={0}

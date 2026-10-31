@@ -22,12 +22,13 @@ export default function Categories({ catalog, onChanged }) {
 
   async function add(event) {
     event.preventDefault();
-    const f = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const f = new FormData(form);
     await run(
       () => api.createCategory({ nameEn: f.get('nameEn'), nameAr: f.get('nameAr'), sortOrder: Number(f.get('sortOrder') || 0), illustration: f.get('illustration') }),
       'Category added.',
     );
-    event.currentTarget.reset();
+    form.reset();
   }
 
   return (

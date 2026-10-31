@@ -33,7 +33,8 @@ export default function Partners() {
 
   async function create(event) {
     event.preventDefault();
-    const f = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const f = new FormData(form);
     const scopes = Object.keys(SCOPES).filter((s) => f.get(`scope:${s}`));
     const campaignIds = campaigns.map((c) => c.id).filter((id) => f.get(`campaign:${id}`));
     try {
@@ -45,7 +46,7 @@ export default function Partners() {
         requestsPerMinute: Number(f.get('requestsPerMinute')),
       });
       setIssued({ name: result.client.name, apiKey: result.apiKey });
-      event.currentTarget.reset();
+      form.reset();
       setMessage('Partner created. Copy the key now: it is not shown again.');
       load();
     } catch (err) {

@@ -154,11 +154,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
         const SizedBox(height: Tokens.space5),
         TextField(controller: _name, textCapitalization: TextCapitalization.words, autofillHints: const [AutofillHints.name], decoration: InputDecoration(labelText: s.nameLabel)),
         const SizedBox(height: Tokens.space3),
-        TextField(controller: _phone, keyboardType: TextInputType.phone, autofillHints: const [AutofillHints.telephoneNumber], decoration: InputDecoration(labelText: s.mobileLabel, hintText: s.mobileHint)),
+        TextField(controller: _phone, keyboardType: TextInputType.phone, textDirection: TextDirection.ltr, autofillHints: const [AutofillHints.telephoneNumber], decoration: InputDecoration(labelText: s.mobileLabel, hintText: s.mobileHint)),
         const SizedBox(height: Tokens.space3),
         TextField(
           controller: _email,
           keyboardType: TextInputType.emailAddress,
+          textDirection: TextDirection.ltr,
           autofillHints: const [AutofillHints.email],
           autocorrect: false,
           decoration: InputDecoration(labelText: s.emailLabel),
@@ -179,6 +180,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         TextField(
           controller: _email,
           keyboardType: TextInputType.emailAddress,
+          textDirection: TextDirection.ltr,
           autofillHints: const [AutofillHints.email],
           autocorrect: false,
           decoration: InputDecoration(labelText: s.emailLabel),

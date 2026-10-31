@@ -152,7 +152,7 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
   const deliveryBlocked = channel === 'delivery' && (!addressId || (delivery !== null && !delivery.deliverable));
   const addressForm = draft ? (
     <div className="card stack" role="group" aria-label={s.addAddress}>
-      <label>{s.addressLabel}<input value={draft.label} maxLength={30} placeholder="Home" onChange={(e) => setDraft({ ...draft, label: e.target.value })} /></label>
+      <label>{s.addressLabel}<input value={draft.label} maxLength={30} placeholder={s.addressLabelHint} onChange={(e) => setDraft({ ...draft, label: e.target.value })} /></label>
       <label>{s.addressLine1}<input value={draft.line1} maxLength={200} required autoComplete="street-address" onChange={(e) => setDraft({ ...draft, line1: e.target.value })} /></label>
       <label>{s.addressLine2}<input value={draft.line2} maxLength={200} onChange={(e) => setDraft({ ...draft, line2: e.target.value })} /></label>
       <label>
