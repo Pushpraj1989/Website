@@ -165,7 +165,7 @@ export const End: React.FC = () => {
   const { fps } = useVideoConfig();
   const portrait = usePortrait();
   const word = progress(frame, 12, 22);
-  const tags = ['0% commission', 'Free & open source', 'Apache 2.0'];
+  const tags = ['0% commission', 'Restaurants & shops', 'Free & open source', 'Apache 2.0'];
   const url = typed(BRAND.repo, frame, 44, 1.6);
   return (
     <AbsoluteFill style={{ alignItems: 'center', justifyContent: 'center', fontFamily: FONT, textAlign: 'center' }}>

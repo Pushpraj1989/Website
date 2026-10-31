@@ -13,7 +13,7 @@ export const Hook: React.FC = () => {
   const portrait = usePortrait();
   return (
     <Centre>
-      <Words text={portrait ? 'Still paying\nfor your\nrestaurant\'s *app?*' : 'Still paying for\nyour restaurant\'s *app?*'} start={8} gap={8} size={portrait ? 118 : 136} />
+      <Words text={portrait ? 'Still paying\nfor your\nbusiness *app?*' : 'Still paying for\nyour business *app?*'} start={8} gap={8} size={portrait ? 118 : 136} />
     </Centre>
   );
 };

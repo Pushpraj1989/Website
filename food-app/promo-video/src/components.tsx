@@ -10,7 +10,7 @@ export const usePortrait = () => {
 };
 
 // ---------- Backdrop: cream with two soft saffron glows that drift, and sweep across at each scene change ----------
-export const SCENE_STARTS = [0, 96, 222, 318, 492, 678, 858, 1056, 1230, 1332];
+export const SCENE_STARTS = [0, 96, 222, 318, 492, 678, 858, 1056, 1230, 1470];
 
 export const Backdrop: React.FC = () => {
   const frame = useCurrentFrame();
@@ -75,7 +75,7 @@ export const LogoMark: React.FC<{ size: number; start?: number; onDark?: boolean
 export const CornerBrand: React.FC = () => {
   const frame = useCurrentFrame();
   const portrait = usePortrait();
-  const opacity = interpolate(frame, [222, 240, 1320, 1336], [0, 0.85, 0.85, 0], clamp);
+  const opacity = interpolate(frame, [222, 240, SCENE_STARTS[9] - 12, SCENE_STARTS[9] + 4], [0, 0.85, 0.85, 0], clamp);
   return (
     <div style={{ position: 'absolute', left: portrait ? 44 : 56, bottom: portrait ? 40 : 44, display: 'flex', alignItems: 'center', gap: 12, opacity, fontFamily: FONT, fontWeight: 700, fontSize: portrait ? 26 : 24, color: C.ink, letterSpacing: '-0.02em' }}>
       <LogoMark size={portrait ? 44 : 40} />

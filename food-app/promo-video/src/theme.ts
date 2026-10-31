@@ -35,3 +35,17 @@ export const DEMO = {
   ],
   sales: 2237, orders: 40, collected: 32, average: 62.14, customers: 36,
 };
+
+// The businesses in the "every business" slider: the real app set up for each (name, colour, products), filmed into
+// public/shots/sector-<key>.png by the capture script. Order is the order they pass the centre.
+export const SECTORS = [
+  { key: 'restaurant', name: 'restaurant', shot: 'shots/sector-restaurant.png' },
+  { key: 'fashion', name: 'fashion', shot: 'shots/sector-fashion.png' },
+  { key: 'beauty', name: 'beauty', shot: 'shots/sector-beauty.png' },
+  //   { key: 'supplements', name: 'supplements', shot: 'shots/sector-supplements.png' }, (screen not captured yet)
+  //   { key: 'pharmacy', name: 'pharmacy', shot: 'shots/sector-pharmacy.png' }, (screen not captured yet)
+  //   { key: 'grocery', name: 'grocery', shot: 'shots/sector-grocery.png' }, (screen not captured yet)
+  //   { key: 'flowers', name: 'flower shop', shot: 'shots/sector-flowers.png' }, (screen not captured yet)
+  //   { key: 'bakery', name: 'bakery', shot: 'shots/sector-bakery.png' }, (screen not captured yet)
+  //   { key: 'cafe', name: 'café', shot: 'shots/sector-cafe.png' }, (screen not captured yet)
+];

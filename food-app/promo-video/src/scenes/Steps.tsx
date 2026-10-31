@@ -110,7 +110,7 @@ export const Restaurant: React.FC = () => {
   );
   return (
     <AbsoluteFill>
-      <Header portrait={portrait}><StepHeader n={2} lead="Add your" words={['restaurant.', 'dishes.']} every={swap} portrait={portrait} /></Header>
+      <Header portrait={portrait}><StepHeader n={2} lead="Add your" words={['business.', 'products.']} every={swap} portrait={portrait} /></Header>
       {restaurantCard}
       {frame >= swap - 2 && dishesCard}
       {!portrait && (

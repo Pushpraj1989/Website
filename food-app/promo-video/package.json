@@ -4,7 +4,7 @@
   "description": "The launch video for Free Restaurant Ordering, as code (Remotion). Edit the scenes in src/, then render.",
   "scripts": {
     "studio": "remotion studio",
-    "render": "remotion render Launch out/launch-1920x1080.mp4 && remotion render LaunchFeed out/launch-1080x1350.mp4 && remotion still Launch out/poster-1920x1080.png --frame=1420 && remotion still LaunchFeed out/poster-1080x1350.png --frame=1420",
+    "render": "remotion render Launch out/launch-1920x1080.mp4 && remotion render LaunchFeed out/launch-1080x1350.mp4 && remotion still Launch out/poster-1920x1080.png --frame=1560 && remotion still LaunchFeed out/poster-1080x1350.png --frame=1560",
     "finish": "bash finish.sh",
     "render:wide": "remotion render Launch out/launch-1920x1080.mp4",
     "render:feed": "remotion render LaunchFeed out/launch-1080x1350.mp4"

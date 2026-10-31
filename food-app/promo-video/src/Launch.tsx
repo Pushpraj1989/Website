@@ -5,12 +5,13 @@ import { sceneFade } from './motion';
 import { loadFonts } from './fonts';
 import { Hook, Brand, Promise as PromiseScene } from './scenes/Opening';
 import { Deploy, Restaurant, Offers } from './scenes/Steps';
-import { Dashboard, Stores, Recap, End } from './scenes/Proof';
+import { Dashboard, Stores, End } from './scenes/Proof';
+import { Sectors } from './scenes/Sectors';
 
 loadFonts();
 
-export const DURATION = 1440; // 48 s at 30 fps
-const SCENES: React.FC[] = [Hook, Brand, PromiseScene, Deploy, Restaurant, Offers, Dashboard, Stores, Recap, End];
+export const DURATION = 1578; // 52.6 s at 30 fps
+const SCENES: React.FC[] = [Hook, Brand, PromiseScene, Deploy, Restaurant, Offers, Dashboard, Stores, Sectors, End];
 
 /** One scene, with the shared blur crossfade at its start and end. */
 const Shell: React.FC<{ duration: number; last: boolean; children: React.ReactNode }> = ({ duration, last, children }) => {
