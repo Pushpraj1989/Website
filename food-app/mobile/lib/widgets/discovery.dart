@@ -257,7 +257,12 @@ class CategoryTabs extends StatelessWidget {
                     duration: const Duration(milliseconds: 200),
                     padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: selected ? context.accentFg : Colors.transparent, width: 2)),
-                    child: ClipOval(child: SizedBox(width: 60, height: 60, child: tab.image.isEmpty ? ColoredBox(color: context.accentSoft) : Image.asset(tab.image, fit: BoxFit.cover, cacheWidth: 180, semanticLabel: ''))),
+                    child: ClipOval(child: SizedBox(width: 60, height: 60, child: tab.image.isEmpty
+                        ? ColoredBox(color: context.accentSoft)
+                        // A product photo from the server, or one of the bundled pictures.
+                        : tab.image.startsWith('http')
+                            ? Image.network(tab.image, fit: BoxFit.cover, cacheWidth: 180, semanticLabel: '', errorBuilder: (_, _, _) => ColoredBox(color: context.accentSoft))
+                            : Image.asset(tab.image, fit: BoxFit.cover, cacheWidth: 180, semanticLabel: ''))),
                   ),
                   const SizedBox(height: Tokens.space2),
                   ExcludeSemantics(

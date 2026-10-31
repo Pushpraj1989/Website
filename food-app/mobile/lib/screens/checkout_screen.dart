@@ -30,6 +30,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   String _method = 'cod';
   List<SavedAddress> _addresses = [];
   String? _addressId;
+  // Courier shipping (shops): the options on offer, the one chosen, and the address to ship to.
+  List<ShippingRate> _rates = const [];
+  String? _rateId;
+  String? _shipAddressId;
   bool _loadingAddresses = true;
   Quote? _quote;
   DeliveryQuote? _delivery;
@@ -46,6 +50,20 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     super.initState();
     _loadPayments();
     _loadAddresses();
+    _loadRates();
+  }
+
+  Future<void> _loadRates() async {
+    try {
+      final rates = await widget.api.shippingRates();
+      if (!mounted) return;
+      setState(() {
+        _rates = rates;
+        _rateId ??= rates.isEmpty ? null : rates.first.id;
+      });
+    } catch (_) {
+      // Shipping is optional: without its options, the screen offers delivery and pickup only.
+    }
   }
 
   /// The payment methods the restaurant accepts, from its settings (the menu response), not from the screen.
@@ -67,7 +85,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   List<String> _methodsFor(String channel) {
     final p = _payments;
     if (p == null) return const [];
-    return channel == 'delivery' ? [if (p.cod) 'cod'] : [if (p.payOnArrival) 'pay_on_arrival'];
+    return channel == 'pickup' ? [if (p.payOnArrival) 'pay_on_arrival'] : [if (p.cod) 'cod'];
   }
 
   /// Keeps the chosen address when it still exists, otherwise the default, otherwise the first saved one.
@@ -86,6 +104,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       setState(() {
         _addresses = addresses;
         _addressId = _choose(addresses);
+        final shippable = addresses.where((a) => a.shippable).toList();
+        if (!shippable.any((a) => a.id == _shipAddressId)) _shipAddressId = shippable.isEmpty ? null : shippable.first.id;
       });
     } catch (_) {
       if (mounted) setState(() => _error = 'addresses');
@@ -97,7 +117,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   Future<void> _loadQuote() async {
     try {
-      final result = await widget.api.quote(_channel, addressId: _channel == 'delivery' ? _addressId : null);
+      final result = await widget.api.quote(
+        _channel,
+        addressId: _channel == 'delivery' ? _addressId : _channel == 'shipping' ? _shipAddressId : null,
+        shippingRateId: _channel == 'shipping' ? _rateId : null,
+      );
       if (!mounted) return;
       setState(() {
         _quote = result.quote;
@@ -159,10 +183,85 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   bool get _codeBlocked => _offer != null && !_offer!.applied;
 
-  bool get _deliveryBlocked => _channel == 'delivery' && (_addressId == null || (_delivery != null && !_delivery!.deliverable));
+  bool get _deliveryBlocked =>
+      (_channel == 'delivery' && (_addressId == null || (_delivery != null && !_delivery!.deliverable))) ||
+      (_channel == 'shipping' && (_shipAddressId == null || _rateId == null));
+
+  /// A shipping address: street, city and country, saved to the customer's addresses.
+  Future<void> _addShippingAddress(Strings s) async {
+    final line1 = TextEditingController(), line2 = TextEditingController(), city = TextEditingController(), country = TextEditingController();
+    final saved = await showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (sheet) => Padding(
+        padding: EdgeInsets.fromLTRB(Tokens.space4, 0, Tokens.space4, MediaQuery.viewInsetsOf(sheet).bottom + Tokens.space4),
+        child: _ShippingAddressForm(s: s, line1: line1, line2: line2, city: city, country: country, onSave: () async {
+          await widget.api.saveAddress({'forShipping': true, 'label': 'Home', 'line1': line1.text, 'line2': line2.text, 'city': city.text, 'country': country.text});
+          if (sheet.mounted) Navigator.of(sheet).pop(true);
+        }),
+      ),
+    );
+    if (saved == true && mounted) {
+      final addresses = await widget.api.addresses();
+      final added = addresses.where((a) => a.shippable).toList();
+      if (mounted) setState(() => _shipAddressId = added.isEmpty ? null : added.first.id);
+      await _loadAddresses();
+    }
+  }
+
+  Widget _shipping(BuildContext context, Strings s) {
+    final lang = s.lang;
+    final shippable = _addresses.where((a) => a.shippable).toList();
+    return Column(children: [
+      SectionCard(
+        title: s.shipTo,
+        icon: LucideIcons.mapPin,
+        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          for (final a in shippable) ...[
+            ChoiceTile(
+              icon: LucideIcons.mapPin,
+              title: a.label,
+              subtitle: [a.line1, a.line2, a.city, a.country].where((p) => p.isNotEmpty).join(', '),
+              selected: a.id == _shipAddressId,
+              onTap: () {
+                setState(() => _shipAddressId = a.id);
+                _loadQuote();
+              },
+            ),
+            const SizedBox(height: Tokens.space2),
+          ],
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: TextButton.icon(onPressed: () => _addShippingAddress(s), icon: const Icon(LucideIcons.plus, size: 18), label: Text(s.addShippingAddress)),
+          ),
+        ]),
+      ),
+      const SizedBox(height: Tokens.space3),
+      SectionCard(
+        title: s.shippingOption,
+        icon: LucideIcons.truck,
+        child: Column(children: [
+          for (final r in _rates) ...[
+            ChoiceTile(
+              icon: LucideIcons.package,
+              title: '${r.name.of(lang)} · ${formatMoney(r.priceMinor, _currency)}',
+              subtitle: [r.eta.of(lang), if (r.freeOverMinor != null) s.freeOver(formatMoney(r.freeOverMinor!, _currency))].where((p) => p.isNotEmpty).join(' · '),
+              selected: r.id == _rateId,
+              onTap: () {
+                setState(() => _rateId = r.id);
+                _loadQuote();
+              },
+            ),
+            if (r != _rates.last) const SizedBox(height: Tokens.space2),
+          ],
+        ]),
+      ),
+    ]);
+  }
 
   Future<void> _place(Strings s) async {
-    if (_channel == 'delivery' && _addressId == null) {
+    if ((_channel == 'delivery' && _addressId == null) || (_channel == 'shipping' && _shipAddressId == null)) {
       setState(() => _error = s.chooseAddress);
       return;
     }
@@ -174,7 +273,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       final order = await widget.api.placeOrder(
         channel: _channel,
         method: _method,
-        addressId: _channel == 'delivery' ? _addressId : null,
+        addressId: _channel == 'delivery' ? _addressId : _channel == 'shipping' ? _shipAddressId : null,
+        shippingRateId: _channel == 'shipping' ? _rateId : null,
         idempotencyKey: _idempotencyKey,
       );
       if (!mounted) return;
@@ -246,11 +346,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   Expanded(child: ChoiceTile(icon: LucideIcons.bike, title: s.delivery, selected: _channel == 'delivery', onTap: _methodsFor('delivery').isEmpty && _payments != null ? null : () => _setChannel('delivery'))),
                   const SizedBox(width: Tokens.space2),
                   Expanded(child: ChoiceTile(icon: LucideIcons.store, title: s.pickup, selected: _channel == 'pickup', onTap: _methodsFor('pickup').isEmpty && _payments != null ? null : () => _setChannel('pickup'))),
+                  if (_rates.isNotEmpty) ...[
+                    const SizedBox(width: Tokens.space2),
+                    Expanded(child: ChoiceTile(icon: LucideIcons.truck, title: s.shipByCourier, selected: _channel == 'shipping', onTap: _methodsFor('shipping').isEmpty && _payments != null ? null : () => _setChannel('shipping'))),
+                  ],
                 ]),
               ),
               if (_channel == 'delivery') ...[
                 const SizedBox(height: Tokens.space3),
                 _deliveryAddresses(context, s),
+              ],
+              if (_channel == 'shipping') ...[
+                const SizedBox(height: Tokens.space3),
+                _shipping(context, s),
               ],
               const SizedBox(height: Tokens.space3),
               SectionCard(
@@ -297,5 +405,52 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         );
       },
     );
+  }
+}
+
+/// The fields of a shipping address. Saving reports a problem from the server under the fields.
+class _ShippingAddressForm extends StatefulWidget {
+  const _ShippingAddressForm({required this.s, required this.line1, required this.line2, required this.city, required this.country, required this.onSave});
+  final Strings s;
+  final TextEditingController line1, line2, city, country;
+  final Future<void> Function() onSave;
+
+  @override
+  State<_ShippingAddressForm> createState() => _ShippingAddressFormState();
+}
+
+class _ShippingAddressFormState extends State<_ShippingAddressForm> {
+  bool _busy = false;
+  String? _error;
+
+  @override
+  Widget build(BuildContext context) {
+    final s = widget.s;
+    return Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      Text(s.addShippingAddress, style: Theme.of(context).textTheme.titleLarge),
+      const SizedBox(height: Tokens.space3),
+      TextField(controller: widget.line1, decoration: InputDecoration(labelText: s.addressLine1), textInputAction: TextInputAction.next, autofillHints: const [AutofillHints.streetAddressLine1]),
+      const SizedBox(height: Tokens.space2),
+      TextField(controller: widget.line2, decoration: InputDecoration(labelText: s.addressLine2), textInputAction: TextInputAction.next),
+      const SizedBox(height: Tokens.space2),
+      TextField(controller: widget.city, decoration: InputDecoration(labelText: s.city), textInputAction: TextInputAction.next, autofillHints: const [AutofillHints.addressCity]),
+      const SizedBox(height: Tokens.space2),
+      TextField(controller: widget.country, decoration: InputDecoration(labelText: s.country), autofillHints: const [AutofillHints.countryName]),
+      if (_error != null) Padding(padding: const EdgeInsets.only(top: Tokens.space2), child: Text(_error!, style: TextStyle(color: Tokens.danger))),
+      const SizedBox(height: Tokens.space3),
+      FilledButton(
+        onPressed: _busy ? null : () async {
+          setState(() { _busy = true; _error = null; });
+          try {
+            await widget.onSave();
+          } on ApiException catch (e) {
+            if (mounted) setState(() => _error = e.message);
+          } finally {
+            if (mounted) setState(() => _busy = false);
+          }
+        },
+        child: Text(s.saveAddress),
+      ),
+    ]);
   }
 }

@@ -253,10 +253,22 @@ class _PillButton extends StatelessWidget {
 }
 
 /// The built-in first slide, used until staff publish a hero of their own.
-HeroSlide builtInHeroSlide(Strings s, VoidCallback onMenu) => HeroSlide(
-      background: const HeroVideo(video: Art.heroVideo, poster: Art.heroVideoPoster),
+/// The hero without published promotions. A shop shows its own product photo (or its colour), never the food clip.
+HeroSlide builtInHeroSlide(Strings s, VoidCallback onMenu, {String? photo}) => HeroSlide(
+      background: Strings.shop
+          ? (photo == null ? const _BrandWash() : Image.network(photo, fit: BoxFit.cover, semanticLabel: '', errorBuilder: (_, _, _) => const _BrandWash()))
+          : const HeroVideo(video: Art.heroVideo, poster: Art.heroVideoPoster),
       title: s.heroTitle,
       body: s.heroBody,
       action: s.menu,
       onAction: onMenu,
     );
+
+/// A soft wash of the brand colour, for a hero without a photo.
+class _BrandWash extends StatelessWidget {
+  const _BrandWash();
+  @override
+  Widget build(BuildContext context) => DecoratedBox(
+        decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [context.accent, Color.lerp(context.accent, Colors.black, 0.45)!])),
+      );
+}

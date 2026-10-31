@@ -12,7 +12,8 @@ export type PricingSettings = {
 
 export type PricedLine = { itemId: string; name: string; unitMinor: number; qty: number };
 
-export type Channel = 'delivery' | 'pickup';
+/** delivery: own riders inside the areas; pickup; shipping: by courier anywhere (retail mode). */
+export type Channel = 'delivery' | 'pickup' | 'shipping';
 
 export type Quote = {
   currency: string;
@@ -34,7 +35,7 @@ export type Quote = {
 export function computeQuote(lines: PricedLine[], channel: Channel, settings: PricingSettings, discountMinor = 0): Quote {
   minorDigitsOf(settings.currency); // fails fast if the currency is not in the table
   const subtotalMinor = lines.reduce((sum, line) => sum + line.unitMinor * line.qty, 0);
-  const deliveryFeeMinor = channel === 'delivery' && subtotalMinor > 0 ? settings.deliveryFeeMinor : 0;
+  const deliveryFeeMinor = (channel === 'delivery' || channel === 'shipping') && subtotalMinor > 0 ? settings.deliveryFeeMinor : 0;
   const serviceFeeMinor = subtotalMinor > 0 ? settings.serviceFeeMinor : 0;
   const tipMinor = 0;
   if (discountMinor < 0 || discountMinor > subtotalMinor + deliveryFeeMinor) throw new Error('A discount cannot be negative or larger than the order.');

@@ -6,6 +6,7 @@ export const ORDER_STATUSES = [
   'preparing',
   'ready',
   'out_for_delivery',
+  'shipped',
   'delivered',
   'collected',
   'rejected',
@@ -17,10 +18,12 @@ export type OrderStatus = (typeof ORDER_STATUSES)[number];
 const NEXT: Record<OrderStatus, OrderStatus[]> = {
   awaiting_payment: ['placed', 'cancelled'],
   placed: ['accepted', 'rejected', 'cancelled'],
-  accepted: ['preparing', 'cancelled'],
-  preparing: ['ready'],
-  ready: ['out_for_delivery', 'collected'],
+  accepted: ['preparing', 'shipped', 'cancelled'],
+  preparing: ['ready', 'shipped'],
+  // A courier order is handed over as 'shipped' (with its tracking), then delivered.
+  ready: ['out_for_delivery', 'collected', 'shipped'],
   out_for_delivery: ['delivered'],
+  shipped: ['delivered'],
   delivered: [],
   collected: [],
   rejected: [],

@@ -4,17 +4,22 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { t, type Locale } from '@/lib/i18n.ts';
 import { Money } from '@/components/Money';
+import { formatMoney } from '@/lib/money.ts';
 
-type Channel = 'delivery' | 'pickup';
+type Channel = 'delivery' | 'pickup' | 'shipping';
+type Rate = { id: string; name: Localised; eta: Localised; priceMinor: number; freeOverMinor: number | null };
 type Method = 'card' | 'cod' | 'pay_on_arrival';
 type Quote = { subtotalMinor: number; deliveryFeeMinor: number; serviceFeeMinor: number; totalMinor: number; taxIncludedMinor: number; taxLabel: string; currency: string };
 type Payments = { cod: boolean; payOnArrival: boolean; card: boolean };
 type Localised = { en: string; ar: string };
 type Zone = { id: string; name: Localised; feeMinor: number; minOrderMinor: number };
-type SavedAddress = { id: string; label: string; line1: string; line2: string; isDefault: boolean; zone: { name: Localised } | null };
+type SavedAddress = { id: string; label: string; line1: string; line2: string; isDefault: boolean; zone: { name: Localised } | null; city?: string; country?: string };
 type Delivery = { minOrderMinor: number; deliverable: boolean } | null;
 
 const blankAddress = { label: '', line1: '', line2: '', zoneId: '' };
+const blankShipping = { label: '', line1: '', line2: '', city: '', country: '' };
+/** An address a courier can use: it has a city and a country. */
+const shippable = (a: SavedAddress) => Boolean(a.city && a.country);
 
 export function CheckoutForm({ locale }: { locale: Locale }) {
   const s = t(locale);
@@ -26,6 +31,11 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
   const [addressId, setAddressId] = useState<string | null>(null);
   const [zones, setZones] = useState<Zone[]>([]);
   const [draft, setDraft] = useState<typeof blankAddress | null>(null);
+  // Courier shipping (shops): the options on offer, the one chosen, and a new shipping address being typed.
+  const [rates, setRates] = useState<Rate[]>([]);
+  const [rateId, setRateId] = useState<string | null>(null);
+  const [shipDraft, setShipDraft] = useState<typeof blankShipping | null>(null);
+  const [shipAddressId, setShipAddressId] = useState<string | null>(null);
   const [savingAddress, setSavingAddress] = useState(false);
   const [quote, setQuote] = useState<Quote | null>(null);
   const [delivery, setDelivery] = useState<Delivery>(null);
@@ -40,6 +50,7 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
   useEffect(() => {
     fetch('/v1/menu').then((r) => r.json()).then((m) => setPayments(m.payments));
     fetch('/v1/delivery-zones').then((r) => r.json()).then((b) => setZones(b.zones ?? [])).catch(() => setZones([]));
+    fetch('/v1/shipping-rates').then((r) => r.json()).then((b) => { setRates(b.rates ?? []); setRateId((b.rates ?? [])[0]?.id ?? null); }).catch(() => setRates([]));
     loadAddresses();
     fetch('/v1/cart').then((r) => r.json()).then((c) => setCartFilled((c.lines ?? []).length > 0)).catch(() => setCartFilled(true));
   }, []);
@@ -54,6 +65,11 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
         if (keep && list.some((a) => a.id === keep)) return keep;
         return (list.find((a) => a.isDefault) ?? list[0])?.id ?? null;
       });
+      setShipAddressId((current) => {
+        const keep = choose ?? current;
+        if (keep && list.some((a) => a.id === keep && shippable(a))) return keep;
+        return list.find(shippable)?.id ?? null;
+      });
     } catch {
       setAddresses([]);
     }
@@ -66,7 +82,7 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
     fetch('/v1/checkout/quote', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ channel, addressId: channel === 'delivery' ? addressId : null }),
+      body: JSON.stringify({ channel, addressId: channel === 'delivery' ? addressId : channel === 'shipping' ? shipAddressId : null, shippingRateId: channel === 'shipping' ? rateId : null }),
     })
       .then(async (r) => {
         const body = await r.json();
@@ -82,10 +98,34 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
       .catch(() => setError(s.errorGeneric));
     // Pick a payment method the channel allows, keeping the current one if it still fits.
     setMethod((current) => {
-      const allowed: Method[] = channel === 'delivery' ? ['cod', 'card'] : ['pay_on_arrival', 'card'];
+      const allowed: Method[] = channel === 'pickup' ? ['pay_on_arrival', 'card'] : ['cod', 'card'];
       return allowed.includes(current) ? current : allowed[0];
     });
-  }, [channel, addressId, cartFilled, s.errorGeneric]);
+  }, [channel, addressId, shipAddressId, rateId, cartFilled, s.errorGeneric]);
+
+  async function saveShippingAddress() {
+    if (!shipDraft) return;
+    setSavingAddress(true);
+    setError('');
+    try {
+      const response = await fetch('/v1/addresses', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...shipDraft, label: shipDraft.label || 'Home', forShipping: true }),
+      });
+      const body = await response.json();
+      if (!response.ok) {
+        setError(body.error?.message ?? s.errorGeneric);
+        return;
+      }
+      setShipDraft(null);
+      await loadAddresses(body.address.id);
+    } catch {
+      setError(s.errorGeneric);
+    } finally {
+      setSavingAddress(false);
+    }
+  }
 
   async function saveAddress() {
     if (!draft) return;
@@ -112,7 +152,7 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
   }
 
   const methods: { value: Method; label: string; available: boolean }[] = [
-    { value: 'cod', label: s.payCod, available: channel === 'delivery' && Boolean(payments?.cod) },
+    { value: 'cod', label: s.payCod, available: channel !== 'pickup' && Boolean(payments?.cod) },
     { value: 'pay_on_arrival', label: s.payArrival, available: channel === 'pickup' && Boolean(payments?.payOnArrival) },
     { value: 'card', label: s.payCard, available: Boolean(payments?.card) },
   ];
@@ -125,7 +165,7 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
       const response = await fetch('/v1/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ channel, method, addressId: channel === 'delivery' ? addressId : null, idempotencyKey }),
+        body: JSON.stringify({ channel, method, addressId: channel === 'delivery' ? addressId : channel === 'shipping' ? shipAddressId : null, shippingRateId: channel === 'shipping' ? rateId : null, idempotencyKey }),
       });
       const body = await response.json();
       if (!response.ok) {
@@ -149,7 +189,20 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
     );
   }
 
-  const deliveryBlocked = channel === 'delivery' && (!addressId || (delivery !== null && !delivery.deliverable));
+  const deliveryBlocked = (channel === 'delivery' && (!addressId || (delivery !== null && !delivery.deliverable)))
+    || (channel === 'shipping' && (!shipAddressId || !rateId));
+  const shipForm = shipDraft ? (
+    <div className="card stack" role="group" aria-label={s.addShippingAddress}>
+      <label>{s.addressLine1}<input value={shipDraft.line1} maxLength={200} required autoComplete="address-line1" onChange={(e) => setShipDraft({ ...shipDraft, line1: e.target.value })} /></label>
+      <label>{s.addressLine2}<input value={shipDraft.line2} maxLength={200} autoComplete="address-line2" onChange={(e) => setShipDraft({ ...shipDraft, line2: e.target.value })} /></label>
+      <label>{s.city}<input value={shipDraft.city} maxLength={80} required autoComplete="address-level2" onChange={(e) => setShipDraft({ ...shipDraft, city: e.target.value })} /></label>
+      <label>{s.country}<input value={shipDraft.country} maxLength={80} required autoComplete="country-name" onChange={(e) => setShipDraft({ ...shipDraft, country: e.target.value })} /></label>
+      <div className="row">
+        <button type="button" className="btn primary" onClick={saveShippingAddress} disabled={savingAddress || shipDraft.line1.trim().length < 3 || shipDraft.city.trim().length < 2 || shipDraft.country.trim().length < 2} aria-busy={savingAddress}>{s.saveAddress}</button>
+        <button type="button" className="btn" onClick={() => setShipDraft(null)}>{s.cancel}</button>
+      </div>
+    </div>
+  ) : null;
   const addressForm = draft ? (
     <div className="card stack" role="group" aria-label={s.addAddress}>
       <label>{s.addressLabel}<input value={draft.label} maxLength={30} placeholder={s.addressLabelHint} onChange={(e) => setDraft({ ...draft, label: e.target.value })} /></label>
@@ -175,7 +228,35 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
         <legend>{s.howYouGetIt}</legend>
         <label className="choice"><input type="radio" name="channel" value="delivery" checked={channel === 'delivery'} onChange={() => setChannel('delivery')} />{s.delivery}</label>
         <label className="choice"><input type="radio" name="channel" value="pickup" checked={channel === 'pickup'} onChange={() => setChannel('pickup')} />{s.pickup}</label>
+        {rates.length ? <label className="choice"><input type="radio" name="channel" value="shipping" checked={channel === 'shipping'} onChange={() => setChannel('shipping')} />{s.shipByCourier}</label> : null}
       </fieldset>
+
+      {channel === 'shipping' ? (
+        <>
+          <fieldset>
+            <legend>{s.shipTo}</legend>
+            {(addresses ?? []).filter(shippable).map((a) => (
+              <label key={a.id} className="choice">
+                <input type="radio" name="shipAddress" value={a.id} checked={shipAddressId === a.id} onChange={() => setShipAddressId(a.id)} />
+                <span><strong>{a.label}</strong> · {[a.line1, a.line2, a.city, a.country].filter(Boolean).join(', ')}</span>
+              </label>
+            ))}
+            {shipForm ?? <button type="button" className="btn" onClick={() => setShipDraft({ ...blankShipping })}>{s.addShippingAddress}</button>}
+          </fieldset>
+          <fieldset>
+            <legend>{s.shippingOption}</legend>
+            {rates.map((r) => (
+              <label key={r.id} className="choice">
+                <input type="radio" name="rate" value={r.id} checked={rateId === r.id} onChange={() => setRateId(r.id)} />
+                <span>
+                  <strong>{r.name[locale]}</strong>{r.eta[locale] ? ` · ${r.eta[locale]}` : ''} · {formatMoney(r.priceMinor, quote?.currency ?? 'AED', locale)}
+                  {r.freeOverMinor ? <span className="muted"> · {s.freeOver(formatMoney(r.freeOverMinor, quote?.currency ?? 'AED', locale))}</span> : null}
+                </span>
+              </label>
+            ))}
+          </fieldset>
+        </>
+      ) : null}
 
       {channel === 'delivery' ? (
         <fieldset>
@@ -210,7 +291,7 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
         <dl className="totals card">
           <dt>{s.subtotal}</dt>
           <dd><Money minor={quote.subtotalMinor} currency={quote.currency} locale={locale} /></dd>
-          {quote.deliveryFeeMinor ? (<><dt>{s.deliveryFee}</dt><dd><Money minor={quote.deliveryFeeMinor} currency={quote.currency} locale={locale} /></dd></>) : null}
+          {quote.deliveryFeeMinor ? (<><dt>{channel === 'shipping' ? s.shippingFee : s.deliveryFee}</dt><dd><Money minor={quote.deliveryFeeMinor} currency={quote.currency} locale={locale} /></dd></>) : null}
           {quote.serviceFeeMinor ? (<><dt>{s.serviceFee}</dt><dd><Money minor={quote.serviceFeeMinor} currency={quote.currency} locale={locale} /></dd></>) : null}
           <dt>{s.total}</dt>
           <dd className="grand"><Money minor={quote.totalMinor} currency={quote.currency} locale={locale} /></dd>

@@ -248,6 +248,14 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  /// The first product photo among [items], or null.
+  String? _firstPhoto(Iterable<MenuItem> items) {
+    for (final i in items) {
+      if (i.imageUrl != null) return i.imageUrl;
+    }
+    return null;
+  }
+
   Future<void> _add(MenuItem item, Strings s) async {
     // A product sold in options is chosen in its sheet.
     final menu = _menu;
@@ -325,7 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
               seconds: p.look.durationSeconds,
               animation: p.look.animation,
             ),
-          if (heroPromos.isEmpty) builtInHeroSlide(s, _openMenu),
+          if (heroPromos.isEmpty) builtInHeroSlide(s, _openMenu, photo: Strings.shop ? _firstPhoto(_menu?.categories.expand((c) => c.items) ?? const []) : null),
         ];
         final filtering = _query.isNotEmpty || _filters.isNotEmpty || _category != null;
         const pad = EdgeInsets.symmetric(horizontal: Tokens.space4);
@@ -374,8 +382,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: pad,
                             child: CategoryTabs(
                               tabs: [
-                                CategoryTab(id: '', label: s.allCategories, image: Art.hero),
-                                for (final c in menu.categories) CategoryTab(id: c.id, label: c.name.of(s.lang), image: Art.forCategory(c.illustration)),
+                                // A category shows its first product photo when it has one (always for shops, whose
+                                // categories are not food), else its bundled picture.
+                                CategoryTab(id: '', label: s.allCategories, image: Strings.shop ? _firstPhoto(menu.categories.expand((c) => c.items)) ?? '' : Art.hero),
+                                for (final c in menu.categories)
+                                  CategoryTab(id: c.id, label: c.name.of(s.lang), image: _firstPhoto(c.items) ?? (Strings.shop ? '' : Art.forCategory(c.illustration))),
                               ],
                               selectedId: _category ?? '',
                               onSelect: (id) => setState(() => _category = id.isEmpty ? null : id),

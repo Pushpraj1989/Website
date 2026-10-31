@@ -28,6 +28,8 @@ class OrderScreen extends StatefulWidget {
 
 const _deliverySteps = ['placed', 'accepted', 'preparing', 'ready', 'out_for_delivery', 'delivered'];
 const _pickupSteps = ['placed', 'accepted', 'preparing', 'ready', 'collected'];
+// A courier order (shops): packed, shipped with tracking, delivered.
+const _shippingSteps = ['placed', 'accepted', 'preparing', 'shipped', 'delivered'];
 const _finished = {'delivered', 'collected', 'cancelled', 'rejected'};
 
 IconData _iconFor(String status) => switch (status) {
@@ -36,6 +38,7 @@ IconData _iconFor(String status) => switch (status) {
       'preparing' => LucideIcons.chefHat,
       'ready' => LucideIcons.packageCheck,
       'out_for_delivery' => LucideIcons.bike,
+      'shipped' => LucideIcons.truck,
       'delivered' || 'collected' => LucideIcons.circleCheck,
       _ => LucideIcons.ban,
     };
@@ -100,8 +103,54 @@ class _OrderScreenState extends State<OrderScreen> {
     );
   }
 
+  /// Asks to return items: choose the lines (all of each), say why. The shop decides in its console.
+  Future<void> _askReturn(Strings s, PlacedOrder order) async {
+    final chosen = <String>{};
+    final reason = TextEditingController();
+    String? problem;
+    final sent = await showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (sheet) => StatefulBuilder(
+        builder: (sheet, setSheet) => Padding(
+          padding: EdgeInsets.fromLTRB(Tokens.space4, 0, Tokens.space4, MediaQuery.viewInsetsOf(sheet).bottom + Tokens.space4),
+          child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            Text(s.returnItems, style: Theme.of(sheet).textTheme.titleLarge),
+            for (final l in order.lines.where((l) => l.lineId.isNotEmpty))
+              CheckboxListTile(
+                contentPadding: EdgeInsets.zero,
+                value: chosen.contains(l.lineId),
+                title: Text('${l.qty} × ${l.name.of(s.lang)}'),
+                onChanged: (on) => setSheet(() => on == true ? chosen.add(l.lineId) : chosen.remove(l.lineId)),
+              ),
+            TextField(controller: reason, maxLength: 300, decoration: InputDecoration(labelText: s.returnWhy)),
+            if (problem != null) Text(problem!, style: TextStyle(color: Tokens.danger)),
+            FilledButton(
+              onPressed: () async {
+                try {
+                  await widget.api.requestReturn(order.id, reason: reason.text.trim(), lines: [
+                    for (final l in order.lines.where((l) => chosen.contains(l.lineId))) (lineId: l.lineId, qty: l.qty),
+                  ]);
+                  if (sheet.mounted) Navigator.of(sheet).pop(true);
+                } on ApiException catch (e) {
+                  setSheet(() => problem = e.message);
+                }
+              },
+              child: Text(s.returnSend),
+            ),
+          ]),
+        ),
+      ),
+    );
+    if (sent == true && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(s.returnSent)));
+      _load();
+    }
+  }
+
   Widget _content(BuildContext context, Strings s, PlacedOrder order) {
-    final steps = order.channel == 'pickup' ? _pickupSteps : _deliverySteps;
+    final steps = order.channel == 'pickup' ? _pickupSteps : order.channel == 'shipping' ? _shippingSteps : _deliverySteps;
     final stopped = order.status == 'cancelled' || order.status == 'rejected';
     final current = steps.indexOf(order.status);
     final reachedAt = {for (final h in order.history) h.status: h.at};
@@ -112,6 +161,38 @@ class _OrderScreenState extends State<OrderScreen> {
       children: [
         _StatusCard(order: order, s: s, stopped: stopped, progress: stopped || current < 0 ? 0 : (current + 1) / steps.length),
         const SizedBox(height: Tokens.space3),
+        for (final r in order.returns) ...[
+          SectionCard(
+            title: s.returnStatus(r.status),
+            icon: LucideIcons.undo2,
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(r.summary),
+              if (r.refundMinor != null && r.status != 'rejected') Text(formatMoney(r.refundMinor!, order.quote.currency), style: const TextStyle(fontWeight: FontWeight.w700)),
+              if (r.staffNote.isNotEmpty) Text(r.staffNote, style: TextStyle(color: Tokens.textMuted)),
+            ]),
+          ),
+          const SizedBox(height: Tokens.space3),
+        ],
+        if (order.returnsOpenUntil != null && !order.returns.any((r) => r.status == 'requested')) ...[
+          OutlinedButton.icon(onPressed: () => _askReturn(s, order), icon: const Icon(LucideIcons.undo2), label: Text(s.returnItems)),
+          const SizedBox(height: Tokens.space3),
+        ],
+        if (order.shipping != null && order.shipping!.trackingNumber.isNotEmpty) ...[
+          SectionCard(
+            title: s.tracking,
+            icon: LucideIcons.truck,
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(order.shipping!.carrier, style: const TextStyle(fontWeight: FontWeight.w600)),
+              SelectableText(order.shipping!.trackingNumber, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+              if (order.shipping!.trackingUrl.isNotEmpty) ...[
+                const SizedBox(height: Tokens.space1),
+                Text(s.trackParcel, style: TextStyle(color: Tokens.textMuted)),
+                SelectableText(order.shipping!.trackingUrl),
+              ],
+            ]),
+          ),
+          const SizedBox(height: Tokens.space3),
+        ],
         if (!stopped)
           SectionCard(
             title: s.trackOrder,
@@ -210,7 +291,7 @@ class _StatusCard extends StatelessWidget {
         if (stopped)
           Text(s.orderStopped, style: const TextStyle(color: Colors.white))
         else ...[
-          if (order.etaMinutes != null && order.status != 'awaiting_payment')
+          if (order.etaMinutes != null && order.status != 'awaiting_payment' && order.channel != 'shipping')
             Text(s.etaLabel(order.etaMinutes!), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
           const SizedBox(height: Tokens.space2),
           ClipRRect(

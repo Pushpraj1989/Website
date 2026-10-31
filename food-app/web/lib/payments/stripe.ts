@@ -44,3 +44,12 @@ export async function paymentIntentFor(order: {
   const intent = await stripeRequest<IntentResponse>('POST', '/payment_intents', body, `pi-${order.id}`);
   return { id: intent.id, clientSecret: intent.client_secret, created: true };
 }
+
+/**
+ * Refunds part or all of a card payment (an approved return). The key makes a retry return the same refund, so a
+ * customer is never refunded twice for one return.
+ */
+export async function refundPayment(paymentIntentId: string, amountMinor: number, idempotencyKey: string): Promise<{ id: string; status: string }> {
+  const body = new URLSearchParams({ payment_intent: paymentIntentId, amount: String(amountMinor) });
+  return stripeRequest<{ id: string; status: string }>('POST', '/refunds', body, idempotencyKey);
+}

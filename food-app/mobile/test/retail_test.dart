@@ -114,4 +114,23 @@ void main() {
     expect(const Strings('en').searchDishes, 'Search products');
     expect(const Strings('en').dishesInCategory(2), '2 products');
   });
+
+  test('shipping options, tracking and returns read from the server', () {
+    final rate = ShippingRate.fromJson({'id': 'r1', 'name': {'en': 'Standard', 'ar': 'عادي'}, 'eta': {'en': '2-4 days', 'ar': ''}, 'priceMinor': 1500, 'freeOverMinor': 20000});
+    expect(rate.freeOverMinor, 20000);
+    final order = PlacedOrder.fromJson({
+      'id': 'o1', 'number': '41', 'status': 'delivered', 'method': 'cod', 'channel': 'shipping', 'etaMinutes': null,
+      'quote': {'currency': 'AED', 'subtotalMinor': 9000, 'deliveryFeeMinor': 1500, 'serviceFeeMinor': 0, 'discountMinor': 0, 'totalMinor': 10500, 'taxLabel': 'VAT', 'taxIncludedMinor': 500},
+      'history': [],
+      'lines': [{'lineId': 'l1', 'name': {'en': 'Linen shirt · M', 'ar': 'قميص'}, 'qty': 1, 'note': '', 'unitMinor': 9000}],
+      'shipping': {'rate': 'Standard', 'carrier': 'Aramex', 'trackingNumber': 'AX123', 'trackingUrl': ''},
+      'returns': [{'status': 'approved', 'lines': [{'lineId': 'l1', 'qty': 1, 'name': {'en': 'Linen shirt · M', 'ar': ''}}], 'refundMinor': 9000, 'staffNote': ''}],
+      'returnsOpenUntil': '2026-11-14T10:00:00.000Z',
+    });
+    expect(order.shipping!.trackingNumber, 'AX123');
+    expect(order.lines.single.lineId, 'l1');
+    expect(order.returns.single.summary, '1 × Linen shirt · M');
+    expect(order.returnsOpenUntil, isNotNull);
+    expect(const Strings('en').statusLabel('shipped'), 'Shipped');
+  });
 }

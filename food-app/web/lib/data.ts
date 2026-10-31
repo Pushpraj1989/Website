@@ -70,7 +70,9 @@ function shape(r: { available: boolean; base_price_minor: number; stock: number 
 }
 
 export type OrderLineRow = {
+  id: string;
   itemId: string | null;
+  variantId: string | null;
   name: Localised;
   unitMinor: number;
   qty: number;
@@ -87,6 +89,8 @@ export type OrderRow = {
   status: OrderStatus;
   etaMinutes: number | null;
   address: string | null;
+  /** Courier shipping (retail mode): the rate chosen and, once shipped, the parcel's tracking. */
+  shipping: { rate: string; carrier: string; trackingNumber: string; trackingUrl: string } | null;
   currency: string;
   subtotalMinor: number;
   deliveryFeeMinor: number;
@@ -135,9 +139,13 @@ export type SavedAddress = {
   lat: number | null;
   lng: number | null;
   zone: { id: string; name: Localised; feeMinor: number; minOrderMinor: number; active: boolean } | null;
+  /** Shipping addresses (courier, retail mode) have a city and country instead of a delivery area. */
+  city: string;
+  country: string;
+  forShipping: boolean;
 };
 
-const addressColumns = `a.id, a.label, a.line_1, a.line_2, a.notes, a.is_default,
+const addressColumns = `a.id, a.label, a.line_1, a.line_2, a.notes, a.is_default, a.city, a.country, a.for_shipping,
   ST_Y(a.location::geometry) as lat, ST_X(a.location::geometry) as lng,
   z.id as zone_id, z.name_en as zone_en, z.name_ar as zone_ar, z.fee_minor, z.min_order_minor, z.active as zone_active`;
 
@@ -154,6 +162,9 @@ function toAddress(r: Record<string, any>): SavedAddress {
     zone: r.zone_id
       ? { id: r.zone_id, name: { en: r.zone_en, ar: r.zone_ar }, feeMinor: r.fee_minor, minOrderMinor: r.min_order_minor, active: r.zone_active }
       : null,
+    city: r.city,
+    country: r.country,
+    forShipping: r.for_shipping,
   };
 }
 
@@ -195,6 +206,9 @@ export type AddressFields = {
   lat: number | null;
   lng: number | null;
   isDefault: boolean;
+  city?: string;
+  country?: string;
+  forShipping?: boolean;
 };
 
 const locationSql = `case when $8::float8 is null then null
@@ -202,9 +216,9 @@ const locationSql = `case when $8::float8 is null then null
 
 export async function insertSavedAddress(c: PoolClient, guestId: string, f: AddressFields): Promise<string> {
   const { rows } = await c.query(
-    `insert into addresses (guest_session_id, label, line_1, line_2, notes, zone_id, is_default, saved, location)
-     values ($1, $2, $3, $4, $5, $6, $7, true, ${locationSql}) returning id`,
-    [guestId, f.label, f.line1, f.line2, f.notes, f.zoneId, f.isDefault, f.lat, f.lng],
+    `insert into addresses (guest_session_id, label, line_1, line_2, notes, zone_id, is_default, saved, location, city, country, for_shipping)
+     values ($1, $2, $3, $4, $5, $6, $7, true, ${locationSql}, $10, $11, $12) returning id`,
+    [guestId, f.label, f.line1, f.line2, f.notes, f.zoneId || null, f.isDefault, f.lat, f.lng, f.city ?? '', f.country ?? '', f.forShipping ?? false],
   );
   return rows[0].id;
 }
@@ -212,9 +226,9 @@ export async function insertSavedAddress(c: PoolClient, guestId: string, f: Addr
 export async function updateSavedAddress(c: PoolClient, guestId: string, id: string, f: AddressFields): Promise<boolean> {
   const { rowCount } = await c.query(
     `update addresses set label = $3, line_1 = $4, line_2 = $5, notes = $6, zone_id = $7, is_default = $10,
-       location = ${locationSql}
+       location = ${locationSql}, city = $11, country = $12, for_shipping = $13
      where id = $1 and guest_session_id = $2 and saved`,
-    [id, guestId, f.label, f.line1, f.line2, f.notes, f.zoneId, f.lat, f.lng, f.isDefault],
+    [id, guestId, f.label, f.line1, f.line2, f.notes, f.zoneId || null, f.lat, f.lng, f.isDefault, f.city ?? '', f.country ?? '', f.forShipping ?? false],
   );
   return (rowCount ?? 0) > 0;
 }
@@ -270,8 +284,8 @@ export async function listActiveZones(): Promise<(Zone & { centre: { lat: number
 /** Copies a saved address for one order. The copy is not listed as a saved address. */
 export async function copyAddressForOrder(c: PoolClient, guestId: string, id: string): Promise<string> {
   const { rows } = await c.query(
-    `insert into addresses (guest_session_id, label, line_1, line_2, notes, zone_id, location, is_default, saved)
-     select guest_session_id, label, line_1, line_2, notes, zone_id, location, false, false
+    `insert into addresses (guest_session_id, label, line_1, line_2, notes, zone_id, location, is_default, saved, city, country, for_shipping)
+     select guest_session_id, label, line_1, line_2, notes, zone_id, location, false, false, city, country, for_shipping
      from addresses where id = $1 and guest_session_id = $2 and saved returning id`,
     [id, guestId],
   );
@@ -392,7 +406,10 @@ export async function setCart(guestId: string, lines: CartLine[]) {
 
 async function loadOrder(c: PoolClient | typeof pool, where: string, value: string): Promise<OrderRow | null> {
   const { rows } = await c.query(
-    `select o.*, p.provider_ref as payment_intent_id, a.line_1 as address_text, r.tax_label
+    `select o.*, p.provider_ref as payment_intent_id, r.tax_label,
+       -- A shipping address is shown in full (street, city, country); a delivery address by its first line.
+       case when a.for_shipping then concat_ws(', ', nullif(a.line_1, ''), nullif(a.line_2, ''), nullif(a.city, ''), nullif(a.country, ''))
+            else a.line_1 end as address_text
      from orders o
      join restaurant r on r.id = o.restaurant_id
      left join payments p on p.order_id = o.id
@@ -403,7 +420,7 @@ async function loadOrder(c: PoolClient | typeof pool, where: string, value: stri
   const o = rows[0];
   if (!o) return null;
   const lines = await c.query(
-    'select menu_item_id, name_en, name_ar, unit_price_minor, qty, note from order_lines where order_id = $1 order by id',
+    'select id, menu_item_id, variant_id, name_en, name_ar, unit_price_minor, qty, note from order_lines where order_id = $1 order by id',
     [o.id],
   );
   const events = await c.query(
@@ -420,6 +437,9 @@ async function loadOrder(c: PoolClient | typeof pool, where: string, value: stri
     status: o.status,
     etaMinutes: o.eta_minutes,
     address: o.address_text,
+    shipping: o.channel === 'shipping'
+      ? { rate: o.shipping_rate_name, carrier: o.tracking_carrier, trackingNumber: o.tracking_number, trackingUrl: o.tracking_url }
+      : null,
     currency: o.currency,
     subtotalMinor: o.subtotal_minor,
     deliveryFeeMinor: o.delivery_fee_minor,
@@ -431,7 +451,9 @@ async function loadOrder(c: PoolClient | typeof pool, where: string, value: stri
     taxLabel: o.tax_label,
     placedAt: new Date(o.placed_at).toISOString(),
     lines: lines.rows.map((l) => ({
+      id: l.id,
       itemId: l.menu_item_id,
+      variantId: l.variant_id,
       name: { en: l.name_en, ar: l.name_ar },
       unitMinor: l.unit_price_minor,
       qty: l.qty,
@@ -482,6 +504,7 @@ export async function insertOrder(
     locale: 'en' | 'ar';
     quote: { currency: string; subtotalMinor: number; deliveryFeeMinor: number; serviceFeeMinor: number; discountMinor: number; tipMinor: number; totalMinor: number; taxIncludedMinor: number };
     lines: { itemId: string; variantId?: string | null; name: Localised; unitMinor: number; qty: number; note: string }[];
+    shippingRate?: { id: string; name: string } | null;
   },
 ): Promise<string | null> {
   const { rows } = await c.query(
@@ -513,6 +536,9 @@ export async function insertOrder(
   );
   const id: string | undefined = rows[0]?.id;
   if (!id) return null;
+  if (input.shippingRate) {
+    await c.query('update orders set shipping_rate_id = $2, shipping_rate_name = $3 where id = $1', [id, input.shippingRate.id, input.shippingRate.name]);
+  }
   for (const line of input.lines) {
     await c.query(
       `insert into order_lines (order_id, menu_item_id, name_en, name_ar, unit_price_minor, qty, line_total_minor, note, variant_id)

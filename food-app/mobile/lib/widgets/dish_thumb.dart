@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../core/art.dart';
+import '../core/brand.dart';
+import '../core/strings.dart';
 import '../core/theme.dart';
 
 /// A dish's picture: the photo staff uploaded in the admin when there is one, otherwise the category's picture.
@@ -16,7 +18,10 @@ class DishImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fallback = Image.asset(Art.forCategory(illustration), width: width, height: height, fit: fit, cacheWidth: cacheWidth, semanticLabel: '');
+    // A shop's product without a photo shows a soft panel in the brand colour, never a food picture.
+    final Widget fallback = Strings.shop
+        ? SizedBox(width: width, height: height, child: ColoredBox(color: context.accentSoft, child: Icon(Icons.shopping_bag_outlined, color: context.accentFg)))
+        : Image.asset(Art.forCategory(illustration), width: width, height: height, fit: fit, cacheWidth: cacheWidth, semanticLabel: '');
     final url = imageUrl;
     if (url == null) return fallback;
     return Image.network(

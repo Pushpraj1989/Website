@@ -200,7 +200,7 @@ class OrderStatusEvent {
 }
 
 class PlacedOrder {
-  const PlacedOrder({required this.id, required this.number, required this.status, required this.method, required this.channel, required this.etaMinutes, required this.quote, required this.history, this.lines = const [], this.address, this.ratingStars});
+  const PlacedOrder({required this.id, required this.number, required this.status, required this.method, required this.channel, required this.etaMinutes, required this.quote, required this.history, this.lines = const [], this.address, this.ratingStars, this.shipping, this.returns = const [], this.returnsOpenUntil});
   final String id;
   final String number;
   final String status;
@@ -215,6 +215,12 @@ class PlacedOrder {
   final String? address;
   /// The stars the customer gave this order, or null when they have not rated it.
   final int? ratingStars;
+  /// Courier orders: the shipping option and, once shipped, the tracking.
+  final ShippingInfo? shipping;
+  /// Return requests for this order (shops), newest first.
+  final List<OrderReturn> returns;
+  /// Until when items can be asked back; null when the order cannot be returned.
+  final DateTime? returnsOpenUntil;
 
   factory PlacedOrder.fromJson(Map<String, dynamic> json) => PlacedOrder(
         id: json['id'] as String,
@@ -230,7 +236,8 @@ class PlacedOrder {
         lines: [
           for (final l in (json['lines'] as List<dynamic>? ?? []))
             OrderLineView(
-              name: Localised.fromJson((l as Map<String, dynamic>)['name'] as Map<String, dynamic>),
+              lineId: (l as Map<String, dynamic>)['lineId'] as String? ?? '',
+              name: Localised.fromJson(l['name'] as Map<String, dynamic>),
               qty: l['qty'] as int,
               note: l['note'] as String? ?? '',
               unitMinor: l['unitMinor'] as int? ?? 0,
@@ -238,11 +245,34 @@ class PlacedOrder {
         ],
         address: json['address'] as String?,
         ratingStars: ((json['rating'] as Map<String, dynamic>?)?['stars'] as num?)?.toInt(),
+        shipping: json['shipping'] is Map<String, dynamic> ? ShippingInfo.fromJson(json['shipping'] as Map<String, dynamic>) : null,
+        returns: [for (final r in (json['returns'] as List<dynamic>? ?? const [])) OrderReturn.fromJson(r as Map<String, dynamic>)],
+        returnsOpenUntil: json['returnsOpenUntil'] is String ? DateTime.tryParse(json['returnsOpenUntil'] as String) : null,
+      );
+}
+
+/// A return request: its status, what was asked back, the refund and the shop's note.
+class OrderReturn {
+  const OrderReturn({required this.status, required this.summary, this.refundMinor, this.staffNote = ''});
+  final String status;
+  final String summary;
+  final int? refundMinor;
+  final String staffNote;
+
+  factory OrderReturn.fromJson(Map<String, dynamic> json) => OrderReturn(
+        status: json['status'] as String,
+        summary: [
+          for (final l in (json['lines'] as List<dynamic>? ?? const []))
+            '${(l as Map<String, dynamic>)['qty']} × ${(l['name'] as Map<String, dynamic>)['en']}',
+        ].join(', '),
+        refundMinor: json['refundMinor'] as int?,
+        staffNote: json['staffNote'] as String? ?? '',
       );
 }
 
 class OrderLineView {
-  const OrderLineView({required this.name, required this.qty, required this.note, required this.unitMinor});
+  const OrderLineView({required this.name, required this.qty, required this.note, required this.unitMinor, this.lineId = ''});
+  final String lineId;
   final Localised name;
   final int qty;
   final String note;
@@ -344,6 +374,8 @@ class SavedAddress {
     required this.isDefault,
     required this.zoneId,
     required this.zoneName,
+    this.city = '',
+    this.country = '',
   });
   final String id;
   final String label;
@@ -353,6 +385,10 @@ class SavedAddress {
   final bool isDefault;
   final String? zoneId;
   final Localised? zoneName;
+  /// Shipping addresses (courier, shops) have a city and country instead of a delivery area.
+  final String city;
+  final String country;
+  bool get shippable => city.isNotEmpty && country.isNotEmpty;
 
   factory SavedAddress.fromJson(Map<String, dynamic> json) {
     final zone = json['zone'] as Map<String, dynamic>?;
@@ -365,8 +401,44 @@ class SavedAddress {
       isDefault: json['isDefault'] as bool? ?? false,
       zoneId: zone?['id'] as String?,
       zoneName: zone == null ? null : Localised.fromJson(zone['name'] as Map<String, dynamic>),
+      city: json['city'] as String? ?? '',
+      country: json['country'] as String? ?? '',
     );
   }
+}
+
+/// A courier shipping option the business offers (retail mode): a price, and free above an amount when set.
+class ShippingRate {
+  const ShippingRate({required this.id, required this.name, required this.eta, required this.priceMinor, this.freeOverMinor});
+  final String id;
+  final Localised name;
+  final Localised eta;
+  final int priceMinor;
+  final int? freeOverMinor;
+
+  factory ShippingRate.fromJson(Map<String, dynamic> json) => ShippingRate(
+        id: json['id'] as String,
+        name: Localised.fromJson(json['name'] as Map<String, dynamic>),
+        eta: json['eta'] == null ? const Localised('', '') : Localised.fromJson(json['eta'] as Map<String, dynamic>),
+        priceMinor: json['priceMinor'] as int,
+        freeOverMinor: json['freeOverMinor'] as int?,
+      );
+}
+
+/// A shipped order's parcel: the courier and tracking number, and a tracking link when there is one.
+class ShippingInfo {
+  const ShippingInfo({required this.rate, required this.carrier, required this.trackingNumber, required this.trackingUrl});
+  final String rate;
+  final String carrier;
+  final String trackingNumber;
+  final String trackingUrl;
+
+  factory ShippingInfo.fromJson(Map<String, dynamic> json) => ShippingInfo(
+        rate: json['rate'] as String? ?? '',
+        carrier: json['carrier'] as String? ?? '',
+        trackingNumber: json['trackingNumber'] as String? ?? '',
+        trackingUrl: json['trackingUrl'] as String? ?? '',
+      );
 }
 
 /// A delivery area the restaurant serves, with its fee and the smallest order it accepts.

@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ChartColumn, Gauge, Moon, Paintbrush, Store, Sun, ClipboardList, Bot, Handshake, LayoutGrid, LogOut, Map as MapIcon, Megaphone, Menu, Palette, Percent, Tags, UtensilsCrossed, X } from 'lucide-react';
+import { ChartColumn, Gauge, Moon, Paintbrush, Store, Sun, ClipboardList, Bot, Handshake, LayoutGrid, LogOut, Map as MapIcon, Megaphone, Menu, Palette, Percent, Tags, Truck, Undo2, UtensilsCrossed, X } from 'lucide-react';
 import { api } from './api.js';
 import Login from './pages/Login.jsx';
 import Products from './pages/Products.jsx';
 import Categories from './pages/Categories.jsx';
+import Shipping from './pages/Shipping.jsx';
+import Returns from './pages/Returns.jsx';
 import Offers from './pages/Offers.jsx';
 import Campaigns from './pages/Campaigns.jsx';
 import Templates from './pages/Templates.jsx';
@@ -22,6 +24,7 @@ import Settings from './pages/Settings.jsx';
 const SECTIONS = [
   { id: 'dashboard', group: 'Overview', label: 'Dashboard', short: 'Dashboard', Icon: Gauge },
   { id: 'orders', group: 'Overview', label: 'Live orders', short: 'Orders', Icon: ClipboardList },
+  { id: 'returns', group: 'Overview', label: 'Returns', Icon: Undo2, shopOnly: true },
   { id: 'products', group: 'Menu', label: 'Dishes', short: 'Menu', Icon: UtensilsCrossed },
   { id: 'categories', group: 'Menu', label: 'Categories', Icon: LayoutGrid },
   { id: 'promotions', group: 'Marketing', label: 'Home and pop-ups', Icon: Tags },
@@ -31,6 +34,7 @@ const SECTIONS = [
   { id: 'reports', group: 'Marketing', label: 'Promotion reports', Icon: ChartColumn },
   { id: 'restaurant', group: 'Settings', label: 'Restaurant and look', Icon: Store },
   { id: 'zones', group: 'Settings', label: 'Delivery areas', Icon: MapIcon },
+  { id: 'shipping', group: 'Settings', label: 'Shipping', Icon: Truck, shopOnly: true },
   { id: 'assistant', group: 'Settings', label: 'Assistant', Icon: Bot },
   { id: 'partners', group: 'Settings', label: 'Partners', Icon: Handshake },
   { id: 'appearance', group: 'Settings', label: 'Appearance', Icon: Paintbrush },
@@ -38,7 +42,7 @@ const SECTIONS = [
 
 // A shop sees shop words: Products instead of Dishes, Shop instead of Menu, Business instead of Restaurant.
 const SHOP_WORDS = { products: { label: 'Products', short: 'Shop' }, restaurant: { label: 'Business and look' } };
-const sectionsFor = (shop) => SECTIONS.map((s) => ({
+const sectionsFor = (shop) => SECTIONS.filter((s) => shop || !s.shopOnly).map((s) => ({
   ...s,
   ...(shop ? SHOP_WORDS[s.id] ?? {} : {}),
   group: shop && s.group === 'Menu' ? 'Shop' : s.group,
@@ -221,6 +225,8 @@ export default function App() {
         {section === 'orders' ? <Orders /> : null}
         {catalog && section === 'assistant' ? <AiSettings /> : null}
         {section === 'restaurant' ? <Settings onBrandChanged={loadBrand} /> : null}
+        {section === 'shipping' ? <Shipping /> : null}
+        {section === 'returns' ? <Returns /> : null}
         {section === 'appearance' ? <Appearance /> : null}
       </main>
     </div>

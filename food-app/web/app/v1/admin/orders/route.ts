@@ -15,6 +15,7 @@ export async function GET() {
       status: o.status,
       etaMinutes: o.etaMinutes,
       address: o.address,
+      shipping: o.shipping,
       lines: o.lines,
       total: o.totalMinor,
       currency: o.currency,

@@ -9,6 +9,7 @@ import { canTransition, ORDER_STATUSES, type OrderStatus } from './status.ts';
 import { paymentIntentFor } from './payments/stripe.ts';
 import { applyCode, cartOffer, finalizeOrderOffer, releaseOrderOffer, removeCode, reserveForOrder, CARD_PAYMENT_MINUTES, type Held } from './offers-checkout.ts';
 import type { CartLineFacts } from './discounts.ts';
+import { activeRate, shippingFee, type ShippingRate } from './shipping.ts';
 
 export class RuleError extends Error {
   code: string;
@@ -83,10 +84,23 @@ async function zoneForOrder(c: PoolClient, guestId: string, addressId: string | 
   return { id: address.zone.id, name: address.zone.name, feeMinor: address.zone.feeMinor, minOrderMinor: address.zone.minOrderMinor };
 }
 
+/** Offers and vouchers treat a courier order as a delivery: a free-delivery code covers the shipping fee. */
+const offerChannel = (channel: Channel): 'delivery' | 'pickup' => (channel === 'pickup' ? 'pickup' : 'delivery');
+
+/** A courier order's address: one of the customer's, with a street, city and country. */
+async function shippingAddress(c: PoolClient | typeof pool, guestId: string, addressId: string | null) {
+  if (!addressId || !UUID.test(addressId)) throw new RuleError('Add the address to ship to.', 'address_missing', 400);
+  const address = await data.findSavedAddress(c, guestId, addressId);
+  if (!address) throw new RuleError('That address is not on your account.', 'address_missing', 422);
+  if (!address.city || !address.country) throw new RuleError('Add the city and country to this address to ship to it.', 'address_incomplete', 422);
+  return address;
+}
+
 /** Prices the cart. With an address, the delivery fee and the zone minimum come from that address's zone. */
-export async function quoteFor(guestId: string, channel: Channel, addressId: string | null = null, accountId: string | null = null): Promise<{ quote: Quote; delivery: DeliveryQuote; offer: OfferView | null }> {
+export async function quoteFor(guestId: string, channel: Channel, addressId: string | null = null, accountId: string | null = null, shippingRateId: string | null = null): Promise<{ quote: Quote; delivery: DeliveryQuote; offer: OfferView | null; shipping?: { rateId: string; feeMinor: number } | null }> {
   const cartLines = await data.getCart(guestId);
   const lines = await pricedLines(cartLines);
+  if (channel === 'shipping') return quoteShipping(guestId, cartLines, lines, addressId, accountId, shippingRateId);
   let zone: data.Zone | null = null;
   let delivery: DeliveryQuote = null;
   if (channel === 'delivery' && addressId && UUID.test(addressId)) {
@@ -98,11 +112,32 @@ export async function quoteFor(guestId: string, channel: Channel, addressId: str
   const { settings } = await settingsFor(channel, zone);
   const plain = computeQuote(lines, channel, settings);
   // The cart's code, checked against this cart now. It only takes effect when it still applies.
-  const held = await cartOffer(pool, guestId, accountId, await linesFacts(cartLines), plain.subtotalMinor, plain.deliveryFeeMinor, channel);
+  const held = await cartOffer(pool, guestId, accountId, await linesFacts(cartLines), plain.subtotalMinor, plain.deliveryFeeMinor, offerChannel(channel));
   const discount = held && held.outcome.applies ? held.outcome.discountMinor : 0;
   const quote = discount ? computeQuote(lines, channel, settings, discount) : plain;
   if (zone) delivery = { zoneId: zone.id, zoneName: zone.name, minOrderMinor: zone.minOrderMinor, deliverable: quote.subtotalMinor >= zone.minOrderMinor };
   return { quote, delivery, offer: held ? offerView(held) : null };
+}
+
+/** The quote for a courier order: the chosen rate's fee (free above its amount). Without a rate yet, no fee. */
+async function quoteShipping(guestId: string, cartLines: CartLine[], lines: PricedLine[], addressId: string | null, accountId: string | null, rateId: string | null) {
+  const rate = rateId ? await activeRate(pool, rateId) : null;
+  if (addressId) await shippingAddress(pool, guestId, addressId);
+  const restaurant = await data.getRestaurant();
+  const subtotal = lines.reduce((n, l) => n + l.unitMinor * l.qty, 0);
+  const settings = {
+    currency: restaurant.currency,
+    taxLabel: restaurant.taxLabel,
+    taxBasisPoints: restaurant.taxBasisPoints,
+    deliveryFeeMinor: rate ? shippingFee(rate, subtotal) : 0,
+    serviceFeeMinor: restaurant.serviceFeeMinor,
+    pricesIncludeTax: true as const,
+  };
+  const plain = computeQuote(lines, 'shipping', settings);
+  const held = await cartOffer(pool, guestId, accountId, await linesFacts(cartLines), plain.subtotalMinor, plain.deliveryFeeMinor, 'delivery');
+  const discount = held && held.outcome.applies ? held.outcome.discountMinor : 0;
+  const quote = discount ? computeQuote(lines, 'shipping', settings, discount) : plain;
+  return { quote, delivery: null, offer: held ? offerView(held) : null, shipping: rate ? { rateId: rate.id, feeMinor: settings.deliveryFeeMinor } : null };
 }
 
 export type OfferView = { applied: boolean; label: string | null; reason: string | null; discountMinor: number; kind: 'voucher' | 'offer' };
@@ -127,7 +162,7 @@ async function linesFacts(cart: CartLine[]): Promise<CartLineFacts[]> {
   });
 }
 
-export function validateAddress(raw: unknown): data.AddressFields & { zoneId: string } {
+export function validateAddress(raw: unknown): data.AddressFields & { zoneId: string; forShipping: boolean; city: string; country: string } {
   const body = (raw ?? {}) as Record<string, unknown>;
   const text = (key: string, max: number) => (typeof body[key] === 'string' ? (body[key] as string).trim().slice(0, max) : '');
   const line1 = text('line1', 200);
@@ -141,7 +176,16 @@ export function validateAddress(raw: unknown): data.AddressFields & { zoneId: st
   if (lng !== null && (!Number.isFinite(lng) || Math.abs(lng) > 180)) throw new RuleError('The longitude is not valid.', 'bad_input', 400);
   const zoneId = text('zoneId', 40);
   if (zoneId && !UUID.test(zoneId)) throw new RuleError('Choose one of the delivery areas.', 'bad_input', 400);
+  // A courier (shipping) address names its city and country instead of a delivery area.
+  const forShipping = body.forShipping === true;
+  const city = text('city', 80);
+  const country = text('country', 80);
+  if (forShipping && city.length < 2) throw new RuleError('Enter the city.', 'bad_input', 400);
+  if (forShipping && country.length < 2) throw new RuleError('Enter the country.', 'bad_input', 400);
   return {
+    forShipping,
+    city,
+    country,
     label: text('label', 30) || 'Home',
     line1,
     line2: text('line2', 200),
@@ -175,11 +219,12 @@ export async function saveAddress(guestId: string, raw: unknown): Promise<data.S
   return withTx(async (c: PoolClient) => {
     const count = await data.countSavedAddresses(c, guestId);
     if (count >= MAX_SAVED_ADDRESSES) throw new RuleError(`You can save up to ${MAX_SAVED_ADDRESSES} addresses. Delete one to add another.`, 'address_limit', 422);
-    const zone = await resolveZone(c, f);
+    // A shipping address goes by courier, so it needs no delivery area.
+    const zone = f.forShipping ? null : await resolveZone(c, f);
     // The first address is the default. Making one the default moves the default away from the others.
     const isDefault = f.isDefault || count === 0;
     if (isDefault) await data.clearDefaultAddress(c, guestId);
-    const id = await data.insertSavedAddress(c, guestId, { ...f, zoneId: zone.id, isDefault });
+    const id = await data.insertSavedAddress(c, guestId, { ...f, zoneId: zone?.id ?? '', isDefault });
     return (await data.findSavedAddress(c, guestId, id))!;
   });
 }
@@ -190,11 +235,11 @@ export async function updateAddress(guestId: string, id: string, raw: unknown): 
   return withTx(async (c: PoolClient) => {
     const existing = await data.findSavedAddress(c, guestId, id);
     if (!existing) throw new RuleError('Address not found.', 'not_found', 404);
-    const zone = await resolveZone(c, f);
+    const zone = f.forShipping ? null : await resolveZone(c, f);
     // The default stays the default until another address is made the default.
     const isDefault = existing.isDefault || f.isDefault;
     if (!existing.isDefault && f.isDefault) await data.clearDefaultAddress(c, guestId);
-    await data.updateSavedAddress(c, guestId, id, { ...f, zoneId: zone.id, isDefault });
+    await data.updateSavedAddress(c, guestId, id, { ...f, zoneId: zone?.id ?? '', isDefault });
     return (await data.findSavedAddress(c, guestId, id))!;
   });
 }
@@ -234,6 +279,8 @@ export async function placeOrder(input: {
   method: 'card' | 'cod' | 'pay_on_arrival';
   addressId: string | null;
   locale: 'en' | 'ar';
+  /** Courier orders (channel 'shipping'): the chosen shipping option. */
+  shippingRateId?: string | null;
 }): Promise<OrderRow> {
   // A repeat with the same key returns the same order (idempotency from the architecture).
   const existing = await data.findOrderByKey(input.guestId, input.idempotencyKey);
@@ -263,16 +310,23 @@ export async function placeOrder(input: {
     const restaurant = await data.getRestaurant(c);
     const methodOk =
       (input.method === 'card' && restaurant.payments.card) ||
-      (input.method === 'cod' && restaurant.payments.cod && input.channel === 'delivery') ||
+      (input.method === 'cod' && restaurant.payments.cod && (input.channel === 'delivery' || input.channel === 'shipping')) ||
       (input.method === 'pay_on_arrival' && restaurant.payments.payOnArrival && input.channel === 'pickup');
     if (!methodOk) throw new RuleError('That payment method is not available for this order.', 'method_unavailable');
     const zone = input.channel === 'delivery' ? await zoneForOrder(c, input.guestId, input.addressId) : null;
+    // A courier order: a full address and a shipping option; the fee is the option's (free above its amount).
+    let rate: ShippingRate | null = null;
+    if (input.channel === 'shipping') {
+      await shippingAddress(c, input.guestId, input.addressId);
+      rate = await activeRate(c, input.shippingRateId);
+    }
+    const subtotalNow = priced.reduce((n, p) => n + p.unitMinor * p.qty, 0);
 
     const settings = {
       currency: restaurant.currency,
       taxLabel: restaurant.taxLabel,
       taxBasisPoints: restaurant.taxBasisPoints,
-      deliveryFeeMinor: zone?.feeMinor ?? 0,
+      deliveryFeeMinor: rate ? shippingFee(rate, subtotalNow) : zone?.feeMinor ?? 0,
       serviceFeeMinor: restaurant.serviceFeeMinor,
       pricesIncludeTax: true as const,
     };
@@ -284,7 +338,7 @@ export async function placeOrder(input: {
     // The cart's code is checked again here, under the cart lock, so the price is the one the customer was shown.
     const categories = await data.getItems(lines.map((l) => l.itemId));
     const facts: CartLineFacts[] = priced.map((p) => ({ itemId: p.itemId, categoryId: categories.get(p.itemId)!.categoryId, unitMinor: p.unitMinor, qty: p.qty }));
-    const held = await cartOffer(c, input.guestId, input.accountId ?? null, facts, plain.subtotalMinor, plain.deliveryFeeMinor, input.channel);
+    const held = await cartOffer(c, input.guestId, input.accountId ?? null, facts, plain.subtotalMinor, plain.deliveryFeeMinor, offerChannel(input.channel));
     if (held && !held.outcome.applies) {
       throw new RuleError(`Your code no longer applies: ${held.reason ?? 'please remove it'}`, 'offer_not_applicable', 409);
     }
@@ -294,7 +348,7 @@ export async function placeOrder(input: {
       throw new RuleError(`Orders paid in cash can be up to ${restaurant.currency} ${(restaurant.cashLimitMinor / 100).toFixed(2)}. Remove something to continue.`, 'over_cash_limit');
     }
     const status: OrderStatus = input.method === 'card' ? 'awaiting_payment' : 'placed';
-    const orderAddressId = zone ? await data.copyAddressForOrder(c, input.guestId, input.addressId!) : null;
+    const orderAddressId = zone || rate ? await data.copyAddressForOrder(c, input.guestId, input.addressId!) : null;
     const id = await data.insertOrder(c, {
       guestId: input.guestId,
       idempotencyKey: input.idempotencyKey,
@@ -305,6 +359,7 @@ export async function placeOrder(input: {
       locale: input.locale,
       quote: { ...quote, taxIncludedMinor: quote.taxIncludedMinor },
       lines: priced,
+      shippingRate: rate ? { id: rate.id, name: rate.name.en } : null,
     });
     if (!id && orderAddressId) {
       // A concurrent request with the same key won. Drop the copy this attempt made, so nothing is left behind.
@@ -408,7 +463,7 @@ export function customerView(order: OrderRow) {
     method: order.method,
     status: order.status,
     etaMinutes: order.etaMinutes,
-    lines: order.lines.map((l) => ({ name: l.name, qty: l.qty, note: l.note, unitMinor: l.unitMinor })),
+    lines: order.lines.map((l) => ({ lineId: l.id, name: l.name, qty: l.qty, note: l.note, unitMinor: l.unitMinor })),
     quote: {
       currency: order.currency,
       subtotalMinor: order.subtotalMinor,
@@ -420,6 +475,7 @@ export function customerView(order: OrderRow) {
       taxIncludedMinor: order.vatMinor,
     },
     address: order.address,
+    shipping: order.shipping,
     history: order.history,
   };
 }
@@ -458,7 +514,7 @@ export async function applyCartCode(guestId: string, accountId: string | null, r
   const { quote } = await quoteFor(guestId, channel, await cartAddressId(guestId, channel, addressId), accountId);
   return withTx(async (c) => {
     await c.query('select 1 from carts where guest_session_id = $1 for update', [guestId]);
-    return applyCode(c, guestId, accountId, raw, facts, quote.subtotalMinor, quote.deliveryFeeMinor, channel);
+    return applyCode(c, guestId, accountId, raw, facts, quote.subtotalMinor, quote.deliveryFeeMinor, offerChannel(channel));
   });
 }
 

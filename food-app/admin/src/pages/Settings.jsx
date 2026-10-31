@@ -80,6 +80,7 @@ export default function Settings({ onBrandChanged }) {
         buttonStyle,
         iconStyle,
         businessType,
+        ...(businessType === 'shop' ? { returnDays: Number(f.get('returnDays') || 0) } : {}),
         ratingMinCount: Number(f.get('ratingMinCount')),
         cashLimitMinor: cashLimit,
         serviceFeeMinor: serviceFee,
@@ -161,6 +162,11 @@ export default function Settings({ onBrandChanged }) {
             ))}
           </fieldset>
           <p className="hint">You can switch at any time. Products, orders and settings stay as they are; only the words and the product options change.</p>
+          {businessType === 'shop' ? (
+            <label style={{ maxWidth: 320 }}>Returns allowed for (days after delivery) <span className="hint">0 = no online returns</span>
+              <input name="returnDays" type="number" min={0} max={365} defaultValue={settings.returnDays ?? 14} />
+            </label>
+          ) : null}
         </div>
 
         <div className="card stack">

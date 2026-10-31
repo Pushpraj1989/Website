@@ -13,6 +13,25 @@ class Strings {
 
   String get priceFrom => isArabic ? 'من' : 'from';
   String get chooseOption => isArabic ? 'اختر نوعاً' : 'Choose an option';
+  String get shipByCourier => isArabic ? 'شحن' : 'Ship';
+  String get shipTo => isArabic ? 'الشحن إلى' : 'Ship to';
+  String get shippingOption => isArabic ? 'طريقة الشحن' : 'Shipping option';
+  String get addShippingAddress => isArabic ? 'أضف عنوان شحن' : 'Add a shipping address';
+  String get city => isArabic ? 'المدينة' : 'City';
+  String get country => isArabic ? 'الدولة' : 'Country';
+  String freeOver(String amount) => isArabic ? 'مجاني فوق $amount' : 'Free over $amount';
+  String get tracking => isArabic ? 'التتبع' : 'Tracking';
+  String get trackParcel => isArabic ? 'تتبّع شحنتك' : 'Track your parcel';
+  String get returnItems => isArabic ? 'إرجاع منتجات' : 'Return items';
+  String get returnWhy => isArabic ? 'لماذا تريد الإرجاع؟' : 'Why are you returning it?';
+  String get returnSend => isArabic ? 'اطلب الإرجاع' : 'Ask for a return';
+  String get returnSent => isArabic ? 'تم إرسال طلب الإرجاع. سيرد المتجر قريباً.' : 'Return requested. The shop will reply soon.';
+  String returnStatus(String status) => switch (status) {
+        'requested' => isArabic ? 'طلب إرجاع مُرسل' : 'Return requested',
+        'approved' => isArabic ? 'تمت الموافقة على الإرجاع' : 'Return approved',
+        'rejected' => isArabic ? 'لم يُقبل الإرجاع' : 'Return not accepted',
+        _ => isArabic ? 'تم رد المبلغ' : 'Refunded',
+      };
 
   String get menu => _w('Menu', 'القائمة', 'Shop', 'المتجر');
   String get cart => isArabic ? 'السلة' : 'Cart';
@@ -225,6 +244,7 @@ class Strings {
         'preparing' => isArabic ? 'قيد التحضير' : 'Preparing',
         'ready' => isArabic ? 'جاهز' : 'Ready',
         'out_for_delivery' => isArabic ? 'في الطريق إليك' : 'Out for delivery',
+        'shipped' => isArabic ? 'تم الشحن' : 'Shipped',
         'delivered' => isArabic ? 'تم التوصيل' : 'Delivered',
         'collected' => isArabic ? 'تم الاستلام' : 'Collected',
         'rejected' => isArabic ? 'مرفوض' : 'Rejected',

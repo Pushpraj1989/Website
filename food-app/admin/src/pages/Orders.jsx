@@ -10,7 +10,8 @@ function nextStatus(order) {
   switch (order.status) {
     case 'accepted': return { to: 'preparing', label: 'Start preparing' };
     case 'preparing': return { to: 'ready', label: 'Mark ready' };
-    case 'ready': return order.channel === 'delivery' ? { to: 'out_for_delivery', label: 'Out for delivery' } : { to: 'collected', label: 'Collected' };
+    case 'ready': return order.channel === 'delivery' ? { to: 'out_for_delivery', label: 'Out for delivery' } : order.channel === 'shipping' ? null : { to: 'collected', label: 'Collected' };
+    case 'shipped': return { to: 'delivered', label: 'Delivered' };
     case 'out_for_delivery': return { to: 'delivered', label: 'Delivered' };
     default: return null;
   }
@@ -27,7 +28,7 @@ function statusTone(status) {
 
 const STATUS_TEXT = {
   placed: 'New', awaiting_payment: 'Awaiting payment', accepted: 'Accepted', preparing: 'Preparing', ready: 'Ready',
-  out_for_delivery: 'Out for delivery', delivered: 'Delivered', collected: 'Collected', cancelled: 'Cancelled', rejected: 'Rejected',
+  out_for_delivery: 'Out for delivery', shipped: 'Shipped', delivered: 'Delivered', collected: 'Collected', cancelled: 'Cancelled', rejected: 'Rejected',
 };
 
 // A short two-tone chime made in the browser, so no audio file is needed.
@@ -143,10 +144,10 @@ export default function Orders() {
                 return (
                   <tr key={o.id}>
                     <td><strong>{o.number}</strong></td>
-                    <td>{o.channel === 'delivery' ? 'Delivery' : 'Pickup'}</td>
+                    <td>{o.channel === 'delivery' ? 'Delivery' : o.channel === 'shipping' ? `Courier${o.shipping?.rate ? ` · ${o.shipping.rate}` : ''}` : 'Pickup'}</td>
                     <td><span className={`status ${statusTone(o.status)}`}>{STATUS_TEXT[o.status] ?? o.status}</span>{o.etaMinutes ? <span className="muted"> · {o.etaMinutes} min</span> : null}</td>
                     <td>{o.lines.map((l) => `${l.qty} × ${l.name?.en ?? ''}`).join(', ')}</td>
-                    <td>{o.address ?? '—'}</td>
+                    <td>{o.address ?? '—'}{o.shipping?.trackingNumber ? <div className="muted">{o.shipping.carrier} · {o.shipping.trackingNumber}</div> : null}</td>
                     <td className="num">{formatMoney(o.total, DIGITS, o.currency)}</td>
                     <td>
                       {o.status === 'placed' ? (
@@ -156,9 +157,14 @@ export default function Orders() {
                           </label>
                           <button type="button" className="btn primary sm" onClick={() => act(o, 'accept')}>Accept order {o.number}</button>
                         </div>
-                      ) : next ? (
-                        <button type="button" className="btn sm" onClick={() => act(o, next.to)}>{next.label}</button>
-                      ) : null}
+                      ) : (
+                        <div className="actions">
+                          {next ? <button type="button" className="btn sm" onClick={() => act(o, next.to)}>{next.label}</button> : null}
+                          {o.channel === 'shipping' && ['accepted', 'preparing', 'ready'].includes(o.status)
+                            ? <ShipButton order={o} onShipped={load} onError={setError} />
+                            : null}
+                        </div>
+                      )}
                     </td>
                   </tr>
                 );
@@ -168,5 +174,39 @@ export default function Orders() {
         </div>
       ) : null}
     </section>
+  );
+}
+
+// Hands a courier order to the courier: the carrier, the tracking number and (optional) a tracking link. The customer
+// sees them on their order. A small form opens under the button.
+function ShipButton({ order, onShipped, onError }) {
+  const [open, setOpen] = useState(false);
+  const [busy, setBusy] = useState(false);
+  async function submit(event) {
+    event.preventDefault();
+    const f = new FormData(event.currentTarget);
+    setBusy(true);
+    onError('');
+    try {
+      await api.shipOrder(order.id, { carrier: f.get('carrier'), trackingNumber: f.get('trackingNumber'), trackingUrl: f.get('trackingUrl') });
+      setOpen(false);
+      await onShipped();
+    } catch (err) {
+      onError(err.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  if (!open) return <button type="button" className="btn primary sm" onClick={() => setOpen(true)}>Mark shipped</button>;
+  return (
+    <form className="stack ship-form" onSubmit={submit} aria-label={`Ship order ${order.number}`}>
+      <label>Courier<input name="carrier" required minLength={2} maxLength={60} placeholder="Aramex" /></label>
+      <label>Tracking number<input name="trackingNumber" required minLength={3} maxLength={60} /></label>
+      <label>Tracking link <span className="hint">optional</span><input name="trackingUrl" type="url" pattern="https://.*" placeholder="https://" /></label>
+      <div className="actions">
+        <button type="submit" className="btn primary sm" disabled={busy} aria-busy={busy}>{busy ? 'Saving…' : `Ship order ${order.number}`}</button>
+        <button type="button" className="btn ghost sm" onClick={() => setOpen(false)}>Cancel</button>
+      </div>
+    </form>
   );
 }

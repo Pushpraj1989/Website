@@ -84,11 +84,17 @@ class ApiClient {
     return (body['lines'] as List<dynamic>).map((l) => CartLine.fromJson(l as Map<String, dynamic>)).toList();
   }
 
-  Future<QuoteResult> quote(String channel, {String? addressId}) async {
+  /// The courier shipping options on offer (shops); empty when the business does not ship.
+  Future<List<ShippingRate>> shippingRates() async {
+    final body = await _send(() => _client.get(_uri('/v1/shipping-rates'), headers: _headers()));
+    return [for (final r in (body['rates'] as List<dynamic>? ?? const [])) ShippingRate.fromJson(r as Map<String, dynamic>)];
+  }
+
+  Future<QuoteResult> quote(String channel, {String? addressId, String? shippingRateId}) async {
     final body = await _send(() => _client.post(
           _uri('/v1/checkout/quote'),
           headers: _headers(json: true),
-          body: jsonEncode({'channel': channel, 'addressId': addressId}),
+          body: jsonEncode({'channel': channel, 'addressId': addressId, 'shippingRateId': ?shippingRateId}),
         ));
     return QuoteResult(
       quote: Quote.fromJson(body['quote'] as Map<String, dynamic>),
@@ -97,11 +103,11 @@ class ApiClient {
     );
   }
 
-  Future<PlacedOrder> placeOrder({required String channel, required String method, String? addressId, required String idempotencyKey}) async {
+  Future<PlacedOrder> placeOrder({required String channel, required String method, String? addressId, String? shippingRateId, required String idempotencyKey}) async {
     final body = await _send(() => _client.post(
           _uri('/v1/orders'),
           headers: _headers(json: true),
-          body: jsonEncode({'channel': channel, 'method': method, 'addressId': addressId, 'idempotencyKey': idempotencyKey}),
+          body: jsonEncode({'channel': channel, 'method': method, 'addressId': addressId, 'shippingRateId': ?shippingRateId, 'idempotencyKey': idempotencyKey}),
         ));
     final placed = PlacedOrder.fromJson(body['order'] as Map<String, dynamic>);
     await prefs?.setString('last_order_id', placed.id);
@@ -227,6 +233,15 @@ class ApiClient {
   Future<PlacedOrder> order(String id) async {
     final body = await _send(() => _client.get(_uri('/v1/orders/$id'), headers: _headers()));
     return PlacedOrder.fromJson(body['order'] as Map<String, dynamic>);
+  }
+
+  /// Asks for a return (shops): which lines and how many, and why.
+  Future<void> requestReturn(String orderId, {required List<({String lineId, int qty})> lines, required String reason}) async {
+    await _send(() => _client.post(
+          _uri('/v1/orders/$orderId/returns'),
+          headers: _headers(json: true),
+          body: jsonEncode({'reason': reason, 'lines': [for (final l in lines) {'lineId': l.lineId, 'qty': l.qty}]}),
+        ));
   }
 
   /// Asks the restaurant assistant. Sends the question only; the reply's cards are data the server checked.
