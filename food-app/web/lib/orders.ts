@@ -24,14 +24,33 @@ export function hashToken(token: string): string {
   return createHash('sha256').update(token).digest('hex');
 }
 
+/**
+ * What one cart line is: its price, the name it is sold under and its variant. A product sold in versions needs one
+ * of its active variants; its name then carries the variant ("T-shirt · M / Black"). Prices come from the database.
+ */
+export function resolveLine(item: data.MenuItem | undefined, line: CartLine) {
+  if (!item) throw new RuleError('An item in the cart is no longer on the menu.', 'item_missing');
+  if (item.variants.length) {
+    const variant = item.variants.find((v) => v.id === line.variantId);
+    if (!variant) throw new RuleError(`Choose an option for ${item.name.en}.`, 'variant_required');
+    if (variant.soldOut || item.soldOut) throw new RuleError(`${item.name.en} (${variant.name.en}) is sold out.`, 'sold_out');
+    return {
+      unitMinor: variant.priceMinor,
+      name: { en: `${item.name.en} · ${variant.name.en}`, ar: `${item.name.ar} · ${variant.name.ar}` },
+      variantId: variant.id,
+    };
+  }
+  if (line.variantId) throw new RuleError('That option is no longer available.', 'item_missing');
+  if (item.soldOut) throw new RuleError(`${item.name.en} is sold out.`, 'sold_out');
+  return { unitMinor: item.priceMinor, name: item.name, variantId: null };
+}
+
 /** Prices the cart from the database. Prices never come from the request. */
 export async function pricedLines(cart: CartLine[]): Promise<PricedLine[]> {
   const items = await data.getItems(cart.map((l) => l.itemId));
   return cart.map((line) => {
-    const item = items.get(line.itemId);
-    if (!item) throw new RuleError('An item in the cart is no longer on the menu.', 'item_missing');
-    if (item.soldOut) throw new RuleError(`${item.name.en} is sold out.`, 'sold_out');
-    return { itemId: item.id, name: item.name.en, unitMinor: item.priceMinor, qty: line.qty };
+    const r = resolveLine(items.get(line.itemId), line);
+    return { itemId: line.itemId, name: r.name.en, unitMinor: r.unitMinor, qty: line.qty };
   });
 }
 
@@ -104,7 +123,7 @@ async function linesFacts(cart: CartLine[]): Promise<CartLineFacts[]> {
   const items = await data.getItems(cart.map((l) => l.itemId));
   return cart.map((l) => {
     const item = items.get(l.itemId)!;
-    return { itemId: l.itemId, categoryId: item.categoryId, unitMinor: item.priceMinor, qty: l.qty };
+    return { itemId: l.itemId, categoryId: item.categoryId, unitMinor: resolveLine(item, l).unitMinor, qty: l.qty };
   });
 }
 
@@ -199,7 +218,10 @@ export function validateCart(cart: unknown): CartLine[] {
         throw new RuleError('Each line needs an item and a quantity from 0 to 20.', 'bad_input', 400);
       }
       const note = typeof line.note === 'string' ? line.note.trim().slice(0, 200) : '';
-      return { itemId: line.itemId, qty, note };
+      if (line.variantId !== undefined && line.variantId !== null && (typeof line.variantId !== 'string' || !UUID.test(line.variantId))) {
+        throw new RuleError('That option is not valid.', 'bad_input', 400);
+      }
+      return line.variantId ? { itemId: line.itemId, variantId: line.variantId, qty, note } : { itemId: line.itemId, qty, note };
     })
     .filter((line) => line.qty > 0);
 }
@@ -228,19 +250,15 @@ export async function placeOrder(input: {
     const lines = (cart.rows[0]?.items ?? []) as CartLine[];
     if (lines.length === 0) throw new RuleError('Your cart is empty.', 'empty_cart');
     const ids = lines.map((l) => l.itemId);
-    const items = await c.query(
-      `select id, name_en, name_ar, base_price_minor, available from menu_items where id = any($1::uuid[]) for update`,
-      [ids],
-    );
-    const byId = new Map<string, { name: { en: string; ar: string }; price: number; available: boolean }>(
-      items.rows.map((r) => [r.id, { name: { en: r.name_en, ar: r.name_ar }, price: r.base_price_minor, available: r.available }]),
-    );
+    // Lock the products and their variants, so two orders cannot both take the last one in stock.
+    await c.query('select id from menu_items where id = any($1::uuid[]) order by id for update', [ids]);
+    await c.query('select id from product_variants where item_id = any($1::uuid[]) order by id for update', [ids]);
+    const current = await data.getItems(ids);
     const priced = lines.map((line) => {
-      const item = byId.get(line.itemId);
-      if (!item) throw new RuleError('An item in the cart is no longer on the menu.', 'item_missing');
-      if (!item.available) throw new RuleError(`${item.name.en} is sold out.`, 'sold_out');
-      return { itemId: line.itemId, name: item.name, unitMinor: item.price, qty: line.qty, note: line.note };
+      const r = resolveLine(current.get(line.itemId), line);
+      return { itemId: line.itemId, variantId: r.variantId, name: r.name, unitMinor: r.unitMinor, qty: line.qty, note: line.note };
     });
+    await takeStock(c, priced, current);
 
     const restaurant = await data.getRestaurant(c);
     const methodOk =
@@ -265,7 +283,7 @@ export async function placeOrder(input: {
     }
     // The cart's code is checked again here, under the cart lock, so the price is the one the customer was shown.
     const categories = await data.getItems(lines.map((l) => l.itemId));
-    const facts: CartLineFacts[] = lines.map((l) => ({ itemId: l.itemId, categoryId: categories.get(l.itemId)!.categoryId, unitMinor: byId.get(l.itemId)!.price, qty: l.qty }));
+    const facts: CartLineFacts[] = priced.map((p) => ({ itemId: p.itemId, categoryId: categories.get(p.itemId)!.categoryId, unitMinor: p.unitMinor, qty: p.qty }));
     const held = await cartOffer(c, input.guestId, input.accountId ?? null, facts, plain.subtotalMinor, plain.deliveryFeeMinor, input.channel);
     if (held && !held.outcome.applies) {
       throw new RuleError(`Your code no longer applies: ${held.reason ?? 'please remove it'}`, 'offer_not_applicable', 409);
@@ -332,8 +350,12 @@ async function moveOrder(id: string, to: OrderStatus, actor: { kind: 'staff' | '
   const from = ORDER_STATUSES.filter((s) => canTransition(s, to));
   const moved = await withTx(async (c) => {
     const done = await data.transitionOrder(c, id, from, to, actor, extra);
-    // A cancelled or rejected order gives back what it held: the voucher is released or made usable again.
-    if (done && (to === 'cancelled' || to === 'rejected')) await releaseOrderOffer(c, id);
+    // A cancelled or rejected order gives back what it held: the voucher is released or made usable again, and the
+    // stock it took goes back on the shelf.
+    if (done && (to === 'cancelled' || to === 'rejected')) {
+      await releaseOrderOffer(c, id);
+      await returnStock(c, id);
+    }
     return done;
   });
   if (!moved) {
@@ -443,4 +465,43 @@ export async function applyCartCode(guestId: string, accountId: string | null, r
 /** Takes the code off the cart. */
 export async function removeCartCode(guestId: string) {
   await withTx((c) => removeCode(c, guestId));
+}
+
+/**
+ * Takes counted stock for an order, under the locks placeOrder holds. Products and variants whose stock is not counted
+ * (null) are left alone. Refused with how many are left when there are not enough.
+ */
+async function takeStock(c: PoolClient, lines: { itemId: string; variantId: string | null; qty: number }[], items: Map<string, data.MenuItem>) {
+  const want = new Map<string, { qty: number; variant: boolean; label: string; left: number | null }>();
+  for (const l of lines) {
+    const item = items.get(l.itemId)!;
+    const variant = l.variantId ? item.variants.find((v) => v.id === l.variantId)! : null;
+    const key = l.variantId ?? l.itemId;
+    const entry = want.get(key) ?? { qty: 0, variant: Boolean(variant), label: variant ? `${item.name.en} (${variant.name.en})` : item.name.en, left: variant ? variant.stock : item.stock };
+    entry.qty += l.qty;
+    want.set(key, entry);
+  }
+  for (const [id, w] of want) {
+    if (w.left === null) continue;
+    if (w.left < w.qty) {
+      throw new RuleError(w.left === 0 ? `${w.label} is sold out.` : `Only ${w.left} left of ${w.label}. Lower the quantity to continue.`, 'out_of_stock');
+    }
+    await c.query(w.variant ? 'update product_variants set stock = stock - $2 where id = $1' : 'update menu_items set stock = stock - $2 where id = $1', [id, w.qty]);
+  }
+}
+
+/** Puts back the counted stock a cancelled or rejected order took. Runs once, with the order's move to that status. */
+async function returnStock(c: PoolClient, orderId: string) {
+  await c.query(
+    `update product_variants v set stock = v.stock + l.qty from
+       (select variant_id, sum(qty)::int as qty from order_lines where order_id = $1 and variant_id is not null group by variant_id) l
+     where v.id = l.variant_id and v.stock is not null`,
+    [orderId],
+  );
+  await c.query(
+    `update menu_items i set stock = i.stock + l.qty from
+       (select menu_item_id, sum(qty)::int as qty from order_lines where order_id = $1 and variant_id is null group by menu_item_id) l
+     where i.id = l.menu_item_id and i.stock is not null`,
+    [orderId],
+  );
 }

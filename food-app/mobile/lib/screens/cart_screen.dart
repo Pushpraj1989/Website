@@ -191,7 +191,7 @@ class _CartScreenState extends State<CartScreen> {
             const SizedBox(height: Tokens.space1),
             Text(s.cartEmptyBody, textAlign: TextAlign.center, style: TextStyle(color: Tokens.textMuted)),
             const SizedBox(height: Tokens.space4),
-            FilledButton.icon(onPressed: () => Navigator.of(context).maybePop(), icon: const Icon(LucideIcons.utensils), label: Text(s.menu)),
+            FilledButton.icon(onPressed: () => Navigator.of(context).maybePop(), icon: Icon(Strings.shop ? LucideIcons.store : LucideIcons.utensils), label: Text(s.menu)),
           ]),
         ),
       );

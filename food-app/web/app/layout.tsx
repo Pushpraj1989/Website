@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <main id="main" className="shell">{children}</main>
         <Footer locale={locale} />
         <CartBar locale={locale} />
-        <BottomDock locale={locale} />
+        <BottomDock locale={locale} kind={settings.businessType} />
       </body>
     </html>
   );

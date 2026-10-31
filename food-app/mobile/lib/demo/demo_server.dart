@@ -302,7 +302,7 @@ class DemoServer {
       final item = _item(line['itemId'] as String);
       if (item['soldOut'] == true) throw _Refused('${(item['name'] as Map)['en']} is sold out.', 'sold_out');
       final note = line['note'] is String ? (line['note'] as String).trim() : '';
-      lines.add({'itemId': item['id'], 'qty': qty, 'note': note.length > 200 ? note.substring(0, 200) : note});
+      lines.add({'itemId': item['id'], if (line['variantId'] is String) 'variantId': line['variantId'], 'qty': qty, 'note': note.length > 200 ? note.substring(0, 200) : note});
     }
     _cart
       ..clear()
@@ -332,7 +332,7 @@ class DemoServer {
       'lines': [
         for (final l in _cart)
           {
-            'itemId': l['itemId'], 'qty': l['qty'], 'note': l['note'],
+            'itemId': l['itemId'], 'variantId': l['variantId'], 'qty': l['qty'], 'note': l['note'],
             'name': _items[l['itemId']]?['name'], 'unitMinor': _items[l['itemId']]?['priceMinor'], 'soldOut': _items[l['itemId']]?['soldOut'] ?? false,
           },
       ],

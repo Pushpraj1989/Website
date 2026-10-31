@@ -20,8 +20,9 @@ type Promo = Awaited<ReturnType<typeof livePromotions>>['carousel'][number];
 // comes from the restaurant's own settings, menu and published promotions; a part with nothing to show is left out.
 export default async function Home() {
   const locale = await currentLocale();
-  const s = t(locale);
   const [settings, restaurant, categories, live] = await Promise.all([getSettings(), data.getRestaurant(), data.getMenu(), livePromotions()]);
+  const kind = settings.businessType;
+  const s = t(locale, kind);
   const name = settings.name[locale];
   const items = categories.flatMap((c) => c.items);
   const linkFor = (p: Promo) => (p.menuItemId ? `/menu#dish-${p.menuItemId}` : '/menu');
@@ -44,7 +45,7 @@ export default async function Home() {
 
   return (
     <div className="home">
-      <HeroSlider slides={slides} locale={locale} />
+      <HeroSlider slides={slides} locale={locale} kind={kind} />
 
       {/* As in the app: a sheet rises over the foot of the photo, with the categories and the quick filters on it. */}
       <div className="home-sheet">
@@ -98,7 +99,7 @@ export default async function Home() {
 
       {popular.length ? (
         <Carousel id="popular-h" title={s.popular} action={<Link href="/menu">{s.seeFullMenu}</Link>} previous={s.previous} next={s.next} kind="tiles">
-          {popular.map((item) => <DishCard key={item.id} item={item} locale={locale} currency={restaurant.currency} layout="tile" anchor={false} />)}
+          {popular.map((item) => <DishCard key={item.id} item={item} locale={locale} currency={restaurant.currency} layout="tile" anchor={false} kind={kind} />)}
         </Carousel>
       ) : null}
 
@@ -120,7 +121,7 @@ export default async function Home() {
             <h2 id={`home-${category.id}`}>{category.name[locale]}</h2>
           </div>
           <div className="dish-list">
-            {category.items.map((item) => <DishCard key={item.id} item={item} locale={locale} currency={restaurant.currency} />)}
+            {category.items.map((item) => <DishCard key={item.id} item={item} locale={locale} currency={restaurant.currency} kind={kind} />)}
           </div>
         </section>
       ))}

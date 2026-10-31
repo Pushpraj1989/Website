@@ -1,5 +1,5 @@
 import type { MenuItem } from '@/lib/data.ts';
-import type { Locale } from '@/lib/i18n.ts';
+import type { BusinessKind, Locale } from '@/lib/i18n.ts';
 import { initialOf, t } from '@/lib/i18n.ts';
 import { AddToCart } from '@/components/AddToCart';
 import { Money } from '@/components/Money';
@@ -9,15 +9,17 @@ import { Icon } from '@/components/Icon';
 // price. "row" lays the photo beside the words (the menu); "tile" puts it on top (the popular dishes on the home).
 // A dish without a photo shows its first letter on a soft panel in the brand colour.
 // Only the menu's copy of a dish carries its anchor (#dish-…), so a dish shown twice on a page keeps one id.
-export function DishCard({ item, locale, currency, layout = 'row', anchor = true }: { item: MenuItem; locale: Locale; currency: string; layout?: 'row' | 'tile'; anchor?: boolean }) {
-  const s = t(locale);
+export function DishCard({ item, locale, currency, layout = 'row', anchor = true, kind = 'restaurant' }: { item: MenuItem; locale: Locale; currency: string; layout?: 'row' | 'tile'; anchor?: boolean; kind?: BusinessKind }) {
+  const s = t(locale, kind);
+  // A product sold in options (sizes, colours...) is chosen from a sheet and priced "from" its lowest option.
+  const options = item.variants.map((v) => ({ id: v.id, name: v.name[locale], priceMinor: v.priceMinor, soldOut: v.soldOut }));
   const name = item.name[locale];
   return (
     <article className={`dish ${layout}${item.soldOut ? ' sold' : ''}`} id={anchor ? `dish-${item.id}` : undefined}>
       <div className="dish-photo">
         {item.imageUrl ? <img src={item.imageUrl} alt="" loading="lazy" /> : <span className="dish-letter" aria-hidden="true">{initialOf(name)}</span>}
         <div className="dish-add">
-          {item.soldOut ? <span className="badge danger">{s.soldOut}</span> : <AddToCart itemId={item.id} label={`${s.addToCart}: ${name}`} addLabel={s.addToCart} />}
+          {item.soldOut ? <span className="badge danger">{s.soldOut}</span> : <AddToCart itemId={item.id} label={`${s.addToCart}: ${name}`} addLabel={s.addToCart} options={options} chooseLabel={s.choose} chooseTitle={s.chooseOption(name)} soldOutLabel={s.soldOut} currency={currency} locale={locale} />}
         </div>
       </div>
       <div className="dish-text">
@@ -29,7 +31,7 @@ export function DishCard({ item, locale, currency, layout = 'row', anchor = true
           </p>
         ) : null}
         {item.description[locale] ? <p className="dish-desc">{item.description[locale]}</p> : null}
-        <p className="dish-price"><Money minor={item.priceMinor} currency={currency} locale={locale} /></p>
+        <p className="dish-price">{options.length ? <span className="muted">{s.priceFrom} </span> : null}<Money minor={item.priceMinor} currency={currency} locale={locale} /></p>
       </div>
     </article>
   );

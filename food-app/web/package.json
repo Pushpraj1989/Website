@@ -20,7 +20,7 @@
     "db:reset": "node db/migrate.mjs --reset",
     "test:access": "node test/rls.test.mjs",
     "test:accounts": "node --test test/accounts-admin.test.mjs",
-    "test:vouchers": "node --test test/vouchers.test.mjs && node --test test/campaigns.test.ts && node --test test/templates.test.ts && node --test test/print.test.ts && node --test test/wallet.test.ts && node --test test/checkout-offers.test.ts && node --test test/partners.test.ts && node --test test/reporting.test.ts && node --test test/gates.test.ts && node --test test/branding.test.ts && node --test test/staff-login.test.ts && node --test test/home.test.ts && node --test test/assistant.test.ts && node --test test/sales.test.ts",
+    "test:vouchers": "node --test test/vouchers.test.mjs && node --test test/campaigns.test.ts && node --test test/templates.test.ts && node --test test/print.test.ts && node --test test/wallet.test.ts && node --test test/checkout-offers.test.ts && node --test test/partners.test.ts && node --test test/reporting.test.ts && node --test test/gates.test.ts && node --test test/branding.test.ts && node --test test/staff-login.test.ts && node --test test/home.test.ts && node --test test/assistant.test.ts && node --test test/sales.test.ts && node --test test/retail.test.ts",
     "verify": "bash scripts/verify.sh"
   },
   "dependencies": {

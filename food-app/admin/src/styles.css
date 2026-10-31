@@ -527,3 +527,12 @@ dialog.more .grab { width: 40px; height: 4px; border-radius: 2px; background: va
 @media (min-width: 721px) { .split > .table-wrap table { min-width: 0; } .split > .table-wrap td, .split > .table-wrap th { padding: 10px 8px; } }
 /* On a phone a date and time does not fit in half the width, so each one takes a full row. */
 @media (max-width: 720px) { .form-grid > label:has(> input[type=datetime-local]), .grid-form > label:has(> input[type=datetime-local]) { grid-column: 1 / -1; } }
+
+/* Retail mode: a product's options, one small card each: names, then SKU, price, stock and the on-sale switch. */
+.variants { border: 1px solid var(--line, #e7e5e4); border-radius: 14px; padding: 14px; }
+.variants legend h3 { margin: 0; font-size: 1.05rem; }
+.variant-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.variant-card { border: 1px solid var(--line, #e7e5e4); border-radius: 12px; padding: 10px 12px; display: grid; gap: 8px; }
+.variant-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.variant-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px; align-items: end; }
+.variant-grid input:not([type=checkbox]) { width: 100%; }

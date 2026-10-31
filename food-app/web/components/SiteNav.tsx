@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { t, type Locale } from '@/lib/i18n.ts';
+import { t, type BusinessKind, type Locale } from '@/lib/i18n.ts';
 import { Icon } from '@/components/Icon';
 import { CART_CHANGED } from '@/components/AddToCart';
 
@@ -45,13 +45,13 @@ export function CartIcon({ locale, initial }: { locale: Locale; initial: number 
 
 /** On phones, as in the app: a floating rounded dock. The open page's item shows its name on a tinted pill; the
  *  others show the icon, with the name kept for screen readers. (The app's Orders and Account need an app account.) */
-export function BottomDock({ locale }: { locale: Locale }) {
-  const s = t(locale);
+export function BottomDock({ locale, kind = 'restaurant' }: { locale: Locale; kind?: BusinessKind }) {
+  const s = t(locale, kind);
   const pathname = usePathname() ?? '/';
   if (/^\/(admin|checkout|orders)/.test(pathname)) return null;
   const items = [
     { href: '/', label: s.home, icon: 'home', on: pathname === '/' },
-    { href: '/menu', label: s.menu, icon: 'menu', on: pathname.startsWith('/menu') },
+    { href: '/menu', label: s.menu, icon: kind === 'shop' ? 'shop' : 'menu', on: pathname.startsWith('/menu') },
     { href: '/cart', label: s.cart, icon: 'bag', on: pathname.startsWith('/cart') },
   ];
   return (

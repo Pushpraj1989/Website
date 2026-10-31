@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { t, type Locale } from '@/lib/i18n.ts';
+import { t, type BusinessKind, type Locale } from '@/lib/i18n.ts';
 import { Icon } from '@/components/Icon';
 import { LoopVideo } from '@/components/LoopVideo';
 
@@ -22,8 +22,8 @@ export type HeroSlide = {
 // on it, the slide's words and pill button at its foot and small dots at its bottom edge. Slides change on their own after each one's time;
 // the pause button stops them (they also stop while the pointer or focus is on the hero, and never move when the
 // visitor asks for less motion).
-export function HeroSlider({ slides, locale }: { slides: HeroSlide[]; locale: Locale }) {
-  const s = t(locale);
+export function HeroSlider({ slides, locale, kind = 'restaurant' }: { slides: HeroSlide[]; locale: Locale; kind?: BusinessKind }) {
+  const s = t(locale, kind);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [hold, setHold] = useState(false);

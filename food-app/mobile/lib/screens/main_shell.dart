@@ -12,6 +12,7 @@ import 'home_screen.dart';
 import 'account_screen.dart';
 import 'menu_screen.dart';
 import 'orders_screen.dart';
+import '../core/strings.dart';
 
 // The signed-in app: four destinations in a floating pill dock: Home, Menu, Orders and Account (membership,
 // vouchers, settings and About live under Account). The assistant is a button in the Home and Menu
@@ -62,7 +63,7 @@ class _MainShellState extends State<MainShell> {
                     onSelect: _select,
                     items: [
                       DockItem(icon: LucideIcons.house, label: s.home),
-                      DockItem(icon: LucideIcons.utensils, label: s.menu),
+                      DockItem(icon: Strings.shop ? LucideIcons.store : LucideIcons.utensils, label: s.menu),
                       DockItem(icon: LucideIcons.receiptText, label: s.orderHistory),
                       DockItem(icon: LucideIcons.user, label: s.account),
                     ],

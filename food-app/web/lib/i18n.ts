@@ -12,6 +12,9 @@ export const STRINGS = {
     admin: 'Staff',
     addToCart: 'Add',
     soldOut: 'Sold out',
+    choose: 'Choose',
+    chooseOption: (name: string) => `Choose an option: ${name}`,
+    priceFrom: 'from',
     emptyCart: 'Your cart is empty.',
     quantity: 'Quantity',
     remove: 'Remove',
@@ -108,6 +111,9 @@ export const STRINGS = {
     admin: 'الموظفون',
     addToCart: 'إضافة',
     soldOut: 'نفدت الكمية',
+    choose: 'اختر',
+    chooseOption: (name: string) => `اختر نوعاً: ${name}`,
+    priceFrom: 'من',
     emptyCart: 'سلتك فارغة.',
     quantity: 'الكمية',
     remove: 'حذف',
@@ -199,6 +205,38 @@ export const STRINGS = {
   },
 } as const;
 
-export function t(locale: Locale) {
+/** A shop (retail mode) says shop and products where a restaurant says menu and dishes. */
+export type BusinessKind = 'restaurant' | 'shop';
+const SHOP = {
+  en: {
+    menu: 'Shop',
+    note: 'Note for us',
+    browseMenu: 'Browse the shop',
+    allDishes: 'All products',
+    selectedDishes: 'Selected products',
+    searchDishes: 'Search products',
+    popular: 'Popular in the shop',
+    seeFullMenu: 'See all products',
+    noResults: (q: string) => `No products match “${q}”.`,
+    resultsFor: (n: number, q: string) => `${n} ${n === 1 ? 'product matches' : 'products match'} “${q}”`,
+    welcomeLine: 'Quality products, delivered to your door.',
+  },
+  ar: {
+    menu: 'المتجر',
+    note: 'ملاحظة لنا',
+    browseMenu: 'تصفّح المتجر',
+    allDishes: 'كل المنتجات',
+    selectedDishes: 'منتجات مختارة',
+    searchDishes: 'ابحث عن المنتجات',
+    popular: 'الأكثر طلباً في المتجر',
+    seeFullMenu: 'عرض كل المنتجات',
+    noResults: (q: string) => `لا توجد منتجات تطابق «${q}».`,
+    resultsFor: (n: number, q: string) => `${n} من المنتجات تطابق «${q}»`,
+    welcomeLine: 'منتجات مختارة تصل إلى بابك.',
+  },
+};
+
+export function t(locale: Locale, kind: BusinessKind = 'restaurant') {
+  if (kind === 'shop') return { ...STRINGS[locale], ...SHOP[locale] } as unknown as (typeof STRINGS)[Locale];
   return STRINGS[locale];
 }

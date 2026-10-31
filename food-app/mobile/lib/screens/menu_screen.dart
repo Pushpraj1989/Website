@@ -53,7 +53,9 @@ class _MenuScreenState extends State<MenuScreen> {
       ..showSnackBar(SnackBar(behavior: SnackBarBehavior.floating, content: Text(message), backgroundColor: Tokens.dangerFill));
   }
 
-  Future<void> _quickAdd(Strings s, MenuItem item) async {
+  Future<void> _quickAdd(Strings s, MenuItem item, {required Menu menu, required String illustration}) async {
+    // A product sold in options is chosen in its sheet.
+    if (item.variants.isNotEmpty) return _open(s, menu, item, illustration);
     try {
       await widget.api.addOne(item.id);
       if (mounted) _added(s, item.name.of(s.lang));
@@ -156,7 +158,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 s: s,
                 currency: menu.currency,
                 onOpen: () => _open(s, menu, item, category.illustration),
-                onAdd: () => _quickAdd(s, item),
+                onAdd: () => _quickAdd(s, item, menu: menu, illustration: category.illustration),
               ),
             );
           },

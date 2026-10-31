@@ -38,6 +38,7 @@ export const api = {
   createProduct: (body) => request('POST', '/v1/admin/products', body),
   updateProduct: (id, body) => request('PATCH', `/v1/admin/products/${id}`, body),
   deleteProduct: (id) => request('DELETE', `/v1/admin/products/${id}`),
+  saveVariants: (id, variants) => request('PUT', `/v1/admin/products/${id}/variants`, { variants }),
   gallery: (id) => request('GET', `/v1/admin/products/${id}/media`),
   uploadMedia: (id, file, altEn, altAr) => {
     const form = new FormData();

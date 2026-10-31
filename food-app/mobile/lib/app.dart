@@ -94,7 +94,10 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Brand?>(
       valueListenable: _brand,
-      builder: (context, brand, _) => ValueListenableBuilder<String>(
+      builder: (context, brand, _) {
+        // Retail mode: the business's words (shop and products, or menu and dishes) follow its settings.
+        Strings.shop = brand?.isShop ?? false;
+        return ValueListenableBuilder<String>(
       valueListenable: _language,
       builder: (context, lang, _) {
         return BrandScope(
@@ -130,7 +133,8 @@ class _SampleKitchenAppState extends State<SampleKitchenApp> {
           ),
         );
       },
-      ),
+      );
+      },
     );
   }
 }

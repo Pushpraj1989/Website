@@ -27,7 +27,7 @@ export function imageUrl(storageKey: string | null): string | null {
 }
 
 export async function adminCatalog() {
-  const [categories, items, offers] = await Promise.all([
+  const [categories, items, offers, variants] = await Promise.all([
     pool.query('select id, name_en, name_ar, sort_order, active, illustration from categories where restaurant_id = $1 order by sort_order, name_en', [RESTAURANT_ID]),
     pool.query(
       `select i.*, cover.storage_key from menu_items i
@@ -38,7 +38,9 @@ export async function adminCatalog() {
       [RESTAURANT_ID],
     ),
     pool.query('select * from offers where restaurant_id = $1 order by active desc, starts_at desc', [RESTAURANT_ID]),
+    pool.query('select * from product_variants order by position, created_at'),
   ]);
+  const variantsOf = (itemId: string) => variants.rows.filter((v) => v.item_id === itemId).map(variantView);
   return {
     categories: categories.rows.map((c) => ({ id: c.id, name: { en: c.name_en, ar: c.name_ar }, sortOrder: c.sort_order, active: c.active, illustration: c.illustration })),
     products: items.rows.map((i) => ({
@@ -50,6 +52,8 @@ export async function adminCatalog() {
       available: i.available,
       sortOrder: i.sort_order,
       imageUrl: imageUrl(i.storage_key),
+      stock: i.stock,
+      variants: variantsOf(i.id),
     })),
     offers: offers.rows.map(offerView),
   };
@@ -122,6 +126,8 @@ const productFields = (body: Record<string, unknown>, partial: boolean) => ({
   priceMinor: body.priceMinor === undefined && partial ? undefined : int(body.priceMinor, 'Price', 0, 1_000_000_000),
   available: body.available === undefined && partial ? undefined : bool(body.available, true),
   sortOrder: body.sortOrder === undefined && partial ? undefined : int(body.sortOrder ?? 0, 'Sort order', 0, 999),
+  // Stock left: a whole number, or empty (null) for "not counted".
+  stock: body.stock === undefined ? undefined : body.stock === null || body.stock === '' ? null : int(body.stock, 'Stock', 0, 1_000_000),
 });
 
 export async function createProduct(body: Record<string, unknown>) {
@@ -129,9 +135,9 @@ export async function createProduct(body: Record<string, unknown>) {
   const category = await pool.query('select 1 from categories where id = $1 and restaurant_id = $2', [f.categoryId, RESTAURANT_ID]);
   if (!category.rows[0]) throw new RuleError('Choose a category that exists.', 'bad_input', 400);
   const { rows } = await pool.query(
-    `insert into menu_items (category_id, name_en, name_ar, description_en, description_ar, base_price_minor, available, sort_order)
-     values ($1,$2,$3,$4,$5,$6,$7,$8) returning id`,
-    [f.categoryId, f.nameEn, f.nameAr, f.descEn, f.descAr, f.priceMinor, f.available, f.sortOrder],
+    `insert into menu_items (category_id, name_en, name_ar, description_en, description_ar, base_price_minor, available, sort_order, stock)
+     values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id`,
+    [f.categoryId, f.nameEn, f.nameAr, f.descEn, f.descAr, f.priceMinor, f.available, f.sortOrder, f.stock ?? null],
   );
   return rows[0];
 }
@@ -146,9 +152,10 @@ export async function updateProduct(id: string, body: Record<string, unknown>) {
     `update menu_items set category_id = coalesce($2, category_id), name_en = coalesce($3, name_en),
        name_ar = coalesce($4, name_ar), description_en = coalesce($5, description_en),
        description_ar = coalesce($6, description_ar), base_price_minor = coalesce($7, base_price_minor),
-       available = coalesce($8, available), sort_order = coalesce($9, sort_order), updated_at = now()
+       available = coalesce($8, available), sort_order = coalesce($9, sort_order),
+       stock = case when $10 then $11::int else stock end, updated_at = now()
      where id = $1`,
-    [id, f.categoryId ?? null, f.nameEn ?? null, f.nameAr ?? null, f.descEn ?? null, f.descAr ?? null, f.priceMinor ?? null, f.available ?? null, f.sortOrder ?? null],
+    [id, f.categoryId ?? null, f.nameEn ?? null, f.nameAr ?? null, f.descEn ?? null, f.descAr ?? null, f.priceMinor ?? null, f.available ?? null, f.sortOrder ?? null, f.stock !== undefined, f.stock ?? null],
   );
   if (!rowCount) throw new RuleError('Product not found.', 'not_found', 404);
 }
@@ -242,4 +249,67 @@ export function validateOffer(body: Record<string, unknown>) {
     maxDiscountMinor: maxDiscount,
     active: bool(body.active, true),
   };
+}
+
+// ---------- Variants (retail mode): one product in versions, each with its own price and stock ----------
+
+export const MAX_VARIANTS = 50;
+
+export function variantView(v: Record<string, any>) {
+  return { id: v.id, name: { en: v.name_en, ar: v.name_ar }, sku: v.sku, priceMinor: v.price_minor, stock: v.stock, active: v.active, position: v.position };
+}
+
+/**
+ * Replaces a product's variants with the list sent, in that order. Variants sent with an id are updated; without one,
+ * added; left out, removed (or switched off when they have been ordered, so order history keeps them).
+ */
+export async function saveVariants(itemId: string, raw: unknown) {
+  if (!Array.isArray(raw)) throw new RuleError('Send the variants as a list.', 'bad_input', 400);
+  if (raw.length > MAX_VARIANTS) throw new RuleError(`A product can have up to ${MAX_VARIANTS} variants.`, 'bad_input', 400);
+  const list = raw.map((r, i) => {
+    const v = (r ?? {}) as Record<string, unknown>;
+    const name = (v.name ?? {}) as { en?: unknown; ar?: unknown };
+    return {
+      id: typeof v.id === 'string' && /^[0-9a-f-]{36}$/.test(v.id) ? v.id : null,
+      nameEn: text(name.en ?? v.nameEn, `Variant ${i + 1}: English name`, 60),
+      nameAr: text(name.ar ?? v.nameAr, `Variant ${i + 1}: Arabic name`, 60),
+      sku: text(v.sku ?? '', `Variant ${i + 1}: SKU`, 40, false),
+      priceMinor: int(v.priceMinor, `Variant ${i + 1}: Price`, 0, 1_000_000_000),
+      stock: v.stock === null || v.stock === undefined || v.stock === '' ? null : int(v.stock, `Variant ${i + 1}: Stock`, 0, 1_000_000),
+      active: bool(v.active, true),
+    };
+  });
+  const names = new Set<string>();
+  for (const v of list) {
+    const key = v.nameEn.toLowerCase();
+    if (names.has(key)) throw new RuleError(`Two variants are both called "${v.nameEn}". Give each a different name.`, 'bad_input', 400);
+    names.add(key);
+  }
+  return withTx(async (c) => {
+    const item = await c.query('select 1 from menu_items i join categories c on c.id = i.category_id where i.id = $1 and c.restaurant_id = $2 for update', [itemId, RESTAURANT_ID]);
+    if (!item.rows[0]) throw new RuleError('Product not found.', 'not_found', 404);
+    const existing = await c.query('select id from product_variants where item_id = $1', [itemId]);
+    const keep = new Set(list.map((v) => v.id).filter(Boolean));
+    for (const row of existing.rows) {
+      if (keep.has(row.id)) continue;
+      const used = await c.query('select 1 from order_lines where variant_id = $1 limit 1', [row.id]);
+      if (used.rows[0]) await c.query('update product_variants set active = false, position = 9999 where id = $1', [row.id]);
+      else await c.query('delete from product_variants where id = $1', [row.id]);
+    }
+    for (const [position, v] of list.entries()) {
+      if (v.id && existing.rows.some((r) => r.id === v.id)) {
+        await c.query(
+          'update product_variants set name_en=$2, name_ar=$3, sku=$4, price_minor=$5, stock=$6, active=$7, position=$8 where id=$1',
+          [v.id, v.nameEn, v.nameAr, v.sku, v.priceMinor, v.stock, v.active, position],
+        );
+      } else {
+        await c.query(
+          'insert into product_variants (item_id, name_en, name_ar, sku, price_minor, stock, active, position) values ($1,$2,$3,$4,$5,$6,$7,$8)',
+          [itemId, v.nameEn, v.nameAr, v.sku, v.priceMinor, v.stock, v.active, position],
+        );
+      }
+    }
+    const saved = await c.query('select * from product_variants where item_id = $1 order by position, created_at', [itemId]);
+    return saved.rows.map(variantView);
+  });
 }

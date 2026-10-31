@@ -9,7 +9,10 @@ import 'theme.dart';
 /// The restaurant's own identity, set by its staff in the admin: name, tagline, logo, colour and contact. The app has
 /// no restaurant built in; it shows whichever restaurant its server belongs to.
 class Brand {
-  const Brand({required this.name, required this.tagline, required this.logoUrl, required this.color, required this.phone, required this.address, this.theme = AppTheme.classic, this.buttonStyle = 'light', this.iconStyle = 'brand'});
+  const Brand({required this.name, required this.tagline, required this.logoUrl, required this.color, required this.phone, required this.address, this.theme = AppTheme.classic, this.buttonStyle = 'light', this.iconStyle = 'brand', this.businessType = 'restaurant'});
+  /// 'restaurant' or 'shop' (retail mode): a shop says shop and products where a restaurant says menu and dishes.
+  final String businessType;
+  bool get isShop => businessType == 'shop';
   final Localised name;
   final Localised tagline;
   /// Absolute address of the logo, or null when the restaurant has none.
@@ -43,6 +46,7 @@ class Brand {
       iconStyle: json['iconStyle'] as String? ?? 'brand',
       phone: json['phone'] as String? ?? '',
       address: json['address'] == null ? const Localised('', '') : Localised.fromJson(json['address'] as Map<String, dynamic>),
+      businessType: json['businessType'] == 'shop' ? 'shop' : 'restaurant',
     );
   }
 
@@ -56,6 +60,7 @@ class Brand {
         'iconStyle': iconStyle,
         'phone': phone,
         'address': {'en': address.en, 'ar': address.ar},
+        'businessType': businessType,
       };
 }
 

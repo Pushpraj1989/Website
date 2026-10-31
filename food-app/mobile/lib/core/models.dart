@@ -24,8 +24,24 @@ class MediaUrls {
   }
 }
 
+/// One version of a product in a shop: a size, colour, shade or flavour, with its own price and stock.
+class ItemVariant {
+  const ItemVariant({required this.id, required this.name, required this.priceMinor, required this.soldOut});
+  final String id;
+  final Localised name;
+  final int priceMinor;
+  final bool soldOut;
+
+  factory ItemVariant.fromJson(Map<String, dynamic> json) => ItemVariant(
+        id: json['id'] as String,
+        name: Localised.fromJson(json['name'] as Map<String, dynamic>),
+        priceMinor: json['priceMinor'] as int,
+        soldOut: (json['soldOut'] as bool?) ?? false,
+      );
+}
+
 class MenuItem {
-  const MenuItem({required this.id, required this.name, required this.description, required this.priceMinor, required this.soldOut, this.imageUrl, this.rating});
+  const MenuItem({required this.id, required this.name, required this.description, required this.priceMinor, required this.soldOut, this.imageUrl, this.rating, this.variants = const []});
   final String id;
   final Localised name;
   final Localised description;
@@ -35,6 +51,8 @@ class MenuItem {
   final String? imageUrl;
   /// The dish's score from rated orders, or null until it has as many ratings as the restaurant set.
   final DishRating? rating;
+  /// The product's options (shops). With options, [priceMinor] is the lowest one and the customer chooses one.
+  final List<ItemVariant> variants;
 
   factory MenuItem.fromJson(Map<String, dynamic> json) => MenuItem(
         id: json['id'] as String,
@@ -44,6 +62,7 @@ class MenuItem {
         soldOut: json['soldOut'] as bool,
         imageUrl: MediaUrls.resolve(json['imageUrl']),
         rating: json['rating'] is Map<String, dynamic> ? DishRating.fromJson(json['rating'] as Map<String, dynamic>) : null,
+        variants: [for (final v in (json['variants'] as List<dynamic>? ?? const [])) ItemVariant.fromJson(v as Map<String, dynamic>)],
       );
 }
 
@@ -99,8 +118,12 @@ class Menu {
 }
 
 class CartLine {
-  const CartLine({required this.itemId, required this.qty, required this.note, required this.name, required this.unitMinor, required this.soldOut});
+  const CartLine({required this.itemId, required this.qty, required this.note, required this.name, required this.unitMinor, required this.soldOut, this.variantId});
   final String itemId;
+  /// The chosen option of a product sold in options (shops), or null.
+  final String? variantId;
+  /// The line's identity: product and option together. The same product in two sizes is two lines.
+  String get key => '$itemId:${variantId ?? ''}';
   final int qty;
   final String note;
   final Localised? name;
@@ -109,6 +132,7 @@ class CartLine {
 
   factory CartLine.fromJson(Map<String, dynamic> json) => CartLine(
         itemId: json['itemId'] as String,
+        variantId: json['variantId'] as String?,
         qty: json['qty'] as int,
         note: (json['note'] as String?) ?? '',
         name: json['name'] == null ? null : Localised.fromJson(json['name'] as Map<String, dynamic>),
@@ -117,7 +141,7 @@ class CartLine {
       );
 
   CartLine copyWith({int? qty, String? note}) =>
-      CartLine(itemId: itemId, qty: qty ?? this.qty, note: note ?? this.note, name: name, unitMinor: unitMinor, soldOut: soldOut);
+      CartLine(itemId: itemId, variantId: variantId, qty: qty ?? this.qty, note: note ?? this.note, name: name, unitMinor: unitMinor, soldOut: soldOut);
 }
 
 class Quote {

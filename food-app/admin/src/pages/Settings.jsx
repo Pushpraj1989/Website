@@ -33,6 +33,12 @@ const ICON_STYLES = [
   { id: 'neutral', name: 'Neutral', about: 'Icons in the text colour.' },
 ];
 
+// What kind of business this is. A shop gets shop words everywhere, and variants and stock on its products.
+const BUSINESS_TYPES = [
+  { id: 'restaurant', name: 'Restaurant', about: 'Menu and dishes. For restaurants, cafés, bakeries and cloud kitchens.' },
+  { id: 'shop', name: 'Shop', about: 'Shop and products, with sizes, colours or flavours and stock counts. For clothing, beauty, supplements and more.' },
+];
+
 // The restaurant's own identity and ordering rules. Everything the customer app shows about the restaurant comes from here.
 export default function Settings({ onBrandChanged }) {
   const [settings, setSettings] = useState(null);
@@ -40,12 +46,13 @@ export default function Settings({ onBrandChanged }) {
   const [theme, setTheme] = useState('classic');
   const [buttonStyle, setButtonStyle] = useState('light');
   const [iconStyle, setIconStyle] = useState('brand');
+  const [businessType, setBusinessType] = useState('restaurant');
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
-    api.settings().then(({ settings: s }) => { setSettings(s); setColor(s.brandColor); setTheme(s.theme ?? 'classic'); setButtonStyle(s.buttonStyle ?? 'light'); setIconStyle(s.iconStyle ?? 'brand'); }).catch((err) => setError(err.message));
+    api.settings().then(({ settings: s }) => { setSettings(s); setColor(s.brandColor); setTheme(s.theme ?? 'classic'); setButtonStyle(s.buttonStyle ?? 'light'); setIconStyle(s.iconStyle ?? 'brand'); setBusinessType(s.businessType ?? 'restaurant'); }).catch((err) => setError(err.message));
   }, []);
 
   if (!settings) return <section className="stack"><h1>Restaurant</h1>{error ? <p role="alert" className="error">{error}</p> : <p className="muted">Loading…</p>}</section>;
@@ -72,6 +79,7 @@ export default function Settings({ onBrandChanged }) {
         theme,
         buttonStyle,
         iconStyle,
+        businessType,
         ratingMinCount: Number(f.get('ratingMinCount')),
         cashLimitMinor: cashLimit,
         serviceFeeMinor: serviceFee,
@@ -117,7 +125,7 @@ export default function Settings({ onBrandChanged }) {
     <section className="stack">
       <div className="toolbar">
         <div>
-          <h1>Restaurant</h1>
+          <h1>{businessType === 'shop' ? 'Business' : 'Restaurant'}</h1>
           <p className="muted">Your name, logo, colour and ordering rules. The customer app and this console use them.</p>
         </div>
       </div>
@@ -141,6 +149,20 @@ export default function Settings({ onBrandChanged }) {
       </div>
 
       <form className="stack" onSubmit={save}>
+        <div className="card stack">
+          <h2>Type of business</h2>
+          <fieldset className="choices">
+            <legend className="sr-only">Type of business</legend>
+            {BUSINESS_TYPES.map((b) => (
+              <label key={b.id} className={`style-option${businessType === b.id ? ' selected' : ''}`}>
+                <input type="radio" name="businessType" value={b.id} checked={businessType === b.id} onChange={() => setBusinessType(b.id)} />
+                <span><b>{b.name}</b><span className="hint">{b.about}</span></span>
+              </label>
+            ))}
+          </fieldset>
+          <p className="hint">You can switch at any time. Products, orders and settings stay as they are; only the words and the product options change.</p>
+        </div>
+
         <div className="card stack">
           <h2>Name and contact</h2>
           <div className="form-grid">

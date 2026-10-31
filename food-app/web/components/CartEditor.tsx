@@ -2,15 +2,16 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { t, type Locale } from '@/lib/i18n.ts';
+import { t, type BusinessKind, type Locale } from '@/lib/i18n.ts';
 import { Money } from '@/components/Money';
+import { forPut, lineKey } from '@/lib/cart-lines.ts';
 
-type CartLine = { itemId: string; qty: number; note: string; name: { en: string; ar: string } | null; unitMinor: number | null; soldOut: boolean };
+type CartLine = { itemId: string; variantId?: string | null; qty: number; note: string; name: { en: string; ar: string } | null; unitMinor: number | null; soldOut: boolean };
 type Quote = { subtotalMinor: number; deliveryFeeMinor: number; serviceFeeMinor: number; totalMinor: number; taxIncludedMinor: number; taxLabel: string; currency: string };
 type CartView = { lines: CartLine[]; quote: Quote | null; problem: string | null; currency?: string };
 
-export function CartEditor({ locale }: { locale: Locale }) {
-  const s = t(locale);
+export function CartEditor({ locale, kind = 'restaurant' }: { locale: Locale; kind?: BusinessKind }) {
+  const s = t(locale, kind);
   const [cart, setCart] = useState<CartView | null>(null);
   const [error, setError] = useState('');
 
@@ -26,7 +27,7 @@ export function CartEditor({ locale }: { locale: Locale }) {
     const response = await fetch('/v1/cart', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: lines.map((l) => ({ itemId: l.itemId, qty: l.qty, note: l.note })), channel: 'delivery' }),
+      body: JSON.stringify({ items: lines.map(forPut), channel: 'delivery' }),
     });
     const body = await response.json();
     if (!response.ok) setError(body.error?.message ?? s.errorGeneric);
@@ -48,7 +49,7 @@ export function CartEditor({ locale }: { locale: Locale }) {
     <div className="stack">
       {error ? <p role="alert" className="error">{error}</p> : null}
       {cart.lines.map((line) => (
-        <div key={line.itemId} className="card stack">
+        <div key={lineKey(line)} className="card stack">
           <div className="row">
             <strong>{line.name?.[locale] ?? '—'}</strong>
             <span className="spacer" />
@@ -68,7 +69,7 @@ export function CartEditor({ locale }: { locale: Locale }) {
                 style={{ width: 96 }}
                 onChange={(e) => {
                   const qty = Math.min(20, Math.max(0, Number(e.target.value) || 0));
-                  setCart({ ...cart, lines: cart.lines.map((l) => (l.itemId === line.itemId ? { ...l, qty } : l)) });
+                  setCart({ ...cart, lines: cart.lines.map((l) => (lineKey(l) === lineKey(line) ? { ...l, qty } : l)) });
                 }}
                 onBlur={() => save(cart.lines.filter((l) => l.qty > 0))}
               />
@@ -79,11 +80,11 @@ export function CartEditor({ locale }: { locale: Locale }) {
                 type="text"
                 maxLength={200}
                 value={line.note}
-                onChange={(e) => setCart({ ...cart, lines: cart.lines.map((l) => (l.itemId === line.itemId ? { ...l, note: e.target.value } : l)) })}
+                onChange={(e) => setCart({ ...cart, lines: cart.lines.map((l) => (lineKey(l) === lineKey(line) ? { ...l, note: e.target.value } : l)) })}
                 onBlur={() => save(cart.lines.filter((l) => l.qty > 0))}
               />
             </label>
-            <button type="button" className="btn" onClick={() => save(cart.lines.filter((l) => l.itemId !== line.itemId))}>
+            <button type="button" className="btn" onClick={() => save(cart.lines.filter((l) => lineKey(l) !== lineKey(line)))}>
               {s.remove}
             </button>
           </div>

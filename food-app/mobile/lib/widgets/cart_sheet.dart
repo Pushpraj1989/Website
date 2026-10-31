@@ -101,7 +101,7 @@ class _CartSheetState extends State<CartSheet> {
   }
 
   Future<void> _setQty(CartLine line, int qty) async {
-    final lines = [for (final l in _lines!) l.itemId == line.itemId ? l.copyWith(qty: qty) : l].where((l) => l.qty > 0).toList();
+    final lines = [for (final l in _lines!) l.key == line.key ? l.copyWith(qty: qty) : l].where((l) => l.qty > 0).toList();
     setState(() => _lines = lines);
     try {
       await widget.api.saveCart(lines);

@@ -19,6 +19,9 @@ export type Theme = (typeof THEMES)[number];
 export const BUTTON_STYLES = ['light', 'tonal', 'filled'] as const;
 export const ICON_STYLES = ['brand', 'neutral'] as const;
 export type ButtonStyle = (typeof BUTTON_STYLES)[number];
+/** Restaurant or shop: changes the words customers and staff see, and turns on variants and stock in the console. */
+export const BUSINESS_TYPES = ['restaurant', 'shop'] as const;
+export type BusinessType = (typeof BUSINESS_TYPES)[number];
 export type IconStyle = (typeof ICON_STYLES)[number];
 
 export type RestaurantSettings = {
@@ -31,6 +34,7 @@ export type RestaurantSettings = {
   buttonStyle: ButtonStyle;
   iconStyle: IconStyle;
   ratingMinCount: number;
+  businessType: BusinessType;
   logoUrl: string | null;
   currency: string;
   taxLabel: string;
@@ -42,7 +46,7 @@ export type RestaurantSettings = {
 };
 
 const SQL = `
-  select r.name_en, r.name_ar, r.tagline_en, r.tagline_ar, r.phone, r.address_en, r.address_ar, r.brand_color, r.theme, r.button_style, r.icon_style, r.rating_min_count,
+  select r.name_en, r.name_ar, r.tagline_en, r.tagline_ar, r.phone, r.address_en, r.address_ar, r.brand_color, r.theme, r.button_style, r.icon_style, r.rating_min_count, r.business_type,
          r.currency_code, r.tax_label, r.tax_basis_points, r.service_fee_minor, r.cash_limit_minor,
          r.accepts_cod, r.accepts_pay_on_arrival, r.accepts_card, m.storage_key as logo_key
   from restaurant r left join media m on m.id = r.logo_media_id
@@ -62,6 +66,7 @@ export async function getSettings(): Promise<RestaurantSettings> {
     buttonStyle: r.button_style,
     iconStyle: r.icon_style,
     ratingMinCount: r.rating_min_count,
+    businessType: r.business_type,
     logoUrl: r.logo_key ? urlFor(r.logo_key) : null,
     currency: r.currency_code,
     taxLabel: r.tax_label,
@@ -76,7 +81,7 @@ export async function getSettings(): Promise<RestaurantSettings> {
 /** What the customer app needs to look like this restaurant. Public. */
 export async function publicBrand() {
   const s = await getSettings();
-  return { name: s.name, tagline: s.tagline, logoUrl: s.logoUrl, color: s.brandColor, theme: s.theme, buttonStyle: s.buttonStyle, iconStyle: s.iconStyle, phone: s.phone, address: s.address };
+  return { name: s.name, tagline: s.tagline, logoUrl: s.logoUrl, color: s.brandColor, theme: s.theme, buttonStyle: s.buttonStyle, iconStyle: s.iconStyle, phone: s.phone, address: s.address, businessType: s.businessType };
 }
 
 /** Relative luminance of a #RRGGBB colour (WCAG 2.2 definition). */
@@ -124,6 +129,7 @@ export async function updateSettings(body: Record<string, unknown>, actor: strin
     buttonStyle: (body.buttonStyle === undefined ? current.buttonStyle : body.buttonStyle) as ButtonStyle,
     iconStyle: (body.iconStyle === undefined ? current.iconStyle : body.iconStyle) as IconStyle,
     ratingMinCount: body.ratingMinCount === undefined ? current.ratingMinCount : Number(body.ratingMinCount),
+    businessType: (body.businessType === undefined ? current.businessType : body.businessType) as BusinessType,
     serviceFeeMinor: body.serviceFeeMinor === undefined ? current.serviceFeeMinor : minor(body.serviceFeeMinor, 'The service fee', 100_000),
     cashLimitMinor: body.cashLimitMinor === undefined ? current.cashLimitMinor : minor(body.cashLimitMinor, 'The cash limit', 10_000_000),
     cod: payments?.cod === undefined ? current.payments.cod : payments.cod === true,
@@ -138,6 +144,7 @@ export async function updateSettings(body: Record<string, unknown>, actor: strin
   if (!THEMES.includes(next.theme)) throw new RuleError('Choose one of the themes.', 'bad_input', 400);
   if (!BUTTON_STYLES.includes(next.buttonStyle)) throw new RuleError('Choose one of the button styles.', 'bad_input', 400);
   if (!ICON_STYLES.includes(next.iconStyle)) throw new RuleError('Choose one of the icon styles.', 'bad_input', 400);
+  if (!BUSINESS_TYPES.includes(next.businessType)) throw new RuleError('Choose restaurant or shop.', 'bad_input', 400);
   if (!Number.isInteger(next.ratingMinCount) || next.ratingMinCount < 1 || next.ratingMinCount > 1000) throw new RuleError('Show ratings after 1 to 1000 ratings.', 'bad_input', 400);
   if (payments?.card === true && !current.payments.card && !stripeConfigured()) throw new RuleError('Card payment needs the payment provider set up first.', 'card_unavailable', 422);
   if (!next.cod && !next.payOnArrival && !next.card) throw new RuleError('Keep at least one way to pay switched on.', 'bad_input', 400);
@@ -146,12 +153,12 @@ export async function updateSettings(body: Record<string, unknown>, actor: strin
     await c.query(
       `update restaurant set name_en=$2, name_ar=$3, tagline_en=$4, tagline_ar=$5, phone=$6, address_en=$7, address_ar=$8,
          brand_color=$9, service_fee_minor=$10, cash_limit_minor=$11, accepts_cod=$12, accepts_pay_on_arrival=$13,
-         accepts_card=$14, theme=$15, button_style=$16, icon_style=$17, rating_min_count=$18, updated_at=now()
+         accepts_card=$14, theme=$15, button_style=$16, icon_style=$17, rating_min_count=$18, business_type=$19, updated_at=now()
        where id=$1`,
       [RESTAURANT_ID, next.nameEn, next.nameAr, next.taglineEn, next.taglineAr, next.phone, next.addressEn, next.addressAr,
-        next.brandColor, next.serviceFeeMinor, next.cashLimitMinor, next.cod, next.payOnArrival, next.card, next.theme, next.buttonStyle, next.iconStyle, next.ratingMinCount],
+        next.brandColor, next.serviceFeeMinor, next.cashLimitMinor, next.cod, next.payOnArrival, next.card, next.theme, next.buttonStyle, next.iconStyle, next.ratingMinCount, next.businessType],
     );
-    const changed = Object.keys(body).filter((k) => ['name', 'tagline', 'phone', 'address', 'brandColor', 'theme', 'buttonStyle', 'iconStyle', 'ratingMinCount', 'serviceFeeMinor', 'cashLimitMinor', 'payments'].includes(k));
+    const changed = Object.keys(body).filter((k) => ['name', 'tagline', 'phone', 'address', 'brandColor', 'theme', 'buttonStyle', 'iconStyle', 'ratingMinCount', 'businessType', 'serviceFeeMinor', 'cashLimitMinor', 'payments'].includes(k));
     await recordAudit(c, actor, 'restaurant_settings_changed', 'restaurant', RESTAURANT_ID, { fields: changed });
   });
   return getSettings();

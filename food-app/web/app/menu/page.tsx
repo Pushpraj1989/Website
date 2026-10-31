@@ -6,6 +6,7 @@ import { DishCard } from '@/components/DishCard';
 import { Icon } from '@/components/Icon';
 import { WelcomeOffer, type WelcomePromo } from '@/components/WelcomeOffer';
 import { livePromotions } from '@/lib/gallery.ts';
+import { getSettings } from '@/lib/restaurant-settings.ts';
 
 // The menu, as in the app: a search box, the categories as tabs that stay at the top while the page scrolls, and each
 // dish as a card with its photo and an Add button on it. ?q= narrows the dishes to those whose name or description
@@ -18,7 +19,8 @@ const FILTERS = {
 
 export default async function MenuPage({ searchParams }: { searchParams: Promise<{ q?: string; filter?: string }> }) {
   const locale = await currentLocale();
-  const s = t(locale);
+  const kind = (await getSettings()).businessType;
+  const s = t(locale, kind);
   const params = await searchParams;
   const q = String(params.q ?? '').trim().slice(0, 60);
   const filter = params.filter === 'available' || params.filter === 'under' ? params.filter : null;
@@ -67,7 +69,7 @@ export default async function MenuPage({ searchParams }: { searchParams: Promise
         <section key={category.id} className="menu-section" aria-labelledby={category.id}>
           <h2 id={category.id}>{category.name[locale]}</h2>
           <div className="dish-list">
-            {category.items.map((item) => <DishCard key={item.id} item={item} locale={locale} currency={restaurant.currency} />)}
+            {category.items.map((item) => <DishCard key={item.id} item={item} locale={locale} currency={restaurant.currency} kind={kind} />)}
           </div>
         </section>
       ))}

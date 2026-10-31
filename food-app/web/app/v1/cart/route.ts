@@ -39,13 +39,16 @@ async function viewFor(guestId: string, channel: Channel, accountId: string | nu
     currency: restaurant.currency,
     lines: lines.map((line) => {
       const item = items.get(line.itemId);
+      // A product sold in options shows the chosen one: its name, price and stock state.
+      const variant = line.variantId ? item?.variants.find((v) => v.id === line.variantId) ?? null : null;
       return {
         itemId: line.itemId,
+        variantId: line.variantId ?? null,
         qty: line.qty,
         note: line.note,
-        name: item?.name ?? null,
-        unitMinor: item?.priceMinor ?? null,
-        soldOut: item?.soldOut ?? false,
+        name: item ? (variant ? { en: `${item.name.en} · ${variant.name.en}`, ar: `${item.name.ar} · ${variant.name.ar}` } : item.name) : null,
+        unitMinor: variant ? variant.priceMinor : item?.priceMinor ?? null,
+        soldOut: variant ? variant.soldOut || item!.soldOut : item?.soldOut ?? false,
         imageUrl: item?.imageUrl ?? null,
       };
     }),

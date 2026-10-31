@@ -43,6 +43,11 @@ class _DishSheetState extends State<_DishSheet> {
   final _note = TextEditingController();
   bool _busy = false;
   String? _error;
+  /// The chosen option, for a product sold in options (shops). Chosen first when only one is in stock.
+  late ItemVariant? _variant = () {
+    final inStock = widget.item.variants.where((v) => !v.soldOut).toList();
+    return inStock.length == 1 ? inStock.first : null;
+  }();
 
   @override
   void dispose() {
@@ -56,7 +61,7 @@ class _DishSheetState extends State<_DishSheet> {
       _error = null;
     });
     try {
-      await widget.api.addToCart(widget.item.id, qty: _qty, note: _note.text.trim());
+      await widget.api.addToCart(widget.item.id, variantId: _variant?.id, qty: _qty, note: _note.text.trim());
       if (mounted) Navigator.of(context).pop(true);
     } on ApiException catch (e) {
       if (mounted) setState(() => _error = e.message);
@@ -104,7 +109,25 @@ class _DishSheetState extends State<_DishSheet> {
                     RatingChip(rating: item.rating!, s: s, inline: true),
                   ],
                   const SizedBox(height: Tokens.space2),
-                  Text(formatMoney(item.priceMinor, widget.currency), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                  Text(
+                    item.variants.isEmpty || _variant != null
+                        ? formatMoney(_variant?.priceMinor ?? item.priceMinor, widget.currency)
+                        : '${s.priceFrom} ${formatMoney(item.priceMinor, widget.currency)}',
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                  ),
+                  if (item.variants.isNotEmpty) ...[
+                    const SizedBox(height: Tokens.space3),
+                    Text(s.chooseOption, style: const TextStyle(fontWeight: FontWeight.w600)),
+                    const SizedBox(height: Tokens.space2),
+                    Wrap(spacing: Tokens.space2, runSpacing: Tokens.space2, children: [
+                      for (final v in item.variants)
+                        ChoiceChip(
+                          label: Text(v.soldOut ? '${v.name.of(s.lang)} · ${s.soldOut}' : v.name.of(s.lang)),
+                          selected: _variant?.id == v.id,
+                          onSelected: v.soldOut ? null : (_) => setState(() => _variant = v),
+                        ),
+                    ]),
+                  ],
                   if (description.isNotEmpty) ...[
                     const SizedBox(height: Tokens.space3),
                     Text(description, style: TextStyle(color: Tokens.textMuted, fontSize: 15, height: 1.4)),
@@ -141,9 +164,10 @@ class _DishSheetState extends State<_DishSheet> {
             Expanded(
               child: PrimaryAction(
                 label: s.add,
-                amount: formatMoney(item.priceMinor * _qty, widget.currency),
+                amount: formatMoney((_variant?.priceMinor ?? item.priceMinor) * _qty, widget.currency),
                 busy: _busy,
-                onPressed: item.soldOut ? null : _add,
+                // A product sold in options waits for one to be chosen.
+                onPressed: item.soldOut || (item.variants.isNotEmpty && _variant == null) ? null : _add,
               ),
             ),
           ]),

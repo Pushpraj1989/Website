@@ -249,6 +249,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _add(MenuItem item, Strings s) async {
+    // A product sold in options is chosen in its sheet.
+    final menu = _menu;
+    if (item.variants.isNotEmpty && menu != null) {
+      final c = menu.categories.firstWhere((c) => c.items.any((i) => i.id == item.id), orElse: () => menu.categories.first);
+      await showDishSheet(context, api: widget.api, item: item, illustration: c.illustration, currency: menu.currency, s: s);
+      return;
+    }
     setState(() => _message = null);
     try {
       await widget.api.addOne(item.id);
@@ -446,7 +453,7 @@ class _HomeScreenState extends State<HomeScreen> {
           (icon: LucideIcons.ticketPercent, label: s.myVouchers, colours: const [Color(0xFFDB2777), Color(0xFF9D174D)], onTap: _openVouchers),
           (icon: LucideIcons.crown, label: s.membership, colours: const [Color(0xFFD97706), Color(0xFF92400E)], onTap: _openMembership),
           (icon: LucideIcons.sparkles, label: s.askTitle, colours: const [Color(0xFF2563EB), Color(0xFF1E3A8A)], onTap: _openAsk),
-          (icon: LucideIcons.utensils, label: s.menu, colours: const [Color(0xFF059669), Color(0xFF065F46)], onTap: _openMenu),
+          (icon: Strings.shop ? LucideIcons.store : LucideIcons.utensils, label: s.menu, colours: const [Color(0xFF059669), Color(0xFF065F46)], onTap: _openMenu),
         ]),
       ),
       if (menu != null) ...[
@@ -596,7 +603,7 @@ class _QuickActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      Expanded(child: _QuickTile(icon: LucideIcons.utensils, label: s.menu, onPressed: onMenu)),
+      Expanded(child: _QuickTile(icon: Strings.shop ? LucideIcons.store : LucideIcons.utensils, label: s.menu, onPressed: onMenu)),
       const SizedBox(width: Tokens.space2),
       Expanded(child: _QuickTile(icon: LucideIcons.shoppingBag, label: s.cart, onPressed: onCart)),
       const SizedBox(width: Tokens.space2),

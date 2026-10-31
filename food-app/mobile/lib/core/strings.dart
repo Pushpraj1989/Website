@@ -5,12 +5,21 @@ class Strings {
 
   bool get isArabic => lang == 'ar';
 
-  String get menu => isArabic ? 'القائمة' : 'Menu';
+  /// Retail mode: set from the business's settings (Brand.businessType). A shop says shop and products where a
+  /// restaurant says menu and dishes.
+  static bool shop = false;
+  String _w(String restaurantEn, String restaurantAr, String shopEn, String shopAr) =>
+      shop ? (isArabic ? shopAr : shopEn) : (isArabic ? restaurantAr : restaurantEn);
+
+  String get priceFrom => isArabic ? 'من' : 'from';
+  String get chooseOption => isArabic ? 'اختر نوعاً' : 'Choose an option';
+
+  String get menu => _w('Menu', 'القائمة', 'Shop', 'المتجر');
   String get cart => isArabic ? 'السلة' : 'Cart';
   String get add => isArabic ? 'إضافة' : 'Add';
   String get soldOut => isArabic ? 'نفدت الكمية' : 'Sold out';
   String get emptyCart => isArabic ? 'سلتك فارغة.' : 'Your cart is empty.';
-  String get note => isArabic ? 'ملاحظة للمطبخ' : 'Note for the kitchen';
+  String get note => _w('Note for the kitchen', 'ملاحظة للمطبخ', 'Note for us', 'ملاحظة لنا');
   String get remove => isArabic ? 'حذف' : 'Remove';
   String get subtotal => isArabic ? 'المجموع الفرعي' : 'Subtotal';
   String get deliveryFee => isArabic ? 'رسوم التوصيل' : 'Delivery fee';
@@ -29,7 +38,7 @@ class Strings {
   String get orderAgain => isArabic ? 'أضف إلى السلة' : 'Add to cart';
   String get orderedMost => isArabic ? 'الأكثر طلبك' : 'Ordered most';
   String get favourites => isArabic ? 'المفضلة' : 'Favourites';
-  String get noFavourites => isArabic ? 'اضغط على القلب بجانب طبق تحبه ليظهر هنا.' : 'Tap the heart on a dish you like to see it here.';
+  String get noFavourites => _w('Tap the heart on a dish you like to see it here.', 'اضغط على القلب بجانب طبق تحبه ليظهر هنا.', 'Tap the heart on a product you like to see it here.', 'اضغط على القلب بجانب منتج تحبه ليظهر هنا.');
   String get noOrdersYet => isArabic ? 'لا توجد طلبات سابقة بعد.' : 'You have no past orders yet.';
   String get orderHistory => isArabic ? 'طلباتي' : 'My orders';
   String get viewOrder => isArabic ? 'عرض الطلب' : 'View order';
@@ -58,10 +67,10 @@ class Strings {
   String get benefitDetails => isArabic ? 'تفاصيل الميزة' : 'Benefit details';
   String perPeriod(String period) => isArabic ? (period == 'month' ? 'شهرياً' : 'سنوياً') : (period == 'month' ? 'per month' : 'per year');
   String get heroTitle => isArabic ? 'جوع؟ اطلب الآن' : 'Hungry? Order now';
-  String get heroBody => isArabic ? 'تصفح القائمة واطلب في خطوات قليلة.' : 'Browse the menu and order in a few taps.';
+  String get heroBody => _w('Browse the menu and order in a few taps.', 'تصفح القائمة واطلب في خطوات قليلة.', 'Browse the shop and order in a few taps.', 'تصفح المتجر واطلب في خطوات قليلة.');
   String get more => isArabic ? 'المزيد' : 'More';
   String get priceToBeAnnounced => isArabic ? 'السعر يُعلن لاحقاً' : 'Price to be announced';
-  String get cartEmptyBody => isArabic ? 'أضف طبقاً من القائمة ليظهر هنا.' : 'Add a dish from the menu and it will show here.';
+  String get cartEmptyBody => _w('Add a dish from the menu and it will show here.', 'أضف طبقاً من القائمة ليظهر هنا.', 'Add a product from the shop and it will show here.', 'أضف منتجاً من المتجر ليظهر هنا.');
   String get ordersEmptyBody => isArabic ? 'ستظهر طلباتك هنا بعد أول طلب.' : 'Your orders will show here after your first order.';
   String addDish(String name) => isArabic ? 'إضافة $name' : 'Add $name';
   String get chooseAddress => isArabic ? 'اختر عنوان التوصيل.' : 'Choose a delivery address.';
@@ -167,12 +176,12 @@ class Strings {
       : (isArabic ? 'ماذا يأتي مع $dish؟' : 'What comes with the $dish?');
   String get askSuggestionOrder => isArabic ? 'أين وصل طلبي؟' : 'Where is my order?';
   String get askSuggestionPrice => isArabic ? 'ما الأطباق المتوفرة الآن؟' : 'What is available right now?';
-  String get askHint => isArabic ? 'اسأل عن الأطباق والأسعار وطلبك.' : 'Ask about dishes, prices or your order.';
+  String get askHint => _w('Ask about dishes, prices or your order.', 'اسأل عن الأطباق والأسعار وطلبك.', 'Ask about products, prices or your order.', 'اسأل عن المنتجات والأسعار وطلبك.');
   String get browseCategories => isArabic ? 'تصفح حسب الفئة' : 'Browse by category';
   String get recommendedForYou => isArabic ? 'مقترح لك' : 'Recommended for you';
-  String get recommendedFromHistory => isArabic ? 'من الأطباق التي تطلبها غالباً' : 'From the dishes you order most';
-  String get recommendedStarter => isArabic ? 'ابدأ بهذه الأطباق' : 'Start with these dishes';
-  String get fromTheKitchen => isArabic ? 'من المطبخ' : 'From the kitchen';
+  String get recommendedFromHistory => _w('From the dishes you order most', 'من الأطباق التي تطلبها غالباً', 'From the products you order most', 'من المنتجات التي تطلبها غالباً');
+  String get recommendedStarter => _w('Start with these dishes', 'ابدأ بهذه الأطباق', 'Start with these products', 'ابدأ بهذه المنتجات');
+  String get fromTheKitchen => _w('From the kitchen', 'من المطبخ', 'New in', 'وصل حديثاً');
   String get offersAndVouchers => isArabic ? 'العروض والقسائم' : 'Offers and vouchers';
   String get applyCode => isArabic ? 'تطبيق' : 'Apply';
   String get removeCode => isArabic ? 'إزالة' : 'Remove';
@@ -190,17 +199,19 @@ class Strings {
   String get voucherNotUsable => isArabic ? 'لا يمكن استخدام هذه القسيمة.' : 'This voucher cannot be used.';
   String minOrder(String amount) => isArabic ? 'الحد الأدنى للطلب $amount' : 'Minimum order $amount';
   String expiresOn(String date) => isArabic ? 'تنتهي في $date' : 'Expires $date';
-  String get searchDishes => isArabic ? 'ابحث عن طبق' : 'Search dishes';
+  String get searchDishes => _w('Search dishes', 'ابحث عن طبق', 'Search products', 'ابحث عن منتج');
   String get allCategories => isArabic ? 'الكل' : 'All';
   String get filterAvailable => isArabic ? 'متوفر الآن' : 'Available now';
   String get filterUnder => isArabic ? 'أقل من 20' : 'Under 20';
   String get filterFavourites => isArabic ? 'المفضلة' : 'Favourites';
   String get filterOrdered => isArabic ? 'طلبته سابقاً' : 'Ordered before';
-  String get noSearchResults => isArabic ? 'لا توجد أطباق تطابق بحثك.' : 'No dishes match your search.';
+  String get noSearchResults => _w('No dishes match your search.', 'لا توجد أطباق تطابق بحثك.', 'No products match your search.', 'لا توجد منتجات تطابق بحثك.');
   String get yourShortcuts => isArabic ? 'اختصاراتك' : 'Your shortcuts';
   String get promoMemberBody => isArabic ? 'عروض للأعضاء وتوصيل مجاني على الطلبات المؤهلة.' : 'Member offers and free delivery on eligible orders.';
-  String dishesInCategory(int n) => isArabic ? '$n طبق' : (n == 1 ? '1 dish' : '$n dishes');
-  String get seeCategory => isArabic ? 'اعرض الأطباق' : 'See dishes';
+  String dishesInCategory(int n) => shop
+      ? (isArabic ? '$n منتج' : (n == 1 ? '1 product' : '$n products'))
+      : (isArabic ? '$n طبق' : (n == 1 ? '1 dish' : '$n dishes'));
+  String get seeCategory => _w('See dishes', 'اعرض الأطباق', 'See products', 'اعرض المنتجات');
   String get askPlaceholder => isArabic ? 'اكتب سؤالك' : 'Type your question';
   String get send => isArabic ? 'إرسال' : 'Send';
   String get assistantOff => isArabic ? 'المساعد غير مفعّل الآن.' : 'The assistant is not switched on right now.';
@@ -239,7 +250,7 @@ class Strings {
   String vouchersLine(int n) => isArabic ? (n == 1 ? 'قسيمة واحدة' : '$n قسائم') : (n == 1 ? '1 voucher' : '$n vouchers');
   String get inTheSpotlight => isArabic ? 'تحت الضوء' : 'In the spotlight';
   String get exploreMore => isArabic ? 'اكتشف المزيد' : 'Explore more';
-  String get browseMenu => isArabic ? 'تصفح القائمة' : 'Browse the menu';
+  String get browseMenu => _w('Browse the menu', 'تصفح القائمة', 'Browse the shop', 'تصفح المتجر');
   String copyright(int year, String name) => isArabic ? '© $year $name. جميع الحقوق محفوظة.' : '© $year $name. All rights reserved.';
   String appVersionLine(String version, int build) => isArabic ? 'إصدار التطبيق $version ($build)' : 'App version $version ($build)';
   String get about => isArabic ? 'حول' : 'About';
@@ -252,8 +263,8 @@ class Strings {
 
   // Welcome offer
   String get validOn => isArabic ? 'صالح على' : 'Valid on';
-  String get allDishes => isArabic ? 'كل الأطباق' : 'All dishes';
-  String get selectedDishes => isArabic ? 'أطباق مختارة' : 'Selected dishes';
+  String get allDishes => _w('All dishes', 'كل الأطباق', 'All products', 'كل المنتجات');
+  String get selectedDishes => _w('Selected dishes', 'أطباق مختارة', 'Selected products', 'منتجات مختارة');
   String get minSpend => isArabic ? 'الحد الأدنى' : 'Min spend';
   String get maxSaving => isArabic ? 'أقصى توفير' : 'Max saving';
   String get validUntil => isArabic ? 'صالح حتى' : 'Valid until';
@@ -277,7 +288,7 @@ class Strings {
   String get nothingAdded => isArabic ? 'لم تتم إضافة شيء.' : 'Nothing was added.';
   String get assistantScope => isArabic ? 'الإجابات من قائمة المطعم وطلباتك فقط. لا يضاف شيء إلى سلتك حتى تضغط أضف.' : "Answers come from this restaurant's menu and your own orders. Nothing is added to your cart until you tap Add.";
   String get askAboutOrder => isArabic ? 'عن طلب' : 'About an order';
-  String get askAboutMenu => isArabic ? 'عن القائمة' : 'About the menu';
+  String get askAboutMenu => _w('About the menu', 'عن القائمة', 'About the products', 'عن المنتجات');
   String assistantGreeting(String name) => isArabic ? 'أهلاً! أستطيع المساعدة في قائمة $name وطلباتك. عن ماذا تريد أن تسأل؟' : 'Hi! I can help with the $name menu and your orders. What would you like to ask about?';
 
   // Account and settings

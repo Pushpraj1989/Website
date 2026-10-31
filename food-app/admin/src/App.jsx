@@ -36,6 +36,14 @@ const SECTIONS = [
   { id: 'appearance', group: 'Settings', label: 'Appearance', Icon: Paintbrush },
 ];
 
+// A shop sees shop words: Products instead of Dishes, Shop instead of Menu, Business instead of Restaurant.
+const SHOP_WORDS = { products: { label: 'Products', short: 'Shop' }, restaurant: { label: 'Business and look' } };
+const sectionsFor = (shop) => SECTIONS.map((s) => ({
+  ...s,
+  ...(shop ? SHOP_WORDS[s.id] ?? {} : {}),
+  group: shop && s.group === 'Menu' ? 'Shop' : s.group,
+}));
+
 // The quick light/dark switch beside the menu. The full set of choices is under Settings, Appearance.
 function ThemeToggle({ className }) {
   const [, redraw] = useState(0);
@@ -137,6 +145,8 @@ export default function App() {
 
   if (signedIn === null) return <p className="pad muted">Loading…</p>;
   if (!signedIn) return <Login brand={brand} onSignedIn={reload} />;
+  const shop = brand?.businessType === 'shop';
+  const sections = sectionsFor(shop);
 
   async function signOut() {
     // Ending the staff session is done by letting the cookie expire; the console shows the sign-in page again.
@@ -146,9 +156,9 @@ export default function App() {
 
   const navLinks = (
     <nav aria-label="Sections">
-      {SECTIONS.map(({ id, group, label, Icon }, i) => (
+      {sections.map(({ id, group, label, Icon }, i) => (
         <React.Fragment key={id}>
-          {group !== SECTIONS[i - 1]?.group ? <span className="nav-group">{group}</span> : null}
+          {group !== sections[i - 1]?.group ? <span className="nav-group">{group}</span> : null}
           <a href={`#/${id}`} className={section === id ? 'nav active' : 'nav'} aria-current={section === id ? 'page' : undefined}>
             <Icon className="icon" aria-hidden="true" />{label}
           </a>
@@ -176,7 +186,7 @@ export default function App() {
       </header>
       <nav className="tabbar" aria-label="Main sections">
         {TABS.map((id) => {
-          const { short, Icon } = SECTIONS.find((s) => s.id === id);
+          const { short, Icon } = sections.find((s) => s.id === id);
           return (
             <a key={id} href={`#/${id}`} className={section === id ? 'tab active' : 'tab'} aria-current={section === id ? 'page' : undefined}>
               <Icon className="icon" aria-hidden="true" />{short}
@@ -199,7 +209,7 @@ export default function App() {
         {loadError ? <p role="alert" className="error">{loadError}</p> : null}
         {!catalog ? <p className="muted">Loading…</p> : null}
         {section === 'dashboard' ? <Dashboard /> : null}
-        {catalog && section === 'products' ? <Products catalog={catalog} onChanged={reload} /> : null}
+        {catalog && section === 'products' ? <Products catalog={catalog} onChanged={reload} shop={shop} /> : null}
         {catalog && section === 'categories' ? <Categories catalog={catalog} onChanged={reload} /> : null}
         {catalog && section === 'offers' ? <Offers catalog={catalog} onChanged={reload} /> : null}
         {catalog && section === 'campaigns' ? <Campaigns /> : null}

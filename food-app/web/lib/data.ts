@@ -30,9 +30,44 @@ export type MenuItem = {
   imageUrl: string | null;
   /** Average stars and how many orders were rated; null until the restaurant's minimum is reached. */
   rating?: { average: number; count: number } | null;
+  /** Versions of the product (size, colour, shade...), each with its own price and stock. Empty for most dishes. */
+  variants: Variant[];
+  /** How many are left when the shop counts stock (products without variants); null when not counted. */
+  stock: number | null;
 };
 
-export type CartLine = { itemId: string; qty: number; note: string };
+export type Variant = { id: string; name: Localised; sku: string; priceMinor: number; stock: number | null; soldOut: boolean };
+
+/** A cart line. variantId is set for products sold in versions. */
+export type CartLine = { itemId: string; variantId?: string; qty: number; note: string };
+
+/** The active variants of the given products, in their order, by product. */
+export async function variantsFor(itemIds: string[], c: PoolClient | typeof pool = pool): Promise<Map<string, Variant[]>> {
+  const map = new Map<string, Variant[]>();
+  if (itemIds.length === 0) return map;
+  const { rows } = await c.query(
+    `select id, item_id, name_en, name_ar, sku, price_minor, stock from product_variants
+     where item_id = any($1::uuid[]) and active order by position, created_at`,
+    [itemIds],
+  );
+  for (const r of rows) {
+    const list = map.get(r.item_id) ?? [];
+    list.push({ id: r.id, name: { en: r.name_en, ar: r.name_ar }, sku: r.sku, priceMinor: r.price_minor, stock: r.stock, soldOut: r.stock !== null && r.stock <= 0 });
+    map.set(r.item_id, list);
+  }
+  return map;
+}
+
+/**
+ * A product as customers see it. With variants, its price is the lowest variant's ("from") and it is sold out when
+ * every variant is; without, it is sold out when switched off or when its counted stock reaches zero.
+ */
+function shape(r: { available: boolean; base_price_minor: number; stock: number | null }, variants: Variant[]) {
+  if (variants.length) {
+    return { priceMinor: Math.min(...variants.map((v) => v.priceMinor)), soldOut: !r.available || variants.every((v) => v.soldOut) };
+  }
+  return { priceMinor: r.base_price_minor, soldOut: !r.available || (r.stock !== null && r.stock <= 0) };
+}
 
 export type OrderLineRow = {
   itemId: string | null;
@@ -246,7 +281,7 @@ export async function copyAddressForOrder(c: PoolClient, guestId: string, id: st
 export async function getMenu() {
   const { rows } = await pool.query(
     `select c.id as category_id, c.name_en as cat_en, c.name_ar as cat_ar, c.illustration as cat_art,
-            i.id, i.name_en, i.name_ar, i.description_en, i.description_ar, i.base_price_minor, i.available,
+            i.id, i.name_en, i.name_ar, i.description_en, i.description_ar, i.base_price_minor, i.available, i.stock,
             m.storage_key, rt.average, rt.count as rating_count, rest.rating_min_count
      from categories c
      join menu_items i on i.category_id = c.id
@@ -261,7 +296,9 @@ export async function getMenu() {
     [restaurantId],
   );
   const categories = new Map<string, { id: string; name: Localised; illustration: string; items: MenuItem[] }>();
+  const variants = await variantsFor(rows.map((r) => r.id));
   for (const r of rows) {
+    const vs = variants.get(r.id) ?? [];
     if (!categories.has(r.category_id)) {
       categories.set(r.category_id, { id: r.category_id, name: { en: r.cat_en, ar: r.cat_ar }, illustration: r.cat_art, items: [] });
     }
@@ -270,10 +307,11 @@ export async function getMenu() {
       categoryId: r.category_id,
       name: { en: r.name_en, ar: r.name_ar },
       description: { en: r.description_en, ar: r.description_ar },
-      priceMinor: r.base_price_minor,
-      soldOut: !r.available,
+      ...shape(r, vs),
       imageUrl: r.storage_key ? `/media/${r.storage_key}` : null,
       rating: r.rating_count >= r.rating_min_count ? { average: Number(r.average), count: r.rating_count } : null,
+      variants: vs,
+      stock: vs.length ? null : r.stock,
     });
   }
   return [...categories.values()];
@@ -301,13 +339,14 @@ export async function getItems(ids: string[]): Promise<Map<string, MenuItem>> {
   if (ids.length === 0) return new Map();
   const { rows } = await pool.query(
     `select i.id, i.category_id, i.name_en, i.name_ar, i.description_en, i.description_ar, i.base_price_minor, i.available,
-            m.storage_key
+            i.stock, m.storage_key
      from menu_items i
      left join lateral (select m.storage_key from product_media pm join media m on m.id = pm.media_id
        where pm.menu_item_id = i.id and m.kind = 'image' order by pm.is_primary desc, pm.position limit 1) m on true
      where i.id = any($1::uuid[])`,
     [ids],
   );
+  const variants = await variantsFor(rows.map((r) => r.id));
   return new Map(
     rows.map((r) => [
       r.id,
@@ -316,8 +355,9 @@ export async function getItems(ids: string[]): Promise<Map<string, MenuItem>> {
         categoryId: r.category_id,
         name: { en: r.name_en, ar: r.name_ar },
         description: { en: r.description_en, ar: r.description_ar },
-        priceMinor: r.base_price_minor,
-        soldOut: !r.available,
+        ...shape(r, variants.get(r.id) ?? []),
+        variants: variants.get(r.id) ?? [],
+        stock: (variants.get(r.id) ?? []).length ? null : r.stock,
         // The dish's cover picture, the same one the menu shows.
         imageUrl: r.storage_key ? `/media/${r.storage_key}` : null,
       } satisfies MenuItem,
@@ -441,7 +481,7 @@ export async function insertOrder(
     addressId: string | null;
     locale: 'en' | 'ar';
     quote: { currency: string; subtotalMinor: number; deliveryFeeMinor: number; serviceFeeMinor: number; discountMinor: number; tipMinor: number; totalMinor: number; taxIncludedMinor: number };
-    lines: { itemId: string; name: Localised; unitMinor: number; qty: number; note: string }[];
+    lines: { itemId: string; variantId?: string | null; name: Localised; unitMinor: number; qty: number; note: string }[];
   },
 ): Promise<string | null> {
   const { rows } = await c.query(
@@ -475,9 +515,9 @@ export async function insertOrder(
   if (!id) return null;
   for (const line of input.lines) {
     await c.query(
-      `insert into order_lines (order_id, menu_item_id, name_en, name_ar, unit_price_minor, qty, line_total_minor, note)
-       values ($1, $2, $3, $4, $5::int, $6::int, $5::int * $6::int, $7)`,
-      [id, line.itemId, line.name.en, line.name.ar, line.unitMinor, line.qty, line.note],
+      `insert into order_lines (order_id, menu_item_id, name_en, name_ar, unit_price_minor, qty, line_total_minor, note, variant_id)
+       values ($1, $2, $3, $4, $5::int, $6::int, $5::int * $6::int, $7, $8)`,
+      [id, line.itemId, line.name.en, line.name.ar, line.unitMinor, line.qty, line.note, line.variantId ?? null],
     );
   }
   await c.query(

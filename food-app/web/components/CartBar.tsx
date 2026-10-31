@@ -7,8 +7,9 @@ import { initialOf, t, type Locale } from '@/lib/i18n.ts';
 import { Money } from '@/components/Money';
 import { Icon } from '@/components/Icon';
 import { CART_CHANGED } from '@/components/AddToCart';
+import { forPut, lineKey } from '@/lib/cart-lines.ts';
 
-type Line = { itemId: string; qty: number; note: string; name: { en: string; ar: string } | null; unitMinor: number | null; soldOut: boolean; imageUrl?: string | null };
+type Line = { itemId: string; variantId?: string | null; qty: number; note: string; name: { en: string; ar: string } | null; unitMinor: number | null; soldOut: boolean; imageUrl?: string | null };
 type Cart = { currency: string; lines: Line[]; quote: { subtotalMinor: number; totalMinor: number } | null; problem: string | null };
 
 // As in the app: once something is in the cart, a bar at the foot of the page shows the dishes' photos, how many and
@@ -37,12 +38,12 @@ export function CartBar({ locale }: { locale: Locale }) {
     return () => window.removeEventListener(CART_CHANGED, onChange);
   }, [load, pathname]);
 
-  async function change(itemId: string, delta: number) {
+  async function change(key: string, delta: number) {
     if (!cart) return;
     setBusy(true);
     setError('');
     const items = cart.lines
-      .map((l) => ({ itemId: l.itemId, qty: l.itemId === itemId ? l.qty + delta : l.qty, note: l.note }))
+      .map((l) => forPut({ ...l, qty: lineKey(l) === key ? l.qty + delta : l.qty }))
       .filter((l) => l.qty > 0);
     try {
       const response = await fetch('/v1/cart', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items }) });
@@ -69,7 +70,7 @@ export function CartBar({ locale }: { locale: Locale }) {
       <div className="cart-bar" role="region" aria-label={s.cart}>
         <div className="cart-thumbs" aria-hidden="true">
           {cart.lines.slice(0, 3).map((l) => (
-            <span key={l.itemId} className="cart-thumb">{l.imageUrl ? <img src={l.imageUrl} alt="" /> : initialOf(l.name?.[locale] ?? '?')}</span>
+            <span key={lineKey(l)} className="cart-thumb">{l.imageUrl ? <img src={l.imageUrl} alt="" /> : initialOf(l.name?.[locale] ?? '?')}</span>
           ))}
         </div>
         <div className="cart-sum">
@@ -92,7 +93,7 @@ export function CartBar({ locale }: { locale: Locale }) {
           {cart.lines.map((l) => {
             const name = l.name?.[locale] ?? '';
             return (
-              <li key={l.itemId}>
+              <li key={lineKey(l)}>
                 <span className="cart-thumb lg">{l.imageUrl ? <img src={l.imageUrl} alt="" /> : initialOf(name)}</span>
                 <div className="sheet-name">
                   <strong>{name}</strong>
@@ -100,9 +101,9 @@ export function CartBar({ locale }: { locale: Locale }) {
                   {l.soldOut ? <span className="badge danger">{s.soldOut}</span> : null}
                 </div>
                 <div className="stepper">
-                  <button type="button" aria-label={s.oneLess(name)} disabled={busy} onClick={() => change(l.itemId, -1)}><Icon name="minus" size={18} /></button>
+                  <button type="button" aria-label={s.oneLess(name)} disabled={busy} onClick={() => change(lineKey(l), -1)}><Icon name="minus" size={18} /></button>
                   <span aria-live="polite" aria-label={`${s.quantity}: ${l.qty}`}>{l.qty}</span>
-                  <button type="button" aria-label={s.oneMore(name)} disabled={busy || l.qty >= 20} onClick={() => change(l.itemId, 1)}><Icon name="plus" size={18} /></button>
+                  <button type="button" aria-label={s.oneMore(name)} disabled={busy || l.qty >= 20} onClick={() => change(lineKey(l), 1)}><Icon name="plus" size={18} /></button>
                 </div>
               </li>
             );

@@ -22,6 +22,7 @@ const securityFile = fileURLToPath(new URL('./security.sql', import.meta.url));
 const homeFile = fileURLToPath(new URL('./home.sql', import.meta.url));
 const emailSigninFile = fileURLToPath(new URL('./email-signin.sql', import.meta.url));
 const passkeysFile = fileURLToPath(new URL('./passkeys.sql', import.meta.url));
+const retailFile = fileURLToPath(new URL('./retail.sql', import.meta.url));
 const AUTH_STUB = `
 create schema if not exists auth;
 create table if not exists auth.users (id uuid primary key default gen_random_uuid(), email text);
@@ -58,6 +59,7 @@ try {
   await client.query(readFileSync(homeFile, 'utf8'));
   await client.query(readFileSync(emailSigninFile, 'utf8'));
   await client.query(readFileSync(passkeysFile, 'utf8'));
+  await client.query(readFileSync(retailFile, 'utf8'));
   if (!existing) await client.query(readFileSync(seedFile, 'utf8'));
   console.log(existing ? 'database brought up to date (existing data kept)' : `schema and seed applied${reset ? ' (after reset)' : ''}`);
 } finally {

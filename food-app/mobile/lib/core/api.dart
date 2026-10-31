@@ -75,7 +75,7 @@ class ApiClient {
         headers: _headers(json: true),
         body: jsonEncode({
           'channel': channel,
-          'items': lines.map((l) => {'itemId': l.itemId, 'qty': l.qty, 'note': l.note}).toList(),
+          'items': lines.map((l) => {'itemId': l.itemId, if (l.variantId != null) 'variantId': l.variantId, 'qty': l.qty, 'note': l.note}).toList(),
         }),
       ));
 
@@ -254,35 +254,36 @@ class ApiClient {
 
   /// Adds [qty] of a dish with an optional note for the kitchen. A dish already in the cart gets the extra quantity;
   /// a note replaces the line's note only when one is given.
-  Future<void> addToCart(String itemId, {int qty = 1, String note = ''}) async {
+  /// A product sold in options needs the chosen [variantId]; each option is its own line.
+  Future<void> addToCart(String itemId, {String? variantId, int qty = 1, String note = ''}) async {
     final lines = await cartLines();
     final updated = <CartLine>[];
     var found = false;
     for (final line in lines) {
-      if (line.itemId == itemId) {
+      if (line.itemId == itemId && line.variantId == variantId) {
         updated.add(line.copyWith(qty: (line.qty + qty).clamp(1, 20), note: note.isEmpty ? null : note));
         found = true;
       } else {
         updated.add(line);
       }
     }
-    if (!found) updated.add(CartLine(itemId: itemId, qty: qty.clamp(1, 20), note: note, name: null, unitMinor: null, soldOut: false));
+    if (!found) updated.add(CartLine(itemId: itemId, variantId: variantId, qty: qty.clamp(1, 20), note: note, name: null, unitMinor: null, soldOut: false));
     await saveCart(updated);
   }
 
-  Future<void> addOne(String itemId) async {
+  Future<void> addOne(String itemId, {String? variantId}) async {
     final lines = await cartLines();
     final updated = <CartLine>[];
     var found = false;
     for (final line in lines) {
-      if (line.itemId == itemId) {
+      if (line.itemId == itemId && line.variantId == variantId) {
         updated.add(line.copyWith(qty: line.qty + 1));
         found = true;
       } else {
         updated.add(line);
       }
     }
-    if (!found) updated.add(CartLine(itemId: itemId, qty: 1, note: '', name: null, unitMinor: null, soldOut: false));
+    if (!found) updated.add(CartLine(itemId: itemId, variantId: variantId, qty: 1, note: '', name: null, unitMinor: null, soldOut: false));
     await saveCart(updated);
   }
 }
