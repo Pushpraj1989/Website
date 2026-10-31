@@ -1,5 +1,12 @@
 @import './tokens.css';
 
+/* The same font files the app ships with, served from this site (their licences sit beside them in public/fonts). */
+@font-face { font-family: Roboto; src: url('/fonts/Roboto-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: Roboto; src: url('/fonts/Roboto-Medium.woff2') format('woff2'); font-weight: 500 600; font-style: normal; font-display: swap; }
+@font-face { font-family: Roboto; src: url('/fonts/Roboto-Bold.woff2') format('woff2'); font-weight: 700 900; font-style: normal; font-display: swap; }
+@font-face { font-family: Fraunces; src: url('/fonts/Fraunces-Variable.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Noto Sans Arabic'; src: url('/fonts/NotoSansArabic-Variable.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; }
 body {
@@ -25,6 +32,7 @@ a { color: var(--color-accent-fg); }
 .stack { display: grid; gap: var(--space-3); }
 .row { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
 .spacer { flex: 1; }
+h1, h2, .hero-title { font-family: var(--font-heading); }
 h1 { font-size: var(--text-xl); line-height: var(--leading-xl); margin: var(--space-5) 0 var(--space-3); }
 h2 { font-size: var(--text-lg); line-height: var(--leading-lg); margin: var(--space-5) 0 var(--space-2); }
 .muted { color: var(--color-text-muted); font-size: var(--text-sm); }
@@ -136,44 +144,57 @@ dialog.welcome.anim-zoom[open] { margin: auto; border-radius: 26px; animation-na
 
 /* The hero: the photo or the brand colour edge to edge, the address and search on it, the slide's words at its foot. */
 .home { display: grid; gap: var(--space-6); padding-block-start: var(--space-4); }
-.hero { position: relative; min-height: clamp(420px, 62vh, 560px); border-radius: 28px; overflow: hidden; color: #fff; display: grid; grid-template-rows: auto auto 1fr; padding: var(--space-4); isolation: isolate; }
+.hero { position: relative; min-height: clamp(430px, 62vh, 560px); border-radius: 28px; overflow: hidden; color: #fff; display: grid; grid-template-rows: auto 1fr; padding: var(--space-4) var(--space-4) 46px; isolation: isolate; }
 .hero-media { position: absolute; inset: 0; z-index: -2; opacity: 0; transition: opacity .7s ease; background: radial-gradient(120% 120% at 0% 0%, color-mix(in srgb, var(--hero) 75%, #fff), var(--hero) 50%, color-mix(in srgb, var(--hero) 55%, #000)); }
 .hero-media.on { opacity: 1; }
 .hero-media img, .hero-media video { width: 100%; height: 100%; object-fit: cover; }
 .hero-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(0 0 0 / .35) 0%, rgb(0 0 0 / 0) 30%, rgb(0 0 0 / .05) 50%, rgb(0 0 0 / .72) 100%); }
-.hero-top { display: flex; justify-content: space-between; gap: var(--space-2); }
-.hero-pin { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: rgb(0 0 0 / .32); backdrop-filter: blur(10px); font-size: var(--text-sm); font-weight: 600; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hero-search, .search { position: relative; display: flex; align-items: center; gap: var(--space-2); }
-.hero-search { margin-block-start: var(--space-4); max-width: 560px; width: 100%; background: #fff; color: #1c1917; border-radius: 16px; padding: 0 var(--space-3); box-shadow: 0 10px 30px rgb(0 0 0 / .25); }
+.hero-search { margin-block-start: 0; max-width: 560px; width: 100%; background: #fff; color: #1c1917; border-radius: 14px; padding: 0 var(--space-3); box-shadow: 0 10px 30px rgb(0 0 0 / .25); }
 .hero-search input { border: 0; background: transparent; color: #1c1917; min-height: 52px; padding: 0; font-size: 16px; }
 .hero-search input:focus-visible { outline: none; }
 .hero-search:focus-within { outline: 3px solid color-mix(in srgb, var(--color-accent) 70%, #fff); outline-offset: 2px; }
 .hero-search .icon { color: #57534e; flex: none; }
 .hero-foot { align-self: end; display: grid; gap: var(--space-2); max-width: 640px; }
-.hero-kicker { justify-self: start; padding: 4px 12px; border-radius: 999px; background: rgb(255 255 255 / .22); font-weight: 700; font-size: var(--text-sm); }
-.hero-title { margin: 0; font-size: clamp(30px, 5vw, 48px); line-height: 1.05; letter-spacing: -.02em; text-shadow: 0 2px 16px rgb(0 0 0 / .35); }
-.hero-body { margin: 0; font-size: var(--text-lg); line-height: 1.4; text-shadow: 0 1px 10px rgb(0 0 0 / .4); }
-.hero-actions { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; margin-block-start: var(--space-2); }
-.btn.hero-cta { background: #fff; color: #1c1917; border-color: #fff; min-height: 48px; padding: 0 var(--space-5); border-radius: 14px; }
-.hero-dots { display: flex; align-items: center; gap: 6px; }
-.hero-dots .dot { width: 10px; height: 10px; padding: 0; border-radius: 999px; border: 0; background: rgb(255 255 255 / .55); cursor: pointer; transition: width .3s; }
-.hero-dots .dot.on { width: 26px; background: #fff; }
+.hero-kicker { justify-self: start; padding: 4px 8px; border-radius: 6px; background: rgb(255 255 255 / .18); font-weight: 700; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+.hero-title { margin: 0; font-size: clamp(32px, 5vw, 48px); font-weight: 700; line-height: 1.05; letter-spacing: -.01em; text-shadow: 0 2px 16px rgb(0 0 0 / .4); }
+.hero-body { margin: 0; font-size: 14px; line-height: 1.4; text-shadow: 0 1px 10px rgb(0 0 0 / .4); }
+/* The slide's button: a pill in the restaurant's button style, with an arrow, as in the app. */
+.hero-cta { justify-self: start; display: inline-flex; align-items: center; gap: 4px; min-height: 48px; margin-block-start: var(--space-2); padding: 0 var(--space-4); border-radius: 999px; border: 1px solid var(--btn-line, #fff); background: var(--btn-bg, #fff); color: var(--btn-fg, var(--color-accent-fg)); font-weight: 700; font-size: 15px; text-decoration: none; }
+[dir='rtl'] .hero-cta .icon { transform: scaleX(-1); }
+.hero-dots { position: absolute; inset-inline-start: var(--space-4); bottom: 18px; display: flex; align-items: center; gap: 6px; }
+.hero-dots .dot { width: 6px; height: 6px; padding: 0; border-radius: 3px; border: 0; background: rgb(255 255 255 / .5); cursor: pointer; transition: width .3s; }
+.hero-dots .dot.on { width: 20px; background: #fff; }
 .hero-dots .dot::after { content: ''; display: block; position: relative; inset: -12px; width: calc(100% + 24px); height: 34px; }
-.hero-pause { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 0; background: rgb(0 0 0 / .35); color: #fff; cursor: pointer; margin-inline-start: 6px; }
+.hero-pause { position: relative; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; border: 0; background: rgb(0 0 0 / .3); color: #fff; cursor: pointer; margin-inline-start: 4px; padding: 0; }
+.hero-pause::after { content: ''; position: absolute; inset: -11px; } /* a 44px target for a finger */
 
 /* Categories as round photos with their names, scrolling sideways. */
 .chips { display: flex; gap: var(--space-3); overflow-x: auto; padding-block: 2px; scrollbar-width: none; }
-.chip { flex: none; display: grid; justify-items: center; gap: 6px; width: 84px; text-align: center; color: var(--color-text); text-decoration: none; font-weight: 600; font-size: var(--text-sm); }
-.chip img, .chip-letter { width: 68px; height: 68px; border-radius: 22px; object-fit: cover; background: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg)); display: grid; place-items: center; font-size: 26px; font-weight: 800; color: var(--color-accent-fg); box-shadow: var(--shadow-card); transition: transform .2s; }
+.chip { flex: none; display: grid; justify-items: center; gap: 8px; width: 76px; text-align: center; color: var(--color-text); text-decoration: none; font-weight: 600; font-size: 13px; }
+.chip span:not(.chip-letter) { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chip.on { color: var(--color-accent-fg); }
+.chip.on span:not(.chip-letter)::after { content: ''; display: block; width: 28px; height: 2px; margin: 2px auto 0; background: currentColor; }
+.chip img, .chip-letter { width: 64px; height: 64px; padding: 2px; border: 2px solid transparent; border-radius: 50%; object-fit: cover; background: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg)); background-clip: content-box; display: grid; place-items: center; font-size: 24px; font-weight: 800; color: var(--color-accent-fg); transition: transform .2s; }
+.chip.on img, .chip.on .chip-letter { border-color: var(--color-accent-fg); }
 .chip:hover img, .chip:hover .chip-letter { transform: translateY(-3px); }
 
+/* The sheet that rises over the foot of the photo (on phones), with the categories and the quick filters. */
+.home-sheet { display: grid; gap: var(--space-3); }
+.filters { display: flex; gap: var(--space-2); overflow-x: auto; scrollbar-width: none; }
+.filters::-webkit-scrollbar { display: none; }
+.filter { flex: none; display: inline-flex; align-items: center; min-height: 40px; padding: 0 var(--space-4); border-radius: 12px; border: 1px solid var(--color-border); background: var(--color-bg); color: var(--color-text); text-decoration: none; font-size: 14px; font-weight: 500; }
+.filter:hover { border-color: var(--color-accent-fg); color: var(--color-accent-fg); }
+
 /* The offer strip. */
-.strip { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; padding: var(--space-3) var(--space-4); border-radius: 16px; color: #fff; text-decoration: none; background: linear-gradient(110deg, var(--strip), color-mix(in srgb, var(--strip) 60%, #000)); }
-.strip-code { padding: 4px 10px; border-radius: 999px; border: 1px dashed rgb(255 255 255 / .8); font-weight: 700; font-size: var(--text-sm); }
+.strip { display: flex; align-items: center; gap: var(--space-2); min-height: 48px; padding: var(--space-2); border-radius: 14px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; background: linear-gradient(110deg, var(--strip), color-mix(in srgb, var(--strip) 60%, #000)); }
+.strip-badge { flex: none; transform: rotate(-3deg); padding: 4px 8px; border-radius: 8px; background: #fff; color: #1c1917; font-weight: 900; font-size: 13px; }
+.strip-text { flex: 1; min-width: 0; display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+.strip > .icon { flex: none; transform: rotate(-90deg); }
 
 /* Sections. */
 .home-section, .menu-section { display: grid; gap: var(--space-3); scroll-margin-top: 130px; }
-.home-section h2, .menu-section h2 { margin: 0; font-size: 24px; letter-spacing: -.01em; }
+.home-section h2, .menu-section h2, .carousel h2 { margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -.01em; }
 .section-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
 .section-head a { font-weight: 600; white-space: nowrap; }
 
@@ -277,18 +298,29 @@ dialog.cart-sheet::backdrop { background: rgb(0 0 0 / .5); }
 .sheet-actions { display: grid; gap: var(--space-2); }
 .sheet-actions .btn { width: 100%; }
 
-/* On phones: the hero runs edge to edge, a bottom bar holds Home, Menu and Cart, and the cart bar sits above it. */
+/* On phones, as in the app: no top bar on the home (its icons float on the photo), the photo runs edge to edge, a
+   sheet with rounded corners rises over its foot, the offer line floats above a rounded dock at the bottom. */
 .dock { display: none; }
 @media (max-width: 720px) {
   .shell { padding-block-end: 150px; }
   .home { padding-block-start: 0; gap: var(--space-5); }
-  .hero { margin-inline: calc(-1 * var(--space-4)); border-radius: 0 0 28px 28px; min-height: 480px; }
+  .hero { margin-inline: calc(-1 * var(--space-4)); border-radius: 0; min-height: 430px; padding-block-start: 68px; }
+  body:has(.home) .header { position: absolute; inset: 0 0 auto 0; background: transparent; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  body:has(.home) .header .brand { visibility: hidden; }
+  body:has(.home) .header .icon-btn { background: rgb(0 0 0 / .32); border-color: rgb(255 255 255 / .35); color: #fff; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .home-sheet { position: relative; z-index: 1; margin: calc(-18px - var(--space-5)) calc(-1 * var(--space-4)) 0; padding: var(--space-4) var(--space-4) 0; border-radius: 22px 22px 0 0; background: var(--color-bg); }
+  .home > .home-sheet + * { margin-block-start: calc(-1 * var(--space-2)); }
+  .home .strip { position: fixed; z-index: 34; inset-inline: var(--space-4); bottom: calc(64px + 12px + 8px + env(safe-area-inset-bottom)); box-shadow: 0 10px 30px rgb(0 0 0 / .25); }
+  body:has(.cart-bar) .home .strip { display: none; }
   .dish.row { grid-template-columns: minmax(0, 1fr) 112px; }
-  .dock { display: grid; grid-template-columns: repeat(3, 1fr); position: fixed; z-index: 35; inset: auto 0 0 0; background: color-mix(in srgb, var(--color-bg) 92%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-block-start: 1px solid var(--color-border); padding-bottom: env(safe-area-inset-bottom); }
-  .dock-item { display: grid; justify-items: center; gap: 2px; padding: 8px 0 6px; min-height: 56px; color: var(--color-text-muted); text-decoration: none; font-size: 12px; font-weight: 600; }
+  .dock { display: flex; position: fixed; z-index: 35; inset-inline: var(--space-4); bottom: calc(12px + env(safe-area-inset-bottom)); height: 64px; padding: 0 var(--space-1); border-radius: 64px; border: 1px solid var(--color-border); background: color-mix(in srgb, var(--color-bg) 94%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 10px 30px rgb(0 0 0 / .12); }
+  .dock-item { flex: 1; display: grid; place-items: center; color: var(--color-text-muted); text-decoration: none; }
+  .dock-item.on { flex: 2; }
   .dock-item.on { color: var(--color-accent-fg); }
-  .cart-bar { bottom: calc(72px + env(safe-area-inset-bottom)); }
-  .site-footer { padding-block-end: 90px; }
+  /* The name on the tinted pill is a darker shade of the brand colour (the app's accent ink), so it stays readable. */
+  .dock-pill { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); border-radius: 64px; background: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg)); color: color-mix(in srgb, var(--color-accent-fg) 70%, #000); font-weight: 700; font-size: 13px; }
+  .cart-bar { bottom: calc(64px + 12px + 8px + env(safe-area-inset-bottom)); }
+  .site-footer { padding-block-end: 100px; }
   .tabs { top: 58px; }
 }
 @media (prefers-reduced-motion: reduce) { .hero-media { transition: none; } .cart-bar, dialog.cart-sheet[open] { animation: none; } .dish:hover, .chip:hover img { transform: none; } }

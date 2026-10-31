@@ -6,6 +6,7 @@ import { initialOf, t } from '@/lib/i18n.ts';
 import { livePromotions } from '@/lib/gallery.ts';
 import { getSettings } from '@/lib/restaurant-settings.ts';
 import { DishCard } from '@/components/DishCard';
+import { Icon } from '@/components/Icon';
 import { HeroSlider, type HeroSlide } from '@/components/HeroSlider';
 import { Carousel } from '@/components/Carousel';
 import { WelcomeOffer, type WelcomePromo } from '@/components/WelcomeOffer';
@@ -14,8 +15,8 @@ export const dynamic = 'force-dynamic';
 
 type Promo = Awaited<ReturnType<typeof livePromotions>>['carousel'][number];
 
-// The home page, laid out like the app's home: the hero with the address and search, the categories, the offer
-// strip, the offers that slide sideways, the popular dishes, the spotlight promotions and then the menu. Every part
+// The home page, laid out like the app's home: the hero with the search, the sheet with the categories and filters,
+// the offer strip above the bottom bar, the offers that slide sideways, the popular dishes, the spotlight promotions and then the menu. Every part
 // comes from the restaurant's own settings, menu and published promotions; a part with nothing to show is left out.
 export default async function Home() {
   const locale = await currentLocale();
@@ -38,26 +39,44 @@ export default async function Home() {
     .slice(0, 8);
   const welcome = live.welcome as WelcomePromo | null;
   const strip = live.strip;
+  const stripBadge = strip ? (strip.offer?.headline?.[locale] ?? strip.kicker[locale]) : '';
+  const firstPhoto = items.find((i) => i.imageUrl)?.imageUrl ?? null;
 
   return (
     <div className="home">
-      <HeroSlider slides={slides} locale={locale} address={settings.address[locale]} />
+      <HeroSlider slides={slides} locale={locale} />
 
-      {categories.length ? (
-        <nav className="chips" aria-label={s.categories}>
-          {categories.map((c) => (
-            <Link key={c.id} className="chip" href={`/menu#${c.id}`}>
-              {c.items.find((i) => i.imageUrl) ? <img src={c.items.find((i) => i.imageUrl)!.imageUrl!} alt="" /> : <span className="chip-letter" aria-hidden="true">{initialOf(c.name[locale])}</span>}
-              {c.name[locale]}
+      {/* As in the app: a sheet rises over the foot of the photo, with the categories and the quick filters on it. */}
+      <div className="home-sheet">
+        {categories.length ? (
+          <nav className="chips" aria-label={s.categories}>
+            <Link className="chip on" href="/menu" aria-current="page">
+              {firstPhoto ? <img src={firstPhoto} alt="" /> : <span className="chip-letter" aria-hidden="true">{initialOf(s.allCategories)}</span>}
+              <span>{s.allCategories}</span>
             </Link>
-          ))}
-        </nav>
-      ) : null}
+            {categories.map((c) => (
+              <Link key={c.id} className="chip" href={`/menu#${c.id}`}>
+                {c.items.find((i) => i.imageUrl) ? <img src={c.items.find((i) => i.imageUrl)!.imageUrl!} alt="" /> : <span className="chip-letter" aria-hidden="true">{initialOf(c.name[locale])}</span>}
+                <span>{c.name[locale]}</span>
+              </Link>
+            ))}
+          </nav>
+        ) : null}
 
+        {items.length ? (
+          <nav className="filters" aria-label={locale === 'ar' ? 'تصفية' : 'Filters'}>
+            <Link className="filter" href="/menu?filter=available">{s.filterAvailable}</Link>
+            <Link className="filter" href="/menu?filter=under">{s.filterUnder}</Link>
+          </nav>
+        ) : null}
+      </div>
+
+      {/* The offer line floats above the bottom bar while the cart is empty, as in the app. */}
       {strip ? (
         <Link className="strip" href={linkFor(strip)} style={{ '--strip': strip.look.colour ?? 'var(--color-accent)' } as React.CSSProperties}>
-          <strong>{strip.title[locale]}</strong>
-          {strip.offer?.code ? <span className="strip-code">{s.useCode(strip.offer.code)}</span> : strip.body[locale] ? <span>{strip.body[locale]}</span> : null}
+          {stripBadge ? <span className="strip-badge">{stripBadge}</span> : null}
+          <span className="strip-text">{strip.title[locale]}</span>
+          <Icon name="chevron" size={18} />
         </Link>
       ) : null}
 

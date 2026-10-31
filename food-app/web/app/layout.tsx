@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getRestaurant } from '@/lib/data.ts';
 import { cookies } from 'next/headers';
+import { preload } from 'react-dom';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -20,6 +21,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const locale: Locale = (await cookies()).get('locale')?.value === 'ar' ? 'ar' : 'en';
   // The restaurant's own theme and colour, from its settings in the admin.
   const settings = await getSettings();
+  // The text and heading fonts load first, so the page draws in them from the start.
+  for (const font of locale === 'ar' ? ['NotoSansArabic-Variable'] : ['Roboto-Regular', 'Fraunces-Variable']) {
+    preload(`/fonts/${font}.woff2`, { as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' });
+  }
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} data-theme={settings.theme} data-glass={String(settings.theme.startsWith('glass'))} style={themeStyle(settings.theme, settings.brandColor, settings.buttonStyle) as React.CSSProperties}>
       <body>

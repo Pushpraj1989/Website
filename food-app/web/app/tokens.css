@@ -10,8 +10,10 @@
   --color-danger: #b91c1c;
   --color-success: #15803d;
   --color-warning: #92400e;
-  --font-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  --font-arabic: Noto Sans Arabic, IBM Plex Sans Arabic, system-ui, sans-serif;
+  /* The app's own fonts (public/fonts): Roboto for text, Fraunces for headings, Noto Sans Arabic for Arabic. */
+  --font-sans: Roboto, system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-heading: Fraunces, Georgia, 'Times New Roman', serif;
+  --font-arabic: 'Noto Sans Arabic', 'IBM Plex Sans Arabic', system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   --text-xs: 12px; --leading-xs: 16px; --weight-xs: 500;
   --text-sm: 14px; --leading-sm: 20px; --weight-sm: 400;
@@ -38,7 +40,7 @@
   --motion-base: 200ms;
   --motion-ease: cubic-bezier(.2,.8,.2,1);
 }
-:root[dir='rtl'] { --font-body: var(--font-arabic); }
+:root[dir='rtl'] { --font-body: var(--font-arabic); --font-heading: var(--font-arabic); }
 
 /* The restaurant's theme sets the colours above on <html> (lib/theme.ts). These are what is not a colour. */
 :root { --color-accent-fg: var(--color-accent); --page-backdrop: var(--color-bg); }

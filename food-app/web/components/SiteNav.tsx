@@ -43,7 +43,8 @@ export function CartIcon({ locale, initial }: { locale: Locale; initial: number 
   );
 }
 
-/** On phones, as in the app: Home, Menu and Cart pinned to the bottom of the screen while the page scrolls. */
+/** On phones, as in the app: a floating rounded dock. The open page's item shows its name on a tinted pill; the
+ *  others show the icon, with the name kept for screen readers. (The app's Orders and Account need an app account.) */
 export function BottomDock({ locale }: { locale: Locale }) {
   const s = t(locale);
   const pathname = usePathname() ?? '/';
@@ -57,8 +58,11 @@ export function BottomDock({ locale }: { locale: Locale }) {
     <nav className="dock" aria-label={locale === 'ar' ? 'التنقل السفلي' : 'Bottom'}>
       {items.map((i) => (
         <Link key={i.href} href={i.href} className={i.on ? 'dock-item on' : 'dock-item'} aria-current={i.on ? 'page' : undefined}>
-          <Icon name={i.icon} />
-          <span>{i.label}</span>
+          {i.on ? (
+            <span className="dock-pill"><Icon name={i.icon} size={22} /><span>{i.label}</span></span>
+          ) : (
+            <><Icon name={i.icon} size={22} /><span className="sr">{i.label}</span></>
+          )}
         </Link>
       ))}
     </nav>

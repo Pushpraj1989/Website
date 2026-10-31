@@ -18,11 +18,11 @@ export type HeroSlide = {
   href: string;
 };
 
-// The top of the home page, as in the app: the photo runs edge to edge, with the restaurant's address and the dish
-// search on it, and the slide's words and button at its foot. Slides change on their own after each one's time;
+// The top of the home page, as in the app: the photo runs edge to edge under the floating icons, with the dish search
+// on it, the slide's words and pill button at its foot and small dots at its bottom edge. Slides change on their own after each one's time;
 // the pause button stops them (they also stop while the pointer or focus is on the hero, and never move when the
 // visitor asks for less motion).
-export function HeroSlider({ slides, locale, address }: { slides: HeroSlide[]; locale: Locale; address: string }) {
+export function HeroSlider({ slides, locale }: { slides: HeroSlide[]; locale: Locale }) {
   const s = t(locale);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -50,10 +50,6 @@ export function HeroSlider({ slides, locale, address }: { slides: HeroSlide[]; l
       ))}
       <div className="hero-shade" aria-hidden="true" />
 
-      <div className="hero-top">
-        {address ? <span className="hero-pin"><Icon name="pin" size={16} />{address}</span> : null}
-      </div>
-
       <form className="hero-search" action="/menu" method="get" role="search">
         <Icon name="search" />
         <input id="hero-q" name="q" type="search" aria-label={s.searchDishes} placeholder={s.searchDishes} autoComplete="off" enterKeyHint="search" />
@@ -63,20 +59,20 @@ export function HeroSlider({ slides, locale, address }: { slides: HeroSlide[]; l
         {slide.kicker ? <span className="hero-kicker">{slide.kicker}</span> : null}
         <h1 className="hero-title">{slide.title}</h1>
         {slide.body ? <p className="hero-body">{slide.body}</p> : null}
-        <div className="hero-actions">
-          <Link className="btn hero-cta" href={slide.href}>{slide.cta}</Link>
-          {slides.length > 1 ? (
-            <div className="hero-dots">
-              {slides.map((sl, i) => (
-                <button key={sl.id} type="button" className={i === index ? 'dot on' : 'dot'} aria-label={s.slideOf(i + 1, slides.length)} aria-current={i === index ? 'true' : undefined} onClick={() => setIndex(i)} />
-              ))}
-              <button type="button" className="hero-pause" aria-label={paused ? s.play : s.pause} onClick={() => setPaused((p) => !p)}>
-                <Icon name={paused ? 'play' : 'pause'} size={16} />
-              </button>
-            </div>
-          ) : null}
-        </div>
+        <Link className="hero-cta" href={slide.href}>{slide.cta}<Icon name="chevron" size={18} /></Link>
       </div>
+
+      {slides.length > 1 ? (
+        <div className="hero-dots">
+          {slides.map((sl, i) => (
+            <button key={sl.id} type="button" className={i === index ? 'dot on' : 'dot'} aria-label={s.slideOf(i + 1, slides.length)} aria-current={i === index ? 'true' : undefined} onClick={() => setIndex(i)} />
+          ))}
+          {/* The app has no pause button; on the web, moving slides must be stoppable (WCAG 2.2.2), so a small one stays. */}
+          <button type="button" className="hero-pause" aria-label={paused ? s.play : s.pause} onClick={() => setPaused((p) => !p)}>
+            <Icon name={paused ? 'play' : 'pause'} size={12} />
+          </button>
+        </div>
+      ) : null}
     </section>
   );
 }
