@@ -14,6 +14,20 @@ value() {
 }
 show() { if [ -n "$(value "$1")" ]; then printf '  %-36s set\n' "$1"; else printf '  %-36s EMPTY  %s\n' "$1" "$2"; fi; }
 
+# Lines the service cannot read (a stray quote before the name, a missing =), and example text left in place.
+bad=0; n=0
+while IFS= read -r line || [ -n "$line" ]; do
+  n=$((n + 1)); line="${line%$'\r'}"; trimmed="${line#"${line%%[![:space:]]*}"}"
+  case "$trimmed" in ''|'#'*) continue ;; esac
+  trimmed="${trimmed#export }"
+  if ! [[ "$trimmed" =~ ^[A-Za-z_][A-Za-z0-9_]*= ]]; then
+    echo "Line $n is not read by the service: it must start with a NAME= (no quote or space before the name)."; bad=1
+  elif [[ "$trimmed" =~ yourdomain|YourRestaurant|the\ mailbox\ password|the\ Directory|the\ Application|the\ client\ secret ]]; then
+    echo "Line $n (${trimmed%%=*}) still holds the example text from the instructions: put your own value there."; bad=1
+  fi
+done < "$ENV_FILE"
+[ "$bad" = 1 ] && echo
+
 echo "Made by setup.sh (must all be set):"
 for n in PUBLIC_URL DATABASE_URL ADMIN_PASSWORD OTP_SECRET APP_ENCRYPTION_KEY PARTNER_KEY_SECRET VOUCHER_CODE_SECRET; do
   show "$n" "- run the update, which puts it back"
