@@ -6,7 +6,7 @@ import { chromium } from 'playwright';
 const ADMIN = process.env.ADMIN_URL ?? 'http://127.0.0.1:4173';
 const PASSWORD = process.env.ADMIN_PASSWORD;
 if (!PASSWORD) throw new Error('Set ADMIN_PASSWORD');
-const SECTIONS = ['orders', 'products', 'categories', 'offers', 'campaigns', 'designs', 'partners', 'reports', 'promotions', 'zones', 'assistant', 'restaurant'];
+const SECTIONS = ['dashboard', 'orders', 'products', 'categories', 'offers', 'campaigns', 'designs', 'partners', 'reports', 'promotions', 'zones', 'assistant', 'restaurant'];
 const WIDTHS = [390, 1280];
 
 const browser = await chromium.launch();

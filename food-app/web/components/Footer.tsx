@@ -11,6 +11,8 @@ export async function Footer({ locale }: { locale: Locale }) {
   const name = settings.name[locale];
   const year = new Date().getFullYear();
   const address = settings.address[locale];
+  // On the server the staff console is at /console/ (STAFF_URL); a local run keeps the built-in order board.
+  const staffUrl = process.env.STAFF_URL || '/admin';
   return (
     <footer className="site-footer">
       <div className="shell footer-inner">
@@ -18,7 +20,7 @@ export async function Footer({ locale }: { locale: Locale }) {
         {address || settings.phone ? <span>{[address, settings.phone].filter(Boolean).join(' · ')}</span> : null}
         <nav aria-label={locale === 'ar' ? 'روابط إضافية' : 'More links'}>
           <Link href="/menu">{s.menu}</Link>
-          <Link href="/admin">{s.adminLogin}</Link>
+          <a href={staffUrl}>{s.adminLogin}</a>
         </nav>
         <span>{s.copyright(year, name)} {s.websiteVersion(pkg.version)}</span>
       </div>

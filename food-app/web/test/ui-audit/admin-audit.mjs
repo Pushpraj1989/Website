@@ -8,7 +8,7 @@ import { probe } from './probe.mjs';
 const AXE = readFileSync(new URL('../../node_modules/axe-core/axe.min.js', import.meta.url), 'utf8');
 const ADMIN = process.env.ADMIN_URL ?? 'http://127.0.0.1:4173';
 const PW = readFileSync(process.argv[2], 'utf8').trim();
-const SECTIONS = ['orders','products','categories','offers','campaigns','designs','partners','reports','promotions','zones','assistant','restaurant'];
+const SECTIONS = ['dashboard','orders','products','categories','offers','campaigns','designs','partners','reports','promotions','zones','assistant','restaurant'];
 const out = [];
 const browser = await chromium.launch();
 for (const width of [390, 1280]) {

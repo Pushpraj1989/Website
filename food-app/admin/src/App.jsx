@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ChartColumn, Store, ClipboardList, Bot, Handshake, LayoutGrid, LogOut, Map as MapIcon, Megaphone, Menu, Palette, Percent, Tags, UtensilsCrossed, X } from 'lucide-react';
+import { ChartColumn, Gauge, Store, ClipboardList, Bot, Handshake, LayoutGrid, LogOut, Map as MapIcon, Megaphone, Menu, Palette, Percent, Tags, UtensilsCrossed, X } from 'lucide-react';
 import { api } from './api.js';
 import Login from './pages/Login.jsx';
 import Products from './pages/Products.jsx';
@@ -12,25 +12,28 @@ import Reports from './pages/Reports.jsx';
 import Promotions from './pages/Promotions.jsx';
 import Zones from './pages/Zones.jsx';
 import Orders from './pages/Orders.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 import AiSettings from './pages/AiSettings.jsx';
 import Settings from './pages/Settings.jsx';
 
+// The side menu, in groups: what is happening, what is sold, how it is promoted, and how the restaurant is set up.
 const SECTIONS = [
-  { id: 'orders', label: 'Orders', short: 'Orders', Icon: ClipboardList },
-  { id: 'products', label: 'Products', short: 'Menu', Icon: UtensilsCrossed },
-  { id: 'categories', label: 'Categories', Icon: LayoutGrid },
-  { id: 'offers', label: 'Offers', Icon: Percent },
-  { id: 'campaigns', label: 'Campaigns', short: 'Campaigns', Icon: Megaphone },
-  { id: 'designs', label: 'Voucher designs', Icon: Palette },
-  { id: 'partners', label: 'Partners', Icon: Handshake },
-  { id: 'reports', label: 'Promotion reports', short: 'Reports', Icon: ChartColumn },
-  { id: 'promotions', label: 'Promotions', Icon: Tags },
-  { id: 'zones', label: 'Delivery areas', Icon: MapIcon },
-  { id: 'assistant', label: 'Assistant', Icon: Bot },
-  { id: 'restaurant', label: 'Restaurant', Icon: Store },
+  { id: 'dashboard', group: 'Overview', label: 'Dashboard', short: 'Dashboard', Icon: Gauge },
+  { id: 'orders', group: 'Overview', label: 'Live orders', short: 'Orders', Icon: ClipboardList },
+  { id: 'products', group: 'Menu', label: 'Dishes', short: 'Menu', Icon: UtensilsCrossed },
+  { id: 'categories', group: 'Menu', label: 'Categories', Icon: LayoutGrid },
+  { id: 'promotions', group: 'Marketing', label: 'Home and pop-ups', Icon: Tags },
+  { id: 'offers', group: 'Marketing', label: 'Offers and codes', Icon: Percent },
+  { id: 'campaigns', group: 'Marketing', label: 'Voucher campaigns', Icon: Megaphone },
+  { id: 'designs', group: 'Marketing', label: 'Voucher designs', Icon: Palette },
+  { id: 'reports', group: 'Marketing', label: 'Promotion reports', Icon: ChartColumn },
+  { id: 'restaurant', group: 'Settings', label: 'Restaurant and look', Icon: Store },
+  { id: 'zones', group: 'Settings', label: 'Delivery areas', Icon: MapIcon },
+  { id: 'assistant', group: 'Settings', label: 'Assistant', Icon: Bot },
+  { id: 'partners', group: 'Settings', label: 'Partners', Icon: Handshake },
 ];
 // The phone's tab bar holds the four sections staff open most; the rest are under More.
-const TABS = ['orders', 'products', 'campaigns', 'reports'];
+const TABS = ['dashboard', 'orders', 'products'];
 
 // On a phone, tables are shown as cards. Each cell is given its column's name so the card can label it, and the
 // table roles are set explicitly, because changing a table's display drops its semantics in some browsers.
@@ -62,7 +65,7 @@ function useCardTables(ref, active) {
 // Hash routing keeps the console working without a server rewrite.
 function currentSection() {
   const id = window.location.hash.replace('#/', '');
-  return SECTIONS.some((s) => s.id === id) ? id : 'products';
+  return SECTIONS.some((s) => s.id === id) ? id : 'dashboard';
 }
 
 export default function App() {
@@ -121,10 +124,13 @@ export default function App() {
 
   const navLinks = (
     <nav aria-label="Sections">
-      {SECTIONS.map(({ id, label, Icon }) => (
-        <a key={id} href={`#/${id}`} className={section === id ? 'nav active' : 'nav'} aria-current={section === id ? 'page' : undefined}>
-          <Icon className="icon" aria-hidden="true" />{label}
-        </a>
+      {SECTIONS.map(({ id, group, label, Icon }, i) => (
+        <React.Fragment key={id}>
+          {group !== SECTIONS[i - 1]?.group ? <span className="nav-group">{group}</span> : null}
+          <a href={`#/${id}`} className={section === id ? 'nav active' : 'nav'} aria-current={section === id ? 'page' : undefined}>
+            <Icon className="icon" aria-hidden="true" />{label}
+          </a>
+        </React.Fragment>
       ))}
     </nav>
   );
@@ -164,6 +170,7 @@ export default function App() {
       <main className="main" ref={mainRef}>
         {loadError ? <p role="alert" className="error">{loadError}</p> : null}
         {!catalog ? <p className="muted">Loading…</p> : null}
+        {section === 'dashboard' ? <Dashboard /> : null}
         {catalog && section === 'products' ? <Products catalog={catalog} onChanged={reload} /> : null}
         {catalog && section === 'categories' ? <Categories catalog={catalog} onChanged={reload} /> : null}
         {catalog && section === 'offers' ? <Offers catalog={catalog} onChanged={reload} /> : null}

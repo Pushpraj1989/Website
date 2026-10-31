@@ -97,6 +97,7 @@ export const api = {
   duplicateTemplate: (id) => request('POST', `/v1/admin/voucher-templates/${id}/duplicate`),
   templatePreview: (id, which = 'draft') => request('GET', `/v1/admin/voucher-templates/${id}/preview?which=${which}`),
   promotionReport: () => request('GET', '/v1/admin/reports/promotions'),
+  salesReport: (from, to) => request('GET', `/v1/admin/reports/sales?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`),
   downloadPromotionCsv: async () => {
     const response = await fetch('/v1/admin/reports/promotions.csv', { credentials: 'same-origin' });
     if (!response.ok) throw new ApiError('The report could not be made.', response.status);
