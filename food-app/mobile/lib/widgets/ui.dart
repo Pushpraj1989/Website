@@ -221,8 +221,10 @@ class StatusChip extends StatelessWidget {
 /// A selectable card in a group of choices (order type, address, payment). It reads as a selected or unselected
 /// option to screen readers, and the whole card is the tap target.
 class ChoiceTile extends StatelessWidget {
-  const ChoiceTile({super.key, required this.icon, required this.title, this.subtitle, required this.selected, required this.onTap});
+  const ChoiceTile({super.key, required this.icon, required this.title, this.subtitle, required this.selected, required this.onTap, this.stacked = false});
   final IconData icon;
+  /// Icon above a centred label, for three or more tiles in a row where a side-by-side label would break mid-word.
+  final bool stacked;
   final String title;
   final String? subtitle;
   final bool selected;
@@ -245,7 +247,7 @@ class ChoiceTile extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: onTap,
-          child: Padding(
+          child: stacked ? _stacked(context, enabled) : Padding(
             padding: const EdgeInsets.symmetric(horizontal: Tokens.space3, vertical: Tokens.space3),
             child: Row(children: [
               Icon(icon, color: enabled ? (selected ? context.accentFg : Tokens.text) : Tokens.textMuted),
@@ -264,6 +266,20 @@ class ChoiceTile extends StatelessWidget {
       ),
     );
   }
+
+  Widget _stacked(BuildContext context, bool enabled) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Tokens.space2, vertical: Tokens.space3),
+        child: Stack(children: [
+          Center(
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              Icon(icon, color: enabled ? (selected ? context.accentFg : Tokens.text) : Tokens.textMuted),
+              const SizedBox(height: Tokens.space2),
+              Text(title, textAlign: TextAlign.center, maxLines: 2, style: TextStyle(fontWeight: FontWeight.w700, color: enabled ? Tokens.text : Tokens.textMuted)),
+            ]),
+          ),
+          if (selected) Positioned(top: 0, right: 0, child: Icon(LucideIcons.circleCheck, color: context.accentFg, size: 18)),
+        ]),
+      );
 }
 
 /// The small ADD button that sits on the edge of a dish photo, in the restaurant's button style. It looks compact

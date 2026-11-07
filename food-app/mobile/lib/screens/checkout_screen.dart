@@ -343,12 +343,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 title: s.orderType,
                 icon: LucideIcons.shoppingBag,
                 child: Row(children: [
-                  Expanded(child: ChoiceTile(icon: LucideIcons.bike, title: s.delivery, selected: _channel == 'delivery', onTap: _methodsFor('delivery').isEmpty && _payments != null ? null : () => _setChannel('delivery'))),
+                  Expanded(child: ChoiceTile(icon: LucideIcons.bike, title: s.delivery, stacked: _rates.isNotEmpty, selected: _channel == 'delivery', onTap: _methodsFor('delivery').isEmpty && _payments != null ? null : () => _setChannel('delivery'))),
                   const SizedBox(width: Tokens.space2),
-                  Expanded(child: ChoiceTile(icon: LucideIcons.store, title: s.pickup, selected: _channel == 'pickup', onTap: _methodsFor('pickup').isEmpty && _payments != null ? null : () => _setChannel('pickup'))),
+                  Expanded(child: ChoiceTile(icon: LucideIcons.store, title: s.pickup, stacked: _rates.isNotEmpty, selected: _channel == 'pickup', onTap: _methodsFor('pickup').isEmpty && _payments != null ? null : () => _setChannel('pickup'))),
                   if (_rates.isNotEmpty) ...[
                     const SizedBox(width: Tokens.space2),
-                    Expanded(child: ChoiceTile(icon: LucideIcons.truck, title: s.shipByCourier, selected: _channel == 'shipping', onTap: _methodsFor('shipping').isEmpty && _payments != null ? null : () => _setChannel('shipping'))),
+                    Expanded(child: ChoiceTile(icon: LucideIcons.truck, title: s.shipByCourier, stacked: true, selected: _channel == 'shipping', onTap: _methodsFor('shipping').isEmpty && _payments != null ? null : () => _setChannel('shipping'))),
                   ],
                 ]),
               ),

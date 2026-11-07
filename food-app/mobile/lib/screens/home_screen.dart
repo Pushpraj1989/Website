@@ -473,7 +473,7 @@ class _HomeScreenState extends State<HomeScreen> {
         for (final c in menu.categories)
           Padding(
             padding: const EdgeInsets.fromLTRB(Tokens.space4, 0, Tokens.space4, Tokens.space3),
-            child: FeedCategoryCard(title: c.name.of(s.lang), count: c.items.length, image: Art.forCategory(c.illustration), s: s, onTap: () => setState(() => _category = c.id)),
+            child: FeedCategoryCard(title: c.name.of(s.lang), count: c.items.length, image: _firstPhoto(c.items) ?? (Strings.shop ? '' : Art.forCategory(c.illustration)), s: s, onTap: () => setState(() => _category = c.id)),
           ),
       ],
       gap,

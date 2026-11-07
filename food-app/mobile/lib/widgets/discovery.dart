@@ -440,7 +440,12 @@ class FeedCategoryCard extends StatelessWidget {
           child: Row(children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(Tokens.radiusMd),
-              child: ExcludeSemantics(child: Image.asset(image, width: 88, height: 88, fit: BoxFit.cover, cacheWidth: 240, semanticLabel: '')),
+              // A product photo from the server, a bundled picture, or (no picture at all) a soft brand tile.
+              child: ExcludeSemantics(child: SizedBox(width: 88, height: 88, child: image.isEmpty
+                  ? ColoredBox(color: context.accentSoft)
+                  : image.startsWith('http')
+                      ? Image.network(image, fit: BoxFit.cover, cacheWidth: 240, semanticLabel: '', errorBuilder: (_, _, _) => ColoredBox(color: context.accentSoft))
+                      : Image.asset(image, fit: BoxFit.cover, cacheWidth: 240, semanticLabel: ''))),
             ),
             const SizedBox(width: Tokens.space4),
             Expanded(

@@ -35,7 +35,7 @@ const _finished = {'delivered', 'collected', 'cancelled', 'rejected'};
 IconData _iconFor(String status) => switch (status) {
       'placed' || 'awaiting_payment' => LucideIcons.clock,
       'accepted' => LucideIcons.check,
-      'preparing' => LucideIcons.chefHat,
+      'preparing' => Strings.shop ? LucideIcons.packageOpen : LucideIcons.chefHat,
       'ready' => LucideIcons.packageCheck,
       'out_for_delivery' => LucideIcons.bike,
       'shipped' => LucideIcons.truck,
@@ -212,7 +212,7 @@ class _OrderScreenState extends State<OrderScreen> {
         const SizedBox(height: Tokens.space3),
         SectionCard(
           title: s.orderItems,
-          icon: LucideIcons.utensils,
+          icon: Strings.shop ? LucideIcons.shoppingBag : LucideIcons.utensils,
           child: Column(children: [
             for (final l in order.lines)
               Padding(

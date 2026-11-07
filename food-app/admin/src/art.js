@@ -16,5 +16,5 @@ export const ILLUSTRATION_LABELS = {
 };
 
 export function illustrationSrc(key) {
-  return `/illustrations/${FILES[key] ?? FILES.dish}`;
+  return `${import.meta.env.BASE_URL}illustrations/${FILES[key] ?? FILES.dish}`;
 }

@@ -16,7 +16,7 @@ const ACTIONS = {
   cancelled: [],
 };
 const TYPES = { percent: 'Percent off', fixed: 'Fixed amount off (AED)', free_delivery: 'Free delivery', item_free: 'Free item', bundle: 'Bundle' };
-const FUNDING = { restaurant: 'Restaurant pays', platform: 'Platform pays', shared: 'Shared' };
+const FUNDING = { restaurant: 'Your business pays', platform: 'Platform pays', shared: 'Shared' };
 
 const toLocalInput = (iso) => {
   const d = new Date(iso);

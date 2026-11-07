@@ -29,7 +29,7 @@ const mediaLabel = (m) => (!m ? 'None' : m.kind === 'video' ? 'Video' : m.mime =
 
 // A promotion puts a picture, GIF, video or offer in one place on the customer's home, for a set time, with the look
 // staff choose: how it arrives, its size and frame, its colour and how long it stays.
-export default function Promotions({ catalog }) {
+export default function Promotions({ catalog, shop = false }) {
   const [promos, setPromos] = useState(null);
   const [mediaByProduct, setMediaByProduct] = useState({});
   const [editing, setEditing] = useState(null);
@@ -103,6 +103,7 @@ export default function Promotions({ catalog }) {
             key={editing === 'new' ? 'new' : editing.id}
             promo={editing === 'new' ? null : editing}
             catalog={catalog}
+            shop={shop}
             mediaByProduct={mediaByProduct}
             onClose={() => setEditing(null)}
             onSaved={async (text) => { setMessage(text); await load(); }}
@@ -113,7 +114,7 @@ export default function Promotions({ catalog }) {
   );
 }
 
-function PromotionEditor({ promo, catalog, mediaByProduct, onClose, onSaved }) {
+function PromotionEditor({ promo, catalog, mediaByProduct, onClose, onSaved, shop = false }) {
   const [placement, setPlacement] = useState(promo?.placement ?? 'hero');
   const [media, setMedia] = useState(promo?.media ?? null);
   const [look, setLook] = useState({ animation: 'slide_up', size: 'standard', frame: 'rounded', colour: null, durationSeconds: 5, frequency: 'once_per_day', ...(promo?.look ?? {}) });
@@ -241,7 +242,7 @@ function PromotionEditor({ promo, catalog, mediaByProduct, onClose, onSaved }) {
           ) : (
             <label>Button opens
               <select name="menuItemId" defaultValue={promo?.menuItemId ?? ''}>
-                <option value="">The menu</option>
+                <option value="">{shop ? 'The shop' : 'The menu'}</option>
                 {catalog.products.map((p) => <option key={p.id} value={p.id}>{p.name.en}</option>)}
               </select>
             </label>

@@ -46,7 +46,7 @@ class Strings {
   String includesTax(String label) => isArabic ? 'شامل $label' : 'includes $label';
   String get checkout => isArabic ? 'الدفع' : 'Checkout';
   String get delivery => isArabic ? 'توصيل' : 'Delivery';
-  String get pickup => isArabic ? 'استلام من المطعم' : 'Pickup';
+  String get pickup => _w('Pickup', 'استلام من المطعم', 'Pickup', 'استلام من المتجر');
   String get paymentMethod => isArabic ? 'طريقة الدفع' : 'Payment method';
   String get payCod => isArabic ? 'الدفع نقداً عند الاستلام' : 'Cash on delivery';
   String get payArrival => isArabic ? 'الدفع عند الوصول' : 'Pay on arrival';
@@ -187,12 +187,12 @@ class Strings {
   String unlockReason(String restaurant) => isArabic ? 'افتح تطبيق $restaurant' : 'Unlock $restaurant';
   String get signOut => isArabic ? 'تسجيل الخروج' : 'Sign out';
   String get skipEmail => isArabic ? 'لاحقاً' : 'Later';
-  String get askTitle => isArabic ? 'اسأل المطعم' : 'Ask the restaurant';
+  String get askTitle => _w('Ask the restaurant', 'اسأل المطعم', 'Ask the shop', 'اسأل المتجر');
   String get askSuggestionsTitle => isArabic ? 'جرّب أحد هذه الأسئلة' : 'Try one of these';
   /// A question about one of the restaurant's own dishes; without a dish, a general one.
   String askSuggestionDish(String? dish) => dish == null || dish.isEmpty
-      ? (isArabic ? 'ما الأطباق التي تنصح بها؟' : 'What do you recommend?')
-      : (isArabic ? 'ماذا يأتي مع $dish؟' : 'What comes with the $dish?');
+      ? _w('What do you recommend?', 'ما الأطباق التي تنصح بها؟', 'What do you recommend?', 'ما المنتجات التي تنصح بها؟')
+      : _w('What comes with the $dish?', 'ماذا يأتي مع $dish؟', 'Tell me about the $dish.', 'أخبرني عن $dish.');
   String get askSuggestionOrder => isArabic ? 'أين وصل طلبي؟' : 'Where is my order?';
   String get askSuggestionPrice => isArabic ? 'ما الأطباق المتوفرة الآن؟' : 'What is available right now?';
   String get askHint => _w('Ask about dishes, prices or your order.', 'اسأل عن الأطباق والأسعار وطلبك.', 'Ask about products, prices or your order.', 'اسأل عن المنتجات والأسعار وطلبك.');
@@ -306,10 +306,10 @@ class Strings {
   String get addToCartAction => isArabic ? 'أضف إلى السلة' : 'Add to cart';
   String get addedToYourCart => isArabic ? 'أضيف إلى سلتك' : 'Added to your cart';
   String get nothingAdded => isArabic ? 'لم تتم إضافة شيء.' : 'Nothing was added.';
-  String get assistantScope => isArabic ? 'الإجابات من قائمة المطعم وطلباتك فقط. لا يضاف شيء إلى سلتك حتى تضغط أضف.' : "Answers come from this restaurant's menu and your own orders. Nothing is added to your cart until you tap Add.";
+  String get assistantScope => _w("Answers come from this restaurant's menu and your own orders. Nothing is added to your cart until you tap Add.", 'الإجابات من قائمة المطعم وطلباتك فقط. لا يضاف شيء إلى سلتك حتى تضغط أضف.', "Answers come from this shop's products and your own orders. Nothing is added to your cart until you tap Add.", 'الإجابات من منتجات المتجر وطلباتك فقط. لا يضاف شيء إلى سلتك حتى تضغط أضف.');
   String get askAboutOrder => isArabic ? 'عن طلب' : 'About an order';
   String get askAboutMenu => _w('About the menu', 'عن القائمة', 'About the products', 'عن المنتجات');
-  String assistantGreeting(String name) => isArabic ? 'أهلاً! أستطيع المساعدة في قائمة $name وطلباتك. عن ماذا تريد أن تسأل؟' : 'Hi! I can help with the $name menu and your orders. What would you like to ask about?';
+  String assistantGreeting(String name) => _w('Hi! I can help with the $name menu and your orders. What would you like to ask about?', 'أهلاً! أستطيع المساعدة في قائمة $name وطلباتك. عن ماذا تريد أن تسأل؟', 'Hi! I can help with $name products and your orders. What would you like to ask about?', 'أهلاً! أستطيع المساعدة في منتجات $name وطلباتك. عن ماذا تريد أن تسأل؟');
 
   // Account and settings
   String get account => isArabic ? 'الحساب' : 'Account';
@@ -326,7 +326,7 @@ class Strings {
   String get getHelp => isArabic ? 'المساعدة' : 'Get help';
   String get aboutApp => isArabic ? 'حول التطبيق' : 'About app';
   String get becomePartner => isArabic ? 'كن شريكاً' : 'Become a partner';
-  String partnerBody(String name) => isArabic ? 'لتصبح شريكاً لـ $name، تواصل مع المطعم:' : 'To become a partner of $name, contact the restaurant:';
+  String partnerBody(String name) => _w('To become a partner of $name, contact the restaurant:', 'لتصبح شريكاً لـ $name، تواصل مع المطعم:', 'To become a partner of $name, contact the shop:', 'لتصبح شريكاً لـ $name، تواصل مع المتجر:');
   String get signInForAccount => isArabic ? 'سجّل الدخول لرؤية طلباتك وقسائمك وعضويتك.' : 'Sign in to see your orders, vouchers and membership.';
   String get signIn => isArabic ? 'تسجيل الدخول' : 'Sign in';
   String get emailNotAdded => isArabic ? 'لم يُضف بعد' : 'Not added yet';

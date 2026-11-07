@@ -220,7 +220,7 @@ export default function App() {
         {catalog && section === 'designs' ? <Templates restaurantName={brand?.name.en} /> : null}
         {catalog && section === 'partners' ? <Partners /> : null}
         {catalog && section === 'reports' ? <Reports /> : null}
-        {catalog && section === 'promotions' ? <Promotions catalog={catalog} /> : null}
+        {catalog && section === 'promotions' ? <Promotions catalog={catalog} shop={shop} /> : null}
         {section === 'zones' ? <Zones /> : null}
         {section === 'orders' ? <Orders /> : null}
         {catalog && section === 'assistant' ? <AiSettings /> : null}
