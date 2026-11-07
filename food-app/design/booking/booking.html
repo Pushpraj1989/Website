@@ -1,0 +1,103 @@
+<!doctype html>
+<!--
+  Appointment booking: a DESIGN for the customer app, not a built feature. It shows how a salon customer would pick a
+  treatment, a stylist, a day and a time. Build it when a customer asks for it. Open in a phone-sized window
+  (390 x 844); add ?step=done for the confirmation screen. Colours and type follow the app (brand colour per business).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Booking design</title>
+<style>
+  @font-face { font-family: 'Fraunces'; src: url('../../web/public/fonts/Fraunces-Variable.woff2') format('woff2'); font-weight: 100 900; }
+  @font-face { font-family: 'Roboto'; src: url('../../web/public/fonts/Roboto-Regular.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Roboto'; src: url('../../web/public/fonts/Roboto-Medium.woff2') format('woff2'); font-weight: 500; }
+  @font-face { font-family: 'Roboto'; src: url('../../web/public/fonts/Roboto-Bold.woff2') format('woff2'); font-weight: 700; }
+  :root { --brand: #9D174D; --brand-soft: #F7E3EC; --ink: #1C1917; --muted: #6B625A; --line: #E7E5E4; --bg: #F5F5F4; --card: #fff; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: 'Roboto', system-ui, sans-serif; background: var(--bg); color: var(--ink); width: 390px; min-height: 844px; }
+  header { display: flex; align-items: center; gap: 14px; padding: 18px 20px 10px; background: #fff; }
+  header h1 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px; }
+  .back { width: 24px; height: 24px; }
+  main { padding: 10px 16px 120px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .card { background: var(--card); border-radius: 18px; padding: 16px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .title { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; margin-bottom: 12px; }
+  .ico { width: 32px; height: 32px; border-radius: 10px; background: var(--brand-soft); display: grid; place-items: center; }
+  .ico svg { width: 18px; height: 18px; stroke: var(--brand); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .svc { display: flex; align-items: center; gap: 12px; padding: 10px; border: 1px solid var(--line); border-radius: 14px; margin-top: 8px; }
+  .svc img { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; }
+  .svc b { display: block; font-size: 15px; } .svc small { color: var(--muted); font-size: 13px; }
+  .svc .price { margin-left: auto; font-weight: 700; font-size: 14px; }
+  .svc.on { border: 2px solid var(--brand); background: var(--brand-soft); }
+  .chips { display: flex; gap: 6px; flex-wrap: nowrap; overflow: hidden; } .chip { flex: none; }
+  .chip { display: flex; align-items: center; gap: 6px; padding: 5px 10px 5px 5px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; font-weight: 500; }
+  .chip i { width: 28px; height: 28px; border-radius: 50%; background: #E7D6DE; display: grid; place-items: center; font-style: normal; font-size: 12px; font-weight: 700; color: var(--brand); }
+  .chip.on { border: 2px solid var(--brand); background: var(--brand-soft); }
+  .days { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+  .day { text-align: center; padding: 8px 0; border: 1px solid var(--line); border-radius: 14px; }
+  .day small { display: block; color: var(--muted); font-size: 12px; } .day b { font-size: 17px; }
+  .day.on { background: var(--brand); border-color: var(--brand); color: #fff; } .day.on small { color: #fde7f0; }
+  .times { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .time { text-align: center; padding: 10px 0; border: 1px solid var(--line); border-radius: 12px; font-weight: 500; font-size: 14px; }
+  .time.off { color: #c4bdb7; text-decoration: line-through; background: #fafaf9; }
+  .time.on { border: 2px solid var(--brand); background: var(--brand-soft); color: var(--brand); font-weight: 700; }
+  .bar { position: fixed; left: 0; right: 0; bottom: 0; width: 390px; padding: 14px 16px 22px; background: #fff; box-shadow: 0 -8px 24px rgba(0,0,0,.06); }
+  .btn { display: flex; justify-content: space-between; align-items: center; height: 52px; border-radius: 16px; padding: 0 18px; background: var(--brand); color: #fff; font-weight: 700; font-size: 16px; }
+  .sum { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+  /* Confirmation */
+  .done { display: none; padding: 28px 16px; }
+  body.step-done main, body.step-done .bar { display: none; } body.step-done .done { display: grid; gap: 14px; }
+  .hero { border-radius: 20px; padding: 22px; color: #fff; background: linear-gradient(135deg, var(--brand), #6B0F35); }
+  .hero h2 { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; margin-top: 10px; }
+  .row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .row:last-child { border: 0; } .row span { color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <svg class="back" viewBox="0 0 24 24" fill="none" stroke="#1C1917" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+  <h1>Book an appointment</h1>
+</header>
+<main>
+  <section class="card">
+    <div class="title"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/></svg></span>Treatment</div>
+    <div class="svc on"><img src="img/cutting.jpg" alt="" /><div><b>Cut and blow-dry</b><small>60 min</small></div><span class="price">AED 180</span></div>
+    <div class="svc"><img src="img/manicure.jpg" alt="" /><div><b>Gel manicure</b><small>45 min</small></div><span class="price">AED 110</span></div>
+  </section>
+  <section class="card">
+    <div class="title"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span>With</div>
+    <div class="chips"><span class="chip"><i>★</i>Anyone</span><span class="chip on"><i>L</i>Lina</span><span class="chip"><i>S</i>Sara</span><span class="chip"><i>M</i>Maya</span></div>
+  </section>
+  <section class="card">
+    <div class="title"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>November</div>
+    <div class="days">
+      <div class="day"><small>Mon</small><b>9</b></div><div class="day on"><small>Tue</small><b>10</b></div><div class="day"><small>Wed</small><b>11</b></div>
+      <div class="day"><small>Thu</small><b>12</b></div><div class="day"><small>Fri</small><b>13</b></div><div class="day"><small>Sat</small><b>14</b></div>
+    </div>
+  </section>
+  <section class="card">
+    <div class="title"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Time</div>
+    <div class="times">
+      <div class="time off">10:00</div><div class="time">10:30</div><div class="time off">11:00</div><div class="time on">11:30</div>
+      <div class="time">12:00</div><div class="time off">13:00</div><div class="time">14:30</div><div class="time">16:00</div>
+    </div>
+  </section>
+</main>
+<div class="bar">
+  <div class="sum">Cut and blow-dry with Lina · Tue 10 Nov, 11:30</div>
+  <div class="btn"><span>Book</span><span>AED 180</span></div>
+</div>
+<section class="done">
+  <div class="hero"><small>Booking 1024</small><h2>You're booked in</h2><small>We sent the details to your email.</small></div>
+  <div class="card">
+    <div class="row"><span>Treatment</span><b>Cut and blow-dry</b></div>
+    <div class="row"><span>With</span><b>Lina</b></div>
+    <div class="row"><span>When</span><b>Tue 10 Nov, 11:30</b></div>
+    <div class="row"><span>Pay</span><b>At the salon, AED 180</b></div>
+  </div>
+  <div class="btn" style="justify-content:center">Add to calendar</div>
+</section>
+<script>if (location.search.includes('step=done')) document.body.classList.add('step-done');</script>
+</body>
+</html>
