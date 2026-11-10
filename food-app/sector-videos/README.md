@@ -17,6 +17,8 @@ appointment booking **design** (`food-app/design/booking/`), labelled as built o
 | `public/<id>/console/` | Real console screenshots, and the console recordings sped up to their scene length. |
 | `SOURCES.md` | Credits for the free photos inside the screens. |
 
+Soundtracks: original music synthesised by `music/compose.py` (no samples or third-party music, so it is free to use anywhere), timed to each film's scenes, in `public/music/`.
+
 Render: `bash render-all.sh` (or `IDS=salon bash render-all.sh`). Output in `out/`; post the `*-linkedin.mp4` files.
 
 To add a business: set the app up as that business with demo data, capture the app screens and record the console
