@@ -55,6 +55,15 @@ FILMS = {
         'roots': [43, 36, 41, 38],
         'final': ([53, 57, 60, 64, 67, 72], 29),
     },
+    'backoffice': {  # the console film: breakdown on the numbers chapter, drop on the wall of screens
+        'plan': [('hook', 150), ('meet', 2352), ('office', 165), ('clip0', 180), ('end', 180)],
+        'crashes': ['meet', 'clip0'],
+        'whoosh_at': [330, 534, 768, 942, 1356, 1620, 1944, 2238],
+        'bpm': 120,
+        'chords': [[58, 62, 65, 69], [58, 62, 64, 69], [57, 60, 64, 67], [53, 57, 60, 64]],
+        'roots': [43, 36, 41, 38],
+        'final': ([53, 57, 60, 64, 67, 72], 29),
+    },
     'pharmacy': {  # G major: Am9 - D13 - Gmaj9 - Em9
         'tour': 7, 'booking': False, 'bpm': 116,
         'chords': [[60, 64, 67, 71], [60, 64, 66, 71], [59, 62, 66, 69], [55, 59, 62, 66]],
@@ -292,6 +301,9 @@ def compose(name):
     for (start, every, count) in [cfg['whoosh_every']] if 'whoosh_every' in cfg else []:
         for k in range(1, count):  # a light swoosh on every cut of the sector parade
             riser(mix, start + k * every, 0.6, 0.035)
+    for fr in cfg.get('whoosh_at', []):  # a swoosh into each chapter, with a light brass push
+        riser(mix, fr / FPS, 0.7, 0.04)
+        crash(mix, fr / FPS, 0.35)
     for key in cfg.get('crashes', ('meet', 'tour', 'clip0', 'link', 'features')):
         crash(mix, sc[key], 1.0 if key in ('meet', 'clip0') else 0.6)
         brass(mix, sc[key], [n + 12 for n in cfg['chords'][0][1:]], 0.3, 0.08)

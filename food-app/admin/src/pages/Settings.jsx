@@ -17,7 +17,7 @@ function contrastWithWhite(hex) {
 // The looks the restaurant can choose for its app and website. The brand colour goes on top of each.
 const THEMES = [
   { id: 'classic', name: 'Classic', about: 'Light and clean, white cards on a soft grey.' },
-  { id: 'midnight', name: 'Midnight', about: 'Dark, for evening menus and bold food photos.' },
+  { id: 'midnight', name: 'Midnight', about: 'Dark, for bold photos and evening browsing.' },
   { id: 'glass', name: 'Glass', about: 'Frosted cards over a soft wash of your colour.' },
   { id: 'glass_night', name: 'Glass night', about: 'Frosted dark cards over a glow of your colour.' },
 ];
@@ -115,7 +115,7 @@ export default function Settings({ onBrandChanged }) {
     try {
       const { settings: saved } = await api.removeLogo();
       setSettings(saved);
-      setMessage('Logo removed. The app shows the restaurant name instead.');
+      setMessage('Logo removed. The app shows the business name instead.');
       onBrandChanged();
     } catch (err) {
       setError(err.message);
@@ -251,10 +251,10 @@ export default function Settings({ onBrandChanged }) {
           <div className="form-grid">
             <label>Cash limit, {settings.currency} <span className="hint">0 for none</span><input id="cashLimit" name="cashLimit" inputMode="decimal" defaultValue={(settings.cashLimitMinor / 100).toFixed(digits)} /></label>
             <label>Service fee, {settings.currency}<input id="serviceFee" name="serviceFee" inputMode="decimal" defaultValue={(settings.serviceFeeMinor / 100).toFixed(digits)} /></label>
-            <label>Show a dish's rating after<input id="ratingMinCount" name="ratingMinCount" type="number" min={1} max={1000} defaultValue={settings.ratingMinCount ?? 5} aria-describedby="ratingHint" /></label>
+            <label>Show ratings after<input id="ratingMinCount" name="ratingMinCount" type="number" min={1} max={1000} defaultValue={settings.ratingMinCount ?? 5} aria-describedby="ratingHint" /></label>
           </div>
-          <p className="hint">Currency {settings.currency} and tax ({settings.taxLabel} {settings.taxBasisPoints / 100}%) are set for your country when the restaurant is set up. Cash orders above {settings.cashLimitMinor > 0 ? formatMoney(settings.cashLimitMinor, digits, settings.currency) : 'any amount'} are refused.</p>
-          <p className="hint" id="ratingHint">Customers rate an order once it reaches them. A dish shows its stars once that many orders with it are rated, so one early rating does not stand for the dish.</p>
+          <p className="hint">Currency {settings.currency} and tax ({settings.taxLabel} {settings.taxBasisPoints / 100}%) are set for your country when the business is set up. Cash orders above {settings.cashLimitMinor > 0 ? formatMoney(settings.cashLimitMinor, digits, settings.currency) : 'any amount'} are refused.</p>
+          <p className="hint" id="ratingHint">Customers rate an order once it reaches them. An item shows its stars once that many orders with it are rated, so one early rating does not stand for the item.</p>
         </div>
 
         <div className="actions submit">
