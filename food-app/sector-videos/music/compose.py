@@ -20,7 +20,13 @@ rng = np.random.default_rng(11)
 
 
 def scenes(film):
-    """Scene start times in seconds, mirroring parts() in src/Film.tsx."""
+    """Scene start times in seconds, mirroring parts() in src/Film.tsx (or the film's own plan)."""
+    if 'plan' in film:
+        t, out = 0, {}
+        for name, n in film['plan']:
+            out[name] = t / FPS
+            t += n
+        return out, t / FPS
     frames = [('hook', 105), ('meet', 180), ('tour', 96 * film['tour'])]
     if film['booking']:
         frames.append(('booking', 240))
@@ -37,6 +43,14 @@ def scenes(film):
 FILMS = {
     'salon': {  # F major: Gm9 - C13 - Fmaj9 - Dm9 (ii - V - I - vi)
         'tour': 8, 'booking': True, 'bpm': 120,
+        'chords': [[58, 62, 65, 69], [58, 62, 64, 69], [57, 60, 64, 67], [53, 57, 60, 64]],
+        'roots': [43, 36, 41, 38],
+        'final': ([53, 57, 60, 64, 67, 72], 29),
+    },
+    'finale': {  # the all-sectors film: same groove as the salon, a touch faster; timed by an explicit plan
+        'plan': [('hook', 150), ('meet', 756), ('office', 210), ('clip0', 150), ('end', 180)],
+        'crashes': ['meet', 'clip0'], 'whoosh_every': (5.0, 2.8, 9),
+        'bpm': 124,
         'chords': [[58, 62, 65, 69], [58, 62, 64, 69], [57, 60, 64, 67], [53, 57, 60, 64]],
         'roots': [43, 36, 41, 38],
         'final': ([53, 57, 60, 64, 67, 72], 29),
@@ -275,7 +289,10 @@ def compose(name):
         for k in range(8):  # sixteenth-note fill over the last two beats, getting louder
             snare(mix, t - beat * 2 + k * beat / 4, 0.25 + 0.1 * k)
         riser(mix, t, 2.2, 0.06)
-    for key in ('meet', 'tour', 'clip0', 'link', 'features'):
+    for (start, every, count) in [cfg['whoosh_every']] if 'whoosh_every' in cfg else []:
+        for k in range(1, count):  # a light swoosh on every cut of the sector parade
+            riser(mix, start + k * every, 0.6, 0.035)
+    for key in cfg.get('crashes', ('meet', 'tour', 'clip0', 'link', 'features')):
         crash(mix, sc[key], 1.0 if key in ('meet', 'clip0') else 0.6)
         brass(mix, sc[key], [n + 12 for n in cfg['chords'][0][1:]], 0.3, 0.08)
 
